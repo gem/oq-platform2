@@ -15,6 +15,15 @@ body {
 #showcase           {
     display: none;
 }
+.navbar-inverse {
+    border: 0;
+    background: url(/static/img/oq-header.png) no-repeat left top;
+    background-color: #1b75a5;
+}
+.home .navbar-inverse {
+    background: url(/static/img/oq-header.png) no-repeat left top;
+    background-color: #1b75a5;
+}
 .jumbotron {
     width: 75%;
     float: left;
@@ -23,9 +32,14 @@ body {
     text-shadow: none!important;
     min-height: 400px;
 }
-.jumbotron p {
+.jumbotron .paragraf {
     font-size: 18px;
-        line-height: 30px;
+    width: 88%;
+    float: left;
+    font-family: 'Lato', sans-serif;
+    font-weight: 200;
+    line-height: 27px;
+    color: #555;
 }
 .jumbotron h1 {
     color: #1b75a7;
@@ -37,6 +51,38 @@ body {
 .jumbotron a {
     color: #2d7681!important;
     text-decoration: none;
+}
+.oq-button-home {
+    width: 25%;
+    float: left;
+    padding: 205px 0 0 0;
+}
+.oq-button-home .col-md-4 {
+    width: 100%;
+}
+.oq-button-home .col-md-4 .oq-button-home-btn {
+    display: block!important;
+    font-size: 20px;
+    margin: 0 0 15px;
+    background: #f7931e;
+    border-color: #f7931e;
+    font-weight: 700;
+    color: #fff!important;
+    width: 160px;
+}
+.oq-button-home .col-md-4 .oq-button-home-btn:hover,
+.oq-button-home .col-md-4 .oq-button-home-btn:focus {
+    background: #f05a24;
+    border-color: #f05a24;
+}
+.btn-primary {
+    background: #f7931e;
+    border-color: #f7931e;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+    background: #f05a24;
+    border-color: #f05a24;
 }
 #footer {
     border-top: 0!important;
@@ -63,6 +109,12 @@ body {
 }
 #footer form {
     display: none;
+}
+.search {
+    display: none;
+}
+#footer .row .col-md-6 {
+    width: 33%;
 }
 @media (max-width: 980px) {
    #wrap,
