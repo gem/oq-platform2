@@ -4,12 +4,14 @@
 set -x
 . .gem_init.sh
 
-$branch = $1
+GIT_BRANCH="$1"
+GIT_GEO_REPO="$2"
+GIT_REPO="$3"
 
 sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
 
-git clone -b pla26 git@github.com:gem/oq-platform2.git                                                                                            
+git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
 
 ## Create the virtualenv
 virtualenv ~/env
@@ -18,7 +20,7 @@ source ~/env/bin/activate
 cd ~
 
 ## Clone GeoNode
-git clone -b {$branch} https://github.com/GeoNode/geonode 
+git clone -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode 
 
 ## Install GeoNode and dependencies
 cd geonode
@@ -62,7 +64,7 @@ OGC_SERVER = {
 }
 EOF
 
-sudo cp -R $HOME/platform2/html/* $HOME/
+sudo cp -R $HOME/"$GIT_REPO"/html/* $HOME/
 
 ## Run GeoNode
 paver setup
