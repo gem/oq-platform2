@@ -1,6 +1,12 @@
-
-dy {
+body {
     background: #fff;
+}
+select {
+    width: 220px;
+    border: 1px solid #ccc;
+}
+.col-md-8 {
+    width: 100%;
 }
 .fa-2x {
     font-size: 1.3em;
@@ -10,7 +16,7 @@ dy {
 .home #wrap {
     padding: 0px 0 0 0px!important;
     min-height: 800px;
-    margin: -90px auto 30px!important;    
+    margin: -90px auto 30px!important;
     width: 900px;
 }
 #wrap .container {
@@ -306,7 +312,7 @@ div#search-inp:after {
 .navbar-nav .dropdown-menu li a:hover {
     color: #fff;
 }
-.navbar-nav .dropdown-menu li a:hover, 
+.navbar-nav .dropdown-menu li a:hover,
 .navbar-nav .dropdown-menu li a:focus {
     background-color: #2c689c;
 }
@@ -354,9 +360,7 @@ div#search-inp:after {
     background-color: #1b75a5;
 }
 
-
-
-
+/*mobile*/
 @media (max-width: 991px) {
    #wrap,
    #wrap .container {
@@ -417,4 +421,3 @@ div#search-inp:after {
        width: 85%;
    }
 }
-

@@ -36,10 +36,11 @@
 </div>
 
   {% endblock %}
-{% block mainbody %}
+
+  {% block mainbody %}
   <div class="big-search">
         <div class="container">
-                <h1>{% trans "Search for Data." %}</h1>
+<h1>{% trans "Search for Data." %}</h1>
                 <div class="search">
                         <form id="search" action="{% url "search" %}" >
                                 <span class="fa fa-search fa-2x"></span>
@@ -68,7 +69,7 @@
                                                         <h4>Boundaries</h4>
                                                 </div>
                                         </a>
-</div>
+                                </div>
                                 <div class="col-xs-4 col-sm-2">
                                         <a href="/search/?limit=100&offset=0&category__identifier__in=society" data-toggle="tooltip" data-placement="auto"
                                                 title="Buildings, museums, churches, factories, housing, monuments, shops, towers. Energy, water and waste systems and communications infrastructure and services. Military bases, structures, activities." >
@@ -79,7 +80,7 @@
                                         </a>
                                 </div>
                                 <div class="col-xs-4 col-sm-2">
-                                        <a href="/search/?limit=100&offset=0&category__identifier__in=climatologyMeteorologyAtmosphere" data-toggle="tooltip" data-placement="auto"
+<a href="/search/?limit=100&offset=0&category__identifier__in=climatologyMeteorologyAtmosphere" data-toggle="tooltip" data-placement="auto"
                                                 title="Cloud cover, weather, climate, atmospheric conditions, climate change, precipitation" >
                                                 <div class="category">
                                                         <i class="fa fa-umbrella fa-4x"></i>
@@ -106,7 +107,7 @@
                                         </a>
                                 </div>
                                 <div class="col-xs-4 col-sm-2">
-<a href="/search/?limit=100&offset=0&category__identifier__in=health" data-toggle="tooltip" data-placement="auto"
+                                        <a href="/search/?limit=100&offset=0&category__identifier__in=health" data-toggle="tooltip" data-placement="auto"
                                                 title="Health, health services, human ecology, and safety." >
                                                 <div class="category">
                                                         <i class="fa fa-medkit fa-4x"></i>
@@ -118,7 +119,7 @@
                                         <a href="/search/?limit=100&offset=0&category__identifier__in=imageryBaseMapsEarthCover" data-toggle="tooltip" data-placement="auto"
                                                 title="Land cover, topographic maps, imagery, unclassified images, annotations." >
                                                 <div class="category">
-                                                        <i class="fa fa-tree fa-4x"></i>
+<i class="fa fa-tree fa-4x"></i>
                                                         <h4>Land Cover</h4>
                                                 </div>
                                         </a>
@@ -146,7 +147,7 @@
                                                 title="Settlements, anthropology, archaeology, education, traditional beliefs, manners and customs, demographic data, recreational areas and activities, social impact assessments, crime and justice, census information. Economic activities, conditions and employment." >
                                                 <div class="category">
                                                         <i class="fa fa-male fa-4x"></i>
-<h4>Population</h4>
+                                                        <h4>Population</h4>
                                                 </div>
                                         </a>
                                 </div>
@@ -157,7 +158,7 @@
                                                         <i class="fa fa-road fa-4x"></i>
                                                         <h4>Transportation</h4>
                                                 </div>
-                                        </a>
+</a>
                                 </div>
                                 <div class="col-xs-4 col-sm-2">
                                         <a href="/search/?limit=100&offset=0&category__identifier__in=inlandWaters" data-toggle="tooltip" data-placement="auto"
@@ -185,7 +186,7 @@
             <div class="col-md-3">
               <a href="{{ item.detail_url }}"><img ng-src="{{ item.thumbnail_url }}" /></a>
               <h4>{{ item.title | limitTo: 20 }}{{item.title.length > 20 ? '...' : ''}}</h4>
-</div>
+            </div>
           </div>
         </div>
                 {% endverbatim %}
@@ -198,7 +199,6 @@
   {% endblock %}
 
 {% endblock %}
-
 {% block extra_script %}
 {% if DEBUG_STATIC %}
 <script src="{{ STATIC_URL }}lib/js/angular.js"></script>
