@@ -64,7 +64,7 @@ OGC_SERVER = {
 }
 EOF
 
-sudo cp -R $HOME/"$GIT_REPO"/html/* $HOME/geonode/geonode/
+sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 
 ## Run GeoNode
 paver setup
