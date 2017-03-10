@@ -238,7 +238,7 @@ set -e
 if [ \$GEM_SET_DEBUG ]; then
     set -x
 fi
-./$GEM_GIT_PACKAGE/verifier-guest.sh
+./$GEM_GIT_PACKAGE/verifier-guest.sh pla26 2.6.x $GEM_GIT_PACKAGE
 "
     echo "_prodtest_innervm_run: exit"
 
