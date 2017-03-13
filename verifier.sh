@@ -32,7 +32,7 @@ usage () {
     echo "    $0 devtest <branch-name> [<plugins-branch-name>]"
     echo "                                                 put oq-platform sources in a lxc,"
     echo "                                                 setup environment and run development tests."
-    echo "    $0 prodtest <branch-name> <smtp_address> ['notest']"
+    echo "    $0 devtest <branch-name> <smtp_address> ['notest']"
     echo "                                                 production installation and tests."
     echo
     exit $ret
@@ -249,13 +249,13 @@ fi
 
 ./\"$GEM_GIT_PACKAGE\"/verifier-guest.sh \"$branch_id\" \"$BRANCH_GEONODE\" \"$GEM_GIT_PACKAGE\"
 "
-    echo "_prodtest_innervm_run: exit"
+    echo "_devtest_innervm_run: exit"
 
     return 0
 }
 
 #
-#  prodtest_run <branch_id> - main function of source test
+#  devtest_run <branch_id> - main function of source test
 #      <branch_id>    name of the tested branch
 #
 devtest_run () {
@@ -277,8 +277,8 @@ devtest_run () {
     _devtest_innervm_run "$branch_id" "$BRANCH_GEONODE"
     inner_ret=$?
 
-    copy_common prod
-    copy_prod
+    copy_common dev
+    copy_dev
 
     if [ $inner_ret != 0 ]; then
         # cleanup in error case
@@ -298,11 +298,11 @@ copy_common () {
     scp "${lxc_ip}:ssh.log" "out/${1}_ssh_history.log" || true
 }
 
-copy_prod () {
-    scp "${lxc_ip}:/var/log/apache2/access.log" "out/prod_apache2_access.log" || true
-    scp "${lxc_ip}:/var/log/apache2/error.log" "out/prod_apache2_error.log" || true
-    scp "${lxc_ip}:prod_*.png" "out/" || true
-    scp "${lxc_ip}:xunit-platform-prod.xml" "out/" || true
+copy_dev () {
+    scp "${lxc_ip}:/var/log/apache2/access.log" "out/dev_apache2_access.log" || true
+    scp "${lxc_ip}:/var/log/apache2/error.log" "out/dev_apache2_error.log" || true
+    scp "${lxc_ip}:dev_*.png" "out/" || true
+    scp "${lxc_ip}:xunit-platform-dev.xml" "out/" || true
 }
 
 
@@ -317,7 +317,7 @@ sig_hand () {
         ssh -t  $lxc_ip "cd ~/$GEM_GIT_PACKAGE; . platform-env/bin/activate ; cd openquakeplatform ; sleep 5 ; fab stop"
 
         copy_common "$ACTION"
-        copy_prod
+        copy_dev
 
         echo "Destroying [$lxc_name] lxc"
         if [ "$LXC_DESTROY" = "true" ]; then
