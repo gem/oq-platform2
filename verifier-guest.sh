@@ -71,3 +71,5 @@ paver setup
 paver sync
 paver start -b 0.0.0.0:8000
 
+
+sleep 4000
