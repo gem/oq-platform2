@@ -243,6 +243,9 @@ if [ \$GEM_SET_DEBUG ]; then
     set -x
 fi
 
+if [ "$branch_geo_repo" == "" ] ; then                                                                                                        
+    $branch_geo_repo="2.6.x"
+fi
 
 ./$GEM_GIT_PACKAGE/verifier-guest.sh $branch_id $branch_geo_repo $GEM_GIT_PACKAGE
 "
