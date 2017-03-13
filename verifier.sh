@@ -258,7 +258,7 @@ fi
 #  prodtest_run <branch_id> - main function of source test
 #      <branch_id>    name of the tested branch
 #
-prodtest_run () {
+devtest_run () {
     local deps old_ifs branch_id="$1" BRANCH_GEONODE="$2"
 
     trap sig_hand SIGINT SIGTERM ERR
