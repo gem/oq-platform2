@@ -227,6 +227,11 @@ _prodtest_innervm_run () {
 
     git archive --prefix=$GEM_GIT_PACKAGE/ --format tar HEAD | ssh -t $lxc_ip "tar -x"
 
+    branch_geo_repo="2.6.x"
+
+    if [ "$branch_geo_repo" != "2.6.x" ] ; then
+        branch_geo_repo="2.6.x"
+    fi
 
     ssh -t  $lxc_ip "export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
 
