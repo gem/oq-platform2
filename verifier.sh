@@ -244,7 +244,7 @@ if [ \$GEM_SET_DEBUG ]; then
 fi
 
 
-./$GEM_GIT_PACKAGE/verifier-guest.sh $branch_id 2.6.x $GEM_GIT_PACKAGE
+./$GEM_GIT_PACKAGE/verifier-guest.sh $branch_id $branch_geo_repo $GEM_GIT_PACKAGE
 "
     echo "_prodtest_innervm_run: exit"
 
@@ -256,7 +256,7 @@ fi
 #      <branch_id>    name of the tested branch
 #
 prodtest_run () {
-    local deps old_ifs branch_id="$1"
+    local deps old_ifs branch_id="$1" branch_geo_repo="$2"
 
     trap sig_hand SIGINT SIGTERM ERR
     
@@ -271,7 +271,7 @@ prodtest_run () {
 
     _wait_ssh $lxc_ip
     set +e
-    _prodtest_innervm_run "$branch_id" "$lxc_ip"
+    _prodtest_innervm_run "$branch_id" "$lxc_ip" "$branch_geo_repo"
     inner_ret=$?
 
     copy_common prod
@@ -348,7 +348,7 @@ while [ $# -gt 0 ]; do
             #    usage 1
             #fi
             ACTION="$1"
-            prodtest_run $(echo "$2" | sed 's@.*/@@g')
+            prodtest_run $(echo "$2" | sed 's@.*/@@g') "$3"
             break
             ;;
         *)
