@@ -228,8 +228,8 @@ _prodtest_innervm_run () {
     git archive --prefix=$GEM_GIT_PACKAGE/ --format tar HEAD | ssh -t $lxc_ip "tar -x"
 
 
-    if [ "$branch_geo_repo" == "" ] ; then
-        branch_geo_repo="2.6.x"
+    if [ "$BRANCH_GEONODE" == "" ] ; then
+        BRANCH_GEONODE="2.6.x"
     fi
 
     ssh -t  $lxc_ip "export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
@@ -247,7 +247,7 @@ if [ \$GEM_SET_DEBUG ]; then
     set -x
 fi
 
-./$GEM_GIT_PACKAGE/verifier-guest.sh $branch_id $BRANCH_GEONODE $GEM_GIT_PACKAGE
+./\"$GEM_GIT_PACKAGE\"/verifier-guest.sh \"$branch_id\" \"$BRANCH_GEONODE\" \"$GEM_GIT_PACKAGE\"
 "
     echo "_prodtest_innervm_run: exit"
 
