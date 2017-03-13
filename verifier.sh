@@ -247,9 +247,6 @@ if [ \$GEM_SET_DEBUG ]; then
     set -x
 fi
 
-branch_geo_repo=\"2.6.x\"
-
-
 ./$GEM_GIT_PACKAGE/verifier-guest.sh $branch_id $branch_geo_repo $GEM_GIT_PACKAGE
 "
     echo "_prodtest_innervm_run: exit"
