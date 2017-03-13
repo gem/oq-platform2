@@ -20,7 +20,7 @@ source ~/env/bin/activate
 cd ~
 
 ## Clone GeoNode
-git clone -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode 
+git clone -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git 
 
 ## Install GeoNode and dependencies
 cd geonode
