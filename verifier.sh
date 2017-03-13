@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# verifier.sh  Copyright (c) 2016, GEM Foundation.
+# verifier.sh  Copyright (c) 2017, GEM Foundation.
 #
 # OpenQuake is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Affero General Public License as published
@@ -207,14 +207,14 @@ _lxc_name_and_ip_get()
 }
 
 #
-#  _prodtest_innervm_run <branch_id> <lxc_ip> - part of source test performed on lxc
+#  _devtest_innervm_run <branch_id> <lxc_ip> - part of source test performed on lxc
 #                     the following activities are performed:
 #                       files and install them
 #
 #      <branch_id>    name of the tested branch
 #      <lxc_ip>       the IP address of lxc instance
 #
-_prodtest_innervm_run () {
+_devtest_innervm_run () {
     local i old_ifs pkgs_list dep GIT_BRANCH="$1" BRANCH_GEONODE="$2"
 
     trap 'local LASTERR="$?" ; trap ERR ; (exit $LASTERR) ; return' ERR
@@ -274,7 +274,7 @@ prodtest_run () {
 
     _wait_ssh $lxc_ip
     set +e
-    _prodtest_innervm_run "$branch_id" "$BRANCH_GEONODE"
+    _devtest_innervm_run "$branch_id" "$BRANCH_GEONODE"
     inner_ret=$?
 
     copy_common prod
@@ -346,12 +346,12 @@ fi
 #  args management
 while [ $# -gt 0 ]; do
     case $1 in
-        prodtest)
+        devtest)
             #if [ $# -lt 3 ]; then
             #    usage 1
             #fi
             ACTION="$1"
-            prodtest_run $(echo "$2" | sed 's@.*/@@g') "$3"
+            devtest_run $(echo "$2" | sed 's@.*/@@g') "$3"
             break
             ;;
         *)
