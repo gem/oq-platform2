@@ -315,9 +315,7 @@ sig_hand () {
     if [ "$lxc_name" != "" ]; then
         set +e
 
-        echo "before"
         ssh -t  $lxc_ip "cd ~/$GEM_GIT_PACKAGE; . platform-env/bin/activate ; cd geonode ; sleep 5 ; faver stop"
-        echo "after"
 
         copy_common "$ACTION"
         copy_dev
