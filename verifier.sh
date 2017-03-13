@@ -215,7 +215,7 @@ _lxc_name_and_ip_get()
 #      <lxc_ip>       the IP address of lxc instance
 #
 _prodtest_innervm_run () {
-    local i old_ifs pkgs_list dep GIT_BRANCH="$1" branch_geo_repo="$2"
+    local i old_ifs pkgs_list dep GIT_BRANCH="$1" BRANCH_GEONODE="$2"
 
     trap 'local LASTERR="$?" ; trap ERR ; (exit $LASTERR) ; return' ERR
 
@@ -247,7 +247,7 @@ if [ \$GEM_SET_DEBUG ]; then
     set -x
 fi
 
-./$GEM_GIT_PACKAGE/verifier-guest.sh $branch_id $branch_geo_repo $GEM_GIT_PACKAGE
+./$GEM_GIT_PACKAGE/verifier-guest.sh $branch_id $BRANCH_GEONODE $GEM_GIT_PACKAGE
 "
     echo "_prodtest_innervm_run: exit"
 
@@ -259,7 +259,7 @@ fi
 #      <branch_id>    name of the tested branch
 #
 prodtest_run () {
-    local deps old_ifs branch_id="$1" branch_geo_repo="$2"
+    local deps old_ifs branch_id="$1" BRANCH_GEONODE="$2"
 
     trap sig_hand SIGINT SIGTERM ERR
     
@@ -274,7 +274,7 @@ prodtest_run () {
 
     _wait_ssh $lxc_ip
     set +e
-    _prodtest_innervm_run "$branch_id" "$branch_geo_repo"
+    _prodtest_innervm_run "$branch_id" "$BRANCH_GEONODE"
     inner_ret=$?
 
     copy_common prod
