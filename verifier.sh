@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# verifier.sh  Copyright (c) 2017, GEM Foundation.
+# verifier.sh  Copyright (c) 2016, GEM Foundation.
 #
 # OpenQuake is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Affero General Public License as published
@@ -84,6 +84,7 @@ export GEM_SET_DEBUG=$GEM_SET_DEBUG
 if [ "$OQ_MOON_STATS" = "true" ]; then
     export OQ_MOON_STATS=$OQ_MOON_STATS
 fi
+
 set -e
 if [ -n "\$GEM_SET_DEBUG" -a "\$GEM_SET_DEBUG" != "false" ]; then
     export PS4='+\${BASH_SOURCE}:\${LINENO}:\${FUNCNAME[0]}: '
@@ -214,7 +215,7 @@ _lxc_name_and_ip_get()
 #      <lxc_ip>       the IP address of lxc instance
 #
 _prodtest_innervm_run () {
-    local i old_ifs pkgs_list dep branch_id="$1" lxc_ip="$2"
+    local i old_ifs pkgs_list dep GIT_BRANCH="$1"
 
     trap 'local LASTERR="$?" ; trap ERR ; (exit $LASTERR) ; return' ERR
 
@@ -223,10 +224,13 @@ _prodtest_innervm_run () {
 
     repo_id="$GEM_GIT_REPO"
 
-    git archive --prefix=$GEM_GIT_PACKAGE/ --format tar HEAD | ssh -t $lxc_ip "tar -x"
+    # git  --prefix=$GEM_GIT_PACKAGE/ --format tar HEAD | ssh -t $lxc_ip "tar -x"
 
 
     ssh -t  $lxc_ip "export GEM_SET_DEBUG=$GEM_SET_DEBUG
+
+    git clone -b pla26 https://github.com/gem/oq-platform2.git
+
 export GEM_GIT_REPO="$GEM_GIT_REPO"
 export GEM_GIT_PACKAGE="$GEM_GIT_PACKAGE"
 rem_sig_hand() {
@@ -238,7 +242,10 @@ set -e
 if [ \$GEM_SET_DEBUG ]; then
     set -x
 fi
-./$GEM_GIT_PACKAGE/verifier-guest.sh pla26 2.6.x $GEM_GIT_PACKAGE
+
+sudo chmod u+x  ./$GEM_GIT_PACKAGE/verifier-guest.sh
+
+./$GEM_GIT_PACKAGE/verifier-guest.sh $branch_id 2.6.X $GEM_GIT_PACKAGE
 "
     echo "_prodtest_innervm_run: exit"
 
@@ -338,9 +345,9 @@ fi
 while [ $# -gt 0 ]; do
     case $1 in
         prodtest)
-            if [ $# -lt 3 ]; then
-                usage 1
-            fi
+            #if [ $# -lt 3 ]; then
+            #    usage 1
+            #fi
             ACTION="$1"
             prodtest_run $(echo "$2" | sed 's@.*/@@g')
             break
@@ -355,3 +362,6 @@ while [ $# -gt 0 ]; do
 done
 
 exit 0
+
+
+
