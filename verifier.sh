@@ -244,7 +244,7 @@ if [ \$GEM_SET_DEBUG ]; then
 fi
 
 
-./$GEM_GIT_PACKAGE/verifier-guest.sh $branch_id 2.6.X $GEM_GIT_PACKAGE
+./$GEM_GIT_PACKAGE/verifier-guest.sh $branch_id 2.6.x $GEM_GIT_PACKAGE
 "
     echo "_prodtest_innervm_run: exit"
 
