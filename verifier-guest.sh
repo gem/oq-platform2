@@ -11,7 +11,7 @@ GIT_REPO="$3"
 sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
 
-git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
+# git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
 
 ## Create the virtualenv
 virtualenv ~/env
