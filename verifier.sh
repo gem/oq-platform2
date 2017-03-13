@@ -243,7 +243,7 @@ if [ \$GEM_SET_DEBUG ]; then
     set -x
 fi
 
-if [ \$branch_geo_repo ] ; then                                                                                                        
+if [ !\$branch_geo_repo ] ; then                                                                                                        
     branch_geo_repo=\"2.6.x\"
 fi
 
