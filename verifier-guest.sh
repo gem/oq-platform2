@@ -78,10 +78,6 @@ sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 paver setup
 paver sync
 paver start -f -b 0.0.0.0:8000 &
-PAV_START_PID=$!
-
-sleep 60
-echo "NOW WE ARE HERE $PAV_START_PID" > /tmp/guest.log
-sleep 30
-kill $PAV_START_PID
+sleep 90
+kill $(ps ax | grep 'python manage.py runserver ' | grep -v 'grep' | sed 's/^ *//g;s/ .*//g' | tr '\n' ' ')
 
