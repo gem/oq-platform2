@@ -77,6 +77,11 @@ sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 ##cd geonode
 paver setup
 paver sync
-nohup paver start -f -b 0.0.0.0:8000 &
+paver start -f -b 0.0.0.0:8000 &
+PAV_START_PID=$!
 
+sleep 60
+echo "NOW WE ARE HERE $PAV_START_PID" > /tmp/guest.log
 sleep 30
+kill $PAV_START_PID
+
