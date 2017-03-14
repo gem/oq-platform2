@@ -73,4 +73,4 @@ paver start -b 0.0.0.0:8000
 
 echo "End installation Geonode"
 
-# sleep 4000
+sleep 4000
