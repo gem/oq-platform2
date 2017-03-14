@@ -77,8 +77,6 @@ sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 ##cd geonode
 paver setup
 paver sync
-paver start -b 0.0.0.0:8000 &
-
-echo "End installation Geonode"
+nohup paver start -b 0.0.0.0:8000 &
 
 sleep 10
