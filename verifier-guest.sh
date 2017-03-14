@@ -66,7 +66,15 @@ EOF
 
 sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 
+## installing taxtweb
+cd ~
+git clone https://github.com/gem/oq-platform-taxtweb.git
+cd oq-platform-taxtweb
+export PYTHONPATH=$PWD
+
+
 ## Run GeoNode
+cd geonode
 paver setup
 paver sync
 paver start -b 0.0.0.0:8000
