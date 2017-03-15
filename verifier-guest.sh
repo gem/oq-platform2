@@ -72,6 +72,7 @@ git clone https://github.com/gem/oq-platform-taxtweb.git
 cd oq-platform-taxtweb
 export PYTHONPATH=$PWD
 
+echo pwd
 
 ## Run GeoNode
 cd geonode
