@@ -78,6 +78,7 @@ echo pwd
 cd geonode
 paver setup
 paver sync
-nohup paver start -f -b 0.0.0.0:8000 &
+paver start -f -b 0.0.0.0:8000 &
+sleep 90
+kill $(ps ax | grep 'python manage.py runserver ' | grep -v 'grep' | sed 's/^ *//g;s/ .*//g' | tr '\n' ' ')
 
-sleep 30
