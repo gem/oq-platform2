@@ -77,7 +77,7 @@ sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 ##cd geonode
 paver setup
 paver sync
-paver start -f -b 0.0.0.0:8000 &
+paver start -b 0.0.0.0:8000
 sleep 90
 kill $(ps ax | grep 'python manage.py runserver ' | grep -v 'grep' | sed 's/^ *//g;s/ .*//g' | tr '\n' ' ')
 
