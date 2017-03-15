@@ -67,10 +67,10 @@ EOF
 sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 
 ## installing taxtweb
-##cd ~
-##git clone https://github.com/gem/oq-platform-taxtweb.git
-##cd oq-platform-taxtweb
-##export PYTHONPATH=$PWD
+cd ~
+git clone https://github.com/gem/oq-platform-taxtweb.git
+cd oq-platform-taxtweb
+export PYTHONPATH=$PWD
 
 
 ## Run GeoNode
