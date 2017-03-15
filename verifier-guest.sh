@@ -65,6 +65,8 @@ OGC_SERVER = {
 EOF
 
 sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
+sudo cat local_setting.py.tmpl | \
+sudo tee local_settings.py
 
 ## installing taxtweb
 cd ~
