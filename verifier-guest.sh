@@ -74,7 +74,7 @@ export PYTHONPATH=$PWD
 
 
 ## Run GeoNode
-##cd geonode
+cd geonode
 paver setup
 paver sync
 nohup paver start -f -b 0.0.0.0:8000 &
