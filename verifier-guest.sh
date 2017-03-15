@@ -78,5 +78,6 @@ paver setup
 paver sync
 paver start -b 0.0.0.0:8000
 sleep 90
-kill $(ps ax | grep 'python manage.py runserver ' | grep -v 'grep' | sed 's/^ *//g;s/ .*//g' | tr '\n' ' ')
+paver stop
+# kill $(ps ax | grep 'python manage.py runserver ' | grep -v 'grep' | sed 's/^ *//g;s/ .*//g' | tr '\n' ' ')
 
