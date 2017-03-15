@@ -72,10 +72,8 @@ git clone https://github.com/gem/oq-platform-taxtweb.git
 cd oq-platform-taxtweb
 export PYTHONPATH=$PWD
 
-pwd
-
 ## Run GeoNode
-cd geonode
+cd ~/geonode
 paver setup
 paver sync
 paver start -f -b 0.0.0.0:8000 &
