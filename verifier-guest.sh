@@ -66,7 +66,7 @@ OGC_SERVER = {
 EOF
 
 sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
-sudo cp -Rf $HOME/"$GIT_REPO"/paver_custom.py $HOME/geonode
+sudo cp -Rf $HOME/"$GIT_REPO"/pavement.py $HOME/
 
 ## installing taxtweb
 cd ~
@@ -77,7 +77,7 @@ export PYTHONPATH=$PWD
 ## Run GeoNode
 cd ~/geonode
 paver setup
-python paver_custom.py $LXC_IP
+paver $HOME/custom_local -b $LXC_IP
 paver sync
 paver start -b 0.0.0.0:8000
 sleep 4000
