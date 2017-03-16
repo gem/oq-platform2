@@ -77,10 +77,15 @@ export PYTHONPATH=$PWD
 ## Run GeoNode
 cd ~/geonode
 paver setup
-paver $HOME/custom_local -b $LXC_IP
 paver sync
 paver start -b 0.0.0.0:8000
+
+## modify local_settings with pavement from repo
+cd ~
+paver setup -l $LXC_IP
+
+## stop paver
+cd~/geonode
 sleep 4000
 paver stop
-# kill $(ps ax | grep 'python manage.py runserver ' | grep -v 'grep' | sed 's/^ *//g;s/ .*//g' | tr '\n' ' ')
 
