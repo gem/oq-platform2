@@ -1,4 +1,16 @@
 import sys
+import os
+import re
+import shutil
+import sys
+import time
+import urllib
+import urllib2
+import zipfile
+import glob
+import fileinput
+import yaml
+
 LXC_IP = sys.argv[1]
 GEM_LOCAL_SETTINGS_TMPL = 'geonode/geonode/local_settings.py.template'
 def _write_local_settings(lxc_ip):
