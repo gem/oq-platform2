@@ -7,6 +7,7 @@ set -x
 GIT_BRANCH="$1"
 GIT_GEO_REPO="$2"
 GIT_REPO="$3"
+LXC_IP="$4"
 
 sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
@@ -65,8 +66,6 @@ OGC_SERVER = {
 EOF
 
 sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
-sudo cat local_setting.py.tmpl | \
-sudo tee local_settings.py
 
 ## installing taxtweb
 cd ~
@@ -77,6 +76,7 @@ export PYTHONPATH=$PWD
 ## Run GeoNode
 cd ~/geonode
 paver setup
+paver_custom $LXC_IP
 paver sync
 paver start -b 0.0.0.0:8000
 sleep 4000
