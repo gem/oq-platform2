@@ -76,8 +76,7 @@ export PYTHONPATH=$PWD
 ## Run GeoNode
 cd ~/geonode
 paver setup
-pwd
-python ~/geonode/paver_custom $LXC_IP
+python paver_custom.py $LXC_IP
 paver sync
 paver start -b 0.0.0.0:8000
 sleep 4000
