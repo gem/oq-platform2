@@ -66,6 +66,7 @@ OGC_SERVER = {
 EOF
 
 sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
+sudo cp -Rf $HOME/"$GIT_REPO"/paver_custom.py $HOME/
 
 ## installing taxtweb
 cd ~
