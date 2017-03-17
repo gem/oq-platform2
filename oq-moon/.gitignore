@@ -1,0 +1,6 @@
+*.pyc
+/build
+/dist
+/openquake.moon.egg-info
+/openquake/moon/test/config/moon_config.py
+/geckodriver.log
