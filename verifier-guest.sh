@@ -67,7 +67,7 @@ EOF
 
 sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 sudo cp -Rf $HOME/"$GIT_REPO"/pavement.py $HOME/
-sudo rm $HOME/local_settings.py
+sudo rm $HOME/geonode/geonode/local_settings.py
 
 ## installing taxtweb
 cd ~
