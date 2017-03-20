@@ -84,7 +84,7 @@ paver start -b 0.0.0.0:8000
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
-sudo paver setup -l $LXC_IP
+paver setup -l $LXC_IP
 
 #function complete procedure for tests
 exec_test () {    
