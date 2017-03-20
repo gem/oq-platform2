@@ -105,7 +105,7 @@ exec_test () {
 }
 
 #if [ "$NO_EXEC_TEST" != "notest" ] ; then
-    exec_test
+#    exec_test
 #fi
 
 
