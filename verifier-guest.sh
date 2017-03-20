@@ -83,8 +83,8 @@ paver sync
 paver start -b 0.0.0.0:8000
 
 ## modify local_settings with pavement from repo
-cd ~
-#paver setup -l $LXC_IP
+cd ~/oq-platform2
+paver setup -l $LXC_IP
 
 #function complete procedure for tests
 exec_test () {    
@@ -95,17 +95,17 @@ exec_test () {
     sudo pip install -U selenium==3.0.1
     wget http://ftp.openquake.org/mirror/mozilla/geckodriver-latest-linux64.tar.gz ; tar zxvf geckodriver-latest-linux64.tar.gz ; sudo cp geckodriver /usr/local/bin
 
-    cp "$GIT_REPO"/openquake/taxonomy/test/config/moon_config.py.tmpl "$GIT_repo"/openquake/taxonomy/test/config/moon_config.py
-    git clone -b "$GIT_BRANCH" --depth=1  $GEM_GIT_REPO/oq-moon.git || git clone --depth=1 "$GIT_REPO"/oq-moon.git
+    cp oq-platform2/openquake/taxonomy/test/config/moon_config.py.tmpl oq-platform2/openquake/taxonomy/test/config/moon_config.py
+    git clone -b "$GIT_BRANCH" --depth=1  $GEM_GIT_REPO/oq-moon.git || git clone --depth=1 "$GEM_GIT_REPO"/oq-moon.git
 
     export DISPLAY=:1
     export PYTHONPATH=oq-moon:$GIT_REPO:"$GIT_REPO"/openquake/taxonomy/test/config
-    python -m openquake.moon.nose_runner --failurecatcher prod -s -v --with-xunit --xunit-file=xunit-platform-prod.xml "$GIT_REPO"/openquake/taxonomy/test || true
+    python -m openquake.moon.nose_runner --failurecatcher prod -s -v --with-xunit --xunit-file=xunit-platform-prod.xml openquake2/openquake/taxonomy/test || true
     # sleep 40000 || true
 }
 
 #if [ "$NO_EXEC_TEST" != "notest" ] ; then
-#    exec_test
+exec_test
 #fi
 
 
