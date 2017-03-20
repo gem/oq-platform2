@@ -84,6 +84,9 @@ paver start -b 0.0.0.0:8000
 
 ## modify local_settings with pavement from repo
 cd ~
+
+sudo chmod u+x $HOME/geonode/geonode/local_settings.py.tmpl
+
 paver setup -l $LXC_IP
 
 #function complete procedure for tests
