@@ -99,8 +99,8 @@ exec_test () {
     git clone -b "$GIT_BRANCH" --depth=1  $GEM_GIT_REPO/oq-moon.git || git clone --depth=1 "$GEM_GIT_REPO"/oq-moon.git
 
     export DISPLAY=:1
-    export PYTHONPATH=oq-moon:$GIT_REPO:"$GIT_REPO"/openquake/taxonomy/test/config
-    python -m openquake.moon.nose_runner --failurecatcher prod -s -v --with-xunit --xunit-file=xunit-platform-prod.xml openquake2/openquake/taxonomy/test || true
+    export PYTHONPATH=oq-moon:$GIT_REPO:oq-platform2/openquake/taxonomy/test/config
+    python -m openquake.moon.nose_runner --failurecatcher prod -s -v --with-xunit --xunit-file=xunit-platform-prod.xml oq-platform2/openquake/taxonomy/test || true
     # sleep 40000 || true
 }
 
