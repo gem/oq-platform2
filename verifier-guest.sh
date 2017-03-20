@@ -79,11 +79,11 @@ export PYTHONPATH=$PWD
 cd ~/geonode
 paver setup
 paver sync
-#paver start -b 0.0.0.0:8000
+paver start -b 0.0.0.0:8000
 
 ## modify local_settings with pavement from repo
 cd ~
-paver setup -l $LXC_IP
+#paver setup -l $LXC_IP
 
 #function complete procedure for tests
 exec_test () {    
