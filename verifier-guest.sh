@@ -79,7 +79,7 @@ export PYTHONPATH=$PWD
 cd ~/geonode
 paver setup
 paver sync
-paver start -b 0.0.0.0:8000
+#paver start -b 0.0.0.0:8000
 
 ## modify local_settings with pavement from repo
 cd ~
