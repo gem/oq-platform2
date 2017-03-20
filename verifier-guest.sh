@@ -92,6 +92,7 @@ exec_test () {
     sudo pip install --upgrade pip
     sudo pip install nose
     sudo pip install -U selenium==3.0.1
+    sudo apt-get install wget
     wget http://ftp.openquake.org/mirror/mozilla/geckodriver-latest-linux64.tar.gz ; tar zxvf geckodriver-latest-linux64.tar.gz ; sudo cp geckodriver /usr/local/bin
 
     cp "$GIT_REPO"/openquake/taxonomy/test/config/moon_config.py.tmpl "$GIT_repo"/openquake/taxonomy/test/config/moon_config.py
