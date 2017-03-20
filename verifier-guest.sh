@@ -110,7 +110,7 @@ exec_test
 
 
 ## stop paver
-cd~/geonode
+cd ~/geonode
 sleep 4000
 paver stop
 
