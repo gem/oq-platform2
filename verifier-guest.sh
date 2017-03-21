@@ -72,7 +72,7 @@ EOF
 #sudo rm $HOME/geonode/geonode/local_settings.py
 
 
-sudo chown -R www-data.www-data $HOME/"$GIT_REPO"/*
+#chown -R www-data.www-data $HOME/"$GIT_REPO"/*
 
 ## installing taxtweb
 cd ~
@@ -88,7 +88,10 @@ paver setup
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
 ls -la
+sudo chmod u+x local_settings.py.tmpl
+
 paver setup -l $LXC_IP
+
 sudo cp local_settings.py.tmpl ~/geonode/geonode/local_settings.py
 
 ## Run GeoNode
