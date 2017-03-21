@@ -68,6 +68,7 @@ EOF
 sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 sudo cp -Rf $HOME/"$GIT_REPO"/pavement.py $HOME/
 sudo cp -Rf $HOME/"$GIT_REPO"/openquake $HOME/
+sudo cp -Rf $HOME/"$GIT_REPO"/local_settings.py.tmpl $HOME/
 sudo rm $HOME/geonode/geonode/local_settings.py
 
 

@@ -19,7 +19,7 @@ from paver.easy import BuildFailure
 
 
 GEM_LOCAL_SETTINGS_TMPL = os.path.join(os.path.expanduser("~"),
-                                           'geonode/geonode', 
+#                                           'geonode/geonode', 
                                            'local_settings.py.tmpl')
 
 #GEM_LOCAL_SETTINGS_TMPL = 'geonode/geonode/local_settings.py.tmpl'
