@@ -82,11 +82,13 @@ export PYTHONPATH=$PWD
 
 ## Run GeoNode
 cd ~/geonode
+paver sync
 paver setup
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
 paver setup -l $LXC_IP
+sudo cp local_settings.py.tmpl ~/geonode/geonode/local_settings.py
 
 ## Run GeoNode
 cd ~/geonode
