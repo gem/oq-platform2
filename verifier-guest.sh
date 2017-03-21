@@ -70,6 +70,9 @@ sudo cp -Rf $HOME/"$GIT_REPO"/pavement.py $HOME/
 sudo cp -Rf $HOME/"$GIT_REPO"/openquake $HOME/
 sudo rm $HOME/geonode/geonode/local_settings.py
 
+
+sudo chown -R www-data.www-data $HOME/"$GIT_REPO"/*
+
 ## installing taxtweb
 cd ~
 git clone https://github.com/gem/oq-platform-taxtweb.git
@@ -79,15 +82,15 @@ export PYTHONPATH=$PWD
 ## Run GeoNode
 cd ~/geonode
 paver setup
-paver sync
-paver start -b 0.0.0.0:8000
 
 ## modify local_settings with pavement from repo
 cd ~
-
-sudo chmod u+x $HOME/geonode/geonode/local_settings.py.tmpl
-
 paver setup -l $LXC_IP
+
+## Run GeoNode
+cd ~/geonode
+paver start -b 0.0.0.0:8000
+
 
 #function complete procedure for tests
 exec_test () {    
