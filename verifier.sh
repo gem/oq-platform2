@@ -320,10 +320,10 @@ sig_hand () {
         copy_common "$ACTION"
         copy_dev
 
-        echo "Destroying [$lxc_name] lxc"
-        if [ "$LXC_DESTROY" = "true" ]; then
-            sudo $LXC_KILL -n $lxc_name
-        fi
+#        echo "Destroying [$lxc_name] lxc"
+#        if [ "$LXC_DESTROY" = "true" ]; then
+#            sudo $LXC_KILL -n $lxc_name
+#        fi
     fi
     if [ -f /tmp/packager.eph.$$.log ]; then
         rm /tmp/packager.eph.$$.log
