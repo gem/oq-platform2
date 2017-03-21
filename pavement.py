@@ -25,7 +25,7 @@ GEM_LOCAL_SETTINGS_TMPL = os.path.join(os.path.expanduser("~"),
 #GEM_LOCAL_SETTINGS_TMPL = 'geonode/geonode/local_settings.py.tmpl'
 def _write_local_settings(lxc_ip):
     local_settings = open(GEM_LOCAL_SETTINGS_TMPL, 'r').read()
-    with open(os.path.join(os.path.expanduser("~"), 'geonode/geonode',
+    with open(os.path.join(os.path.expanduser("~"),
                                'local_settings.py.tmpl'), 'r+') as fh:
         fh.write(local_settings % dict(lxc_ip=lxc_ip
                                        ))
