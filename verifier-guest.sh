@@ -65,11 +65,11 @@ OGC_SERVER = {
 }
 EOF
 
-sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
-sudo cp -Rf $HOME/"$GIT_REPO"/pavement.py $HOME/
-sudo cp -Rf $HOME/"$GIT_REPO"/openquake $HOME/
-sudo cp -Rf $HOME/"$GIT_REPO"/local_settings.py.tmpl $HOME/
-sudo rm $HOME/geonode/geonode/local_settings.py
+#sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
+#sudo cp -Rf $HOME/"$GIT_REPO"/pavement.py $HOME/
+#sudo cp -Rf $HOME/"$GIT_REPO"/openquake $HOME/
+#sudo cp -Rf $HOME/"$GIT_REPO"/local_settings.py.tmpl $HOME/
+#sudo rm $HOME/geonode/geonode/local_settings.py
 
 
 sudo chown -R www-data.www-data $HOME/"$GIT_REPO"/*
@@ -85,7 +85,7 @@ cd ~/geonode
 paver setup
 
 ## modify local_settings with pavement from repo
-cd ~
+cd ~/oq-platform2
 paver setup -l $LXC_IP
 
 ## Run GeoNode
