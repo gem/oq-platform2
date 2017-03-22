@@ -88,7 +88,7 @@ paver setup
 cd ~/geonode
 paver start -b 0.0.0.0:8000
 
-sleep 40000
+#sleep 40000
 
 
 #function complete procedure for tests
