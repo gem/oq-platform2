@@ -310,8 +310,11 @@ copy_dev () {
 #  sig_hand - manages cleanup if the build is aborted
 #
 sig_hand () {
-    trap ERR SIGINT SIGTERM
+
+    trap "" ERR SIGINT SIGTERM
     echo "signal trapped"
+    echo "sig_hand begin $$" >> /tmp/sig_hand.log
+
     if [ "$lxc_name" != "" ]; then
         set +e
 
@@ -328,6 +331,9 @@ sig_hand () {
     if [ -f /tmp/packager.eph.$$.log ]; then
         rm /tmp/packager.eph.$$.log
     fi
+
+    echo "sig_hand end $$" >> /tmp/sig_hand.log
+    exit 1
 }
 
 
@@ -338,6 +344,8 @@ BUILD_FLAGS=""
 
 trap sig_hand SIGINT SIGTERM
 trap sig_hand ERR
+
+echo "sig_hand trap $$" >> /tmp/sig_hand.log
 
 # create folder to save logs
 if [ ! -d "out" ]; then
