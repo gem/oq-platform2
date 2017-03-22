@@ -65,22 +65,14 @@ OGC_SERVER = {
 }
 EOF
 
-#sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
-#sudo cp -Rf $HOME/"$GIT_REPO"/pavement.py $HOME/
-#sudo cp -Rf $HOME/"$GIT_REPO"/openquake $HOME/
-#sudo cp -Rf $HOME/"$GIT_REPO"/local_settings.py.tmpl $HOME/
-#sudo rm $HOME/geonode/geonode/local_settings.py
 
-
-#chown -R www-data.www-data $HOME/"$GIT_REPO"/*
-
-## installing taxtweb
+## clone and setting pythonpath taxtweb
 cd ~
 git clone https://github.com/gem/oq-platform-taxtweb.git
 cd oq-platform-taxtweb
 export PYTHONPATH=$PWD
 
-## Run GeoNode
+## Sync and setup GeoNode
 cd ~/geonode
 paver sync
 paver setup
@@ -90,7 +82,7 @@ cd ~/oq-platform2
 ls -la
 paver setup -l $LXC_IP
 
-
+## Start Geonode
 cd ~/geonode
 paver start -b 0.0.0.0:8000
 
@@ -118,7 +110,7 @@ exec_test
 #fi
 
 
-## stop paver
+## Stop Geonode
 cd ~/geonode
 sleep 4000
 paver stop
