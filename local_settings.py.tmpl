@@ -2,14 +2,10 @@ import os
 from geonode.settings import GEONODE_APPS
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-# SITEURL = 'http://10.0.3.91:8000'
 SITEURL = 'http://%(lxc_ip)s/:8000'
-# ALLOWED_HOSTS = ['10.0.3.91', 'localhost']
 ALLOWED_HOSTS = ['%(lxc_ip)s/', 'localhost']
 
-#GEOSERVER_LOCATION = 'http://10.0.3.91:8080/geoserver/'
 GEOSERVER_LOCATION = 'http://%(lxc_ip)s/:8080/geoserver/'
-#GEOSERVER_PUBLIC_LOCATION = 'http://10.0.3.91:8080/geoserver/'
 GEOSERVER_PUBLIC_LOCATION = 'http://%(lxc_ip)s/:8080/geoserver/'
 
 OGC_SERVER = {
@@ -36,66 +32,4 @@ OGC_SERVER = {
         'DATASTORE': '', #'datastore',
     }
 }
-
-
-INSTALLED_APPS = (
-
-    'modeltranslation',
-
-    # ioostrap admin theme
-    # 'django_admin_bootstrapped.bootstrap3',
-    # 'django_admin_bootstrapped',
-
-    # Apps bundled with Django
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.admin',
-    'django.contrib.sitemaps',
-    'django.contrib.staticfiles',
-    'django.contrib.messages',
-    'django.contrib.humanize',
-    'django.contrib.gis',
-
-    # Third party apps
-
-    # Utility
-    'pagination',
-    'taggit',
-    'treebeard',
-    'friendlytagloader',
-    'geoexplorer',
-    'leaflet',
-    'django_extensions',
-    #'geonode-client',
-    # 'haystack',
-    'autocomplete_light',
-    'mptt',
-    # 'modeltranslation',
-    'djcelery',
-    'storages',
-
-    # Theme
-    "pinax_theme_bootstrap_account",
-    "pinax_theme_bootstrap",
-    'django_forms_bootstrap',
-
-    # Social
-    'account',
-    'avatar',
-    'dialogos',
-    'agon_ratings',
-    # 'notification',
-    'announcements',
-    'actstream',
-    'user_messages',
-    'tastypie',
-    'polymorphic',
-    'guardian',
-    'oauth2_provider',
-
-    # taxtweb
-    'openquakeplatform_taxtweb',
-) + GEONODE_APPS
 
