@@ -66,6 +66,8 @@ OGC_SERVER = {
 EOF
 
 
+sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
+
 ## clone and setting pythonpath taxtweb
 cd ~
 git clone https://github.com/gem/oq-platform-taxtweb.git
