@@ -88,7 +88,7 @@ cd ~/oq-platform2
 ## ls -la
 paver setup -l $LXC_IP 
 
-
+ls -la
 
 #function complete procedure for tests
 exec_test () {    
@@ -107,8 +107,6 @@ exec_test () {
     python -m openquake.moon.nose_runner --failurecatcher prod -s -v --with-xunit --xunit-file=xunit-platform-prod.xml oq-platform2/openquake/taxonomy/test || true
     # sleep 40000 || true
 }
-
-ls -la
 
 #if [ "$NO_EXEC_TEST" != "notest" ] ; then
 exec_test
