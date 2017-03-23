@@ -77,18 +77,19 @@ export PYTHONPATH=$PWD
 
 ## Sync and setup GeoNode
 cd ~/geonode
-paver sync
 paver setup
-paver start -b 0.0.0.0:8000
-
-#sleep 40000
+sleep 40000 || true
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
-## ls -la
-paver setup -l $LXC_IP 
+paver setup -l $LXC_IP
 
-ls -la
+
+cd ~/geonode
+paver sync
+paver start -b 0.0.0.0:8000
+
+#sleep 40000
 
 #function complete procedure for tests
 exec_test () {    
@@ -102,10 +103,10 @@ exec_test () {
     #cp openquake/taxonomy/test/config/moon_config.py.tmpl openquake/taxonomy/test/config/moon_config.py
     git clone -b "$GIT_BRANCH" --depth=1  $GEM_GIT_REPO/oq-moon.git || git clone --depth=1 "$GEM_GIT_REPO"/oq-moon.git
 
-    export PYTHONPATH=\$(pwd):\$(pwd)/openquakeplatform/test/config
+    export PYTHONPATH=../oq-moon:\$(pwd):\$(pwd)/openquakeplatform/test/config
     cp openquakeplatform/test/config/moon_config.py.tmpl openquakeplatform/test/config/moon_config.py
     export DISPLAY=:1
-    python -m openquake.moon.nose_runner --failurecatcher dev -v --with-xunit --xunit-file=xunit-platform-dev.xml openquakeplatform/test # || true
+    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml openquakeplatform/test # || true
 
 
     #export DISPLAY=:1
