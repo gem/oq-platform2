@@ -67,6 +67,7 @@ EOF
 
 
 sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
+sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 
 ## clone and setting pythonpath taxtweb
 cd ~
