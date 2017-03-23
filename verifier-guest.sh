@@ -81,21 +81,18 @@ paver setup -l $LXC_IP
 
 ## Sync and setup GeoNode
 cd ~/geonode
-python manage.py makemigrations
-python manage.py migrate --noinput
-python manage.py syncdb --noinput
+# python manage.py makemigrations
+# python manage.py migrate --noinput
+# python manage.py syncdb --noinput
+paver sync
 paver setup
 #sleep 40000 || true
 
-## manage.py syncdb
-# cd ~/geonode/geonode
-# python manage.py syncdb --noinput
-
-cd ~/geonode
+#cd ~/geonode
 paver sync
 paver start -b 0.0.0.0:8000
 
-sleep 40000 || true
+# sleep 40000 || true
 
 #function complete procedure for tests
 exec_test () {    
@@ -128,6 +125,6 @@ exec_test
 
 ## Stop Geonode
 cd ~/geonode
-sleep 4000
+# sleep 4000
 paver stop
 
