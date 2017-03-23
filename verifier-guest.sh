@@ -75,15 +75,8 @@ git clone https://github.com/gem/oq-platform-taxtweb.git
 cd oq-platform-taxtweb
 export PYTHONPATH=$PWD
 
-## modify local_settings with pavement from repo
-cd ~/oq-platform2
-paver setup -l $LXC_IP
-
 ## Sync and setup GeoNode
 cd ~/geonode
-# python manage.py makemigrations
-# python manage.py migrate --noinput
-# python manage.py syncdb --noinput
 paver sync
 paver setup
 #sleep 40000 || true
@@ -91,6 +84,10 @@ paver setup
 #cd ~/geonode
 paver sync
 paver start -b 0.0.0.0:8000
+
+## modify local_settings with pavement from repo
+cd ~/oq-platform2
+paver setup -l $LXC_IP
 
 # sleep 40000 || true
 
