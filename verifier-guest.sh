@@ -81,6 +81,7 @@ paver setup -l $LXC_IP
 
 ## Sync and setup GeoNode
 cd ~/geonode
+python manage.py makemigrations
 python manage.py migrate --noinput
 paver setup
 #sleep 40000 || true
