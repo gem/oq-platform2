@@ -79,18 +79,14 @@ export PYTHONPATH=$PWD
 cd ~/geonode
 paver sync
 paver setup
-
-## modify local_settings with pavement from repo
-cd ~/oq-platform2
-## ls -la
-paver setup -l $LXC_IP
-
-## Start Geonode
-cd ~/geonode
 paver start -b 0.0.0.0:8000
 
 #sleep 40000
 
+## modify local_settings with pavement from repo
+cd ~/oq-platform2
+## ls -la
+paver setup -l $LXC_IP 
 
 #function complete procedure for tests
 exec_test () {    
