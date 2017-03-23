@@ -78,15 +78,15 @@ export PYTHONPATH=$PWD
 ## Sync and setup GeoNode
 cd ~/geonode
 paver setup
-paver sync
-sleep 40000 || true
+#sleep 40000 || true
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
 paver setup -l $LXC_IP
-
+python manage.py syncdb --noinput
 
 cd ~/geonode
+paver sync
 paver start -b 0.0.0.0:8000
 
 #sleep 40000
