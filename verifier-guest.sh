@@ -83,6 +83,7 @@ paver setup -l $LXC_IP
 cd ~/geonode
 python manage.py makemigrations
 python manage.py migrate --noinput
+python manage.py syncdb --noinput
 paver setup
 #sleep 40000 || true
 
