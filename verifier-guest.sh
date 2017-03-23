@@ -83,6 +83,9 @@ paver setup
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
 paver setup -l $LXC_IP
+
+## manage.py syncdb
+cd ~/geonode/geonode
 python manage.py syncdb --noinput
 
 cd ~/geonode
