@@ -95,7 +95,7 @@ cd ~/geonode
 paver sync
 paver start -b 0.0.0.0:8000
 
-#sleep 40000
+sleep 40000 || true
 
 #function complete procedure for tests
 exec_test () {    
