@@ -97,13 +97,11 @@ cd ~/geonode
 paver sync
 paver start -b 0.0.0.0:8000
 
-sleep 40000 || true
+#sleep 40000 || true
 
 #function complete procedure for tests
 exec_test () {   
-
-    cd ~
- 
+    
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
     sudo apt-get -y install python-pip wget
     sudo pip install --upgrade pip
@@ -111,24 +109,19 @@ exec_test () {
     sudo pip install -U selenium==3.0.1
     wget http://ftp.openquake.org/mirror/mozilla/geckodriver-latest-linux64.tar.gz ; tar zxvf geckodriver-latest-linux64.tar.gz ; sudo cp geckodriver /usr/local/bin
 
-    #cp openquake/taxonomy/test/config/moon_config.py.tmpl openquake/taxonomy/test/config/moon_config.py
-    git clone -b "$GIT_BRANCH" --depth=1  $GEM_GIT_REPO/oq-moon.git || git clone --depth=1 "$GEM_GIT_REPO"/oq-moon.git
+    git clone --depth=1 "$GEM_GIT_REPO"/oq-moon.git
 
     export PYTHONPATH=oq-moon:$GIT_REPO:openquakeplatform/test/config
     cp /openquakeplatform/test/config/moon_config.py.tmpl /openquakeplatform/test/config/moon_config.py
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml openquakeplatform/test # || true
-
-
-    #export DISPLAY=:1
-    #export PYTHONPATH=oq-moon:$GIT_REPO:openquake/taxonomy/test/config
-    #python -m openquake.moon.nose_runner --failurecatcher prod -s -v --with-xunit --xunit-file=xunit-platform-prod.xml /openquake/taxonomy/test || true
-    # sleep 40000 || true
 }
 
+cd ~ 
 #if [ "$NO_EXEC_TEST" != "notest" ] ; then
 exec_test
 #fi
+sleep 40000 || true
 
 
 ## Stop Geonode
