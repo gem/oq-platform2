@@ -28,11 +28,11 @@ git clone -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
 
 ## Install GeoNode and dependencies
 cd geonode
-# pip install -e .
+pip install -e .
 # pip install pygdal==1.11.3.3
 
 # Install the system python-gdal
-sudo apt-get install -y pygdal
+sudo apt-get install -y python-gdal
 
 cd ~
 # Create a symbolic link in your virtualenv
