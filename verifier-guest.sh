@@ -65,10 +65,6 @@ OGC_SERVER = {
 }
 EOF
 
-## modify local_settings with pavement from repo
-cd ~/oq-platform2
-paver setup -l $LXC_IP
-
 
 sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
@@ -82,11 +78,13 @@ export PYTHONPATH=$PWD
 ## Sync and setup GeoNode
 cd ~/geonode
 paver setup
+
+## modify local_settings with pavement from repo
+cd ~/oq-platform2
+paver setup -l $LXC_IP 
+
+cd ~/geonode
 paver sync
-
-sleep 40000 || true
-
-
 paver start -b 0.0.0.0:8000
 
 # sleep 40000 || true

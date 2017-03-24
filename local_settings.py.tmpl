@@ -2,11 +2,11 @@ import os
 from geonode.settings import GEONODE_APPS
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-SITEURL = 'http://%(lxc_ip)s/:8000'
-ALLOWED_HOSTS = ['%(lxc_ip)s/', 'localhost']
+SITEURL = 'http://%(lxc_ip)s:8000'
+ALLOWED_HOSTS = ['%(lxc_ip)s', 'localhost']
 
-GEOSERVER_LOCATION = 'http://%(lxc_ip)s/:8080/geoserver/'
-GEOSERVER_PUBLIC_LOCATION = 'http://%(lxc_ip)s/:8080/geoserver/'
+GEOSERVER_LOCATION = 'http://%(lxc_ip)s:8080/geoserver/'
+GEOSERVER_PUBLIC_LOCATION = 'http://%(lxc_ip)s:8080/geoserver/'
 
 OGC_SERVER = {
     'default': {
