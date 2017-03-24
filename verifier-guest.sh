@@ -111,9 +111,7 @@ exec_test () {
 
     git clone --depth=1 "$GEM_GIT_REPO"/oq-moon.git
 
-    sleep 40000 || true
-
-    export PYTHONPATH=oq-moon:$GIT_REPO/openquakeplatform/test/config
+    export PYTHONPATH=oq-moon:$GIT_REPO:$GIT_REPO/openquakeplatform/test/config
 
     sleep 40000 || true
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
