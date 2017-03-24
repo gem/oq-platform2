@@ -100,7 +100,10 @@ paver start -b 0.0.0.0:8000
 # sleep 40000 || true
 
 #function complete procedure for tests
-exec_test () {    
+exec_test () {   
+
+    cd ~
+ 
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
     sudo apt-get -y install python-pip wget
     sudo pip install --upgrade pip
@@ -112,7 +115,7 @@ exec_test () {
     git clone -b "$GIT_BRANCH" --depth=1  $GEM_GIT_REPO/oq-moon.git || git clone --depth=1 "$GEM_GIT_REPO"/oq-moon.git
 
     export PYTHONPATH=oq-moon:$GIT_REPO:openquakeplatform/test/config
-    cp openquakeplatform/test/config/moon_config.py.tmpl openquakeplatform/test/config/moon_config.py
+    cp /openquakeplatform/test/config/moon_config.py.tmpl /openquakeplatform/test/config/moon_config.py
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml openquakeplatform/test # || true
 
