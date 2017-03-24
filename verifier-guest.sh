@@ -77,11 +77,7 @@ export PYTHONPATH=$PWD
 
 ## Sync and setup GeoNode
 cd ~/geonode
-paver sync
 paver setup
-#sleep 40000 || true
-
-#cd ~/geonode
 paver sync
 paver start -b 0.0.0.0:8000
 
@@ -89,7 +85,7 @@ paver start -b 0.0.0.0:8000
 cd ~/oq-platform2
 paver setup -l $LXC_IP
 
-# sleep 40000 || true
+sleep 40000 || true
 
 #function complete procedure for tests
 exec_test () {    
