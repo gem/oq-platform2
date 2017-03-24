@@ -111,7 +111,11 @@ exec_test () {
 
     git clone --depth=1 "$GEM_GIT_REPO"/oq-moon.git
 
+    sleep 40000 || true
+
     export PYTHONPATH=oq-moon:$GIT_REPO:openquakeplatform/test/config
+
+    sleep 40000 || true
     cp /openquakeplatform/test/config/moon_config.py.tmpl /openquakeplatform/test/config/moon_config.py
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml openquakeplatform/test # || true
@@ -121,7 +125,6 @@ cd ~
 #if [ "$NO_EXEC_TEST" != "notest" ] ; then
 exec_test
 #fi
-sleep 40000 || true
 
 
 ## Stop Geonode
