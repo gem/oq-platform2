@@ -32,7 +32,7 @@ cd geonode
 # pip install pygdal==1.11.3.3
 
 # Install the system python-gdal
-sudo apt-get install -y python-gdal
+sudo apt-get install -y pygdal
 
 cd ~
 # Create a symbolic link in your virtualenv
