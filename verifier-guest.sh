@@ -14,8 +14,11 @@ sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openj
 
 # git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
 
-## Create the virtualenv
-virtualenv ~/env
+## Check if exist and  create the virtualenv
+if [ ! -f ~/env/bin/activate ]; then
+    virtualenv ~/env
+fi
+
 source ~/env/bin/activate
 
 cd ~
@@ -25,8 +28,13 @@ git clone -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
 
 ## Install GeoNode and dependencies
 cd geonode
-pip install -e .
-pip install pygdal==1.11.3.3
+# pip install -e .
+# pip install pygdal==1.11.3.3
+
+# Install the system python-gdal
+sudo apt-get install python-gdal
+# Create a symbolic link in your virtualenv
+ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
 ## Set the local_settings.py
 IP=$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
