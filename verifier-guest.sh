@@ -32,7 +32,9 @@ cd geonode
 # pip install pygdal==1.11.3.3
 
 # Install the system python-gdal
-sudo apt-get install python-gdal
+sudo apt-get install -y python-gdal
+
+cd ~
 # Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
