@@ -9,6 +9,30 @@ GIT_GEO_REPO="$2"
 GIT_REPO="$3"
 LXC_IP="$4"
 
+#function complete procedure for tests
+exec_test () {   
+    
+    #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
+    sudo apt-get -y install python-pip wget
+    pip install --upgrade pip
+    pip install nose
+    pip install -U selenium==3.0.1
+    wget http://ftp.openquake.org/mirror/mozilla/geckodriver-latest-linux64.tar.gz ; tar zxvf geckodriver-latest-linux64.tar.gz ; sudo cp geckodriver /usr/local/bin
+
+    git clone --depth=1 "$GEM_GIT_REPO"/oq-moon.git
+    cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
+    
+    cd $GIT_REPO
+    export PYTHONPATH=../oq-moon:$PWD:$PWD/openquakeplatform/test/config:../oq-platform-taxtweb
+
+    export DISPLAY=:1
+    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
+    # sleep 40000 || true
+}
+
+#
+#  MAIN
+#
 sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
 
@@ -82,8 +106,7 @@ sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 ## clone and setting pythonpath taxtweb
 cd ~
 git clone https://github.com/gem/oq-platform-taxtweb.git
-cd oq-platform-taxtweb
-export PYTHONPATH=$PWD
+export PYTHONPATH=~/oq-platform-taxtweb
 
 ## Sync and setup GeoNode
 cd ~/geonode
@@ -97,36 +120,13 @@ cd ~/geonode
 paver sync
 paver start -b 0.0.0.0:8000
 
-#sleep 40000 || true
-
-#function complete procedure for tests
-exec_test () {   
-    
-    #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
-    sudo apt-get -y install python-pip wget
-    sudo pip install --upgrade pip
-    sudo pip install nose
-    sudo pip install -U selenium==3.0.1
-    wget http://ftp.openquake.org/mirror/mozilla/geckodriver-latest-linux64.tar.gz ; tar zxvf geckodriver-latest-linux64.tar.gz ; sudo cp geckodriver /usr/local/bin
-
-    git clone --depth=1 "$GEM_GIT_REPO"/oq-moon.git
-
-    export PYTHONPATH=../oq-moon:$GIT_REPO:$GIT_REPO/openquakeplatform/test/config
-
-    sleep 40000 || true
-    cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
-    export DISPLAY=:1
-    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
-}
-
-cd ~ 
-#if [ "$NO_EXEC_TEST" != "notest" ] ; then
-exec_test
-#fi
+cd ~/ 
+if [ "$NO_EXEC_TEST" != "notest" ] ; then
+    exec_test
+fi
 
 
 ## Stop Geonode
 cd ~/geonode
-# sleep 4000
 paver stop
 
