@@ -228,8 +228,7 @@ _devtest_innervm_run () {
         BRANCH_GEONODE="2.6.x"
     fi
 
-    ssh -t $lxc_ip "mkdir \"$GEM_GIT_PACKAGE\""
-    scp verifier-guest.sh "$lxc_ip:$GEM_GIT_PACKAGE"
+    scp verifier-guest.sh "$lxc_ip:"
 
     ssh -t  $lxc_ip "export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
 
@@ -246,7 +245,7 @@ if [ \$GEM_SET_DEBUG ]; then
     set -x
 fi
 
-\"./$GEM_GIT_PACKAGE/verifier-guest.sh\" \"$branch_id\" \"$BRANCH_GEONODE\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\"
+\"./verifier-guest.sh\" \"$branch_id\" \"$BRANCH_GEONODE\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\"
 "
     echo "_devtest_innervm_run: exit"
 
