@@ -12,8 +12,3 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-import version
-
-__version__ = '1.9.0'
-__version__ += version.git_suffix(__file__)
