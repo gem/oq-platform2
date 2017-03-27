@@ -3,7 +3,7 @@ import unittest
 
 from openquakeplatform.test import pla
 
-
+@unittest.skip("temporarily disabled")
 class IrvTest(unittest.TestCase):
     def irv_test(self):
         # go to test page
