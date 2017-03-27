@@ -224,10 +224,6 @@ _devtest_innervm_run () {
 
     repo_id="$GEM_GIT_REPO"
 
-
-    git archive --prefix=$GEM_GIT_PACKAGE/ --format tar HEAD | ssh -t $lxc_ip "tar -x"
-
-
     if [ "$BRANCH_GEONODE" == "" ] ; then
         BRANCH_GEONODE="2.6.x"
     fi

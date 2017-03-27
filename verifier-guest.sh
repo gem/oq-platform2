@@ -19,14 +19,14 @@ exec_test () {
     pip install -U selenium==3.0.1
     wget http://ftp.openquake.org/mirror/mozilla/geckodriver-latest-linux64.tar.gz ; tar zxvf geckodriver-latest-linux64.tar.gz ; sudo cp geckodriver /usr/local/bin
 
-    git clone --depth=1 "$GEM_GIT_REPO"/oq-moon.git
+    git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
     
     cd $GIT_REPO
     export PYTHONPATH=../oq-moon:$PWD:$PWD/openquakeplatform/test/config:../oq-platform-taxtweb
 
     export DISPLAY=:1
-    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
+    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml openquakeplatform/test # || true
     # sleep 40000 || true
 }
 
@@ -36,7 +36,7 @@ exec_test () {
 sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
 
-# git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
+git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
 
 ## Check if exist and  create the virtualenv
 if [ ! -f ~/env/bin/activate ]; then
