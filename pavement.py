@@ -23,7 +23,7 @@ def _write_local_settings(lxc_ip,webuiurl):
 
 @task
 @cmdopts([
-    ('lxc_ip=', 'l', 'Bind server to provided IP address and port number.')
+    ('lxc_ip=', 'l', 'Bind server to provided IP address and port number.'),
     ('webuiurl=', 'u', 'Bind server to provided URL of webui.')
 ])
 def setup():
