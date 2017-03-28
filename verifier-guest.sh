@@ -62,7 +62,7 @@ cd ~
 # Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
-sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
+# sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 
 ## clone and setting pythonpath taxtweb
@@ -76,7 +76,7 @@ paver setup
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
-paver setup -l $LXC_IP 
+paver setup -l $LXC_IP localhost:8080
 
 cd ~/geonode
 paver sync
