@@ -76,7 +76,7 @@ paver setup
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
-paver setup -l $LXC_IP localhost:8080
+paver setup -l $LXC_IP -u localhost:8080
 
 cd ~/geonode
 paver sync
