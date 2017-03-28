@@ -11,12 +11,14 @@ from paver.easy import BuildFailure
 GEM_LOCAL_SETTINGS_TMPL = 'local_settings.py.tmpl'
 
 
-def _write_local_settings(lxc_ip):
+def _write_local_settings(lxc_ip,webuiurl):
     local_settings = open(GEM_LOCAL_SETTINGS_TMPL, 'r').read()
     with open(os.path.join(os.path.expanduser("~"), 'geonode/geonode/'
                                                     'local_settings'
                                                     '.py'), 'w') as fh:
-        fh.write(local_settings % dict(lxc_ip=lxc_ip))
+        fh.write(local_settings % dict(lxc_ip=lxc_ip,
+                                       webuiurl=webuiurl
+                                       ))
 
 
 @task
