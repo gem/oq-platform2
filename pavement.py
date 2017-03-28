@@ -27,8 +27,9 @@ def _write_local_settings(lxc_ip,webuiurl):
 ])
 def setup():
     lxc_ip = options.get('lxc_ip', '')
+    webuiurl = options.get('webuiurl', '')
     # info(lxc_ip)
-    _write_local_settings(lxc_ip)
+    _write_local_settings(lxc_ip,webuiurl)
     info("Local setting changed.")
 
 
