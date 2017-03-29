@@ -63,7 +63,7 @@ if [ $LXC_VER -lt 1 ]; then
     exit 1
 fi
 
-if [ -z "$GEM_EPHEM_EXE" ]; then
+#if [ -z "$GEM_EPHEM_EXE" ]; then
     if command -v lxc-copy &> /dev/null; then
         # New lxc (>= 2.0.0) with lxc-copy
         GEM_EPHEM_EXE="${GEM_EPHEM_CMD} -n ${GEM_EPHEM_NAME} -e"
@@ -71,7 +71,7 @@ if [ -z "$GEM_EPHEM_EXE" ]; then
         # Old lxc (< 2.0.0) with lxc-start-ephimeral
         GEM_EPHEM_EXE="${GEM_EPHEM_CMD} -o ${GEM_EPHEM_NAME} -d"
     fi
-fi
+#fi
 
 if [ "$GEM_EPHEM_DESTROY" != "" ]; then
     LXC_DESTROY="$GEM_EPHEM_DESTROY"
