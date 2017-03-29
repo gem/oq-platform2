@@ -62,7 +62,6 @@ cd ~
 # Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
-# sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 
 ## clone and setting pythonpath taxtweb and oq-platform2
@@ -83,13 +82,13 @@ paver sync
 paver start -b 0.0.0.0:8000
 
 cd ~/ 
-#if [ "$NO_EXEC_TEST" != "notest" ] ; then
-#    exec_test
-#fi
+if [ "$NO_EXEC_TEST" != "notest" ] ; then
+    exec_test
+fi
 
 # sleep 40000
 
 ## Stop Geonode
 cd ~/geonode
-# paver stop
+paver stop
 

@@ -250,7 +250,7 @@ if [ \$GEM_SET_DEBUG ]; then
     set -x
 fi
 
-\"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\"
+\"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$notests\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\"
 "
     echo "_devtest_innervm_run: exit"
 
@@ -263,7 +263,7 @@ fi
 #      <branch_geonode>   name of the geonode branch
 #
 devtest_run () {
-    local deps old_ifs branch_id="$1" branch_geonode="$2"
+    local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3"
 
     trap sig_hand SIGINT SIGTERM ERR
    
@@ -282,7 +282,7 @@ devtest_run () {
 
     _wait_ssh $lxc_ip
     set +e
-    _devtest_innervm_run "$branch_id" "$branch_geonode"
+    _devtest_innervm_run "$branch_id" "$branch_geonode" "$notests"
     inner_ret=$?
 
     copy_common dev
@@ -368,7 +368,7 @@ while [ $# -gt 0 ]; do
             #    usage 1
             #fi
             ACTION="$1"
-            devtest_run $(echo "$2" | sed 's@.*/@@g') "$3"
+            devtest_run $(echo "$2" | sed 's@.*/@@g') "$3" "$4"
             break
             ;;
         *)
