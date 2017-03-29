@@ -48,7 +48,7 @@ source ~/env/bin/activate
 cd ~
 
 ## Clone GeoNode
-git clone -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git 
+git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
 
 ## Install GeoNode and dependencies
 cd geonode
@@ -68,7 +68,7 @@ sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 ## clone and setting pythonpath taxtweb
 cd ~
 git clone https://github.com/gem/oq-platform-taxtweb.git
-export PYTHONPATH=~/oq-platform-taxtweb
+export PYTHONPATH=:~/oq-platform2:~/oq-platform-taxtweb
 
 ## Sync and setup GeoNode
 cd ~/geonode
