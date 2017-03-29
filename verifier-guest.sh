@@ -65,7 +65,7 @@ ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osg
 # sudo cp -Rf $HOME/"$GIT_REPO"/html/* $HOME/
 sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 
-## clone and setting pythonpath taxtweb
+## clone and setting pythonpath taxtweb and oq-platform2
 cd ~
 git clone https://github.com/gem/oq-platform-taxtweb.git
 export PYTHONPATH=:~/oq-platform2:~/oq-platform-taxtweb
@@ -76,7 +76,7 @@ paver setup
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
-paver setup -l $LXC_IP -u localhost:8080
+paver setup -l $LXC_IP -u localhost:8800
 
 cd ~/geonode
 paver sync
