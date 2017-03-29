@@ -87,6 +87,7 @@ cd ~/
 #    exec_test
 #fi
 
+sleep 40000
 
 ## Stop Geonode
 cd ~/geonode
