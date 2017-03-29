@@ -250,7 +250,7 @@ if [ \$GEM_SET_DEBUG ]; then
     set -x
 fi
 
-\"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$notests\" \"$lxc_ip\"
+\"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\" \"$notests\"
 "
     echo "_devtest_innervm_run: exit"
 
