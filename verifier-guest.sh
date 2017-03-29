@@ -48,7 +48,7 @@ source ~/env/bin/activate
 cd ~
 
 ## Clone GeoNode
-git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git 
+git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
 
 ## Install GeoNode and dependencies
 cd geonode
@@ -87,7 +87,7 @@ cd ~/
 #    exec_test
 #fi
 
-sleep 40000
+# sleep 40000
 
 ## Stop Geonode
 cd ~/geonode
