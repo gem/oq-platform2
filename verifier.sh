@@ -217,7 +217,7 @@ _lxc_name_and_ip_get()
 #      <lxc_ip>       the IP address of lxc instance
 #
 _devtest_innervm_run () {
-    local i old_ifs pkgs_list dep GIT_BRANCH="$1" BRANCH_GEONODE="$2"
+    local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2"
 
     trap 'local LASTERR="$?" ; trap ERR ; (exit $LASTERR) ; return' ERR
 
@@ -225,10 +225,6 @@ _devtest_innervm_run () {
     scp .gem_ffox_init.sh ${lxc_ip}:
 
     repo_id="$GEM_GIT_REPO"
-
-    if [ "$BRANCH_GEONODE" == "" ] ; then
-        BRANCH_GEONODE="2.6.x"
-    fi
 
     scp verifier-guest.sh "$lxc_ip:"
 
@@ -247,7 +243,7 @@ if [ \$GEM_SET_DEBUG ]; then
     set -x
 fi
 
-\"./verifier-guest.sh\" \"$branch_id\" \"$BRANCH_GEONODE\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\"
+\"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\"
 "
     echo "_devtest_innervm_run: exit"
 
@@ -259,10 +255,14 @@ fi
 #      <branch_id>    name of the tested branch
 #
 devtest_run () {
-    local deps old_ifs branch_id="$1" BRANCH_GEONODE="$2"
+    local deps old_ifs branch_id="$1" branch_geonode="$2"
 
     trap sig_hand SIGINT SIGTERM ERR
-    
+   
+    if [ "$branch_geonode" == "" ] ; then
+        branch_geonode="2.6.x"
+    fi
+ 
     sudo echo
     if [ "$GEM_EPHEM_EXE" = "$GEM_EPHEM_NAME" ]; then
         _lxc_name_and_ip_get
@@ -274,7 +274,7 @@ devtest_run () {
 
     _wait_ssh $lxc_ip
     set +e
-    _devtest_innervm_run "$branch_id" "$BRANCH_GEONODE"
+    _devtest_innervm_run "$branch_id" "$branch_geonode"
     inner_ret=$?
 
     copy_common dev
