@@ -1,4 +1,4 @@
-export GEM_SET_DEBUG=true-new
+export GEM_SET_DEBUG=true
 if [ "" = "true" ]; then
     export OQ_MOON_STATS=
 fi
