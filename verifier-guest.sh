@@ -90,5 +90,5 @@ cd ~/
 
 ## Stop Geonode
 cd ~/geonode
-paver stop
+# paver stop
 
