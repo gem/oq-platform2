@@ -19,6 +19,13 @@
 #
 
 #
+#  HOWTO INSTALL ON A NOT-EPHEMERAL MACHINE
+#
+# export GEM_EPHEM_NAME=<lxc-name>
+# export GEM_EPHEM_EXE=<lxc-name>
+# export GEM_EPHEM_DESTROY=false
+# 
+#
 #  usage <exitcode> - show usage of the script
 #      <exitcode>    value of exitcode
 #
@@ -63,7 +70,7 @@ if [ $LXC_VER -lt 1 ]; then
     exit 1
 fi
 
-#if [ -z "$GEM_EPHEM_EXE" ]; then
+if [ -z "$GEM_EPHEM_EXE" ]; then
     if command -v lxc-copy &> /dev/null; then
         # New lxc (>= 2.0.0) with lxc-copy
         GEM_EPHEM_EXE="${GEM_EPHEM_CMD} -n ${GEM_EPHEM_NAME} -e"
@@ -71,7 +78,7 @@ fi
         # Old lxc (< 2.0.0) with lxc-start-ephimeral
         GEM_EPHEM_EXE="${GEM_EPHEM_CMD} -o ${GEM_EPHEM_NAME} -d"
     fi
-#fi
+fi
 
 if [ "$GEM_EPHEM_DESTROY" != "" ]; then
     LXC_DESTROY="$GEM_EPHEM_DESTROY"
@@ -255,8 +262,9 @@ fi
 }
 
 #
-#  devtest_run <branch_id> - main function of source test
-#      <branch_id>    name of the tested branch
+#  devtest_run <branch_id> <branch_geonode> - main function for development test
+#      <branch_id>        name of the tested branch
+#      <branch_geonode>   name of the geonode branch
 #
 devtest_run () {
     local deps old_ifs branch_id="$1" BRANCH_GEONODE="$2"
