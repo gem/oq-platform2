@@ -39,7 +39,7 @@ usage () {
     echo "    $0 devtest <branch-name> ['notests']"
     echo "                                     development installation and tests."
     echo "         <branch-name>    name of branch repo"
-    echo "         ['notests']    if not running the tests"
+    echo "         'notests'    if not running the tests"
     echo
     exit $ret
 }
