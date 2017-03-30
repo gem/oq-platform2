@@ -36,8 +36,10 @@ usage () {
 
     echo
     echo "USAGE:"
-    echo "$0 devtest <branch-name> and if not running test use <notests>"
-    echo "development  installation and tests."
+    echo "    $0 devtest <branch-name> ['notests']"
+    echo "                                     development installation and tests."
+    echo "         <branch-name>    name of branch repo"
+    echo "         ['notests']    if not running the tests"
     echo
     exit $ret
 }
