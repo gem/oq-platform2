@@ -36,11 +36,10 @@ usage () {
 
     echo
     echo "USAGE:"
-    echo "    $0 devtest <branch-name> [<plugins-branch-name>]"
-    echo "                                                 put oq-platform sources in a lxc,"
-    echo "                                                 setup environment and run development tests."
-    echo "    $0 devtest <branch-name> <smtp_address> ['notest']"
-    echo "                                                 production installation and tests."
+    echo "    $0 devtest <branch-name> ['notests']"
+    echo "                                     development installation and tests."
+    echo "         <branch-name>    name of branch repo"
+    echo "         'notests'    if not running the tests"
     echo
     exit $ret
 }
@@ -224,7 +223,7 @@ _lxc_name_and_ip_get()
 #      <lxc_ip>       the IP address of lxc instance
 #
 _devtest_innervm_run () {
-    local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2"
+    local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2" notests="$3"
 
     trap 'local LASTERR="$?" ; trap ERR ; (exit $LASTERR) ; return' ERR
 
@@ -258,9 +257,10 @@ fi
 }
 
 #
-#  devtest_run <branch_id> <branch_geonode> - main function for development test
+#  devtest_run <branch_id> <branch_geonode> <notests> - main function for development test
 #      <branch_id>        name of the tested branch
 #      <branch_geonode>   name of the geonode branch
+#      <notests>          name of variable for activate or deactivate tests 
 #
 devtest_run () {
     local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3"
@@ -318,7 +318,6 @@ copy_dev () {
 #  sig_hand - manages cleanup if the build is aborted
 #
 sig_hand () {
-
     trap "" ERR SIGINT SIGTERM
     echo "signal trapped"
     echo "sig_hand begin $$" >> /tmp/sig_hand.log

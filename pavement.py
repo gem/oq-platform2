@@ -11,7 +11,7 @@ from paver.easy import BuildFailure
 GEM_LOCAL_SETTINGS_TMPL = 'local_settings.py.tmpl'
 
 
-def _write_local_settings(lxc_ip,webuiurl):
+def _write_local_settings(lxc_ip, webuiurl):
     local_settings = open(GEM_LOCAL_SETTINGS_TMPL, 'r').read()
     with open(os.path.join(os.path.expanduser("~"), 'geonode/geonode/'
                                                     'local_settings'
@@ -30,7 +30,7 @@ def setup():
     lxc_ip = options.get('lxc_ip', '')
     webuiurl = options.get('webuiurl', '')
     # info(lxc_ip)
-    _write_local_settings(lxc_ip,webuiurl)
+    _write_local_settings(lxc_ip, webuiurl)
     info("Local setting changed.")
 
 
