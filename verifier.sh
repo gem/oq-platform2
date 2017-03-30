@@ -258,9 +258,10 @@ fi
 }
 
 #
-#  devtest_run <branch_id> <branch_geonode> - main function for development test
+#  devtest_run <branch_id> <branch_geonode> <notests> - main function for development test
 #      <branch_id>        name of the tested branch
 #      <branch_geonode>   name of the geonode branch
+#      <notests>          name of variable for activate or deactivate tests 
 #
 devtest_run () {
     local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3"
@@ -318,7 +319,6 @@ copy_dev () {
 #  sig_hand - manages cleanup if the build is aborted
 #
 sig_hand () {
-
     trap "" ERR SIGINT SIGTERM
     echo "signal trapped"
     echo "sig_hand begin $$" >> /tmp/sig_hand.log
