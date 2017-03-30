@@ -24,6 +24,7 @@ exec_test () {
     
     cd $GIT_REPO
     export PYTHONPATH=../oq-moon:$PWD:$PWD/openquakeplatform/test/config:../oq-platform-taxtweb
+    export PYTHONPATH=../oq-moon:$PWD:$PWD/openquakeplatform/test/config:../oq-platform-ipt
 
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml openquakeplatform/test # || true
@@ -83,13 +84,13 @@ paver sync
 paver start -b 0.0.0.0:8000
 
 cd ~/ 
-if [ "$NO_EXEC_TEST" != "notest" ] ; then
-    exec_test
-fi
+#if [ "$NO_EXEC_TEST" != "notest" ] ; then
+#    exec_test
+#fi
 
-# sleep 40000
+sleep 40000
 
 ## Stop Geonode
 cd ~/geonode
-paver stop
+# paver stop
 
