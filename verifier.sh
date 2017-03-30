@@ -224,7 +224,7 @@ _lxc_name_and_ip_get()
 #      <lxc_ip>       the IP address of lxc instance
 #
 _devtest_innervm_run () {
-    local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2"
+    local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2" notests="$3"
 
     trap 'local LASTERR="$?" ; trap ERR ; (exit $LASTERR) ; return' ERR
 
