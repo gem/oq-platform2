@@ -36,11 +36,8 @@ usage () {
 
     echo
     echo "USAGE:"
-    echo "    $0 devtest <branch-name> [<plugins-branch-name>]"
-    echo "                                                 put oq-platform sources in a lxc,"
-    echo "                                                 setup environment and run development tests."
-    echo "    $0 devtest <branch-name> <smtp_address> ['notest']"
-    echo "                                                 production installation and tests."
+    echo "$0 devtest <branch-name> and if not running test use <notests>"
+    echo "development  installation and tests."
     echo
     exit $ret
 }
