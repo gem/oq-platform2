@@ -67,7 +67,8 @@ sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 ## clone and setting pythonpath taxtweb and oq-platform2
 cd ~
 git clone https://github.com/gem/oq-platform-taxtweb.git
-export PYTHONPATH=:~/oq-platform2:~/oq-platform-taxtweb
+git clone https://github.com/gem/oq-platform-ipt.git
+export PYTHONPATH=:~/oq-platform2:~/oq-platform-taxtweb:~/oq-platform-ipt
 
 ## Sync and setup GeoNode
 cd ~/geonode
