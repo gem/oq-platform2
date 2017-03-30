@@ -25,6 +25,7 @@ from django.conf.urls.static import static
 from geonode.sitemap import LayerSitemap, MapSitemap
 from django.views.generic import TemplateView
 from django.contrib import admin
+from openquakeplatform_ipt import views
 
 import geonode.proxy.urls
 
@@ -46,6 +47,21 @@ sitemaps = {
     "layer": LayerSitemap,
     "map": MapSitemap
 }
+
+urlpatterns = [
+    url(r'^(?P<tab_id>\d+)?$', views.view, name='home'),
+    url(r'^upload/(?P<target>[^?]*)', views.upload, name='upload'),
+    url(r'^valid$', views.validate_nrml, name='validate_nrml'),
+    url(r'^sendback$', views.sendback_nrml, name='sendback_nrml'),
+    url(r'^sendback_er_rupture_surface$', views.sendback_er_rupture_surface,
+        name='sendback_er_rupture_surface'),
+    url(r'^prepare/scenario$',
+        views.scenario_prepare, name='scenario_prepare'),
+    url(r'^prepare/event-based$',
+        views.event_based_prepare, name='event_based_prepare'),
+    url(r'^download$', views.download, name='download'),
+    url(r'^clean_all$', views.clean_all, name='clean_all'),
+]
 
 urlpatterns = patterns('',
 
