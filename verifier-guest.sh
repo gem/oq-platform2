@@ -64,6 +64,14 @@ cd ~
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
 sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
+sudo cp $HOME/"$GIT_REPO"/views.py $HOME/geonode/geonode
+
+## install engine
+sudo apt-get install software-properties-common
+sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
+sudo apt-get update
+sudo apt-get install -y --force-yes python-oq-engine
+
 
 ## clone and setting pythonpath taxtweb and oq-platform2
 cd ~
