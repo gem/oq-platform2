@@ -64,7 +64,6 @@ cd ~
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
 sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
-sudo cp $HOME/"$GIT_REPO"/openquakeplatform/settings.py $HOME/oq-platform2/openquakeplatform
 
 ## install engine
 sudo apt-get install software-properties-common
