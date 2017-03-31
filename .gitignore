@@ -85,7 +85,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+<<<<<<< HEAD
 
 #
+=======
+>>>>>>> c20297c0f89c02727d7f96d0bf5edf04f7918b12
 .gem_ffox_init.sh
 .gem_init.sh
