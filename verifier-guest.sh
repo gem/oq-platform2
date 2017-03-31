@@ -64,7 +64,7 @@ cd ~
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
 sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
-#sudo cp $HOME/"$GIT_REPO"/views.py $HOME/geonode/geonode
+sudo cp $HOME/"$GIT_REPO"/settings.py $HOME/oq-platform2/openquakeplatform
 
 ## install engine
 sudo apt-get install software-properties-common
@@ -78,6 +78,7 @@ cd ~
 git clone https://github.com/gem/oq-platform-taxtweb.git
 git clone https://github.com/gem/oq-platform-ipt.git
 export PYTHONPATH=:~/oq-platform2:~/oq-platform-taxtweb:~/oq-platform-ipt
+export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
 
 ## Sync and setup GeoNode
 cd ~/geonode
