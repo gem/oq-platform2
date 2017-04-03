@@ -77,6 +77,7 @@ cd ~
 git clone https://github.com/gem/oq-platform-taxtweb.git
 git clone https://github.com/gem/oq-platform-ipt.git
 export PYTHONPATH=:~/oq-platform2:~/oq-platform-taxtweb:~/oq-platform-ipt
+export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
 
 ## Sync and setup GeoNode
 cd ~/geonode
