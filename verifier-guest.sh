@@ -24,6 +24,7 @@ exec_test () {
     
     cd $GIT_REPO
     export PYTHONPATH=../oq-moon:$PWD:$PWD/openquakeplatform/test/config:../oq-platform-taxtweb
+    export PYTHONPATH=../oq-moon:$PWD:$PWD/openquakeplatform/test/config:../oq-platform-ipt
 
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml openquakeplatform/test # || true
@@ -47,6 +48,9 @@ source ~/env/bin/activate
 
 cd ~
 
+#install numpy
+pip install numpy
+
 ## Clone GeoNode
 git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
 
@@ -67,7 +71,9 @@ sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 ## clone and setting pythonpath taxtweb and oq-platform2
 cd ~
 git clone https://github.com/gem/oq-platform-taxtweb.git
-export PYTHONPATH=:$HOME/oq-platform2:$HOME/oq-platform-taxtweb
+git clone https://github.com/gem/oq-platform-ipt.git
+
+export PYTHONPATH=:$HOME/oq-platform2:$HOME/oq-platform-taxtweb::$HOME/oq-platform-ipt
 export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
 
 ## Sync and setup GeoNode
@@ -84,7 +90,7 @@ paver start -b 0.0.0.0:8000
 
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
-    exec_test
+#    exec_test
 fi
 
 ## Stop Geonode
