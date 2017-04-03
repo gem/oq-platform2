@@ -36,6 +36,7 @@ exec_test () {
 #
 sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
+sudo apt-get install -y python-numpy
 
 git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
 
