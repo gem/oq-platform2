@@ -68,6 +68,7 @@ sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 cd ~
 git clone https://github.com/gem/oq-platform-taxtweb.git
 export PYTHONPATH=:$HOME/oq-platform2:$HOME/oq-platform-taxtweb
+export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
 
 ## Sync and setup GeoNode
 cd ~/geonode
