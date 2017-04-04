@@ -54,6 +54,12 @@ pip install numpy
 ## Clone GeoNode
 git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
 
+## install engine
+sudo apt-get install -y software-properties-common
+sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
+sudo apt-get update
+sudo apt-get install -y --force-yes python-oq-engine
+
 ## Install GeoNode and dependencies
 cd geonode
 pip install -e .
