@@ -77,7 +77,7 @@ sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 ## clone and setting pythonpath taxtweb and oq-platform2
 cd ~
 git clone https://github.com/gem/oq-platform-taxtweb.git
-git clone https://github.com/gem/oq-platform-ipt.git
+git clone -b ipt26-sat1 https://github.com/gem/oq-platform-ipt.git
 
 export PYTHONPATH=:$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
 export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
