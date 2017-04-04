@@ -26,7 +26,7 @@ def _write_local_settings(lxc_ip, webuiurl, datadir):
 @task
 @cmdopts([
     ('lxc_ip=', 'l', 'Bind server to provided IP address and port number.'),
-    ('webuiurl=', 'u', 'Bind server to provided URL of webui.')
+    ('webuiurl=', 'u', 'Bind server to provided URL of webui.'),
     ('datadir=', 'd', 'Value for FILE_PATH_FIELD_DIRECTORY in ipt')
 ])
 def setup():
