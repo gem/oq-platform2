@@ -27,11 +27,12 @@ def _write_local_settings(lxc_ip, webuiurl, datadir):
 @cmdopts([
     ('lxc_ip=', 'l', 'Bind server to provided IP address and port number.'),
     ('webuiurl=', 'u', 'Bind server to provided URL of webui.')
+    ('datadir=', 'd', 'Value for FILE_PATH_FIELD_DIRECTORY in ipt')
 ])
 def setup():
     lxc_ip = options.get('lxc_ip', '')
     webuiurl = options.get('webuiurl', '')
-    datadir = options.get('datadir', 'data/')
+    datadir = options.get('datadir', '')
     # info(lxc_ip)
     _write_local_settings(lxc_ip, webuiurl, datadir)
     info("Local setting changed.")
