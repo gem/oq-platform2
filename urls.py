@@ -33,6 +33,9 @@ from geonode.api.views import verify_token, roles, users, admin_role
 
 import autocomplete_light
 
+from openquakeplatform_ipt import views
+
+
 # Setup Django Admin
 autocomplete_light.autodiscover()
 
@@ -189,5 +192,8 @@ urlpatterns += patterns('',
 urlpatterns += patterns('',
                         (r'^taxtweb/',
 include('openquakeplatform_taxtweb.urls', namespace='taxtweb')),
+                        (r'^ipt/',
+include('openquakeplatform_ipt.urls', namespace='ipt')),
+
                         )
 
