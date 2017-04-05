@@ -90,8 +90,6 @@ paver setup
 cd ~/oq-platform2
 paver setup -l $LXC_IP -u localhost:8800 -s data
 
-sleep 40000
-
 cd ~/geonode
 paver sync
 paver start -b 0.0.0.0:8000
