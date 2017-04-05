@@ -11,6 +11,9 @@ LXC_IP="$4"
 
 #function complete procedure for tests
 exec_test () {   
+
+    #exclude login  
+    export LOCKDOWN_GEONODE='false'
     
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
     sudo apt-get -y install python-pip wget
@@ -23,8 +26,7 @@ exec_test () {
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
     
     cd $GIT_REPO
-    export PYTHONPATH=../oq-moon:$PWD:$PWD/openquakeplatform/test/config:../oq-platform-taxtweb
-    export PYTHONPATH=../oq-moon:$PWD:$PWD/openquakeplatform/test/config:../oq-platform-ipt
+    export PYTHONPATH=../oq-moon:$PWD:$PWD/openquakeplatform/test/config:../oq-platform-taxtweb:../oq-moon:$PWD:$PWD/openquakeplatform/test/config:../oq-platform-ipt
 
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml openquakeplatform/test # || true
