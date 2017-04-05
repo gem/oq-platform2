@@ -4,7 +4,7 @@ import time
 
 from openquakeplatform.test import pla
 
-# @unittest.skip("temporarily disabled")
+@unittest.skip("temporarily disabled")
 class IscTest(unittest.TestCase):
     def isc_test(self):
         pla.get('/explore')
