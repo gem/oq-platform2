@@ -12,9 +12,6 @@ LXC_IP="$4"
 #function complete procedure for tests
 exec_test () {   
 
-    #exclude login  
-    export LOCKDOWN_GEONODE='false'
-    
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
     sudo apt-get -y install python-pip wget
     pip install --upgrade pip
