@@ -1,6 +1,12 @@
 body {
     background: #fff;
 }
+h3 {
+    line-height: 18px;
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 0 !important;
+}
 select {
     width: 220px;
     border: 1px solid #ccc;
