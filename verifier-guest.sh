@@ -84,6 +84,7 @@ export LOCKDOWN_GEONODE='true'
 
 ## Sync and setup GeoNode
 cd ~/geonode
+
 paver setup
 
 ## modify local_settings with pavement from repo
@@ -101,5 +102,6 @@ fi
 
 ## Stop Geonode
 cd ~/geonode
+sudo supervisorctl stop openquake-webui
 paver stop
 
