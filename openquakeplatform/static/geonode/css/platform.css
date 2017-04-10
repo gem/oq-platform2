@@ -32,6 +32,10 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     -o-transition: border linear .2s,box-shadow linear .2s;
     transition: border linear .2s,box-shadow linear .2s;
 }
+input[type="checkbox"], input[type="radio"] {
+    width: auto;
+    height: auto;
+}
 .col-md-8 {
     width: 100%;
 }
