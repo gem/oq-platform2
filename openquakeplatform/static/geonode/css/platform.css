@@ -330,6 +330,12 @@ div#search-inp:after {
     background: #f05a24;
     border-color: #f05a24;
 }
+.btn-group-justified > .btn, .btn-group-justified > .btn-group {
+    float: left;
+    display: table-cell;
+    width: 100%;
+    margin: 0 0 14px 0;
+}
 .input-group .yourlabs-autocomplete {
     margin-top: 6px;
 }
