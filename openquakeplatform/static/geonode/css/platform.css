@@ -300,6 +300,13 @@ div#search-inp:after {
     right: 4px;
     top: 0px;
 }
+.hero-unit .btn {
+    background: #f7931e;
+}
+.hero-unit .btn:hover {
+    background: #f05a24;
+    color: #fff;
+}
 .btn-primary {
     background: #f7931e;
     border-color: #f7931e;
