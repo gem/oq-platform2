@@ -1,4 +1,4 @@
-import os
+        import os
 
 from setuptools.command import easy_install
 from urlparse import urlparse

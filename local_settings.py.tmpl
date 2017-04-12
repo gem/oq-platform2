@@ -17,9 +17,9 @@ GEOSERVER_PUBLIC_LOCATION = 'http://%(lxc_ip)s:8080/geoserver/'
 DATABASES = {
     'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': '%(db_name)',
-         'USER': '%(db_user)',
-         'PASSWORD': '%(db_pass)',
+         'NAME': '%(db_name)s',
+         'USER': '%(db_user)s',
+         'PASSWORD': '%(db_pass)s',
      },
     # vector datastore for uploads
     'datastore' : {
