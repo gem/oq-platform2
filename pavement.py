@@ -20,7 +20,7 @@ def _write_local_settings(lxc_ip, webuiurl, db_name, db_user, db_pass):
                                        webuiurl=webuiurl,
                                        db_name=db_name,
                                        db_user=db_user,
-                                       db_pass=db_pass
+                                       db_pass=db_pass,
                                        ))
 
 
