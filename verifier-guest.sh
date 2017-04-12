@@ -47,6 +47,25 @@ source ~/env/bin/activate
 
 cd ~
 
+#install and configuration postgres
+sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts
+sudo -u postgres createdb geonode_dev
+sudo -u postgres createdb geonode_dev-imports
+cat << EOF | sudo -u postgres psql
+CREATE USER "geonode_dev" WITH PASSWORD 'geonode_dev';
+GRANT ALL PRIVILEGES ON DATABASE "geonode_dev" to geonode_dev;
+GRANT ALL PRIVILEGES ON DATABASE "geonode_dev-imports" to geonode_dev;
+EOF
+sudo -u postgres psql -d geonode_dev-imports -c 'CREATE EXTENSION postgis;'
+sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
+sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
+
+#insert line in pg_hba.conf postgres
+sudo sed '1 i local   all             all                                md5' /etc/postgresql/9.5/main/pg_hba.conf
+
+#restart postgres
+sudo service postgresql restart
+
 ## Clone GeoNode
 git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
 
