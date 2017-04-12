@@ -61,8 +61,8 @@ sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON geometry_columns T
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
 
 #insert line in pg_hba.conf postgres
-sudo sed '1 i local   all             all                                md5' /etc/postgresql/9.5/main/pg_hba.conf
-
+#sudo sed '1 i local   all             all                                md5' /etc/postgresql/9.5/main/pg_hba.conf
+sudo sed -i '1 s@^@local  all             all             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
 #restart postgres
 sudo service postgresql restart
 
