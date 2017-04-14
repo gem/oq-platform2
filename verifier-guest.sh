@@ -8,9 +8,9 @@ GIT_BRANCH="$1"
 GIT_GEO_REPO="$2"
 GIT_REPO="$3"
 LXC_IP="$4"
-GEODBNAME="geonode_dev"
-GEODBUSER="geonode_dev"
-GEODBPWD="geonode_dev"
+GEO_DBNAME="geonode_dev"
+GEO_DBUSER="geonode_dev"
+GEO_DBPWD="geonode_dev"
 
 #function complete procedure for tests
 exec_test () {   
@@ -57,9 +57,9 @@ sudo -u postgres createdb geonode_dev-imports
 
 
 cat << EOF | sudo -u postgres psql
-    CREATE USER "$GEODBUSER" WITH PASSWORD '$GEODBPWD';
-    GRANT ALL PRIVILEGES ON DATABASE "$GEODBNAME" to $GEODBNAME;
-    GRANT ALL PRIVILEGES ON DATABASE "geonode_dev-imports" to $GEODBPWD;
+    CREATE USER "$GEO_DBUSER" WITH PASSWORD '$GEO_DBPWD';
+    GRANT ALL PRIVILEGES ON DATABASE "$GEO_DBNAME" to $GEO_DBUSER;
+    GRANT ALL PRIVILEGES ON DATABASE "geonode_dev-imports" to $GEO_DBUSER;
 EOF
 
 sudo -u postgres psql -d geonode_dev-imports -c 'CREATE EXTENSION postgis;'
