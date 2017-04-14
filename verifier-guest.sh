@@ -53,10 +53,10 @@ sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-script
 sudo -u postgres createdb geonode_dev
 sudo -u postgres createdb geonode_dev-imports
 
-echo sudo -u postgres psql
-echo CREATE USER "$GEOUSPW" WITH PASSWORD $GEOUSPW
-echo GRANT ALL PRIVILEGES ON DATABASE "$GEOUSPW" to $GEOUSPW
-echo GRANT ALL PRIVILEGES ON DATABASE geonode_dev-imports to $GEOUSPW
+echo sudo -u postgres psql | sudo -u postgres psql
+echo CREATE USER "$GEOUSPW" WITH PASSWORD $GEOUSPW | CREATE USER "$GEOUSPW" WITH PASSWORD "$GEOUSPW"
+echo GRANT ALL PRIVILEGES ON DATABASE "$GEOUSPW" to $GEOUSPW | GRANT ALL PRIVILEGES ON DATABASE "$GEOUSPW" to $GEOUSPW
+echo GRANT ALL PRIVILEGES ON DATABASE geonode_dev-imports to $GEOUSPW | GRANT ALL PRIVILEGES ON DATABASE geonode_dev-imports to $GEOUSPW
 
 sudo -u postgres psql -d geonode_dev-imports -c 'CREATE EXTENSION postgis;'
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
