@@ -26,8 +26,8 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         #'ENGINE': '', # Empty ENGINE name disables
         'NAME': 'geonode_dev-imports',
-        'USER' : 'geonod_dev',
-        'PASSWORD' : 'geonode_dev',
+        'USER' : '%(db_name)s',
+        'PASSWORD' : '%(db_name)s',
         'HOST' : 'localhost',
         'PORT' : '5432',
     }
