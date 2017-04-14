@@ -8,6 +8,7 @@ GIT_BRANCH="$1"
 GIT_GEO_REPO="$2"
 GIT_REPO="$3"
 LXC_IP="$4"
+GEOUSPW="geonode_dev"
 
 #function complete procedure for tests
 exec_test () {   
@@ -51,11 +52,12 @@ cd ~
 sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts
 sudo -u postgres createdb geonode_dev
 sudo -u postgres createdb geonode_dev-imports
-cat << EOF | sudo -u postgres psql
-CREATE USER "geonode_dev" WITH PASSWORD 'geonode_dev';
-GRANT ALL PRIVILEGES ON DATABASE "geonode_dev" to geonode_dev;
-GRANT ALL PRIVILEGES ON DATABASE "geonode_dev-imports" to geonode_dev;
-EOF
+
+sudo -u postgres psql
+echo CREATE USER "$GEOUSPW" WITH PASSWORD "$GEOUSPW"
+echo GRANT ALL PRIVILEGES ON DATABASE "$GEOUSPW" to geonode_dev
+echo GRANT ALL PRIVILEGES ON DATABASE geonode_dev-imports to geonode_dev
+
 sudo -u postgres psql -d geonode_dev-imports -c 'CREATE EXTENSION postgis;'
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
@@ -105,8 +107,6 @@ cd ~/
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
 fi
-
-#sleep 40000
 
 ## Stop Geonode
 cd ~/geonode
