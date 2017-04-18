@@ -1,9 +1,49 @@
 body {
     background: #fff;
 }
+h3 {
+    line-height: 18px;
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 0 !important;
+}
 select {
     width: 220px;
     border: 1px solid #ccc;
+}
+select, input[type="file"] {
+    height: auto;
+    line-height: 28px;
+}
+.ui-icon-help {
+    background-position: -49px -145px !important;
+}
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+    display: inline-block;
+    padding: 4px 6px;
+    margin-bottom: 9px;
+    font-size: 13px;
+    line-height: 18px;
+    color: #555;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    vertical-align: middle;
+}
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border linear .2s,box-shadow linear .2s;
+    -moz-transition: border linear .2s,box-shadow linear .2s;
+    -o-transition: border linear .2s,box-shadow linear .2s;
+    transition: border linear .2s,box-shadow linear .2s;
+}
+input[type="checkbox"], input[type="radio"] {
+    width: auto;
+    height: auto;
 }
 .col-md-8 {
     width: 100%;
@@ -273,6 +313,14 @@ div#search-inp:after {
     right: 4px;
     top: 0px;
 }
+.hero-unit .btn {
+    background: #f7931e;
+    color: #fff;
+}
+.hero-unit .btn:hover {
+    background: #f05a24;
+    color: #fff;
+}
 .btn-primary {
     background: #f7931e;
     border-color: #f7931e;
@@ -281,6 +329,12 @@ div#search-inp:after {
 .btn-primary:focus {
     background: #f05a24;
     border-color: #f05a24;
+}
+.btn-group-justified > .btn, .btn-group-justified > .btn-group {
+    float: left;
+    display: table-cell;
+    width: 100%;
+    margin: 0 0 14px 0;
 }
 .input-group .yourlabs-autocomplete {
     margin-top: 6px;
@@ -299,6 +353,12 @@ div#search-inp:after {
     position: absolute;
     top: -7px;
     right: 50px;
+}
+#oq-body-heading h1 {
+    color: #1b75a7;
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: 300;
 }
 .dropdown-menu {
    border: 1px solid #ccc;
@@ -331,7 +391,7 @@ div#search-inp:after {
     font-size: 12px;
     position: fixed;
     bottom: 0;
-    padding: 0 10%!important;
+    padding: 0 0 0 12%!important;
     width: 100%;
     height: auto;
     padding-top: 0;
