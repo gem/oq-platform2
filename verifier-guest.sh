@@ -8,6 +8,9 @@ GIT_BRANCH="$1"
 GIT_GEO_REPO="$2"
 GIT_REPO="$3"
 LXC_IP="$4"
+GEO_DBNAME="geonode_dev"
+GEO_DBUSER="geonode_dev"
+GEO_DBPWD="geonode_dev"
 
 #function complete procedure for tests
 exec_test () {   
@@ -47,8 +50,31 @@ source ~/env/bin/activate
 
 cd ~
 
+#install and configuration postgres
+sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts
+sudo -u postgres createdb geonode_dev
+sudo -u postgres createdb geonode_dev-imports
+
+
+cat << EOF | sudo -u postgres psql
+    CREATE USER "$GEO_DBUSER" WITH PASSWORD '$GEO_DBPWD';
+    GRANT ALL PRIVILEGES ON DATABASE "$GEO_DBNAME" to $GEO_DBUSER;
+    GRANT ALL PRIVILEGES ON DATABASE "geonode_dev-imports" to $GEO_DBUSER;
+EOF
+
+sudo -u postgres psql -d geonode_dev-imports -c 'CREATE EXTENSION postgis;'
+sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
+sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
+
+#insert line in pg_hba.conf postgres
+#sudo sed '1 i local   all             all                                md5' /etc/postgresql/9.5/main/pg_hba.conf
+sudo sed -i '1 s@^@local  all             all             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+#restart postgres
+sudo service postgresql restart
+
 #install numpy
 pip install numpy
+
 
 ## Clone GeoNode
 git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
