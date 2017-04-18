@@ -103,7 +103,7 @@ sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 cd ~
 
 for repo in oq-platform-taxtweb oq-platform-ipt; do
-    git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
+    if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
 done
 
 export PYTHONPATH=:$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
