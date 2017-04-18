@@ -14,7 +14,7 @@ GEO_DBPWD="geonode_dev"
 
 #function complete procedure for tests
 exec_test () {   
-    
+
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
     sudo apt-get -y install python-pip wget
     pip install --upgrade pip
@@ -22,11 +22,11 @@ exec_test () {
     pip install -U selenium==3.0.1
     wget http://ftp.openquake.org/mirror/mozilla/geckodriver-latest-linux64.tar.gz ; tar zxvf geckodriver-latest-linux64.tar.gz ; sudo cp geckodriver /usr/local/bin
 
-    git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
+    git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
     
     cd $GIT_REPO
-    export PYTHONPATH=../oq-moon:$PWD:$PWD/openquakeplatform/test/config:../oq-platform-taxtweb
+    export PYTHONPATH=../oq-moon:$PWD:$PWD/openquakeplatform/test/config:../oq-platform-taxtweb:../oq-platform-ipt
 
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml openquakeplatform/test # || true
@@ -72,8 +72,18 @@ sudo sed -i '1 s@^@local  all             all             md5\n@g' /etc/postgres
 #restart postgres
 sudo service postgresql restart
 
+#install numpy
+pip install numpy
+
+
 ## Clone GeoNode
 git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
+
+## install engine
+sudo apt-get install -y software-properties-common
+sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
+sudo apt-get update
+sudo apt-get install -y --force-yes python-oq-engine
 
 ## Install GeoNode and dependencies
 cd geonode
@@ -91,17 +101,23 @@ sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 
 ## clone and setting pythonpath taxtweb and oq-platform2
 cd ~
-git clone https://github.com/gem/oq-platform-taxtweb.git
-export PYTHONPATH=:$HOME/oq-platform2:$HOME/oq-platform-taxtweb
+
+for repo in oq-platform-taxtweb oq-platform-ipt; do
+    git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
+done
+
+export PYTHONPATH=:$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
 export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
+export LOCKDOWN_GEONODE='true'
 
 ## Sync and setup GeoNode
 cd ~/geonode
+
 paver setup
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
-paver setup -l $LXC_IP -u localhost:8800
+paver setup -l $LXC_IP -u localhost:8800 -s data
 
 cd ~/geonode
 paver sync
@@ -114,5 +130,6 @@ fi
 
 ## Stop Geonode
 cd ~/geonode
+sudo supervisorctl stop openquake-webui
 paver stop
 

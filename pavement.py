@@ -11,7 +11,9 @@ from paver.easy import BuildFailure
 GEM_LOCAL_SETTINGS_TMPL = 'local_settings.py.tmpl'
 
 
-def _write_local_settings(lxc_ip, webuiurl, db_name, db_user, db_pass):
+
+def _write_local_settings(lxc_ip, webuiurl, datadir, db_name, db_user, db_pass):
+
     local_settings = open(GEM_LOCAL_SETTINGS_TMPL, 'r').read()
     with open(os.path.join(os.path.expanduser("~"), 'oq-platform2',
                                                     'openquakeplatform',
@@ -22,13 +24,15 @@ def _write_local_settings(lxc_ip, webuiurl, db_name, db_user, db_pass):
                                        db_name=db_name,
                                        db_user=db_user,
                                        db_pass=db_pass,
+                                       datadir=datadir
                                        ))
 
 
 @task
 @cmdopts([
     ('lxc_ip=', 'l', 'Bind server to provided IP address and port number.'),
-    ('webuiurl=', 'u', 'Bind server to provided URL of webui.')
+    ('webuiurl=', 'u', 'Bind server to provided URL of webui.'),
+    ('datadir=', 's', 'Value for FILE_PATH_FIELD_DIRECTORY in ipt')
 ])
 def setup():
     lxc_ip = options.get('lxc_ip', '')
@@ -36,8 +40,9 @@ def setup():
     db_name = "geonode_dev"
     db_user = "geonode_dev"
     db_pass = "geonode_dev"
+    datadir = options.get('datadir', '')
     # info(lxc_ip)
-    _write_local_settings(lxc_ip, webuiurl, db_name, db_user, db_pass)
+    _write_local_settings(lxc_ip, webuiurl, datadir, db_name, db_user, db_pass)
     info("Local setting changed.")
 
 
