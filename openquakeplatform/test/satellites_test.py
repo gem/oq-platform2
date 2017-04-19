@@ -19,8 +19,8 @@ def get_checks(pkgname):
             obj.__name__ = newname
             globals()[newname] = obj
 
-for pkgname in ['openquakeplatform_ipt.test', 'openquakeplatform_taxtweb.test']:
-    try:
-        get_checks(pkgname)
-    except:
-        pass
+# for pkgname in ['openquakeplatform_ipt.test', 'openquakeplatform_taxtweb.test']:
+#     try:
+#         get_checks(pkgname)
+#     except:
+#         pass
