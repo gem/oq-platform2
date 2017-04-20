@@ -10,7 +10,8 @@ class ShapeTest(unittest.TestCase):
 
     def upload_shape_test(self):
 
-        sph = "~/oq-platform2/openquakeplatform/test/shapefile/exampleshape.zip"
+        sph = "~/oq-platform2/openquakeplatform/test/shapefile/"
+        "exampleshape.zip"
 
         pla.get('')
 
@@ -38,7 +39,6 @@ class ShapeTest(unittest.TestCase):
 
         time.sleep(5)
 
-
         # confirm upload layers
         confuplayer = pla.xpath_finduniq(
             "//a[normalize-space(text())='Upload files']",
@@ -59,4 +59,3 @@ class ShapeTest(unittest.TestCase):
 
         # page where exist layer create
         pla.wait_new_page(succuploadlayer, '/layers/geonode:exampleshape')
-
