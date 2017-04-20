@@ -10,8 +10,7 @@ class ShapeTest(unittest.TestCase):
 
     def upload_shape_test(self):
 
-        sph = "~/oq-platform2/openquakeplatform/test/shapefile/"
-        "exampleshape.zip"
+        sph = "~/oq-platform2/openquakeplatform/test/shapefile/exampleshape.zip"
 
         pla.get('')
 
