@@ -36,14 +36,14 @@ class ShapeTest(unittest.TestCase):
              100, 1)
         chooselayer.send_keys(sph)
 
-        # time.sleep(5)
+        time.sleep(5)
 
 
         # confirm upload layers
         confuplayer = pla.xpath_finduniq(
             "//a[normalize-space(text())='Upload files']",
             100, 1)
-        pla.wait_visibility(confuplayer)
+        # pla.wait_visibility(confuplayer)
         confuplayer.click()
 
         # success load layer
