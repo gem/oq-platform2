@@ -2,6 +2,7 @@
 import unittest
 
 from openquakeplatform.test import pla
+from selenium import keys
 
 import time
 
@@ -43,7 +44,10 @@ class ShapeTest(unittest.TestCase):
             "//a[normalize-space(text())='Upload files']",
             100, 1)
         # pla.wait_visibility(confuplayer)
-        confuplayer.click()
+        # Actions myAction = new Actions(pla.driver)
+        # myActions.moveToElement(confuplayer).build().perform()
+        # confuplayer.click()
+        confuplayer.send_keys(Keys.PAGE_DOWN)
 
         # success load layer
         pla.xpath_finduniq(
