@@ -2,7 +2,7 @@
 import unittest
 
 from openquakeplatform.test import pla
-from selenium import keys
+from selenium.webdriver.common.keys import keys
 
 import time
 
@@ -37,7 +37,7 @@ class ShapeTest(unittest.TestCase):
              100, 1)
         chooselayer.send_keys(sph)
 
-        time.sleep(5)
+        # time.sleep(5)
 
         # confirm upload layers
         confuplayer = pla.xpath_finduniq(
