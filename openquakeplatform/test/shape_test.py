@@ -2,6 +2,7 @@
 import unittest
 
 from openquakeplatform.test import pla
+
 from selenium.webdriver.common.keys import Keys
 
 
