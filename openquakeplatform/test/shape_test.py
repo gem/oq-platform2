@@ -4,8 +4,6 @@ import unittest
 from openquakeplatform.test import pla
 from selenium.webdriver.common.keys import Keys
 
-import time
-
 
 class ShapeTest(unittest.TestCase):
 
@@ -43,9 +41,6 @@ class ShapeTest(unittest.TestCase):
         confuplayer = pla.xpath_finduniq(
             "//a[normalize-space(text())='Upload files']",
             100, 1)
-        # pla.wait_visibility(confuplayer)
-        # Actions myAction = new Actions(pla.driver)
-        # myActions.moveToElement(confuplayer).build().perform()
         # confuplayer.click()
         confuplayer.send_keys(Keys.PAGE_DOWN)
 
@@ -62,3 +57,5 @@ class ShapeTest(unittest.TestCase):
 
         # page where exist layer create
         pla.wait_new_page(succuploadlayer, '/layers/geonode:exampleshape')
+
+        pla.get('')
