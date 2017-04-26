@@ -43,7 +43,7 @@ class ShapeTest(unittest.TestCase):
             "//a[normalize-space(text())='Upload files']",
             100, 1)
         # confuplayer.click()
-        confuplayer.send_keys(Keys.PAGE_DOWN)
+        confuplayer.send_keys(Keys.END)
 
         # success load layer
         pla.xpath_finduniq(
