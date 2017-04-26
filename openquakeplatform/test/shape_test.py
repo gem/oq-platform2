@@ -44,7 +44,7 @@ class ShapeTest(unittest.TestCase):
             100, 1)
         # confuplayer.click()
         # confuplayer.send_keys(Keys.END)
-        actions = ActionChains(pla.driver).move_to_element(confuplayer)
+        actions = ActionChains(pla.driver).switch_to_active_element(confuplayer)
         actions.perform()
 
         # success load layer
