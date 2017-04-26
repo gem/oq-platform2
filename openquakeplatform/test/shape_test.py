@@ -46,7 +46,7 @@ class ShapeTest(unittest.TestCase):
         # confuplayer.click()
         # confuplayer.send_keys(Keys.END)
         actions = ActionChains(pla.driver)
-        actions.move_to_element(confuplayer).perform()
+        actions.scrollIntoView(confuplayer).perform()
 
         # success load layer
         pla.xpath_finduniq(
