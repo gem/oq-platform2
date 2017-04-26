@@ -2,7 +2,7 @@
 import unittest
 
 from openquakeplatform.test import pla
-from selenium.webdriver.common.keys import keys
+from selenium.webdriver.common.keys import Keys
 
 import time
 
