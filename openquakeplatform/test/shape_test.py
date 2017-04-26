@@ -3,9 +3,10 @@ import unittest
 
 from openquakeplatform.test import pla
 
-from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.common.keys import Keys
 
 from selenium.webdriver.common.action_chains import ActionChains
+
 
 class ShapeTest(unittest.TestCase):
 
@@ -37,16 +38,13 @@ class ShapeTest(unittest.TestCase):
              100, 1)
         chooselayer.send_keys(sph)
 
-        # time.sleep(5)
-
         # confirm upload layers
         confuplayer = pla.xpath_finduniq(
             "//a[normalize-space(text())='Upload files']",
             100, 1)
         # confuplayer.click()
         # confuplayer.send_keys(Keys.END)
-        actions = ActionChains(pla.driver)
-        actions.move_to_element(confuplayer)
+        actions = ActionChains(pla.driver).move_to_element(confuplayer)
         actions.perform()
 
         # success load layer
