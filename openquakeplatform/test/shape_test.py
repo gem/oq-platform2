@@ -44,10 +44,9 @@ class ShapeTest(unittest.TestCase):
             100, 1)
         # confuplayer.click()
         # confuplayer.send_keys(Keys.END)
-        #actions = ActionChains(pla.driver).move_to_element(confuplayer)
-        #actions.perform()
-        JavascriptExecutor jse = (JavascriptExecutor)pla.driver;
-        jse.executeScript("window.scrollBy(0,250)", "");
+        # actions = ActionChains(pla.driver).move_to_element(confuplayer)
+        # actions.perform()
+        confuplayer.execute_script("window.scrollTo(0 ,document.body.scrollHeight);")        
         confuplayer.click()
 
         # success load layer
