@@ -19,7 +19,7 @@ exec_test () {
     sudo apt-get -y install python-pip wget
     pip install --upgrade pip
     pip install nose
-    pip install -U selenium==3.4.0
+    pip install -U selenium==3.4.1
     wget http://ftp.openquake.org/mirror/mozilla/geckodriver-v0.16.1-linux64.tar.gz ; tar zxvf geckodriver-v0.16.1-linux64.tar.gz ; sudo cp geckodriver /usr/local/bin
 
     git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
