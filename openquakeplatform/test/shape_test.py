@@ -44,8 +44,10 @@ class ShapeTest(unittest.TestCase):
             100, 1)
         # confuplayer.click()
         # confuplayer.send_keys(Keys.END)
-        actions = ActionChains(pla.driver).move_to_element(confuplayer)
-        actions.perform()
+        #actions = ActionChains(pla.driver).move_to_element(confuplayer)
+        #actions.perform()
+        JavascriptExecutor jse = (JavascriptExecutor)pla.driver;
+        jse.executeScript("window.scrollBy(0,250)", "");
 
         # success load layer
         pla.xpath_finduniq(
