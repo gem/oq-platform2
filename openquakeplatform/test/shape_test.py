@@ -63,4 +63,5 @@ class ShapeTest(unittest.TestCase):
         # page where exist layer create
         pla.wait_new_page(succuploadlayer, '/layers/geonode:exampleshape')
 
-        pla.get('')
+        # pla.get('')
+        pla.user_del('one')
