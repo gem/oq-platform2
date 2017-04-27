@@ -5,8 +5,7 @@ from openquakeplatform.test import pla
 
 # from selenium.webdriver.common.keys import Keys
 
-from selenium.webdriver.common.action_chains import ActionChains
-
+from selenium.webdriver.common.keys import Keys
 
 class ShapeTest(unittest.TestCase):
 
@@ -46,7 +45,8 @@ class ShapeTest(unittest.TestCase):
         # confuplayer.send_keys(Keys.END)
         # actions = ActionChains(pla.driver).move_to_element(confuplayer)
         # actions.perform()
-        confuplayer.execute_script("window.scrollTo(0 ,document.body.scrollHeight);")        
+        # confuplayer.execute_script("window.scrollTo(0 ,document.body.scrollHeight);")        
+        confuplayer.send_keys(Keys.ENTER)
         confuplayer.click()
 
         # success load layer
