@@ -41,11 +41,6 @@ class ShapeTest(unittest.TestCase):
         confuplayer = pla.xpath_finduniq(
             "//a[normalize-space(text())='Upload files']",
             100, 1)
-        # confuplayer.click()
-        # confuplayer.send_keys(Keys.END)
-        # actions = ActionChains(pla.driver).move_to_element(confuplayer)
-        # actions.perform()
-        # confuplayer.execute_script("window.scrollTo(0 ,document.body.scrollHeight);")        
         confuplayer.send_keys(Keys.ENTER)
         confuplayer.click()
 
@@ -61,7 +56,8 @@ class ShapeTest(unittest.TestCase):
         succuploadlayer.click()
 
         # page where exist layer create
-        pla.wait_new_page(succuploadlayer, '/layers/geonode:exampleshape')
+        pla.wait_new_page(succuploadlayer, '/layers/geonode:exampleshape',
+                          timeout=10)
 
         # pla.get('')
-        pla.user_del('one')
+        # pla.user_del('one')
