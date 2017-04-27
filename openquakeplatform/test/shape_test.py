@@ -48,6 +48,7 @@ class ShapeTest(unittest.TestCase):
         #actions.perform()
         JavascriptExecutor jse = (JavascriptExecutor)pla.driver;
         jse.executeScript("window.scrollBy(0,250)", "");
+        confuplayer.click()
 
         # success load layer
         pla.xpath_finduniq(
