@@ -53,7 +53,6 @@ class ShapeTest(unittest.TestCase):
         succuploadlayer = pla.xpath_finduniq(
              "//a[normalize-space(text())='Layer Info']",
              100, 1)
-
         succuploadlayer.click()
 
         # page where exist layer create
