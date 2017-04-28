@@ -7,6 +7,7 @@ from openquakeplatform.test import pla
 
 from selenium.webdriver.common.keys import Keys
 
+
 class ShapeTest(unittest.TestCase):
 
     def upload_shape_test(self):
@@ -56,8 +57,7 @@ class ShapeTest(unittest.TestCase):
         succuploadlayer.click()
 
         # page where exist layer create
-        pla.wait_new_page(succuploadlayer, '/layers/geonode:exampleshape',
-                          timeout=20)
+        # pla.wait_new_page(succuploadlayer, '/layers/geonode:exampleshape',
+        #                   timeout=20)
 
         # pla.get('')
-        # pla.user_del('one')
