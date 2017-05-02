@@ -61,4 +61,4 @@ class ShapeTest(unittest.TestCase):
                           timeout=20)
 
         # pla.get('')
-        time.sleep(400)
+        # time.sleep(400)
