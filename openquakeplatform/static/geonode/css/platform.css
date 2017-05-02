@@ -410,6 +410,9 @@ div#search-inp:after {
 #footer form {
     display: none;
 }
+#footer .col-md-6.text-right {
+    width: auto;
+}
 .search {
     display: block;
 }
