@@ -7,6 +7,7 @@ from openquakeplatform.test import pla
 
 from selenium.webdriver.common.keys import Keys
 
+import time
 
 class ShapeTest(unittest.TestCase):
 
@@ -60,3 +61,4 @@ class ShapeTest(unittest.TestCase):
                           timeout=20)
 
         # pla.get('')
+        time.sleep(400)
