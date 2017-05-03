@@ -44,7 +44,7 @@ class ShapeTest(unittest.TestCase):
             "//a[normalize-space(text())='Upload files']",
             100, 1)
         confuplayer.send_keys(Keys.ENTER)
-        confuplayer.click()
+        # confuplayer.click()
         # time.sleep(400)
       
         # success load layer
