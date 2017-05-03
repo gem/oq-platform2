@@ -104,7 +104,7 @@ class ShapeTest(unittest.TestCase):
 
         # click button for confirm
         confsure = pla.xpath_finduniq(
-            "//input[normalize-space(value)='Yes,I am sure' and"
+            "//input[normalize-space(value)='Yes, I am sure' and"
             " @type='submit']",
             100, 1)
         confsure.click()
