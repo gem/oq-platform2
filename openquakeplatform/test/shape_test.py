@@ -13,6 +13,8 @@ class ShapeTest(unittest.TestCase):
 
         sph = "~/oq-platform2/openquakeplatform/test/shapefile/exampleshape.zip"
 
+        lay = "/layer" 
+
         pla.get('')
 
         # layers in homepage
@@ -42,7 +44,6 @@ class ShapeTest(unittest.TestCase):
             "//a[normalize-space(text())='Upload files']",
             100, 1)
         confuplayer.send_keys(Keys.ENTER)
-        # confuplayer.click()
 
         # success load layer
         pla.xpath_finduniq(
@@ -57,6 +58,13 @@ class ShapeTest(unittest.TestCase):
         # page where exist layer create
         pla.wait_new_page(succuploadlayer, '/layers/geonode:exampleshape',
                           timeout=20)
+        
+        # redirect oage layer
+        pla.get(lay)
 
-        # pla.get('')
-        # time.sleep(400)
+        # click on title shapefile inserted
+        lay = pla.xpath_finduniq(                                      
+            "//a[normalize-space(text())='exampleshape' and"
+            " @class='ng-binding']",
+            100, 1)                          
+        lay.click()
