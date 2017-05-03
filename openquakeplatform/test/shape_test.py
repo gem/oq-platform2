@@ -45,7 +45,7 @@ class ShapeTest(unittest.TestCase):
             100, 1)
         confuplayer.send_keys(Keys.ENTER)
         
-        time.sleep(400)
+        # time.sleep(400)
       
         # success load layer
         pla.xpath_finduniq(
@@ -61,6 +61,8 @@ class ShapeTest(unittest.TestCase):
         pla.wait_new_page(succuploadlayer, '/layers/geonode:exampleshape',
                           timeout=20)
         
+        pla.get('')
+
         # redirect oage layer
         pla.get(lay)
 
