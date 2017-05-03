@@ -64,8 +64,13 @@ class ShapeTest(unittest.TestCase):
         
         pla.get('')
 
-        # redirect oage layer
-        pla.get(lay)
+        # layers in homepage
+        linklayertwo = pla.xpath_finduniq(
+            "//a[normalize-space(text())='Layers' and @role='button']",
+            100, 1)
+        linklayertwo.click() 
+
+        pla.wait_new_page(linklayertwo, '/layers', timeout=10) 
 
         # click on title shapefile inserted
         lay = pla.xpath_finduniq(                                      
