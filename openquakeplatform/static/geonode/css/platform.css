@@ -410,11 +410,11 @@ div#search-inp:after {
 #footer form {
     display: none;
 }
+#footer .col-md-6.text-right {
+    width: auto!important;
+}
 .search {
     display: block;
-}
-#footer .row .col-md-6 {
-    width: 33%;
 }
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
     background-color: #1b75a5;
