@@ -78,3 +78,38 @@ class ShapeTest(unittest.TestCase):
             " @class='ng-binding']",
             100, 1)                          
         lay.click()
+
+        # page where exist layer create
+        pla.wait_new_page(lay, '/layers/geonode:exampleshape',
+                          timeout=20)
+        
+        # click edit layer 
+        editbutton = pla.xpath_finduniq(
+            "//button[normalize-space(text())='Edit Layer' and"
+            " @data-target='#edit-layer']",
+            100, 1)
+
+        editbutton.send_keys(Keys.ENTER)
+
+        # click remove
+        removebutton = pla.xpath_finduniq(
+            "//a[normalize-space(text())='Remove']",
+            100, 1)
+
+        removebutton.click()
+
+        # wait if the page for confirm exist
+        pla.wait_new_page(removebutton, '/layers/geonode:exampleshape/remove',
+                          timeout=20)
+
+        # click button for confirm
+        confsure = pla.xpath_finduniq(
+            "//input[normalize-space(value)='Yes,I am sure' and"
+            " @type='submit']",
+            100, 1)
+        confsure.click()
+
+        # check if page list layers
+        pla.wait_new_page(confsure, '/layers', timeout=10)
+
+        
