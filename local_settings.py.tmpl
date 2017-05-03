@@ -211,3 +211,15 @@ MAP_BASELAYERS = [{
     "name":"mapbox"
 }]
 
+if BING_KEY['bing_key']:
+    MAP_BASELAYERS.append(
+        {
+            "source": {"ptype": "gxp_bingsource",
+                       "apiKey": BING_KEY['bing_key']
+                       },
+            "name": "AerialWithLabels",
+            "fixed": True,
+            "visibility": False,
+            "group":"background"
+            }
+        )
