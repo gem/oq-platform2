@@ -9,6 +9,8 @@ OQPLATFORM_ROOT = os.path.dirname(openquakeplatform.__file__)
 SITEURL = 'http://%(lxc_ip)s:8000'
 ALLOWED_HOSTS = ['%(lxc_ip)s', 'localhost']
 
+AUTH_IP_WHITELIST = ['%(lxc_ip)s']
+
 GEOSERVER_LOCATION = 'http://%(lxc_ip)s:8000/geoserver'
 GEOSERVER_PUBLIC_LOCATION = 'http://%(lxc_ip)s:8000/geoserver'
 
@@ -158,19 +160,29 @@ INSTALLED_APPS = (
     'openquakeplatform_ipt',
 ) + GEONODE_APPS
 
-# authentication.
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+
+    # The setting below makes it possible to serve different languages per
+    # user depending on things like headers in HTTP requests.
     'django.middleware.locale.LocaleMiddleware',
-    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'pagination.middleware.PaginationMiddleware',
-    # irv needs csrf to be disabled to work
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # geonode.security is enabled to lockdown the website
-    'geonode.security.middleware.LoginRequiredMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # This middleware allows to print private layers for the users that have
+    # the permissions to view them.
+    # It sets temporary the involved layers as public before restoring the permissions.
+    # Beware that for few seconds the involved layers are public there could be risks.
+    # 'geonode.middleware.PrintProxyMiddleware',
+
+    # If you use SessionAuthenticationMiddleware, be sure it appears before OAuth2TokenMiddleware.
+    # SessionAuthenticationMiddleware is NOT required for using django-oauth-toolkit.
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
 )
 
 # Add additional paths (as regular expressions) that don't require
@@ -217,3 +229,21 @@ MAP_BASELAYERS = [{
     "source": {"ptype": "gxp_mapboxsource"},
     "name":"mapbox"
 }]
+
+# Replacement of default authentication backend in order to support
+# permissions per object.
+AUTHENTICATION_BACKENDS = (
+    'oauth2_provider.backends.OAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+)
+
+OAUTH2_PROVIDER = {
+    'SCOPES': {
+        'read': 'Read scope',
+        'write': 'Write scope',
+        'groups': 'Access to your groups'
+    },
+
+    'CLIENT_ID_GENERATOR_CLASS': 'oauth2_provider.generators.ClientIdGenerator',
+}
