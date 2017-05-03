@@ -179,5 +179,35 @@ AUTH_EXEMPT_URLS = ('/$',
                     '/vulnerability/resp_var_par_csc?.*',
                     '/vulnerability/resp_var_units_csc?.*',
                     '/taxtweb/',
-'/building-class/')
+                    '/building-class/')
+
+MAP_BASELAYERS = [{
+    "source": {
+        "ptype": "gxp_wmscsource",
+        "url": OGC_SERVER['default']['PUBLIC_LOCATION'] + "wms",
+        "restUrl": "/gs/rest"
+     },
+    "name":"geoserver"
+  },{
+    "source": {"ptype": "gxp_osmsource"},
+    "type":"OpenLayers.Layer.OSM",
+    "name":"mapnik",
+    "visibility": False,
+    "fixed": True,
+    "group":"background"
+  },{
+    "source": {"ptype": "gxp_olsource"},
+    "type":"OpenLayers.Layer",
+    "args":["No background"],
+    "name":"nobackground",
+    "visibility": False,
+    "fixed": True,
+    "group":"background"
+  },{
+    "source": {"ptype": "gxp_tilestreamsource" },
+    "name":"tilestream"
+  }, {
+    "source": {"ptype": "gxp_mapboxsource"},
+    "name":"mapbox"
+}]
 
