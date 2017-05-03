@@ -319,12 +319,12 @@ copy_dev () {
 #
 sig_hand () {
     trap "" ERR SIGINT SIGTERM
+    set +e
+
     echo "signal trapped"
-    echo "sig_hand begin $$" >> /tmp/sig_hand.log
+    echo "sig_hand begin $$ [$lxc_name]" >> /tmp/sig_hand.log
 
     if [ "$lxc_name" != "" ]; then
-        set +e
-
         ssh -t  $lxc_ip ". env/bin/activate ; export PYTHONPATH=:$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt ; export DJANGO_SETTINGS_MODULE='openquakeplatform.settings ; sudo supervisorctl stop openquake-webui ; sleep 3 ; cd geonode ; paver stop"
 
         copy_common "$ACTION"
