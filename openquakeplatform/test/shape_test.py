@@ -1,20 +1,17 @@
 #!/usr/bin/env python
+import os
 import unittest
-
 from openquakeplatform.test import pla
-
 from selenium.webdriver.common.keys import Keys
 
-import time
 
 class ShapeTest(unittest.TestCase):
 
     def upload_shape_test(self):
-        self.assertEqual(1, 0, "fake exception to test error management branch")
-        sph = "~/oq-platform2/openquakeplatform/test/shapefile/exampleshape.zip"
-
-        lay = "/layer" 
-
+        sph = os.path.join(os.path.expanduser("~"), 'oq-platform2',
+                                                    'openquakeplatform',
+                                                    'test/shapefile',
+                                                    'exampleshape.zip')
         pla.get('')
 
         # layers in homepage
@@ -44,13 +41,11 @@ class ShapeTest(unittest.TestCase):
             "//a[normalize-space(text())='Upload files']",
             100, 1)
         confuplayer.send_keys(Keys.ENTER)
-        # confuplayer.click()
-        # time.sleep(400)
-      
+
         # success load layer
         pla.xpath_finduniq(
             "//p[normalize-space(text())='Your layer was successfully"
-            " uploaded']", 
+            " uploaded']",
             100, 1)
 
         succuploadlayer = pla.xpath_finduniq(
@@ -61,20 +56,72 @@ class ShapeTest(unittest.TestCase):
         # page where exist layer create
         pla.wait_new_page(succuploadlayer, '/layers/geonode:exampleshape',
                           timeout=20)
-        
         pla.get('')
 
         # layers in homepage
         linklayertwo = pla.xpath_finduniq(
             "//a[normalize-space(text())='Layers' and @role='button']",
             100, 1)
-        linklayertwo.click() 
+        linklayertwo.click()
 
-        pla.wait_new_page(linklayertwo, '/layers', timeout=10) 
+        pla.wait_new_page(linklayertwo, '/layers', timeout=10)
 
         # click on title shapefile inserted
-        lay = pla.xpath_finduniq(                                      
+        lay = pla.xpath_finduniq(
             "//a[normalize-space(text())='exampleshape' and"
             " @class='ng-binding']",
-            100, 1)                          
+            100, 1)
         lay.click()
+
+        # page where exist layer create
+        pla.wait_new_page(lay, '/layers/geonode:exampleshape',
+                          timeout=20)
+
+        # click edit layer
+
+        editbutton = pla.xpath_finduniq(
+            "//button[normalize-space(text())='Edit Layer' and"
+            " @data-target='#edit-layer']",
+            100, 1)
+
+        editbutton.send_keys(Keys.ENTER)
+
+        # click remove
+        removebutton = pla.xpath_finduniq(
+            "//a[normalize-space(text())='Remove']",
+            100, 1)
+
+        removebutton.click()
+
+        # wait if the page for confirm exist
+        pla.wait_new_page(removebutton, '/layers/geonode:exampleshape/remove',
+                          timeout=20)
+
+        # click button for confirm
+        confsure = pla.xpath_finduniq(
+            "//input[normalize-space(@value)='Yes, I am sure' and"
+            " @type='submit']",
+            100, 1)
+        confsure.click()
+
+        pla.get('')
+
+        # layers in homepage
+        newlinklayer = pla.xpath_finduniq(
+            "//a[normalize-space(text())='Layers' and @role='button']",
+            100, 1)
+        newlinklayer.click()
+
+        # check if page list layers
+        pla.wait_new_page(newlinklayer, '/layers', timeout=20)
+
+        # search exampleshape and if found go to error
+        try:
+            pla.xpath_finduniq(
+                "//a[normalize-space(text())='exampleshape' and"
+                " @class='ng-binding']",
+                timeout=5.0)
+        except:
+            pass
+        else:
+            self.assertFalse(False, msg="exampleshape deleted layer founded")
