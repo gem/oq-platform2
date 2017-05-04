@@ -85,7 +85,7 @@ class ShapeTest(unittest.TestCase):
         # page where exist layer create
         pla.wait_new_page(lay, '/layers/geonode:exampleshape',
                           timeout=20)
-        
+
         # click edit layer 
         editbutton = pla.xpath_finduniq(
             "//button[normalize-space(text())='Edit Layer' and"
@@ -107,18 +107,33 @@ class ShapeTest(unittest.TestCase):
 
         # click button for confirm
         confsure = pla.xpath_finduniq(
-            "//input[normalize-space(value)='Yes, I am sure' and"
+            "//input[normalize-space(@value)='Yes, I am sure' and"
             " @type='submit']",
             100, 1)
         confsure.click()
 
+        pla.get('')
+
+        # layers in homepage
+        newlinklayer = pla.xpath_finduniq(
+            "//a[normalize-space(text())='Layers' and @role='button']",
+            100, 1)
+        newlinklayer.click()
+
+
         # check if page list layers
-        pla.wait_new_page(confsure, '/layers', timeout=10)
+        pla.wait_new_page(newlinklayer, '/layers', timeout=20)
 
         try:
-            laynew = pla.xpath_finduniq(                                      
+            laynew = pla.xpath_finduniq(
                 "//a[normalize-space(text())='exampleshape' and"
                 " @class='ng-binding']",
-                100, 1)
-        except NoSuchElementException:
-            pla.quit()
+                timeout=5.0)
+        except:
+            pla.get('')
+        else:
+            laynew = pla.xpath_finduniq(
+                "//a[normalize-space(text())='exampleshapeeee' and"
+                " @class='ng-binding']",
+                timeout=5.0)
+
