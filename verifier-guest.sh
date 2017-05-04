@@ -20,7 +20,9 @@ geonode_setup_env()
 
 #function complete procedure for tests
 exec_test () {   
-#    trap rem_sig_hand ERR
+    trap -l
+    trap rem_sig_hand ERR
+    trap -l
 
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
     sudo apt-get -y install python-pip wget
@@ -57,7 +59,9 @@ rem_sig_hand() {
     exit 1
 }
 trap rem_sig_hand ERR
+trap -l
 set -e
+trap -l
 if [ \$GEM_SET_DEBUG ]; then
     export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '
     set -x
