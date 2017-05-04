@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #display each command before executing it
-set -x
 . .gem_init.sh
 
 GIT_BRANCH="$1"
@@ -14,6 +13,10 @@ GEO_DBPWD="geonode_dev"
 
 geonode_setup_env()
 {
+    #
+    #  NOTE:
+    #        align the same env var in the rem_sig_hand function
+    #
     export PYTHONPATH=$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
     export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
     export LOCKDOWN_GEONODE='true'
@@ -49,7 +52,10 @@ rem_sig_hand() {
     set +e
     sudo supervisorctl stop openquake-webui
 
-    geonode_setup_env
+    export PYTHONPATH=$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
+    export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
+    export LOCKDOWN_GEONODE='true'
+
     cd ~/geonode
     paver stop
 
@@ -58,6 +64,7 @@ rem_sig_hand() {
 trap rem_sig_hand ERR
 set -e
 if [ \$GEM_SET_DEBUG ]; then
+    export PS4='+\${BASH_SOURCE}:\${LINENO}:\${FUNCNAME[0]}: '
     set -x
 fi
 
