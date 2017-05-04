@@ -20,7 +20,7 @@ geonode_setup_env()
 
 #function complete procedure for tests
 exec_test () {   
-    trap rem_sig_hand ERR
+#    trap rem_sig_hand ERR
 
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
     sudo apt-get -y install python-pip wget
