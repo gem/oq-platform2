@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# verifier.sh  Copyright (c) 2017, GEM Foundation.
+# verifier-guest.sh  Copyright (c) 2017, GEM Foundation.
 #
 # OpenQuake is free software: you can redistribute it and/or modify it
 # under the terms of the GNU Affero General Public License as published
@@ -66,7 +66,7 @@ rem_sig_hand() {
 #
 trap rem_sig_hand ERR
 set -e
-if [ \$GEM_SET_DEBUG ]; then
+if [ $GEM_SET_DEBUG ]; then
     export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '
     set -x
 fi
