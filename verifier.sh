@@ -29,6 +29,9 @@
 #  usage <exitcode> - show usage of the script
 #      <exitcode>    value of exitcode
 #
+
+set -o errtrace
+
 usage () {
     local ret
 
@@ -45,8 +48,8 @@ usage () {
 }
 
 
-
 if [ $GEM_SET_DEBUG ]; then
+    export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '
     set -x
 fi
 
@@ -234,20 +237,10 @@ _devtest_innervm_run () {
 
     scp verifier-guest.sh "$lxc_ip:"
 
-    ssh -t  $lxc_ip "export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
-
-
+    ssh -t  $lxc_ip "
+export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
 export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
 export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
-rem_sig_hand() {
-    trap ERR
-    echo 'signal trapped'
-}
-trap rem_sig_hand ERR
-set -e
-if [ \$GEM_SET_DEBUG ]; then
-    set -x
-fi
 
 \"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\" \"$notests\"
 "
@@ -265,8 +258,6 @@ fi
 devtest_run () {
     local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3"
 
-    trap sig_hand SIGINT SIGTERM ERR
-   
     if [ "$branch_geonode" == "" ] ; then
         branch_geonode="2.6.x"
     fi
@@ -319,12 +310,12 @@ copy_dev () {
 #
 sig_hand () {
     trap "" ERR SIGINT SIGTERM
+    set +e
+
     echo "signal trapped"
-    echo "sig_hand begin $$" >> /tmp/sig_hand.log
+    echo "sig_hand begin $$ [$lxc_name]" >> /tmp/sig_hand.log
 
     if [ "$lxc_name" != "" ]; then
-        set +e
-
         ssh -t  $lxc_ip ". env/bin/activate ; export PYTHONPATH=:$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt ; export DJANGO_SETTINGS_MODULE='openquakeplatform.settings ; sudo supervisorctl stop openquake-webui ; sleep 3 ; cd geonode ; paver stop"
 
         copy_common "$ACTION"
