@@ -29,6 +29,9 @@
 #  usage <exitcode> - show usage of the script
 #      <exitcode>    value of exitcode
 #
+
+set -o errtrace
+
 usage () {
     local ret
 
@@ -43,7 +46,6 @@ usage () {
     echo
     exit $ret
 }
-
 
 
 if [ $GEM_SET_DEBUG ]; then
@@ -256,8 +258,6 @@ export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
 devtest_run () {
     local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3"
 
-    trap sig_hand SIGINT SIGTERM ERR
-   
     if [ "$branch_geonode" == "" ] ; then
         branch_geonode="2.6.x"
     fi
