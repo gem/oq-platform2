@@ -47,7 +47,7 @@ usage () {
 
 
 if [ $GEM_SET_DEBUG ]; then
-    export PS4='+\${BASH_SOURCE}:\${LINENO}:\${FUNCNAME[0]}: '
+    export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '
     set -x
 fi
 
