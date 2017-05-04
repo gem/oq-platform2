@@ -45,9 +45,6 @@ input[type="checkbox"], input[type="radio"] {
     width: auto;
     height: auto;
 }
-.col-md-8 {
-    width: 100%;
-}
 .fa-2x {
     font-size: 1.3em;
     width: 1.25em;
