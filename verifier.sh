@@ -242,6 +242,7 @@ export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
 rem_sig_hand() {
     trap ERR
     echo 'signal trapped'
+    exit 1
 }
 trap rem_sig_hand ERR
 set -e
