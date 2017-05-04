@@ -1,4 +1,5 @@
 #!/bin/bash
+set -o errtrace
 
 #display each command before executing it
 . .gem_init.sh
@@ -20,10 +21,6 @@ geonode_setup_env()
 
 #function complete procedure for tests
 exec_test () {   
-    trap -p
-    trap rem_sig_hand ERR
-    trap -p
-
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
     sudo apt-get -y install python-pip wget
     pip install --upgrade pip
@@ -42,9 +39,6 @@ exec_test () {
     # sleep 40000 || true
 }
 
-#
-#  MAIN
-#
 rem_sig_hand() {
     trap "" ERR
     echo 'signal trapped'
@@ -58,10 +52,12 @@ rem_sig_hand() {
 
     exit 1
 }
+
+#
+#  MAIN
+#
 trap rem_sig_hand ERR
-trap -p
 set -e
-trap -p
 if [ \$GEM_SET_DEBUG ]; then
     export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '
     set -x
