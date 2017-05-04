@@ -10,7 +10,7 @@ import time
 class ShapeTest(unittest.TestCase):
 
     def upload_shape_test(self):
-
+        self.assertEqual(1, 0, "fake exception to test error management branch")
         sph = "~/oq-platform2/openquakeplatform/test/shapefile/exampleshape.zip"
 
         lay = "/layer" 
