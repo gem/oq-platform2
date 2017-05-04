@@ -42,7 +42,7 @@ class ShapeTest(unittest.TestCase):
             "//a[normalize-space(text())='Upload files']",
             100, 1)
         confuplayer.send_keys(Keys.ENTER)
-    
+
         # success load layer
         pla.xpath_finduniq(
             "//p[normalize-space(text())='Your layer was successfully"
@@ -68,10 +68,10 @@ class ShapeTest(unittest.TestCase):
         pla.wait_new_page(linklayertwo, '/layers', timeout=10)
 
         # click on title shapefile inserted
-        lay = pla.xpath_finduniq(                                   
+        lay = pla.xpath_finduniq(
             "//a[normalize-space(text())='exampleshape' and"
             " @class='ng-binding']",
-            100, 1)             
+            100, 1)
         lay.click()
 
         # page where exist layer create
@@ -116,16 +116,13 @@ class ShapeTest(unittest.TestCase):
         # check if page list layers
         pla.wait_new_page(newlinklayer, '/layers', timeout=20)
 
-        # search exampleshape and if not found go error
+        # search exampleshape and if found go to error
         try:
-            laynew = pla.xpath_finduniq(
+            pla.xpath_finduniq(
                 "//a[normalize-space(text())='exampleshape' and"
                 " @class='ng-binding']",
                 timeout=5.0)
         except:
-            pla.get('')
+            pass
         else:
-            laynew = pla.xpath_finduniq(
-                "//a[normalize-space(text())='exampleshapeeee' and"
-                " @class='ng-binding']",
-                timeout=5.0)
+            self.assertFalse(False, msg="exampleshape deleted layer founded")
