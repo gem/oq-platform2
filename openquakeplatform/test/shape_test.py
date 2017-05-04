@@ -5,7 +5,10 @@ from openquakeplatform.test import pla
 
 from selenium.webdriver.common.keys import Keys
 
+from selenium.common.exceptions import NoSuchElementException
+
 import time
+
 
 class ShapeTest(unittest.TestCase):
 
@@ -112,4 +115,10 @@ class ShapeTest(unittest.TestCase):
         # check if page list layers
         pla.wait_new_page(confsure, '/layers', timeout=10)
 
-        
+        try:
+            laynew = pla.xpath_finduniq(                                      
+                "//a[normalize-space(text())='exampleshape' and"
+                " @class='ng-binding']",
+                100, 1)
+        except NoSuchElementException:
+            pla.quit()
