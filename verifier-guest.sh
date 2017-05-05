@@ -1,7 +1,15 @@
 #!/bin/bash
+#
+# verifier-guest.sh  Copyright (c) 2017, GEM Foundation.
+#
+# OpenQuake is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+set -o errtrace
 
 #display each command before executing it
-set -x
 . .gem_init.sh
 
 GIT_BRANCH="$1"
@@ -12,9 +20,15 @@ GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
 
+geonode_setup_env()
+{
+    export PYTHONPATH=$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
+    export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
+    export LOCKDOWN_GEONODE='true'
+}
+
 #function complete procedure for tests
 exec_test () {   
-
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
     sudo apt-get -y install python-pip wget
     pip install --upgrade pip
@@ -33,9 +47,31 @@ exec_test () {
     # sleep 40000 || true
 }
 
+rem_sig_hand() {
+    trap "" ERR
+    echo 'signal trapped'
+    set +e
+    sudo supervisorctl stop openquake-webui
+
+    geonode_setup_env
+
+    cd ~/geonode
+    paver stop
+
+    exit 1
+}
+
 #
 #  MAIN
 #
+trap rem_sig_hand ERR
+set -e
+if [ $GEM_SET_DEBUG ]; then
+    export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '
+    set -x
+fi
+
+
 sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
 
@@ -105,9 +141,7 @@ for repo in oq-platform-taxtweb oq-platform-ipt; do
     if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
 done
 
-export PYTHONPATH=:$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
-export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
-export LOCKDOWN_GEONODE='true'
+geonode_setup_env
 
 ## Sync and setup GeoNode
 cd ~/geonode

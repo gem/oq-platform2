@@ -8,7 +8,6 @@ from selenium.webdriver.common.keys import Keys
 class ShapeTest(unittest.TestCase):
 
     def upload_shape_test(self):
-
         sph = os.path.join(os.path.expanduser("~"), 'oq-platform2',
                                                     'openquakeplatform',
                                                     'test/shapefile',
