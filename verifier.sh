@@ -300,6 +300,7 @@ copy_common () {
 copy_dev () {
     scp "${lxc_ip}:/var/log/apache2/access.log" "out/dev_apache2_access.log" || true
     scp "${lxc_ip}:/var/log/apache2/error.log" "out/dev_apache2_error.log" || true
+    scp "${lxc_ip}:/var/log/openquake/webui.log" "out/dev_webui.log" || true
     scp "${lxc_ip}:dev_*.png" "out/" || true
     scp "${lxc_ip}:xunit-platform-dev.xml" "out/" || true
 }
