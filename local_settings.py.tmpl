@@ -202,37 +202,7 @@ AUTH_EXEMPT_URLS = ('/$',
                     '/taxtweb/',
                     '/building-class/')
 
-MAP_BASELAYERS = [{
-    "source": {
-        "ptype": "gxp_wmscsource",
-        "url": OGC_SERVER['default']['PUBLIC_LOCATION'] + "wms",
-        "restUrl": "/gs/rest"
-     },
-    "name":"geoserver"
-  },{
-    "source": {"ptype": "gxp_osmsource"},
-    "type":"OpenLayers.Layer.OSM",
-    "name":"mapnik",
-    "visibility": False,
-    "fixed": True,
-    "group":"background"
-  },{
-    "source": {"ptype": "gxp_olsource"},
-    "type":"OpenLayers.Layer",
-    "args":["No background"],
-    "name":"nobackground",
-    "visibility": False,
-    "fixed": True,
-    "group":"background"
-  },{
-    "source": {"ptype": "gxp_tilestreamsource" },
-    "name":"tilestream"
-  }, {
-    "source": {"ptype": "gxp_mapboxsource"},
-    "name":"mapbox"
-}]
-
-# Replacement of default authentication backend in order to support
+eplacement of default authentication backend in order to support
 # permissions per object.
 AUTHENTICATION_BACKENDS = (
     'oauth2_provider.backends.OAuth2Backend',
@@ -248,4 +218,64 @@ OAUTH2_PROVIDER = {
     },
 
     'CLIENT_ID_GENERATOR_CLASS': 'oauth2_provider.generators.ClientIdGenerator',
+}
+
+# Absolute filesystem path to the directory that will be used to upload/download schema.xsd files through gsschema app
+GSSCHEMA_CONFIG = {
+    'gsschema_dir': '/var/lib/geoserver_data/'
+}
+
+# where to save tilebundler tilesets. Should move this to  OGC_SERVER['default']['TILEBUNDLER_DATASTORE_DIR']
+TILEBUNDLER_CONFIG = {
+    'tileset_dir': '/var/lib/geoserver_data/tilebundler-store'
+}
+
+MAP_BASELAYERS = [
+    {
+        "source": {
+            "ptype": "gxp_wmscsource",
+            "url": OGC_SERVER['default']['LOCATION'] + "wms",
+            "restUrl": "/gs/rest",
+            "name": "local geoserver"
+        }
+    },
+    {
+        "source": {"ptype": "gxp_osmsource", "name": "OpenStreetMap"},
+        "type": "OpenLayers.Layer.OSM",
+        "name": "mapnik",
+        "title": "OpenStreetMap",
+        "args": ["OpenStreetMap"],
+        "visibility": True,
+        "fixed": True,
+        "group":"background"
+    }
+]
+
+MAP_BASELAYERS = [
+    {
+        "source": {
+            "ptype": "gxp_wmscsource",
+            "url": OGC_SERVER['default']['LOCATION'] + "wms",
+            "restUrl": "/gs/rest",
+            "name": "local geoserver"
+        }
+    },
+    {
+        "source": {"ptype": "gxp_osmsource", "name": "OpenStreetMap"},
+        "type": "OpenLayers.Layer.OSM",
+        "name": "mapnik",
+        "title": "OpenStreetMap",
+        "args": ["OpenStreetMap"],
+        "visibility": True,
+        "fixed": True,
+        "group":"background"
+    }
+]
+
+FILESERVICE_CONFIG = {
+    'store_dir': '/var/lib/geoserver_data/file-service-store',
+    # example: ('*', ) or ('.mov', '.jpg', ...),
+    'types_allowed': ('*', ),
+    # maploom will replace {} with the media item name such as 7ff194b54ab57a829094dc0afc624c78815ec02c.jpg
+    'url_template': '/api/fileservice/view/{}'
 }
