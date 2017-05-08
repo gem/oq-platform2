@@ -9,6 +9,11 @@ OQPLATFORM_ROOT = os.path.dirname(openquakeplatform.__file__)
 SITEURL = 'http://%(lxc_ip)s:8000'
 ALLOWED_HOSTS = ['%(lxc_ip)s', 'localhost']
 
+AUTH_IP_WHITELIST = ['%(lxc_ip)s']
+
+GEOSERVER_LOCATION = 'http://%(lxc_ip)s:8000/geoserver'
+GEOSERVER_PUBLIC_LOCATION = 'http://%(lxc_ip)s:8000/geoserver'
+
 WEBUIURL = 'http://%(webuiurl)s/'
 
 FILE_PATH_FIELD_DIRECTORY = '%(datadir)s/'
@@ -37,6 +42,22 @@ DATABASES = {
     }
 }
 
+GEOSERVER_LOCATION = os.getenv(
+    'GEOSERVER_LOCATION', 'http://%(lxc_ip)s:8080/geoserver/'
+)
+GEOSERVER_PUBLIC_LOCATION = os.getenv(
+    'GEOSERVER_PUBLIC_LOCATION', 'http://%(lxc_ip)s:8080/geoserver/'
+)
+
+OGC_SERVER_DEFAULT_USER = os.getenv(
+    'GEOSERVER_ADMIN_USER', 'admin'
+)
+
+OGC_SERVER_DEFAULT_PASSWORD = os.getenv(
+    'GEOSERVER_ADMIN_PASSWORD', 'geoserver'
+)
+
+# OGC (WMS/WFS/WCS) Server Settings
 OGC_SERVER = {
     'default': {
         'BACKEND': 'geonode.geoserver',
@@ -47,8 +68,8 @@ OGC_SERVER = {
         # the proxy won't work and the integration tests will fail
         # the entire block has to be overridden in the local_settings
         'PUBLIC_LOCATION': GEOSERVER_PUBLIC_LOCATION,
-        'USER' : 'admin',
-        'PASSWORD' : 'geoserver',
+        'USER' : OGC_SERVER_DEFAULT_USER,
+        'PASSWORD' : OGC_SERVER_DEFAULT_PASSWORD,
         'MAPFISH_PRINT_ENABLED' : True,
         'PRINT_NG_ENABLED' : True,
         'GEONODE_SECURITY_ENABLED' : True,
@@ -59,6 +80,8 @@ OGC_SERVER = {
         'LOG_FILE': '%%s/geoserver/data/logs/geoserver.log' %% os.path.abspath(os.path.join(PROJECT_ROOT, os.pardir)),
         # Set to dictionary identifier of database containing spatial data in DATABASES dictionary to enable
         'DATASTORE': '', #'datastore',
+        'PG_GEOGIG': False,
+        'TIMEOUT': 10  # number of seconds to allow for HTTP requests
     }
 }
 
@@ -69,6 +92,13 @@ STATICFILES_DIRS = [
 ]
 
 TEMPLATES[0]['DIRS'].insert(0, os.path.join(OQPLATFORM_ROOT, 'templates'))
+
+ALLOWED_DOCUMENT_TYPES = [
+    'csv', 'doc', 'docx', 'xls', 'xlsx', 'odt', 'ods', 'pdf',
+    'jpg', 'jpeg', 'tif', 'tiff', 'png', 'gif', 'txt', 'zip',
+    'tar', 'tgz', 'tbz', 'tar.gz', 'tar.bz2'
+]
+MAX_DOCUMENT_SIZE = 100
 
 INSTALLED_APPS = (
 
@@ -89,7 +119,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.humanize',
     'django.contrib.gis',
-
+    'django.contrib.redirects',
     # Third party apps
 
     # Utility
@@ -132,7 +162,6 @@ INSTALLED_APPS = (
     'openquakeplatform_ipt',
 ) + GEONODE_APPS
 
-# authentication.
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -145,6 +174,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     # geonode.security is enabled to lockdown the website
     'geonode.security.middleware.LoginRequiredMiddleware',
+    
+    # If you use SessionAuthenticationMiddleware, be sure it appears before OAuth2TokenMiddleware.
+    # SessionAuthenticationMiddleware is NOT required for using django-oauth-toolkit.
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
 )
 
 # Add additional paths (as regular expressions) that don't require
@@ -160,5 +194,83 @@ AUTH_EXEMPT_URLS = ('/$',
                     '/vulnerability/resp_var_par_csc?.*',
                     '/vulnerability/resp_var_units_csc?.*',
                     '/taxtweb/',
-'/building-class/')
+                    '/building-class/')
+
+# replacement of default authentication backend in order to support
+# permissions per object.
+AUTHENTICATION_BACKENDS = (
+    'oauth2_provider.backends.OAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+)
+
+OAUTH2_PROVIDER = {
+    'SCOPES': {
+        'read': 'Read scope',
+        'write': 'Write scope',
+        'groups': 'Access to your groups'
+    },
+
+    'CLIENT_ID_GENERATOR_CLASS': 'oauth2_provider.generators.ClientIdGenerator',
+}
+
+# Absolute filesystem path to the directory that will be used to upload/download schema.xsd files through gsschema app
+GSSCHEMA_CONFIG = {
+    'gsschema_dir': '/var/lib/geoserver_data/'
+}
+
+# where to save tilebundler tilesets. Should move this to  OGC_SERVER['default']['TILEBUNDLER_DATASTORE_DIR']
+TILEBUNDLER_CONFIG = {
+    'tileset_dir': '/var/lib/geoserver_data/tilebundler-store'
+}
+
+MAP_BASELAYERS = [
+    {
+        "source": {
+            "ptype": "gxp_wmscsource",
+            "url": OGC_SERVER['default']['LOCATION'] + "wms",
+            "restUrl": "/gs/rest",
+            "name": "local geoserver"
+        }
+    },
+    {
+        "source": {"ptype": "gxp_osmsource", "name": "OpenStreetMap"},
+        "type": "OpenLayers.Layer.OSM",
+        "name": "mapnik",
+        "title": "OpenStreetMap",
+        "args": ["OpenStreetMap"],
+        "visibility": True,
+        "fixed": True,
+        "group":"background"
+    }
+]
+
+MAP_BASELAYERS = [
+    {
+        "source": {
+            "ptype": "gxp_wmscsource",
+            "url": OGC_SERVER['default']['LOCATION'] + "wms",
+            "restUrl": "/gs/rest",
+            "name": "local geoserver"
+        }
+    },
+    {
+        "source": {"ptype": "gxp_osmsource", "name": "OpenStreetMap"},
+        "type": "OpenLayers.Layer.OSM",
+        "name": "mapnik",
+        "title": "OpenStreetMap",
+        "args": ["OpenStreetMap"],
+        "visibility": True,
+        "fixed": True,
+        "group":"background"
+    }
+]
+
+FILESERVICE_CONFIG = {
+    'store_dir': '/var/lib/geoserver_data/file-service-store',
+    # example: ('*', ) or ('.mov', '.jpg', ...),
+    'types_allowed': ('*', ),
+    # maploom will replace {} with the media item name such as 7ff194b54ab57a829094dc0afc624c78815ec02c.jpg
+    'url_template': '/api/fileservice/view/{}'
+}
 
