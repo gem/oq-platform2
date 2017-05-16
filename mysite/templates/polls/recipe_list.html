@@ -1,0 +1,8 @@
+<h1>Recipes</h1>
+<ul>
+{% for recipe in object_list %}
+    <li>{{ article.pub_date|date }} - {{ article.headline }}</li>
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+</ul>
