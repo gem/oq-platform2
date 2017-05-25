@@ -102,6 +102,8 @@ var tilestreamPlugin = {
 
         var layers = new Array();
 
+        var TS_URL = 'https://tilestream.openquake.org'
+
         $.getJSON(TS_URL + '/api/v1/Tileset',
         function(json) {
             for (var i=0; i < json.length; i++) {
