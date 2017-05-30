@@ -54,13 +54,16 @@ urlpatterns = patterns('',
 
                        # Static pages
                        url(r'^/?$',
-TemplateView.as_view(template_name='index.html'), name='home'),
+                           TemplateView.as_view(template_name='index.html'), name='home'),
                        url(r'^help/$',
-TemplateView.as_view(template_name='help.html'), name='help'),
+                           TemplateView.as_view(template_name='help.html'), name='help'),
                        url(r'^developer/$',
-TemplateView.as_view(template_name='developer.html'), name='developer'),
+                           TemplateView.as_view(template_name='developer.html'), name='developer'),
                        url(r'^about/$',
-TemplateView.as_view(template_name='about.html'), name='about'),
+                           TemplateView.as_view(template_name='about.html'), name='about'),
+                       url(r'^explore/$',
+                           TemplateView.as_view(template_name='explore.html'), name='explore'),
+
 
                        # Layer views
                        (r'^layers/', include('geonode.layers.urls')),
@@ -73,19 +76,19 @@ TemplateView.as_view(template_name='about.html'), name='about'),
 
                        # data.json
                        url(r'^data.json$', 'geonode.catalogue.views.data_json',
-name='data_json'),
+                           name='data_json'),
 
                        # ident
                        url(r'^ident.json$', 'geonode.views.ident_json',
-name='ident_json'),
+                           name='ident_json'),
 
                        # h keywords
                        url(r'^h_keywords_api$', 'geonode.views.h_keywords',
-name='h_keywords_api'),
+                           name='h_keywords_api'),
 
                        # Search views
                        url(r'^search/$',
-TemplateView.as_view(template_name='search/search.html'), name='search'),
+                           TemplateView.as_view(template_name='search/search.html'), name='search'),
 
                        # Social views
                        (r"^account/", include("account.urls")),
@@ -97,23 +100,23 @@ TemplateView.as_view(template_name='search/search.html'), name='search'),
                        (r'^announcements/', include('announcements.urls')),
                        (r'^messages/', include('user_messages.urls')),
                        (r'^social/', include('geonode.social.urls')),
-(r'^security/', include('geonode.security.urls')),
+                       (r'^security/', include('geonode.security.urls')),
 
                        # Accounts
                        url(r'^account/ajax_login$', 'geonode.views.ajax_login',
-name='account_ajax_login'),
+                           name='account_ajax_login'),
                        url(r'^account/ajax_lookup$',
-'geonode.views.ajax_lookup', name='account_ajax_lookup'),
+                           'geonode.views.ajax_lookup', name='account_ajax_lookup'),
 
                        # Meta
                        url(r'^lang\.js$',
-TemplateView.as_view(template_name='lang.js', content_type='text/javascript'),
+                           TemplateView.as_view(template_name='lang.js', content_type='text/javascript'),
                            name='lang'),
 
                        url(r'^jsi18n/$',
-'django.views.i18n.javascript_catalog', js_info_dict, name='jscat'),
+                           'django.views.i18n.javascript_catalog', js_info_dict, name='jscat'),
                        url(r'^sitemap\.xml$',
-'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps},
+                           'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps},
                            name='sitemap'),
 
                        (r'^i18n/', include('django.conf.urls.i18n')),
@@ -125,11 +128,11 @@ TemplateView.as_view(template_name='lang.js', content_type='text/javascript'),
 
                        # OAuth Provider
                        url(r'^o/', include('oauth2_provider.urls',
-namespace='oauth2_provider')),
+                           namespace='oauth2_provider')),
 
                        # Api Views
                        url(r'^api/o/v4/tokeninfo', verify_token,
-name='tokeninfo'),
+                           name='tokeninfo'),
                        url(r'^api/roles', roles, name='roles'),
                        url(r'^api/adminRole', admin_role, name='adminRole'),
                        url(r'^api/users', users, name='users'),
