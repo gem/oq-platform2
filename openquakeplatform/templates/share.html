@@ -4,30 +4,17 @@
 
 {% block title %} Share - {{ block.super }} {% endblock title %}
 
-{% block extra_head %}
-    {{block.super}}
-    <link href="{{ STATIC_URL }}css/oqplatform_index.css" rel="stylesheet"/>
-{% endblock extra_head %}
-
-{% block body %}
-  <div class="span12">
-    <div class="hero-unit">
-      <div id="oq-context-ribbon">
-        {% block oq_context_ribbon %}
-          <!-- Subtemplates can add context-sensitive components to the page-->
-        {% endblock oq_context_ribbon %}
-      </div>
-      <div id="oq-body-heading">
-        {% block oq_body_heading %}
+{% block middle %}
+  {{ block.super }}
+  {% block hero %}
+<div class="jumbotron">
+        <div class="container">
           <h1>{% trans "OpenQuake Share" %}</h1>
-          <br />
-        {% endblock oq_body_heading %}
-      </div>
-      <div id="oq-body-content">
-        {% block oq_body_content %}
-          <div class="oq-intro">
+          <p></p>
+          <div class="paragraf">
             <!-- Main page content goes here -->
-The OpenQuake Platform includes a number of tools allowing users to contribute to the existing datasets.
+
+            The OpenQuake Platform includes a number of tools allowing users to contribute to the existing datasets.
             <br/><br/>
 
             <b>Online Data Capture and data Collection</b>
@@ -42,7 +29,6 @@ The OpenQuake Platform includes a number of tools allowing users to contribute t
                 <a href="{#{% url 'building_class:home' %}#}">The Building Classification Survey tool</a> allows users to share information regarding the building stock of a given region.
               </li>
             </ul>
-
             <b>Offline Inventory Capture Tools</b>
             <br/>
             The following tools were developed as part of the <a href="http://www.globalquakemodel.org/what/physical-integrated-risk/inventory-capture-tools/">Inventory Data Capture Tools</a> global component:
@@ -62,6 +48,7 @@ The OpenQuake Platform includes a number of tools allowing users to contribute t
               <li><a href="http://taxtweb.openquake.org/">TaxTweb</a> Graphical tool for editing GEM Taxonomy strings, web version</li>
               <li><a href="https://github.com/GEMScienceTools/TaxT">TaxT</a> Graphical tool for editing GEM Taxonomy strings, Windows only</li>
             </ul>
+
             <b>Upload:</b>
             <br/>
             The OpenQuake platform also allows users to upload arbitrary documents and GIS map layers:
@@ -69,18 +56,11 @@ The OpenQuake Platform includes a number of tools allowing users to contribute t
               <li><a href="{% url "document_upload" %}">Documents</a></li>
               <li><a href="{% url "layer_upload" %}">Layers</a></li>
             </ul>
-          </div>
-        {% endblock oq_body_content %}
-      </div>
-      <div id="oq-body-sidebar">
-        {#{% include 'includes/sidebar.html' %}#}
-      </div>
-    </div>
-  </div>
-{% endblock body %}
+</div>
 
-{% block extra_script %}
-    {{block.super}}
-    {#{% include 'search_scripts.html' %}#}
-{% endblock extra_script %}
+</div>
+</div>
+{% include 'includes/sidebar.html' %}
+{% endblock %}
+{% endblock %}
 
