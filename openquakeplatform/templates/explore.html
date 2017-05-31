@@ -4,27 +4,14 @@
 
 {% block title %} Explore - {{ block.super }} {% endblock title %}
 
-{% block extra_head %}
-    {{block.super}}
-    <link href="{{ STATIC_URL }}css/oqplatform_index.css" rel="stylesheet"/>
-{% endblock extra_head %}
-
-{% block body %}
-  <div class="span12">
-    <div class="hero-unit">
-      <div id="oq-context-ribbon">
-        {% block oq_context_ribbon %}
-        {% endblock oq_context_ribbon %}
-      </div>
-      <div id="oq-body-heading">
-        {% block oq_body_heading %}
+{% block middle %}
+  {{ block.super }}
+  {% block hero %}
+<div class="jumbotron">
+        <div class="container">
           <h1>{% trans "OpenQuake Explore" %}</h1>
-          <br />
-        {% endblock oq_body_heading %}
-      </div>
-      <div id="oq-body-content">
-        {% block oq_body_content %}
-          <div class="oq-intro">
+          <p></p>
+          <div class="paragraf">
             <!-- Main page content goes here -->
             <b>Seismic Hazard Data Sets and Models:</b>
             <ul>
@@ -50,7 +37,6 @@
               <li><a href="{#{% url 'irv' %}#}">Social Vulnerability Integrated Risk Viewer</a></li>
              {% endif %}
             </ul>
-
             <b>GEM Building Taxonomy Tools:</b>
             <ul>
               <li><a href="http://taxtweb.openquake.org/" target="_blank">TaxTweb</a> Online graphical tool for editing GEM Taxonomy strings</li>
@@ -64,23 +50,11 @@
               <li><a href="{#{% url 'documents_browse' %}#}">Documents</a></li>
               <li><a href="{#{% url 'profile_browse' %}#}">People</a></li>
             </ul>
+            </div>
 
-          </div>
-        {% endblock oq_body_content %}
-      </div>
-      <div id="oq-body-sidebar">
-        {#{% include 'includes/sidebar.html' %}#}
-      </div>
-    </div>
-  </div>
-{% endblock body %}
-
-{% block extra_script %}
-    {{block.super}}
-    {#{% include 'search_scripts.html' %}#}
-    <script>
-        help=document.getElementById("help_url");
-        if(typeof help !== "undefined") { help.href+='/explore/'; }
-    </script>
-{% endblock extra_script %}
+</div>
+</div>
+{% include 'includes/sidebar.html' %}
+{% endblock %}
+{% endblock %}
 
