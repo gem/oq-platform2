@@ -2,30 +2,16 @@
 {% load i18n %}
 {% load url from future %}
 
-{% block title %} Calculate - {{ block.super }} {% endblock title %}
+{% block title %} Share - {{ block.super }} {% endblock title %}
 
-{% block extra_head %}
-    {{block.super}}
-    <link href="{{ STATIC_URL }}css/oqplatform_index.css" rel="stylesheet"/>
-{% endblock extra_head %}
-
-{% block body %}
-  <div class="span12">
-    <div class="hero-unit">
-      <div id="oq-context-ribbon">
-        {% block oq_context_ribbon %}
-          <!-- Subtemplates can add context-sensitive components to the page-->
-        {% endblock oq_context_ribbon %}
-      </div>
-      <div id="oq-body-heading">
-        {% block oq_body_heading %}
+{% block middle %}
+  {{ block.super }}
+  {% block hero %}
+<div class="jumbotron">
+        <div class="container">
           <h1>{% trans "OpenQuake Calculate" %}</h1>
-          <br/>
-        {% endblock oq_body_heading %}
-      </div>
-      <div id="oq-body-content">
-        {% block oq_body_content %}
-          <div class="oq-intro">
+            <p></p>
+            <div class="paragraf">
             <!-- Main page content goes here -->
 
             <b>The OpenQuake Engine:</b><br/>
@@ -52,7 +38,6 @@
                   <a href="https://github.com/gem/oq-hazardlib" target="_blank">oq-hazardlib</a> - Openquake Hazard Library
                 </li>
               </ul>
-
             <b>Modelling Tools:</b>
               <ul>
                 <li>
@@ -85,19 +70,10 @@
                   GEM respository for <a href="https://github.com/GEMScienceTools/nrml_converters" target="_blank">NRML converters</a>
                 </li>
               </ul>
-            <br/><br/>
-          </div>
-        {% endblock oq_body_content %}
-      </div>
-      <div id="oq-body-sidebar">
-        {#{% include 'includes/sidebar.html' %}#}
-      </div>
-    </div>
-  </div>
-{% endblock body %}
+</div>
 
-{% block extra_script %}
-    {{block.super}}
-    {#{% include 'search_scripts.html' %}#}
-{% endblock extra_script %}
-
+</div>
+</div>
+{% include 'includes/sidebar.html' %}
+{% endblock %}
+{% endblock %}
