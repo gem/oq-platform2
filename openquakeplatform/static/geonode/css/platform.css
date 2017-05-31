@@ -53,10 +53,10 @@ input[type="checkbox"], input[type="radio"] {
     width: 1.25em;
     text-align: center;
 }
-.home #wrap {
+#wrap {
     padding: 0px 0 0 0px!important;
     min-height: 800px;
-    margin: -90px auto 30px!important;
+    margin: 0px auto 30px!important;
     width: 900px;
 }
 #wrap .container {
@@ -162,6 +162,9 @@ ul.dropdown-menu li {
 .navbar-right .dropdown-menu {
     right: -36px;
 }
+.home .jumbotron {
+    padding: 40px 0 0 0;
+}
 .jumbotron {
     width: 75%;
     float: left;
@@ -214,7 +217,7 @@ ul.dropdown-menu li {
 .oq-button-home {
     width: 25%;
     float: left;
-    padding: 205px 0 0 0;
+    padding: 130px 0 0 0;
     text-align: center;
 }
 .oq-button-home .col-md-4 {
