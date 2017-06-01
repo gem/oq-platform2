@@ -96,7 +96,7 @@ pip install -e .
 # Install the system python-gdal
 sudo apt-get install -y python-gdal
 
-sudo apt-get install python-six
+sudo apt-get install -y python-six
 
 cd ~
 # Create a symbolic link in your virtualenv
