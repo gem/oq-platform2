@@ -1,4 +1,5 @@
-mport os
+#!/usr/bin/env python
+import os
 import unittest
 from openquakeplatform.test import pla
 from selenium.webdriver.common.keys import Keys
