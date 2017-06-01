@@ -96,6 +96,8 @@ pip install -e .
 # Install the system python-gdal
 sudo apt-get install -y python-gdal
 
+sudo apt-get install python-six
+
 cd ~
 # Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
