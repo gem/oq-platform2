@@ -91,7 +91,7 @@ cd geonode
 ## print latest hash commit
 git rev-parse HEAD
 
-sudo apt-get install -y python-six
+pip install six
 
 pip install -e .
 # pip install pygdal==1.11.3.3
