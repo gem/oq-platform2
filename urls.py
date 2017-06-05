@@ -194,6 +194,7 @@ urlpatterns += patterns('',
 include('openquakeplatform_taxtweb.urls', namespace='taxtweb')),
                         (r'^ipt/',
 include('openquakeplatform_ipt.urls', namespace='ipt')),
-
+                        url(r'^hazus/$', TemplateView.as_view(
+template_name="hazus/hazus.html"), name='hazus'),
                         )
 
