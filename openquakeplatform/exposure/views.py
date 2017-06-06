@@ -281,7 +281,7 @@ def export_exposure(request):
         else:
             raise NotImplementedError(
                 'output_type [%s] is not available' % output_type)
-    response = HttpResponse(response_data, mimetype=mimetype)
+    response = HttpResponse(response_data, content_type=mimetype)
     response['Content-Disposition'] = content_disp
     return response
 
@@ -391,7 +391,7 @@ def get_country_list(request):
     """
     country_list = util._get_iso_and_name_for_all_countries()
     response_data = json.dumps(country_list)
-    response = HttpResponse(response_data, mimetype='text/json')
+    response = HttpResponse(response_data, content_type='text/json')
     return response
 
 
@@ -417,7 +417,7 @@ def get_geographic_regions_by_iso(request):
         return response
     geographic_regions = util._get_geographic_region_id_and_name_by_iso(iso)
     response_data = json.dumps(geographic_regions)
-    response = HttpResponse(response_data, mimetype='text/json')
+    response = HttpResponse(response_data, content_type='text/json')
     return response
 
 
@@ -451,7 +451,7 @@ def get_all_studies(request):
     for sr in map(StudyRecord._make, util._get_all_studies()):
         studies.append(dict(sr._asdict()))
     response_data = json.dumps(studies)
-    response = HttpResponse(response_data, mimetype='text/json')
+    response = HttpResponse(response_data, content_type='text/json')
     return response
 
 
@@ -499,7 +499,7 @@ def get_studies_by_country(request):
             iso, level_filter, study_filter)):
         studies.append(dict(sr._asdict()))
     response_data = json.dumps(studies)
-    response = HttpResponse(response_data, mimetype='text/json')
+    response = HttpResponse(response_data, content_type='text/json')
     return response
 
 
@@ -536,7 +536,7 @@ def get_study_region_info(request):
         assert len(sr_info) == 1, ('_get_study_region_info(sr_id) returned '
                                    '%d rows. It should return one') % len(sr_info)
     response_data = json.dumps(sr_info[0])
-    response = HttpResponse(response_data, mimetype='text/json')
+    response = HttpResponse(response_data, content_type='text/json')
     return response
 
 
@@ -568,7 +568,7 @@ def export_fractions_by_study_region_id(request):
     filename = 'fractions_export.csv'
     content_disp = 'attachment; filename="%s"' % filename
     mimetype = 'text/csv'
-    response = HttpResponse(mimetype=mimetype)
+    response = HttpResponse(content_type=mimetype)
     response['Content-Disposition'] = content_disp
     copyright = copyright_csv(COPYRIGHT_HEADER)
     response.write(copyright)
