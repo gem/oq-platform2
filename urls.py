@@ -134,6 +134,9 @@ name='tokeninfo'),
                        url(r'^api/adminRole', admin_role, name='adminRole'),
                        url(r'^api/users', users, name='users'),
                        url(r'', include(api.urls)),
+
+                       url(r'^account/terms/$', 
+                           TemplateView.as_view(template_name='account/terms.html'), name='terms'),
                        )
 
 if "geonode.contrib.dynamic" in settings.INSTALLED_APPS:
