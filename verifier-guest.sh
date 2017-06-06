@@ -132,8 +132,8 @@ cd ~
 # Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
-sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
-sudo cp $HOME/"$GIT_REPO"/ged_settings.py.tmpl ~/oq-platform2/openquakeplatform/ged_settings.py
+cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
+cp $HOME/"$GIT_REPO"/ged_settings.py.tmpl ~/oq-platform2/openquakeplatform/ged_settings.py
 
 ## clone and setting pythonpath taxtweb and oq-platform2
 cd ~
@@ -151,7 +151,6 @@ paver setup
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
-cp ged_settings.py.tmpl ~/oq-platform2/openquakeplatform/ged_settings.py
 paver setup -l $LXC_IP -u localhost:8800 -s data
 
 cd ~/geonode
