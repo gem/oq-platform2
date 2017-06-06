@@ -196,5 +196,7 @@ include('openquakeplatform_taxtweb.urls', namespace='taxtweb')),
 include('openquakeplatform_ipt.urls', namespace='ipt')),
                         url(r'^hazus/$', TemplateView.as_view(
 template_name="hazus/hazus.html"), name='hazus'),
+                        url(r'^hrde/$', TemplateView.as_view(
+template_name="hrde/hrde.html"), name='hrde'),
                         )
 
