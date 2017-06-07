@@ -61,6 +61,12 @@ TemplateView.as_view(template_name='help.html'), name='help'),
 TemplateView.as_view(template_name='developer.html'), name='developer'),
                        url(r'^about/$',
 TemplateView.as_view(template_name='about.html'), name='about'),
+                       url(r'^explore/$',
+                           TemplateView.as_view(template_name='explore.html'), name='explore'),
+                       url(r'^share/$',
+                           TemplateView.as_view(template_name='share.html'), name='share'),
+                       url(r'^calculate/$',
+                           TemplateView.as_view(template_name='calculate.html'), name='calculate'),
 
                        # Layer views
                        (r'^layers/', include('geonode.layers.urls')),
