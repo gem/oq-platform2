@@ -47,11 +47,11 @@ class CseTest(unittest.TestCase):
 
         pla.wait_new_page(sha, '/share', timeout=10)
 
-        #search title page
+        # search title page
         pla.xpath_finduniq(
             "//h1[normalize-space(text())='OpenQuake Share']")
     
-     def terms_test(self):
+    def terms_test(self):
 
         # calculate
         ter = pla.xpath_finduniq(
