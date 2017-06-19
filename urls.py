@@ -127,6 +127,10 @@ TemplateView.as_view(template_name='lang.js', content_type='text/javascript'),
                        url(r'^o/', include('oauth2_provider.urls',
 namespace='oauth2_provider')),
 
+                       # apps
+                       url(r'^geodetic/$', TemplateView.as_view(
+                           template_name="geodetic.html"), name='geodetic'),
+
                        # Api Views
                        url(r'^api/o/v4/tokeninfo', verify_token,
 name='tokeninfo'),
