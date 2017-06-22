@@ -128,7 +128,8 @@ urlpatterns = patterns('',
                        (r'^groups/', include('geonode.groups.urls')),
                        (r'^documents/', include('geonode.documents.urls')),
                        (r'^services/', include('geonode.services.urls')),
-
+                       (r'^building-class/',
+                        include('openquakeplatform_building_class.urls', namespace='building_class')),
                        # OAuth Provider
                        url(r'^o/', include('oauth2_provider.urls',
                            namespace='oauth2_provider')),
