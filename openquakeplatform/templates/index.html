@@ -21,9 +21,10 @@
 {% if user.is_authenticated %}
     <h1 style="margin:100px 0 20px;font-size:25px;">{% trans "Latest Maps" %}</h1>
         {#{% for map in latest_maps %}#}
-        {#{% include "maps/map_list.html" %}#}
+        {% include "maps/map_list_home.html" %}
         {#{% endfor %}#}
-        {#{% endif %}#}
+
+{% endif %}
 
         </div>
   </div>
