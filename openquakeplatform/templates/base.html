@@ -20,6 +20,15 @@
       <link href="{{ STATIC_URL }}geonode/css/ext-compatibility.css?v={{ VERSION }}" rel="stylesheet" />
       <link href="{{ STATIC_URL }}geonode/css/base.css?v={{ VERSION }}" rel="stylesheet" />
       <link href="{{ STATIC_URL }}geonode/css/platform.css" rel="stylesheet" />
+      <meta property="og:url" content="http://platform.openquake.org"/>
+      <meta property="og:title" content="Openquake Paltform"/>
+      <meta property="og:description" content="Welcome to the OpenQuake Platform, by the GEM Foundation. This web-based platform offers an interactive environment in which users can access, manipulate, share and add data, and explore models and tools for integrated assessment of earthquake risk."/>
+      <meta property="og:type" content="website"/>
+      <meta property="og:site_name" content="Openquake Platform"/> 
+      <meta property="og:image" content="img 512x512.png"/>
+      <meta property="fb:app_id" content="fb_id"/>
+      <meta property="og:image:width" content="450"/>
+      <meta property="og:image:height" content="298"/>
       <style type="text/css">[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}</style>
       {% block extra_head %}
       {% endblock %}
@@ -229,8 +238,8 @@
         <div id="oq-share" class="oq-share" style="display:none;">
            <div class="col-md-3">
                  <ul>
-                         <li><a href=""><i class="fa fa-facebook fa-2x" aria-hidden="true"></i>  Share on Facebook</a></li>
-                         <li><a href=""><i class="fa fa-twitter fa-2x" aria-hidden="true"></i>  Share on Twitter</a></li>
+                         <li><a href="https://www.facebook.com/sharer/sharer.php?u=https://www.platform.openquake.org&text=Openquake Platform "><i class="fa fa-facebook fa-2x" aria-hidden="true"></i>  Share on Facebook</a></li>
+                         <li><a href="http://twitter.com/share?url=https://platform.openquake.org&text=The OQ Platform offers an interactive environment and explore models and tools for integrated assessment of earthquake risk."><i class="fa fa-twitter fa-2x" aria-hidden="true"></i>  Share on Twitter</a></li>
                          <li><a href=""><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i>  Share on Google Plus</a></li>
                  </ul>
            </div>
