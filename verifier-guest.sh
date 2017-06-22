@@ -22,7 +22,7 @@ GEO_DBPWD="geonode_dev"
 
 geonode_setup_env()
 {
-    export PYTHONPATH=$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
+    export PYTHONPATH=$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
     export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
     export LOCKDOWN_GEONODE='true'
 }
@@ -40,7 +40,7 @@ exec_test () {
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
     
     # cd $GIT_REPO
-    export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
+    export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
 
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
@@ -74,6 +74,7 @@ fi
 
 sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
+pip install django_extras
 
 git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
 ## Check if exist and  create the virtualenv
@@ -143,7 +144,7 @@ sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
 ## clone and setting pythonpath taxtweb and oq-platform2
 cd ~
 
-for repo in oq-platform-taxtweb oq-platform-ipt; do
+for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
     if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
 done
 

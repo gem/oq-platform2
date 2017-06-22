@@ -151,9 +151,6 @@ ul.dropdown-menu li {
 #nav_explore {
     border-bottom: solid #dc6522 5px;
 }
-.col-md-8 {
-    width: 100%;
-}
 #nav_calculate a:hover,
 #nav_share a:hover,
 #nav_explore a:hover
