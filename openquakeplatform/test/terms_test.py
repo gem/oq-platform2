@@ -9,7 +9,9 @@ class TermsTest(unittest.TestCase):
 
     def terms_test(self):
 
-        # calculate
+        pla.get()    
+
+        # terms of use
         ter = pla.xpath_finduniq(
             "//a[normalize-space(text())='Terms of use']",
             100, 1)
