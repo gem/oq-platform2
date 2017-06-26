@@ -51,16 +51,3 @@ class CseTest(unittest.TestCase):
         pla.xpath_finduniq(
             "//h1[normalize-space(text())='OpenQuake Share']")
     
-    def terms_test(self):
-
-        # calculate
-        ter = pla.xpath_finduniq(
-            "//a[normalize-space(text())='Terms of use']",
-            100, 1)
-        ter.click()
-
-        pla.wait_new_page(ter, '/account/terms', timeout=10)
-
-        #search title page
-        pla.xpath_finduniq(
-            "//h1[normalize-space(text())='Terms of use']")
