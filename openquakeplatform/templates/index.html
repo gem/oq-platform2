@@ -17,14 +17,6 @@
                 <p class="paragraf">
                 Welcome to the OpenQuake Platform, by the <a target="_blank" href="http://www.globalquakemodel.org">GEM Foundation</a>. This web-based platform offers an interactive environment in which users can access, manipulate, share and add data, and explore models and tools for integrated assessment of earthquake risk.
                 </p>
-<br><br>
-{% if user.is_authenticated %}
-    <h1 style="margin:100px 0 20px;font-size:25px;">{% trans "Latest Maps" %}</h1>
-        {#{% for map in latest_maps %}#}
-        {% include "maps/map_list_home.html" %}
-        {#{% endfor %}#}
-
-{% endif %}
 
         </div>
   </div>
