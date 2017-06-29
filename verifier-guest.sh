@@ -122,6 +122,12 @@ sudo apt-get install -y --force-yes python-oq-engine
 
 ## Install GeoNode and dependencies
 cd geonode
+
+## print latest hash commit
+git rev-parse HEAD
+
+pip install six
+
 pip install -e .
 # pip install pygdal==1.11.3.3
 

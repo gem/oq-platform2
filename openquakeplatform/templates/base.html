@@ -34,6 +34,7 @@
         }
       </style>
     <![endif]-->
+    <link href="{{ STATIC_URL }}geonode/img/favicon.png" rel="shortcut icon"/>
     <link rel="search" type="application/opensearchdescription+xml" href="/catalogue/opensearch" title="GeoNode Search"/>
     
     <!--function for open modal menu -->
@@ -93,13 +94,13 @@
 	     <ul class="nav navbar-nav toolbar">
 	        {% block tabs %}
                <li id="nav_calculate">
-                   <a href="/layers/">Calculate</a>
+                   <a href="/calculate">Calculate</a>
                </li>
                <li id="nav_share">
-                   <a href="/layers/">Share</a>
+                   <a href="/share">Share</a>
                </li>
                <li id="nav_explore">
-                   <a href="/layers/">Explore</a>
+                   <a href="/explore">Explore</a>
                </li>
 	       <!-- <li id="nav_layers">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Data" %}<i class="fa fa-angle-down fa-lg"></i></a>
@@ -309,7 +310,7 @@
         <div class="col-md-6 text-right">
           <ul class="list-unstyled">	  
             <li>{% trans "Powered by" %} <a href="http://geonode.org">{% trans "GeoNode" %}</a> <em>{% trans "version" %} {{ VERSION }}</em>
-                <a href="{% url "developer" %}">{% trans "Developers" %}</a> | <a href="{% url "about" %}">{% trans "About" %}</a>
+                <a target="_blank" href="https://www.globalquakemodel.org/openquake/about/">{% trans "About" %}</a> | <a target="_blank" href="https://www.globalquakemodel.org/contact/">Contact us</a> | <a target="_blank" href="https://groups.google.com/forum/#%21forum/openquake-users">Feedback</a>
             <li>
           </ul>
           <label class="hidden">{% trans "Language" %}</label>
