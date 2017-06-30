@@ -1,3 +1,9 @@
+#oq-page-middle .container {
+    width: 100%;
+}
+.ui-button-text-only .ui-button-text {
+    padding: 0.2em 0.492em;
+}
 select#layer-list {
   width: 95%;
 }
