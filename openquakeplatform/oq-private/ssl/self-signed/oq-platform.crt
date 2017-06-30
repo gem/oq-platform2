@@ -1,0 +1,62 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 9 (0x9)
+    Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=IT, ST=Italy, L=Pavia, O=GEM Foundation, OU=Certification Authority, CN=Security Manager/emailAddress=security@openquake.org
+        Validity
+            Not Before: Nov 21 08:25:46 2012 GMT
+            Not After : Nov 19 08:25:46 2022 GMT
+        Subject: C=IT, ST=Italy, L=Pavia, O=GEM Foundation, OU= , CN=public machine 3/emailAddress=security@openquake.org
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (1024 bit)
+                Modulus:
+                    00:b6:ed:7f:d8:ec:3c:f0:7c:0a:fb:f6:8e:19:60:
+                    11:5f:ec:28:a8:7f:f0:dc:b4:1c:5c:e3:9b:26:cc:
+                    41:02:4c:cc:32:53:cb:2b:ae:a7:a4:f4:e5:56:7c:
+                    56:1f:27:ff:9a:d1:7f:b5:dd:9a:6c:5b:05:d5:19:
+                    5b:3a:39:c0:77:a5:2a:71:cd:48:ff:6f:82:07:d3:
+                    20:d7:89:4a:7e:35:af:81:f9:1a:59:b8:78:e5:47:
+                    81:47:50:e2:c1:82:dc:81:b4:e4:d9:41:aa:a9:60:
+                    d9:0c:12:b3:fd:ad:7d:cb:49:27:96:15:68:5d:14:
+                    4f:e2:2e:38:4f:3b:2d:92:f3
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Key Usage: 
+                Digital Signature, Non Repudiation, Key Encipherment, Data Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Subject Alternative Name: 
+                DNS:platform.openquake.org, DNS:alpha-platform.openquake.org, IP Address:176.58.109.115, IP Address:176.58.118.171
+    Signature Algorithm: sha1WithRSAEncryption
+         3e:62:fc:7d:d6:d3:6f:f3:74:44:90:54:25:2e:38:7e:70:c0:
+         18:c9:11:33:95:26:af:3a:28:af:74:a1:57:cb:d7:7f:92:37:
+         8b:3b:f8:a9:32:f0:7f:40:8a:2b:d1:a5:d4:45:b4:e4:66:57:
+         d4:0c:81:59:b1:76:36:e3:90:2a:07:a9:8b:7d:d4:2e:bd:51:
+         a8:df:8c:e2:4f:8f:2c:41:a5:9c:c0:9e:5c:c9:ca:ab:81:11:
+         a4:9c:92:88:55:f0:08:42:ce:40:e9:bf:c5:66:9e:49:2b:0c:
+         77:21:fd:43:eb:a0:3f:12:16:de:0b:b4:d1:dd:0e:ec:83:90:
+         3e:20
+-----BEGIN CERTIFICATE-----
+MIIDMjCCApugAwIBAgIBCTANBgkqhkiG9w0BAQUFADCBqjELMAkGA1UEBhMCSVQx
+DjAMBgNVBAgTBUl0YWx5MQ4wDAYDVQQHEwVQYXZpYTEXMBUGA1UEChMOR0VNIEZv
+dW5kYXRpb24xIDAeBgNVBAsTF0NlcnRpZmljYXRpb24gQXV0aG9yaXR5MRkwFwYD
+VQQDExBTZWN1cml0eSBNYW5hZ2VyMSUwIwYJKoZIhvcNAQkBFhZzZWN1cml0eUBv
+cGVucXVha2Uub3JnMB4XDTEyMTEyMTA4MjU0NloXDTIyMTExOTA4MjU0NlowgZQx
+CzAJBgNVBAYTAklUMQ4wDAYDVQQIEwVJdGFseTEOMAwGA1UEBxMFUGF2aWExFzAV
+BgNVBAoTDkdFTSBGb3VuZGF0aW9uMQowCAYDVQQLEwEgMRkwFwYDVQQDExBwdWJs
+aWMgbWFjaGluZSAzMSUwIwYJKoZIhvcNAQkBFhZzZWN1cml0eUBvcGVucXVha2Uu
+b3JnMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC27X/Y7DzwfAr79o4ZYBFf
+7Ciof/DctBxc45smzEECTMwyU8srrqek9OVWfFYfJ/+a0X+13ZpsWwXVGVs6OcB3
+pSpxzUj/b4IH0yDXiUp+Na+B+RpZuHjlR4FHUOLBgtyBtOTZQaqpYNkMErP9rX3L
+SSeWFWhdFE/iLjhPOy2S8wIDAQABo3wwejAJBgNVHRMEAjAAMAsGA1UdDwQEAwIE
+8DATBgNVHSUEDDAKBggrBgEFBQcDATBLBgNVHREERDBCghZwbGF0Zm9ybS5vcGVu
+cXVha2Uub3JnghxhbHBoYS1wbGF0Zm9ybS5vcGVucXVha2Uub3JnhwSwOm1zhwSw
+OnarMA0GCSqGSIb3DQEBBQUAA4GBAD5i/H3W02/zdESQVCUuOH5wwBjJETOVJq86
+KK90oVfL13+SN4s7+Kky8H9AiivRpdRFtORmV9QMgVmxdjbjkCoHqYt91C69Uajf
+jOJPjyxBpZzAnlzJyquBEaSckohV8AhCzkDpv8VmnkkrDHch/UProD8SFt4LtNHd
+DuyDkD4g
+-----END CERTIFICATE-----

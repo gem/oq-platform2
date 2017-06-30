@@ -1,0 +1,902 @@
+# GEM Global Historical Earthquake Catalogue
+# Version 1.0 released on 2013-03-29
+# Edited by Paola Albini and Roger M.W. Musson
+#
+# Copyright (C) 2013 GEM Foundation
+#
+# Contributions by: see http://www.globalquakemodel.org/contributors
+#
+# You may use this work under the terms of the CC-BY-NC-SA 3.0 (unported)
+# [http://creativecommons.org/licenses/by-nc-sa/3.0/]
+#
+# THE WORK IS PROTECTED BY COPYRIGHT AND/OR OTHER APPLICABLE
+# LAW. INSOFAR AS THIS WORK IS PROTECTED BY LAWS THAT NEIGHBOUR
+# OR ARE SIMILARLY RELATED TO COPYRIGHT, SUCH AS DATABASE RIGHTS
+# AS INTRODUCED IN EUROPE BY THE DIRECTIVE 96/9/EC, YOU ALSO MAY
+# USE THIS WORK UNDER THE TERMS OF CC-BY-NC-SA 3.0 (unported).
+# [http://creativecommons.org/licenses/by-nc-sa/3.0/]
+#
+# ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS
+# LICENSE OR DIRECTLY ALLOWED BY THE APPLICABLE LAW IS
+# PROHIBITED.
+#
+# If you have any questions or if you wish to seek permission to use this data
+# beyond what is offered by CC-BY-NC-SA 3.0 (unported), please contact the GEM
+# Foundation at: licensing@globalquakemodel.org
+#
+# More information on licensing: http://www.globalquakemodel.org/licensing
+# 
+# -----------------------------------------------------------------------------
+#
+# FORMAT DESCRIPTION
+# 
+# CODE	DDESCRPTION	NOTES
+# En	Event number	unique ID of the catalogue, in chronological order
+# Source	Main source	selected dataset for time, epicentral coordinates, depth, Io
+# Year	Origin time: year	from the selected dataset
+# Mo	Origin time: month	from the selected dataset
+# Da	Origin time: day	from the selected dataset
+# Ho	Origin time: hour	from the selected dataset
+# Mi	Origin time: minutes	from the selected dataset
+# Se	Origin time: seconds	from the selected dataset
+# Area	Epicentral area	from the selected dataset, or (in square brackets) the country (as of today) where the epicentre is located
+# Lat	Epicentral latitude	from the selected dataset
+# Lon	Epicentral longitude	from the selected dataset
+# LatUnc	Uncertainty of epicentral latitude	in km, from the selected dataset, when available
+# LonUnc	Uncertainty of epicentral longitude	in km, from the selected dataset, when available
+# EpDet	Type of epicentre determination	bx: determined according to the method by Gasperini et al. (1999; 2010)
+# 		bw: determined according to the method by Bakun and Wenthworth (1997)
+# 	 	cat: derived from another catalogue
+# 	 	instr: instrumental
+# Dep	depth	in km
+# Io	epicentral intensity	from the selected dataset
+# Msource	source for the magnitude	the same as "Source", with 65 exceptions
+# M	magnitude	from Msource
+# MUnc	magnitude uncertainty	from Msource, when available
+# MType	type of magnitude	w: Mw
+# 	 	s: Ms
+# 	 	jma: Mjma
+# 	 	<blank>: not specified by the source
+# MDet	Type of magnitude determination	bx: determined according to the method by Gasperini et al. (1999; 2010)
+# 	 	bw: determined according to the method by Bakun and Wenthworth (1997)
+# 	 	int: converted from epicentral or maximum intensity
+# 	 	cat: derived from another catalogue
+# 	 	instr: instrumental
+# MDPsource	Source of the Macroseismic Data Points	 
+# MDPn	Number of Macroseismic Data Points	 
+# MDPIx	Maximum intensity	 
+# MDPsc	Macroseimic scale of the MPDs	MM: modified Mercalli
+# 		MSK: Medvedev-Sponheuer-Karnik
+# 		EMS: European Macroseimic Scale
+# 		MCS: Mercalli-Cancani-Sieberg
+# 		JMA: Japan Meteorological Agency
+# Remarks	 Additional information from the source
+# 
+# -----------------------------------------------------------------------------
+# 
+En	Source	Year	Mo	Da	Ho	Mi	Se	Area	Lat	Lon	LatUnc	LonUnc	EpDet	Dep	Io	Msource	M	MUnc	MType	MDet	MDPSource	MDPn	MDPIx	MDPsc	Remarks	GEHid
+1008.0427180	Ambraseys and Melville, 1982	1008	04	27	18			Dinavar	34.600	47.400						Ambraseys and Melville, 1982	7.00		s							6849
+1033.1205000	Ambraseys and Jackson, 1998	1033	12	05				Jordan	32.500	35.500						Ambraseys and Jackson, 1998	7.40	0.40	s						"7.0 ≤ Ms < 7.8"	7665
+1038.0115000	Min Ziqun, 1995	1038	01	15				Dingxiang, Xinxian (Shanxi)	38.400	112.900	25.0	25.0			10	Min Ziqun, 1995	7.25		s							5995
+1045.0000000	Ambraseys and Jackson, 1998	1045	04	05				Erzinc.	40.000	38.000						Ambraseys and Jackson, 1998	7.40	0.40	s						"7.0 ≤ Ms < 7.8"	7667
+1050.0804000	Ambraseys and Jackson, 1998	1050	08	05				Cankiri	41.000	33.500						Ambraseys and Jackson, 1998	7.40	0.40	s						"7.0 ≤ Ms < 7.8"	7668
+1052.0000000	Ambraseys and Melville, 1982	1052						Khuzistan	31.500	50.000						Ambraseys and Melville, 1982	6.80		s							6850
+1052.0602000	Ambraseys and Melville, 1982	1052	06	02				Baihaq	36.200	57.700						Ambraseys and Melville, 1982	7.00		s							6851
+1058.1208180	Shebalin and Tatevossian, 1997	1058	11					Iraq	35.800	43.600	127.0	111.0		25	9	Shebalin and Tatevossian, 1997	7.20		s		Shebalin and Tatevossian, 1997	7		MSK		6692
+1063.0730000	Sbeinati et al., 2005	1063	07	30				[Lebanon]	34.400	36.200				32	8	Sbeinati et al., 2005	6.90		s		Sbeinati et al., 2005	5	7-8	EMS		50
+1063.0923000	Stucchi et al., 2012	1063	09	23				Sea of Marmara	40.867	27.411	11.1	6.8	bx			Stucchi et al., 2012	7.14	0.30	w		Guidoboni and Comastri, 2005	5	9	MCS		51
+1068.0318080	Ambraseys et al., 1994	1068	03	18	08	30		Northern Hejaz	28.500	36.700						Ambraseys et al., 1994	7.00		s							7630
+1096.1211080	UTSU online	1096	12	11	08			Tokaido, Kinki	34.000	137.500						UTSU online	8.30		jma							80
+1099.0216060	UTSU online	1099	02	16	06			Nankaido, Kinki	33.000	135.500						UTSU online	8.20		jma							82
+1107.0212030	Stucchi et al., 2012	1107	02	12	03			[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	8	Stucchi et al., 2012	7.10	0.30	w							96
+1114.1100000	Sbeinati et al., 2005	1114	11					Urfa	37.300	38.500				40	8-9	Sbeinati et al., 2005	7.40		s		Sbeinati et al., 2005	1	7-8	EMS		106
+1114.1129000	Ambraseys, 2009	1114	11	29				Antioch, Maras	37.500	37.200						Ambraseys, 2009	6.90	0.30	s							6875
+1117.0700000	China State Seismological Bureau and Fudan University, 1990a	1117	07					Jingyuan county in Guyuan (Ningxia)	36.000	106.000					9	China State Seismological Bureau and Fudan University, 1990a	7.00		s							6520
+1125.0906000	Min Ziqun, 1995	1125	09	06				Lanzhou (Gansu)	36.100	103.700	25.0	25.0			9	Min Ziqun, 1995	7.00		s							6001
+1126.0808000	Stucchi et al., 2012	1126	08	08				[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	8	Stucchi et al., 2012	7.10	0.30	w							119
+1139.0930000	Shebalin and Leydecker, 1997	1139	09	30				Caucasus	40.300	46.200	26.0	22.0		23		Shebalin and Leydecker, 1997	7.70		s							143
+1157.0812000	Sbeinati et al., 2005	1157	08	12				[Syria]	35.400	36.600				15	9-10	Sbeinati et al., 2005	7.40		s							169
+1170.0629000	Sbeinati et al., 2005	1170	06	29				[Syria]	34.800	36.400				35	9	Sbeinati et al., 2005	7.70		s		Sbeinati et al., 2005	12	7-8	EMS		175
+1177.0500000	Ambraseys and Melville, 1982	1177	05					East Buyin Zahra	35.700	50.700						Ambraseys and Melville, 1982	7.20		s							6852
+1185.0806120	UTSU online	1185	08	06	12			Kyoto Pref., Shiga Pref.	35.000	135.900						UTSU online	7.40		jma							190
+1196.0213070	Stucchi et al., 2012	1196	02	13	07			[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	9	Stucchi et al., 2012	7.50	0.30	w							199
+1202.0520000	Sbeinati et al., 2005	1202	05	20				[Lebanon]	34.100	36.100				30	9	Sbeinati et al., 2005	7.60		s		Sbeinati et al., 2005	38	9	EMS		205
+1209.0000000	Ambraseys and Bilham, 2003	1209			12			Nishapur	36.400	58.700						Ambraseys and Bilham, 2003	7.50		w							216
+1212.0501050	Ambraseys, 2006	1212	05	01				Dead Sea	30.000	35.000						Ambraseys, 2006	7.00		s							7656
+1216.0324000	Min Ziqun, 1995	1216	03	24				Leibo (Sichuan)	28.400	103.800	150.0	150.0			9	Min Ziqun, 1995	7.00		s							6005
+1230.0510070	Stucchi et al., 2012	1230	05	10	07			[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	8-9	Stucchi et al., 2012	7.30	0.30	w		Shebalin (ed.), 1977	7	6	MSK		235
+1246.0000000	Stucchi et al., 2012	1246						Chania	35.400	23.300	10.0	10.0	cat		7	Stucchi et al., 2012	7.00	0.50	w		University of Thessaloniki, 2003	1	7	MM		242
+1254.1014000	Ambraseys and Jackson, 1998	1254	10	11				Susehri	40.000	39.000						Ambraseys and Jackson, 1998	7.40	0.40	s						"7.0 ≤ Ms < 7.8"	7674
+1257.1002200	UTSU online	1257	10	02	20			Kamakura (Sanriku?)	35.300	139.600						UTSU online	7.30		jma							251
+1260.0000000	Shebalin and Leydecker, 1997	1260						Caucasus	43.200	51.600	68.0	56.0		20		Shebalin and Leydecker, 1997	7.20		s							254
+1268.0000010	Shebalin and Tatevossian, 1997	1268						Turkey	39.800	40.000	132.0	111.0		25	9-10	Shebalin and Tatevossian, 1997	7.20		s		Shebalin and Tatevossian, 1997	2		MSK	"crustal"	6719
+1270.1007120	Ambraseys and Bilham, 2003	1270	10	07	12			Nishapur	36.200	58.800						Ambraseys and Bilham, 2003	7.00		w							268
+1275.1003000	Guidoboni and Comastri, 2005	1275	10	03				Ercis	38.883	42.916					9	Shebalin and Tatevossian, 1997	6.80		s		Guidoboni and Comastri, 2005	6	10	MCS		5351
+1290.0927000	Min Ziqun, 1995	1290	10	04				W of Ningcheng (Inner Mongolia)	41.600	119.300	50.0	50.0			9	Min Ziqun, 1995	6.75		s							6526
+1293.0520060	UTSU online	1293	05	20	06			Kamakura	35.200	139.500						UTSU online	7.50		jma							293
+1303.0808030	Stucchi et al., 2012	1303	08	08	03	30		Crete	35.717	25.797	50.0	50.0	bw			Stucchi et al., 2012	8.26	0.30	w		Guidoboni and Comastri, 2005	40	10	MCS		301
+1303.0925000	Min Ziqun, 1995	1303	09	25				Hongtong and Zaocheng (Shanxi)	36.300	111.700	25.0	25.0			11	Min Ziqun, 1995	8.00		s		Min Ziqun, 1995		11			6015
+1309.0222050	Stucchi et al., 2012	1309	02	22	05	30		Offshore Portugal	36.000	-11.000	99.9	99.9	cat			Stucchi et al., 2012	7.00	0.50	w							315
+1327.0000000	Stucchi et al., 2012	1327						[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	8	Stucchi et al., 2012	7.30	0.30	w							330
+1331.0807000	UTSU online	1331	08	07				Kiichirihama	33.700	135.200						UTSU online	7.00		jma							331
+1336.1021060	Ambraseys and Bilham, 2003	1336	10	21	06			Kwaf	34.700	59.700						Ambraseys and Bilham, 2003	7.50		w							337
+1344.0102000	Sbeinati et al., 2005	1344	01	02				[Turkey]	36.700	37.400				30	8	Sbeinati et al., 2005	6.80		s		Sbeinati et al., 2005	4	8	EMS		344
+1352.0426000	Min Ziqun, 1995	1352	04	26				SE of Jiuquan (Gansu)	35.600	105.300	100.0	100.0				Min Ziqun, 1995	7.00		s							6023
+1354.0301170	Stucchi et al., 2012	1354	03	01	17			Sea of Marmara	40.525	26.846	26.4	29.4	bx		10	Stucchi et al., 2012	7.06	0.33	w		Guidoboni and Comastri, 2005	5	10	MCS		353
+1356.0824000	Stucchi et al., 2012	1356	08	24				SW. Cabo San Vicente	36.000	-10.700	99.9	99.9	cat			Stucchi et al., 2012	7.50	0.50	w		Instituto Geografíco Nacional, 2010	5	8	EMS		356
+1360.1114000	UTSU online	1360	11	14				Japan	33.400	136.200						UTSU online	7.80		jma							359
+1361.0726040	UTSU online	1361	07	26	04			Cent. and South. Kinki, Shikoku	33.000	135.000						UTSU online	8.40		jma							360
+1363.0000000	Shebalin and Tatevossian, 1997	1363						Turkey	38.700	41.600	39.0	33.0		15	9	Shebalin and Tatevossian, 1997	6.90		s		Shebalin and Tatevossian, 1997	1		MSK	"crustal"	6730
+1365.0103180	Hamdache et al., 2010	1365	01	03	18			Algeria	36.770	3.050					10	Hamdache et al., 2010	7.00		w							6668
+1389.0200000	Ambraseys and Bilham, 2003	1389	02					Nishapur	36.200	58.800						Ambraseys and Bilham, 2003	7.50		w							373
+1403.0000000	UTSU online	1403						Kii	33.700	136.500						UTSU online	7.00		jma							386
+1404.0220000	Sbeinati et al., 2005	1404	02	20				[Syria]	35.700	36.200				30	8-9	Sbeinati et al., 2005	7.40		s		Sbeinati et al., 2005	8	8	EMS		388
+1405.1123000	Ambraseys and Bilham, 2003	1405	11	23				Nishapur	36.200	58.800						Ambraseys and Bilham, 2003	7.50		w							390
+1408.0112000	UTSU online	1408	01	12				Kii peninsula	33.000	136.000						UTSU online	7.50		jma							398
+1408.1229000	Sbeinati et al., 2005	1408	12	29				[Syria]	35.800	36.100				25	9	Sbeinati et al., 2005	7.40		s		Sbeinati et al., 2005	7	8-9	EMS		401
+1411.0929050	Min Ziqun, 1995	1411	10	08				SW Dangxiong (Danxung), Xizang (Tibet)	30.100	90.500	50.0	50.0			10-11	Min Ziqun, 1995	8.00		s		Min Ziqun, 1995		10-11			6032
+1433.1029000	UTSU online	1433	10	29				S Kanto area	34.900	139.500						UTSU online	7.00		jma							426
+1440.0000000	Ambraseys and Melville, 1982	1440						Karzin-Qir	28.400	53.100						Ambraseys and Melville, 1982	7.10		s							6858
+1446.1010040	Stucchi et al., 2012	1446	10	10	04			[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	8-9	Stucchi et al., 2012	7.50	0.30	w							439
+1456.1205000	Stucchi et al., 2012	1456	12	05				Molise	41.302	14.711	10.5	10.3	bx		11	Stucchi et al., 2012	7.17	0.30	w		Meletti et al., 1988	199	11	MCS		447
+1457.0423000	Shebalin and Tatevossian, 1997	1457	04					Turkey	39.900	40.400	66.0	56.0		25	9-10	Shebalin and Tatevossian, 1997	7.60		s		Shebalin and Tatevossian, 1997	2		MSK		6735
+1458.1112000	Ambraseys, 2006	1458	11	16				Dead Sea	31.000	35.300						Ambraseys, 2006	7.10		s							7655
+1460.0000000	Musson, 2012c	1460						Wellington	-41.200	174.800						Musson, 2012c	8.00		w							8324
+1471.0000000	Tavera et al., 2001	1471						[Peru]	-16.300	-71.000				25	9	Tavera et al., 2001	8.00		s		Tavera et al., 2001	1	8	MM		7868
+1471.0829080	Stucchi et al., 2012	1471	08	29	08			[Vrancea deep]	45.700	26.600	29.9	29.9	cat	110	9	Stucchi et al., 2012	7.50	0.30	w							464
+1485.0815180	Ambraseys and Melville, 1982	1485	08	15				Mazandaran-Gilan	36.700	50.500						Ambraseys and Melville, 1982	7.20		s							6860
+1493.0110060	Ambraseys and Bilham, 2003	1493	01	10	06			Muminabad-I	33.000	59.800						Ambraseys and Bilham, 2003	6.90		w							505
+1494.0701100	Stucchi et al., 2012	1494	07	01	10	10		Crete	35.500	23.300	10.0	10.0	cat		8	Stucchi et al., 2012	7.50	0.50	w		Guidoboni and Comastri, 2005	2	8-9	MCS		513
+1498.0911080	UTSU online	1498	09	11	08			Tokaido, Kii and others	34.000	138.000						UTSU online	8.30		jma							524
+1500.0103000	Min Ziqun, 1995	1500	01	04				Yiliang (Yunnan)	24.900	103.100	50.0	50.0			9	Min Ziqun, 1995	7.00		s							6045
+1501.0129000	Min Ziqun, 1995	1501	01	29				Chaoyi (Shanxi)	34.800	110.100	25.0	25.0			9	Min Ziqun, 1995	7.00		s							6047
+1505.0606050	Ambraseys and Douglas, 2004	1505	06	06	05			Lo Mustang	29.500	83.000						Ambraseys and Douglas, 2004	8.10		w							556
+1505.0706000	Ambraseys and Bilham, 2003	1505	07	06				Kabul	34.500	69.100						Ambraseys and Bilham, 2003	7.20		w							557
+1508.0529000	Stucchi et al., 2012	1508	05	29				Hierapetra	35.020	25.720	20.0	20.0	bx		9	Stucchi et al., 2012	7.12	0.39	w		University of Thessaloniki, 2003	11	10	MM		563
+1509.0910000	Stucchi et al., 2012	1509	09	10				Istanbul	41.022	28.786	1.5	16.3	bx		10	Stucchi et al., 2012	7.14	0.33	w		University of Thessaloniki, 2003	12	10	MM		566
+1513.0000000	Tavera et al., 2001	1513						[Peru]	-17.210	-72.300				30		Tavera et al., 2001	8.70		s							7869
+1513.0000002	Ambraseys, 1989	1513						Tarsus-Malatya	37.500	36.500	40.0	40.0			9	Ambraseys, 1989	7.40		s						"Ms 7.4+"	7727
+1515.0627000	Min Ziqun, 1995	1515	06	27				NE of Heqing (Yunnan)	26.700	100.700	50.0	50.0			10	Min Ziqun, 1995	7.75		s		Min Ziqun, 1995		10			6051
+1516.1124120	Stucchi et al., 2012	1516	11	24	12			[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	9	Stucchi et al., 2012	7.50	0.30	w							587
+1520.0325170	UTSU online	1520	03	25	17			Kyoto, Kii	33.000	136.000						UTSU online	7.40		jma							592
+1526.0000000	Peraldo and Montero, 1999	1526						[Guatemala]	13.600	-90.240					6	Peraldo and Montero, 1999	7.10		s							8105
+1530.0901140	Sismología Histórica de Venezuela, 2011	1530	09	01	14			[Venezuela]	10.700	-64.100			cat		10-11	Sismología Histórica de Venezuela, 2011	7.30		s		Sismología Histórica de Venezuela, 2011	1	11	MCS		7870
+1533.0100000	Tavera et al., 2001	1533	01					[Peru]	-12.200	-77.800				30		Tavera et al., 2001	6.50		s							7871
+1536.0329000	Min Ziqun, 1995	1536	03	19				N of Xichang (Sichuan)	28.100	102.200	25.0	25.0			10	Min Ziqun, 1995	7.50		s							6065
+1539.0000000	Peraldo and Montero, 1999	1539	11	24				[Honduras]	16.500	-86.000					8	Peraldo and Montero, 1999	7.20		s							8179
+1548.0922000	Min Ziqun, 1995	1548	09	22				Bohai Sea	38.000	121.000	150.0	150.0			8	Min Ziqun, 1995	6.40		s							6079
+1550.0000010	Shebalin and Tatevossian, 1997	1550						Iran	38.200	46.200	130.0	111.0		22	9	Shebalin and Tatevossian, 1997	7.10		s		Shebalin and Tatevossian, 1997	3		MSK		6742
+1552.0702100	Tavera et al., 2001	1552	07	02	10	30		[Peru]	-16.600	-71.300				30	9	Tavera et al., 2001	7.60		s		Tavera et al., 2001	3	8	MM		7872
+1555.0900220	Ambraseys and Douglas, 2004	1555	09	00	22			Srinagar	33.500	75.500						Ambraseys and Douglas, 2004	7.50		w							646
+1555.1115000	Tavera et al., 2001	1555	11	15				[Peru]	-11.900	-77.600				30	6	Tavera et al., 2001	8.40		s							7873
+1556.0202000	Min Ziqun, 1995	1556	02	02				Huaxian (Shanxi)	34.500	109.700	25.0	25.0			11	Min Ziqun, 1995	8.25		s							6089
+1561.0804000	Min Ziqun, 1995	1561	08	04				E of Zhongwei (Ningxia)	37.500	106.200	25.0	25.0			9-10	Min Ziqun, 1995	7.25		s							6095
+1562.1203010	Flores et al., 2012	1562	12	02				[Dominican Republic]	19.370	-70.680			bw			Flores et al., 2012	7.70	0.30	w	bw	Flores et al., 2012	6	8	MM		8335
+1563.0528000	Chiu and Kim, 2004	1563	05	28				Pyongyang Region	38.800	126.100						Chiu and Kim, 2004	7.00		s							6096
+1564.0420000	SisFrance, 2010	1564	04	20				Republique Dominicaine	19.217	-70.517	50.0	50.0			8-9	Alvarez et al., 1999	7.00		s		SisFrance, 2010	3	8-9	MSK		8336
+1568.1227000	Torres-Vera, 2010	1568	12	27				Jalisco	20.200	-103.500			bx			Torres-Vera, 2010	7.10		s		Torres-Vera, 2010	16	10	MM		8904
+1570.0208050	CERESIS, 1995	1570	02	08	05			[Chile]	-36.750	-73.000					11	Lomnitz, 2004	8.00		s				11			694
+1575.0317060	CERESIS, 1995	1575	03	17	06			[Chile]	-33.400	-70.600					8	Lomnitz, 2004	7.25	0.25	s				8			706
+1575.1216180	CERESIS, 1995	1575	12	16	18	30		[Chile]	-39.800	-73.200					10	Lomnitz, 2004	8.25	0.25	s				10			712
+1577.1130060	Peraldo and Montero, 1999	1577	11	29				[Guatemala]	14.000	-92.500					8	Peraldo and Montero, 1999	7.20		s							8108
+1578.0800000	Alvarez et al., 1999	1578	08					[Cuba]	19.900	-76.000				30		Alvarez et al., 1999	6.70		s							727
+1581.0000000	Tavera et al., 2001	1581						[Peru]	-12.400	-77.700				30	6	Tavera et al., 2001	7.60		s							7879
+1582.0122160	Tavera et al., 2001	1582	01	22	16	30		[Peru]	-16.600	-71.600				30	10	Tavera et al., 2001	7.50		w		Tavera et al., 2001	4	10	MM		7881
+1582.0815000	Tavera et al., 2001	1582	08	15				[Peru]	-12.200	-77.600				30	7	Tavera et al., 2001	7.80		s		Tavera et al., 2001	2	7	MM		7882
+1584.0317000	Tavera et al., 2001	1584	03	17				[Peru]	-11.800	-77.800				30	7	Tavera et al., 2001	8.40		s		Tavera et al., 2001	2	7	MM		7883
+1585.0628020	Stucchi et al., 2012	1585	06	28	02			Athos	39.786	24.372	50.0	50.0	bw			Stucchi et al., 2012	7.06	0.39	w		University of Thessaloniki, 2003	3	8	MM		757
+1586.0116000	UTSU online	1586	01	16				Ecchu	36.600	136.900						UTSU online	7.00		jma							758
+1586.0118010	UTSU online	1586	01	18	01			Tsubu and Kinki area	36.000	136.900						UTSU online	7.80		jma							759
+1586.0710000	Tavera et al., 2001	1586	07	10	00	30		[Peru]	-12.109	-77.028				40	10	Tavera et al., 2001	8.60		s		Tavera et al., 2001	12	9	MM		7885
+1588.0104130	Ambraseys, 2006	1588	01	04				Dead Sea	29.000	36.000						Ambraseys, 2006	7.20		s							7654
+1588.0809000	Min Ziqun, 1995	1588	08	09				Jianshui (Yunnan)	24.000	102.800	25.0	25.0			9	Min Ziqun, 1995	7.00		s							6105
+1590.0000000	Tavera et al., 2001	1590						[Peru]	-17.200	-72.900				40	7	Tavera et al., 2001	7.70		s		Tavera et al., 2001	2	7	MM		7886
+1591.0314000	Zúñiga et al., 1997	1591	03	14				[Mexico]	16.000	-92.500				0		Zúñiga et al., 1997	7.00		w							788
+1595.0421100	Stucchi et al., 2012	1595	04	21	10			[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	8	Stucchi et al., 2012	7.10	0.30	w							795
+1596.0904190	UTSU online	1596	09	04	19			Oita Pref.	33.300	131.600						UTSU online	7.00		jma							797
+1596.0905010	UTSU online	1596	09	05	01			Kinki area	34.650	135.600						UTSU online	7.50		jma							798
+1597.1006000	Min Ziqun, 1995	1597	10	06				Bohai Sea	38.500	120.000	150.0	150.0				Min Ziqun, 1995	7.00		s							6113
+1600.0219100	Tavera et al., 2001	1600	02	19	10			[Peru]	-16.770	-70.900				20	11	Tavera et al., 2001	7.90		s		Tavera et al., 2001	2	11	MM		7887
+1600.0228200	Tavera et al., 2001	1600	02	28	20			[Peru]	-16.600	-70.800				20	10	Tavera et al., 2001	8.10		s		Tavera et al., 2001	5	10	MM		7888
+1600.0929000	Min Ziqun, 1995	1600	09	29				Nan'ao (Guangdong)	23.500	117.200	25.0	25.0			9	Min Ziqun, 1995	7.00		s							6116
+1604.1124180	CERESIS, 1995	1604	11	24	18	30		[Peru]	-17.880	-70.940				80	10	Lomnitz, 2004	8.25	0.25	s				10			835
+1604.1229000	Min Ziqun, 1995	1604	12	29				Offshore Quanzhou (Fujian)	24.700	119.000	100.0	100.0				Min Ziqun, 1995	7.50		s							6120
+1605.0203200	UTSU online	1605	02	03	20			Tokai, Nankai and Saikai roads	33.500	138.500						UTSU online	7.90		jma							843
+1605.0713000	Min Ziqun, 1995	1605	07	13				Qiongshan (Hainan)	20.000	110.500	25.0	25.0			10	Min Ziqun, 1995	7.50		s							6125
+1606.0323200	Tavera et al., 2001	1606	03	23	20			[Peru]	-7.000	-80.300				40	6	Tavera et al., 2001	6.50		s		Tavera et al., 2001	2	5	MM		7892
+1606.1025130	Tavera et al., 2001	1606	10	25	13			[Peru]	-11.800	-77.800				60	9	Tavera et al., 2001	6.80		s		Tavera et al., 2001	1	8	MM		7893
+1608.0420120	Ambraseys and Melville, 1982	1608	04	20				Taliqan	36.400	50.500						Ambraseys and Melville, 1982	7.60		s							6862
+1609.0000000	Benito et al., 2012	1609						[Nicaragua]	12.420	-86.550			cat		8	Benito et al., 2012	7.20		w					MM		5318
+1609.0400000	Stucchi et al., 2012	1609	04					Rhodos	36.200	29.000	10.0	10.0	cat		9	Stucchi et al., 2012	7.20	0.50	w		University of Thessaloniki, 2003	3	9	MM		859
+1609.0712000	Min Ziqun, 1995	1609	07	11				Jiuquan and Hongyapu (Gansu)	39.200	99.000	50.0	50.0			10	Min Ziqun, 1995	7.25		s							6127
+1609.1020010	CERESIS, 1995	1609	10	20	01			[Peru]	-11.900	-77.400				55	9	CERESIS, 1995	7.40		s				9			865
+1610.0203190	Palme et al., 2005	1610	02	03				[Venezuela]	8.450	-71.650			bw			Palme et al., 2005	7.60	0.63	w	bw						7895
+1611.0825000	Torres-Vera, 2010	1611	08	31				Oaxaca	17.825	-97.640			bx			Torres-Vera, 2010	7.40		s		Torres-Vera, 2010	7	7	MM		8905
+1611.1202140	UTSU online	1611	12	02	14			Sanriku, E coast of Hokkaido	39.000	144.000						UTSU online	8.10		jma							876
+1612.1108000	Stucchi et al., 2012	1612	11	08				Heraklio	35.000	23.800	10.0	10.0	cat		8	Stucchi et al., 2012	7.20	0.50	w		University of Thessaloniki, 2003	1	8	MM		878
+1614.1126000	Usami, 1979	1614	11	26				Japan	37.500	138.000						Usami, 1979	7.70		jma							7510
+1615.0907000	Chuy and Alvarez, 1988	1615	09	08				[Dominican Republic]	18.400	-69.900				30	7	Flores et al., 2012	7.50	0.70	w	bw	Chuy and Alvarez, 1988	1	7	MSK		8338
+1615.0916000	CERESIS, 1995	1615	09	16				[Chile]	-18.500	-70.350					10	CERESIS, 1995	7.50		s				10			893
+1616.0200000	CERESIS, 1995	1616	02					[Colombia]	5.000	-74.000					9	CERESIS, 1995	7.00		s				9			899
+1616.0909150	UTSU online	1616	09	09	15			Sendai	38.100	142.000						UTSU online	7.00		jma							902
+1619.0214160	CERESIS, 1995	1619	02	14	16	30		[Peru]	-8.900	-79.300				50	9	Dorbath et al., 1990	7.85	0.15	w				9			910
+1619.1130160	Bautista and Oike, 2000	1619	11	30	16			Philippines	18.500	121.600						Bautista and Oike, 2000	8.00		s							920
+1621.0502000	Benito et al., 2012	1621	05	02				Pedro Miguel Fault, canal area	8.970	-79.550			cat		8	Benito et al., 2012	6.90		w					MM	"crustal"	5342
+1621.1200000	Bautista and Oike, 2000	1621	12					Philippines	11.700	122.100						Bautista and Oike, 2000	7.20		s							926
+1622.1025000	Min Ziqun, 1995	1622	10	25				N of Guyuan (Ningxia)	36.500	106.300	50.0	50.0			9-10	Min Ziqun, 1995	7.00		s							6140
+1624.0511000	Pelaez et al., 2007	1624	05	11				Fès	34.260	-4.570					9-10	Pelaez et al., 2007	6.70		w							7603
+1626.0121000	Sbeinati et al., 2005	1626	01	21				[Syria]	36.500	37.100				20	9	Sbeinati et al., 2005	7.30		s		Sbeinati et al., 2005	4	8-9	EMS		942
+1626.0628000	Min Ziqun, 1995	1626	06	28				Lingqiu (Shanxi)	39.400	114.200	25.0	25.0			9	Min Ziqun, 1995	7.00		s							6145
+1627.0900000	Bautista and Oike, 2000	1627	09					Philippines	18.700	121.800						Bautista and Oike, 2000	7.50		s							947
+1629.0801013	Musson, 2012a	1629	08	01	01	30		Indonesia	-4.300	129.600						Musson, 2012a	8.80		w							7771
+1630.0309090	Stucchi et al., 2012	1630	03	09	09			Crete	35.000	23.700	10.0	10.0	cat		9	Stucchi et al., 2012	7.30	0.50	w		University of Thessaloniki, 2003	1	8-9	MM		953
+1630.1127150	Tavera et al., 2001	1630	11	27	15	30		[Peru]	-12.200	-77.500				30	7	Tavera et al., 2001	7.50		s		Tavera et al., 2001	2	7	MM		7903
+1633.0301050	UTSU online	1633	03	01	05			W side of Kanagawa Pref.	35.200	139.200						UTSU online	7.00		jma							968
+1637.0201010	Stucchi et al., 2012	1637	02	01	01			[Vrancea deep]	45.700	26.600	29.9	29.9	cat	130	8	Stucchi et al., 2012	7.10	0.30	w							977
+1638.0327150	Stucchi et al., 2012	1638	03	27	15	05		Calabria	39.048	16.289	3.6	1.1	bx		11	Stucchi et al., 2012	7.02	0.30	w		Guidoboni et al., 2007	213	11	MCS		979
+1644.0116110	CERESIS, 1995	1644	01	16	11			[Colombia]	7.400	-72.700					9	CERESIS, 1995	7.00		s				9			1000
+1644.0512120	Musson, 2012a	1644	05	12	12			Ambon	-3.850	128.400						Musson, 2012a	7.00		w							7772
+1645.0315000	Beauval et al., 2013	1645	03	15				Chimborazo	-1.730	-78.800						Beauval et al., 2013	7.00	0.30	w	bw					"Mw: 6.7–7.3"	8964
+1645.1130120	Bautista and Oike, 2000	1645	11	30	12	30		Philippines	15.600	121.200						Bautista and Oike, 2000	7.90		s							1015
+1647.0514020	CERESIS, 1995	1647	05	14	02	30		[Chile]	-33.000	-72.000					11	Lomnitz, 2004	8.00		s				11			1023
+1648.0000000	Benito et al., 2012	1648						[Nicaragua]	12.500	-86.800			cat		8	Benito et al., 2012	7.20		w					MM		5316
+1648.0202000	Musson, 2012a	1648	02	02				Flores	-8.400	122.950						Musson, 2012a	7.00		w							7773
+1648.0613120	UTSU online	1648	06	13	12			Kanagawa Pref.	35.200	139.200						UTSU online	7.00		jma							1031
+1649.0317120	UTSU online	1649	03	17	12			Ehime and Hiroshima Pref.	33.700	132.500						UTSU online	7.00		jma							1033
+1649.0730010	UTSU online	1649	07	30	01			Tokyo, Saitama Pref.	35.800	139.500						UTSU online	7.00		jma							1034
+1650.0331160	Tavera et al., 2001	1650	03	31	16	10		[Peru]	-13.600	-72.200				70	10	Tavera et al., 2001	7.40		s		Tavera et al., 2001	9	9	MM		7912
+1650.0331190	Tavera et al., 2001	1650	03	31	19			[Peru]	-13.500	-71.700				30	10	Tavera et al., 2001	7.20		s		Tavera et al., 2001	10	9	MM		7913
+1651.0000000	Benito et al., 2012	1651						[Nicaragua]	11.200	-85.200			cat		8	Benito et al., 2012	7.30		w					MM		5317
+1652.0713000	Min Ziqun, 1995	1652	07	13				S of Midu (Yunnan)	25.200	100.600	25.0	25.0			9+	Min Ziqun, 1995	7.00		s							6168
+1654.0000000	Min Ziqun, 1995	1654						Xizang (Tibet)	30.800	95.600	50.0	50.0			9	Min Ziqun, 1995	7.00		s							6169
+1654.0721000	Min Ziqun, 1995	1654	07	21				S of Tongwei (Gansu)	34.300	105.500	25.0	25.0			11	Min Ziqun, 1995	8.00		s		Min Ziqun, 1995		10			6171
+1655.1113190	CERESIS, 1995	1655	11	13	19	45		[Peru]	-12.300	-77.600				30	10	CERESIS, 1995	7.70		s				10			1062
+1657.0315230	CERESIS, 1995	1657	03	15	23	30		[Chile]	-36.830	-73.030					11	Lomnitz, 2004	8.00		s				11			1070
+1658.0214000	Tavera et al., 2001	1658	02	14				[Peru]	-8.200	-80.100				40	7	Tavera et al., 2001	7.70		s		Tavera et al., 2001	1	7	MM		7917
+1659.0217000	Stucchi et al., 2012	1659	02	17				Redestos	40.713	27.256	50.0	50.0	bw			Stucchi et al., 2012	7.10	0.30	w		University of Thessaloniki, 2003	6	8	MM		1086
+1659.1200000	Musson, 2012a	1659	12					Indonesia	-4.200	127.000						Musson, 2012a	7.50		w							7774
+1662.0616120	UTSU online	1662	06	16	12			Kinki	35.200	135.950						UTSU online	7.40		jma							1094
+1662.1031000	UTSU online	1662	10	31				Hyuga,Osumi	31.700	132.000						UTSU online	7.60		jma							1095
+1663.0000000	Benito et al., 2012	1663						[Nicaragua]	12.420	-86.550			cat		8	Benito et al., 2012	7.30		w					MM		5319
+1663.0205220	Lamontagne et al., 2008	1663	02	05	22	30		Charlevoix-Kamouraska, Quebec	47.600	-70.100					9	Schulte and Mooney, 2005	6.70	1.00	w				9			8509
+1664.0000000	Ambraseys and Douglas, 2004	1664						N Bangla	25.000	90.000						Ambraseys and Douglas, 2004	7.70		w							1103
+1664.0522090	Tavera et al., 2001	1664	05	12	09	15		[Peru]	-14.100	-75.850				15	10	Tavera et al., 2001	7.30		s		Tavera et al., 2001	7	10	MM		7919
+1666.0922000	Sbeinati et al., 2005	1666	09	22				[Iraq]	37.000	43.000				35	9	Sbeinati et al., 2005	6.90		s		Sbeinati et al., 2005	6	7-8	EMS		1123
+1666.1113090	Shebalin and Tatevossian, 1997	1666	11	13	09			Turkey	39.700	39.500	131.0	111.0		10	10	Shebalin and Tatevossian, 1997	7.50		s		Shebalin and Tatevossian, 1997	1		MSK		6758
+1667.0000000	Alvarez et al., 1999	1667						[Jamaica]	17.800	-77.000				30		Alvarez et al., 1999	6.70		s							1126
+1668.0114000	Shebalin and Tatevossian, 1997	1668	01	14				Azerbaijan	41.000	48.000	66.0	56.0		40	10	Shebalin and Tatevossian, 1997	7.80		s		Shebalin and Tatevossian, 1997	20		MSK		6760
+1668.0725000	Min Ziqun, 1995	1668	07	25				Tancheng (Shandong)	34.800	118.500	25.0	25.0			11	Min Ziqun, 1995	8.50		s		Min Ziqun, 1995		11			6178
+1668.0729000	Shebalin and Leydecker, 1997	1668	07	29				Caucasus	41.000	48.000	133.0	111.0		30		Shebalin and Leydecker, 1997	7.10		s							1149
+1668.0817000	Ambraseys and Jackson, 1998	1668	08	17				Amasya	40.500	36.000						Ambraseys and Jackson, 1998	7.90		s							7688
+1671.1017000	Musson, 2012a	1671	10	17				Saparua	-3.800	128.700						Musson, 2012a	7.50		w							7775
+1672.0214000	Stucchi et al., 2012	1672	02	14				Bozcaada	39.818	25.717	50.0	50.0	bw			Stucchi et al., 2012	7.05	0.33	w		Taxeidis, 2003	5	8	EMS		1165
+1673.0509110	Alvarez et al., 1999	1673	05	09	11	30		[Dominican Republic]	18.400	-70.300				30		Flores et al., 2012	7.30	0.70	w	bw						1167
+1673.0812141	Musson, 2012a	1673	08	12	14	15		Indonesia	0.800	127.300						Musson, 2012a	7.00		w							7776
+1674.0316000	Palme et al., 2005	1674	03	16				[Venezuela]	8.950	-70.800			bw			Palme et al., 2005	7.40	0.63	w	bw						7920
+1675.0216233	Musson, 2012a	1675	02	16	23	30		Ambon	-4.000	127.750						Musson, 2012a	7.90		w							7777
+1677.0413020	UTSU online	1677	04	13	02			Sanriku area	41.000	143.000						UTSU online	7.90		jma							1189
+1677.1104200	UTSU online	1677	11	04	20			Fukushima Pref., E Kanto area	35.000	141.500						UTSU online	8.00		jma							1191
+1677.1207110	Bautista and Oike, 2000	1677	12	07	11	30		Philippines	14.500	119.500						Bautista and Oike, 2000	7.30		s							1193
+1678.0211140	Alvarez et al., 1999	1678	02	11	14	59		[Cuba]	19.900	-76.000				30		Alvarez et al., 1999	6.70		s							1203
+1678.0616010	Tavera et al., 2001	1678	06	16	01	45		[Peru]	-12.300	-77.800				40	9	Tavera et al., 2001	7.70		s		Tavera et al., 2001	6	8	MM		7922
+1678.1002200	UTSU online	1678	10	02	20			Tohoku area	39.000	142.000						UTSU online	7.50		jma							1211
+1679.0902000	Min Ziqun, 1995	1679	09	02				Sanhe and Pinggu (Hebei)	40.000	117.000	25.0	25.0			11	Min Ziqun, 1995	8.00		s		Min Ziqun, 1995		10			6187
+1681.0110000	Stucchi et al., 2012	1681	01	10				Heraklio	35.400	23.500	10.0	10.0	cat		8	Stucchi et al., 2012	7.00	0.50	w		University of Thessaloniki, 2003	3	8	MM		1222
+1681.0310000	CERESIS, 1995	1681	03	10				[Chile]	-18.500	-70.350					10	Lomnitz, 2004	7.25	0.25	s				10			1225
+1681.0818000	Stucchi et al., 2012	1681	08	18				[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	8	Stucchi et al., 2012	7.10	0.30	w							1230
+1681.1211000	Musson, 2012a	1681	12	11				Indonesia	-2.200	99.000						Musson, 2012a	7.00		w							7778
+1681.1227040	Stucchi et al., 2012	1681	12	27	04	30		[Vrancea]	45.700	26.600	29.9	29.9	cat	150	8	Stucchi et al., 2012	7.10	0.30	w							1231
+1683.1016000	Musson, 2012a	1683	10	16				Banda	-4.500	130.300						Musson, 2012a	7.00		w							7779
+1683.1020050	UTSU online	1683	10	20	05			Tochigi Pref., Fukushima Pref.	36.900	139.900						UTSU online	7.00		jma							1239
+1683.1122000	Min Ziqun, 1995	1683	11	22				Close to Yuanping (Shanxi)	38.700	112.700	25.0	25.0			9	Min Ziqun, 1995	7.00		s							6198
+1684.0000000	Alvarez et al., 1999	1684						[Dominican Republic]	18.400	-70.300				30		Flores et al., 2012	7.00	0.70	w	bw						1241
+1686.0104110	UTSU online	1686	01	04	11			Hiroshima, Yamaguchi, Ehime Pref.	34.000	132.600						UTSU online	7.20		jma							1246
+1686.1003090	Usami, 1979	1686	10	03	07			Japan	34.450	137.400						Usami, 1979	7.00		jma							7526
+1687.0712070	CERESIS, 1995	1687	07	12	07			[Chile]	-32.750	-70.730					8	Lomnitz, 2004	7.25	0.25	s				8			1254
+1687.1020110	Tavera et al., 2001	1687	10	20	10	30		[Peru]	-13.231	-76.507				30	10	Tavera et al., 2001	8.60		w		Tavera et al., 2001	14	9	MM		7927
+1688.1019000	Bautista and Oike, 2000	1688	10	19				Philippines	16.950	122.200						Bautista and Oike, 2000	7.50		s							1275
+1690.0405000	Flores et al., 2012	1690	04	05				Lesser Antilles	17.080	-62.510			bw			Flores et al., 2012	7.50	0.20	w	bw	Flores et al., 2012	11	9	MM		8347
+1690.1120190	Tavera et al., 2001	1690	11	20	19	30		[Peru]	-12.550	-77.000				40	6	Tavera et al., 2001	7.20		s		Tavera et al., 2001	1	6	MM		7930
+1691.0000000	Alvarez et al., 1999	1691						[Dominican Republic]	18.400	-70.300				30		Flores et al., 2012	7.50	0.70	w	bw						1279
+1692.0607160	SisFrance, 2010	1692	06	17	16	40		Jamaique	17.966	-76.783	50.0	50.0			10	Alvarez et al., 1999	7.50		s		SisFrance, 2010	11	10	MSK		8349
+1692.0913110	CERESIS, 1995	1692	09	13	11			[Argentina]	-25.400	-64.800				30	9	CERESIS, 1995	7.00		s				9			1291
+1693.0111130	Stucchi et al., 2012	1693	01	11	13	30		Sicilia orientale	37.140	15.013	5.4	15.6	bx		11	Stucchi et al., 2012	7.42	0.30	w		Guidoboni et al., 2007	185	11	MCS		1296
+1694.0619070	UTSU online	1694	06	19	07			N side of Akita Pref.	40.200	140.100						UTSU online	7.00		jma							1297
+1695.0511240	Ambraseys and Melville, 1982	1695	05	12				Isfara'in	36.800	57.000						Ambraseys and Melville, 1982	7.00		s							6863
+1695.0518000	Min Ziqun, 1995	1695	05	18				Linfen (Shanxi)	36.000	111.500	25.0	25.0			10	Min Ziqun, 1995	7.75		s		Min Ziqun, 1995		10			6210
+1696.0414000	Ambraseys and Melville, 1982	1696	04	14				Chaldiran	39.100	43.900						Ambraseys and Melville, 1982	7.00		s							6872
+1696.0714090	Tavera et al., 2001	1696	07	14	09			[Peru]	-12.800	-77.700				20	6	Tavera et al., 2001	6.70		s							7932
+1697.0207000	Zúñiga et al., 1997	1697	02	07				Costa de Guerrero	16.500	-99.000					9	Zúñiga et al., 1997	7.50		w				9			8884
+1697.0929130	Tavera et al., 2001	1697	09	29	13	30		[Peru]	-12.300	-77.400				30	6	Tavera et al., 2001	7.30		s							7933
+1698.0620060	Beauval et al., 2010	1698	06	20				Ambato	-1.400	-78.800			bw		9	Beauval et al., 2010	7.30	0.35	w	bw	Beauval et al., 2010	20	9	MSK		7934
+1698.1002080	Ambraseys et al., 1994	1698	10	02	08	30		Mediterranean?	32.000	30.000						Ambraseys et al., 1994	6.00		s							7641
+1699.0104183	Musson, 2012a	1699	01	04	18	30		Batavia	-7.000	105.500						Musson, 2012a	7.50		w							7780
+1699.0714090	Tavera et al., 2001	1699	07	14	09			[Peru]	-11.800	-77.500				40	7	Tavera et al., 2001	7.80		s		Tavera et al., 2001	2	7	MM		7935
+1700.0127050	Lamontagne et al., 2008	1700	01	27	05			Cascadia Subduction Zone	48.500	-125.000					7	Lamontagne et al., 2008	9.00		w				7			8510
+1700.0415000	UTSU online	1700	04	15				Iki, Tsushima	33.900	129.600						UTSU online	7.00		jma							1339
+1701.0612000	Stucchi et al., 2012	1701	06	12				[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	8	Stucchi et al., 2012	7.10	0.30	w							1343
+1701.1109000	Flores et al., 2012	1701	11	09				[Haiti]	18.420	-72.650			bw			Flores et al., 2012	6.60	0.30	w	bw	Flores et al., 2012	5	7	MM		8352
+1703.1231021	Grunewald and Stein, 2006	1703	12	31				S Kanto	35.030	139.660						Grunewald and Stein, 2006	8.20	0.20	jma		Usami, 1994	83		JMA		6215
+1704.0527130	UTSU online	1704	05	27	13			Akita Pref., Aomori Pref.	40.400	140.000						UTSU online	7.00		jma							1353
+1705.1000000	Musson, 2012a	1705	10					Ambon	-4.000	127.900						Musson, 2012a	7.00		w							7781
+1705.1124000	Sbeinati et al., 2005	1705	11	24				[Syria]	33.700	36.600				35	8	Sbeinati et al., 2005	6.90		s		Sbeinati et al., 2005	4	8	EMS		1356
+1707.1028140	UTSU online	1707	10	28	14			Western Japan	33.000	136.000						UTSU online	8.60		jma							1365
+1707.1029060	UTSU online	1707	10	29	06			Shizuoka and Yamanashi Pref.	35.100	138.600						UTSU online	7.00		jma							1366
+1709.1014000	Min Ziqun, 1995	1709	10	14				Zhongwei (Ningxia)	37.400	105.300	25.0	25.0			9-10	Min Ziqun, 1995	7.50		s		Min Ziqun, 1995		8			6220
+1710.0306000	Musson, 2012a	1710	03	06				Indonesia	-4.530	129.900						Musson, 2012a	7.00		w							7782
+1711.0000000	White et al., 2004	1711						Comasagua	13.667	-89.417					7	White et al., 2004	7.00	0.30	w				7	MM	"subduction"	8291
+1712.1214000	White et al., 2004	1712	12	14				Costuma	13.583	-88.833					8	White et al., 2004	7.10	0.20	w				8	MM	"subduction"	8292
+1713.0904000	Min Ziqun, 1995	1713	09	04				Diexi and Maoxian (Sichuan)	32.000	103.700	25.0	25.0			9	Min Ziqun, 1995	7.00		s							6234
+1715.0823000	CERESIS, 1995	1715	08	23				[Peru]	-17.300	-70.800				80	7	Lomnitz, 2004	8.00		s				7			1397
+1716.0000000	Shebalin and Leydecker, 1997	1716						Middle Asia, Kazakhstan	41.200	80.300	66.0	56.0		30		Shebalin and Leydecker, 1997	7.50		s							1400
+1716.0203020	Hamdache et al., 2010	1716	02	03	02			Algeria	36.700	3.100					10	Hamdache et al., 2010	7.00		w							6669
+1717.0000000	Stucchi et al., 2012	1717						Crete	35.900	22.900	10.0	10.0	cat		8	Stucchi et al., 2012	7.00	0.50	w		University of Thessaloniki, 2003	1	8	MM		1411
+1717.0513140	UTSU online	1717	05	13	14			Sendai	38.500	142.500						UTSU online	7.50		jma							1414
+1717.0929000	White et al., 2004	1717	09	29				Patzicia	14.500	-90.750					8	White et al., 2004	7.40	0.20	w				8	MM	"subduction"	8144
+1717.1003000	White et al., 2004	1717	10	03				Amatitlan, Guazacapan	14.333	-90.500					6-7	White et al., 2004	7.00	0.20	w				6-7	MM	"subduction"	8145
+1718.0619000	Min Ziqun, 1995	1718	06	19				S of Tongwei (Gansu)	35.000	105.200	25.0	25.0			10	Min Ziqun, 1995	7.50		s							6238
+1718.0822140	UTSU online	1718	08	22	14			S Nagano Pref. (Inadani)	35.300	137.900						UTSU online	7.00		jma							1420
+1719.0305000	White et al., 2004	1719	03	05				Ystepeque	13.667	-89.000					8	White et al., 2004	7.60	0.20	w				8	MM	"subduction"	8293
+1719.0525000	Stucchi et al., 2012	1719	05	25				Izmit	40.733	29.777	4.5	13.5	bx		9-10	Stucchi et al., 2012	6.75	0.30	w		University of Thessaloniki, 2003	13	10	MM		8931
+1720.0000000	White et al., 2004	1720						Siquinala	14.667	-91.000					7	White et al., 2004	7.00	0.20	w				7	MM	"subduction"	8146
+1720.0725120	Ambraseys and Douglas, 2004	1720	07	25	12	30		N Uttarpradesh	30.000	80.000						Ambraseys and Douglas, 2004	7.40		w							1430
+1721.0426070	Ambraseys and Melville, 1982	1721	04	26	07			SW Tabriz	37.900	46.700						Ambraseys and Melville, 1982	7.70		s							5360
+1724.1012020	Stucchi et al., 2012	1724	10	12	02	45		[Océano Atlántico]	39.000	-12.500	99.9	99.9	cat			Stucchi et al., 2012	7.00	0.50	w							1442
+1724.1100000	Dimate et al., 2005	1724	11					Chita	6.200	-72.480					8	Dimate et al., 2005	6.75		w							7941
+1725.0107040	CERESIS, 1995	1725	01	07	04	15		[Peru]	-9.200	-79.300				60	9	Dorbath et al., 1990	7.50		w				9			1449
+1725.0201110	Tatevossian et al., 2012	1725	02	01				[Russia]	52.360	114.200					6-7	Tatevossian et al., 2012	6.80	0.20	s		Tatevossian et al., 2012	4	6-7	MSK		5361
+1725.0801000	Min Ziqun, 1995	1725	08	01				Kangding (Sichuan)	30.000	101.900	25.0	25.0			9	Min Ziqun, 1995	7.00		s							6241
+1727.1109000	SisFrance, 2010	1727	11	09	18	30		Nord-Est Martinique	14.983	-60.750	50.0	50.0				Tanner and Shepherd, 1997	6.57		w		SisFrance, 2010	2	6-7	MSK	"subduction"	8355
+1730.0708100	CERESIS, 1995	1730	07	08	10			[Chile]	-33.050	-71.630					11	Lomnitz, 2004	8.75	0.25	s				11			1479
+1730.1111030	UTSU online	1730	11	11	03			Coast of Ibakaki Pref.	36.000	142.000						UTSU online	7.30		jma							1483
+1732.1202060	Tavera et al., 2001	1732	12	02	06			[Peru]	-11.800	-77.600				50	6	Tavera et al., 2001	6.90		s		Tavera et al., 2001	3	6	MM		7947
+1733.0500000	White et al., 2004	1733	05					Patzicia	14.667	-91.083					7	White et al., 2004	7.00	0.20	w				7	MM	"subduction"	8147
+1733.0802000	Min Ziqun, 1995	1733	08	02				Dongchuan and Ziniupo (Yunnan)	26.200	103.100	25.0	25.0			10	Min Ziqun, 1995	7.75		s		Min Ziqun, 1995		10			6247
+1733.1130000	Gouin, 1979	1733	11	30				Eritrean scarp	15.700	39.000						Gouin, 1979	6.00		m							6926
+1736.0506000	White et al., 2004	1736	05	06				Tecoluca	13.583	-88.917					8	White et al., 2004	7.20	0.10	w				8	MM	"subduction"	8294
+1737.0306170	Stucchi et al., 2012	1737	03	06	17	30		Ezine	40.224	26.966	24.7	36.8	bx		10	Stucchi et al., 2012	7.36	0.67	w		Taxeidis, 2003	14	10	EMS		1506
+1737.1017150	Shebalin and Leydecker, 1997	1737	10	17	15	30		Kamchatka	51.100	158.000	148.0	111.0		40		Shebalin and Leydecker, 1997	8.30		s							1511
+1737.1104080	Shebalin and Leydecker, 1997	1737	11	04	08			Kamchatka	55.500	163.000	316.0	223.0		20		Shebalin and Leydecker, 1997	7.80		s						location error very large (+/-2 degrees).	1513
+1737.1224000	CERESIS, 1995	1737	12	24				[Chile]	-39.800	-73.200					11	Lomnitz, 2004	7.50		s				11			1518
+1738.0611100	Stucchi et al., 2012	1738	06	11	10			[Vrancea deep]	45.700	26.600	29.9	29.9	cat	130	9-10	Stucchi et al., 2012	7.70	0.30	w		Shebalin (ed.), 1977	8	8	MSK		1527
+1738.1223000	Min Ziqun, 1995	1738	12	23				Yushu, Qinghai	33.300	96.600	100.0	100.0			8	Min Ziqun, 1995	6.50		s							6559
+1738.1226010	Shebalin and Leydecker, 1997	1738	12	26	01			Kamchatka	55.000	157.500	156.0	111.0		350		Shebalin and Leydecker, 1997	7.10		s						very doubtful parameters	1531
+1739.0103000	Min Ziqun, 1995	1739	01	03				Pingluo and Yinchuan (Ningxia)	38.800	106.500	25.0	25.0			10+	Min Ziqun, 1995	8.00		s							6252
+1740.0405000	Stucchi et al., 2012	1740	04	05				[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	8-9	Stucchi et al., 2012	7.30	0.30	w							1536
+1741.0131010	Stucchi et al., 2012	1741	01	31	01	15		Rhodos	36.160	28.500	50.0	50.0	bw			Stucchi et al., 2012	7.54	0.30	w		University of Thessaloniki, 2003	7	8	MM		1540
+1741.0215000	Tanner and Shepherd, 1997	1741	02	15				[Guatemala]	15.750	-90.420				10	8	Tanner and Shepherd, 1997	7.00		w							1541
+1741.0825000	Tavera et al., 2001	1741	08	25				[Ecuador]	-3.100	-78.100					9	Tavera et al., 2001	6.80		s							7949
+1742.0000000	White et al., 2004	1742						Comasagua	14.000	-90.083					8	White et al., 2004	7.20	0.10	w				8	MM	"subduction"	8295
+1742.0000003	White et al., 2004	1742						Tacuilula	13.583	-89.083					8	White et al., 2004	7.10	0.20	w				8	MM	"subduction"	8296
+1742.0627050	Tatevossian et al., 2012	1742	06	27				[Russia]	53.500	109.500					7	Tatevossian et al., 2012	7.70	0.30	s		Tatevossian et al., 2012	6	7	MSK		6901
+1742.0810000	White et al., 2004	1742	08	10				San Antonio Suchilepequez	14.500	-91.500					8	White et al., 2004	7.10	0.20	w				8	MM	"subduction"	8148
+1743.0220160	Stucchi et al., 2012	1743	02	20	16	30		Basso Ionio	39.846	18.772	57.5	83.1	bx		9	Stucchi et al., 2012	7.10	0.30	w		Boschi et al., 2000	77	9	MCS		1562
+1743.0530000	White et al., 2004	1743	05	30				Tuxtla	16.750	-92.750					8	White et al., 2004	7.80	0.40	w				8	MM	"subduction"	8871
+1746.1029030	Tavera et al., 2001	1746	10	29	03	30		[Peru]	-11.996	-77.198				30	10	Tavera et al., 2001	8.80		w		Tavera et al., 2001	21	10	MM		7951
+1747.1013000	White et al., 2004	1747	10	13				Cuyotenango	14.667	-91.500					8	White et al., 2004	7.10	0.20	w				8	MM	"subduction"	8149
+1748.0313000	White et al., 2004	1748	03	13				Olocuitla	13.667	-89.083					8	White et al., 2004	7.10	0.20	w				8	MM	"subduction"	8297
+1749.0120000	Tavera et al., 2001	1749	01	20				[Ecuador]	-4.000	-79.300					8	Tavera et al., 2001	7.40		s							7952
+1750.0000000	Benito et al., 2012	1750						Pacific Coast (subduction) 	10.900	-86.000			cat	45	8	Benito et al., 2012	7.20		w					MM		5320
+1751.0000000	Ambraseys and Jackson, 2003	1751						Guge	31.300	80.000						Ambraseys and Jackson, 2003	7.00		s							6605
+1751.0304000	White et al., 2004	1751	03	04				Compala	14.667	-90.833					8	White et al., 2004	7.30	0.10	w				8	MM	"subduction"	8150
+1751.0521020	UTSU online	1751	05	21	02			Niigata Pref., N Nagano Pref.	37.100	138.200						UTSU online	7.20		jma							1604
+1751.0525050	CERESIS, 1995	1751	05	25	05	30		[Chile]	-36.830	-73.030					11	Lomnitz, 2004	8.50		s				11			1610
+1751.0916030	Alvarez et al., 1999	1751	09	16	03	29		[Haiti]	18.600	-72.300				30		Alvarez et al., 1999	6.80		s							1614
+1751.1018200	Flores et al., 2012	1751	10	18				[Dominican Republic]	18.360	-70.840			bw			Flores et al., 2012	7.45	0.20	w	bw	Flores et al., 2012	14	8	MM		8358
+1751.1121130	Flores et al., 2012	1751	11	21				[Haiti]	18.540	-72.320			bw			Flores et al., 2012	6.60	0.20	w	bw	Flores et al., 2012	14	9	MM		8361
+1754.0615000	Stucchi et al., 2012	1754	06	15				[Corinth]	37.800	22.800	10.0	10.0	cat		8	Stucchi et al., 2012	7.00	0.50	w		University of Thessaloniki, 2003	1	8	MM		1629
+1754.0818073	Musson, 2012a	1754	08	18	07	35		Indonesia	-3.500	128.500						Musson, 2012a	7.00		w							7783
+1754.0901000	Zúñiga et al., 1997	1754	09	01				Costa de Guerrero	16.800	-100.000					11	Zúñiga et al., 1997	7.80		w				11			8886
+1754.1000000	Ambraseys et al., 1994	1754	10					Gulf of Suez ?	29.600	32.200						Ambraseys et al., 1994	6.60		s							7642
+1755.1101090	Stucchi et al., 2012	1755	11	01	09	30		Lisboa	36.500	-10.000	49.9	49.9	cat			Stucchi et al., 2012	8.50	0.30	w		Sousa Moreira, 1984	128	10	MM		1647
+1756.0213000	Stucchi et al., 2012	1756	02	13				Rhodos	36.300	27.500	10.0	10.0	cat		7	Stucchi et al., 2012	7.50	0.35	w		University of Thessaloniki, 2003	5	7	MM		1656
+1756.1103000	Musson, 2012a	1756	11	03				Indonesia	-4.500	101.400						Musson, 2012a	7.90		w							7784
+1757.1004000	White et al., 2004	1757	10	04				Alotenango	14.500	-90.750					7	White et al., 2004	6.80	0.30	w				7	MM	"subduction"	8151
+1759.1125000	Sbeinati et al., 2005	1759	11	25				[Lebanon]	33.700	35.900				30	9	Sbeinati et al., 2005	7.40		s		Sbeinati et al., 2005	24	8	EMS		1676
+1760.0711000	Alvarez et al., 1999	1760	07	11				[Cuba]	19.900	-76.000				30		Alvarez et al., 1999	6.70		s							1678
+1761.0331120	Stucchi et al., 2012	1761	03	31	12	15		SW. Cabo San Vicente	36.000	-10.500	99.9	99.9	cat			Stucchi et al., 2012	7.50	0.50	w		Instituto Geografíco Nacional, 2010	77	6-7	EMS		1681
+1762.0402170	Cummins, 2007	1762	04	02				Arakan	20.000	93.500						Cummins, 2007	8.80		w							6682
+1762.1031140	UTSU online	1762	10	31	14			Sado	38.100	138.700						UTSU online	7.00		jma							1694
+1763.0129180	UTSU online	1763	01	29	18			Aomori Pref. (Hachinohe and others)	41.000	142.500						UTSU online	7.70		jma							1695
+1763.0311120	UTSU online	1763	03	11	12			Aomori Pref. (Hachinohe)	41.000	142.000						UTSU online	7.30		jma							1696
+1763.0315140	UTSU online	1763	03	15	14			Aomori Pref. (Hachinohe)	41.000	142.000						UTSU online	7.00		jma							1697
+1763.0912090	Musson, 2012a	1763	09	12	09			Indonesia	-6.700	130.000						Musson, 2012a	7.00		w							7785
+1764.0700000	White et al., 2004	1764						Quezaltenango	14.833	-91.833						White et al., 2004	6.80	0.30	w						"subduction"	8152
+1765.0602000	Peraldo and Montero, 1999	1765	06	02				[Guatemala]	14.830	-89.500						White, 1984	6.90	0.30	w							8116
+1765.1024000	White et al., 2004	1765	10	24				Ostuncalco to Tacana	15.000	-91.917					8	White et al., 2004	7.90	0.30	w				8	MM	"subduction"	8153
+1766.0308180	UTSU online	1766	03	08	18			Aomori, Hirosaki	40.730	140.590				10		UTSU online	7.30		jma							1718
+1766.0522000	Stucchi et al., 2012	1766	05	22				Istanbul	40.837	29.463	9.5	23.2	bx		8	Stucchi et al., 2012	6.76	0.38	w		University of Thessaloniki, 2003	13	9	MM		5347
+1766.0612050	SisFrance, 2010	1766	06	11	23	57		Cuba	20.533	-76.800	20.0	20.0			8-9	Alvarez et al., 1999	7.50		s		SisFrance, 2010	11	8	MSK		8366
+1766.0805000	Stucchi et al., 2012	1766	08	05				Marmara Sea	40.665	27.108	9.8	13.3	bx		9-10	Stucchi et al., 2012	7.08	0.34	w		University of Thessaloniki, 2003	20	10	MM		1722
+1766.1021090	Mocquet, 2007	1766	10	21	04	30		Trinidad	11.000	-62.500				85	9-10	Mocquet, 2007	7.00		s		Mocquet, 2007	62	9-10	EMS		5656
+1767.1022100	Grunewald and Stein, 2006	1767	10	22				Honshu	35.130	139.050						Grunewald and Stein, 2006	7.00	0.40	jma		Usami, 1994	8		JMA		6272
+1769.0829150	UTSU online	1769	08	29	15			Oita, Miyazaki and Kumamoto Pref.	33.000	132.100						UTSU online	7.80		jma							1741
+1770.0000001	Musson, 2012a	1770						Indonesia	-5.300	102.000						Musson, 2012a	7.00		w							7786
+1770.0604000	Flores et al., 2012	1770	06	03				[Haiti]	18.500	-72.860			bw			Flores et al., 2012	7.50	0.20	w	bw	Flores et al., 2012	32	9	MM		8368
+1771.0424080	UTSU online	1771	04	24	08			Yae-yama mountain, Miyako Islands	24.000	124.300						UTSU online	7.40		jma							1755
+1772.0603100	Bozkurt et al., 2007	1772	06	03				Japan	39.500	143.500			cat			Bozkurt et al., 2007	7.50		jma		Bozkurt et al., 2007	5	4	JMA		8311
+1772.0615000	White et al., 2004	1772	06	15				S Antonio Suchitepequez	14.583	-91.500					7	White et al., 2004	7.00	0.10	w				7	MM	"subduction"	8154
+1773.0729000	White et al., 2004	1773	07	29				Antigua to L. Atitlan	14.667	-91.167					8	White et al., 2004	7.50	0.10	w				8	MM	"subduction"	8156
+1773.0907000	White et al., 2004	1773	09	07				Antigua	14.500	-90.750					7	White et al., 2004	6.80	0.30	w				7	MM	"subduction"	8157
+1773.1213000	White et al., 2004	1773	12	13				Antigua	14.583	-91.500					7	White et al., 2004	7.10	0.20	w				7	MM	"subduction"	8158
+1776.0330000	White et al., 2004	1776	03	30				Cuilapa	14.250	-90.250					7-8	White et al., 2004	7.20	0.10	w				7-8	MM	"subduction"	8159
+1776.0421000	Zúñiga et al., 1997	1776	04	21				Acapulco	16.800	-100.000					9	Zúñiga et al., 1997	7.70		w				9			8888
+1776.0530170	White et al., 2004	1776	05	30				Santa Ana and Ahuachapan provinces	13.833	-89.833					7-8	White et al., 2004	7.90	0.20	w				7-8	MM	"subduction"	8298
+1776.0706000	White et al., 2004	1776	07	06				San Salvador	13.583	-89.000					6-7	White et al., 2004	6.80	0.30	w				6-7	MM	"subduction"	8299
+1776.1115000	White et al., 2004	1776	11	15				San Salvador	13.583	-89.000					7	White et al., 2004	7.00	0.30	w				7	MM	"subduction"	8300
+1777.0330010	Musson, 2012a	1777	03	30	01			Ambon	-4.000	128.000						Musson, 2012a	7.00		w							7787
+1780.0108220	Ambraseys and Melville, 1982	1780	01	08	24			Tabriz	38.200	46.000						Ambraseys and Melville, 1982	7.70		s							5369
+1780.0119000	Shebalin and Leydecker, 1997	1780	01	19				Kuril Islands	45.800	152.000	139.0	111.0		40		Shebalin and Leydecker, 1997	7.00		s							1808
+1780.0122073	Musson, 2012a	1780	01	22	07	39		Java	-8.600	105.500						Musson, 2012a	8.50		w							7788
+1780.0531000	Usami, 1979	1780	05	31				Japan	45.300	151.200						Usami, 1979	7.00		jma							7544
+1780.0629000	Shebalin and Leydecker, 1997	1780	06	29				Kuril Islands	46.000	151.000	140.0	111.0		40		Shebalin and Leydecker, 1997	7.50		s							1811
+1782.0522160	CERESIS, 1995	1782	05	22	16			[Argentina]	-33.000	-69.200				30	8	CERESIS, 1995	7.00		s				8			1820
+1782.0823200	Grunewald and Stein, 2006	1782	08	23				[subduction]	35.400	139.100						Grunewald and Stein, 2006	7.20	0.30	jma		Usami, 1994	48		JMA		6278
+1783.0205120	Stucchi et al., 2012	1783	02	05	12			Calabria	38.297	15.970	1.2	0.9	bx		11	Stucchi et al., 2012	7.00	0.30	w		Guidoboni et al., 2007	356	11	MCS		1829
+1783.1129200	Benito et al., 2012	1783	11	29				Santiago. Nonualco	13.630	-88.780			cat	5	8	Benito et al., 2012	6.60		w					MM		5282
+1784.0513120	Tavera et al., 2001	1784	05	13	12	36		[Peru]	-16.500	-72.000				27	10	Tavera et al., 2001	8.40		w		Tavera et al., 2001	25	10	MM		7957
+1784.0723000	Ambraseys, 1997b	1784	07	18				Elmali	39.500	40.200						Ambraseys, 1997b	7.60		s							6895
+1784.0729000	SisFrance, 2010	1784	07	29	21	10		Haiti	18.800	-72.667						Tanner and Shepherd, 1997	6.75		w		SisFrance, 2010	4	8	MSK		8370
+1784.0814160	Stucchi et al., 2012	1784	08	14	16	35		NA af Þjórsárbrú	64.000	-20.500	39.9	39.9	cat	10		Stucchi et al., 2012	7.10	0.30	w							1845
+1785.0106000	Zúñiga et al., 1997	1785	01	06				[Guatemala]	15.500	-89.700				5		Zúñiga et al., 1997	7.40		w							1852
+1785.0711000	Flores et al., 2012	1785	07	11				Puerto Rico	19.210	-64.600			bw			Flores et al., 2012	6.90	0.30	w	bw	Flores et al., 2012	7	6-7	MM		8372
+1785.0712120	Dimate et al., 2005	1785	07	12	12	45		Paramo Chingaza	5.000	-73.710					9	Dimate et al., 2005	7.00		w		Dimate et al., 2005	27	9	MSK		5659
+1786.0601000	Min Ziqun, 1995	1786	06	01				S of Kangding (Sichuan)	29.900	102.000	25.0	25.0			10	Min Ziqun, 1995	7.75		s							6282
+1786.0610000	Min Ziqun, 1995	1786	06	10				Luhuo (Sichuan)	29.400	102.200	50.0	50.0				Min Ziqun, 1995	7.00		s							6283
+1787.0328000	Zúñiga et al., 1997	1787	03	28				Guerrero-Oxaca	16.000	-97.000					10	Suarez and Albini, 2009	8.60		w				10			8889
+1787.0502000	Flores et al., 2012	1787	05	02				Puerto Rico	17.330	-67.540			bw			Flores et al., 2012	6.90	0.20	w	bw	Flores et al., 2012	7	11	MM		8376
+1787.0712220	Bautista and Oike, 2000	1787	07	12	22	45		Philippines	11.050	122.250						Bautista and Oike, 2000	7.40		s							1890
+1789.0511010	UTSU online	1789	05	11	01			Tokushima, Kochi and Okayama Pref.	33.700	134.300						UTSU online	7.00		jma							1897
+1789.0529000	Ambraseys and Jackson, 1998	1789	05	28				Elazig	38.800	39.500						Ambraseys, 1989	7.00		s						"7.0 ≤ Ms < 7.8"	7695
+1789.0607000	Min Ziqun, 1995	1789	06	07				Huaning (Yunnan)	31.000	102.900	25.0	25.0			9+	Min Ziqun, 1995	7.00		s							6287
+1790.0406190	Stucchi et al., 2012	1790	04	06	19	29		[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	8	Stucchi et al., 2012	7.10	0.30	w		Shebalin (ed.), 1977	19	7	MSK		1903
+1790.1009011	Hamdache et al., 2010	1790	10	09	01	15		Algeria	35.700	-0.600					10	Hamdache et al., 2010	7.00		w							6671
+1790.1202010	Shebalin and Leydecker, 1997	1790	12	02	01			Kamchatka	54.000	162.000	154.0	111.0		20		Shebalin and Leydecker, 1997	7.50		s						Parameters characterized by large uncertainity	1905
+1792.0613160	UTSU online	1792	06	13	16			Hokkaido Shiribeshi	43.800	140.000						UTSU online	7.10		jma							1916
+1792.0809000	Min Ziqun, 1995	1792	08	09				Jiayi, Taiwan	23.600	120.600	25.0	25.0			9	Min Ziqun, 1995	7.00		s							6293
+1792.0822180	Shebalin and Leydecker, 1997	1792	08	22	18			Kamchatka	54.000	162.000	154.0	111.0		40		Shebalin and Leydecker, 1997	8.40		s							1919
+1793.0208140	UTSU online	1793	02	08	14			Aomori Pref.	40.850	139.950						UTSU online	7.00		jma							1924
+1793.0217140	UTSU online	1793	02	17	14			Miyagi, Iwate and Fukushima Pref.	38.500	144.500						UTSU online	8.20		jma							1925
+1796.0330100	CERESIS, 1995	1796	03	30	10	45		[Chile]	-27.350	-70.350					11	Lomnitz, 2004	7.50		s				11			1938
+1796.0426000	Sbeinati et al., 2005	1796	04	26				[Syria]	35.300	36.200				20	8-9	Sbeinati et al., 2005	6.80		s		Sbeinati et al., 2005	8	8	EMS		1943
+1797.0204120	Beauval et al., 2010	1797	02	04	12	45		[Ecuador]	-1.500	-78.600			bw			Beauval et al., 2010	7.60		w	bw	Beauval et al., 2010	117	11	MSK		5662
+1797.0211000	Musson, 2012a	1797	02	10	15			Indonesia	-2.000	99.000						Musson, 2012a	8.00		w							7789
+1799.0827000	Min Ziqun, 1995	1799	08	27				Shiping and Baoxiu (Yunnan)	23.800	102.400	10.0	10.0			9	Min Ziqun, 1995	7.00		s							6300
+1802.1025000	Tanner and Shepherd, 1997	1802	10	25				[Panamá]	7.500	-80.400				10	7	Tanner and Shepherd, 1997	6.70		w							1974
+1802.1026100	Stucchi et al., 2012	1802	10	26	10	55		[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	10	Stucchi et al., 2012	7.90	0.30	w		Tatevossian and Mokrushina, 1998	81	9	MSK		1975
+1803.0901010	Ambraseys and Douglas, 2004	1803	09	01	01	30		Uttar.Pradesh	31.500	79.000						Ambraseys and Douglas, 2004	7.40		w		Ambraseys and Douglas, 2004	33	8-9	MSK		1983
+1803.1207000	Benito et al., 2012	1803	12	07				Golfito (Subduction)	8.500	-83.000			cat	30	8	Benito et al., 2012	7.10		w					MM		5222
+1804.0000000	White et al., 2004	1804						las Casas	16.500	-92.667					7	White et al., 2004	6.80	0.30	w				7	MM	"subduction"	8872
+1804.0710220	UTSU online	1804	07	10	22			Yamagata and Akita Pref.	39.050	139.950						UTSU online	7.00		jma							1992
+1805.0616080	Dimate et al., 2005	1805	06	16				Honda (Tolima)	5.220	-74.750					9	Dimate et al., 2005	6.75		w							7962
+1806.0325000	Torres-Vera, 2010	1806	03	25				Colima	20.215	-103.410			bx			Torres-Vera, 2010	7.60		s		Torres-Vera, 2010	9	10	MM		8913
+1806.0611000	Min Ziqun, 1995	1806	06	11				NW of Cuona, Xizang  (Tibet)	28.200	91.800	100.0	100.0			10	Min Ziqun, 1995	7.50		s		Min Ziqun, 1995		9			6304
+1810.0216220	Stucchi et al., 2012	1810	02	16	22	15		Heraklio	35.500	25.600	10.0	10.0	cat	90	9	Stucchi et al., 2012	7.50	0.50	w		University of Thessaloniki, 2003	2	9	MM		2051
+1811.0318000	Min Ziqun, 1995	1811	03	18				W coast of Xinzhu, Taiwan	24.800	120.800	100.0	100.0				Min Ziqun, 1995	6.75		s							6567
+1811.1216000	CEUS, 2012	1811	12	16	08	15		[United States]	36.000	-89.960			cat			CEUS, 2012	7.60		w							8481
+1811.1216001	CEUS, 2012	1811	12	16	14	15		[United States]	36.000	-90.000			cat			CEUS, 2012	7.17		w							8484
+1812.0123000	CEUS, 2012	1812	01	23	15			[United States]	36.800	-89.500			cat			CEUS, 2012	7.50		w							8485
+1812.0207000	CEUS, 2012	1812	02	07	09	45		[United States]	36.300	-89.400			cat			CEUS, 2012	7.80		w							8486
+1812.0308000	Min Ziqun, 1995	1812	03	08				East of Nileke (Xinjiang)	43.700	83.500	50.0	50.0			11	Min Ziqun, 1995	8.00		s							6314
+1812.0326200	Choy et al., 2010	1812	03	26	20	07		Barquisimeto-San Felipe	10.200	-68.950					9-10	Choy et al., 2010	7.40		w		Choy et al., 2010	23	9-10	MM		5664
+1812.0326202	Choy et al., 2010	1812	03	26	20	07		Caracas	10.600	-67.100					9-10	Choy et al., 2010	7.10		w		Choy et al., 2010	33	9-10	MM		5663
+1812.0421200	Grunewald and Stein, 2006	1812	04	21				[subduction]	35.390	139.620						Grunewald and Stein, 2006	7.10	0.30	jma		Usami, 1994	23		JMA		6315
+1812.1208000	Felzer and Cao, 2008	1812	12	08	15			[United States]	34.370	-117.650						Felzer and Cao, 2008	7.50		w							5667
+1812.1221000	Felzer and Cao, 2008	1812	12	21	19			[United States]	34.200	-119.800						Felzer and Cao, 2008	7.10		w							5668
+1815.0800000	Peraldo and Montero, 1999	1815	08	20				[El Salvador]	12.750	-89.000					8	Peraldo and Montero, 1999	7.20		s							8277
+1815.1023000	Min Ziqun, 1995	1815	10	23				Pinglu (Shanxi)	34.800	111.200	25.0	25.0			9	Min Ziqun, 1995	6.75		s							6572
+1815.1122150	Musson, 2012a	1815	11	22	15			Indonesia	-8.000	115.000						Musson, 2012a	7.00		w							7790
+1816.0202000	Stucchi et al., 2012	1816	02	02	00	40		Offshore Portugal	37.000	-15.000	99.9	99.9	cat			Stucchi et al., 2012	7.00	0.50	w							2130
+1816.0723000	Zúñiga et al., 1997	1816	07	23	00	30		[Guatemala]	15.350	-91.250				10		Zúñiga et al., 1997	7.70		w							2136
+1816.1014000	Musson, 2012a	1816	10	14				Banda	-4.600	130.400						Musson, 2012a	7.00		w							7791
+1816.1208000	Min Ziqun, 1995	1816	12	08				Luhuo (Sichuan)	31.400	100.700	25.0	25.0			10	Min Ziqun, 1995	7.50		s							6318
+1817.0704000	INPRES, 2012	1817	07	04	17	30		[Argentina]	-28.000	-64.500				30	8	INPRES, 2012	7.00		s							7964
+1818.0318000	Musson, 2012a	1818	03	18				Indonesia	-4.900	101.600						Musson, 2012a	7.50		w							7792
+1818.0531000	Zúñiga et al., 1997	1818	05	31				Jalisco-Colima	19.000	-105.000					10	Zúñiga et al., 1997	8.20		w				10			8890
+1818.1108151	Musson, 2012a	1818	11	08	15	15		Indonesia	-7.000	117.000						Musson, 2012a	8.50		w							7793
+1819.0411150	CERESIS, 1995	1819	04	11	15			[Chile]	-27.350	-70.350					10	Lomnitz, 2004	8.50		s				10			2159
+1819.0616190	Ambraseys and Douglas, 2004	1819	06	16	19			Cutchch	23.000	69.000						Ambraseys and Douglas, 2004	8.10		w		Ambraseys and Douglas, 2004	30	9	MSK		2166
+1819.0802140	UTSU online	1819	08	02	14			Shiga Pref. and surrounding	35.200	136.300						UTSU online	7.30		jma							2168
+1820.0000000	Ambraseys and Adams, 1986b	1820						Off Congo	-4.500	11.600					4	Ambraseys and Adams, 1986b	6.20		s							6919
+1820.0504000	Zúñiga et al., 1997	1820	05	04				Costa de Guerrero	16.500	-99.000					9	Zúñiga et al., 1997	7.80		w				9			8891
+1820.1019000	Benito et al., 2012	1820	10	19				San Pedro Sula	14.980	-88.000			cat		8	Benito et al., 2012	6.50		w					MM	"crustal"	5309
+1820.1229010	Musson, 2012a	1820	12	29	01			Indonesia	-7.000	119.000						Musson, 2012a	7.50		w							7794
+1822.0403000	Szeliga et al., 2010	1822	04	03				Bengal	24.320	90.720			bw	15		Szeliga et al., 2010	7.10		w							6613
+1822.0507060	Benito et al., 2012	1822	05	07				Limon (San Estanislao Eq.)	9.630	-83.150			cat	20	9	Benito et al., 2012	7.60		w					MM		5223
+1822.0813000	Ambraseys, 1989	1822	08	13	20	40		Aafrine	36.700	36.900	40.0	40.0				Ambraseys, 1989	7.40		s						"M = 7.4+"	6891
+1822.1120020	CERESIS, 1995	1822	11	20	02	30		[Chile]	-33.050	-71.630					11	Lomnitz, 2004	8.25	0.25	s				11			2214
+1823.0209000	Szeliga et al., 2010	1823	02	09				North Indian Ocean	7.620	84.690			bw	15		Szeliga et al., 2010	7.90		w							6614
+1823.0602080	Stover and Coffman, 1993	1823	06		08	00		Kaimu	19.250	-155.000					9	Wyss and Koyanagi, 1992	7.20		s				9	MM		8524
+1824.1026000	Bautista and Oike, 2000	1824	10	26				Philippines	14.200	121.900						Bautista and Oike, 2000	7.40		s							2238
+1825.0302070	Hamdache et al., 2010	1825	03	02	07			Algeria	36.500	2.900					10	Hamdache et al., 2010	7.00		w							6672
+1826.0101000	Musson, 2012c	1826						Milford Sound	-44.700	167.400						Musson, 2012c	8.00		w							8325
+1826.0403000	Benito et al., 2012	1826	04	03				Nicoya Peninsula	10.000	-85.500			cat	45	8	Benito et al., 2012	7.10		w					MM		5224
+1827.0901060	Peraldo and Montero, 1999	1827	09	01				[Guatemala]	13.750	-91.460					7	Peraldo and Montero, 1999	7.00		s							8117
+1827.1116230	Dimate et al., 2005	1827	11	16	23			Timana (Huila)	1.900	-75.900					9	Dimate et al., 2005	7.75		w							7970
+1828.0607060	Zhang et al., 1999	1828	06	07	06			Pakistan	35.000	77.000			cat			Zhang et al., 1999	7.40		w							2298
+1829.0307220	Tatevossian et al., 2012	1829	03	08				[Russia]	51.700	101.000					9-10	Tatevossian et al., 2012	6.90	0.20	s		Tatevossian et al., 2012	9	9-10	MSK		5371
+1829.0926140	CERESIS, 1995	1829	09	26	14	30		[Chile]	-33.050	-71.630					11	Lomnitz, 2004	7.00		s				11			2331
+1829.1126010	Stucchi et al., 2012	1829	11	26	01	40		[Vrancea deep]	45.800	26.600	29.9	29.9	cat	150	8-9	Stucchi et al., 2012	7.30	0.30	w		Shebalin (ed.), 1977	30	7-8	MSK		2335
+1829.1217000	White et al., 2004	1829	12	17				Chiquimutilla	14.167	-90.250					7	White et al., 2004	7.10	0.10	w				7	MM	"subduction"	8160
+1830.0327120	Ambraseys and Melville, 1982	1830	03	27	12			Damavand-Shamiranat	35.700	52.500						Ambraseys and Melville, 1982	7.10		s							6864
+1830.0328010	Musson, 2012a	1830	03	28	01			Ambon	-4.050	128.000						Musson, 2012a	7.00		w							7795
+1830.0612000	Min Ziqun, 1995	1830	06	12				Cixian (Hebei)	36.400	114.300	25.0	25.0			10	Min Ziqun, 1995	7.50		s		Min Ziqun, 1995		10			6334
+1831.0207000	White et al., 2004	1831	02	07				Jalpatagua	13.833	-89.583					7	White et al., 2004	7.10	0.20	w				7	MM	"subduction"	8301
+1832.0122000	Ambraseys and Bilham, 2003	1832	01	22				Badakhshan	36.500	71.000						Ambraseys and Bilham, 2003	7.30		w							2376
+1833.0826170	Min Ziqun, 1995	1833	08	26				Nyalam, Xizang (Tibet)	28.300	85.500	50.0	50.0			11	Min Ziqun, 1995	8.00		s						"Io ≥ X"	6576
+1833.0906000	Min Ziqun, 1995	1833	09	06				Songming and Yanglin (Yunnan)	25.000	103.000	25.0	25.0			10	Min Ziqun, 1995	8.00		s		Min Ziqun, 1995		10			6338
+1833.0918100	Tavera et al., 2001	1833	09	18	10	45		[Peru]	-18.251	-71.010				60	7	Tavera et al., 2001	7.20		w		Tavera et al., 2001	14	7	MM		7974
+1833.1002000	Benito et al., 2012	1833	10	02				Nicoya Peninsula 	10.000	-85.500			cat	45	8	Benito et al., 2012	7.00		w					MM		5225
+1833.1124000	Musson, 2012a	1833	11	24	13	30		Indonesia	-3.500	100.000						Musson, 2012a	9.00		w							7796
+1833.1207150	UTSU online	1833	12	07	15			Yamagata and Akita Pref., Sado	38.900	139.250						UTSU online	7.70		jma							2407
+1834.0120120	Beauval et al., 2013	1834	01	20				Carchi/Nariño	1.120	-77.000						Beauval et al., 2013	7.40	0.20	w	bw					"Mw: 7.2–7.6"	8967
+1834.1009223	Musson, 2012a	1834	10	09	22	30		Indonesia	-6.900	107.000						Musson, 2012a	7.00		w							7797
+1835.0220150	CERESIS, 1995	1835	02	20	15	30		[Chile]	-36.830	-73.030					11	Lomnitz, 2004	8.25	0.25	s				11			2429
+1835.0720140	UTSU online	1835	07	20	14			Sendai	38.500	142.500						UTSU online	7.00		jma							2438
+1835.1031190	Musson, 2012a	1835	10	31	19			Indonesia	-3.400	128.100						Musson, 2012a	7.00		w							7798
+1836.1128023	Musson, 2012a	1836	11	28	02	30		Indonesia	-8.300	118.700						Musson, 2012a	7.50		w							7799
+1837.0101000	Ambraseys, 2006	1837	01	01				Dead Sea	33.300	35.500						Ambraseys, 2006	7.00		s							7651
+1837.0929071	Musson, 2012a	1837	09	29	07	15		Indonesia	5.000	94.500						Musson, 2012a	7.30		w							7800
+1837.1107110	CERESIS, 1995	1837	11	07	11	30		[Chile]	-39.800	-73.200					10	Lomnitz, 2004	8.00		s				10			2460
+1837.1123000	Zúñiga et al., 1997	1837	11	23				Oaxaca-sur de Guerrero	16.000	-98.000						Zúñiga et al., 1997	7.70		w							8892
+1838.0000000	Ambraseys and Bilham, 2003	1838						Nasratabad-I	29.600	59.900						Ambraseys and Bilham, 2003	6.90		w							2474
+1838.0000020	Musson, 2012c	1838						Utapu	-39.400	175.000						Musson, 2012c	7.00		w							8326
+1838.0123180	Stucchi et al., 2012	1838	01	23	18	36		[Vrancea deep]	45.700	26.600	29.9	29.9	cat	150	9	Stucchi et al., 2012	7.50	0.30	w		Shebalin (ed.), 1977	40	8-9	MSK		2478
+1838.0600000	Bakun, 1999	1838	06					[United States]	37.270	-122.230			bw			Bakun, 1999	6.80	0.50	w	bw						8479
+1839.0111090	SisFrance, 2010	1839	01	11	05	55		Sud-Est Martinique	14.500	-60.500	50.0	50.0			9	Dorel, 1981	7.80		s		SisFrance, 2010	45	9	MSK		8394
+1839.0323000	Zhang et al., 1999	1839	03	23				Myanmar	21.900	96.000			cat			Zhang et al., 1999	8.00		w							2491
+1839.0501000	UTSU online	1839	05	01	14			Kushiro (Akke)	42.500	145.000						UTSU online	7.30		jma							2495
+1840.0104061	Musson, 2012a	1840	01	04	06	15		Indonesia	-8.000	110.500						Musson, 2012a	7.00		w							7801
+1840.0213163	Musson, 2012a	1840	02	13	16	30		Indonesia	0.800	127.330						Musson, 2012a	7.00		w							7802
+1840.0218000	Benito et al., 2012	1840	02	18				West of Nicoya Peninsula	10.500	-86.000			cat	35	8	Benito et al., 2012	7.10		w					MM		5226
+1840.0702160	Shebalin and Tatevossian, 1997	1840	07	02	16			Turkey	39.600	44.100	66.0	56.0		24	9-10	Shebalin and Tatevossian, 1997	7.40		s		Shebalin and Tatevossian, 1997	25		MSK		6803
+1841.0517210	Shebalin and Leydecker, 1997	1841	05	17	21			Kamchatka	52.500	159.500	151.0	111.0		30		Shebalin and Leydecker, 1997	8.40		s							2525
+1842.0219110	Ambraseys and Douglas, 2004	1842	02	19	11	20		Kunar	34.700	71.000						Ambraseys and Douglas, 2004	7.60		w		Ambraseys and Douglas, 2004	29	8-9	MSK		2539
+1842.0507220	SisFrance, 2010	1842	05	07	17	14		Ile De La Tortue, Haiti	20.100	-72.817	20.0	20.0			9-10	Flores et al., 2012	7.60	0.20	w	bw	SisFrance, 2010	42	9-10	MSK		8399
+1842.0611000	Min Ziqun, 1995	1842	06	11				Close to Barkol (Xinjiang)	43.500	93.100	50.0	50.0			9	Min Ziqun, 1995	7.00		s							6347
+1842.0916040	Ambraseys and Douglas, 2004	1842	09	16	04	30		Zongguo	32.100	98.600						Ambraseys and Douglas, 2004	7.30		w							2548
+1842.1111210	Ambraseys and Douglas, 2004	1842	11	11	21	38		Bangla	24.000	90.000						Ambraseys and Douglas, 2004	6.70		w							2554
+1843.0105213	Musson, 2012a	1843	01	05	21	30		Indonesia	1.200	97.800						Musson, 2012a	7.50		w							7803
+1843.0208000	Flores et al., 2012	1843	02	08				Lesser Antilles	16.340	-61.490			bw			Flores et al., 2012	7.80	0.20	w	bw	Flores et al., 2012	42	9	MM	"subduction"	8403
+1843.0425000	Shebalin and Leydecker, 1997	1843	04	25				Kuril Islands	44.700	149.700	138.0	111.0		40		Shebalin and Leydecker, 1997	8.20		s							2571
+1843.0708050	Musson, 2012c	1843	07	08	04	45		Wanganui	-39.600	176.200						Musson, 2012c	7.60		w							8327
+1844.0000002	Benito et al., 2012	1844	05					Intraplate	11.200	-84.800			cat	130	8	Benito et al., 2012	7.10		w					MM		5321
+1844.0416000	SisFrance, 2010	1844	04	16	09	20		Nord Porto-Rico	18.800	-66.600					8	Tanner and Shepherd, 1997	6.57		w		SisFrance, 2010	6	7	MSK		8405
+1844.0830070	SisFrance, 2010	1844	08	30	03	10		E. Grenada	12.083	-60.717	20.0	20.0			7	Dorel, 1981	7.00		s		SisFrance, 2010	14	6-7	MSK	"subduction"	8407
+1844.0918230	CERESIS, 1995	1844	09	18	23			[Argentina]	-24.800	-64.700				30	7	CERESIS, 1995	6.50		s				7			2599
+1845.0207193	Musson, 2012a	1845	02	07	19	30		Indonesia	2.600	122.600						Musson, 2012a	7.00		w							7804
+1845.0212000	Gouin, 1979	1845	02	12				Wollo	12.500	39.000						Gouin, 1979	6.50		m							6927
+1845.0407000	Zúñiga et al., 1997	1845	04	07				Costa de Guerrero	16.800	-100.000					10	Zúñiga et al., 1997	8.30		w				10			8893
+1845.0806000	Szeliga et al., 2010	1845	08	06				North East	26.090	90.890			bw	15		Szeliga et al., 2010	7.10		w							6628
+1846.0125010	Musson, 2012a	1846	01	25	01			Indonesia	1.400	127.200						Musson, 2012a	7.20		w							7805
+1846.0328170	Stucchi et al., 2012	1846	03	28	17			Heraklio	35.800	25.000	10.0	10.0	cat	90	7	Stucchi et al., 2012	7.20	0.50	w		University of Thessaloniki, 2003	1	7	MM		2632
+1846.0804000	Min Ziqun, 1995	1846	08	04				Huanghai (Yellow Sea)	33.500	122.000	100.0	100.0				Min Ziqun, 1995	7.00		s							6358
+1847.0508210	UTSU online	1847	05	08	21			Japan	36.700	138.200						UTSU online	7.40		jma							2660
+1847.0621000	Shebalin and Leydecker, 1997	1847	06	21				Kuril Islands	46.000	152.000	140.0	111.0		40		Shebalin and Leydecker, 1997	7.50		s							2663
+1847.1008150	CERESIS, 1995	1847	10	08	15	30		[Chile]	-31.610	-71.180					8	Lomnitz, 2004	7.00		s				8			2667
+1847.1031000	Musson, 2012a	1847	10	31	08	30		Nicobar	6.900	93.000						Musson, 2012a	7.50		w							7806
+1847.1116031	Musson, 2012a	1847	11	16	03	18		Indonesia	-6.900	108.300						Musson, 2012a	7.00		w							7807
+1848.1016020	Musson, 2012c	1848	10	15	14	10		Marlborough	-41.800	173.700						Musson, 2012c	7.50		w							8328
+1848.1203000	Min Ziqun, 1995	1848	12	03				Zhanghua, Taiwan	24.100	120.500	50.0	50.0			9	Min Ziqun, 1995	6.75		s							6582
+1849.0125051	Musson, 2012c	1849	01	25	05	10		Guam	14.000	143.000						Musson, 2012c	7.50		w							8333
+1849.1027000	Benito et al., 2012	1849	10	27				Esteli	13.000	-86.800			cat	60	9	Benito et al., 2012	7.40		w					MM		5322
+1849.1028090	Shebalin and Leydecker, 1997	1849	10	28	09			Kamchatka	55.000	166.000	156.0	111.0		20		Shebalin and Leydecker, 1997	7.50		s							2697
+1849.1217100	CERESIS, 1995	1849	12	17	10			[Chile]	-29.950	-71.370					8	Lomnitz, 2004	7.50		s				8			2703
+1850.0100000	Ambraseys and Adams, 1986a	1850	01					Sudan	4.200	31.600					9	Ambraseys and Adams, 1986a	6.00		s						"Ms = approximate value"	6925
+1850.0912000	Min Ziqun, 1995	1850	09	12				Around Xichang and Puge (Sichuan)	27.700	102.400	25.0	25.0			10	Min Ziqun, 1995	7.50		s		Min Ziqun, 1995		10			6362
+1850.1206100	CERESIS, 1995	1850	12	06	10	52		[Chile]	-33.810	-70.220					8	Lomnitz, 2004	7.25	0.25	s				8			2720
+1851.0402100	CERESIS, 1995	1851	04	02	10	48		[Chile]	-33.320	-71.420					8	Lomnitz, 2004	7.50		s				8			2728
+1851.0526130	CERESIS, 1995	1851	05	26	17	10		[Chile]	-27.350	-70.350					10	Lomnitz, 2004	7.50		s				10			8024
+1852.0101000	Felzer and Cao, 2008	1852	01	01				[United States]	39.500	-119.500				0		Felzer and Cao, 2008	7.30	0.33	w							5671
+1852.0109110	Musson, 2012a	1852	01	09	11	09		Indonesia	-6.500	105.500						Musson, 2012a	7.00		w							7808
+1852.0707120	SisFrance, 2010	1852	07	07	06	30		Nord Jamaique	19.383	-78.517					7-8	Alvarez et al., 1999	7.50		s		SisFrance, 2010	12	5-6	MSK		8409
+1852.0820140	SisFrance, 2010	1852	08	20	08	36		Santiago de Cuba	19.650	-76.150					8	Alvarez et al., 1999	7.30		s		SisFrance, 2010	4	7	MSK		8411
+1852.0916100	Bautista and Oike, 2000	1852	09	16	10	30		Philippines	14.300	120.050						Bautista and Oike, 2000	7.60		s							2765
+1852.1111000	Musson, 2012a	1852	11	11				Indonesia	1.100	97.700						Musson, 2012a	7.30		w							7809
+1852.1125235	Musson, 2012a	1852	11	25	23	50		Indonesia	-4.300	129.500						Musson, 2012a	8.30		w							7810
+1852.1126080	SisFrance, 2010	1852	11	26	15	15		Cuba et Jamaique	19.833	-75.833					8-9	Alvarez et al., 1999	6.50		s		SisFrance, 2010	9	8	MSK		8413
+1852.1216000	Min Ziqun, 1995	1852	12	16				Yellow Sea	34.500	121.500	150.0	150.0				Min Ziqun, 1995	6.50		s						"M ≥ 6 1/2"	6585
+1852.1224061	Musson, 2012a	1852	12	24	06	15		Indonesia	-5.000	130.500						Musson, 2012a	7.00		w							7811
+1853.0208200	White et al., 2004	1853	02	09				Quezaltenango	14.833	-91.500					6-7	White et al., 2004	6.80	0.30	w				6-7	MM	"subduction"	8161
+1853.0311100	Grunewald and Stein, 2006	1853	03	11				[subduction]	35.310	139.150						Grunewald and Stein, 2006	7.00	0.30	jma		Usami, 1994	59		JMA		6365
+1853.0414000	Min Ziqun, 1995	1853	04	14				Yellow Sea	33.500	121.500	150.0	150.0				Min Ziqun, 1995	6.50		s						"M ≥ 6 1/2"	6587
+1853.0715000	CERESIS, 1995	1853	07	15				[Venezuela]	12.100	-63.600				14	9	CERESIS, 1995	6.70		s				9			2791
+1853.0908000	Benito et al., 2012	1853	09	08				West of Nicoya Peninsula	10.000	-85.500			cat	40	8	Benito et al., 2012	7.10		w					MM		5231
+1853.1100000	Shebalin and Leydecker, 1997	1853	11					Kuril Islands	47.000	154.000	141.0	111.0		40		Shebalin and Leydecker, 1997	7.00		s							2797
+1854.0215030	Gouin, 1979	1854	02	15	03			Near Guf Guf Graben	12.800	39.000						Gouin, 1979	6.30		m							6928
+1854.0416210	Benito et al., 2012	1854	04	16				Ilopango	13.680	-89.140			cat	5	8	Benito et al., 2012	6.60		w					MM		5286
+1854.0627000	Shebalin and Leydecker, 1997	1854	06	27				Kuril Islands	50.500	158.000	147.0	111.0		40		Shebalin and Leydecker, 1997	7.00		s							2811
+1854.0709020	UTSU online	1854	07	09	02			Iga, Ise, Yamato	34.750	136.000						UTSU online	7.30		jma							2812
+1854.0805050	Benito et al., 2012	1854	08	05				Golfito (Subduction)	8.500	-83.000			cat	33	8	Benito et al., 2012	7.00		w					MM		5232
+1854.1223090	UTSU online	1854	12	23	09			Tokai and Nankai do	34.000	137.800						UTSU online	8.40		jma							2823
+1854.1224160	UTSU online	1854	12	24	16			Kinai , Nankaido	33.000	135.000						UTSU online	8.40		jma							2824
+1854.1226100	UTSU online	1854	12	26	10			W side of Iyo , Bungo	33.300	132.000						UTSU online	7.40		jma							2826
+1855.0123090	GeoNet, 2011	1855	01	23	09	32		Wairarapa	-41.200	175.200				33	10	GeoNet, 2011	8.20		w		GeoNet, 2011	40	9-10	MM		2829
+1855.0228010	Stucchi et al., 2012	1855	02	28	01	30		Proussa	40.183	29.067	20.0	20.0	bx		9-10	Stucchi et al., 2012	7.02	0.64	w		University of Thessaloniki, 2003	6	10	MM		2833
+1855.0311185	Ambraseys and Adams, 1986b	1855	03	11	18	55		Atlantic	2.000	-17.500					4	Ambraseys and Adams, 1986b	6.50		s							6920
+1855.0425000	Musson, 2012a	1855	04	25				Ternate	0.800	127.800						Musson, 2012a	7.00		w							7812
+1855.0714080	Musson, 2012a	1855	07	14	08			Indonesia	0.700	127.700						Musson, 2012a	7.00		w							7813
+1855.0913000	UTSU online	1855	09	13				Rikuzen	38.100	142.000						UTSU online	7.30		jma							2836
+1855.0925000	Benito et al., 2012	1855	09	25				Roatan	16.020	-86.000			cat		8	Benito et al., 2012	6.50		w					MM	"crustal"	5311
+1855.1107180	UTSU online	1855	11	07	18			Owari, Toutoumi	34.500	137.750						UTSU online	7.30		jma							2839
+1855.1111220	Grunewald and Stein, 2006	1855	11	11				[subduction]	35.500	139.800						Grunewald and Stein, 2006	7.40	0.20	jma		Usami, 1994	191		JMA		6376
+1856.0804220	Benito et al., 2012	1856	08	04				Gulf of  Honduras	16.750	-86.750			cat	5	8	Benito et al., 2012	7.00		w					MM		5312
+1856.0823120	UTSU online	1856	08	23	12			Sanriku, Masaki	41.000	142.300						UTSU online	7.70		jma							2857
+1856.1012020	Stucchi et al., 2012	1856	10	12	02	45		Heraklio	35.600	25.800	10.0	10.0	cat		9	Stucchi et al., 2012	7.70	0.50	w							2862
+1857.0109000	Felzer and Cao, 2008	1857	01	09	16	24		[United States]	36.200	-120.800				0		Felzer and Cao, 2008	7.90	0.15	w							5673
+1857.0513023	Musson, 2012a	1857	05	13	02	30		Indonesia	-8.000	115.500						Musson, 2012a	7.00		w							7814
+1857.1012080	UTSU online	1857	10	12	08			Iyo, Aki	34.000	132.500						UTSU online	7.30		jma							2888
+1857.1216210	Stucchi et al., 2012	1857	12	16	21	15		Basilicata	40.352	15.842	4.7	6.8	bx		11	Stucchi et al., 2012	7.02	0.30	w		Guidoboni et al., 2007	340	11	MCS		2890
+1858.0409020	UTSU online	1858	04	09	02			Hida, Ecchu, Kaga	36.400	137.200						UTSU online	7.10		jma							2901
+1858.0619000	Zúñiga et al., 1997	1858	06	19				Region central de Michoacan	19.000	-103.000					10	Zúñiga et al., 1997	7.50		w				10			8894
+1858.0708200	UTSU online	1858	07	08	20			Aomori, Hachinohe	40.700	142.000						UTSU online	7.30		jma							2910
+1858.0824150	Ambraseys and Douglas, 2004	1858	08	24	15	30		Arracan	19.100	95.100						Ambraseys and Douglas, 2004	7.60		w		Ambraseys and Douglas, 2004	25	8	MSK		2915
+1858.1113080	Musson, 2012a	1858	11	13	08			Indonesia	1.000	126.000						Musson, 2012a	7.40		w							7815
+1859.0322130	Beauval et al., 2010	1859	03	22				Quito	0.020	-78.750			bw		8	Beauval et al., 2010	7.20		w	bw	Beauval et al., 2010	30	8	MSK		2931
+1859.0628123	Musson, 2012a	1859	06	28	12	30		Indonesia	1.000	126.500						Musson, 2012a	7.00		w							7816
+1859.0729053	Musson, 2012a	1859	07	29	05	30		Indonesia	0.000	125.500						Musson, 2012a	7.20		w							7817
+1859.0825000	White et al., 2004	1859	08	25				La Union	13.250	-87.750					7	White et al., 2004	7.10	0.10	w				7	MM	"subduction"	8302
+1859.1005120	CERESIS, 1995	1859	10	05	12			[Chile]	-27.350	-70.350					10	Lomnitz, 2004	7.50		s				10			2951
+1859.1208000	White et al., 2004	1859	12	08				Ahuachapan and Santa Ana provinces	13.833	-89.000					8	White et al., 2004	7.30	0.30	w				8	MM	"subduction"	8303
+1860.0119000	White et al., 2004	1860	01	19				San Jose Oblspo	14.667	-90.750					8	White et al., 2004	7.10	0.10	w				8	MM	"subduction"	8162
+1860.1023000	SisFrance, 2010	1860	10	23				Mayaguez, Porto-Rico	18.217	-67.150					6-7	Tanner and Shepherd, 1997	6.57		w		SisFrance, 2010	1	6-7	MSK		8421
+1860.1203000	White et al., 2004	1860	12	03				Talnique to Cuscatancingo	13.750	-89.250					8	White et al., 2004	7.10	0.10	w				8	MM	"subduction"	8304
+1861.0216000	Musson, 2012a	1861	02	16	12	10		Indonesia	0.900	97.400						Musson, 2012a	8.50		w							7818
+1861.0309130	Musson, 2012a	1861	03	09	13			Indonesia	-1.200	98.300						Musson, 2012a	7.00		w							7819
+1861.0320230	CERESIS, 1995	1861	03	20	23			[Argentina]	-32.900	-68.900				30	9	CERESIS, 1995	7.00		s				9			2990
+1861.0407092	Musson, 2012a	1861	04	07	09	20		Indonesia	-1.300	98.300						Musson, 2012a	7.00		w							7820
+1861.0425230	Musson, 2012a	1861	04	25	23			Indonesia	0.000	97.500						Musson, 2012a	7.50		w							7821
+1861.0823000	White et al., 2004	1861	08	23				Jalpatagua	14.083	-90.000					7	White et al., 2004	6.70	0.40	w				7	MM	"subduction"	8305
+1861.0925063	Musson, 2012a	1861	09	25	06	30		Indonesia	-0.900	98.000						Musson, 2012a	7.00		w							7822
+1861.1021040	UTSU online	1861	10	21	04			Rikuzen	38.500	142.000						UTSU online	7.30		jma							3015
+1862.0112070	Shebalin and Leydecker, 1997	1862	01	12	07	19		Baikal	52.300	106.700	75.0	56.0		40		Shebalin and Leydecker, 1997	7.50		s							3030
+1862.0621050	Stucchi et al., 2012	1862	06	21	05	30		Melos	36.900	24.400	10.0	10.0	cat	150	8	Stucchi et al., 2012	7.00	0.50	w		University of Thessaloniki, 2003	1	8	MM		3039
+1862.0710081	Musson, 2012	1862	07	10	08	15		Accra	5.500	-0.250						Musson, 2012	6.80		w							6686
+1862.1219000	White et al., 2004	1862	12	19				Santa Ana	13.833	-89.583					8	White et al., 2004	8.10	0.10	w				8	MM	"subduction"	8306
+1863.0223000	Musson, 2012c	1863	02	22	13	05		Hawke's Bay	-40.000	176.500						Musson, 2012c	7.50		w							8330
+1863.0422210	Stucchi et al., 2012	1863	04	22	21	30		Rhodos	36.400	27.600	10.0	10.0	cat	90	10	Stucchi et al., 2012	7.50	0.30	w		University of Thessaloniki, 2003	22	10	MM		3065
+1863.0817000	Musson, 2012c	1863	08	17				Vanuatu	-19.000	168.500						Musson, 2012c	7.50		w							8548
+1863.1209000	Benito et al., 2012	1863	12	09				Nicoya coast	10.000	-85.500			cat	40	8-9	Benito et al., 2012	7.30		w					MM		5233
+1864.0522163	Musson, 2012a	1864	05	22	16	30		Indonesia	-3.000	135.000						Musson, 2012a	7.80		w							7823
+1864.0614000	Stucchi et al., 2012	1864	06	14				Genisea	40.580	25.401	50.0	50.0	bw			Stucchi et al., 2012	7.11	0.30	w		University of Thessaloniki, 2003	5	7	MM		3093
+1864.1003000	Zúñiga et al., 1997	1864	10	03				Puebla-Veracruz	19.000	-97.000					9	Zúñiga et al., 1997	7.40		w				9			8895
+1865.0000000	Benito et al., 2012	1865	12					SW Coast .	12.000	-86.000			cat	10	8	Benito et al., 2012	7.30		w					MM		5323
+1865.0716192	Musson, 2012a	1865	07	16	19	27		Indonesia	-7.000	110.300						Musson, 2012a	7.00		w							7824
+1865.1118000	Musson, 2012c	1865	11	18				Tonga	-19.500	-173.500						Musson, 2012c	8.00		w							8549
+1865.1219190	Szeliga et al., 2010	1865	12	15				Chittagong	22.300	91.050			bw	15		Szeliga et al., 2010	6.80		w							6639
+1866.0512000	Ambraseys, 1997b	1866	05	12	18			Gonek	39.200	41.000						Ambraseys, 1997b	7.20		s							5375
+1866.0523200	Szeliga et al., 2010	1866	05	23				Nepal	27.120	85.260			bw	15		Szeliga et al., 2010	7.40		w							6641
+1866.0906000	Shebalin and Leydecker, 1997	1866	09	06				Kamchatka	52.500	159.500	151.0	111.0		30		Shebalin and Leydecker, 1997	7.00		s							3155
+1867.0102070	Hamdache et al., 2010	1867	01	02	07	13	56.00	Algeria	36.466	2.833					10-11	Hamdache et al., 2010	7.30		w							6673
+1867.0204040	Stucchi et al., 2012	1867	02	04	04	19		Lixouri	38.233	20.424	1.8	2.2	bx		10	Stucchi et al., 2012	7.15	0.35	w		University of Thessaloniki, 2003	13	10	MM		3165
+1867.0609211	Musson, 2012a	1867	06	09	21	15		Indonesia	-8.700	111.600						Musson, 2012a	8.00		w							7825
+1867.0630000	White et al., 2004	1867	06	30				San Salvador and Cuscatlan provinces	13.667	-89.083					7	White et al., 2004	7.10	0.10	w				7	MM	"subduction"	8307
+1867.1114000	Benito et al., 2012	1867	11	14				Central Pacific Coast	12.480	-86.680			cat	3	8	Benito et al., 2012	7.30		w					MM		5324
+1867.1118200	SisFrance, 2010	1867	11	18	14	45		Saint-Thomas, Iles Vierges	18.100	-65.133	20.0	20.0			8-9	Tanner and Shepherd, 1997	7.50		s		SisFrance, 2010	48	8	MSK		8423
+1867.1218000	Min Ziqun, 1995	1867	12	18				Between Jilong and Beihai, Taiwan	25.300	121.800	100.0	100.0				Min Ziqun, 1995	7.00		s							6405
+1868.0329000	Stover and Coffman, 1993	1868	03	29	00	15		Island of Hawaii	19.000	-155.500					8	Wyss and Koyanagi, 1992	7.00		s				8	MM		8525
+1868.0403000	Stover and Coffman, 1993	1868	04	03				Near south coast of Hawaii	19.000	-155.500					10	Wyss and Koyanagi, 1992	7.50	0.25	s				10	MM		8526
+1868.0813200	CERESIS, 1995	1868	08	13	20	45		[Peru]	-18.500	-70.350					11	Lomnitz, 2004	8.50		s				11			3230
+1868.0815200	Beauval et al., 2010	1868	08	15				El Angel	0.700	-77.920			bw		8	Beauval et al., 2010	6.60		w	bw	Beauval et al., 2010	15	8	MSK		3238
+1868.0816060	Beauval et al., 2010	1868	08	16				Ibarra	0.380	-78.430			bw		9	Beauval et al., 2010	7.27	0.30	w	bw	Beauval et al., 2010	71	9	MSK		7994
+1868.1019120	Musson, 2012c	1868	10	18	12	35		Cape Farewell	-40.200	173.000						Musson, 2012c	7.20		w							8331
+1868.1021000	Bakun, 1999	1868	10	21	15	53		[United States]	37.700	-122.100			bw			Bakun, 1999	6.80	0.30	w	bw						8480
+1869.0110170	Ambraseys and Douglas, 2004	1869	01	10	17			Cachar/Silchar	25.500	93.000						Ambraseys and Douglas, 2004	7.30		w		Ambraseys and Douglas, 2004	40	7-8	MSK		3269
+1869.0824160	CERESIS, 1995	1869	08	24	16	30		[Chile]	-19.600	-70.230					8	Lomnitz, 2004	7.50		s				8			3290
+1870.0411000	Min Ziqun, 1995	1870	04	11				Batang (Sichuan)	30.000	99.100	25.0	25.0			10	Min Ziqun, 1995	7.25		s							6411
+1870.0612000	White et al., 2004	1870	06	12				Chiquimulilla	14.167	-90.167					8	White et al., 2004	7.20	0.10	w				8	MM	"subduction"	8164
+1870.1020160	CEUS, 2012	1870	10	20	16	30		[Canada]	47.400	-70.500			cat			CEUS, 2012	6.55	0.47	w							8487
+1871.0220080	Stover and Coffman, 1993	1871	02	20	08	42		Near Lanai, Hawaii	20.800	-157.000				15	8	Wyss and Koyanagi, 1992	6.75		s				8	MM		8527
+1871.0302120	Musson, 2012a	1871	03	02	12			Indonesia	0.000	128.000						Musson, 2012a	7.00		w							7826
+1871.0600000	Min Ziqun, 1995	1871	06					Cuona and Luozha, Xizang  (Tibet)	28.000	91.500	100.0	100.0			10	Min Ziqun, 1995	7.50		s		Min Ziqun, 1995		10			6415
+1871.0627000	Benito et al., 2012	1871	06	27				Panama Fracture Zone	7.800	-82.300			cat	30	8	Benito et al., 2012	7.00		w					MM		5343
+1871.0818131	Musson, 2012a	1871	08	18	13	16		Bengkulu	-5.300	102.400						Musson, 2012a	7.60		w							7827
+1871.1005090	CERESIS, 1995	1871	10	05	09			[Chile]	-20.200	-70.170					10	Lomnitz, 2004	7.00		s				10			3371
+1871.1105000	Bautista and Oike, 2000	1871	11	05	00	45		Philippines	8.900	126.900						Bautista and Oike, 2000	7.30		s							3378
+1871.1208090	Bautista and Oike, 2000	1871	12	08	09	30		Philippines	7.300	123.750						Bautista and Oike, 2000	7.00		s							3381
+1871.1219110	Bautista and Oike, 2000	1871	12	19	11			Philippines	8.500	126.900						Bautista and Oike, 2000	7.20		s							3383
+1871.1223180	Ambraseys and Bilham, 2003	1871	12	23	18			Quchan	37.400	58.400						Ambraseys and Bilham, 2003	7.10		w							3385
+1872.0314170	UTSU online	1872	03	14	17			W side of Shimane Pref.	35.150	132.100						UTSU online	7.10		jma							3401
+1872.0326000	Bakun, 2006b	1872	03	26				Owens Valley	36.650	-118.100			bw			Bakun, 2006b	7.45	0.50	w	bw						8477
+1872.0326140	Felzer and Cao, 2008	1872	03	26	14	06		[United States]	36.900	-118.200				0		Felzer and Cao, 2008	6.80	0.33	w							5678
+1872.0403000	Ambraseys, 1989	1872	04	03	07	40		Amik Gölü	36.400	36.500	40.0	40.0			10	Ambraseys, 1989	7.20		s							7731
+1872.0411190	Felzer and Cao, 2008	1872	04	11	19			[United States]	37.500	-118.500				0		Felzer and Cao, 2008	6.80	0.33	w							5679
+1872.1215050	Lamontagne et al., 2008	1872	12	15	05	37		Washington-British Columbia Border	47.760	-119.900					8	Lamontagne et al., 2008	6.80		w				8			8512
+1873.0000020	Musson, 2012a	1873						Papua New Guinea	-5.500	146.000						Musson, 2012a	8.00		w							7828
+1873.0222000	Tanner and Shepherd, 1997	1873	02	22				[El Salvador]	13.600	-89.000				100	9	Tanner and Shepherd, 1997	7.00		w							3452
+1873.0304220	Tanner and Shepherd, 1997	1873	03	04	22	30		[El Salvador]	13.700	-88.700				100	10	Tanner and Shepherd, 1997	7.30		w							3454
+1873.0319080	White et al., 2004	1873	03	19				San Salvador	13.667	-89.167					8	White et al., 2004	7.10	0.10	w				8	MM	"subduction"	8308
+1873.1123000	Bakun, 2000	1873	11	23	05			[United States]	42.200	-124.200			bw		8	Bakun, 2000	7.30	0.40	w	bw			8			8474
+1873.1215040	Musson, 2012b	1873	12	15				Barrow Range	-26.250	127.500						Musson, 2012b	6.00		w						"Mw = 6.0?"	8016
+1874.0503000	Ambraseys, 1989	1874	05	03	07			Gölcük Gölü	38.500	39.500	40.0	40.0			10	Ambraseys, 1989	7.10		s						"M = 7.1+"	6892
+1874.0903000	White et al., 2004	1874	09	03				Palzicia	14.667	-90.833					8	White et al., 2004	7.10	0.10	w				8	MM	"subduction"	8165
+1874.1116000	Stucchi et al., 2012	1874	11	16				Rhodos	36.500	27.900	10.0	10.0	cat		7	Stucchi et al., 2012	7.00	0.50	w		University of Thessaloniki, 2003	2	7	MM		3500
+1875.0000040	Musson, 2012a	1875						Papua New Guinea	-6.000	147.000						Musson, 2012a	7.00		w							7831
+1875.0211000	Zúñiga et al., 1997	1875	02	11				Jalisco	21.000	-104.000					8	Zúñiga et al., 1997	7.10		w				8			8896
+1875.0327223	Musson, 2012a	1875	03	27	22	30		Indonesia	-9.800	111.500						Musson, 2012a	7.80		w							7829
+1875.0328120	Musson, 2012c	1875	03	28	12			Loyalty Island	-20.000	168.500						Musson, 2012c	8.00		w							8550
+1875.0510000	Musson, 2012c	1875	05	10				Vanuatu	-18.500	168.000						Musson, 2012c	7.00		w							8551
+1875.0518160	Palme et al., 2005	1875	05	18				[Colombia]	7.950	-72.600			bw			Palme et al., 2005	7.41	0.37	w	bw						7998
+1875.1024225	Musson, 2012a	1875	10	24	22	50		Indonesia	-6.900	108.300						Musson, 2012a	7.00		w							7830
+1875.1102000	Gouin, 1979	1875	11	02				Anseba Faults	16.000	38.500						Gouin, 1979	6.00		m						Aftershocks till March 1876	6929
+1876.0725200	Bautista and Oike, 2000	1876	07	25	20			Philippines	10.100	126.400						Bautista and Oike, 2000	7.20		s							3565
+1877.0510020	CERESIS, 1995	1877	05	10	02	16		[Chile]	-19.600	-70.230					11	Lomnitz, 2004	8.00		s				11			3576
+1878.0110000	Musson, 2012c	1878	01	10				Vanuatu	-19.000	168.500						Musson, 2012c	7.50		w							8552
+1878.0123000	Tavera et al., 2001	1878	01	23				[Peru]	-20.050	-77.000				40	7	Tavera et al., 2001	7.90		s		Tavera et al., 2001	6	7	MM		8002
+1878.0211000	Musson, 2012c	1878	02	11				Vanuatu	-19.000	168.500						Musson, 2012c	8.00		w							8553
+1878.0302120	Ambraseys and Douglas, 2004	1878	03	02	12	30		Abbottabad	34.000	73.200						Ambraseys and Douglas, 2004	6.70		w		Ambraseys and Douglas, 2004	16	7	MSK		3601
+1878.0509040	Bakun, 2000	1878	05	09	04	25		[United States]	40.400	-125.200			bw		7	Bakun, 2000	7.00	0.40	w	bw			7			8475
+1878.1011055	Ambraseys and Adams, 1986b	1878	10	11	05	50		Atlantic	2.500	-15.000					4	Ambraseys and Adams, 1986b	6.30		s							6921
+1879.0202100	CERESIS, 1995	1879	02	02	10	30		[Chile]	-53.000	-70.670					8	Lomnitz, 2004	7.00		s				8			3625
+1879.0529000	Benito et al., 2012	1879	05	29				Panama-Costa Rica Border	8.000	-82.900			cat	10	8	Benito et al., 2012	7.00		w					MM		5344
+1879.0701000	Min Ziqun, 1995	1879	07	01				S of Wudu (Gansu)	33.200	104.700	25.0	25.0			11	Min Ziqun, 1995	8.00		s		Min Ziqun, 1995		10			6431
+1880.0718040	Bautista and Oike, 2000	1880	07	18	04	40		Philippines	14.900	121.550						Bautista and Oike, 2000	7.60		s							3668
+1880.0815120	CERESIS, 1995	1880	08	15	12	48		[Chile]	-31.620	-71.180					10	Lomnitz, 2004	7.50		s				10			3672
+1881.0429000	Benito et al., 2012	1881	04	29				Intraplate	11.500	-86.300			cat	130	8	Benito et al., 2012	7.30		w					MM		5325
+1881.1025000	UTSU online	1881	10	25	21	22		East side of Hokkaido offshore	43.300	147.300						UTSU online	7.00		jma							3733
+1881.1231000	Ortiz and Bilham, 2003	1881	12	31	01	49		Car Nicobar	8.520	92.430				15		Ortiz and Bilham, 2003	7.90	0.10	w							6518
+1881.1231001	Bilham et al., 2005	1881	12	31				Car Nicobar	10.800	92.550	34.0	22.0				Bilham et al., 2005	7.00	0.10	w							7649
+1882.0303130	Benito et al., 2012	1882	03	03				Quepos	8.720	-84.250			cat	20	8	Benito et al., 2012	7.00		w					MM		5234
+1882.0719000	Zúñiga et al., 1997	1882	07	19				Oaxaca	18.000	-98.000					9	Zúñiga et al., 1997	6.70		w				9			8897
+1882.0907070	Benito et al., 2012	1882	09	07				Offshore San Blas Archip.	10.000	-79.000			cat	20	9	Benito et al., 2012	7.90		w					MM		5345
+1882.1010000	Musson, 2012a	1882	10	10				Indonesia	-4.500	129.900						Musson, 2012a	7.50		w							7832
+1883.0800000	Ambraseys et al., 1994	1883	08					Libya	30.200	9.500						Ambraseys et al., 1994	6.00		s							7638
+1883.1000000	Min Ziqun, 1995	1883	10					Pulan (Burang), Xizang  (Tibet)	30.200	81.200	100.0	100.0			9	Min Ziqun, 1995	7.00		s							6440
+1884.0210000	Ambraseys, 1989	1884	02	10	05			Siirt	37.500	42.500	90.0	90.0			8	Ambraseys, 1989	6.90		s						"M = 6.9-"	6893
+1884.0720093	Ambraseys et al., 1994	1884	07	20	09	30		Offshore Massawa	15.700	39.600						Ambraseys et al., 1994	6.20		s							7625
+1885.0222070	Bautista and Oike, 2000	1885	02	22	07	30		Philippines	7.900	127.100						Bautista and Oike, 2000	7.20		s							3885
+1885.0429215	Musson, 2012a	1885	04	29	21	53		Indonesia	-2.500	127.500						Musson, 2012a	7.20		w							7833
+1885.0529020	Ambraseys and Douglas, 2004	1885	05	29	02	45		Srinagar	34.100	74.600						Ambraseys and Douglas, 2004	6.30		w		Ambraseys and Douglas, 2004	37	8	MSK		3898
+1885.0723020	Bautista and Oike, 2000	1885	07	23	02	45		Philippines	8.850	123.100						Bautista and Oike, 2000	7.00		s							3909
+1885.1010000	Benito et al., 2012	1885	10	10				Southern Pacific Coast	12.250	-86.750			cat	60	9	Benito et al., 2012	7.00		w					MM		5326
+1886.0827000	Stucchi et al., 2012	1886	08	27				Philiatra	36.988	21.467	50.0	50.0	bw			Stucchi et al., 2012	7.16	0.30	w		Sakellariou et al., 2010	192	10-11	EMS		3957
+1886.0901000	CEUS, 2012	1886	09	01	02	51		[United States]	33.000	-80.200			cat			CEUS, 2012	6.90		w							8490
+1887.0202150	Bautista and Oike, 2000	1887	02	02	15			Philippines	11.450	122.050						Bautista and Oike, 2000	7.30		s							3982
+1887.0503000	Stover and Coffman, 1993	1887	05	03	09			[Mexico]	30.800	-109.250					12	Bakun, 2006b	7.50	0.30	w	bw			12	MM		8915
+1887.0514070	Stucchi et al., 2012	1887	05	14	07	30		Myrina	40.209	24.617	50.0	50.0	bw			Stucchi et al., 2012	7.00	0.30	w		Taxeidis, 2003	7	7-8	EMS		4007
+1887.0608230	Shebalin and Leydecker, 1997	1887	06	08	23	35		Middle Asia, Kazakhstan	43.100	76.800	27.0	22.0		20		Shebalin and Leydecker, 1997	7.30		s							4013
+1887.0717070	Stucchi et al., 2012	1887	07	17	07	45		Heraklio	35.700	25.800	10.0	10.0	cat	100	7	Stucchi et al., 2012	7.20	0.50	w		University of Thessaloniki, 2003	1	7	MM		4022
+1887.0923110	SisFrance, 2010	1887	09	23	06	55		Windward Passage, Haiti	19.950	-73.733	20.0	20.0			10	Flores et al., 2012	6.70	0.20	w	bw	SisFrance, 2010	17	9	MSK		8428
+1887.1129000	Pelaez et al., 2007	1887	11	29	13	30		El Bordj	35.583	0.000					9-10	Pelaez et al., 2007	6.70		w							7614
+1887.1216000	Min Ziqun, 1995	1887	12	16				Shiping (Yunnan)	23.700	102.500	25.0	25.0			9+	Min Ziqun, 1995	7.00		s							6458
+1888.0110130	CERESIS, 1995	1888	01	10	13			[Venezuela]	11.300	-62.200				0	8	CERESIS, 1995	6.50		s				8			4049
+1888.0613000	Min Ziqun, 1995	1888	06	13				Bohai Gulf	38.500	119.000	100.0	100.0				Min Ziqun, 1995	7.50		s							6461
+1888.0901040	Musson, 2012c	1888	08	31	16	45		North Canterbury	-42.600	172.550						Musson, 2012c	7.00		w							8332
+1889.0117120	Benito et al., 2012	1889	01	17				Nicoya coast	10.250	-85.800			cat	30	8	Benito et al., 2012	7.00		w					MM		5236
+1889.0711220	Shebalin and Leydecker, 1997	1889	07	11	22	14		Middle Asia, Kazakhstan	43.200	78.700	68.0	56.0		40		Shebalin and Leydecker, 1997	8.30		s							4139
+1889.0906001	Musson, 2012a	1889	09	06				Indonesia	3.100	125.600						Musson, 2012a	8.00		w							7834
+1889.1006030	Bautista and Oike, 2000	1889	10	06	03	15		Philippines	5.900	127.000						Bautista and Oike, 2000	7.30		s							4159
+1890.0209120	Bakun, 2006a	1890	02	09				Calico	34.700	-116.500			bw			Bakun, 2006a	7.20	0.50	w	bw						8476
+1890.1212005	Musson, 2012a	1890	12	12	00	50		Indonesia	-6.400	111.000						Musson, 2012a	7.00		w							7835
+1891.0115040	Hamdache et al., 2010	1891	01	15	04			Algeria	36.500	1.800					10	Hamdache et al., 2010	7.00		w							6674
+1891.0624190	Bautista and Oike, 2000	1891	06	24	19	42		Philippines	7.600	126.000						Bautista and Oike, 2000	7.20		s							4233
+1891.0909000	White et al., 2004	1891	09	09				Analquito to Comasagua	13.617	-89.167					7	White et al., 2004	7.10	0.10	w				7	MM	"subduction"	8309
+1891.1005000	Musson, 2012a	1891	10	05				Timor-Leste	-9.000	124.000						Musson, 2012a	7.00		w							7836
+1891.1028060	UTSU online	1891	10	28	06	38		W side of Gifu Pref.	35.600	136.600						UTSU online	8.00		jma							4250
+1892.0126164	Musson, 2012b	1892	01	26	16	48		Tasman Sea	-40.300	149.500						Musson, 2012b	6.10		w							8020
+1892.0224000	Felzer and Cao, 2008	1892	02	24	07	20		[United States]	32.550	-115.650				0		Felzer and Cao, 2008	7.30	0.20	w							5685
+1892.0516110	Musson, 2012c	1892	05	16	11	10		Guam	14.000	143.000						Musson, 2012c	7.50		w							8441
+1892.0517130	Musson, 2012a	1892	05	17	13			Indonesia	0.800	98.000						Musson, 2012a	7.50		w							7837
+1892.1118000	Musson, 2012a	1892	11	18				Indonesia	-3.000	127.750						Musson, 2012a	7.00		w							7838
+1893.0302000	Ambraseys, 1989	1893	03	02	22	51		South Malatya	38.000	38.300	40.0	40.0			10	Ambraseys, 1989	7.10		s						"M = 7.1+"	6894
+1893.0604000	UTSU online	1893	06	04	02	27		Sikotan Island offshore	43.500	148.000						UTSU online	7.70		jma							4327
+1893.0621070	Bautista and Oike, 2000	1893	06	21	07	30		Philippines	7.650	126.100						Bautista and Oike, 2000	7.30		s							4329
+1893.0817140	Stucchi et al., 2012	1893	08	17	14	45		[Vrancea deep]	45.700	26.600	29.9	29.9	cat	100	8	Stucchi et al., 2012	7.10	0.30	w		Shebalin (ed.), 1977	14	7	MSK		4333
+1893.0829000	Min Ziqun, 1995	1893	08	29				Daofu and Kangding (Sichuan)	30.600	101.500	25.0	25.0			9	Min Ziqun, 1995	7.00		s							6472
+1893.1117150	Ambraseys and Bilham, 2003	1893	11	17	15			Quchan	37.000	58.400						Ambraseys and Bilham, 2003	7.00		w							4343
+1894.0322000	UTSU online	1894	03	22	19	23		Nemuro offshore	42.500	146.000						UTSU online	7.90		jma							4369
+1894.0429020	Palme et al., 2005	1894	04	28				[Venezuela]	8.700	-71.700			bw			Palme et al., 2005	7.56	0.33	w	bw						8008
+1894.0620081	UTSU online	1894	06	20	14	04		E side of Tokyo metropolis	35.700	139.800						UTSU online	7.00		jma							4381
+1894.0831120	Stucchi et al., 2012	1894	08	31	12	20		[Vrancea deep]	45.700	26.600	29.9	29.9	cat	130	8	Stucchi et al., 2012	7.10	0.30	w		Shebalin (ed.), 1977	26	8	MSK		4387
+1894.1022170	UTSU online	1894	10	22	17	35		NW side of Yamagata Pref.	38.900	139.900						UTSU online	7.00		jma							4392
+1894.1027190	CERESIS, 1995	1894	10	27	19	30		[Argentina]	-30.500	-68.400				30	9	CERESIS, 1995	7.50		s				9			4396
+1895.0118220	UTSU online	1895	01	18	22	48		S of Ibaraki Pref.	36.100	140.400						UTSU online	7.20		jma							4414
+1895.0306083	Musson, 2012a	1895	03	06	08	35		Papua New Guinea	-8.500	150.000						Musson, 2012a	7.50		w							7839
+1895.0705000	Min Ziqun, 1995	1895	07	05				Tashkurgan or Tashiku'ergan (Xinjiang)	37.700	75.100	50.0	50.0			9	Min Ziqun, 1995	7.00		s							6480
+1895.0708220	Ambraseys, 1997a	1895	07	08				Krasnovodsk	39.500	54.600						Ambraseys, 1997a	7.50		s							5383
+1896.0109220	UTSU online	1896	01	09	22	17		Ibaraki offshore	36.500	141.000						UTSU online	7.30		jma							4457
+1896.0300000	Min Ziqun, 1995	1896	03					Siqu (Serxu) and Luoxu (Sichuan)	32.500	98.000	50.0	50.0			9	Min Ziqun, 1995	7.00		s							6483
+1896.0304050	Shebalin and Leydecker, 1997	1896	03	04	05	05		Middle Asia, Kazakhstan	37.000	76.000	258.0	223.0		40		Shebalin and Leydecker, 1997	7.10		s							4470
+1896.0418000	Musson, 2012a	1896	04	18				Timor-Leste	-8.300	126.000						Musson, 2012a	7.00		w							7840
+1896.0503130	CERESIS, 1995	1896	05	03	13	45		[Ecuador]	-0.510	-80.450					9	CERESIS, 1995	7.00		s				9			4474
+1896.0615190	UTSU online	1896	06	15	19	32		Iwate Pref. offshore	39.500	144.000						UTSU online	8.20		jma							4481
+1896.0831170	UTSU online	1896	08	31	17	06		E side of Akita Pref.	39.500	140.700						UTSU online	7.20		jma							4492
+1896.0923230	Shebalin and Leydecker, 1997	1896	09	23	23	20		Middle Asia, Kazakhstan	37.000	71.000	129.0	111.0		160		Shebalin and Leydecker, 1997	7.50		s						"deep?"	4501
+1896.1118020	Shebalin and Leydecker, 1997	1896	11	18	02	06		Kuril Islands	43.500	146.000	136.0	111.0		40		Shebalin and Leydecker, 1997	7.60		s						Doubtful	4513
+1897.0220050	UTSU online	1897	02	20	05	50		Offshore of Miagi Pref.	38.100	141.900						UTSU online	7.40		jma							4522
+1897.0510052	Musson, 2012b	1897	05	10	05	26		Beachport	-37.330	139.750						Musson, 2012b	6.10		w							8021
+1897.0612110	Ambraseys and Douglas, 2004	1897	06	12	11	06		Shillong	25.500	91.000						Ambraseys and Douglas, 2004	8.00		w		Ambraseys and Douglas, 2004	285	9	MSK		4540
+1897.0805090	UTSU online	1897	08	05	09	10		Offshore of Miagi Pref.	38.300	143.300						UTSU online	7.70		jma							4547
+1897.0920160	Tavera et al., 2001	1897	09	20	16	25		[Peru]	-11.913	-76.791				70	7	Tavera et al., 2001	7.70		s		Tavera et al., 2001	17	7	MM		8011
+1897.0921051	Richter, 1958	1897	09	21	05	12		Philippines	6.000	122.000						Richter, 1958	8.70		u						"M = 8.7 +/-"	7748
+1897.1018234	Garcia et al., 1985	1897	10	19	07	52		Philippines	12.400	125.000						Garcia et al., 1985	8.10		s							7749
+1898.0423080	UTSU online	1898	04	23	08	37		Offshore of Miagi Pref.	38.600	142.000						UTSU online	7.20		jma							4587
+1898.0429160	Benito et al., 2012	1898	04	29				Intraplate	12.000	-86.000			cat	100	8	Benito et al., 2012	7.40		w					MM		5327
+1898.0602210	Stucchi et al., 2012	1898	06	02	21	40		Tripole	37.600	22.600	10.0	10.0	cat	90	7	Stucchi et al., 2012	7.00	0.50	w		University of Thessaloniki, 2003	2	7	MM		4595
+1898.0901180	UTSU online	1898	09	01	18			E Ishigaki-jima Isl. offshore	24.500	124.700						UTSU online	7.00		jma							4613
+1898.1117120	Abe and Noguchi, 1983	1898	11	17	12	48		Vanuatu	-16.500	168.500						Abe and Noguchi, 1983	7.20		s							5215
+1899.0114020	Zúñiga et al., 1997	1899	01	14	02	36		[Mexico]	20.000	-110.000				0		Zúñiga et al., 1997	7.00		w							4626
+1899.0124230	Zúñiga et al., 1997	1899	01	24	23	43		[Mexico]	17.100	-100.500				0		Zúñiga et al., 1997	7.90		w							4635
+1899.0307090	UTSU online	1899	03	07	09	55		S of Mie Pref.	34.100	136.100						UTSU online	7.00		jma							4641
+1899.0416000	Bakun, 1999	1899	04	16				West of Eureka	41.000	-126.000			bw			Bakun, 1999	7.10	0.60	w	bw						8478
+1899.0417010	Abe and Noguchi, 1983	1899	04	17	01	36		South Pacific Ocean	-27.000	-167.000						Abe and Noguchi, 1983	7.10		s							5216
+1899.0508030	Shebalin and Leydecker, 1997	1899	05	08	03	39		Kuril Islands	43.000	146.000	136.0	111.0		40		Shebalin and Leydecker, 1997	7.20		s						Doubtful	4655
+1899.0603040	CERESIS, 1995	1899	06	03	04	30		[Ecuador]	0.000	-85.000						CERESIS, 1995	7.20		s							4658
+1899.0614110	Alvarez et al., 1999	1899	06	14	11	09		[Jamaica]	18.000	-77.000						Alvarez et al., 1999	7.30		s							4662
+1899.0714000	Doser, 2006	1899	07	14	13	32		[United States]	58.650	-151.710						Doser, 2006	7.20		s							8493
+1899.0824150	Abe and Noguchi, 1983	1899	08	24	15	09		Norfolk Island	-27.000	165.000						Abe and Noguchi, 1983	7.20		s							5218
+1899.0904000	Doser, 2006	1899	09	04	00	22		[United States/Canada]	59.430	-143.050						Doser, 2006	7.90		s							8494
+1899.0904040	Stover and Coffman, 1993	1899	09	04	04	40		[United States/Canada]	60.000	-142.000						Stover and Coffman, 1993	6.90		s							8532
+1899.0910170	Doser, 2006	1899	09	10	17	04		[United States/Canada]	58.620	-139.070						Doser, 2006	7.40		s							8495
+1899.0910210	Doser, 2006	1899	09	10	21	41		[United States/Canada]	59.390	-139.500						Doser, 2006	8.00		s							8496
+1899.0923110	Stover and Coffman, 1993	1899	09	23	11	04		Copper River delta, Alaska	60.000	-143.000						Stover and Coffman, 1993	6.90		s							8535
+1899.0923120	Stover and Coffman, 1993	1899	09	23	12	50		Copper River delta, Alaska	59.000	-143.000						Stover and Coffman, 1993	7.00		s							8536
+1899.0929170	Musson, 2012a	1899	09	29	17	03		Indonesia	-3.000	128.500						Musson, 2012a	7.40		w							7841
+1899.1019090	Abe and Noguchi, 1983	1899	10	19	09	16		Papua New Guinea	-5.000	148.000						Abe and Noguchi, 1983	7.10		s							5219
+1899.1124090	Abe and Noguchi, 1983	1899	11	24	09	56		Indonesia	0.000	128.000						Abe and Noguchi, 1983	7.20		s							5220
+1899.1125030	UTSU online	1899	11	25	03	43		Miyazaki Pref. offshore	31.900	132.000						UTSU online	7.10		jma							4715
+1900.0105190	Engdahl and Villaseñor, 2002	1900	01	05	19			[Indonesia]	-3.000	102.000						Engdahl and Villaseñor, 2002	7.00		s							4727
+1900.0111090	Engdahl and Villaseñor, 2002	1900	01	11	09	07		[Papua New Guinea]	-5.000	148.000						Engdahl and Villaseñor, 2002	7.00		s							4729
+1900.0114000	Musson, 2012a	1900	01	14				Indonesia	-6.900	106.800						Musson, 2012a	7.00		w							7842
+1900.0120060	Engdahl and Villaseñor, 2002	1900	01	20	06	33		[Mexico]	20.000	-105.000				0		Engdahl and Villaseñor, 2002	7.30		w							4737
+1900.0131190	Engdahl and Villaseñor, 2002	1900	01	31	19	22		Japan	48.000	146.000				450		Engdahl and Villaseñor, 2002	7.50		jma							4743
+1900.0511170	UTSU online	1900	05	12	02	23		N side of Miyagi Pref.	38.700	141.100						UTSU online	7.00		jma							4762
+1900.0516200	Engdahl and Villaseñor, 2002	1900	05	16	20	12		[Mexico]	20.000	-105.000				0		Engdahl and Villaseñor, 2002	6.90		s							4768
+1900.0621200	Benito et al., 2012	1900	06	21				Nicoya coast	10.000	-85.500			cat	50	8	Benito et al., 2012	7.20		w					MM		5237
+1900.0729060	Engdahl and Villaseñor, 2002	1900	07	29	06	59		Solomon Islands	-10.000	165.000						Engdahl and Villaseñor, 2002	7.60		w							4784
+1900.0917210	Engdahl and Villaseñor, 2002	1900	09	17	21	45		[Papua New Guinea]	-5.000	148.000						Engdahl and Villaseñor, 2002	7.10		w							4788
+1900.1007210	Musson, 2012a	1900	10	07	21	04		Indonesia	-2.200	135.500						Musson, 2012a	7.00		w							7843
+1900.1009120	Doser, 2006	1900	10	09	12	24		[United States/Canada]	58.390	-152.420						ISC-GEM, 2012	7.69	0.68	w							8497
+1900.1029090	Palme et al., 2009	1900	10	29	09	11		Macuto	10.520	-66.200			bw			Palme et al., 2009	7.70		w	bw	Palme et al., 2009	26	9-10	MM		5666
+1900.1109160	Engdahl and Villaseñor, 2002	1900	11	09	16	10		[El Salvador]	13.000	-90.000				0		Engdahl and Villaseñor, 2002	7.00		s							4820
+1900.1124070	Engdahl and Villaseñor, 2002	1900	11	24	07	57		[Russia]	43.500	148.000				35		Engdahl and Villaseñor, 2002	7.00		s							4823
+1900.1225050	UTSU online	1900	12	25	14	09		Nemuro offshore	43.000	146.000						UTSU online	7.10		jma							4827
+1901.0107000	Engdahl and Villaseñor, 2002	1901	01	07	00	29		[Ecuador]	-2.000	-82.000				0		Engdahl and Villaseñor, 2002	7.20		w							4830
+1901.0118040	Engdahl and Villaseñor, 2002	1901	01	18	04	39		[Canada]	60.000	-135.000				0		Engdahl and Villaseñor, 2002	7.10		w							4835
+1901.0305100	Engdahl and Villaseñor, 2002	1901	03	05	10	45		[Mexico]	25.000	-110.000				0		Engdahl and Villaseñor, 2002	6.90		s							4845
+1901.0316110	Ambraseys and Adams, 1991	1901	03	16	11	54		Usango	-7.000	35.000					5	Ambraseys and Adams, 1991	6.90	0.30	s						instrumental epicentre: lat = -10, lon = 40 (from BAAS)	6917
+1901.0331070	Oncescu et al., 1999	1901	03	31	07	10	24.00	Bulgaria	43.400	28.700				14		Oncescu et al., 1999	7.20		w							8936
+1901.0405220	Shebalin and Leydecker, 1997	1901	04	05	22	30		Kuril Islands	45.000	148.000	138.0	111.0		30		Shebalin and Leydecker, 1997	7.50		s							4858
+1901.0525000	Engdahl and Villaseñor, 2002	1901	05	25	00	32		[Solomon Islands]	-10.000	160.000						Engdahl and Villaseñor, 2002	7.20		w							4874
+1901.0615180	UTSU online	1901	06	15	18	34		Iwate Pref. offshore	39.000	143.000						UTSU online	7.00		jma							4876
+1901.0624160	UTSU online	1901	06	24	16	02		Amami Oshima Isl. offshore	28.000	130.000						UTSU online	7.50		jma							4879
+1901.0809180	UTSU online	1901	08	09	18	23		E side of Aomori Pref. offshore	40.500	142.500						UTSU online	7.20		jma							4888
+1901.0809200	Engdahl and Villaseñor, 2002	1901	08	09	13	01		Vanuatu	-22.000	170.000						Engdahl and Villaseñor, 2002	7.90		w							4885
+1901.0810030	UTSU online	1901	08	10	03	33		E side of Aomori Pref.	40.600	142.300						UTSU online	7.40		jma							4889
+1901.1008020	Benito et al., 2012	1901	10	08				Subducction	11.000	-87.500			cat	20	7	Benito et al., 2012	7.00		w					MM		5328
+1901.1121190	Tavera et al., 2001	1901	11	21	19	19		[Peru]	-14.177	-76.320				80	6	Tavera et al., 2001	6.70		s		Tavera et al., 2001	8	6	MM		8014
+1901.1125010	Engdahl and Villaseñor, 2002	1901	11	25	01	51		[Indonesia]	3.000	127.000						Engdahl and Villaseñor, 2002	7.00		s							4899
+1901.1209020	Engdahl and Villaseñor, 2002	1901	12	09	02	17		[Mexico]	26.000	-110.000				0		Engdahl and Villaseñor, 2002	7.10		w							4903
+1901.1214220	Engdahl and Villaseñor, 2002	1901	12	14	22	57		[Philippines]	14.000	122.000						Engdahl and Villaseñor, 2002	7.00		s							4908
+1901.1231090	Engdahl and Villaseñor, 2002	1901	12	31	09	02		[United States]	52.000	-177.000				0		Engdahl and Villaseñor, 2002	7.10		w							4911
+1902.0101050	Engdahl and Villaseñor, 2002	1902	01	01	05	20		[United States]	55.000	-165.000				0		Engdahl and Villaseñor, 2002	7.00		s							4913
+1902.0102140	Tavera et al., 2001	1902	01	02	14	08		[Peru]	-9.000	-78.400				80	9	Tavera et al., 2001	6.80		s		Tavera et al., 2001	18	8	MM		8015
+1902.0112220	Engdahl and Villaseñor, 2002	1902	01	12	22	18		[Indonesia]	3.000	122.000						Engdahl and Villaseñor, 2002	7.00		s							4918
+1902.0116000	Zúñiga et al., 1997	1902	01	16				[Mexico]	17.620	-99.720				0		Zúñiga et al., 1997	7.00		w							4919
+1902.0118000	White et al., 2004	1902	01	18				Costa Cuca	14.667	-91.667					7	White et al., 2004	6.70	0.30	s				7	MM	"subduction"	8166
+1902.0124230	Engdahl and Villaseñor, 2002	1902	01	24	23	27		Papua New Guinea	-8.000	150.000						Engdahl and Villaseñor, 2002	7.20		w							4926
+1902.0130230	UTSU online	1902	01	30	23	01		E side of Aomori Pref.	40.500	141.300						UTSU online	7.00		jma							4929
+1902.0217000	Engdahl and Villaseñor, 2002	1902	02	17	00	31		[Dominican Republic]	20.000	-70.000				0		Engdahl and Villaseñor, 2002	6.90		s							4941
+1902.0226000	White et al., 2004	1902	02	26				Acajutla	13.590	-89.833					3	White et al., 2004	8.00		w				3	MM	"subduction"	8310
+1902.0305190	Engdahl and Villaseñor, 2002	1902	03	05	19	03		[Chile]	-20.000	-70.000				0		Engdahl and Villaseñor, 2002	6.80		s							4953
+1902.0419020	Engdahl and Villaseñor, 2002	1902	04	19	02	23		[Guatemala]	14.000	-91.000				0		ISC-GEM, 2012	7.47	0.65	w							4972
+1902.0502110	Engdahl and Villaseñor, 2002	1902	05	02	11	31		Japan	39.000	144.000				35		Engdahl and Villaseñor, 2002	7.00		jma							4983
+1902.0611050	Shebalin and Leydecker, 1997	1902	06	11	05			Kuril Islands	50.000	148.000	146.0	111.0		600		Shebalin and Leydecker, 1997	8.00		s							4993
+1902.0822030	Min Ziqun, 1995	1902	08	22	11			N of Artux (Xinjiang)	39.900	76.200	25.0	25.0			10	Min Ziqun, 1995	8.25		s		Min Ziqun, 1995		10			6502
+1902.0922010	Engdahl and Villaseñor, 2002	1902	09	22	01	46		Guam	18.000	146.000						Engdahl and Villaseñor, 2002	7.50		w							5035
+1902.0923200	Engdahl and Villaseñor, 2002	1902	09	23	20	18		[Mexico]	16.000	-93.000				0		ISC-GEM, 2012	7.81	0.69	w							5037
+1902.1006090	Shebalin and Leydecker, 1997	1902	10	06	09	15		Middle Asia, Kazakhstan	36.500	70.500	257.0	223.0		200		Shebalin and Leydecker, 1997	7.20		s						"deep (?)"	5050
+1902.1212230	Engdahl and Villaseñor, 2002	1902	12	12	23	10		[Mexico]	29.000	-114.000				0		Engdahl and Villaseñor, 2002	7.10		w							5071
+1903.0104050	Musson, 2012c	1903	01	04	05	07		Tonga	-20.000	-175.000						Musson, 2012c	7.80		w							8556
+1903.0114010	Nishenko and Singh, 1987	1903	01	14				[Mexico]	15.000	-93.000	228.0	223.0				ISC-GEM, 2012	7.69	0.68	w		Nishenko and Singh, 1987	13	6	MM		8899
+1903.0117160	Engdahl and Villaseñor, 2002	1903	01	17	16	05		[United States]	50.000	-170.000				0		Engdahl and Villaseñor, 2002	7.00		s							5097
+1903.0201090	Zhang et al., 1999	1903	02	01	09			Mongolia	43.400	104.400			cat	30		Zhang et al., 1999	7.50		w							5109
+1903.0206070	Zhang et al., 1999	1903	02	06	07			Mongolia	43.400	104.400			cat	33		Zhang et al., 1999	7.00		w							5117
+1903.0227100	Musson, 2012a	1903	02	27	00	43		Indonesia	-6.000	106.000						Musson, 2012a	7.30		w							7845
+1903.0428230	Ambraseys, 2001b	1903	04	28	23	39		Turkey	39.100	42.600					9	Ambraseys, 2001b	7.02		s							8918
+1903.0513060	Engdahl and Villaseñor, 2002	1903	05	13	06	34		Vanuatu	-17.000	168.000						Engdahl and Villaseñor, 2002	7.00		s							5145
+1903.0602130	Doser, 2006	1903	06	02	13	17		[United States]	61.780	-157.720						Doser, 2006	6.90		s							8498
+1903.0604145	Ambraseys and Adams, 1991	1903	06	04	14	56		L. Albert	2.000	31.000					6	Ambraseys and Adams, 1991	6.40		s						"the macroseismic epicentre is preferable". Instrumental epicentre: lat = -0.0, lon = 30.0 (from AMBAD991)	6918
+1903.0811040	Makropoulos et al., 2012	1903	08	11	04	32	54.00	Greece	36.300	23.000				120		Makropoulos et al., 2012	7.60		w							8942
+1903.1207140	Engdahl and Villaseñor, 2002	1903	12	07	14	44		[Chile]	-27.000	-70.000				0		Engdahl and Villaseñor, 2002	6.80		s							5207
+1903.1228020	Engdahl and Villaseñor, 2002	1903	12	28	02	56		Philippines	7.000	127.000						Engdahl and Villaseñor, 2002	7.10		w							5211

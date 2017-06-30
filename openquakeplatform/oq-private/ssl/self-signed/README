@@ -1,0 +1,26 @@
+Create a new certificate
+------------------------
+
+- edit file openssl_IT.cnf, go to [alt_names] session and substitute current DNS names and IP addresses with those your server will use
+  for IP-only machines set the IP.1 entry with the public IP and remove all others DNS and IP entries.
+
+- run ./gem_ca_mngr.sh IT <an_id_name> where the second argument is an freely chosen id
+  - do not add extra passwords
+  - to unlock the CA use the communicated password
+
+
+Install a new certificate
+-------------------------
+
+- copy all oq-platform* files to the private_data directory of the installation tree.
+- on the oq-platform new server run the oq-platform2https.sh script
+
+
+Create a new CA
+---------------
+
+If you need to create a new Certification Authority:
+- run ./gem_ca_mngr.sh <new_CA_suffix>
+
+And answer to the listed questions.
+
