@@ -357,6 +357,9 @@ div#search-inp:after {
     text-transform: uppercase;
     font-weight: 300;
 }
+img#legend_icon {
+    width: auto;
+}
 .dropdown-menu {
    border: 1px solid #ccc;
    border-top-right-radius: 5px!important;
