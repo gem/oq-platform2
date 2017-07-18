@@ -1,0 +1,13 @@
+{
+   "import": {
+      "targetWorkspace": {
+         "workspace": {
+            "name": "geonode"
+         }
+      },
+      "data": {
+        "type": "file",
+        "file": "/home/ubuntu/geonode/data/ghec_data_sh"
+      }
+   }
+}
