@@ -85,7 +85,7 @@ source ~/env/bin/activate
 
 cd ~
 
-#install and configuration postgres
+# install and configuration postgres
 sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts
 sudo -u postgres createdb geonode_dev
 sudo -u postgres createdb geonode_dev-imports
@@ -101,15 +101,17 @@ sudo -u postgres psql -d geonode_dev-imports -c 'CREATE EXTENSION postgis;'
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
 
-#insert line in pg_hba.conf postgres
-#sudo sed '1 i local   all             all                                md5' /etc/postgresql/9.5/main/pg_hba.conf
+## insert line in pg_hba.conf postgres
+## sudo sed '1 i local   all             all                                md5' /etc/postgresql/9.5/main/pg_hba.conf
 sudo sed -i '1 s@^@local  all             all             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-#restart postgres
+## restart postgres
 sudo service postgresql restart
 
-#install numpy
+## install numpy
 pip install numpy
 
+## install gsconfig 
+pip install gsconfig
 
 ## Clone GeoNode
 git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
@@ -124,13 +126,13 @@ sudo apt-get install -y --force-yes python-oq-engine
 cd geonode
 pip install -r requirements.txt
 pip install -e .
-# pip install pygdal==1.11.3.3
+## pip install pygdal==1.11.3.3
 
-# Install the system python-gdal
+## Install the system python-gdal
 sudo apt-get install -y python-gdal
 
 cd ~
-# Create a symbolic link in your virtualenv
+## Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
 sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
