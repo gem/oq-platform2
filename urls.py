@@ -61,6 +61,12 @@ TemplateView.as_view(template_name='help.html'), name='help'),
 TemplateView.as_view(template_name='developer.html'), name='developer'),
                        url(r'^about/$',
 TemplateView.as_view(template_name='about.html'), name='about'),
+                       url(r'^explore/$',
+                           TemplateView.as_view(template_name='explore.html'), name='explore'),
+                       url(r'^share/$',
+                           TemplateView.as_view(template_name='share.html'), name='share'),
+                       url(r'^calculate/$',
+                           TemplateView.as_view(template_name='calculate.html'), name='calculate'),
 
                        # Layer views
                        (r'^layers/', include('geonode.layers.urls')),
@@ -134,6 +140,9 @@ name='tokeninfo'),
                        url(r'^api/adminRole', admin_role, name='adminRole'),
                        url(r'^api/users', users, name='users'),
                        url(r'', include(api.urls)),
+
+                       url(r'^account/terms/$', 
+                           TemplateView.as_view(template_name='account/terms.html'), name='terms'),
                        )
 
 if "geonode.contrib.dynamic" in settings.INSTALLED_APPS:
