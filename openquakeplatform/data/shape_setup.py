@@ -3,7 +3,7 @@ cat = Catalog("http://localhost:8080/geoserver/rest/", "admin", "geoserver")
 workspace = cat.get_workspace("geonode")
 import geoserver.util
 dir_shapefile = geoserver.util.shapefile_and_friends("/home/ubuntu/geonode/data/ghec_data_sh/ghec")
-with open("/home/ubuntu/geonode/data/ghec_data_sh/ghec.sld") as f:
+with open("/home/ubuntu/oq-private/ghec_data_sh/ghec.sld") as f:
     cat.create_style("ghec", f.read())
 that_layer = cat.get_layer("ghec")
 that_layer.default_style = 'ghec'
