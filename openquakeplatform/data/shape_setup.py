@@ -38,11 +38,12 @@ with open("/home/ubuntu/geonode/data/ghec_data_sh/ghec.sld") as f:
 ## 'name' is required
 ft = cat.create_featurestore(name, dir_shapefile, workspace)
 
-resource = cat.get_resource("geonode:ghec", workspace="geonode")
-resource.title = "thats my title"
-cat.save(resource)
-
 layer = cat.get_layer("geonode:ghec")
 layer._set_default_style("ghec")
 cat.save(layer)
 
+resource = cat.get_resource(name, workspace="geonode")
+# print dir(resource)
+resource.title = "Global Historical Earthquake Catalogue"
+resource.abstract = "825 earthquakes of M >= 7 87 studies supplying the most reliable input datasets from the archive"
+cat.save(resource)
