@@ -17,32 +17,28 @@ cat = Catalog("%s" % folder_rest, "admin", "geoserver")
 
 dir_shapefile = geoserver.util.shapefile_and_friends("%s/%s" % (folder_shape,
                                                                 name))
-workspace = cat.get_workspace(name_workspace)
+workspace = cat.get_workspace("%s" % name_workspace)
 
 if workspace:
     pass
 else:
     ws = cat.create_workspace(name_workspace, '%s' % folder_workspace)
 
-datastore = cat.get_store(name)
-
-if datastore:
-    pass
-else:
-    cat.create_featurestore(name, dir_shapefile, workspace)
-
 with open("%s/%s.sld" % (folder_shape, name)) as f:
     cat.create_style(name, f.read(), overwrite=True)
 
-layer = cat.get_layer(name_layer)
-layer._set_default_style(name_store)
+fs = cat.create_featurestore("%s" %name, dir_shapefile, workspace)
+
+layer = cat.get_layer("%s" % name_layer)
+layer._set_default_style("%s" % name_store)
 cat.save(layer)
 
-resource = cat.get_resource(name, workspace=name_workspace)
+resource = cat.get_resource("%s" % name, workspace="%s" % name_workspace)
 # print dir(resource)
-resource.title = title
-resource.abstract = abstract
+resource.title = "%s" % title
+resource.abstract = "%s" % abstract
 resource.keywords = keywords
+# resource.metadata_links = [('text/xml', 'other', '%s.xml' % name),]
 cat.save(resource)
 
 # output
