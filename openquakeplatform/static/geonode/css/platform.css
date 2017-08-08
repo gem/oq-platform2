@@ -33,6 +33,12 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     border-radius: 3px;
     vertical-align: middle;
 }
+.item-details .item-items ul i {
+    margin-right: .2em;
+}
+.astrong {
+    font-weight: 700;
+}
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
     background-color: #fff;
     border: 1px solid #ccc;
@@ -161,6 +167,15 @@ ul.dropdown-menu li {
 }
 .navbar-right .dropdown-menu {
     right: -36px;
+}
+#maps_home h2.page-title,
+#maps_home .btn-group,
+#maps_home .btn-default,
+#maps_home .col-md-3,
+#maps_home .col-md-9 .col-md-2,
+#maps_home .pagination,
+#maps_home .page-header {
+    display: none!important;
 }
 .jumbotron {
     width: 75%;
