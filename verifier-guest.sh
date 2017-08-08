@@ -22,7 +22,7 @@ GEO_DBPWD="geonode_dev"
 
 geonode_setup_env()
 {
-    export PYTHONPATH=$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
+    export PYTHONPATH=$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/$GIT_REPO/openquakeplatform/hrde
     export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
     export LOCKDOWN_GEONODE='true'
 }
@@ -40,7 +40,7 @@ exec_test () {
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
     
     # cd $GIT_REPO
-    export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
+    export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/$GIT_REPO/openquakeplatform/hrde
 
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
@@ -164,8 +164,18 @@ if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
 fi
 
-## Stop Geonode
-cd ~/geonode
+## install layer 
+pip install gsconfig
+cd ~
+git clone https://gitlab.openquake.org/openquake/oq-private.git
+cd ~/oq-platform2/openquakeplatform/data
+python setup.py
+
+## Install or update layer
+cd $HOME/geonode
+python manage.py updatelayers
+
+# Stop Geonode
 sudo supervisorctl stop openquake-webui
 paver stop
 

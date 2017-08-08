@@ -15,6 +15,9 @@ select, input[type="file"] {
     height: auto;
     line-height: 28px;
 }
+.checkbox input[type="checkbox"] {
+    position: relative;
+}
 .ui-icon-help {
     background-position: -49px -145px !important;
 }
@@ -29,6 +32,12 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     -moz-border-radius: 3px;
     border-radius: 3px;
     vertical-align: middle;
+}
+.item-details .item-items ul i {
+    margin-right: .2em;
+}
+.astrong {
+    font-weight: 700;
 }
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
     background-color: #fff;
@@ -159,8 +168,19 @@ ul.dropdown-menu li {
 .navbar-right .dropdown-menu {
     right: -36px;
 }
+<<<<<<< HEAD
 .home .jumbotron {
     padding: 40px 0 0 0;
+=======
+#maps_home h2.page-title,
+#maps_home .btn-group,
+#maps_home .btn-default,
+#maps_home .col-md-3,
+#maps_home .col-md-9 .col-md-2,
+#maps_home .pagination,
+#maps_home .page-header {
+    display: none!important;
+>>>>>>> ab93b359bb597cf15244aba5ad227d0043f55acf
 }
 .jumbotron {
     width: 75%;
@@ -359,6 +379,9 @@ div#search-inp:after {
     font-size: 40px;
     text-transform: uppercase;
     font-weight: 300;
+}
+.list-group-item img#legend_icon {
+    width: 250px;
 }
 .dropdown-menu {
    border: 1px solid #ccc;
