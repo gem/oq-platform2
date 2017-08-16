@@ -20,4 +20,4 @@ name_layer = "geonode:ghec"
 
 name_store = "ghec"
 
-folder_shape = "/home/ubuntu/oq-platform2/openquakeplatform/data/ghec_data_sh"
+folder_shape = "/home/ubuntu/oq-private/data/ghec_data_sh"
