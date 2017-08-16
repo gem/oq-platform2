@@ -73,7 +73,7 @@ fi
 
 
 sudo apt update
-sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
+sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless zip
 
 git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
 ## Check if exist and  create the virtualenv
@@ -167,7 +167,9 @@ fi
 ## install layer 
 pip install gsconfig
 cd ~/
-git clone https://gitlab.openquake.org/openquake/oq-private.git
+git clone --depth=1 https://gitlab.openquake.org/openquake/oq-private.git
+cd oq-private
+unzip ghec_data.zip -d ghec_data
 cd ~/oq-platform2/openquakeplatform/data
 python setup.py
 
