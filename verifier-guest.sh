@@ -166,7 +166,7 @@ fi
 
 ## install layer 
 pip install gsconfig
-cd ~
+cd ~/
 git clone https://gitlab.openquake.org/openquake/oq-private.git
 cd ~/oq-platform2/openquakeplatform/data
 python setup.py
