@@ -161,6 +161,19 @@ if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
 fi
 
+## install layer 
+pip install gsconfig
+cd ~/
+git clone --depth=1 https://gitlab.openquake.org/openquake/oq-private.git
+cd oq-private
+unzip ghec_data.zip -d ghec_data
+cd ~/oq-platform2/openquakeplatform/data
+python setup.py
+
+## Install or update layer
+cd $HOME/geonode
+python manage.py updatelayers
+
 ## Stop Geonode
 cd ~/geonode
 sudo supervisorctl stop openquake-webui
