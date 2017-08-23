@@ -38,8 +38,8 @@ exec_test () {
     . selenium-deps
     wget "http://ftp.openquake.org/mirror/mozilla/geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     tar zxvf "geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
-    sudo cp geckodriver /usr/local/bin
-    sudo pip install -U selenium==${GEM_SELENIUM_VERSION}
+    cp geckodriver /usr/local/bin
+    pip install -U selenium==${GEM_SELENIUM_VERSION}
     git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
     
