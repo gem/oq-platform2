@@ -161,7 +161,7 @@ paver sync
 paver start -b 0.0.0.0:8000
 
 
-sleep 50000
+# sleep 50000
 
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
