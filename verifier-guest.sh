@@ -113,7 +113,7 @@ sudo service postgresql restart
 
 #install numpy
 pip install numpy
-pip install shapely
+pip install shapely==1.5.13
 
 
 ## Clone GeoNode
