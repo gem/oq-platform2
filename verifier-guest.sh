@@ -113,6 +113,7 @@ sudo service postgresql restart
 
 #install numpy
 pip install numpy
+pip install shapely
 
 
 ## Clone GeoNode
@@ -130,7 +131,7 @@ pip install -e .
 # pip install pygdal==1.11.3.3
 
 # Install the system python-gdal
-sudo apt-get install -y python-gdal python-shapely
+sudo apt-get install -y python-gdal
 
 cd ~
 # Create a symbolic link in your virtualenv
