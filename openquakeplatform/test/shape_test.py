@@ -20,7 +20,7 @@ class ShapeTest(unittest.TestCase):
             100, 1)
         linklayer.click()
 
-        pla.wait_new_page(linklayer, '/layers', timeout=10)
+        pla.wait_new_page(linklayer, '/layers/?limit=100&offset=0', timeout=10)
 
         # upload layers
         uploadlayer = pla.xpath_finduniq(
