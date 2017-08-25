@@ -13,8 +13,6 @@ class ShapeTest(unittest.TestCase):
                                                     'test',
                                                     'shapefile',
                                                     'exampleshape.zip')
-        import pdb ; pdb.set_trace()
-
         pla.get('')
 
         # layers in homepage
