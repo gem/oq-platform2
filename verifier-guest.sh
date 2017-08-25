@@ -44,7 +44,7 @@ exec_test () {
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
     
     # cd $GIT_REPO
-    export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/openquakeplatform/test
+    export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
 
     #sleep 50000
 
@@ -166,7 +166,7 @@ paver start -b 0.0.0.0:8000
 
 # sleep 50000
 
-# cd ~/ 
+cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
 fi
