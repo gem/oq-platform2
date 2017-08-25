@@ -46,7 +46,7 @@ exec_test () {
     # cd $GIT_REPO
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
 
-    #sleep 50000
+    sleep 50000
 
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test/shape_test.py # || true
