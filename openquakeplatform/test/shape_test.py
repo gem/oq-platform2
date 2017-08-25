@@ -13,6 +13,8 @@ class ShapeTest(unittest.TestCase):
                                                     'test',
                                                     'shapefile',
                                                     'exampleshape.zip')
+        print sph
+
         pla.get('')
 
         # layers in homepage
