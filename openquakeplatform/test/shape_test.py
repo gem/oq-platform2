@@ -33,6 +33,8 @@ class ShapeTest(unittest.TestCase):
                                                     'test',
                                                     'shapefile',
                                                     'exampleshape.zip')
+        import pdb ; pdb.set_trace()
+
         chooselayer = pla.xpath_finduniq(
              "//input[@type='file'and @id='file-input']",
              100, 1)
