@@ -8,15 +8,6 @@ from selenium.webdriver.common.keys import Keys
 class ShapeTest(unittest.TestCase):
 
     def upload_shape_test(self):
-        # sph = os.path.join(os.path.expanduser("~"), 'oq-platform2',
-        #                                            'openquakeplatform',
-        #                                            'test',
-        #                                            'shapefile',
-        #                                            'exampleshape.zip')
-
-        sph = "~/oq-platform2/openquakeplatform/test/shapefile/exampleshape.zip"
-
-        print sph
 
         pla.get('')
 
@@ -37,6 +28,11 @@ class ShapeTest(unittest.TestCase):
         pla.wait_new_page(uploadlayer, '/layers/upload', timeout=10)
 
         # choose shape file
+        sph = os.path.join(os.path.expanduser("~"), 'oq-platform2',
+                                                    'openquakeplatform',
+                                                    'test',
+                                                    'shapefile',
+                                                    'exampleshape.zip')
         chooselayer = pla.xpath_finduniq(
              "//input[@type='file'and @id='file-input']",
              100, 1)
