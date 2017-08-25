@@ -166,7 +166,7 @@ paver start -b 0.0.0.0:8000
 
 # sleep 50000
 
-cd ~/ 
+# cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
 fi
