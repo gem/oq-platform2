@@ -6,7 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-# @unittest.skip("temporarily disabled")
+@unittest.skip("temporarily disabled")
 class ShapeTest(unittest.TestCase):
 
     def upload_shape_test(self):
