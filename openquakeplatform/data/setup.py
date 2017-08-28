@@ -2,7 +2,7 @@
 
 from geoserver.catalog import Catalog
 import geoserver.util
-from metadata import (folder_rest,
+from ghec import (folder_rest,
                       name_workspace,
                       folder_workspace,
                       name,
