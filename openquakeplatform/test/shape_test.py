@@ -41,7 +41,7 @@ class ShapeTest(unittest.TestCase):
         chooselayer = pla.xpath_finduniq(
              "//input[@type='file'and @id='file-input']",
              100, 1)
-        chooselayer.send_keys(Keys.sph)
+        chooselayer.send_keys(sph)
 
         # confirm upload layers
         confuplayer = pla.xpath_finduniq(
