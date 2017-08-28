@@ -6,7 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-@unittest.skip("temporarily disabled")
+# @unittest.skip("temporarily disabled")
 class ShapeTest(unittest.TestCase):
 
     def upload_shape_test(self):
@@ -42,7 +42,7 @@ class ShapeTest(unittest.TestCase):
         chooselayer = pla.xpath_finduniq(
              "//input[@type='file'and @id='file-input']",
              100, 1)
-        chooselayer.send_keys(sph)
+        chooselayer.upload.send_keys(sph)
 
         # confirm upload layers
         confuplayer = pla.xpath_finduniq(
