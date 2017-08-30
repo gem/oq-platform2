@@ -128,8 +128,8 @@ sudo apt-get install -y --force-yes python-oq-engine
 
 ## Install GeoNode and dependencies
 cd geonode
+pip install -r requirements.txt
 pip install -e .
-# pip install pygdal==1.11.3.3
 
 # Install the system python-gdal
 sudo apt-get install -y python-gdal
