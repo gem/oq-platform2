@@ -4,7 +4,7 @@ import atexit
 pla = Moon(jqheavy=True)
 pla.primary_set()
 
-def setup_package(autologin=True):
+def setup_package():
     pla.init()
 
 # turned off because nose run it at the wrong time
