@@ -2,7 +2,6 @@
 import os
 import unittest
 from openquakeplatform.test import pla
-from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
@@ -35,8 +34,6 @@ class ShapeTest(unittest.TestCase):
                                                     'test',
                                                     'shapefile',
                                                     'exampleshape.zip')
-
-        browser = webdriver.Firefox()
 
         chooselayer = pla.xpath_finduniq(
              "//input[@type='file'and @id='file-input']",
