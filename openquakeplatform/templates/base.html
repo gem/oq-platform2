@@ -94,13 +94,13 @@
 	     <ul class="nav navbar-nav toolbar">
 	        {% block tabs %}
                <li id="nav_calculate">
-                   <a href="/calculate">Calculate</a>
+                   <a href="{% url "calculate" %}">Calculate</a>
                </li>
                <li id="nav_share">
-                   <a href="/share">Share</a>
+                   <a href="{% url "share" %}">Share</a>
                </li>
                <li id="nav_explore">
-                   <a href="/explore">Explore</a>
+                   <a href="{% url "explore" %}">Explore</a>
                </li>
 	       <!-- <li id="nav_layers">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Data" %}<i class="fa fa-angle-down fa-lg"></i></a>
