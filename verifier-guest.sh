@@ -161,7 +161,6 @@ cd ~/geonode
 paver sync
 paver start -b 0.0.0.0:8000
 
-
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
