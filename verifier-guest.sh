@@ -29,18 +29,24 @@ geonode_setup_env()
 
 #function complete procedure for tests
 exec_test () {   
-    #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
+    #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
     sudo apt-get -y install python-pip wget
     pip install --upgrade pip
     pip install nose
-    pip install -U selenium==3.4.1
-    wget http://ftp.openquake.org/mirror/mozilla/geckodriver-v0.16.1-linux64.tar.gz ; tar zxvf geckodriver-v0.16.1-linux64.tar.gz ; sudo cp geckodriver /usr/local/bin
-
+    wget "http://ftp.openquake.org/common/selenium-deps"
+    GEM_FIREFOX_VERSION="$(dpkg-query --show -f '${Version}' firefox)"
+    . selenium-deps
+    wget "http://ftp.openquake.org/mirror/mozilla/geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
+    tar zxvf "geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
+    sudo cp geckodriver /usr/local/bin
+    pip install -U selenium==${GEM_SELENIUM_VERSION}
     git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
     
     # cd $GIT_REPO
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
+
+    #sleep 50000
 
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
@@ -109,6 +115,7 @@ sudo service postgresql restart
 
 #install numpy
 pip install numpy
+pip install shapely==1.5.13
 
 
 ## Clone GeoNode
@@ -151,12 +158,14 @@ paver setup
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
-cp ged_settings.py.tmpl ~/oq-platform2/openquakeplatform/ged_settings.py
 paver setup -l $LXC_IP -u localhost:8800 -s data
 
 cd ~/geonode
 paver sync
 paver start -b 0.0.0.0:8000
+
+
+# sleep 50000
 
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
@@ -167,4 +176,6 @@ fi
 cd ~/geonode
 sudo supervisorctl stop openquake-webui
 paver stop
+
+
 
