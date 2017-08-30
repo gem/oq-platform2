@@ -35,7 +35,6 @@ class ShapeTest(unittest.TestCase):
                                                     'test',
                                                     'shapefile',
                                                     'exampleshape.zip')
-        # import pdb ; pdb.set_trace()
 
         browser = webdriver.Firefox()
 
