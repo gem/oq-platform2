@@ -24,12 +24,12 @@ Exposure Export {{ block.super }}
 
 {% block extra_head %}
     {{block.super}}
-    <link rel="stylesheet" href="{{ STATIC_URL }}geonode/css/leaflet.draw.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}geonode/Leaflet.Coordinates/Leaflet.Coordinates-0.1.2.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/leaflet.draw.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}Leaflet.Coordinates/Leaflet.Coordinates-0.1.2.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}exposure/exposure-legend.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}exposure/exposure-export.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}exposure/bootstrap.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}geonode/css/absolute_center_spinner.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/absolute_center_spinner.css" />
 {% endblock extra_head %}
 
 {% block body_outer %}
@@ -143,8 +143,8 @@ Exposure Export {{ block.super }}
     {% endfor %}
     </script>
 
-    <script type="text/javascript" src="{{ STATIC_URL }}geonode/Leaflet.draw/dist/leaflet.draw.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}geonode/Leaflet.Coordinates/Leaflet.Coordinates-0.1.2.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}Leaflet.draw/dist/leaflet.draw.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}Leaflet.Coordinates/Leaflet.Coordinates-0.1.2.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}exposure/exposure_export.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}exposure/exposure_controller.js"></script>
 
