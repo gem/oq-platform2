@@ -204,7 +204,7 @@
             </ul>
           </div> <!--/.nav-collapse -->
         </div>
-        <div class="right-bar"><a href="https://www.globalquakemodel.org/" target="_blank"><img alt="oq-gem" src="/static/geonode/img/oq-gem.png" /></a></div>
+        <div class="right-bar"><a href="https://www.globalquakemodel.org/" target="_blank"><img alt="oq-gem" src="{{ STATIC_URL }}geonode/img/oq-gem.png" /></a></div>
       </nav>
       {% endblock header %}
       <div class="oq-menu">
@@ -310,7 +310,7 @@
         <div class="col-md-6 text-right">
           <ul class="list-unstyled">	  
             <li>{% trans "Powered by" %} <a href="http://geonode.org">{% trans "GeoNode" %}</a> <em>{% trans "version" %} {{ VERSION }}</em>
-               <a target="_blank" href="https://www.globalquakemodel.org/openquake/about/">{% trans "About" %}</a> | <a target="_blank" href="https://www.globalquakemodel.org/contact/">Contact us</a> | <a target="_blank" href="https://groups.google.com/forum/#%21forum/openquake-users">Feedback</a>
+               <a target="_blank" href="https://www.globalquakemodel.org/openquake/about/">{% trans "About" %}</a> | <a href="../account/terms">{% trans "Terms of use" %}</a>
             <li>
           </ul>
           <label class="hidden">{% trans "Language" %}</label>
