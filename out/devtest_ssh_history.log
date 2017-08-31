@@ -1,0 +1,627 @@
+
+
+
+
+
+
+
+Script started on Wed 29 Mar 2017 07:33:52 AM UTC
+]0;ubuntu@ubuntu16-x11-lxc-eph: ~[01;32mubuntu@ubuntu16-x11-lxc-eph[00m:[01;34m~[00m$ sudo apt-get update
+0% [Working]            Hit:1 http://archive.ubuntu.com/ubuntu xenial InRelease
+0% [Waiting for headers]                        Get:2 http://security.ubuntu.com/ubuntu xenial-security InRelease [102 kB]
+0% [Waiting for headers] [2 InRelease 14.2 kB/102 kB 14%]0% [1 InRelease gpgv 247 kB] [Waiting for headers] [2 InRelease 14.2 kB/102 kB                                                                                Get:3 http://archive.ubuntu.com/ubuntu xenial-updates InRelease [102 kB]
+0% [1 InRelease gpgv 247 kB] [3 InRelease 6,945 B/102 kB 7%] [2 InRelease 14.2                                                                                0% [1 InRelease gpgv 247 kB] [3 InRelease 101 kB/102 kB 99%]                                                            0% [1 InRelease gpgv 247 kB]                            0% [Working]0% [2 InRelease gpgv 102 kB]                            0% [Working]0% [3 InRelease gpgv 102 kB] [Waiting for headers]                                                  Get:4 http://security.ubuntu.com/ubuntu xenial-security/main amd64 Packages [232 kB]
+0% [3 InRelease gpgv 102 kB] [4 Packages 28.4 kB/232 kB 12%]                                                            0% [3 InRelease gpgv 102 kB]0% [4 Packages store 0 B] [3 InRelease gpgv 102 kB] [Waiting for headers]                                                                         31% [4 Packages store 0 B] [Waiting for headers]                                                Get:5 http://security.ubuntu.com/ubuntu xenial-security/main Translation-en [98.2 kB]
+                                                Get:6 http://security.ubuntu.com/ubuntu xenial-security/restricted amd64 Packages [7,428 B]
+                                                Get:7 http://security.ubuntu.com/ubuntu xenial-security/restricted Translation-en [2,428 B]
+                                                Get:8 http://security.ubuntu.com/ubuntu xenial-security/universe amd64 Packages [103 kB]
+                                                Get:9 http://security.ubuntu.com/ubuntu xenial-security/universe Translation-en [53.9 kB]
+41% [4 Packages store 0 B] [Waiting for headers] [9 Translation-en 53.9 kB/53.9                                                                               Get:10 http://security.ubuntu.com/ubuntu xenial-security/multiverse amd64 Packages [2,748 B]
+41% [4 Packages store 0 B] [Waiting for headers] [10 Packages 2,748 B/2,748 B 1                                                                               41% [4 Packages store 0 B] [Waiting for headers] [Waiting for headers]                                                                      Get:11 http://security.ubuntu.com/ubuntu xenial-security/multiverse Translation-en [1,232 B]
+41% [4 Packages store 0 B] [Waiting for headers] [11 Translation-en 1,232 B/1,2                                                                               41% [4 Packages store 0 B] [Waiting for headers]                                                Get:12 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 Packages [498 kB]
+45% [4 Packages store 0 B] [12 Packages 93.7 kB/498 kB 19%]                                                           46% [12 Packages 116 kB/498 kB 23%]46% [5 Translation-en store 0 B] [12 Packages 116 kB/498 kB 23%]                                                                52% [12 Packages 262 kB/498 kB 53%]52% [6 Packages store 0 B] [12 Packages 262 kB/498 kB 53%]                                                          53% [12 Packages 262 kB/498 kB 53%]53% [7 Translation-en store 0 B] [12 Packages 262 kB/498 kB 53%]                                                                53% [12 Packages 262 kB/498 kB 53%]53% [8 Packages store 0 B] [12 Packages 262 kB/498 kB 53%]                                                          60% [12 Packages 415 kB/498 kB 83%]60% [9 Translation-en store 0 B] [12 Packages 415 kB/498 kB 83%]                                                                60% [12 Packages 415 kB/498 kB 83%]60% [12 Packages 415 kB/498 kB 83%]61% [12 Packages 415 kB/498 kB 83%]                                   64% [Working]64% [12 Packages store 0 B]                           Get:13 http://archive.ubuntu.com/ubuntu xenial-updates/main Translation-en [200 kB]
+66% [12 Packages store 0 B] [13 Translation-en 43.2 kB/200 kB 22%]                                                                  72% [12 Packages store 0 B]                           Get:14 http://archive.ubuntu.com/ubuntu xenial-updates/restricted amd64 Packages [7,776 B]
+72% [12 Packages store 0 B] [14 Packages 6,713 B/7,776 B 86%]                                                             72% [12 Packages store 0 B]                           Get:15 http://archive.ubuntu.com/ubuntu xenial-updates/restricted Translation-en [2,548 B]
+72% [12 Packages store 0 B] [15 Translation-en 2,548 B/2,548 B 100%]                                                                    Get:16 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 Packages [448 kB]
+                                                                    74% [12 Packages store 0 B] [16 Packages 39.9 kB/448 kB 9%]                                                           85% [16 Packages 310 kB/448 kB 69%]85% [13 Translation-en store 0 B] [16 Packages 310 kB/448 kB 69%]                                                                 90% [13 Translation-en store 0 B]                                 Get:17 http://archive.ubuntu.com/ubuntu xenial-updates/universe Translation-en [171 kB]
+91% [13 Translation-en store 0 B] [17 Translation-en 17.2 kB/171 kB 10%]                                                                        97% [13 Translation-en store 0 B]                                 Get:18 http://archive.ubuntu.com/ubuntu xenial-updates/multiverse amd64 Packages [8,920 B]
+97% [13 Translation-en store 0 B] [18 Packages 8,036 B/8,920 B 90%]                                                                   97% [13 Translation-en store 0 B]                                 Get:19 http://archive.ubuntu.com/ubuntu xenial-updates/multiverse Translation-en [4,136 B]
+97% [13 Translation-en store 0 B] [19 Translation-en 1,374 B/4,136 B 33%]                                                                         97% [13 Translation-en store 0 B]                                 98% [Working]98% [Working]98% [Working]98% [16 Packages store 0 B]                           99% [Working]99% [17 Translation-en store 0 B]                                 99% [Working]99% [18 Packages store 0 B]                           100% [Working]100% [19 Translation-en store 0 B]                                  100% [Working]              Fetched 2,045 kB in 0s (2,889 kB/s)
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 7%Reading package lists... 7%Reading package lists... 11%Reading package lists... 11%Reading package lists... 11%Reading package lists... 11%Reading package lists... 12%Reading package lists... 12%Reading package lists... 57%Reading package lists... 57%Reading package lists... 58%Reading package lists... 83%Reading package lists... 83%Reading package lists... 84%Reading package lists... 84%Reading package lists... 84%Reading package lists... 84%Reading package lists... 88%Reading package lists... 88%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 93%Reading package lists... 93%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 96%Reading package lists... 96%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+]0;ubuntu@ubuntu16-x11-lxc-eph: ~[01;32mubuntu@ubuntu16-x11-lxc-eph[00m:[01;34m~[00m$ sudo apt-get update^C
+]0;ubuntu@ubuntu16-x11-lxc-eph: ~[01;32mubuntu@ubuntu16-x11-lxc-eph[00m:[01;34m~[00m$ exit
+Script started on Wed 05 Apr 2017 09:21:24 AM UTC
+]0;ubuntu@ubuntu16-x11-lxc-eph: ~[01;32mubuntu@ubuntu16-x11-lxc-eph[00m:[01;34m~[00m$ apt-get m[Kupdate
+W: chmod 0700 of directory /var/lib/apt/lists/partial failed - SetupAPTPartialDirectory (1: Operation not permitted)
+E: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)
+E: Unable to lock directory /var/lib/apt/lists/
+W: Problem unlinking the file /var/cache/apt/pkgcache.bin - RemoveCaches (13: Permission denied)
+W: Problem unlinking the file /var/cache/apt/srcpkgcache.bin - RemoveCaches (13: Permission denied)
+E: Could not open lock file /var/lib/dpkg/lock - open (13: Permission denied)
+E: Unable to lock the administration directory (/var/lib/dpkg/), are you root?
+]0;ubuntu@ubuntu16-x11-lxc-eph: ~[01;32mubuntu@ubuntu16-x11-lxc-eph[00m:[01;34m~[00m$ sudoapt-get update[1@s[1@u[1@d[1@o[1@ 
+0% [Working]            Hit:1 http://archive.ubuntu.com/ubuntu xenial InRelease
+0% [Connecting to security.ubuntu.com (91.189.91.26)]0% [1 InRelease gpgv 247 kB] [Waiting for headers] [Connecting to security.ubun                                                                               Get:2 http://archive.ubuntu.com/ubuntu xenial-updates InRelease [102 kB]
+0% [1 InRelease gpgv 247 kB] [2 InRelease 11.3 kB/102 kB 11%] [Connecting to se                                                                               0% [2 InRelease 66.3 kB/102 kB 65%] [Waiting for headers]                                                         0% [Waiting for headers]0% [2 InRelease gpgv 102 kB] [Waiting for headers]                                                  Get:3 http://security.ubuntu.com/ubuntu xenial-security InRelease [102 kB]
+0% [2 InRelease gpgv 102 kB] [3 InRelease 9,825 B/102 kB 10%]                                                             0% [3 InRelease 14.2 kB/102 kB 14%]                                   Get:4 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 Packages [508 kB]
+0% [4 Packages 14.3 kB/508 kB 3%] [3 InRelease 43.1 kB/102 kB 42%]                                                                  0% [4 Packages 201 kB/508 kB 40%]0% [3 InRelease gpgv 102 kB] [4 Packages 201 kB/508 kB 40%]                                                           39% [4 Packages 372 kB/508 kB 73%]                                  45% [Waiting for headers]45% [4 Packages store 0 B] [Waiting for headers] [Waiting for headers]                                                                      Get:5 http://security.ubuntu.com/ubuntu xenial-security/main amd64 Packages [243 kB]
+45% [4 Packages store 0 B] [Waiting for headers] [5 Packages 17.2 kB/243 kB 7%]                                                                               Get:6 http://archive.ubuntu.com/ubuntu xenial-updates/main Translation-en [205 kB]
+51% [4 Packages store 0 B] [6 Translation-en 54.8 kB/205 kB 27%] [5 Packages 11                                                                               57% [4 Packages store 0 B] [5 Packages 116 kB/243 kB 48%]                                                         Get:7 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 Packages [453 kB]
+57% [4 Packages store 0 B] [7 Packages 0 B/453 kB 0%] [5 Packages 116 kB/243 kB                                                                               69% [7 Packages 170 kB/453 kB 37%] [5 Packages 237 kB/243 kB 98%]69% [6 Translation-en store 0 B] [7 Packages 170 kB/453 kB 37%] [5 Packages 237                                                                               75% [6 Translation-en store 0 B] [7 Packages 322 kB/453 kB 71%]                                                               80% [7 Packages 448 kB/453 kB 99%] [Waiting for headers]80% [5 Packages store 0 B] [7 Packages 450 kB/453 kB 99%] [Waiting for headers]                                                                               Get:8 http://archive.ubuntu.com/ubuntu xenial-updates/universe Translation-en [173 kB]
+81% [5 Packages store 0 B] [8 Translation-en 3,265 B/173 kB 2%] [Waiting for he                                                                               Get:9 http://security.ubuntu.com/ubuntu xenial-security/main Translation-en [103 kB]
+87% [5 Packages store 0 B] [8 Translation-en 167 kB/173 kB 97%] [9 Translation-                                                                               90% [5 Packages store 0 B] [9 Translation-en 62.1 kB/103 kB 60%]                                                                91% [5 Packages store 0 B]                          Get:10 http://security.ubuntu.com/ubuntu xenial-security/universe amd64 Packages [108 kB]
+92% [5 Packages store 0 B] [10 Packages 9,279 B/108 kB 9%]                                                          93% [10 Packages 23.6 kB/108 kB 22%]93% [7 Packages store 0 B] [10 Packages 23.6 kB/108 kB 22%]                                                           Get:11 http://security.ubuntu.com/ubuntu xenial-security/universe Translation-en [55.2 kB]
+98% [7 Packages store 0 B] [11 Translation-en 47.3 kB/55.2 kB 86%]                                                                  98% [7 Packages store 0 B]                          98% [Working]98% [8 Translation-en store 0 B]                                99% [Working]99% [9 Translation-en store 0 B]                                99% [Working]99% [10 Packages store 0 B]                           100% [Working]100% [11 Translation-en store 0 B]                                  100% [Working]              Fetched 2,052 kB in 1s (1,448 kB/s)
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 7%Reading package lists... 7%Reading package lists... 11%Reading package lists... 11%Reading package lists... 11%Reading package lists... 11%Reading package lists... 11%Reading package lists... 11%Reading package lists... 39%Reading package lists... 57%Reading package lists... 57%Reading package lists... 82%Reading package lists... 82%Reading package lists... 83%Reading package lists... 83%Reading package lists... 84%Reading package lists... 84%Reading package lists... 87%Reading package lists... 87%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 93%Reading package lists... 93%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 96%Reading package lists... 96%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+]0;ubuntu@ubuntu16-x11-lxc-eph: ~[01;32mubuntu@ubuntu16-x11-lxc-eph[00m:[01;34m~[00m$ exit
+Script started on Thu 13 Apr 2017 03:03:10 PM UTC
+]0;ubuntu@ubuntu16-x11-lxc-eph: ~[01;32mubuntu@ubuntu16-x11-lxc-eph[00m:[01;34m~[00m$ ls -la
+total 84
+drwxr-xr-x 11 ubuntu ubuntu  4096 Jan  2 09:07 [0m[01;34m.[0m
+drwxr-xr-x  3 root   root    4096 Dec 23 09:07 [01;34m..[0m
+-rw-------  1 ubuntu ubuntu  1572 Apr  5 09:23 .bash_history
+-rw-r--r--  1 ubuntu ubuntu   220 Aug 31  2015 .bash_logout
+-rw-r--r--  1 ubuntu ubuntu  3771 Aug 31  2015 .bashrc
+drwx------ 10 ubuntu ubuntu  4096 Dec 23 13:17 [01;34m.cache[0m
+drwxrwxr-x 12 ubuntu ubuntu  4096 Dec 23 13:17 [01;34m.config[0m
+drwx------  3 ubuntu ubuntu  4096 Dec 23 09:15 [01;34m.dbus[0m
+drwx------  2 ubuntu ubuntu  4096 Dec 23 09:15 [01;34mDesktop[0m
+drwx------  2 ubuntu ubuntu  4096 Dec 23 13:17 [01;34m.gconf[0m
+drwx------  4 ubuntu ubuntu  4096 Dec 23 09:30 [01;34m.mozilla[0m
+drwx------  3 ubuntu ubuntu  4096 Dec 23 13:17 [01;34m.pki[0m
+-rw-r--r--  1 ubuntu ubuntu   655 Jun 24  2016 .profile
+drwx------  2 ubuntu ubuntu  4096 Mar 16 11:11 [01;34m.ssh[0m
+-rw-rw-r--  1 ubuntu ubuntu 16484 Apr 13 15:03 ssh.log
+-rw-r--r--  1 ubuntu ubuntu     0 Dec 23 09:08 .sudo_as_admin_successful
+drwx------  4 ubuntu ubuntu  4096 Dec 23 10:02 [01;34m.thumbnails[0m
+-rw-r--r--  1 ubuntu ubuntu    14 Apr  9  2016 .xscreensaver
+]0;ubuntu@ubuntu16-x11-lxc-eph: ~[01;32mubuntu@ubuntu16-x11-lxc-eph[00m:[01;34m~[00m$ sudo p[Kapt-get update
+0% [Working]            Hit:1 http://archive.ubuntu.com/ubuntu xenial InRelease
+0% [Waiting for headers]0% [1 InRelease gpgv 247 kB] [Waiting for headers] [Waiting for headers]                                                                        Get:2 http://archive.ubuntu.com/ubuntu xenial-updates InRelease [102 kB]
+0% [1 InRelease gpgv 247 kB] [2 InRelease 14.2 kB/102 kB 14%] [Waiting for head                                                                               Get:3 http://security.ubuntu.com/ubuntu xenial-security InRelease [102 kB]
+0% [1 InRelease gpgv 247 kB] [2 InRelease 14.2 kB/102 kB 14%] [3 InRelease 14.2                                                                               0% [1 InRelease gpgv 247 kB] [3 InRelease 43.1 kB/102 kB 42%]                                                             0% [3 InRelease 102 kB/102 kB 100%]                                   0% [Working]0% [2 InRelease gpgv 102 kB]                            0% [Working]0% [3 InRelease gpgv 102 kB]                            Get:4 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 Packages [512 kB]
+0% [3 InRelease gpgv 102 kB] [4 Packages 28.2 kB/512 kB 6%]                                                           44% [4 Packages 512 kB/512 kB 100%]                                   44% [Working]44% [4 Packages store 0 B] [Waiting for headers] [Waiting for headers]                                                                      Get:5 http://archive.ubuntu.com/ubuntu xenial-updates/main Translation-en [207 kB]
+44% [4 Packages store 0 B] [5 Translation-en 20.1 kB/207 kB 10%] [Waiting for h                                                                               52% [4 Packages store 0 B] [Waiting for headers]                                                Get:6 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 Packages [456 kB]
+53% [4 Packages store 0 B] [6 Packages 29.9 kB/456 kB 7%] [Waiting for headers]                                                                               Get:7 http://security.ubuntu.com/ubuntu xenial-security/main amd64 Packages [247 kB]
+64% [4 Packages store 0 B] [6 Packages 292 kB/456 kB 64%] [7 Packages 34.5 kB/2                                                                               74% [4 Packages store 0 B] [7 Packages 116 kB/247 kB 47%]                                                         Get:8 http://archive.ubuntu.com/ubuntu xenial-updates/universe Translation-en [175 kB]
+75% [4 Packages store 0 B] [8 Translation-en 32.6 kB/175 kB 19%] [7 Packages 1180% [4 Packages store 0 B] [Waiting for headers] [7 Packages 116 kB/247 kB 47%]                                                                               Get:9 http://archive.ubuntu.com/ubuntu xenial-updates/multiverse amd64 Packages [8,920 B]
+81% [4 Packages store 0 B] [9 Packages 8,920 B/8,920 B 100%] [7 Packages 116 kB                                                                               81% [4 Packages store 0 B] [7 Packages 116 kB/247 kB 47%]                                                         86% [4 Packages store 0 B]                          Get:10 http://security.ubuntu.com/ubuntu xenial-security/main Translation-en [105 kB]
+86% [4 Packages store 0 B] [10 Translation-en 20.1 kB/105 kB 19%]                                                                 90% [4 Packages store 0 B]                          Get:11 http://security.ubuntu.com/ubuntu xenial-security/universe amd64 Packages [108 kB]
+92% [4 Packages store 0 B] [11 Packages 53.4 kB/108 kB 49%]                                                           94% [4 Packages store 0 B]                          Get:12 http://security.ubuntu.com/ubuntu xenial-security/universe Translation-en [55.5 kB]
+95% [4 Packages store 0 B] [12 Translation-en 27.0 kB/55.5 kB 49%]                                                                  96% [4 Packages store 0 B]                          Get:13 http://security.ubuntu.com/ubuntu xenial-security/multiverse amd64 Packages [2,748 B]
+96% [4 Packages store 0 B] [13 Packages 2,748 B/2,748 B 100%]                                                             96% [4 Packages store 0 B]                          96% [Working]96% [5 Translation-en store 0 B]                                97% [Working]97% [6 Packages store 0 B]                          97% [Working]97% [8 Translation-en store 0 B]                                98% [Working]98% [9 Packages store 0 B]                          98% [Working]98% [7 Packages store 0 B]                          98% [Working]98% [10 Translation-en store 0 B]                                 99% [Working]99% [11 Packages store 0 B]                           99% [Working]99% [12 Translation-en store 0 B]                                 100% [Working]100% [13 Packages store 0 B]                            100% [Working]              Fetched 2,081 kB in 0s (2,645 kB/s)
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 7%Reading package lists... 7%Reading package lists... 11%Reading package lists... 11%Reading package lists... 11%Reading package lists... 11%Reading package lists... 11%Reading package lists... 11%Reading package lists... 57%Reading package lists... 57%Reading package lists... 65%Reading package lists... 82%Reading package lists... 82%Reading package lists... 83%Reading package lists... 83%Reading package lists... 84%Reading package lists... 84%Reading package lists... 87%Reading package lists... 87%Reading package lists... 89%Reading package lists... 89%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 93%Reading package lists... 93%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 96%Reading package lists... 96%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 98%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+]0;ubuntu@ubuntu16-x11-lxc-eph: ~[01;32mubuntu@ubuntu16-x11-lxc-eph[00m:[01;34m~[00m$ sudo apt-get update[C[K[K[K[Kgrade
+Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+Calculating upgrade... 0%Calculating upgrade... 50%Calculating upgrade... Done
+The following packages will be upgraded:
+  apt apt-transport-https apt-utils base-files bsdutils chromium-browser
+  chromium-browser-l10n chromium-codecs-ffmpeg-extra console-setup
+  console-setup-linux dbus dbus-x11 desktop-file-utils eject firefox
+  gstreamer1.0-plugins-base humanity-icon-theme init init-system-helpers
+  initramfs-tools initramfs-tools-bin initramfs-tools-core
+  keyboard-configuration klibc-utils libapparmor1 libapt-inst2.0 libapt-pkg5.0
+  libblkid1 libc-bin libc-dev-bin libc6 libc6-dev libdbus-1-3 libdns-export162
+  libdrm-amdgpu1 libdrm-intel1 libdrm-nouveau2 libdrm-radeon1 libdrm2
+  libegl1-mesa libfdisk1 libfreetype6 libgbm1 libgl1-mesa-dri libgl1-mesa-glx
+  libglapi-mesa libglib2.0-0 libglib2.0-data libgnutls-openssl27 libgnutls30
+  libgssapi-krb5-2 libgstreamer-plugins-base1.0-0 libgstreamer1.0-0 libgtk-3-0
+  libgtk-3-bin libgtk-3-common libhogweed4 libicu55 libisc-export160
+  libk5crypto3 libklibc libkrb5-3 libkrb5support0 libmount1 libnettle6 libnss3
+  libnss3-nssdb libpam-systemd libsmartcols1 libssl1.0.0 libsystemd0 libtiff5
+  libudev1 libuuid1 libvncclient1 libvncserver1 libwayland-egl1-mesa libxml2
+  libxpm4 linux-libc-dev locales makedev mount multiarch-support openssl
+  resolvconf sudo systemd systemd-sysv udev util-linux xdg-utils
+92 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 162 MB of archives.
+After this operation, 27.2 MB of additional disk space will be used.
+Do you want to continue? [Y/n] 
+0% [Working]            Get:1 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 base-files amd64 9.4ubuntu4.4 [60.2 kB]
+0% [1 base-files 14.2 kB/60.2 kB 24%]                                     0% [Working]            Get:2 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 bsdutils amd64 1:2.27.1-6ubuntu3.2 [51.8 kB]
+0% [2 bsdutils 4,818 B/51.8 kB 9%]                                  0% [Working]            Get:3 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 init-system-helpers all 1.29ubuntu4 [32.3 kB]
+0% [3 init-system-helpers 18.3 kB/32.3 kB 57%]                                              1% [Working]            Get:4 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 init amd64 1.29ubuntu4 [4,624 B]
+1% [4 init 4,624 B/4,624 B 100%]                                1% [Working]            Get:5 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 util-linux amd64 2.27.1-6ubuntu3.2 [848 kB]
+1% [5 util-linux 4,096 B/848 kB 0%]                                   2% [Working]            Get:6 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 mount amd64 2.27.1-6ubuntu3.2 [121 kB]
+2% [6 mount 0 B/121 kB 0%]                          2% [Working]            Get:7 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libc6-dev amd64 2.23-0ubuntu7 [2,080 kB]
+2% [7 libc6-dev 0 B/2,080 kB 0%]                                3% [Working]            Get:8 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libc-dev-bin amd64 2.23-0ubuntu7 [68.6 kB]
+3% [8 libc-dev-bin 10.8 kB/68.6 kB 16%]                                       3% [Working]            Get:9 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 linux-libc-dev amd64 4.4.0-72.93 [836 kB]
+3% [9 linux-libc-dev 0 B/836 kB 0%]                                   4% [Working]            Get:10 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libc6 amd64 2.23-0ubuntu7 [2,590 kB]
+4% [10 libc6 0 B/2,590 kB 0%]                             5% [Working]            Get:11 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 locales all 2.23-0ubuntu7 [3,222 kB]
+5% [11 locales 0 B/3,222 kB 0%]                               7% [Working]            Get:12 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libc-bin amd64 2.23-0ubuntu7 [622 kB]
+7% [12 libc-bin 29.8 kB/622 kB 5%]                                  8% [Working]            Get:13 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libapt-pkg5.0 amd64 1.2.19 [707 kB]
+8% [13 libapt-pkg5.0 21.0 kB/707 kB 3%]                                       8% [Working]            Get:14 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libapt-inst2.0 amd64 1.2.19 [55.8 kB]
+8% [14 libapt-inst2.0 23.3 kB/55.8 kB 42%]                                          9% [Working]            Get:15 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 apt amd64 1.2.19 [1,042 kB]
+9% [15 apt 7,853 B/1,042 kB 1%]                               9% [Working]            Get:16 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 apt-utils amd64 1.2.19 [196 kB]
+9% [16 apt-utils 20.9 kB/196 kB 11%]                                    10% [Working]             Get:17 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 dbus-x11 amd64 1.10.6-1ubuntu3.3 [21.4 kB]
+10% [17 dbus-x11 20.5 kB/21.4 kB 96%]                                     10% [Working]             Get:18 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 dbus amd64 1.10.6-1ubuntu3.3 [142 kB]
+10% [18 dbus 17.0 kB/142 kB 12%]                                10% [Working]             Get:19 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdbus-1-3 amd64 1.10.6-1ubuntu3.3 [161 kB]
+10% [19 libdbus-1-3 6,056 B/161 kB 4%]                                      10% [Working]             Get:20 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libapparmor1 amd64 2.10.95-0ubuntu2.6 [31.7 kB]
+10% [20 libapparmor1 0 B/31.7 kB 0%]                                    11% [Working]             Get:21 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libuuid1 amd64 2.27.1-6ubuntu3.2 [15.7 kB]
+11% [21 libuuid1 9,830 B/15.7 kB 63%]                                     11% [Working]             Get:22 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libblkid1 amd64 2.27.1-6ubuntu3.2 [107 kB]
+11% [22 libblkid1 59.4 kB/107 kB 56%]                                     11% [Working]             Get:23 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libsystemd0 amd64 229-4ubuntu16 [205 kB]
+11% [23 libsystemd0 0 B/205 kB 0%]                                  12% [Working]             Get:24 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpam-systemd amd64 229-4ubuntu16 [115 kB]
+12% [24 libpam-systemd 53.2 kB/115 kB 46%]                                          12% [Working]             Get:25 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 systemd amd64 229-4ubuntu16 [3,756 kB]
+12% [25 systemd 4,096 B/3,756 kB 0%]                                    14% [Working]             Get:26 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 udev amd64 229-4ubuntu16 [992 kB]
+14% [26 udev 16.4 kB/992 kB 2%]                               15% [Working]             Get:27 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libudev1 amd64 229-4ubuntu16 [55.2 kB]
+15% [27 libudev1 30.3 kB/55.2 kB 55%]                                     15% [Working]             Get:28 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 klibc-utils amd64 2.0.4-8ubuntu1.16.04.3 [108 kB]
+15% [28 klibc-utils 25.4 kB/108 kB 24%]                                       15% [Working]             Get:29 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 initramfs-tools all 0.122ubuntu8.8 [8,610 B]
+15% [29 initramfs-tools 8,610 B/8,610 B 100%]                                             15% [Working]             Get:30 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 initramfs-tools-core all 0.122ubuntu8.8 [42.6 kB]
+15% [30 initramfs-tools-core 0 B/42.6 kB 0%]                                            16% [Working]             Get:31 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 initramfs-tools-bin amd64 0.122ubuntu8.8 [9,618 B]
+16% [31 initramfs-tools-bin 0 B/9,618 B 0%]                                           16% [Working]             Get:32 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libklibc amd64 2.0.4-8ubuntu1.16.04.3 [41.3 kB]
+16% [32 libklibc 24.6 kB/41.3 kB 60%]                                     16% [Working]             Get:33 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 systemd-sysv amd64 229-4ubuntu16 [12.7 kB]
+16% [33 systemd-sysv 12.7 kB/12.7 kB 100%]                                          16% [Working]             Get:34 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libmount1 amd64 2.27.1-6ubuntu3.2 [114 kB]
+16% [34 libmount1 42.7 kB/114 kB 37%]                                     17% [Working]             Get:35 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 chromium-browser-l10n all 57.0.2987.98-0ubuntu0.16.04.1276 [3,387 kB]
+17% [35 chromium-browser-l10n 49.2 kB/3,387 kB 1%]                                                  18% [Working]             Get:36 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libfreetype6 amd64 2.6.1-0.1ubuntu2.1 [316 kB]
+18% [36 libfreetype6 14.2 kB/316 kB 4%]                                       19% [Working]             Get:37 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libglib2.0-0 amd64 2.48.2-0ubuntu1 [1,119 kB]
+19% [37 libglib2.0-0 25.5 kB/1,119 kB 2%]                                         20% [Working]             Get:38 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libnss3-nssdb all 2:3.26.2-0ubuntu0.16.04.2 [10.6 kB]
+20% [38 libnss3-nssdb 10.6 kB/10.6 kB 100%]                                           20% [Working]             Get:39 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libnss3 amd64 2:3.26.2-0ubuntu0.16.04.2 [1,153 kB]
+20% [39 libnss3 8,192 B/1,153 kB 1%]                                    21% [Working]             Get:40 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 xdg-utils all 1.1.1-1ubuntu1.16.04.1 [59.7 kB]
+21% [40 xdg-utils 32.9 kB/59.7 kB 55%]                                      21% [Working]             Get:41 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 chromium-browser amd64 57.0.2987.98-0ubuntu0.16.04.1276 [63.7 MB]
+21% [41 chromium-browser 40.8 kB/63.7 MB 0%]35% [41 chromium-browser 27.9 MB/63.7 MB 44%]50% [41 chromium-browser 58.1 MB/63.7 MB 91%]                                             53% [Working]             Get:42 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 chromium-codecs-ffmpeg-extra amd64 57.0.2987.98-0ubuntu0.16.04.1276 [993 kB]
+53% [42 chromium-codecs-ffmpeg-extra 33.6 kB/993 kB 3%]                                                       53% [Working]             Get:43 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libfdisk1 amd64 2.27.1-6ubuntu3.2 [138 kB]
+53% [43 libfdisk1 23.5 kB/138 kB 17%]                                     54% [Working]             Get:44 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libsmartcols1 amd64 2.27.1-6ubuntu3.2 [63.4 kB]
+54% [44 libsmartcols1 16.0 kB/63.4 kB 25%]                                          54% [Working]             Get:45 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 multiarch-support amd64 2.23-0ubuntu7 [6,826 B]
+54% [45 multiarch-support 0 B/6,826 B 0%]                                         54% [Working]             Get:46 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 makedev all 2.3.1-93ubuntu2~ubuntu16.04.1 [24.4 kB]
+54% [46 makedev 10.8 kB/24.4 kB 44%]                                    54% [Working]             Get:47 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 console-setup-linux all 1.108ubuntu15.3 [985 kB]
+54% [47 console-setup-linux 51.6 kB/985 kB 5%]                                              55% [Working]             Get:48 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 console-setup all 1.108ubuntu15.3 [118 kB]
+55% [48 console-setup 49.8 kB/118 kB 42%]                                         55% [Working]             Get:49 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 keyboard-configuration all 1.108ubuntu15.3 [657 kB]
+55% [49 keyboard-configuration 0 B/657 kB 0%]                                             56% [Working]             Get:50 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 eject amd64 2.1.5+deb1+cvs20081104-13.1ubuntu0.16.04.1 [23.0 kB]
+56% [50 eject 23.0 kB/23.0 kB 100%]                                   56% [Working]             Get:51 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libisc-export160 amd64 1:9.10.3.dfsg.P4-8ubuntu1.5 [153 kB]
+56% [51 libisc-export160 37.5 kB/153 kB 25%]                                            56% [Working]             Get:52 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdns-export162 amd64 1:9.10.3.dfsg.P4-8ubuntu1.5 [665 kB]
+56% [52 libdns-export162 15.4 kB/665 kB 2%]                                           57% [Working]             Get:53 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libhogweed4 amd64 3.2-1ubuntu0.16.04.1 [136 kB]
+57% [53 libhogweed4 5,249 B/136 kB 4%]                                      57% [Working]             Get:54 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libnettle6 amd64 3.2-1ubuntu0.16.04.1 [93.5 kB]
+57% [54 libnettle6 65.5 kB/93.5 kB 70%]                                       57% [Working]             Get:55 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgnutls-openssl27 amd64 3.4.10-4ubuntu1.2 [21.9 kB]
+57% [55 libgnutls-openssl27 21.9 kB/21.9 kB 100%]                                                 58% [Working]             Get:56 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgnutls30 amd64 3.4.10-4ubuntu1.2 [547 kB]
+58% [56 libgnutls30 0 B/547 kB 0%]                                  58% [Working]             Get:57 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libssl1.0.0 amd64 1.0.2g-1ubuntu4.6 [1,082 kB]
+58% [57 libssl1.0.0 57.6 kB/1,082 kB 5%]                                        59% [Working]             Get:58 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 resolvconf all 1.78ubuntu4 [51.1 kB]
+59% [58 resolvconf 23.8 kB/51.1 kB 47%]                                       59% [Working]             Get:59 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 sudo amd64 1.8.16-0ubuntu1.3 [390 kB]
+59% [59 sudo 37.9 kB/390 kB 10%]                                60% [Working]             Get:60 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 apt-transport-https amd64 1.2.19 [26.0 kB]
+60% [60 apt-transport-https 26.0 kB/26.0 kB 100%]                                                 60% [Working]             Get:61 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdrm2 amd64 2.4.70-1~ubuntu16.04.1 [27.9 kB]
+60% [61 libdrm2 14.8 kB/27.9 kB 53%]                                    60% [Working]             Get:62 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libglib2.0-data all 2.48.2-0ubuntu1 [132 kB]
+60% [62 libglib2.0-data 52.1 kB/132 kB 40%]                                           60% [Working]             Get:63 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgssapi-krb5-2 amd64 1.13.2+dfsg-5ubuntu2 [120 kB]
+60% [63 libgssapi-krb5-2 51.4 kB/120 kB 43%]                                            61% [Working]             Get:64 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libkrb5-3 amd64 1.13.2+dfsg-5ubuntu2 [273 kB]
+61% [64 libkrb5-3 62.1 kB/273 kB 23%]                                     61% [Working]             Get:65 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libkrb5support0 amd64 1.13.2+dfsg-5ubuntu2 [30.8 kB]
+61% [65 libkrb5support0 30.8 kB/30.8 kB 100%]                                             61% [Working]             Get:66 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libk5crypto3 amd64 1.13.2+dfsg-5ubuntu2 [81.2 kB]
+61% [66 libk5crypto3 16.4 kB/81.2 kB 20%]                                         61% [Waiting for headers]                         Get:67 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libicu55 amd64 55.1-7ubuntu0.1 [7,654 kB]
+61% [67 libicu55 65.5 kB/7,654 kB 1%]                                     65% [Working]             Get:68 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libxml2 amd64 2.9.3+dfsg1-1ubuntu0.2 [697 kB]
+65% [68 libxml2 17.9 kB/697 kB 3%]                                  66% [Working]             Get:69 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 openssl amd64 1.0.2g-1ubuntu4.6 [492 kB]
+66% [69 openssl 41.1 kB/492 kB 8%]                                  66% [Working]             Get:70 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 desktop-file-utils amd64 0.22-1ubuntu5.1 [43.8 kB]
+66% [70 desktop-file-utils 43.8 kB/43.8 kB 100%]                                                67% [Working]             Get:71 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgtk-3-common all 3.18.9-1ubuntu3.2 [206 kB]
+67% [71 libgtk-3-common 29.3 kB/206 kB 14%]                                           67% [Working]             Get:72 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgbm1 amd64 12.0.6-0ubuntu0.16.04.1 [24.6 kB]
+67% [72 libgbm1 19.8 kB/24.6 kB 81%]                                    67% [Working]             Get:73 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdrm-amdgpu1 amd64 2.4.70-1~ubuntu16.04.1 [16.5 kB]
+67% [73 libdrm-amdgpu1 0 B/16.5 kB 0%]                                      67% [Working]             Get:74 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdrm-intel1 amd64 2.4.70-1~ubuntu16.04.1 [56.0 kB]
+67% [74 libdrm-intel1 43.7 kB/56.0 kB 78%]                                          68% [Working]             Get:75 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdrm-nouveau2 amd64 2.4.70-1~ubuntu16.04.1 [16.3 kB]
+68% [75 libdrm-nouveau2 16.3 kB/16.3 kB 100%]                                             68% [Working]             Get:76 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdrm-radeon1 amd64 2.4.70-1~ubuntu16.04.1 [21.6 kB]
+68% [76 libdrm-radeon1 21.6 kB/21.6 kB 100%]                                            68% [Working]             Get:77 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libwayland-egl1-mesa amd64 12.0.6-0ubuntu0.16.04.1 [5,860 B]
+68% [77 libwayland-egl1-mesa 5,860 B/5,860 B 100%]                                                  68% [Working]             Get:78 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libegl1-mesa amd64 12.0.6-0ubuntu0.16.04.1 [73.9 kB]
+68% [78 libegl1-mesa 8,418 B/73.9 kB 11%]                                         69% [Working]             Get:79 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgl1-mesa-dri amd64 12.0.6-0ubuntu0.16.04.1 [4,344 kB]
+69% [79 libgl1-mesa-dri 16.4 kB/4,344 kB 0%]                                            71% [Working]             Get:80 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgtk-3-0 amd64 3.18.9-1ubuntu3.2 [2,355 kB]
+71% [80 libgtk-3-0 46.1 kB/2,355 kB 2%]                                       72% [Working]             Get:81 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 firefox amd64 52.0.2+build1-0ubuntu0.16.04.1 [46.8 MB]
+72% [81 firefox 0 B/46.8 MB 0%]86% [81 firefox 26.7 MB/46.8 MB 57%]                                    96% [Working]             Get:82 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgstreamer1.0-0 amd64 1.8.3-1~ubuntu0.1 [769 kB]
+96% [82 libgstreamer1.0-0 57.3 kB/769 kB 7%]                                            96% [Working]             Get:83 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgstreamer-plugins-base1.0-0 amd64 1.8.3-1ubuntu0.2 [593 kB]
+97% [Waiting for headers]                         Get:84 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 gstreamer1.0-plugins-base amd64 1.8.3-1ubuntu0.2 [496 kB]
+97% [84 gstreamer1.0-plugins-base 15.6 kB/496 kB 3%]                                                    97% [Working]             Get:85 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 humanity-icon-theme all 0.6.10.1 [1,289 kB]
+97% [85 humanity-icon-theme 43.6 kB/1,289 kB 3%]                                                98% [Working]             Get:86 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgl1-mesa-glx amd64 12.0.6-0ubuntu0.16.04.1 [130 kB]
+98% [86 libgl1-mesa-glx 65.0 kB/130 kB 50%]                                           98% [Working]             Get:87 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libglapi-mesa amd64 12.0.6-0ubuntu0.16.04.1 [22.9 kB]
+98% [87 libglapi-mesa 22.9 kB/22.9 kB 100%]                                           99% [Waiting for headers]                         Get:88 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgtk-3-bin amd64 3.18.9-1ubuntu3.2 [53.8 kB]
+99% [88 libgtk-3-bin 42.4 kB/53.8 kB 79%]                                         99% [Waiting for headers]                         Get:89 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libtiff5 amd64 4.0.6-1ubuntu0.1 [146 kB]
+99% [89 libtiff5 53.8 kB/146 kB 37%]                                    99% [Waiting for headers]                         Get:90 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libvncclient1 amd64 0.9.10+dfsg-3ubuntu0.16.04.1 [54.3 kB]
+99% [90 libvncclient1 39.0 kB/54.3 kB 72%]                                          99% [Waiting for headers]                         Get:91 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libvncserver1 amd64 0.9.10+dfsg-3ubuntu0.16.04.1 [122 kB]
+100% [91 libvncserver1 50.0 kB/122 kB 41%]                                          100% [Waiting for headers]                          Get:92 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libxpm4 amd64 1:3.5.11-1ubuntu0.16.04.1 [33.8 kB]
+100% [92 libxpm4 33.8 kB/33.8 kB 100%]                                      100% [Working]              Fetched 162 MB in 4s (38.1 MB/s)
+Extracting templates from packages: 32%Extracting templates from packages: 65%Extracting templates from packages: 97%Extracting templates from packages: 100%
+Preconfiguring packages ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../base-files_9.4ubuntu4.4_amd64.deb ...
+Unpacking base-files (9.4ubuntu4.4) over (9.4ubuntu4.3) ...
+Setting up base-files (9.4ubuntu4.4) ...
+Installing new version of config file /etc/issue ...
+Installing new version of config file /etc/issue.net ...
+Installing new version of config file /etc/lsb-release ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../bsdutils_1%3a2.27.1-6ubuntu3.2_amd64.deb ...
+Unpacking bsdutils (1:2.27.1-6ubuntu3.2) over (1:2.27.1-6ubuntu3.1) ...
+Setting up bsdutils (1:2.27.1-6ubuntu3.2) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../init-system-helpers_1.29ubuntu4_all.deb ...
+Unpacking init-system-helpers (1.29ubuntu4) over (1.29ubuntu3) ...
+Setting up init-system-helpers (1.29ubuntu4) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../init_1.29ubuntu4_amd64.deb ...
+Unpacking init (1.29ubuntu4) over (1.29ubuntu3) ...
+Setting up init (1.29ubuntu4) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../util-linux_2.27.1-6ubuntu3.2_amd64.deb ...
+Unpacking util-linux (2.27.1-6ubuntu3.2) over (2.27.1-6ubuntu3.1) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+Processing triggers for mime-support (3.59ubuntu1) ...
+Setting up util-linux (2.27.1-6ubuntu3.2) ...
+Processing triggers for systemd (229-4ubuntu13) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../mount_2.27.1-6ubuntu3.2_amd64.deb ...
+Unpacking mount (2.27.1-6ubuntu3.2) over (2.27.1-6ubuntu3.1) ...
+Setting up mount (2.27.1-6ubuntu3.2) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../libc6-dev_2.23-0ubuntu7_amd64.deb ...
+Unpacking libc6-dev:amd64 (2.23-0ubuntu7) over (2.23-0ubuntu5) ...
+Preparing to unpack .../libc-dev-bin_2.23-0ubuntu7_amd64.deb ...
+Unpacking libc-dev-bin (2.23-0ubuntu7) over (2.23-0ubuntu5) ...
+Preparing to unpack .../linux-libc-dev_4.4.0-72.93_amd64.deb ...
+Unpacking linux-libc-dev:amd64 (4.4.0-72.93) over (4.4.0-57.78) ...
+Preparing to unpack .../libc6_2.23-0ubuntu7_amd64.deb ...
+Unpacking libc6:amd64 (2.23-0ubuntu7) over (2.23-0ubuntu5) ...
+Setting up libc6:amd64 (2.23-0ubuntu7) ...
+Processing triggers for libc-bin (2.23-0ubuntu5) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../locales_2.23-0ubuntu7_all.deb ...
+Unpacking locales (2.23-0ubuntu7) over (2.23-0ubuntu5) ...
+Preparing to unpack .../libc-bin_2.23-0ubuntu7_amd64.deb ...
+Unpacking libc-bin (2.23-0ubuntu7) over (2.23-0ubuntu5) ...
+Setting up libc-bin (2.23-0ubuntu7) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../libapt-pkg5.0_1.2.19_amd64.deb ...
+Unpacking libapt-pkg5.0:amd64 (1.2.19) over (1.2.15ubuntu0.2) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Setting up libapt-pkg5.0:amd64 (1.2.19) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../libapt-inst2.0_1.2.19_amd64.deb ...
+Unpacking libapt-inst2.0:amd64 (1.2.19) over (1.2.15ubuntu0.2) ...
+Preparing to unpack .../archives/apt_1.2.19_amd64.deb ...
+Unpacking apt (1.2.19) over (1.2.15ubuntu0.2) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Setting up apt (1.2.19) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../apt-utils_1.2.19_amd64.deb ...
+Unpacking apt-utils (1.2.19) over (1.2.15ubuntu0.2) ...
+Preparing to unpack .../dbus-x11_1.10.6-1ubuntu3.3_amd64.deb ...
+Unpacking dbus-x11 (1.10.6-1ubuntu3.3) over (1.10.6-1ubuntu3.1) ...
+Preparing to unpack .../dbus_1.10.6-1ubuntu3.3_amd64.deb ...
+Unpacking dbus (1.10.6-1ubuntu3.3) over (1.10.6-1ubuntu3.1) ...
+Preparing to unpack .../libdbus-1-3_1.10.6-1ubuntu3.3_amd64.deb ...
+Unpacking libdbus-1-3:amd64 (1.10.6-1ubuntu3.3) over (1.10.6-1ubuntu3.1) ...
+Preparing to unpack .../libapparmor1_2.10.95-0ubuntu2.6_amd64.deb ...
+Unpacking libapparmor1:amd64 (2.10.95-0ubuntu2.6) over (2.10.95-0ubuntu2.5) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Setting up libapparmor1:amd64 (2.10.95-0ubuntu2.6) ...
+Processing triggers for systemd (229-4ubuntu13) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../libuuid1_2.27.1-6ubuntu3.2_amd64.deb ...
+Unpacking libuuid1:amd64 (2.27.1-6ubuntu3.2) over (2.27.1-6ubuntu3.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Setting up libuuid1:amd64 (2.27.1-6ubuntu3.2) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../libblkid1_2.27.1-6ubuntu3.2_amd64.deb ...
+Unpacking libblkid1:amd64 (2.27.1-6ubuntu3.2) over (2.27.1-6ubuntu3.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Setting up libblkid1:amd64 (2.27.1-6ubuntu3.2) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../libsystemd0_229-4ubuntu16_amd64.deb ...
+Unpacking libsystemd0:amd64 (229-4ubuntu16) over (229-4ubuntu13) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Setting up libsystemd0:amd64 (229-4ubuntu16) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../libpam-systemd_229-4ubuntu16_amd64.deb ...
+Unpacking libpam-systemd:amd64 (229-4ubuntu16) over (229-4ubuntu13) ...
+Preparing to unpack .../systemd_229-4ubuntu16_amd64.deb ...
+Unpacking systemd (229-4ubuntu16) over (229-4ubuntu13) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+Setting up systemd (229-4ubuntu16) ...
+addgroup: The group `systemd-journal' already exists as a system group. Exiting.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../udev_229-4ubuntu16_amd64.deb ...
+Unpacking udev (229-4ubuntu16) over (229-4ubuntu13) ...
+Preparing to unpack .../libudev1_229-4ubuntu16_amd64.deb ...
+Unpacking libudev1:amd64 (229-4ubuntu16) over (229-4ubuntu13) ...
+Processing triggers for systemd (229-4ubuntu16) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Setting up libudev1:amd64 (229-4ubuntu16) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../klibc-utils_2.0.4-8ubuntu1.16.04.3_amd64.deb ...
+Unpacking klibc-utils (2.0.4-8ubuntu1.16.04.3) over (2.0.4-8ubuntu1.16.04.2) ...
+Preparing to unpack .../initramfs-tools_0.122ubuntu8.8_all.deb ...
+Unpacking initramfs-tools (0.122ubuntu8.8) over (0.122ubuntu8.7) ...
+Preparing to unpack .../initramfs-tools-core_0.122ubuntu8.8_all.deb ...
+Unpacking initramfs-tools-core (0.122ubuntu8.8) over (0.122ubuntu8.7) ...
+Preparing to unpack .../initramfs-tools-bin_0.122ubuntu8.8_amd64.deb ...
+Unpacking initramfs-tools-bin (0.122ubuntu8.8) over (0.122ubuntu8.7) ...
+Preparing to unpack .../libklibc_2.0.4-8ubuntu1.16.04.3_amd64.deb ...
+Unpacking libklibc (2.0.4-8ubuntu1.16.04.3) over (2.0.4-8ubuntu1.16.04.2) ...
+Preparing to unpack .../systemd-sysv_229-4ubuntu16_amd64.deb ...
+Unpacking systemd-sysv (229-4ubuntu16) over (229-4ubuntu13) ...
+Setting up systemd-sysv (229-4ubuntu16) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../libmount1_2.27.1-6ubuntu3.2_amd64.deb ...
+Unpacking libmount1:amd64 (2.27.1-6ubuntu3.2) over (2.27.1-6ubuntu3.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Setting up libmount1:amd64 (2.27.1-6ubuntu3.2) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59088 files and directories currently installed.)
+Preparing to unpack .../chromium-browser-l10n_57.0.2987.98-0ubuntu0.16.04.1276_all.deb ...
+Unpacking chromium-browser-l10n (57.0.2987.98-0ubuntu0.16.04.1276) over (55.0.2883.87-0ubuntu0.16.04.1263) ...
+Preparing to unpack .../libfreetype6_2.6.1-0.1ubuntu2.1_amd64.deb ...
+Unpacking libfreetype6:amd64 (2.6.1-0.1ubuntu2.1) over (2.6.1-0.1ubuntu2) ...
+Preparing to unpack .../libglib2.0-0_2.48.2-0ubuntu1_amd64.deb ...
+Unpacking libglib2.0-0:amd64 (2.48.2-0ubuntu1) over (2.48.1-1~ubuntu16.04.1) ...
+Preparing to unpack .../libnss3-nssdb_2%3a3.26.2-0ubuntu0.16.04.2_all.deb ...
+Unpacking libnss3-nssdb (2:3.26.2-0ubuntu0.16.04.2) over (2:3.23-0ubuntu0.16.04.1) ...
+Preparing to unpack .../libnss3_2%3a3.26.2-0ubuntu0.16.04.2_amd64.deb ...
+Unpacking libnss3:amd64 (2:3.26.2-0ubuntu0.16.04.2) over (2:3.23-0ubuntu0.16.04.1) ...
+Preparing to unpack .../xdg-utils_1.1.1-1ubuntu1.16.04.1_all.deb ...
+Unpacking xdg-utils (1.1.1-1ubuntu1.16.04.1) over (1.1.1-1ubuntu1) ...
+Preparing to unpack .../chromium-browser_57.0.2987.98-0ubuntu0.16.04.1276_amd64.deb ...
+Unpacking chromium-browser (57.0.2987.98-0ubuntu0.16.04.1276) over (55.0.2883.87-0ubuntu0.16.04.1263) ...
+Preparing to unpack .../chromium-codecs-ffmpeg-extra_57.0.2987.98-0ubuntu0.16.04.1276_amd64.deb ...
+Unpacking chromium-codecs-ffmpeg-extra (57.0.2987.98-0ubuntu0.16.04.1276) over (55.0.2883.87-0ubuntu0.16.04.1263) ...
+Preparing to unpack .../libfdisk1_2.27.1-6ubuntu3.2_amd64.deb ...
+Unpacking libfdisk1:amd64 (2.27.1-6ubuntu3.2) over (2.27.1-6ubuntu3.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Processing triggers for mime-support (3.59ubuntu1) ...
+Processing triggers for hicolor-icon-theme (0.15-0ubuntu1) ...
+Setting up libfdisk1:amd64 (2.27.1-6ubuntu3.2) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59106 files and directories currently installed.)
+Preparing to unpack .../libsmartcols1_2.27.1-6ubuntu3.2_amd64.deb ...
+Unpacking libsmartcols1:amd64 (2.27.1-6ubuntu3.2) over (2.27.1-6ubuntu3.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Setting up libsmartcols1:amd64 (2.27.1-6ubuntu3.2) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59106 files and directories currently installed.)
+Preparing to unpack .../multiarch-support_2.23-0ubuntu7_amd64.deb ...
+Unpacking multiarch-support (2.23-0ubuntu7) over (2.23-0ubuntu5) ...
+Setting up multiarch-support (2.23-0ubuntu7) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 59106 files and directories currently installed.)
+Preparing to unpack .../makedev_2.3.1-93ubuntu2~ubuntu16.04.1_all.deb ...
+Unpacking makedev (2.3.1-93ubuntu2~ubuntu16.04.1) over (2.3.1-93ubuntu1) ...
+Preparing to unpack .../console-setup-linux_1.108ubuntu15.3_all.deb ...
+Unpacking console-setup-linux (1.108ubuntu15.3) over (1.108ubuntu15.2) ...
+Preparing to unpack .../console-setup_1.108ubuntu15.3_all.deb ...
+Obsolete conffile /etc/init.d/keyboard-setup has been modified by you, renaming to .dpkg-bak
+Unpacking console-setup (1.108ubuntu15.3) over (1.108ubuntu15.2) ...
+Preparing to unpack .../keyboard-configuration_1.108ubuntu15.3_all.deb ...
+Unpacking keyboard-configuration (1.108ubuntu15.3) over (1.108ubuntu15.2) ...
+Preparing to unpack .../eject_2.1.5+deb1+cvs20081104-13.1ubuntu0.16.04.1_amd64.deb ...
+Unpacking eject (2.1.5+deb1+cvs20081104-13.1ubuntu0.16.04.1) over (2.1.5+deb1+cvs20081104-13.1) ...
+Preparing to unpack .../libisc-export160_1%3a9.10.3.dfsg.P4-8ubuntu1.5_amd64.deb ...
+Unpacking libisc-export160 (1:9.10.3.dfsg.P4-8ubuntu1.5) over (1:9.10.3.dfsg.P4-8ubuntu1.3) ...
+Preparing to unpack .../libdns-export162_1%3a9.10.3.dfsg.P4-8ubuntu1.5_amd64.deb ...
+Unpacking libdns-export162 (1:9.10.3.dfsg.P4-8ubuntu1.5) over (1:9.10.3.dfsg.P4-8ubuntu1.3) ...
+Preparing to unpack .../libhogweed4_3.2-1ubuntu0.16.04.1_amd64.deb ...
+Unpacking libhogweed4:amd64 (3.2-1ubuntu0.16.04.1) over (3.2-1) ...
+Preparing to unpack .../libnettle6_3.2-1ubuntu0.16.04.1_amd64.deb ...
+Unpacking libnettle6:amd64 (3.2-1ubuntu0.16.04.1) over (3.2-1) ...
+Preparing to unpack .../libgnutls-openssl27_3.4.10-4ubuntu1.2_amd64.deb ...
+Unpacking libgnutls-openssl27:amd64 (3.4.10-4ubuntu1.2) over (3.4.10-4ubuntu1.1) ...
+Preparing to unpack .../libgnutls30_3.4.10-4ubuntu1.2_amd64.deb ...
+Unpacking libgnutls30:amd64 (3.4.10-4ubuntu1.2) over (3.4.10-4ubuntu1.1) ...
+Preparing to unpack .../libssl1.0.0_1.0.2g-1ubuntu4.6_amd64.deb ...
+Unpacking libssl1.0.0:amd64 (1.0.2g-1ubuntu4.6) over (1.0.2g-1ubuntu4.5) ...
+Preparing to unpack .../resolvconf_1.78ubuntu4_all.deb ...
+Unpacking resolvconf (1.78ubuntu4) over (1.78ubuntu2) ...
+Preparing to unpack .../sudo_1.8.16-0ubuntu1.3_amd64.deb ...
+Unpacking sudo (1.8.16-0ubuntu1.3) over (1.8.16-0ubuntu1.2) ...
+Preparing to unpack .../apt-transport-https_1.2.19_amd64.deb ...
+Unpacking apt-transport-https (1.2.19) over (1.2.15ubuntu0.2) ...
+Preparing to unpack .../libdrm2_2.4.70-1~ubuntu16.04.1_amd64.deb ...
+Unpacking libdrm2:amd64 (2.4.70-1~ubuntu16.04.1) over (2.4.67-1ubuntu0.16.04.2) ...
+Preparing to unpack .../libglib2.0-data_2.48.2-0ubuntu1_all.deb ...
+Unpacking libglib2.0-data (2.48.2-0ubuntu1) over (2.48.1-1~ubuntu16.04.1) ...
+Preparing to unpack .../libgssapi-krb5-2_1.13.2+dfsg-5ubuntu2_amd64.deb ...
+Unpacking libgssapi-krb5-2:amd64 (1.13.2+dfsg-5ubuntu2) over (1.13.2+dfsg-5) ...
+Preparing to unpack .../libkrb5-3_1.13.2+dfsg-5ubuntu2_amd64.deb ...
+Unpacking libkrb5-3:amd64 (1.13.2+dfsg-5ubuntu2) over (1.13.2+dfsg-5) ...
+Preparing to unpack .../libkrb5support0_1.13.2+dfsg-5ubuntu2_amd64.deb ...
+Unpacking libkrb5support0:amd64 (1.13.2+dfsg-5ubuntu2) over (1.13.2+dfsg-5) ...
+Preparing to unpack .../libk5crypto3_1.13.2+dfsg-5ubuntu2_amd64.deb ...
+Unpacking libk5crypto3:amd64 (1.13.2+dfsg-5ubuntu2) over (1.13.2+dfsg-5) ...
+Preparing to unpack .../libicu55_55.1-7ubuntu0.1_amd64.deb ...
+Unpacking libicu55:amd64 (55.1-7ubuntu0.1) over (55.1-7) ...
+Preparing to unpack .../libxml2_2.9.3+dfsg1-1ubuntu0.2_amd64.deb ...
+Unpacking libxml2:amd64 (2.9.3+dfsg1-1ubuntu0.2) over (2.9.3+dfsg1-1ubuntu0.1) ...
+Preparing to unpack .../openssl_1.0.2g-1ubuntu4.6_amd64.deb ...
+Unpacking openssl (1.0.2g-1ubuntu4.6) over (1.0.2g-1ubuntu4.5) ...
+Preparing to unpack .../desktop-file-utils_0.22-1ubuntu5.1_amd64.deb ...
+Unpacking desktop-file-utils (0.22-1ubuntu5.1) over (0.22-1ubuntu5) ...
+Preparing to unpack .../libgtk-3-common_3.18.9-1ubuntu3.2_all.deb ...
+Unpacking libgtk-3-common (3.18.9-1ubuntu3.2) over (3.18.9-1ubuntu3.1) ...
+Preparing to unpack .../libgbm1_12.0.6-0ubuntu0.16.04.1_amd64.deb ...
+Unpacking libgbm1:amd64 (12.0.6-0ubuntu0.16.04.1) over (11.2.0-1ubuntu2.2) ...
+Preparing to unpack .../libdrm-amdgpu1_2.4.70-1~ubuntu16.04.1_amd64.deb ...
+Unpacking libdrm-amdgpu1:amd64 (2.4.70-1~ubuntu16.04.1) over (2.4.67-1ubuntu0.16.04.2) ...
+Preparing to unpack .../libdrm-intel1_2.4.70-1~ubuntu16.04.1_amd64.deb ...
+Unpacking libdrm-intel1:amd64 (2.4.70-1~ubuntu16.04.1) over (2.4.67-1ubuntu0.16.04.2) ...
+Preparing to unpack .../libdrm-nouveau2_2.4.70-1~ubuntu16.04.1_amd64.deb ...
+Unpacking libdrm-nouveau2:amd64 (2.4.70-1~ubuntu16.04.1) over (2.4.67-1ubuntu0.16.04.2) ...
+Preparing to unpack .../libdrm-radeon1_2.4.70-1~ubuntu16.04.1_amd64.deb ...
+Unpacking libdrm-radeon1:amd64 (2.4.70-1~ubuntu16.04.1) over (2.4.67-1ubuntu0.16.04.2) ...
+Preparing to unpack .../libwayland-egl1-mesa_12.0.6-0ubuntu0.16.04.1_amd64.deb ...
+Unpacking libwayland-egl1-mesa:amd64 (12.0.6-0ubuntu0.16.04.1) over (11.2.0-1ubuntu2.2) ...
+Preparing to unpack .../libegl1-mesa_12.0.6-0ubuntu0.16.04.1_amd64.deb ...
+Unpacking libegl1-mesa:amd64 (12.0.6-0ubuntu0.16.04.1) over (11.2.0-1ubuntu2.2) ...
+Preparing to unpack .../libgl1-mesa-dri_12.0.6-0ubuntu0.16.04.1_amd64.deb ...
+Unpacking libgl1-mesa-dri:amd64 (12.0.6-0ubuntu0.16.04.1) over (11.2.0-1ubuntu2.2) ...
+Preparing to unpack .../libgtk-3-0_3.18.9-1ubuntu3.2_amd64.deb ...
+Unpacking libgtk-3-0:amd64 (3.18.9-1ubuntu3.2) over (3.18.9-1ubuntu3.1) ...
+Preparing to unpack .../firefox_52.0.2+build1-0ubuntu0.16.04.1_amd64.deb ...
+Unpacking firefox (52.0.2+build1-0ubuntu0.16.04.1) over (50.1.0+build2-0ubuntu0.16.04.1) ...
+Preparing to unpack .../libgstreamer1.0-0_1.8.3-1~ubuntu0.1_amd64.deb ...
+Unpacking libgstreamer1.0-0:amd64 (1.8.3-1~ubuntu0.1) over (1.8.2-1~ubuntu1) ...
+Preparing to unpack .../libgstreamer-plugins-base1.0-0_1.8.3-1ubuntu0.2_amd64.deb ...
+Unpacking libgstreamer-plugins-base1.0-0:amd64 (1.8.3-1ubuntu0.2) over (1.8.2-1ubuntu0.2) ...
+Preparing to unpack .../gstreamer1.0-plugins-base_1.8.3-1ubuntu0.2_amd64.deb ...
+Unpacking gstreamer1.0-plugins-base:amd64 (1.8.3-1ubuntu0.2) over (1.8.2-1ubuntu0.2) ...
+Preparing to unpack .../humanity-icon-theme_0.6.10.1_all.deb ...
+Unpacking humanity-icon-theme (0.6.10.1) over (0.6.10) ...
+Preparing to unpack .../libgl1-mesa-glx_12.0.6-0ubuntu0.16.04.1_amd64.deb ...
+Unpacking libgl1-mesa-glx:amd64 (12.0.6-0ubuntu0.16.04.1) over (11.2.0-1ubuntu2.2) ...
+Preparing to unpack .../libglapi-mesa_12.0.6-0ubuntu0.16.04.1_amd64.deb ...
+Unpacking libglapi-mesa:amd64 (12.0.6-0ubuntu0.16.04.1) over (11.2.0-1ubuntu2.2) ...
+Preparing to unpack .../libgtk-3-bin_3.18.9-1ubuntu3.2_amd64.deb ...
+Leaving 'diversion of /usr/sbin/update-icon-caches to /usr/sbin/update-icon-caches.gtk2 by libgtk-3-bin'
+Leaving 'diversion of /usr/share/man/man8/update-icon-caches.8.gz to /usr/share/man/man8/update-icon-caches.gtk2.8.gz by libgtk-3-bin'
+Unpacking libgtk-3-bin (3.18.9-1ubuntu3.2) over (3.18.9-1ubuntu3.1) ...
+Preparing to unpack .../libtiff5_4.0.6-1ubuntu0.1_amd64.deb ...
+Unpacking libtiff5:amd64 (4.0.6-1ubuntu0.1) over (4.0.6-1) ...
+Preparing to unpack .../libvncclient1_0.9.10+dfsg-3ubuntu0.16.04.1_amd64.deb ...
+Unpacking libvncclient1:amd64 (0.9.10+dfsg-3ubuntu0.16.04.1) over (0.9.10+dfsg-3build1) ...
+Preparing to unpack .../libvncserver1_0.9.10+dfsg-3ubuntu0.16.04.1_amd64.deb ...
+Unpacking libvncserver1:amd64 (0.9.10+dfsg-3ubuntu0.16.04.1) over (0.9.10+dfsg-3build1) ...
+Preparing to unpack .../libxpm4_1%3a3.5.11-1ubuntu0.16.04.1_amd64.deb ...
+Unpacking libxpm4:amd64 (1:3.5.11-1ubuntu0.16.04.1) over (1:3.5.11-1) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+Processing triggers for systemd (229-4ubuntu16) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Processing triggers for mime-support (3.59ubuntu1) ...
+Setting up libc-dev-bin (2.23-0ubuntu7) ...
+Setting up linux-libc-dev:amd64 (4.4.0-72.93) ...
+Setting up libc6-dev:amd64 (2.23-0ubuntu7) ...
+Setting up locales (2.23-0ubuntu7) ...
+Generating locales (this might take a while)...
+  en_AG.UTF-8... done
+  en_AU.UTF-8... done
+  en_BW.UTF-8... done
+  en_CA.UTF-8... done
+  en_DK.UTF-8... done
+  en_GB.UTF-8... done
+  en_HK.UTF-8... done
+  en_IE.UTF-8... done
+  en_IN.UTF-8... done
+  en_NG.UTF-8... done
+  en_NZ.UTF-8... done
+  en_PH.UTF-8... done
+  en_SG.UTF-8... done
+  en_US.UTF-8... done
+  en_ZA.UTF-8... done
+  en_ZM.UTF-8... done
+  en_ZW.UTF-8... done
+Generation complete.
+Setting up libapt-inst2.0:amd64 (1.2.19) ...
+Setting up apt-utils (1.2.19) ...
+Setting up libdbus-1-3:amd64 (1.10.6-1ubuntu3.3) ...
+Setting up dbus (1.10.6-1ubuntu3.3) ...
+A reboot is required to replace the running dbus-daemon.
+Please reboot the system when convenient.
+Setting up dbus-x11 (1.10.6-1ubuntu3.3) ...
+Setting up libpam-systemd:amd64 (229-4ubuntu16) ...
+Setting up udev (229-4ubuntu16) ...
+addgroup: The group `input' already exists as a system group. Exiting.
+update-initramfs: deferring update (trigger activated)
+Setting up libklibc (2.0.4-8ubuntu1.16.04.3) ...
+Setting up klibc-utils (2.0.4-8ubuntu1.16.04.3) ...
+Setting up initramfs-tools-bin (0.122ubuntu8.8) ...
+Setting up initramfs-tools-core (0.122ubuntu8.8) ...
+Setting up initramfs-tools (0.122ubuntu8.8) ...
+update-initramfs: deferring update (trigger activated)
+Setting up libfreetype6:amd64 (2.6.1-0.1ubuntu2.1) ...
+Setting up libglib2.0-0:amd64 (2.48.2-0ubuntu1) ...
+Setting up xdg-utils (1.1.1-1ubuntu1.16.04.1) ...
+Setting up chromium-codecs-ffmpeg-extra (57.0.2987.98-0ubuntu0.16.04.1276) ...
+Setting up makedev (2.3.1-93ubuntu2~ubuntu16.04.1) ...
+LXC container detected, aborting due to LXC managed /dev.
+Setting up keyboard-configuration (1.108ubuntu15.3) ...
+update-rc.d: warning: start and stop actions are no longer supported; falling back to defaults
+update-initramfs: deferring update (trigger activated)
+Setting up console-setup-linux (1.108ubuntu15.3) ...
+Installing new version of config file /etc/console-setup/compose.ISO-8859-1.inc ...
+Installing new version of config file /etc/console-setup/compose.ISO-8859-13.inc ...
+Installing new version of config file /etc/console-setup/compose.ISO-8859-14.inc ...
+Installing new version of config file /etc/console-setup/compose.ISO-8859-15.inc ...
+Installing new version of config file /etc/console-setup/compose.ISO-8859-2.inc ...
+Installing new version of config file /etc/console-setup/compose.ISO-8859-3.inc ...
+Installing new version of config file /etc/console-setup/compose.ISO-8859-4.inc ...
+Installing new version of config file /etc/console-setup/compose.ISO-8859-7.inc ...
+Installing new version of config file /etc/console-setup/compose.ISO-8859-9.inc ...
+Setting up console-setup (1.108ubuntu15.3) ...
+Your console font configuration will be updated the next time your system
+boots. If you want to update it now, run 'setupcon' from a virtual console.
+update-initramfs: deferring update (trigger activated)
+Setting up eject (2.1.5+deb1+cvs20081104-13.1ubuntu0.16.04.1) ...
+Setting up libisc-export160 (1:9.10.3.dfsg.P4-8ubuntu1.5) ...
+Setting up libdns-export162 (1:9.10.3.dfsg.P4-8ubuntu1.5) ...
+Setting up libnettle6:amd64 (3.2-1ubuntu0.16.04.1) ...
+Setting up libhogweed4:amd64 (3.2-1ubuntu0.16.04.1) ...
+Setting up libgnutls30:amd64 (3.4.10-4ubuntu1.2) ...
+Setting up libgnutls-openssl27:amd64 (3.4.10-4ubuntu1.2) ...
+Setting up libssl1.0.0:amd64 (1.0.2g-1ubuntu4.6) ...
+Setting up resolvconf (1.78ubuntu4) ...
+Setting up sudo (1.8.16-0ubuntu1.3) ...
+Setting up apt-transport-https (1.2.19) ...
+Setting up libdrm2:amd64 (2.4.70-1~ubuntu16.04.1) ...
+Setting up libglib2.0-data (2.48.2-0ubuntu1) ...
+Setting up libkrb5support0:amd64 (1.13.2+dfsg-5ubuntu2) ...
+Setting up libk5crypto3:amd64 (1.13.2+dfsg-5ubuntu2) ...
+Setting up libkrb5-3:amd64 (1.13.2+dfsg-5ubuntu2) ...
+Setting up libgssapi-krb5-2:amd64 (1.13.2+dfsg-5ubuntu2) ...
+Setting up libicu55:amd64 (55.1-7ubuntu0.1) ...
+Setting up libxml2:amd64 (2.9.3+dfsg1-1ubuntu0.2) ...
+Setting up openssl (1.0.2g-1ubuntu4.6) ...
+Setting up desktop-file-utils (0.22-1ubuntu5.1) ...
+Installing new version of config file /etc/gnome/defaults.list ...
+Setting up libgtk-3-common (3.18.9-1ubuntu3.2) ...
+Setting up libgbm1:amd64 (12.0.6-0ubuntu0.16.04.1) ...
+Setting up libdrm-amdgpu1:amd64 (2.4.70-1~ubuntu16.04.1) ...
+Setting up libdrm-intel1:amd64 (2.4.70-1~ubuntu16.04.1) ...
+Setting up libdrm-nouveau2:amd64 (2.4.70-1~ubuntu16.04.1) ...
+Setting up libdrm-radeon1:amd64 (2.4.70-1~ubuntu16.04.1) ...
+Setting up libgl1-mesa-dri:amd64 (12.0.6-0ubuntu0.16.04.1) ...
+Installing new version of config file /etc/drirc ...
+Setting up libegl1-mesa:amd64 (12.0.6-0ubuntu0.16.04.1) ...
+Setting up libwayland-egl1-mesa:amd64 (12.0.6-0ubuntu0.16.04.1) ...
+Setting up libgtk-3-0:amd64 (3.18.9-1ubuntu3.2) ...
+Setting up firefox (52.0.2+build1-0ubuntu0.16.04.1) ...
+Installing new version of config file /etc/apparmor.d/usr.bin.firefox ...
+Please restart all running instances of firefox, or you will experience problems.
+Setting up libgstreamer1.0-0:amd64 (1.8.3-1~ubuntu0.1) ...
+Setcap worked! gst-ptp-helper is not suid!
+Setting up libgstreamer-plugins-base1.0-0:amd64 (1.8.3-1ubuntu0.2) ...
+Setting up gstreamer1.0-plugins-base:amd64 (1.8.3-1ubuntu0.2) ...
+Setting up humanity-icon-theme (0.6.10.1) ...
+Setting up libglapi-mesa:amd64 (12.0.6-0ubuntu0.16.04.1) ...
+Setting up libgl1-mesa-glx:amd64 (12.0.6-0ubuntu0.16.04.1) ...
+Setting up libgtk-3-bin (3.18.9-1ubuntu3.2) ...
+Setting up libtiff5:amd64 (4.0.6-1ubuntu0.1) ...
+Setting up libvncclient1:amd64 (0.9.10+dfsg-3ubuntu0.16.04.1) ...
+Setting up libvncserver1:amd64 (0.9.10+dfsg-3ubuntu0.16.04.1) ...
+Setting up libxpm4:amd64 (1:3.5.11-1ubuntu0.16.04.1) ...
+Setting up libnss3-nssdb (2:3.26.2-0ubuntu0.16.04.2) ...
+Setting up libnss3:amd64 (2:3.26.2-0ubuntu0.16.04.2) ...
+Setting up chromium-browser (57.0.2987.98-0ubuntu0.16.04.1276) ...
+Setting up chromium-browser-l10n (57.0.2987.98-0ubuntu0.16.04.1276) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Processing triggers for initramfs-tools (0.122ubuntu8.8) ...
+Processing triggers for resolvconf (1.78ubuntu4) ...
+]0;ubuntu@ubuntu16-x11-lxc-eph: ~[01;32mubuntu@ubuntu16-x11-lxc-eph[00m:[01;34m~[00m$ exit
+exit
+echo begin
+scp -t .
+scp -t .
+scp -t .
+export GEM_SET_DEBUG="true"
+
+
+export GEM_GIT_REPO="git://github.com/gem"
+export GEM_GIT_PACKAGE="oq-platform2"
+rem_sig_hand() {
+    trap ERR
+    echo 'signal trapped'
+}
+trap rem_sig_hand ERR
+set -e
+if [ $GEM_SET_DEBUG ]; then
+    set -x
+fi
+
+"./verifier-guest.sh" "pla26-csenew" "2.6.x" "oq-platform2" "10.0.3.86" ""
+
+cd ~/oq-platform2; . platform-env/bin/activate ; cd geonode ; sleep 5 ; faver stop
+scp -f ssh.log
