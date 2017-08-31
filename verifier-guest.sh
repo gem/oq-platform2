@@ -29,13 +29,17 @@ geonode_setup_env()
 
 #function complete procedure for tests
 exec_test () {   
-    #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose 
+    #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
     sudo apt-get -y install python-pip wget
     pip install --upgrade pip
     pip install nose
-    pip install -U selenium==3.4.1
-    wget http://ftp.openquake.org/mirror/mozilla/geckodriver-v0.16.1-linux64.tar.gz ; tar zxvf geckodriver-v0.16.1-linux64.tar.gz ; sudo cp geckodriver /usr/local/bin
-
+    wget "http://ftp.openquake.org/common/selenium-deps"
+    GEM_FIREFOX_VERSION="$(dpkg-query --show -f '${Version}' firefox)"
+    . selenium-deps
+    wget "http://ftp.openquake.org/mirror/mozilla/geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
+    tar zxvf "geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
+    sudo cp geckodriver /usr/local/bin
+    pip install -U selenium==${GEM_SELENIUM_VERSION}
     git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
     
@@ -109,7 +113,7 @@ sudo service postgresql restart
 
 #install numpy
 pip install numpy
-
+pip install shapely==1.5.13
 
 ## Clone GeoNode
 git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
@@ -122,8 +126,8 @@ sudo apt-get install -y --force-yes python-oq-engine
 
 ## Install GeoNode and dependencies
 cd geonode
+pip install -r requirements.txt
 pip install -e .
-# pip install pygdal==1.11.3.3
 
 # Install the system python-gdal
 sudo apt-get install -y python-gdal
