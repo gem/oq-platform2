@@ -18,8 +18,8 @@
 #    <https://www.gnu.org/licenses/agpl.html>.
 
 
-from django.conf.urls.defaults import patterns
-from django.conf.urls.defaults import url
+from django.conf.urls import patterns
+from django.conf.urls import url
 from django.views.generic import TemplateView
 from openquakeplatform.exposure.views import (validate_export,
                                               get_country_list,
