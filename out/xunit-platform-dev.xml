@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite name="nosetests" tests="3" errors="0" failures="0" skip="2"><testcase classname="openquakeplatform.test.dumb_test.DumbTest" name="dumb_test" time="0.000"></testcase><testcase classname="openquakeplatform.test.irv_test.IrvTest" name="irv_test" time="0.000"><skipped type="unittest.case.SkipTest" message="temporarily disabled"><![CDATA[SkipTest: temporarily disabled
+]]></skipped></testcase><testcase classname="openquakeplatform.test.isc_test.IscTest" name="isc_test" time="0.000"><skipped type="unittest.case.SkipTest" message="temporarily disabled"><![CDATA[SkipTest: temporarily disabled
+]]></skipped></testcase></testsuite>
