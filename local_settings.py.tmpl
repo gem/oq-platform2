@@ -92,6 +92,8 @@ STATICFILES_DIRS = [
 ]
 
 TEMPLATES[0]['DIRS'].insert(0, os.path.join(OQPLATFORM_ROOT, 'templates'))
+TEMPLATES[0]['OPTIONS']['context_processors'].append(
+    'openquakeplatform.utils.oq_context_processor')
 
 ALLOWED_DOCUMENT_TYPES = [
     'csv', 'doc', 'docx', 'xls', 'xlsx', 'odt', 'ods', 'pdf',
