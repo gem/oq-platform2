@@ -133,6 +133,11 @@ Exposure Export {{ block.super }}
 {% block extra_script %}
     {{block.super}}
 
+    <style>
+       #countries-list { z-index: 0; }
+    </style>
+
+
     <script>
     // URL params, captured and rendered to the template:
     var EXPOSURE_MAX_EXPORT_AREA_SQ_DEG = {{ EXPOSURE_MAX_EXPORT_AREA_SQ_DEG }}
