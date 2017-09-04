@@ -77,7 +77,7 @@ fi
 
 
 sudo apt update
-sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
+sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless python-gdbm
 
 git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
 ## Check if exist and  create the virtualenv
@@ -115,7 +115,6 @@ sudo service postgresql restart
 pip install numpy
 pip install shapely==1.5.13
 
-
 ## Clone GeoNode
 git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
 
@@ -137,7 +136,8 @@ cd ~
 # Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
-sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
+cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
+cp $HOME/"$GIT_REPO"/ged_settings.py.tmpl ~/oq-platform2/openquakeplatform/ged_settings.py
 
 ## clone and setting pythonpath taxtweb and oq-platform2
 cd ~

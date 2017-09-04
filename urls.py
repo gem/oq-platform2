@@ -214,7 +214,8 @@ urlpatterns += patterns('',
                          include('openquakeplatform_taxtweb.urls',
                                  namespace='taxtweb')),
                         (r'^ipt/',
-                         include('openquakeplatform_ipt.urls',
+                         include('openquakeplatform_ipt.urls', 
                                  namespace='ipt')),
-
+                        (r'^exposure/',
+                         include('openquakeplatform.exposure.urls')),
                         )
