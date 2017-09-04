@@ -138,6 +138,7 @@ cd ~
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
 sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
+sudo cp $HOME/"$GIT_REPO"/ged_settings.py.tmpl ~/oq-platform2/openquakeplatform/ged_settings.py
 
 ## clone and setting pythonpath taxtweb and oq-platform2
 cd ~
