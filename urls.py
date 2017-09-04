@@ -34,7 +34,6 @@ from geonode.api.views import verify_token, roles, users, admin_role
 import autocomplete_light
 
 
-
 # Setup Django Admin
 autocomplete_light.autodiscover()
 
@@ -119,20 +118,20 @@ urlpatterns = patterns('',
                        url(r'^account/ajax_login$', 'geonode.views.ajax_login',
                            name='account_ajax_login'),
                        url(r'^account/ajax_lookup$',
-                           'geonode.views.ajax_lookup', 
+                           'geonode.views.ajax_lookup',
                            name='account_ajax_lookup'),
 
                        # Meta
                        url(r'^lang\.js$',
-                           TemplateView.as_view(template_name='lang.js', 
+                           TemplateView.as_view(template_name='lang.js',
                                                 content_type='text/javascript'),
                            name='lang'),
 
                        url(r'^jsi18n/$',
-                           'django.views.i18n.javascript_catalog', 
+                           'django.views.i18n.javascript_catalog',
                            js_info_dict, name='jscat'),
                        url(r'^sitemap\.xml$',
-                           'django.contrib.sitemaps.views.sitemap', 
+                           'django.contrib.sitemaps.views.sitemap',
                            {'sitemaps': sitemaps},
                            name='sitemap'),
 
@@ -219,4 +218,3 @@ urlpatterns += patterns('',
                         (r'^exposure/',
                          include('openquakeplatform.exposure.urls')),
                         )
-                       ) 
