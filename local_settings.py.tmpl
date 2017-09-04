@@ -92,6 +92,8 @@ STATICFILES_DIRS = [
 ]
 
 TEMPLATES[0]['DIRS'].insert(0, os.path.join(OQPLATFORM_ROOT, 'templates'))
+TEMPLATES[0]['OPTIONS']['context_processors'].append(
+    'openquakeplatform.utils.oq_context_processor')
 
 ALLOWED_DOCUMENT_TYPES = [
     'csv', 'doc', 'docx', 'xls', 'xlsx', 'odt', 'ods', 'pdf',
@@ -99,6 +101,14 @@ ALLOWED_DOCUMENT_TYPES = [
     'tar', 'tgz', 'tbz', 'tar.gz', 'tar.bz2'
 ]
 MAX_DOCUMENT_SIZE = 100
+
+try:
+    from openquakeplatform import ged_settings
+    DATABASES.update(ged_settings.DATABASES)
+except ImportError:
+    import warnings
+    warnings.warn('Global Exposure Database (GED) configuration not found!',
+ImportWarning)
 
 INSTALLED_APPS = (
 
@@ -160,6 +170,7 @@ INSTALLED_APPS = (
     # taxtweb
     'openquakeplatform_taxtweb',
     'openquakeplatform_ipt',
+    'openquakeplatform.exposure',
 ) + GEONODE_APPS
 
 MIDDLEWARE_CLASSES = (
