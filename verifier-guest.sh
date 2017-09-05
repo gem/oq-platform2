@@ -113,11 +113,10 @@ sudo service postgresql restart
 
 #install numpy
 pip install numpy
-pip install shapely==1.5.13
-
 
 ## Clone GeoNode
-git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
+# git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
+git clone -n https://github.com/GeoNode/geonode.git
 
 ## install engine
 sudo apt-get install -y software-properties-common
@@ -125,8 +124,12 @@ sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
 sudo apt-get update
 sudo apt-get install -y --force-yes python-oq-engine
 
+## more stable dependencies installed
+pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
+
 ## Install GeoNode and dependencies
 cd geonode
+git checkout 1c65c9b
 pip install -r requirements.txt
 pip install -e .
 
@@ -137,7 +140,7 @@ cd ~
 # Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
-sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
+sudo cp $HOME/$GIT_REPO/urls.py $HOME/geonode/geonode
 
 ## clone and setting pythonpath taxtweb and oq-platform2
 cd ~
