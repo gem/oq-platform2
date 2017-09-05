@@ -20,7 +20,9 @@ GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
 
-echo "gem test latest $GEM_TEST_LATEST"
+echo "env BEGIN"
+env
+echo "env END"
 exit 0
 
 geonode_setup_env()
