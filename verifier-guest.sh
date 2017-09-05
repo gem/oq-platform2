@@ -180,7 +180,7 @@ fi
 if [ "$GEM_TEST_LATEST" = "true" ]; then
     pip freeze > ~/latest_requirements.txt
     cd ~/geonode
-    git log -1 ~/latest_geonode_commit.txt
+    git log -1 > ~/latest_geonode_commit.txt
     cd -
 fi
 ## Stop Geonode
