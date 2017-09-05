@@ -20,11 +20,6 @@ GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
 
-echo "env BEGIN"
-env
-echo "env END"
-exit 0
-
 geonode_setup_env()
 {
     export PYTHONPATH=$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
@@ -120,8 +115,14 @@ sudo service postgresql restart
 pip install numpy
 
 ## Clone GeoNode
-# git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
-git clone -n https://github.com/GeoNode/geonode.git
+if [ "$GEM_TEST_LATEST" = "true" ]; then
+    git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
+else
+    git clone -n https://github.com/GeoNode/geonode.git
+    cd geonode
+    git checkout 1c65c9b
+    cd ..
+fi
 
 ## install engine
 sudo apt-get install -y software-properties-common
@@ -131,11 +132,12 @@ sudo apt-get install -y --force-yes python-oq-engine
 
 ## Install GeoNode and dependencies
 cd geonode
-git checkout 1c65c9b
 pip install -r requirements.txt
 
-## more stable dependencies installed
-pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
+if [ "$GEM_TEST_LATEST" != "true" ]; then
+    ## more stable dependencies installed
+    pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
+fi
 
 pip install -e .
 
@@ -175,6 +177,12 @@ if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
 fi
 
+if [ "$GEM_TEST_LATEST" = "true" ]; then
+    pip freeze > ~/latest_requirements.txt
+    cd ~/geonode
+    git log -1 ~/latest_geonode_commit.txt
+    cd -
+fi
 ## Stop Geonode
 cd ~/geonode
 sudo supervisorctl stop openquake-webui
