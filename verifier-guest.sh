@@ -124,13 +124,14 @@ sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
 sudo apt-get update
 sudo apt-get install -y --force-yes python-oq-engine
 
-## more stable dependencies installed
-pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
-
 ## Install GeoNode and dependencies
 cd geonode
 git checkout 1c65c9b
 pip install -r requirements.txt
+
+## more stable dependencies installed
+pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
+
 pip install -e .
 
 # Install the system python-gdal
