@@ -20,6 +20,9 @@ GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
 
+echo "gem test latest $GEM_TEST_LATEST"
+exit 0
+
 geonode_setup_env()
 {
     export PYTHONPATH=$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
