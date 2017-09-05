@@ -241,6 +241,7 @@ _devtest_innervm_run () {
 export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
 export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
 export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
+export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 
 \"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\" \"$notests\"
 "
