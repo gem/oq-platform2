@@ -114,7 +114,6 @@ sudo service postgresql restart
 #install numpy
 pip install numpy
 pip install shapely==1.5.13
-pip install django-extra-views
 
 ## Clone GeoNode
 git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
@@ -152,6 +151,7 @@ geonode_setup_env
 ## Sync and setup GeoNode
 cd ~/geonode
 
+pip install django-extra-views
 paver setup
 
 ## modify local_settings with pavement from repo
