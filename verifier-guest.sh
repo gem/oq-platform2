@@ -159,6 +159,7 @@ cd ~/oq-platform2
 paver setup -l $LXC_IP -u localhost:8800 -s data
 
 cd ~/geonode
+python manage.py makemigrations
 paver sync
 paver start -b 0.0.0.0:8000
 
