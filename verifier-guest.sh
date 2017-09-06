@@ -151,7 +151,7 @@ geonode_setup_env
 ## Sync and setup GeoNode
 cd ~/geonode
 
-pip install django-extra-views
+pip install django-extras
 paver setup
 
 ## modify local_settings with pavement from repo
