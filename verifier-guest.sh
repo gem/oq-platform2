@@ -78,7 +78,6 @@ fi
 
 sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
-sudo pip install django-extra-views
 
 git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
 ## Check if exist and  create the virtualenv
@@ -115,7 +114,7 @@ sudo service postgresql restart
 #install numpy
 pip install numpy
 pip install shapely==1.5.13
-
+pip install django-extra-views
 
 ## Clone GeoNode
 git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
