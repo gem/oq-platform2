@@ -178,7 +178,8 @@ if [ "$NO_EXEC_TEST" != "notest" ] ; then
 fi
 
 if [ "$GEM_TEST_LATEST" = "true" ]; then
-    pip freeze > ~/latest_requirements.txt
+    # pip freeze > ~/latest_requirements.txt
+    $HOME/$GIT_REPO/create_gem_requirements.sh > gem_geonode_requirements.txt  
     cd ~/geonode
     git log -1 > ~/latest_geonode_commit.txt
     cd -
