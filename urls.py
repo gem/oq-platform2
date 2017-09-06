@@ -216,5 +216,7 @@ urlpatterns += patterns('',
                         (r'^ipt/',
                          include('openquakeplatform_ipt.urls',
                                  namespace='ipt')),
-
+                        (r'^building-class/',
+                         include('openquakeplatform_building_class.urls',
+                                 namespace='building_class')),
                         )
