@@ -1,0 +1,21 @@
+[06/Sep/2017 09:21:28] "GET /v1/available_gsims HTTP/1.1" 200 8664
+[06/Sep/2017 09:21:30] "POST /v1/valid/ HTTP/1.1" 200 54
+[06/Sep/2017 09:21:32] "GET /v1/available_gsims HTTP/1.1" 200 8664
+[06/Sep/2017 09:21:35] "GET /v1/available_gsims HTTP/1.1" 200 8664
+[06/Sep/2017 09:21:37] "POST /v1/valid/ HTTP/1.1" 200 54
+[06/Sep/2017 09:21:38] "GET /v1/available_gsims HTTP/1.1" 200 8664
+WARNING:root:Found minIML=0 in /tmp/tmp5xSwji.xml, line 8, using 1e-10 instead
+WARNING:root:Found minIML=0 in /tmp/tmp5xSwji.xml, line 15, using 1e-10 instead
+WARNING:root:Found minIML=0 in /tmp/tmp5xSwji.xml, line 22, using 1e-10 instead
+[06/Sep/2017 09:21:40] "POST /v1/valid/ HTTP/1.1" 200 54
+[06/Sep/2017 09:21:40] "GET /v1/available_gsims HTTP/1.1" 200 8664
+[06/Sep/2017 09:21:42] "POST /v1/valid/ HTTP/1.1" 200 54
+[06/Sep/2017 09:21:42] "GET /v1/available_gsims HTTP/1.1" 200 8664
+[06/Sep/2017 09:21:43] "POST /v1/valid/ HTTP/1.1" 200 54
+[06/Sep/2017 09:21:44] "GET /v1/available_gsims HTTP/1.1" 200 8664
+[06/Sep/2017 09:21:45] "POST /v1/valid/ HTTP/1.1" 200 54
+[06/Sep/2017 09:21:46] "GET /v1/available_gsims HTTP/1.1" 200 8664
+[06/Sep/2017 09:21:47] "POST /v1/valid/ HTTP/1.1" 200 54
+[06/Sep/2017 09:21:48] "GET /v1/available_gsims HTTP/1.1" 200 8664
+[06/Sep/2017 09:21:49] "POST /v1/valid/ HTTP/1.1" 200 54
+[06/Sep/2017 09:21:50] "GET /v1/available_gsims HTTP/1.1" 200 8664
