@@ -78,7 +78,7 @@ fi
 
 sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
-# pip install django_extras
+pip install django-extra-views
 
 git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
 ## Check if exist and  create the virtualenv
