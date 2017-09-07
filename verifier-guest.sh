@@ -151,6 +151,7 @@ geonode_setup_env
 
 ## Sync and setup GeoNode
 cd ~/geonode
+paver sync
 paver setup
 
 ## modify local_settings with pavement from repo
@@ -158,7 +159,6 @@ cd ~/oq-platform2
 paver setup -l $LXC_IP -u localhost:8800 -s data
 
 cd ~/geonode
-paver syncdb
 paver sync
 paver start -b 0.0.0.0:8000
 
