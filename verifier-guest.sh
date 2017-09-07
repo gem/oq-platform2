@@ -152,6 +152,7 @@ geonode_setup_env
 cd ~/geonode
 
 pip install django-extras
+python manage.py syncdb
 paver setup
 
 ## modify local_settings with pavement from repo
