@@ -114,7 +114,7 @@ sudo service postgresql restart
 #install numpy
 pip install numpy
 pip install shapely==1.5.13
-
+pip install django-extras
 
 ## Clone GeoNode
 git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
@@ -158,6 +158,8 @@ cd ~/oq-platform2
 paver setup -l $LXC_IP -u localhost:8800 -s data
 
 cd ~/geonode
+python manage.py makemigrations
+python manage.py migrate account --noinput
 paver sync
 paver start -b 0.0.0.0:8000
 
