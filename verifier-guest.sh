@@ -152,7 +152,6 @@ geonode_setup_env
 cd ~/geonode
 
 pip install django-extras
-python manage.py migrate --noinput
 paver setup
 
 ## modify local_settings with pavement from repo
@@ -160,6 +159,7 @@ cd ~/oq-platform2
 paver setup -l $LXC_IP -u localhost:8800 -s data
 
 cd ~/geonode
+python manage.py syncdb
 paver sync
 paver start -b 0.0.0.0:8000
 
