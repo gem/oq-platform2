@@ -9,7 +9,11 @@ class SurveyTest(unittest.TestCase):
 
     def watch_tut_test(self):
 
-        # calculate
+        url = "/building-class"
+
+        pla.get(url)
+
+        # start test
         wat = pla.xpath_finduniq(
             "//a[normalize-space(text())='watch tutorial here']",
             100, 1)
