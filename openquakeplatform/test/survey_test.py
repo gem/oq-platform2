@@ -4,16 +4,15 @@ import unittest
 from openquakeplatform.test import pla
 from selenium.webdriver.common.keys import Keys
 
+b_url = "/building-class"
+
 
 class SurveyTest(unittest.TestCase):
 
     def watch_tut_test(self):
 
-        url = "/building-class"
+        pla.get(b_url)
 
-        pla.get(url)
-
-        # start test
         wat = pla.xpath_finduniq(
             "//a[normalize-space(text())='watch tutorial here']",
             100, 1)
@@ -22,6 +21,8 @@ class SurveyTest(unittest.TestCase):
         pla.wait_new_page(wat, '/building-class/tutorial', timeout=10)
 
     def new_class_test(self):
+
+        pla.get(b_url)
 
         select = pla.xpath_finduniq(
                "//select[@id='country-id']/option[text()='Anguilla']",
@@ -68,11 +69,11 @@ class SurveyTest(unittest.TestCase):
                " and @type='checkbox']",
                100, 1)
         height.click()
- 
+
         irreg = pla.xpath_finduniq(
               "//input[@name='Regular' and @type='checkbox']",
               100, 1)
-        irreg.click() 
+        irreg.click()
 
         duct = pla.xpath_finduniq(
              "//input[@name='Non ductile (PGA<0.1g)' and @type='checkbox']",
@@ -88,7 +89,10 @@ class SurveyTest(unittest.TestCase):
         # result
         pla.xpath_finduniq(
             "//div[normalize-space(text())='success'"
-            " and @class='save_resp_ok'],"
-            100, 1) 
+            " and @class='save_resp_ok']",
+            100, 1)
 
-
+        delete = pla.xpath_finduniq(
+               "//button[@type='button' and @name='delete']",
+               100, 1)
+        delete.click()
