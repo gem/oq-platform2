@@ -151,7 +151,6 @@ geonode_setup_env
 
 ## Sync and setup GeoNode
 cd ~/geonode
-paver sync
 paver setup
 
 ## modify local_settings with pavement from repo
