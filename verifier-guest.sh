@@ -152,7 +152,7 @@ geonode_setup_env
 cd ~/geonode
 
 pip install django-extras
-python manage.py syncdb
+python manage.py migrate --noinput
 paver setup
 
 ## modify local_settings with pavement from repo
