@@ -482,6 +482,11 @@ def get_studies_by_country(request):
              study_region_id, g1name, g2name, g3name, study_name, has_nonres,
              tot_pop, tot_grid_count, xmin, ymin, xmax, ymax
     """
+    if 'geddb' not in connections:
+        response_data = fake_db.get_studies_by_country
+        response = HttpResponse(response_data, content_type='text/json')
+        return response
+
     iso = request.GET.get('iso')
     if not iso:
         msg = 'A country ISO code must be provided.'
@@ -507,7 +512,7 @@ def get_studies_by_country(request):
             iso, level_filter, study_filter)):
         studies.append(dict(sr._asdict()))
     response_data = json.dumps(studies)
-    response = HttpResponse(response_data, mimetype='text/json')
+    response = HttpResponse(response_data, content_type='text/json')
     return response
 
 
@@ -561,6 +566,11 @@ def export_fractions_by_study_region_id(request):
 
             * 'sr_id': a study region id
     """
+    if 'geddb' not in connections:
+        response_data = fake_db.get_sr_id
+        response = HttpResponse(response_data, content_type='text/json')
+        return response
+
     sr_id = request.GET.get('sr_id')
     if sr_id:
         try:
