@@ -19,7 +19,7 @@ LXC_IP="$4"
 GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
-GEO_COMMIT_HASH="1c65c9b"
+GEO_STABLE_HASH="1c65c9b"
 
 geonode_setup_env()
 {
@@ -121,7 +121,7 @@ if [ "$GEM_TEST_LATEST" = "true" ]; then
 else
     git clone -n https://github.com/GeoNode/geonode.git
     cd geonode
-    git checkout "$GEO_COMMIT_HASH"
+    git checkout "$GEO_STABLE_HASH"
     cd ..
 fi
 
