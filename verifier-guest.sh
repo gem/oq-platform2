@@ -115,7 +115,8 @@ sudo service postgresql restart
 pip install numpy
 pip install shapely==1.5.13
 pip install django-extras
-pip install django-nested-inline
+
+git clone https://github.com/gem/django-nested-inlines.git
 
 ## Clone GeoNode
 git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
