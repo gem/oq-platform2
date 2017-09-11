@@ -117,7 +117,7 @@ pip install shapely==1.5.13
 pip install django-extras
 
 ## Install nested inline
-https://github.com/s-block/django-nested-inline.git
+#https://github.com/s-block/django-nested-inline.git
 pip install django-nested-inline
 
 ## Clone GeoNode
