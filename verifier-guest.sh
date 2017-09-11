@@ -19,6 +19,7 @@ LXC_IP="$4"
 GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
+GEO_STABLE_HASH="1c65c9b"
 
 geonode_setup_env()
 {
@@ -113,11 +114,16 @@ sudo service postgresql restart
 
 #install numpy
 pip install numpy
-pip install shapely==1.5.13
-
 
 ## Clone GeoNode
-git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
+if [ "$GEM_TEST_LATEST" = "true" ]; then
+    git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
+else
+    git clone -n https://github.com/GeoNode/geonode.git
+    cd geonode
+    git checkout "$GEO_STABLE_HASH"
+    cd ..
+fi
 
 ## install engine
 sudo apt-get install -y software-properties-common
@@ -128,6 +134,12 @@ sudo apt-get install -y --force-yes python-oq-engine
 ## Install GeoNode and dependencies
 cd geonode
 pip install -r requirements.txt
+
+if [ "$GEM_TEST_LATEST" != "true" ]; then
+    ## more stable dependencies installed
+    pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
+fi
+
 pip install -e .
 
 # Install the system python-gdal
@@ -137,7 +149,7 @@ cd ~
 # Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
-sudo cp $HOME/"$GIT_REPO"/urls.py $HOME/geonode/geonode
+sudo cp $HOME/$GIT_REPO/urls.py $HOME/geonode/geonode
 
 ## clone and setting pythonpath taxtweb and oq-platform2
 cd ~
@@ -166,6 +178,13 @@ if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
 fi
 
+if [ "$GEM_TEST_LATEST" = "true" ]; then
+    # pip freeze > ~/latest_requirements.txt
+    $HOME/$GIT_REPO/create_gem_requirements.sh > gem_geonode_requirements.txt  
+    cd ~/geonode
+    git log -1 > ~/latest_geonode_commit.txt
+    cd -
+fi
 ## Stop Geonode
 cd ~/geonode
 sudo supervisorctl stop openquake-webui
