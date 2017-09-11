@@ -446,18 +446,20 @@ def get_all_studies(request):
              has_nonres: boolean that indicates if the study has
                          non residential data
     """
-    if 'geddb' in connections:
-        studies = []
-        StudyRecord = namedtuple(
-            'StudyRecord',
-            'iso num_studies num_l1_names num_l2_names study_id'
-            ' country_name study_name has_nonres')
-        for sr in map(StudyRecord._make, util._get_all_studies()):
-            studies.append(dict(sr._asdict()))
-        response_data = json.dumps(studies)
-        response = HttpResponse(response_data, mimetype='text/json')
-    else:
-        response = fake_db.get_all_studies 
+    if 'geddb' not in connections:
+        response_data = fake_db.get_all_studies 
+        response = HttpResponse(response_data, content_type='text/json')
+        return response
+
+	studies = []
+    StudyRecord = namedtuple(
+        'StudyRecord',
+        'iso num_studies num_l1_names num_l2_names study_id'
+        ' country_name study_name has_nonres')
+    for sr in map(StudyRecord._make, util._get_all_studies()):
+        studies.append(dict(sr._asdict()))
+    response_data = json.dumps(studies)
+    response = HttpResponse(response_data, content_type='text/json')
     return response
 
 
