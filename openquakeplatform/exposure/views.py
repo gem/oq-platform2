@@ -209,7 +209,9 @@ def export_exposure(request):
                ' Available choices are "csv" and "nrml".')
         response = HttpResponse(msg, status="400")
         return response
+
     content_disp_type = ('attachment' if 'geddb' in connections else 'inline')
+
     if output_type == "csv":
         content_disp = '%s; filename="exposure_export.csv"' % content_disp_type
         mimetype = 'text/csv'
