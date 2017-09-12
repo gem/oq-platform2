@@ -28,7 +28,7 @@ from django.db import connections
 from openquakeplatform.utils import allowed_methods, sign_in_required
 from openquakeplatform.exposure import util
 
-from openquakeplatform.exposure import fake_db 
+from openquakeplatform.exposure.fake_db import gem_fake_db_get
 
 COPYRIGHT_HEADER = """\
  Copyright (C) 2014 GEM Foundation
@@ -202,17 +202,7 @@ def export_exposure(request):
             return response
     else:
         occupancy = 0  # 'residential' by default
-    data = util._get_currency_and_taxonomy_name(sr_id, occupancy)
-    if data:
-        currency, taxonomy_name, taxonomy_version = data
-    else:
-        # No records were found, corresponding to the given sr_id and occupancy
-        # ==> we return a 204 (the server successfully processed the request,
-        #                      but is not returning any content)
-        #     because it means there's no study corresponding to
-        #     the given combination of parameters
-        response = HttpResponse(status="204")
-        return response
+        
     output_type = request.GET.get('output_type')
     if not output_type or output_type not in ('csv', 'nrml'):
         msg = ('Please provide the parameter "output_type".'
@@ -225,10 +215,24 @@ def export_exposure(request):
     elif output_type == "nrml":
         content_disp = 'attachment; filename="exposure_export.xml"'
         mimetype = 'text/plain'
+
+    if 'geddb' not in connections:
+        response_data = gem_fake_db_get('export_exposure.%s' % output_type) 
+        
+        response = HttpResponse(response_data, content_type=mimetype)
+        response['Content-Disposition'] = content_disp
+        return response
+
+    data = util._get_currency_and_taxonomy_name(sr_id, occupancy)
+    if data:
+        currency, taxonomy_name, taxonomy_version = data
     else:
-        msg = ("Unrecognized output type '%s', only 'nrml' and 'csv' are "
-               "supported" % output_type)
-        response = HttpResponse(msg, status="400")
+        # No records were found, corresponding to the given sr_id and occupancy
+        # ==> we return a 204 (the server successfully processed the request,
+        #                      but is not returning any content)
+        #     because it means there's no study corresponding to
+        #     the given combination of parameters
+        response = HttpResponse(status="204")
         return response
     filter_by_bounding_box = False
     lng1 = request.GET.get('lng1')
@@ -447,7 +451,7 @@ def get_all_studies(request):
                          non residential data
     """
     if 'geddb' not in connections:
-        response_data = fake_db.get_all_studies 
+        response_data = gem_fake_db_get('get_all_studies.json') 
         response = HttpResponse(response_data, content_type='text/json')
         return response
 
@@ -483,7 +487,7 @@ def get_studies_by_country(request):
              tot_pop, tot_grid_count, xmin, ymin, xmax, ymax
     """
     if 'geddb' not in connections:
-        response_data = fake_db.get_studies_by_country
+        response_data = gem_fake_db_get('get_studies_by_country.json')
         response = HttpResponse(response_data, content_type='text/json')
         return response
 
@@ -567,7 +571,7 @@ def export_fractions_by_study_region_id(request):
             * 'sr_id': a study region id
     """
     if 'geddb' not in connections:
-        response_data = fake_db.get_sr_id
+        response_data = gem_fake_db_get('get_sr_id.json')
         response = HttpResponse(response_data, content_type='text/json')
         return response
 
