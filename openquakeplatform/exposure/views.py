@@ -217,10 +217,18 @@ def export_exposure(request):
         mimetype = 'text/plain'
 
     if 'geddb' not in connections:
+
+        if output_type == "csv":
+            content_disp_not_ged = 'inline; filename="exposure_export.csv"'
+            mimetype = 'text/csv'
+        elif output_type == "nrml":
+            content_disp_not_ged = 'inline; filename="exposure_export.xml"'
+            mimetype = 'text/plain'
+
         response_data = gem_fake_db_get('export_exposure.%s' % output_type) 
         
         response = HttpResponse(response_data, content_type=mimetype)
-        response['Content-Disposition'] = content_disp
+        response['Content-Disposition'] = content_disp_not_ged
         return response
 
     data = util._get_currency_and_taxonomy_name(sr_id, occupancy)
