@@ -218,9 +218,7 @@ def export_exposure(request):
         mimetype = 'text/plain'
 
     if 'geddb' not in connections:
-
         response_data = gem_fake_db_get('export_exposure.%s' % output_type) 
-        
         response = HttpResponse(response_data, content_type=mimetype)
         response['Content-Disposition'] = content_disp
         return response
