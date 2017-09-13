@@ -573,8 +573,11 @@ def export_fractions_by_study_region_id(request):
             * 'sr_id': a study region id
     """
     if 'geddb' not in connections:
-        response_data = gem_fake_db_get('get_sr_id.json')
-        response = HttpResponse(response_data, content_type='text/json')
+        response_data = gem_fake_db_get('get_sr_id.csv')
+        response = HttpResponse(response_data, content_type='text/csv')
+        filename = 'fractions_export.csv'
+        content_disp = 'inline; filename="%s"' % filename
+        response['Content-Disposition'] = content_disp
         return response
 
     sr_id = request.GET.get('sr_id')
@@ -589,13 +592,17 @@ def export_fractions_by_study_region_id(request):
         msg = 'Please provide a study region id (numeric parameter sr_id)'
         response = HttpResponse(msg, status="400")
         return response
+
     filename = 'fractions_export.csv'
     content_disp = 'attachment; filename="%s"' % filename
     mimetype = 'text/csv'
+
     response = HttpResponse(mimetype=mimetype)
     response['Content-Disposition'] = content_disp
+
     copyright = copyright_csv(COPYRIGHT_HEADER)
     response.write(copyright)
+
     writer = csv.writer(response, delimiter=',', quotechar='"')
     for row in util._stream_fractions_by_study_region_id(sr_id):
         writer.writerow(row)

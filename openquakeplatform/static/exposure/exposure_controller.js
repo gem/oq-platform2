@@ -54,18 +54,7 @@ var showErrorDialog = function(message, options) {
 };
 
 var downloadFractions = function(srId) {
-    $.ajax({
-        type: 'get',
-        url: 'export_fractions_by_study_region_id?sr_id='+srId,
-        success: function(data, textStatus, jqXHR) {
-            if (navigator.appName != 'Microsoft Internet Explorer') {
-                window.open('data:text/csv;charset=utf-8,' + escape(data));
-            } else {
-                var popup = window.open('','csv','');
-                popup.document.body.innerHTML = '<pre>' + data + '</pre>';
-            }
-        }
-    });
+    window.open('export_fractions_by_study_region_id?sr_id='+srId);
 };
 
 app.controller('ExposureCountryList', function($scope, $filter, myService, ngTableParams, $http) {
