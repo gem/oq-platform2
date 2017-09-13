@@ -2,8 +2,6 @@
 import os
 import unittest
 from openquakeplatform.test import pla
-from selenium.webdriver.common.keys import Keys
-import time
 
 url_exp = "/exposure"
 
@@ -18,14 +16,14 @@ class ExposureTest(unittest.TestCase):
                      100, 1)
         clickldbyreg.click()
 
-        # time.sleep(5)
+        # click paging
 
         page25 = pla.xpath_finduniq(
                "//button/span[normalize-space(text())='25']",
                100, 1)
         page25.click()
 
-        # time.sleep(5)
+        # click nation
 
         class_tr = "Angola18"
 
@@ -33,23 +31,24 @@ class ExposureTest(unittest.TestCase):
                     "//table/tbody/tr[contains(@class, '%s')]" % class_tr )     
         clicknation.click()
 
-        # time.sleep(5)
+        # click second level nation
 
-        class_td = "Cabinda"
+        text_td = "Cabinda"
 
         leveltwo = pla.xpath_finduniq(
-                 "//table/tbody//td[contains(text(), '%s')]" % class_td )      
+                 "//table/tbody//td[contains(text(), '%s')]" % text_td )      
         leveltwo.click()   
        
-        # time.sleep(5)
+        # click download csv
 
         downreg = pla.xpath_finduniq(
                 "//button[@id='subDwellingFractionsDownload']"
                 "/span[normalize-space(text())='Download']",
                 100, 1)
         downreg.click()
-        # alert = pla.driver.switch_to.alert.accept()
         
+        # click download nrml or csv
+
         downsubnat = pla.xpath_finduniq(
                    "//button[@id='subNationalExposureBldgDownload']"
                    "/span[normalize-space(text())='Download']",
