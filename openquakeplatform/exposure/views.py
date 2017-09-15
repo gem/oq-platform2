@@ -23,9 +23,12 @@ from collections import namedtuple
 from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.http import condition
+from django.db import connections
 
 from openquakeplatform.utils import allowed_methods, sign_in_required
 from openquakeplatform.exposure import util
+
+from openquakeplatform.exposure.fake_db import gem_fake_db_get
 
 COPYRIGHT_HEADER = """\
  Copyright (C) 2014 GEM Foundation
@@ -199,6 +202,27 @@ def export_exposure(request):
             return response
     else:
         occupancy = 0  # 'residential' by default
+        
+    output_type = request.GET.get('output_type')
+    if not output_type or output_type not in ('csv', 'nrml'):
+        msg = ('Please provide the parameter "output_type".'
+               ' Available choices are "csv" and "nrml".')
+        response = HttpResponse(msg, status="400")
+        return response
+
+    if output_type == "csv":
+        content_disp = 'attachment; filename="exposure_export.csv"'
+        mimetype = 'text/csv'
+    elif output_type == "nrml":
+        content_disp = 'attachment; filename="exposure_export.xml"'
+        mimetype = 'text/plain'
+
+    if 'geddb' not in connections:
+        response_data = gem_fake_db_get('export_exposure.%s' % output_type) 
+        response = HttpResponse(response_data, content_type=mimetype)
+        response['Content-Disposition'] = content_disp
+        return response
+
     data = util._get_currency_and_taxonomy_name(sr_id, occupancy)
     if data:
         currency, taxonomy_name, taxonomy_version = data
@@ -209,23 +233,6 @@ def export_exposure(request):
         #     because it means there's no study corresponding to
         #     the given combination of parameters
         response = HttpResponse(status="204")
-        return response
-    output_type = request.GET.get('output_type')
-    if not output_type or output_type not in ('csv', 'nrml'):
-        msg = ('Please provide the parameter "output_type".'
-               ' Available choices are "csv" and "nrml".')
-        response = HttpResponse(msg, status="400")
-        return response
-    if output_type == "csv":
-        content_disp = 'attachment; filename="exposure_export.csv"'
-        mimetype = 'text/csv'
-    elif output_type == "nrml":
-        content_disp = 'attachment; filename="exposure_export.xml"'
-        mimetype = 'text/plain'
-    else:
-        msg = ("Unrecognized output type '%s', only 'nrml' and 'csv' are "
-               "supported" % output_type)
-        response = HttpResponse(msg, status="400")
         return response
     filter_by_bounding_box = False
     lng1 = request.GET.get('lng1')
@@ -443,7 +450,12 @@ def get_all_studies(request):
              has_nonres: boolean that indicates if the study has
                          non residential data
     """
-    studies = []
+    if 'geddb' not in connections:
+        response_data = gem_fake_db_get('get_all_studies.json') 
+        response = HttpResponse(response_data, content_type='text/json')
+        return response
+
+	studies = []
     StudyRecord = namedtuple(
         'StudyRecord',
         'iso num_studies num_l1_names num_l2_names study_id'
@@ -451,7 +463,7 @@ def get_all_studies(request):
     for sr in map(StudyRecord._make, util._get_all_studies()):
         studies.append(dict(sr._asdict()))
     response_data = json.dumps(studies)
-    response = HttpResponse(response_data, mimetype='text/json')
+    response = HttpResponse(response_data, content_type='text/json')
     return response
 
 
@@ -474,6 +486,11 @@ def get_studies_by_country(request):
              study_region_id, g1name, g2name, g3name, study_name, has_nonres,
              tot_pop, tot_grid_count, xmin, ymin, xmax, ymax
     """
+    if 'geddb' not in connections:
+        response_data = gem_fake_db_get('get_studies_by_country.json')
+        response = HttpResponse(response_data, content_type='text/json')
+        return response
+
     iso = request.GET.get('iso')
     if not iso:
         msg = 'A country ISO code must be provided.'
@@ -499,7 +516,7 @@ def get_studies_by_country(request):
             iso, level_filter, study_filter)):
         studies.append(dict(sr._asdict()))
     response_data = json.dumps(studies)
-    response = HttpResponse(response_data, mimetype='text/json')
+    response = HttpResponse(response_data, content_type='text/json')
     return response
 
 
@@ -553,6 +570,14 @@ def export_fractions_by_study_region_id(request):
 
             * 'sr_id': a study region id
     """
+    if 'geddb' not in connections:
+        response_data = gem_fake_db_get('get_sr_id.csv')
+        response = HttpResponse(response_data, content_type='text/csv')
+        filename = 'fractions_export.csv'
+        content_disp = 'inline; filename="%s"' % filename
+        response['Content-Disposition'] = content_disp
+        return response
+
     sr_id = request.GET.get('sr_id')
     if sr_id:
         try:
@@ -565,13 +590,17 @@ def export_fractions_by_study_region_id(request):
         msg = 'Please provide a study region id (numeric parameter sr_id)'
         response = HttpResponse(msg, status="400")
         return response
+
     filename = 'fractions_export.csv'
     content_disp = 'attachment; filename="%s"' % filename
     mimetype = 'text/csv'
+
     response = HttpResponse(mimetype=mimetype)
     response['Content-Disposition'] = content_disp
+
     copyright = copyright_csv(COPYRIGHT_HEADER)
     response.write(copyright)
+
     writer = csv.writer(response, delimiter=',', quotechar='"')
     for row in util._stream_fractions_by_study_region_id(sr_id):
         writer.writerow(row)

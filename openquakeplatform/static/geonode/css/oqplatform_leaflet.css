@@ -1,5 +1,10 @@
+#wrap,
+#wrap .container {
+    width: 100%;
+}
 #oq-page-middle {
-    background: #555555;
+    background: #ffffff;
+    width: 100%;
 }
 
 #oq-context-ribbon {

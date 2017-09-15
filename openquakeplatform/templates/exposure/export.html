@@ -1,5 +1,5 @@
 <!--
-   Copyright (c) 2010-2015, GEM Foundation.
+   Copyright (c) 2010-2017, GEM Foundation.
 
       This program is free software: you can redistribute it and/or modify
       it under the terms of the GNU Affero General Public License as
@@ -46,7 +46,7 @@ Exposure Export {{ block.super }}
     <div id="national-spinner" >Loading ...<img id="download-button-spinner" src="{{ STATIC_URL }}img/ajax-loader.gif" /></div>
     {% verbatim %}
       <table ng-table="tableParams" show-filter="true" class="table ng-table-rowselected">
-        <tr ng-repeat="record in $data" ng-click="record.$selected = !record.$selected; changeSelection(record)"
+        <tr gem_class="{{record.country_name}}{{record.num_studies}}" ng-repeat="record in $data" ng-click="record.$selected = !record.$selected; changeSelection(record)"
             ng-class="{'active': record.$selected}">
           <td data-title="'Name'" filter="{ 'country_name': 'text' }">{{record.country_name}}</td>
           <td data-title="'Number of Studies'">{{record.num_studies}}</td>
