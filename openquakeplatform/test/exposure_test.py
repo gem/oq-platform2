@@ -28,7 +28,7 @@ class ExposureTest(unittest.TestCase):
         class_tr = "Angola18"
 
         clicknation = pla.xpath_finduniq(
-            "//table/tbody/tr[contains(@class, '%s')]" % class_tr )     
+            "//table/tbody/tr[contains(@gem_class, '%s')]" % class_tr )     
         clicknation.click()
 
         # click second level nation
