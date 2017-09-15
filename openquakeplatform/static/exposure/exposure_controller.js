@@ -54,6 +54,12 @@ var showErrorDialog = function(message, options) {
 };
 
 var downloadFractions = function(srId) {
+    /* 
+       use this for directly download csv/xml with to open page in about blank
++      and wait the download documents without check the browser used.
++      The right solution could be the Streaming response not still used
+       the right solution
++   */
     window.open('export_fractions_by_study_region_id?sr_id='+srId);
 };
 
