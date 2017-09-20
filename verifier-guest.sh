@@ -102,6 +102,10 @@ cat << EOF | sudo -u postgres psql
     GRANT ALL PRIVILEGES ON DATABASE "geonode_dev-imports" to $GEO_DBUSER;
 EOF
 
+sudo -u postgres psql -d geonode_dev -c 'CREATE EXTENSION postgis;'
+sudo -u postgres psql -d geonode_dev -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
+sudo -u postgres psql -d geonode_dev -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
+
 sudo -u postgres psql -d geonode_dev-imports -c 'CREATE EXTENSION postgis;'
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
