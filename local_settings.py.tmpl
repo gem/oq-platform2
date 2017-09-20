@@ -1,5 +1,5 @@
 import os
-from geonode.settings import GEONODE_APPS, TEMPLATES
+from geonode.settings import GEONODE_APPS, TEMPLATES, INSTALLED_APPS
 import geonode.settings
 import openquakeplatform
 
@@ -100,69 +100,16 @@ ALLOWED_DOCUMENT_TYPES = [
 ]
 MAX_DOCUMENT_SIZE = 100
 
-INSTALLED_APPS = (
-
-    'modeltranslation',
-
-    # ioostrap admin theme
-    # 'django_admin_bootstrapped.bootstrap3',
-    # 'django_admin_bootstrapped',
-
-    # Apps bundled with Django
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.admin',
-    'django.contrib.sitemaps',
-    'django.contrib.staticfiles',
-    'django.contrib.messages',
-    'django.contrib.humanize',
-    'django.contrib.gis',
+INSTALLED_APPS += (
     'django.contrib.redirects',
+    'nested_inline',
+    'chained_selectbox',
+    'nested_inlines',
 
-    # Utility
-    'pagination',
-    'taggit',
-    'treebeard',
-    'friendlytagloader',
-    'geoexplorer',
-    'leaflet',
-    'django_extensions',
-    #'geonode-client',
-    # 'haystack',
-    'autocomplete_light',
-    'mptt',
-    # 'modeltranslation',
-    'djcelery',
-    'storages',
-
-    # Theme
-    "pinax_theme_bootstrap_account",
-    "pinax_theme_bootstrap",
-    'django_forms_bootstrap',
-
-    # Social
-    'account',
-    'avatar',
-    'dialogos',
-    'agon_ratings',
-    # 'notification',
-    'announcements',
-    'actstream',
-    'user_messages',
-    'tastypie',
-    'polymorphic',
-    'guardian',
-    'oauth2_provider',
-    # 'nested-inline',
-
-    # taxtweb
     'openquakeplatform_taxtweb',
     'openquakeplatform_ipt',
     'openquakeplatform.vulnerability',
-    'nested_inline',
-) + GEONODE_APPS
+)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
