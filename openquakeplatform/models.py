@@ -23,7 +23,7 @@ QUERY_TERMS.add('unaccent')
 DatabaseWrapper.operators['unaccent'] = '=~@ %s'
 
 
-def my_lookup_cast(self, lookup_type):
+def my_lookup_cast(self, lookup_type, internal_type=None):
     """
     Adding 'unaccent' to the standard lookup_cast
     """
