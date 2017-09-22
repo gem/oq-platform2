@@ -28,6 +28,15 @@ geonode_setup_env()
     export LOCKDOWN_GEONODE='true'
 }
 
+##function nested applicatione
+nested_exec() {
+    pip install django-nested-inline
+    pip install django_extras
+    pip install -e git+git://github.com/gem/django-chained-selectbox.git#egg=django-chained-selectbox-0.2.2
+    pip install -e git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
+    pip install -e git+git://github.com/gem/django-chained-multi-checkboxes.git#egg=django-chained-multi-checkboxes-0.4.1
+}
+
 #function complete procedure for tests
 exec_test () {   
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
@@ -88,11 +97,9 @@ fi
 
 source ~/env/bin/activate
 
-pip install django-nested-inline
-pip install django_extras
-pip install -e git+git://github.com/gem/django-chained-selectbox.git#egg=django-chained-selectbox-0.2.2
-pip install -e git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
-pip install -e git+git://github.com/gem/django-chained-multi-checkboxes.git#egg=django-chained-multi-checkboxes-0.4.1
+## install nested applications
+nested_exec
+
 pip install scipy
 
 cd ~
