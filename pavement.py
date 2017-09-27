@@ -16,7 +16,7 @@ def _write_local_settings(lxc_ip, webuiurl, datadir, db_name, db_user, db_pass):
 
     local_settings = open(GEM_LOCAL_SETTINGS_TMPL, 'r').read()
     with open(os.path.join(os.path.expanduser("~"), 'oq-platform2',
-                                                    'openquakeplatform',
+                                                    #'openquakeplatform',
                                                     'local_settings'
                                                     '.py'), 'w') as fh:
         fh.write(local_settings % dict(lxc_ip=lxc_ip,
