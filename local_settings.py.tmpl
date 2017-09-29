@@ -20,6 +20,14 @@ FILE_PATH_FIELD_DIRECTORY = '%(datadir)s/'
 
 # ROOT_URLCONF = 'openquakeplatform.urls'
 
+THIRD_PARTY_URLS = {
+    'leaflet_base_map': (
+        'http://{s}.tiles.mapbox.com/v3/unhcr.map-8bkai3wa/{z}/{x}/{y}.png'
+    ),
+}
+
+TILESTREAM_URL = '//tilestream.openquake.org'
+
 GEOSERVER_LOCATION = 'http://%(lxc_ip)s:8080/geoserver/'
 GEOSERVER_PUBLIC_LOCATION = 'http://%(lxc_ip)s:8080/geoserver/'
 
@@ -92,6 +100,8 @@ STATICFILES_DIRS = [
 ]
 
 TEMPLATES[0]['DIRS'].insert(0, os.path.join(OQPLATFORM_ROOT, 'templates'))
+TEMPLATES[0]['OPTIONS']['context_processors'].append(
+    'openquakeplatform.utils.oq_context_processor')
 
 ALLOWED_DOCUMENT_TYPES = [
     'csv', 'doc', 'docx', 'xls', 'xlsx', 'odt', 'ods', 'pdf',
@@ -229,3 +239,11 @@ FILESERVICE_CONFIG = {
     # maploom will replace {} with the media item name such as 7ff194b54ab57a829094dc0afc624c78815ec02c.jpg
     'url_template': '/api/fileservice/view/{}'
 }
+
+# These limits define the maximum data that can be retreived
+# from GEM in the Exposure app
+# Max area size in degrees (i.e. 2 * 2)
+EXPOSURE_MAX_EXPORT_AREA_SQ_DEG = 4
+# Max number of rows
+EXPOSURE_MAX_TOT_GRID_COUNT = 100000
+
