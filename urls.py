@@ -215,11 +215,8 @@ urlpatterns += patterns('',
                         (r'^ipt/',
                          include('openquakeplatform_ipt.urls',
                                  namespace='ipt')),
-<<<<<<< HEAD
                         (r'^vulnerability/',
                          include('openquakeplatform.vulnerability.urls')),
-=======
                         (r'^exposure/',
                          include('openquakeplatform.exposure.urls')),
->>>>>>> origin
                         )
