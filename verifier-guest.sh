@@ -191,6 +191,8 @@ python manage.py migrate account --noinput
 paver sync
 paver start -b 0.0.0.0:8000
 
+python ./manage.py import_vuln_geo_applicability_csv ~/oq-platform2/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
+
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
