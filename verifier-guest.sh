@@ -194,6 +194,11 @@ paver start -b 0.0.0.0:8000
 
 python ./manage.py import_vuln_geo_applicability_csv ~/oq-platform2/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
 
+## load data and install simplejson for vulnerability application
+python manage.py loaddata ~/oq-platform2/openquakeplatform/vulnerability/post_fixtures/initial_data.json
+
+pip install simplejson==2.0.9
+
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
