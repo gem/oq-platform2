@@ -169,7 +169,7 @@ ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osg
 
 sudo cp $HOME/$GIT_REPO/urls.py $HOME/geonode/geonode
 
-## clone and setting pythonpath taxtweb and oq-platform2
+## clone and setting pythonpath taxtweb, ipt and oq-platform2
 cd ~
 
 for repo in oq-platform-taxtweb oq-platform-ipt; do
@@ -196,7 +196,6 @@ python ./manage.py import_vuln_geo_applicability_csv ~/oq-platform2/openquakepla
 
 ## load data and install simplejson for vulnerability application
 python manage.py loaddata ~/oq-platform2/openquakeplatform/vulnerability/post_fixtures/initial_data.json
-
 pip install simplejson==2.0.9
 
 cd ~/ 
