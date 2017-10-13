@@ -7,6 +7,8 @@
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 
+sudo systemctl stop apt-daily.timer
+
 set -o errtrace
 
 #display each command before executing it
