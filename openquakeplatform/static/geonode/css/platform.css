@@ -291,6 +291,7 @@ div#search-inp:after {
     position: absolute;
     right: 0;
     width: auto;
+    z-index: 999;
 }
 .oq-share ul:before {
     content: '';
