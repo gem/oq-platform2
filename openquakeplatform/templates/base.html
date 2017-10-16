@@ -5,7 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <title>{#{% block title %}{{ SITE_NAME }}{% endblock %}#}Openquake platform</title>
+    <title>{#{% block title %}{{ SITE_NAME }}{% endblock %}#}Openquake platform {% if resource.title %}| {{ resource.title }}{% endif %}</title>
+    <meta property="og:title" content="Openquake platform {% if resource.title %}| {{ resource.title }}{% endif %}" />
+    <meta property="og:site_name" content="platform.openquake.org" />
+    <meta property="og:url" content="http://{{ SITE_DOMAIN }}{{ resource.detail_url }}" />
+    <meta property="og:description" content="{% if resource.description %}{{ resource.description  }}{% else %}Welcome to the OpenQuake Platform, by the GEM Foundation.{% endif %}" />
+    <meta name="og:image" content="{{ resource.thumbnail_url }}" />
+    <meta name="og:image:width" content="200" />
+    <meta name="og:image:height" content="150" />
     {% block head %}
       {% if DEBUG_STATIC %}
       <link href="{{ STATIC_URL }}lib/css/jquery.dataTables.css?v={{ VERSION }}" rel="stylesheet" />
@@ -102,64 +109,11 @@
                <li id="nav_explore">
                    <a href="{% url "explore" %}">Explore</a>
                </li>
-	       <!-- <li id="nav_layers">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Data" %}<i class="fa fa-angle-down fa-lg"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="{#{% url "layer_browse" %}#}">{#{% trans "Layers" %}#}</a></li>
-                <li><a href="{#{% url "document_browse" %}#}">{#{% trans "Documents" %}#}</a></li>
-                {#{% if user.is_authenticated %}#}
-                <li><a href="{#{% url "services" %}#}">{#{% trans "Remote Services" %}#}</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="{#{% url "layer_upload" %}#}">Upload Layer</a></li>
-                <li><a href="{#{% url "document_upload" %}#}">Upload Document</a></li>
-                <li><a href="{#{% url "register_service" %}#}">{#{% trans "Add Remote Service" %}#}</a></li>
-                {#{% endif %}#}
-              </ul>
-            </li>-->
-	       <!-- <li id="nav_maps">
-              {% if user.is_authenticated %}
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Maps" %}<i class="fa fa-angle-down fa-lg"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="{% url "maps_browse" %}">{% trans "Explore Maps" %}</a></li>
-                <li> <a href="{% url "new_map" %}">{% trans "Create Map" %}</a></li>
-              </ul>
-              {% else %}
-              <a href="{% url "maps_browse" %}">{% trans "Maps" %}</a>
-              {% endif %}
-            </li>-->
-            <!--<li>
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "About" %}<i class="fa fa-angle-down fa-lg"></i></a>
-              <ul class="dropdown-menu">
-                <li><a href="{% url "profile_browse" %}">{% trans "People" %}</a></li>
-                <li><a href="{% url "group_list" %}">{% trans "Groups" %}</a></li>
-                {% if perms.announcements.can_manage %}
-                <li><a href="{% url "announcements_list" %}">{% trans "Announcements" %}</a></li>
-                {% endif %}
-                {% if user.is_superuser %}
-                <li role="separator" class="divider"></li>
-                <li><a href="/admin/people/profile/add/">{% trans "Add User" %}</a></li>
-                <li><a href="{% url "account_invite_user" %}">{% trans "Invite User" %}</a></li>
-                <li><a href="{% url "group_create" %}">{% trans "Create Group" %}</a></li>
-                {% endif %}
-              </ul>
-            </li>-->
 	        {% block extra_tab %}
             {% endblock %}
             {% endblock %}
           </ul>
 	      <ul id="oq-menu-right" class="nav navbar-nav navbar-right">
-            <!--<li>
-	       <div class="search">
-                        <form id="search" action="{#{% url "search" %}#}" >
-                                <span class="fa fa-search fa-2x"></span>
-                                {#{% if HAYSTACK_SEARCH %}#}
-                                <input id="search_input" type="text" placeholder="Search" class="form-control" name="q">
-                                {#{% else %}#}
-                                <input id="search_input" type="text" placeholder="Search" class="form-control" name="title__icontains">
-                                {#{% endif %}#}
-                        </form>
-                </div>
-            </li>-->
             {% if not user.is_authenticated and REGISTRATION_OPEN %}
             <li><a href="{% url "account_signup" %}">{% trans "Register" %}</a></li>
             {% endif %}
@@ -172,9 +126,6 @@
                 <!--<li role="separator" class="divider"></li>-->
                 <li><a href="{% url "admin:index" %}"><i class="fa fa-cog fa-2x" aria-hidden="true"></i>  Admin</a></li>
                 <li><a href="{% url "recent-activity" %}"><i class="fa fa-fire fa-2x" aria-hidden="true"></i>  {% trans "Recent Activity" %}</a></li>
-                <!--<li><a href="{#{{ GEOSERVER_BASE_URL }}#}">GeoServer</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="{#{% url "help" %}#}">{#{% trans "Help" %}#}</li>-->
                 <li role="separator" class="divider"></li>
                 <li><a href="/account/logout/"><i class="fa fa-power-off fa-2x" aria-hidden="true"></i>  Log out</a></li>
                 </ul>
