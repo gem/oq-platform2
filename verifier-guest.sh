@@ -173,6 +173,9 @@ cd ~/geonode
 paver sync
 paver start -b 0.0.0.0:8000
 
+python manage.py loaddata $HOME/$GIT_REPO/world/dev_data/world.json.bz2
+python manage.py loaddata $HOME/$GIT_REPO/svir/dev_data/svir.json.bz2
+
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
