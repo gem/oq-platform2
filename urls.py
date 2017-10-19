@@ -220,3 +220,13 @@ urlpatterns += patterns('',
                         (r'^svir/', include('openquakeplatform.svir.urls')),
                         (r'^world/', include('openquakeplatform.world.urls')),
                         )
+
+# Enable internal geoserver proxy in development mode.
+# In production it must be done by Apache/Nginx, not by Django
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^geoserver/', 'openquakeplatform.proxy.geoserver',
+            name="geoserver"),
+    )
+
+urlpatterns += geonode.proxy.urls.urlpatterns
