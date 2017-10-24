@@ -416,6 +416,13 @@ div#search-inp:after {
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
     background-color: #1b75a5;
 }
+.item-thumb img {
+    border: 1px solid #eeeeee;
+}
+.profile-avatar {
+    padding: 10px 10px 10px;
+}
+
 
 /*mobile*/
 @media (max-width: 991px) {
