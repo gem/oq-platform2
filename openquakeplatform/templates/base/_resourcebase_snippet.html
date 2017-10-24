@@ -28,6 +28,7 @@
                 <li><a ng-if="item.detail_url.indexOf('/layers/') > -1" href="{% endverbatim %}{% url "new_map" %}?layer={% verbatim %}{{ item.detail_url.substring(8) }}">
                   {% endverbatim %}
 <<<<<<< HEAD
+<<<<<<< HEAD
                   {% if user.is_authenticated %}
                   <i class="fa fa-map-marker"></i>{% trans "Create a map" %}</a>
                   {% endif %}
@@ -35,11 +36,16 @@
                 </li>
                 <li><a ng-if="item.detail_url.indexOf('/maps/') > -1" href="/maps/{{item.id}}/view"><i class="fa fa-map-marker"></i>View Map</a></li>
 =======
+=======
+>>>>>>> 0c0aa0d... added folder base in templates with _resourcebase_snippet.html
                   <i class="fa fa-map-marker"></i>{% trans "Create a Map" %}</a>
                   {% verbatim %}
                 </li>
                 <li><a ng-if="item.detail_url.indexOf('/maps/') > -1" href="/maps/{{item.id}}/view"><i class="fa fa-map-marker"></i>View Map</a></li>
                 <li><a ng-if="item.detail_url.indexOf('/layers/') > -1" href="/irv/{{ item.detail_url.substring(8) }}">Open in Irv</a>
+<<<<<<< HEAD
+>>>>>>> 0c0aa0d... added folder base in templates with _resourcebase_snippet.html
+=======
 >>>>>>> 0c0aa0d... added folder base in templates with _resourcebase_snippet.html
               </ul>
             </div>
@@ -51,6 +57,10 @@
 </div>
 {% endverbatim %}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0c0aa0d... added folder base in templates with _resourcebase_snippet.html
 =======
 
 >>>>>>> 0c0aa0d... added folder base in templates with _resourcebase_snippet.html
