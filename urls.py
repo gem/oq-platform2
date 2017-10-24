@@ -194,6 +194,6 @@ urlpatterns += patterns('',
 include('openquakeplatform_taxtweb.urls', namespace='taxtweb')),
                         (r'^ipt/',
 include('openquakeplatform_ipt.urls', namespace='ipt')),
-
+                        url(r'^irv/', include('openquakeplatform.irv.urls')),
                         )
 
