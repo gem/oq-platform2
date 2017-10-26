@@ -54,10 +54,10 @@ input[type="checkbox"], input[type="radio"] {
     padding: 0px 0 0 0px!important;
     min-height: 800px;
     margin: 0px auto 30px!important;
-    width: 900px;
+    width: 980px;
 }
 #wrap .container {
-    width: 900px;
+    width: 980px;
 }
 #wrap .big-search,
 #datasets,
@@ -213,7 +213,7 @@ ul.dropdown-menu li {
     margin-top: 0!important;
 }
 .oq-button-home {
-    width: 25%;
+    width: 23%;
     float: left;
     padding: 130px 0 0 0;
     text-align: center;
