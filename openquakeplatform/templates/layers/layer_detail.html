@@ -1,4 +1,4 @@
-yers/layer_base.html" %}
+{% extends "layers/layer_base.html" %}
 {% load i18n %}
 {% load dialogos_tags %}
 {% load agon_ratings_tags %}
@@ -380,7 +380,6 @@ yers/layer_base.html" %}
 
     {% for keyword in resource.keywords.all %}
          {% if keyword.name == 'IRMT_QGIS_Plugin' %}
-              {{ keywor }}
               <li class="list-group-item">
               <a href="/irv/{{ resource.typename }}" class="btn btn-default btn-md btn-block oq-button-irv">{% trans "Open in Irv" %}</a>
               </li>
