@@ -382,7 +382,7 @@ yers/layer_base.html" %}
          {% if keyword.name == 'IRMT_QGIS_Plugin' %}
               {{ keywor }}
               <li class="list-group-item">
-              <button class="btn btn-default btn-md btn-block">{% trans "Open in Irv" %}</button>
+              <a href="/irv/{{ resource.typename }}" class="btn btn-default btn-md btn-block oq-button-irv">{% trans "Open in Irv" %}</a>
               </li>
          {% endif %}
     {% endfor %}
