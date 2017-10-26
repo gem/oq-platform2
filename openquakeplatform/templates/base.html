@@ -5,7 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <title>{#{% block title %}{{ SITE_NAME }}{% endblock %}#}Openquake platform</title>
+    <title>{#{% block title %}{{ SITE_NAME }}{% endblock %}#}Openquake platform {% if resource.title %}- {{ resource.title }}{% endif %}</title>
+    <meta property="og:title" content="Openquake platform {% if resource.title %}- {{ resource.title }}{% endif %}" />
+    <meta property="og:site_name" content="platform.openquake.org" />
+    <meta property="og:url" content="http://{{ SITE_DOMAIN }}{{ resource.detail_url }}" />
+    <meta property="og:description" content="{% if resource.description %}{{ resource.description  }}{% else %}Welcome to the OpenQuake Platform, by the GEM Foundation.{% endif %}" />
+    <meta name="og:image" content="{{ resource.thumbnail_url }}" />
+    <meta name="og:image:width" content="200" />
+    <meta name="og:image:height" content="150" />
     {% block head %}
       {% if DEBUG_STATIC %}
       <link href="{{ STATIC_URL }}lib/css/jquery.dataTables.css?v={{ VERSION }}" rel="stylesheet" />
@@ -160,9 +167,9 @@
                         </form>
                 </div>
             </li>-->
-            {% if not user.is_authenticated and REGISTRATION_OPEN %}
-            <li><a href="{% url "account_signup" %}">{% trans "Register" %}</a></li>
-            {% endif %}
+            {#{% if not user.is_authenticated and REGISTRATION_OPEN %}#}
+            <!---<li class="oq-right-user-signup"><a href="{#{% url "account_signup" %}#}">{#{% trans "Register" %}#}</a></li>-->
+            {#{% endif %}#}
             {% if user.is_authenticated %}
             <li class="oq-right-user">
              <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="dropdown_click()">{#{% avatar user 42 %}#} <img src="https://www.gravatar.com/avatar/e2b6ed912af51f071943424ca7bdcff8/?s=40&amp;d=http%3A%2F%2Fftp.openquake.org%2Foq-platform%2Foq-avatar-40.png" alt="hascar" width="40" height="40"> {{ user.username }}<i class="fa fa-angle-down fa-lg"></i></a>
@@ -181,6 +188,10 @@
               </li>
 		      {% else %}
 		      <li class="oq-right-user-signin"><a href="#" data-toggle="modal" data-target="#SigninModal" role="button" >{% trans "Sign in" %} </a></li>
+                      {% if not user.is_authenticated and REGISTRATION_OPEN %}
+                      <li class="oq-right-user-separated">|</li>
+                      <li class="oq-right-user-signup"><a href="{% url "account_signup" %}">{% trans "Register" %}</a></li>
+                      {% endif %}
               {% endif %}
               {% if user.is_authenticated %}
                           <li class="oq-right-search">
@@ -229,9 +240,16 @@
         <div id="oq-share" class="oq-share" style="display:none;">
            <div class="col-md-3">
                  <ul>
-                         <li><a href=""><i class="fa fa-facebook fa-2x" aria-hidden="true"></i>  Share on Facebook</a></li>
-                         <li><a href=""><i class="fa fa-twitter fa-2x" aria-hidden="true"></i>  Share on Twitter</a></li>
-                         <li><a href=""><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i>  Share on Google Plus</a></li>
+                     <li>
+                             <a target="_blank" href="http://www.facebook.com/sharer.php?u=http://{{ request.get_host }}{{ request.get_full_path }}"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i>  Share on Facebook</a>
+                         </li>
+                         <li>
+                             <a target="_blank" href="https://twitter.com/share?text=Openquake platform {% if resource.title %}- {{ resource.title }}{% endif %}&url=http://{{ request.get_host }}{{ request.get_full_path }}"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i>  Share on Twitter</a>
+                         </li>
+                         <li>
+                             <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&title=Openquake platform {% if resource.title %}- {{ resource.title }}{% endif %}&url=http://{{ request.get_host }}{{ request.get_full_path }}"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>  Share on Linkedin</a>
+                         </li>
+
                  </ul>
            </div>
         </div>

@@ -7,6 +7,8 @@
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 
+sudo systemctl stop apt-daily.timer
+
 set -o errtrace
 
 #display each command before executing it
@@ -193,6 +195,7 @@ paver sync
 paver start -b 0.0.0.0:8000
 
 python ./manage.py import_vuln_geo_applicability_csv ~/oq-platform2/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
+python ./manage.py vuln_groups_create
 
 ## load data and install simplejson for vulnerability application
 python manage.py loaddata ~/oq-platform2/openquakeplatform/vulnerability/post_fixtures/initial_data.json
