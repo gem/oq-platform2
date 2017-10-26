@@ -54,10 +54,10 @@ input[type="checkbox"], input[type="radio"] {
     padding: 0px 0 0 0px!important;
     min-height: 800px;
     margin: 0px auto 30px!important;
-    width: 900px;
+    width: 980px;
 }
 #wrap .container {
-    width: 900px;
+    width: 980px;
 }
 #wrap .big-search,
 #datasets,
@@ -218,7 +218,7 @@ ul.dropdown-menu li {
     margin-top: 0!important;
 }
 .oq-button-home {
-    width: 25%;
+    width: 23%;
     float: left;
     padding: 130px 0 0 0;
     text-align: center;
@@ -432,6 +432,27 @@ div#search-inp:after {
 }
 .social li {
     margin: 5px 10px;
+}
+.item-thumb img {
+    border: 1px solid #eeeeee;
+}
+.profile-avatar {
+    padding: 5px 5px 5px;
+    border-top: 1px solid #ccc!important;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 0;
+}
+.oq-button-irv {
+    color: #ffffff;
+    background: #f05a24;
+    border-color: #f05a24;
+}
+.oq-button-irv:hover,
+.oq-button-irv:focus {
+    color: #ffffff;
+    background: #cc3d20;
+    border-color: #f7931e;
 }
 
 
