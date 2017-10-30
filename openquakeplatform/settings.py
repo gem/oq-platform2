@@ -5,4 +5,3 @@ import os
 import geonode
 
 from geonode.settings import *
-#from openquakeplatform.local_settings import *
