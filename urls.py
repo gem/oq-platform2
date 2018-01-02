@@ -25,6 +25,7 @@ from django.conf.urls.static import static
 from geonode.sitemap import LayerSitemap, MapSitemap
 from django.views.generic import TemplateView
 from django.contrib import admin
+import openquakeplatform.common.views as oq_common_views
 
 import geonode.proxy.urls
 
@@ -75,7 +76,8 @@ urlpatterns = patterns('',
                        url(r'^account/terms/$',
                            TemplateView.as_view(template_name='account/terms.html'),
                            name='terms'),
-
+                       url(r'^versions/$', oq_common_views.versions,
+                           name='oq_common_versions'),
                        # Layer views
                        (r'^layers/', include('geonode.layers.urls')),
 
