@@ -59,7 +59,8 @@ urlpatterns = patterns('',
                            TemplateView.as_view(template_name='help.html'),
                            name='help'),
                        url(r'^developer/$',
-                           TemplateView.as_view(template_name='developer.html'),
+                           TemplateView.as_view(
+                               template_name='developer.html'),
                            name='developer'),
                        url(r'^about/$',
                            TemplateView.as_view(template_name='about.html'),
@@ -71,10 +72,12 @@ urlpatterns = patterns('',
                            TemplateView.as_view(template_name='share.html'),
                            name='share'),
                        url(r'^calculate/$',
-                           TemplateView.as_view(template_name='calculate.html'),
+                           TemplateView.as_view(
+                               template_name='calculate.html'),
                            name='calculate'),
                        url(r'^account/terms/$',
-                           TemplateView.as_view(template_name='account/terms.html'),
+                           TemplateView.as_view(
+                               template_name='account/terms.html'),
                            name='terms'),
                        url(r'^versions/$', oq_common_views.versions,
                            name='oq_common_versions'),
@@ -101,7 +104,8 @@ urlpatterns = patterns('',
 
                        # Search views
                        url(r'^search/$',
-                           TemplateView.as_view(template_name='search/search.html'),
+                           TemplateView.as_view(
+                               template_name='search/search.html'),
                            name='search'),
 
                        # Social views
@@ -125,8 +129,9 @@ urlpatterns = patterns('',
 
                        # Meta
                        url(r'^lang\.js$',
-                           TemplateView.as_view(template_name='lang.js',
-                                                content_type='text/javascript'),
+                           TemplateView.as_view(
+                               template_name='lang.js',
+                               content_type='text/javascript'),
                            name='lang'),
 
                        url(r'^jsi18n/$',
