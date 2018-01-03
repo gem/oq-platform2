@@ -3,9 +3,9 @@ import unittest
 from openquakeplatform.test import pla
 
 
-class ShapeTest(unittest.TestCase):
+class AppVersionsTest(unittest.TestCase):
 
-    def upload_shape_test(self):
+    def page_app_versions_test(self):
 
         versions_url = '/versions'
 
