@@ -29,8 +29,8 @@ geonode_setup_env()
     export LOCKDOWN_GEONODE='true'
 }
 
-##function nested applicatione
-nested_exec() {
+#install dependencies vulnerability and ipt
+extra_deps_install() {
     python -m pip install "django<2"
     pip install django-nested-inline
     pip install django_extras
@@ -100,8 +100,8 @@ fi
 
 source ~/env/bin/activate
 
-## install nested applications
-nested_exec
+# install nested applications
+extra_deps_install
 
 pip install scipy
 
