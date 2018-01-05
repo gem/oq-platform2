@@ -7,6 +7,8 @@
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 
+sudo systemctl stop apt-daily.timer
+
 set -o errtrace
 
 #display each command before executing it
@@ -26,6 +28,17 @@ geonode_setup_env()
     export PYTHONPATH=$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
     #export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
     export LOCKDOWN_GEONODE='true'
+}
+
+#install dependencies vulnerability and ipt
+extra_deps_install() {
+    python -m pip install "django<2"
+    pip install django-nested-inline
+    pip install django_extras
+    pip install -e git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
+    pip install -e git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
+    pip install -e git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
+    pip install -e git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
 }
 
 #function complete procedure for tests
@@ -88,6 +101,11 @@ fi
 
 source ~/env/bin/activate
 
+# install nested applications
+extra_deps_install
+
+pip install scipy
+
 cd ~
 
 #install and configuration postgres
@@ -102,13 +120,16 @@ cat << EOF | sudo -u postgres psql
     GRANT ALL PRIVILEGES ON DATABASE "geonode_dev-imports" to $GEO_DBUSER;
 EOF
 
+sudo -u postgres psql -d geonode_dev -c 'CREATE EXTENSION postgis;'
+sudo -u postgres psql -d geonode_dev -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
+sudo -u postgres psql -d geonode_dev -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
+
 sudo -u postgres psql -d geonode_dev-imports -c 'CREATE EXTENSION postgis;'
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
 
 #insert line in pg_hba.conf postgres
-#sudo sed '1 i local   all             all                                md5' /etc/postgresql/9.5/main/pg_hba.conf
-sudo sed -i '1 s@^@local  all             all             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
 #restart postgres
 sudo service postgresql restart
 
@@ -151,7 +172,7 @@ ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osg
 
 sudo cp $HOME/$GIT_REPO/urls.py $HOME/geonode/geonode
 
-## clone and setting pythonpath taxtweb and oq-platform2
+## clone and setting pythonpath taxtweb, ipt and oq-platform2
 cd ~
 
 for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
@@ -170,8 +191,16 @@ cd ~/oq-platform2
 paver setup -l $LXC_IP -u localhost:8800 -s data
 
 cd ~/geonode
+python manage.py migrate account --noinput
 paver sync
 paver start -b 0.0.0.0:8000
+
+python ./manage.py import_vuln_geo_applicability_csv ~/oq-platform2/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
+python ./manage.py vuln_groups_create
+
+## load data and install simplejson for vulnerability application
+python manage.py loaddata ~/oq-platform2/openquakeplatform/vulnerability/post_fixtures/initial_data.json
+pip install simplejson==2.0.9
 
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
@@ -189,4 +218,5 @@ fi
 cd ~/geonode
 sudo supervisorctl stop openquake-webui
 paver stop
+
 
