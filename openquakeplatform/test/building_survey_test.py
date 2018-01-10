@@ -13,10 +13,16 @@ class BuildingSurveyTest(unittest.TestCase):
 
     def setUp(self):
 
-        # User setting
-        submit_settings = pla.xpath_finduniq(
-            "//button[normalize-space(text())='Submit']", TIMEOUT, True)
-        submit_settings.click()
+        survey_url = '/building-class'
+
+        # Redirect page of survey application
+        pla.get(survey_url)
+
+        if pla.url == survey_url:
+            # User setting
+            submit_settings = pla.xpath_finduniq(
+                "//button[normalize-space(text())='Submit']", TIMEOUT, True)
+            submit_settings.click()
 
     def tutorial_test(self):
 
