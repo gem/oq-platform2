@@ -9,22 +9,22 @@ def div_sub():
         "//div[@name='sub']", TIMEOUT)
 
 
+def user_settings():
+
+    user_settings = 'http://localhost:8000/user-settings'
+
+    if pla.url == user_settings:
+        # User setting
+        submit_settings = pla.xpath_finduniq(
+            "//button[normalize-space(text())='Submit']", TIMEOUT, True)
+        submit_settings.click()
+
+
 class BuildingSurveyTest(unittest.TestCase):
 
-    def setUp(self):
-
-        survey_url = '/building-class'
-
-        # Redirect page of survey application
-        pla.get(survey_url)
-
-        if pla.url == survey_url:
-            # User setting
-            submit_settings = pla.xpath_finduniq(
-                "//button[normalize-space(text())='Submit']", TIMEOUT, True)
-            submit_settings.click()
-
     def tutorial_test(self):
+
+        user_settings()
 
         tutorial_url = '/building-class/tutorial'
 
@@ -42,7 +42,9 @@ class BuildingSurveyTest(unittest.TestCase):
 
     def new_classification_test(self):
 
-        survey_url = '/building-class'
+        user_settings()
+
+        survey_url = '/building-class/'
 
         # Redirect page of survey application
         pla.get(survey_url)
