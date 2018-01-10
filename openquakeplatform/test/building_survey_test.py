@@ -11,6 +11,13 @@ def div_sub():
 
 class BuildingSurveyTest(unittest.TestCase):
 
+    def setUp(self):
+
+        # User setting
+        submit_settings = pla.xpath_finduniq(
+            "//button[normalize-space(text())='Submit']", TIMEOUT, True)
+        submit_settings.click()
+
     def tutorial_test(self):
 
         tutorial_url = '/building-class/tutorial'
