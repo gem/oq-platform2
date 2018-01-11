@@ -4,11 +4,13 @@ from openquakeplatform.test import pla
 TIMEOUT = 100
 
 
+# Check subthree occupancy
 def div_sub():
     pla.xpath_finduniq(
         "//div[@name='sub']", TIMEOUT)
 
 
+# Check page user-settings and confirm settings
 def user_settings():
 
     user_settings = 'http://localhost:8000/user-settings'
@@ -17,6 +19,10 @@ def user_settings():
         # User setting
         submit_settings = pla.xpath_finduniq(
             "//button[normalize-space(text())='Submit']", TIMEOUT, True)
+
+        # scroll page and found element
+        submit_settings.location_once_scrolled_into_view
+
         submit_settings.click()
 
 
