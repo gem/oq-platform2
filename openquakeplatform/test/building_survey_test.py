@@ -121,5 +121,3 @@ class BuildingSurveyTest(unittest.TestCase):
             "//button[@name='save'"
             " and normalize-space(text())='save']", TIMEOUT)
         occup_save.click()
-
-        # pla.driver.switch_to.alert.accept()
