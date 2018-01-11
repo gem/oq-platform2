@@ -233,6 +233,6 @@ urlpatterns += patterns('',
                                  namespace='building_class')),
                         (r'^vulnerability/',
                          include('openquakeplatform.vulnerability.urls')),
-                        (r'^exposure/',		
+                        (r'^exposure/',
 -                         include('openquakeplatform.exposure.urls')),
                         )
