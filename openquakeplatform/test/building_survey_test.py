@@ -10,31 +10,15 @@ def div_sub():
         "//div[@name='sub']", TIMEOUT)
 
 
-# Check page user-settings and confirm settings
-def user_settings():
-
-    user_settings = 'http://localhost:8000/user-settings'
-
-    if pla.url == user_settings:
-        # User setting
-        submit_settings = pla.xpath_finduniq(
-            "//button[normalize-space(text())='Submit']", TIMEOUT, True)
-
-        # scroll page and found element
-        submit_settings.location_once_scrolled_into_view
-
-        submit_settings.click()
-
-
 class BuildingSurveyTest(unittest.TestCase):
 
     def tutorial_test(self):
 
-        user_settings()
+        # user_settings()
 
         tutorial_url = '/building-class/tutorial'
 
-        # Redirect page of survey application
+        # Redirect page of tutorial
         pla.get(tutorial_url)
 
         # Check title
@@ -48,17 +32,30 @@ class BuildingSurveyTest(unittest.TestCase):
 
     def new_classification_test(self):
 
-        user_settings()
-
         survey_url = '/building-class/'
 
-        # Redirect page of survey application
+        # Redirect homepage of application
         pla.get(survey_url)
+
+        user_settings = 'http://localhost:8000/building-class/user-settings'
+
+        print(user_settings)
+        print(pla.url)
+
+        if pla.url == user_settings:
+            # User setting
+            submit_settings = pla.xpath_finduniq(
+                "//button[normalize-space(text())='Submit']", TIMEOUT, True)
+
+            # scroll page and found element
+            submit_settings.location_once_scrolled_into_view
+
+            submit_settings.click()
 
         # Select zone
         zone_field = pla.xpath_finduniq(
             "//select[@id='country-id']"
-            "/option[normalize-space(text())='French Guiana']")
+            "/option[normalize-space(text())='French Guiana']", TIMEOUT, True)
         zone_field.click()
 
         # Click button new classification
@@ -125,6 +122,4 @@ class BuildingSurveyTest(unittest.TestCase):
             " and normalize-space(text())='save']", TIMEOUT)
         occup_save.click()
 
-        # Redirect page of survey application
-        # pla.get(survey_url)
         # pla.driver.switch_to.alert.accept()
