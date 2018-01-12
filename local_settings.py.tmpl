@@ -112,6 +112,12 @@ ALLOWED_DOCUMENT_TYPES = [
 ]
 MAX_DOCUMENT_SIZE = 100
 
+STANDALONE_APPS = (
+    'openquakeplatform_ipt',
+    'openquakeplatform_taxtweb',
+    'openquakeplatform_building_class',
+)
+
 inst_new = tuple()
 for app in INSTALLED_APPS:
     if app == 'django.contrib.admin':
