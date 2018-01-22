@@ -112,6 +112,12 @@ ALLOWED_DOCUMENT_TYPES = [
 ]
 MAX_DOCUMENT_SIZE = 100
 
+STANDALONE_APPS = (
+    'openquakeplatform_ipt',
+    'openquakeplatform_taxtweb',
+    'openquakeplatform_building_class',
+)
+
 inst_new = tuple()
 for app in INSTALLED_APPS:
     if app == 'django.contrib.admin':
@@ -125,10 +131,8 @@ INSTALLED_APPS += (
     'nested_inline',
     'chained_multi_checkboxes',
     'chained_selectbox',
-    'openquakeplatform_taxtweb',
-    'openquakeplatform_ipt',
+) + STANDALONE_APPS + (    
     'openquakeplatform.vulnerability',
-    'openquakeplatform_building_class',
     'openquakeplatform.geodetic',
 )
 
