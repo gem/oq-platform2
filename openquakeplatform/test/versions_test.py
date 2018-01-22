@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 import unittest
-from openquakeplatform.test import pla
+from openquake.moon import platform_get
+
 
 
 class AppVersionsTest(unittest.TestCase):
 
     def page_app_versions_test(self):
+
+        pla = platform_get()
 
         versions_url = '/versions'
 
