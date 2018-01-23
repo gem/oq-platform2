@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 import unittest
 from openquake.moon import platform_get
-<<<<<<< HEAD
-=======
-
->>>>>>> 408f4830aa1c60595861a9c950cf6ba32b947340
 
 
 class AppVersionsTest(unittest.TestCase):
