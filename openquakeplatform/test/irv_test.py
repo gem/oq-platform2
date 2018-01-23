@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 import unittest
 
-from openquakeplatform.test import pla
+from openquake.moon import platform_get
 
 @unittest.skip("temporarily disabled")
 class IrvTest(unittest.TestCase):
     def irv_test(self):
+
+        pla = platform_get()
+
         # go to test page
         pla.get('/irv/test/')
 

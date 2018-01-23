@@ -2,14 +2,12 @@
 import unittest
 from openquake.moon import platform_get
 
-pla = platform_get()
-
 
 class TcseTest(unittest.TestCase):
 
     def calculate_test(self):
 
-        # pla.get('')
+        pla = platform_get()
 
         # calculate
         cal = pla.xpath_finduniq(
@@ -25,6 +23,8 @@ class TcseTest(unittest.TestCase):
 
     def explore_test(self):
 
+        pla = platform_get()
+
         # calculate
         exp = pla.xpath_finduniq(
             "//a[normalize-space(text())='Explore']",
@@ -39,6 +39,8 @@ class TcseTest(unittest.TestCase):
 
     def share_test(self):
 
+        pla = platform_get()
+
         # calculate
         sha = pla.xpath_finduniq(
             "//a[normalize-space(text())='Share']",
@@ -52,6 +54,8 @@ class TcseTest(unittest.TestCase):
             "//h1[normalize-space(text())='OpenQuake Share']")
 
     def terms_test(self):
+
+        pla = platform_get()
 
         pla.get('')
 
