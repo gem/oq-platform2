@@ -25,7 +25,5 @@ class AppVersionsTest(unittest.TestCase):
             "td[../td[normalize-space(text())"
             "='IPT']][normalize-space(text())!='IPT']")
         vers = search_version_app.text
-        self.assertRegexpMatches(vers, '^[0-9]+\.', msg=("version [%s]"
-                                                         " not valid"
-                                                         " for IPT"
-                                                         " app" % vers))
+        self.assertRegexpMatches(vers, '^[0-9]+\.', msg=(
+            "version [%s] not valid for IPT app" % vers))
