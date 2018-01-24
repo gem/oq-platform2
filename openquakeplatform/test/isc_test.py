@@ -1,18 +1,22 @@
 #!/usr/bin/env python
 import unittest
-import time
 
-from openquakeplatform.test import pla
+from openquake.moon import platform_get
+
 
 @unittest.skip("temporarily disabled")
 class IscTest(unittest.TestCase):
     def isc_test(self):
+
+        pla = platform_get()
+
         pla.get('/explore')
-        pla.wait_new_page("//b[contains(text(), 'Seismic Hazard Data Sets and Models')]",
+        pla.wait_new_page("//b[contains(text(),"
+                          " 'Seismic Hazard Data Sets and Models')]",
                           "/explore", strategy="next", timeout=10)
 
-        #<li>
-        #<a href="/maps/23">
+        # <li>
+        # <a href="/maps/23">
         enter_button = pla.xpath_finduniq(
             "//li/a[@href='/maps/23' and normalize-space(text()) = 'Global "
             "Instrumental Earthquake Catalogue (1900 - 2009)']")
