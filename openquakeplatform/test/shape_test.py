@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 import unittest
-from openquakeplatform.test import pla
+from openquake.moon import platform_get
 from selenium.webdriver.common.keys import Keys
 
 
@@ -9,6 +9,8 @@ from selenium.webdriver.common.keys import Keys
 class ShapeTest(unittest.TestCase):
 
     def upload_shape_test(self):
+
+        pla = platform_get()
 
         pla.get('')
 
