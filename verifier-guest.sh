@@ -62,9 +62,12 @@ exec_test () {
 
     export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
 
+    export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
+
+    export GEM_PLA_ADMIN_ID=1000
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
-    # sleep 40000 || true
+
 }
 
 rem_sig_hand() {
@@ -190,7 +193,7 @@ paver setup
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
-paver setup -l $LXC_IP -u localhost:8800 -s data
+paver setup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data/
 
 cd ~/geonode
 python manage.py migrate account --noinput

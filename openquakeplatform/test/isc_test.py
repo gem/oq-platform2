@@ -11,8 +11,8 @@ class IscTest(unittest.TestCase):
         pla = platform_get()
 
         pla.get('/explore')
-        pla.wait_new_page("//b[contains(text(), 'Seismic Hazard Data"
-                          " Sets and Models')]",
+        pla.wait_new_page("//b[contains(text(),"
+                          " 'Seismic Hazard Data Sets and Models')]",
                           "/explore", strategy="next", timeout=10)
 
         # <li>

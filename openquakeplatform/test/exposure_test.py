@@ -67,9 +67,8 @@ class ExposureTest(unittest.TestCase):
         close_win_wait_download.click()
 
         close_win_wait_download = pla.xpath_finduniq(
-            "//button["
-            "../span[normalize-space(text())="
-            "'Study: Cabinda Angola, L1, UN Habitat']"
+            "//button[../span[normalize-space(text())='Study: "
+            "Cabinda Angola, L1, UN Habitat']"
             " and @title='close']",
             100, 1)
         close_win_wait_download.click()
