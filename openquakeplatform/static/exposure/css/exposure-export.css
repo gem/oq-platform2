@@ -52,3 +52,18 @@ label {
 .leaflet-control-layers-overlays label {
     display: block !important
 }
+
+div#map-tools {
+    margin: 10px 0;
+}
+
+span.ui-button-text {
+    background: #f7931e;
+    color: #fff;
+}
+
+span.ui-button-text:hover,
+span.ui-button-text:focus {
+    background: #f05a24;
+}
+
