@@ -159,6 +159,8 @@ urlpatterns = patterns('',
                        url(r'^api/roles', roles, name='roles'),
                        url(r'^api/adminRole', admin_role, name='adminRole'),
                        url(r'^api/users', users, name='users'),
+                       url(r'^hrde/$', TemplateView.as_view(
+                           template_name="hrde/hrde.html"), name='hrde'),
                        url(r'', include(api.urls)),
                        )
 
