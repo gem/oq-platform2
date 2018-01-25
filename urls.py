@@ -108,6 +108,12 @@ urlpatterns = patterns('',
                                template_name='search/search.html'),
                            name='search'),
 
+                       # geodetic
+                       url(r'^geodetic/$',
+                           TemplateView.as_view(
+                               template_name="geodetic.html"),
+                           name='geodetic'),
+
                        # Social views
                        (r"^account/", include("account.urls")),
                        (r'^people/', include('geonode.people.urls')),
