@@ -57,7 +57,7 @@ input[type="checkbox"], input[type="radio"] {
     width: 980px;
 }
 #wrap .container {
-    width: 980px;
+    width: 100%;
 }
 #wrap .big-search,
 #datasets,
@@ -454,7 +454,18 @@ div#search-inp:after {
     background: #cc3d20;
     border-color: #f7931e;
 }
-
+#oq-context-ribbon {
+    display: none;
+}
+ 
+#oq-body-wrapper {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
 
 /*mobile*/
 @media (max-width: 991px) {
