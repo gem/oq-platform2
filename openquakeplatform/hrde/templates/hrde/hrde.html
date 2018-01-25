@@ -159,6 +159,23 @@ HRDE - {{block.super}}
 
 {% block extra_script %}
     {{block.super}}
+    <style>
+        span.ui-button-text {
+            background: #f7931e;
+            color: #fff;
+        }
+        span.ui-button-text:hover,
+        span.ui-button-text:focus {
+            background: #f05a24;
+        }
+        .ui-button-text-only .ui-button-text {
+            padding: .4em 0.8em;
+        
+        }
+        div#map-tools {
+            margin: 10px 0;
+        }
+    </style>
     <!-- Category tags-->
     <script src="{{ STATIC_URL }}geonode/leaflet-control-orderlayers/dist/leaflet.control.orderlayers.min.js"></script>
     <script src="{{ STATIC_URL }}hrde/hrde.js"></script>
