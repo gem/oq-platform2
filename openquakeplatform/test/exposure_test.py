@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import unittest
 from openquake.moon import platform_get
+from selenium.webdriver.common.keys import Keys
 
 url_exp = "/exposure"
 
@@ -20,10 +21,19 @@ class ExposureTest(unittest.TestCase):
 
         # click paging
 
-        page25 = pla.xpath_finduniq(
-            "//button/span[normalize-space(text())='25']",
-            100, 1)
-        page25.click()
+        city = "Angola"
+
+        # Search city
+        search_city = pla.xpath_finduniq(
+            "//input[@class='input-filter form-control ng-pristine "
+            "ng-valid ng-scope ng-touched' and @type='text']")
+        search_city.send_keys(city, Keys.ENTER)
+
+        # page25 = pla.xpath_finduniq(
+        #    "//button/span[normalize-space(text())='25']",
+        #    100, 1)
+        # scroll page and found element
+        # page25.click()
 
         # click nation
 
