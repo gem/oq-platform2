@@ -1,5 +1,5 @@
 import os
-from geonode.settings import GEONODE_APPS, TEMPLATES, INSTALLED_APPS
+from geonode.settings import TEMPLATES, INSTALLED_APPS
 import geonode.settings
 import openquakeplatform
 
@@ -41,14 +41,14 @@ DATABASES = {
         'PASSWORD': '%(db_pass)s',
      },
     # vector datastore for uploads
-    'datastore' : {
+    'datastore': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        #'ENGINE': '', # Empty ENGINE name disables
+        # ENGINE': '', # Empty ENGINE name disables
         'NAME': 'geonode_dev-imports',
-        'USER' : '%(db_user)s',
-        'PASSWORD' : '%(db_pass)s',
-        'HOST' : 'localhost',
-        'PORT' : '5432',
+        'USER': '%(db_user)s',
+        'PASSWORD': '%(db_pass)s',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -78,18 +78,20 @@ OGC_SERVER = {
         # the proxy won't work and the integration tests will fail
         # the entire block has to be overridden in the local_settings
         'PUBLIC_LOCATION': GEOSERVER_PUBLIC_LOCATION,
-        'USER' : OGC_SERVER_DEFAULT_USER,
-        'PASSWORD' : OGC_SERVER_DEFAULT_PASSWORD,
-        'MAPFISH_PRINT_ENABLED' : True,
-        'PRINT_NG_ENABLED' : True,
-        'GEONODE_SECURITY_ENABLED' : True,
-        'GEOGIG_ENABLED' : False,
-        'WMST_ENABLED' : False,
+        'USER': OGC_SERVER_DEFAULT_USER,
+        'PASSWORD': OGC_SERVER_DEFAULT_PASSWORD,
+        'MAPFISH_PRINT_ENABLED': True,
+        'PRINT_NG_ENABLED': True,
+        'GEONODE_SECURITY_ENABLED': True,
+        'GEOGIG_ENABLED': False,
+        'WMST_ENABLED': False,
         'BACKEND_WRITE_ENABLED': True,
-        'WPS_ENABLED' : False,
-        'LOG_FILE': '%%s/geoserver/data/logs/geoserver.log' %% os.path.abspath(os.path.join(PROJECT_ROOT, os.pardir)),
-        # Set to dictionary identifier of database containing spatial data in DATABASES dictionary to enable
-        'DATASTORE': '', #'datastore',
+        'WPS_ENABLED': False,
+        'LOG_FILE': '%%s/geoserver/data/logs/geoserver.log'
+                    %% os.path.abspath(os.path.join(PROJECT_ROOT, os.pardir)),
+        # Set to dictionary identifier of database
+        # containing spatial data in DATABASES dictionary to enable
+        'DATASTORE': '',  # 'datastore',
         'PG_GEOGIG': False,
         'TIMEOUT': 10  # number of seconds to allow for HTTP requests
     }
@@ -130,7 +132,7 @@ INSTALLED_APPS += (
     'nested_inline',
     'chained_multi_checkboxes',
     'chained_selectbox',
-) + STANDALONE_APPS + (    
+) + STANDALONE_APPS + (
     'openquakeplatform.vulnerability',
 )
 
@@ -142,13 +144,14 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'pagination.middleware.PaginationMiddleware',
     # irv needs csrf to be disabled to work
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     # geonode.security is enabled to lockdown the website
     'geonode.security.middleware.LoginRequiredMiddleware',
-
-    # If you use SessionAuthenticationMiddleware, be sure it appears before OAuth2TokenMiddleware.
-    # SessionAuthenticationMiddleware is NOT required for using django-oauth-toolkit.
+    # If you use SessionAuthenticationMiddleware,
+    # be sure it appears before OAuth2TokenMiddleware.
+    # SessionAuthenticationMiddleware
+    # is NOT required for using django-oauth-toolkit.
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'oauth2_provider.middleware.OAuth2TokenMiddleware',
 )
@@ -186,12 +189,14 @@ OAUTH2_PROVIDER = {
     'CLIENT_ID_GENERATOR_CLASS': 'oauth2_provider.generators.ClientIdGenerator',
 }
 
-# Absolute filesystem path to the directory that will be used to upload/download schema.xsd files through gsschema app
+# Absolute filesystem path to the directory
+# that will be used to upload/download schema.xsd files through gsschema app
 GSSCHEMA_CONFIG = {
     'gsschema_dir': '/var/lib/geoserver_data/'
 }
 
-# where to save tilebundler tilesets. Should move this to  OGC_SERVER['default']['TILEBUNDLER_DATASTORE_DIR']
+# where to save tilebundler tilesets.
+# Should move this to  OGC_SERVER['default']['TILEBUNDLER_DATASTORE_DIR']
 TILEBUNDLER_CONFIG = {
     'tileset_dir': '/var/lib/geoserver_data/tilebundler-store'
 }
@@ -242,7 +247,6 @@ FILESERVICE_CONFIG = {
     'store_dir': '/var/lib/geoserver_data/file-service-store',
     # example: ('*', ) or ('.mov', '.jpg', ...),
     'types_allowed': ('*', ),
-    # maploom will replace {} with the media item name such as 7ff194b54ab57a829094dc0afc624c78815ec02c.jpg
     'url_template': '/api/fileservice/view/{}'
 }
 
