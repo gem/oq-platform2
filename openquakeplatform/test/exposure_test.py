@@ -3,6 +3,7 @@ import unittest
 from openquake.moon import platform_get
 from selenium.webdriver.common.keys import Keys
 
+# path exposure
 url_exp = "/exposure"
 
 
@@ -12,6 +13,7 @@ class ExposureTest(unittest.TestCase):
 
         pla = platform_get()
 
+        # go to first page
         pla.get(url_exp)
 
         clickldbyreg = pla.xpath_finduniq(
@@ -20,14 +22,13 @@ class ExposureTest(unittest.TestCase):
         clickldbyreg.click()
 
         # click paging
-
-        city = "Algeria"
+        nation = "Algeria"
 
         # Search city
-        search_city = pla.xpath_finduniq(
+        search_nation = pla.xpath_finduniq(
             "//input[@class='input-filter form-control ng-pristine "
             "ng-valid ng-scope ng-touched' and @type='text']")
-        search_city.send_keys(city, Keys.ENTER)
+        search_nation.send_keys(nation, Keys.ENTER)
 
         page25 = pla.xpath_finduniq(
            "//button/span[normalize-space(text())='25']",
@@ -35,16 +36,12 @@ class ExposureTest(unittest.TestCase):
         page25.click()
 
         # click nation
-
-        class_tr = "Algeria"
-
         clicknation = pla.xpath_finduniq(
             "//table/tbody//td[@class='ng-binding'"
-            " and contains(text(), '%s')]" % class_tr)
+            " and contains(text(), '%s')]" % nation)
         clicknation.click()
 
         # click download csv of fractions
-
         downreg = pla.xpath_finduniq(
             "//button[@id='dwellingFractionsDownload']"
             "/span[normalize-space(text())='Download']",
@@ -52,7 +49,6 @@ class ExposureTest(unittest.TestCase):
         downreg.click()
 
         # click download nrml or csv of sub-national
-
         downsubnat = pla.xpath_finduniq(
             "//button[@id='nationalExposureBldgDownload']"
             "/span[normalize-space(text())='Download']",
@@ -60,7 +56,6 @@ class ExposureTest(unittest.TestCase):
         downsubnat.click()
 
         # close final windows
-
         close_win_wait_download = pla.xpath_finduniq(
             "//button["
             "../span[normalize-space(text())='Download']"
@@ -68,4 +63,5 @@ class ExposureTest(unittest.TestCase):
             100, 1)
         close_win_wait_download.click()
 
+        # return to first page
         pla.get(url_exp)
