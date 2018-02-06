@@ -46,9 +46,9 @@ exec_test () {
     sudo apt-get -y install python-pip wget
     pip install --upgrade pip
     pip install nose
-    wget "http://ftp.openquake.org/common/selenium-deps"
+    wget "http://ftp.openquake.org/common/selenium-deps-platform2"
     GEM_FIREFOX_VERSION="$(dpkg-query --show -f '${Version}' firefox)"
-    . selenium-deps
+    . selenium-deps-platform2
     wget "http://ftp.openquake.org/mirror/mozilla/geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     tar zxvf "geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     sudo cp geckodriver /usr/local/bin
@@ -190,7 +190,7 @@ paver setup
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
-paver setup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data/
+paver setup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data
 
 cd ~/geonode
 python manage.py migrate account --noinput
