@@ -21,15 +21,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/agpl.html>.
     <!-- IE 8 Compatibility -->
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
     <link rel="stylesheet" href="{{ STATIC_URL }}lib/jquery-ui/css/smoothness/jquery-ui-1.10.3.custom.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}geonode/Leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}geonode/css/wax-controls.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}geonode/css/oqplatform_leaflet.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}geonode/css/demo_table.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}geonode/css/demo_page.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}geonode/css/d3.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}geonode/css/ng-table.min.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}geonode/css/leaflet-dvf.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}geonode/bootstrap-extend/css/jasny-bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}Leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/wax-controls.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/oqplatform_leaflet.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/demo_table.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/demo_page.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/d3.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/ng-table.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/leaflet-dvf.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap-extend/css/jasny-bootstrap.min.css">
 
 {% endblock extra_head %}
 
@@ -47,24 +47,24 @@ along with this program.  If not, see <https://www.gnu.org/licenses/agpl.html>.
 
 {% block extra_script %}
     {{block.super}}
-    <script src="{{ STATIC_URL }}geonode/js/jquery.mousewheel.js"></script>
-    <script src="{{ STATIC_URL }}geonode/Leaflet/dist/leaflet.js"></script>
-    <script src="{{ STATIC_URL }}geonode/L.Wax/L.Wax.js"></script>
-    <script src="{{ STATIC_URL }}geonode/wax/dist/wax.leaf.min.js"></script>
-    <script src="{{ STATIC_URL }}geonode/wax/ext/modestmaps.min.js"></script>
-    <script src="{{ STATIC_URL }}geonode/wax/dist/wax.mm.js"></script>
-    <script src="{{ STATIC_URL }}geonode/js/base_data_viewer_app.js"></script>
-    <script src="{{ STATIC_URL }}geonode/js/leaflet.utfgrid.js"></script>
-    <script src="{{ STATIC_URL }}geonode/js/leaflet.ajax.min.js"></script>
-    <script src="{{ STATIC_URL }}geonode/js/jquery.dataTables.js"></script>
-    <script src="{{ STATIC_URL }}geonode/js/d3.js"></script>
-    <script src="{{ STATIC_URL }}geonode/js/bing.js"></script>
-    <script src="{{ STATIC_URL }}geonode/js/angular.min.js"></script>
-    <script src="{{ STATIC_URL }}geonode/js/ng-table.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.mousewheel.js"></script>
+    <script src="{{ STATIC_URL }}Leaflet/dist/leaflet.js"></script>
+    <script src="{{ STATIC_URL }}L.Wax/L.Wax.js"></script>
+    <script src="{{ STATIC_URL }}wax/dist/wax.leaf.min.js"></script>
+    <script src="{{ STATIC_URL }}wax/ext/modestmaps.min.js"></script>
+    <script src="{{ STATIC_URL }}wax/dist/wax.mm.js"></script>
+    <script src="{{ STATIC_URL }}js/base_data_viewer_app.js"></script>
+    <script src="{{ STATIC_URL }}js/leaflet.utfgrid.js"></script>
+    <script src="{{ STATIC_URL }}js/leaflet.ajax.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.dataTables.js"></script>
+    <script src="{{ STATIC_URL }}js/d3.js"></script>
+    <script src="{{ STATIC_URL }}js/bing.js"></script>
+    <script src="{{ STATIC_URL }}js/angular.min.js"></script>
+    <script src="{{ STATIC_URL }}js/ng-table.min.js"></script>
     <script src="{{ STATIC_URL }}lib/jquery-ui/js/jquery-ui-1.10.3.custom.js"></script>
-    <script src="{{ STATIC_URL }}geonode/js/xml2json.js"></script>
-    <script src="{{ STATIC_URL }}geonode/js/leaflet-dvf.js"></script>
-    <script src="{{ STATIC_URL }}geonode/bootstrap-extend/js/jasny-bootstrap.js"></script>
+    <script src="{{ STATIC_URL }}js/xml2json.js"></script>
+    <script src="{{ STATIC_URL }}js/leaflet-dvf.js"></script>
+    <script src="{{ STATIC_URL }}bootstrap-extend/js/jasny-bootstrap.js"></script>
 
     <!-- This style overrides the default z-index imposed by jquery to fix
          overlap between widgets and header in the leaflet apps.
