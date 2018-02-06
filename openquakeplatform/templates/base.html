@@ -24,9 +24,9 @@
       {% else %}
       <link href="{{ STATIC_URL }}lib/css/assets.min.css?v={{ VERSION }}" rel="stylesheet"/>
       {% endif %}
-      <link href="{{ STATIC_URL }}geonode/css/ext-compatibility.css?v={{ VERSION }}" rel="stylesheet" />
-      <link href="{{ STATIC_URL }}geonode/css/base.css?v={{ VERSION }}" rel="stylesheet" />
-      <link href="{{ STATIC_URL }}geonode/css/platform.css" rel="stylesheet" />
+      <link href="{{ STATIC_URL }}css/ext-compatibility.css?v={{ VERSION }}" rel="stylesheet" />
+      <link href="{{ STATIC_URL }}css/base.css?v={{ VERSION }}" rel="stylesheet" />
+      <link href="{{ STATIC_URL }}css/platform.css" rel="stylesheet" />
       <style type="text/css">[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}</style>
       {% block extra_head %}
       {% endblock %}
@@ -41,7 +41,7 @@
         }
       </style>
     <![endif]-->
-    <link href="{{ STATIC_URL }}geonode/img/favicon.png" rel="shortcut icon"/>
+    <link href="{{ STATIC_URL }}img/favicon.png" rel="shortcut icon"/>
     <link rel="search" type="application/opensearchdescription+xml" href="/catalogue/opensearch" title="GeoNode Search"/>
     
     <!--function for open modal menu -->
@@ -137,26 +137,26 @@
               {% if user.is_authenticated %}
                           <li class="oq-right-search">
                                   <a href="javascript:void(0)" onclick="search_click()">
-                                          <img alt="" src="/static/geonode/img/oq-search.png" />
+                                          <img alt="" src="/static/img/oq-search.png" />
                                   </a>
                           </li>
               {% endif %}
                           <li class="oq-right-help">
                                   <a href="https://www.globalquakemodel.org/openquake/support/documentation/platform/" target="_blank">
-                                          <img alt="" src="/static/geonode/img/oq-help.png" />
+                                          <img alt="" src="/static/img/oq-help.png" />
                                   </a>
                           </li>
               {% if user.is_authenticated %}
                           <li class="oq-right-share">
                                   <a href="javascript:void(0)" onclick="share_click()">
-                                          <img alt="" src="/static/geonode/img/oq-share.png" />
+                                          <img alt="" src="/static/img/oq-share.png" />
                                   </a>
                           </li>
               {% endif %}
             </ul>
           </div> <!--/.nav-collapse -->
         </div>
-        <div class="right-bar"><a href="https://www.globalquakemodel.org/" target="_blank"><img alt="oq-gem" src="{{ STATIC_URL }}geonode/img/oq-gem.png" /></a></div>
+        <div class="right-bar"><a href="https://www.globalquakemodel.org/" target="_blank"><img alt="oq-gem" src="{{ STATIC_URL }}img/oq-gem.png" /></a></div>
       </nav>
       {% endblock header %}
       <div class="oq-menu">
@@ -343,8 +343,8 @@
     {% else %}
     <script src="{{ STATIC_URL }}lib/js/assets.min.js?v={{ VERSION }}"></script>
     {% endif %}
-    <script src="{{ STATIC_URL }}geonode/js/utils/utils.js?v={{ VERSION }}"></script>
-    <script src="{{ STATIC_URL }}geonode/js/base/base.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}js/utils/utils.js?v={{ VERSION }}"></script>
+    <script src="{{ STATIC_URL }}js/base/base.js?v={{ VERSION }}"></script>
     {% include 'autocomplete_light/static.html' %}
     <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
     {% block extra_script %}{% endblock extra_script %}
