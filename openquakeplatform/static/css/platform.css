@@ -80,7 +80,7 @@ li.oq-right-search {
 }
 .navbar-inverse {
     border: 0;
-    background: url(/static/geonode/img/oq-header.png) no-repeat left top;
+    background: url(/static/img/oq-header.png) no-repeat left top;
     background-color: #1b75a5;
     height: 40px;
 }
