@@ -454,7 +454,9 @@ div#search-inp:after {
     background: #cc3d20;
     border-color: #f7931e;
 }
-
+.ui-widget-header {
+    border: 0;
+}    
 
 /*mobile*/
 @media (max-width: 991px) {
