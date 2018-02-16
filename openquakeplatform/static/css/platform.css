@@ -454,7 +454,25 @@ div#search-inp:after {
     background: #cc3d20;
     border-color: #f7931e;
 }
-
+.ui-widget-header {                                                                                                                      
+    border: 0!important;
+}
+.ui-widget {
+    font-size: 0.8em!important;
+}
+.dataTables_paginate .paginate_button.disabled,
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0!important;
+    margin-left: 0!important;
+    background: #f7931e!important;
+    border: 1px solid #f7931e!important;
+    color: #fff!important;
+}                             
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #f05a24!important;
+    border: 1px solid #f05a24!important;
+    color: #fff!important;
+}
 
 /*mobile*/
 @media (max-width: 991px) {

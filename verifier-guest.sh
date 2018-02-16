@@ -46,9 +46,9 @@ exec_test () {
     sudo apt-get -y install python-pip wget
     pip install --upgrade pip
     pip install nose
-    wget "http://ftp.openquake.org/common/selenium-deps"
+    wget "http://ftp.openquake.org/common/selenium-deps-platform2"
     GEM_FIREFOX_VERSION="$(dpkg-query --show -f '${Version}' firefox)"
-    . selenium-deps
+    . selenium-deps-platform2
     wget "http://ftp.openquake.org/mirror/mozilla/geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     tar zxvf "geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     sudo cp geckodriver /usr/local/bin
@@ -177,7 +177,10 @@ sudo cp $HOME/$GIT_REPO/urls.py $HOME/geonode/geonode
 ## clone and setting pythonpath taxtweb, ipt and oq-platform2
 cd ~
 
+# git clone -b oq-platform2 https://github.com/gem/oq-platform-ipt.git
+
 for repo in oq-platform-taxtweb oq-platform-ipt; do
+# for repo in oq-platform-taxtweb; do
     if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
 done
 
@@ -190,7 +193,7 @@ paver setup
 
 ## modify local_settings with pavement from repo
 cd ~/oq-platform2
-paver setup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data/
+paver setup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data
 
 cd ~/geonode
 python manage.py migrate account --noinput
