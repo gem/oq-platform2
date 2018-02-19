@@ -9,7 +9,7 @@ User can access, manipulate, share and add data, models and tools for integrated
 
 ![OpenQuake](http://storage.globalquakemodel.org/media/cms_page_media/15/OQ-workflows_1.png.530x400_q85_crop.jpg)
 
-This platform has been created by the [GEM Foundation](http://storage.globalquakemodel.org/gem/).
+This platform has been created by the [GEM Foundation](https://www.globalquakemodel.org).
 
 
 ## License
