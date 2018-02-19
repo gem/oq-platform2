@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+import unittest
+from selenium.webdriver.common.action_chains import ActionChains
+from openquake.moon import platform_get
+
+TIMEOUT = 100
+
+
+class GrvTest(unittest.TestCase):
+
+    def page_map_test(self):
+
+        pla = platform_get()
+
+        pla.get('/grv')
+
+        content_map = pla.xpath_finduniq(
+            "//div[@id='map']")
+
+        action_chart = ActionChains(pla.driver)
+
+        # click point to visualize economy graphic
+        action_chart.move_to_element_with_offset(
+            content_map, 550, 50).click().perform()
+
+        # test fails if the svg is not found
+        pla.xpath_finduniq(
+            "//div[@id='categoryTabs']"
+            "//div[@id='economy']"
+            "//div[@id='econ-chart-pcc']"
+            "//*[name()='svg']/*[name()='g']"
+            "/*[name()='g' and @class='foreground']"
+            "/*[name()='path' and @class='Italy']", TIMEOUT)
