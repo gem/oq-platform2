@@ -19,15 +19,14 @@
               <li><a href="/maps/24">Global Historical Earthquake Catalogue and Archive (1000-1903)</a></li>
               <li><a href="/maps/25">Homogeneous Active Faults</a></li>
               <li><a href="/maps/26">Geodetic Strain Rate Model</a></li>
-              <li><a href="{#{% url 'hrde' %}#}">Explore Hazard Models</a> Hazard input models and results obtained using recent models that GEM adapted to the OpenQuake-engine - more info available here: <a href="https://hazardwiki.openquake.org/">https://hazardwiki.openquake.org/</a></li>
+              <li><a href="{#{% url 'hrde' %}#}">Explore Hazard Models</a> Hazard input models and results obtained using recent models that GEM adapted to the OpenQuake-engine - more info available here: <a target="_blank" href="https://hazardwiki.openquake.org/">https://hazardwiki.openquake.org/</a></li>
             </ul>
 
             <b>Physical Risk Data Sets:</b>
             <ul>
-              <li><a href="/ecd/eventsmap/?&amp;f_b=False&amp;f_c=False&amp;f_i=False&amp;f_p=False&amp;f_s=False&amp;all=True">Earthquake Consequences Database</a></li>
-              <li><a href="{#{% url 'exposure' %}#}">Exposure Export</a></li>
+              <li><a href="{% url 'exposure' %}">Exposure Export</a></li>
               <li><a href="{#{% url 'hazus' %}#}">HAZUS Building Fractions </a></li>
-              <li><a href="{#{% url 'vulnerability.views.list' %}#}">Physical Vulnerability</a></li>
+              <li><a href="{% url 'vulnerability:list' %}">Physical Vulnerability</a></li>
 </ul>
 
             <b>Social Vulnerability and Integrated Risk Data Sets:</b>
@@ -39,7 +38,7 @@
             </ul>
             <b>GEM Building Taxonomy Tools:</b>
             <ul>
-              <li><a href="http://taxtweb.openquake.org/" target="_blank">TaxTweb</a> Online graphical tool for editing GEM Taxonomy strings</li>
+              <li><a href="/taxtweb" target="_blank">TaxTweb</a> Online graphical tool for editing GEM Taxonomy strings</li>
             </ul>
 
             <b>Explore:</b>
