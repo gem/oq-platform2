@@ -24,17 +24,6 @@ class ExposureTest(unittest.TestCase):
         # click paging
         nation = "Algeria"
 
-        # Search city
-        search_nation = pla.xpath_finduniq(
-            "//input[@class='input-filter form-control ng-pristine "
-            "ng-valid ng-scope ng-touched' and @type='text']")
-        search_nation.send_keys(nation, Keys.ENTER)
-
-        page25 = pla.xpath_finduniq(
-            "//button/span[normalize-space(text())='25']",
-            100, 1)
-        page25.click()
-
         # click nation
         clicknation = pla.xpath_finduniq(
             "//table/tbody//td[@class='ng-binding'"
