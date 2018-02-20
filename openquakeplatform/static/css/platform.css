@@ -367,6 +367,7 @@ div#search-inp:after {
     font-size: 40px;
     text-transform: uppercase;
     font-weight: 300;
+    font-family: 'Lato',sans-serif;
 }
 .dropdown-menu {
    border: 1px solid #ccc;
