@@ -474,6 +474,9 @@ div#search-inp:after {
     border: 1px solid #f05a24!important;
     color: #fff!important;
 }
+.leaflet-control-coordinates .uiElement .labelFirst {
+    color: #000;
+}
 
 /*mobile*/
 @media (max-width: 991px) {
