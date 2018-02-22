@@ -152,7 +152,8 @@ fi
 
 ## install engine
 sudo apt-get install -y software-properties-common
-sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
+# sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
+sudo add-apt-repository ppa:openquake/release-2.7
 sudo apt-get update
 sudo apt-get install -y --force-yes python-oq-engine
 
