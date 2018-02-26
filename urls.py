@@ -75,6 +75,8 @@ urlpatterns = patterns('',
                            TemplateView.as_view(
                                template_name='calculate.html'),
                            name='calculate'),
+                       url(r'^hazus/$', TemplateView.as_view(
+                           template_name="hazus/hazus.html"), name='hazus'),
                        url(r'^account/terms/$',
                            TemplateView.as_view(
                                template_name='account/terms.html'),
