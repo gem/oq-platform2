@@ -80,9 +80,9 @@ urlpatterns = patterns('',
                                template_name='account/terms.html'),
                            name='terms'),
                        url(r'^versions/$', oq_common_views.versions,
+                           name='oq_common_versions'),
                        url(r'^grv/$', TemplateView.as_view(
                            template_name="grv/grv_viewer.html"), name='grv'),
-                           name='oq_common_versions'),
                        # Layer views
                        (r'^layers/', include('geonode.layers.urls')),
 
