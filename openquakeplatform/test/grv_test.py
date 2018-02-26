@@ -23,11 +23,16 @@ class GrvTest(unittest.TestCase):
         action_chart.move_to_element_with_offset(
             content_map, 550, 50).click().perform()
 
+        category_tabs = pla.xpath_finduniq(
+            "//div[@id='categoryTabs']", TIMEOUT)
+
+        category_tabs.location_once_scrolled_into_view
+
         # test fails if the svg is not found
         pla.xpath_finduniq(
-            "//div[@id='categoryTabs']"
             "//div[@id='economy']"
             "//div[@id='econ-chart-pcc']"
             "//*[name()='svg']/*[name()='g']"
             "/*[name()='g' and @class='foreground']"
-            "/*[name()='path' and @class='Italy']", TIMEOUT)
+            "/*[name()='path' and @class='Germany']",
+            el=category_tabs)
