@@ -25,7 +25,8 @@ from django.http import HttpResponse
 from django.views.decorators.http import condition
 from django.db import connections
 
-from openquakeplatform.utils import allowed_methods, sign_in_required
+# from openquakeplatform.utils import allowed_methods, sign_in_required
+from openquakeplatform.utils import allowed_methods
 from openquakeplatform.exposure import util
 
 from openquakeplatform.exposure.fake_db import gem_fake_db_get
@@ -119,7 +120,8 @@ def _tot_grid_count_valid(sr_id):
             sr_id)):
         sr_info.append(dict(info._asdict()))
         assert len(sr_info) == 1, ('_get_study_region_info(sr_id) returned '
-                                   '%d rows. It should return one') % len(sr_info)
+                                   '%d rows. It should '
+                                   'return one') % len(sr_info)
     sr_info = sr_info[0]
     if sr_info['tot_grid_count'] > settings.EXPOSURE_MAX_TOT_GRID_COUNT:
         msg = ('The export can not be performed because the '
@@ -158,7 +160,7 @@ def validate_export(request):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-@sign_in_required
+# @sign_in_required
 def export_exposure(request):
     """
     Perform a streaming export of the requested exposure data.
@@ -202,7 +204,7 @@ def export_exposure(request):
             return response
     else:
         occupancy = 0  # 'residential' by default
-        
+
     output_type = request.GET.get('output_type')
     if not output_type or output_type not in ('csv', 'nrml'):
         msg = ('Please provide the parameter "output_type".'
@@ -218,7 +220,7 @@ def export_exposure(request):
         mimetype = 'text/plain'
 
     if 'geddb' not in connections:
-        response_data = gem_fake_db_get('export_exposure.%s' % output_type) 
+        response_data = gem_fake_db_get('export_exposure.%s' % output_type)
         response = HttpResponse(response_data, content_type=mimetype)
         response['Content-Disposition'] = content_disp
         return response
@@ -292,7 +294,9 @@ def export_exposure(request):
     response['Content-Disposition'] = content_disp
     return response
 
-def _csv_currency_and_taxonomy_header(currency, taxonomy_name, taxonomy_version):
+
+def _csv_currency_and_taxonomy_header(currency,
+                                      taxonomy_name, taxonomy_version):
     details_str = ""
     if currency is not None:
         details_str += "# currency = %s" % currency
@@ -302,6 +306,7 @@ def _csv_currency_and_taxonomy_header(currency, taxonomy_name, taxonomy_version)
 """ % (taxonomy_name, taxonomy_version)
     return details_str
 
+
 def raw_to_csv_row(row):
     elements = ["\"" + str(x) + "\"" if type(x) == unicode
                 else str(x) if x is not None
@@ -309,6 +314,7 @@ def raw_to_csv_row(row):
                 for x in row]
     row_str = ','.join(elements) + "\n"
     return row_str
+
 
 def _stream_exposure_by_bb_and_sr_id_as_csv(
         lng1, lat1, lng2, lat2, sr_id, occupancy,
@@ -322,6 +328,7 @@ def _stream_exposure_by_bb_and_sr_id_as_csv(
         row_str = raw_to_csv_row(row)
         yield row_str
 
+
 def _stream_exposure_by_sr_id_as_csv(
         sr_id, occupancy, currency, taxonomy_name, taxonomy_version):
     copyright = copyright_csv(COPYRIGHT_HEADER)
@@ -331,6 +338,7 @@ def _stream_exposure_by_sr_id_as_csv(
     for row in util._stream_exposure_by_sr_id(sr_id, occupancy):
         row_str = raw_to_csv_row(row)
         yield row_str
+
 
 def _stream_exposure_as_nrml(req_pars):
     yield XML_HEADER
@@ -387,9 +395,10 @@ def _stream_exposure_as_nrml(req_pars):
     # finalize the document:
     yield NRML_FOOTER
 
+
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-@sign_in_required
+# @sign_in_required
 def get_country_list(request):
     """
     Get the list of countries available in the GED database
@@ -404,7 +413,7 @@ def get_country_list(request):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-@sign_in_required
+# @sign_in_required
 def get_geographic_regions_by_iso(request):
     """
     Given an ISO code, get the list of geographic regions belonging to the
@@ -430,7 +439,7 @@ def get_geographic_regions_by_iso(request):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-@sign_in_required
+# @sign_in_required
 def get_all_studies(request):
     """
     Get GED studies for all national levels
@@ -451,11 +460,11 @@ def get_all_studies(request):
                          non residential data
     """
     if 'geddb' not in connections:
-        response_data = gem_fake_db_get('get_all_studies.json') 
+        response_data = gem_fake_db_get('get_all_studies.json')
         response = HttpResponse(response_data, content_type='text/json')
         return response
 
-	studies = []
+    studies = []
     StudyRecord = namedtuple(
         'StudyRecord',
         'iso num_studies num_l1_names num_l2_names study_id'
@@ -469,7 +478,7 @@ def get_all_studies(request):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-@sign_in_required
+# @sign_in_required
 def get_studies_by_country(request):
     """
     Get GED studies for the country having the provided ISO code
@@ -522,7 +531,7 @@ def get_studies_by_country(request):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-@sign_in_required
+# @sign_in_required
 def get_study_region_info(request):
     """
     For a given study region id, retrieve
@@ -551,7 +560,8 @@ def get_study_region_info(request):
             sr_id)):
         sr_info.append(dict(info._asdict()))
         assert len(sr_info) == 1, ('_get_study_region_info(sr_id) returned '
-                                   '%d rows. It should return one') % len(sr_info)
+                                   '%d rows. It '
+                                   'should return one') % len(sr_info)
     response_data = json.dumps(sr_info[0])
     response = HttpResponse(response_data, mimetype='text/json')
     return response
@@ -559,7 +569,7 @@ def get_study_region_info(request):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-@sign_in_required
+# @sign_in_required
 def export_fractions_by_study_region_id(request):
     """
     Export, as csv file, the fractions for the given study region id.
