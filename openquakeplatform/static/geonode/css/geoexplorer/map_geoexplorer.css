@@ -1,3 +1,10 @@
 #paneltbar {
     margin-top: 41px;
 }
+.gxp-crumbpanel-header ul,
+.x-panel-noborder .x-panel-tbar-noborder .x-toolbar {
+    border-bottom: 1px solid #dbdbdb;
+}
+ul, ol {
+    margin-bottom: 0px!important;
+}
