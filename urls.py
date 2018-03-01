@@ -149,6 +149,8 @@ urlpatterns = patterns('',
                        (r'^documents/', include('geonode.documents.urls')),
                        (r'^services/', include('geonode.services.urls')),
 
+                       # GeoServer Helper Views
+                       (r'^gs/', include('geonode.geoserver.urls')),
                        # OAuth Provider
                        url(r'^o/', include('oauth2_provider.urls',
                            namespace='oauth2_provider')),
