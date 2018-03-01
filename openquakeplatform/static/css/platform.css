@@ -330,8 +330,8 @@ div#search-inp:after {
     color: #fff;
 }
 .btn-primary {
-    background: #f7931e;
-    border-color: #f7931e;
+    background: #f7931e!important;
+    border-color: #f7931e!important;
 }
 .btn-primary:hover,
 .btn-primary:focus {
