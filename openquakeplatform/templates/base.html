@@ -267,8 +267,9 @@
         </div>
         <div class="col-md-6 text-right">
           <ul class="list-unstyled">	  
-            <li>{% trans "Powered by" %} <a href="http://geonode.org">{% trans "GeoNode" %}</a> <em>{% trans "version" %} {{ VERSION }}</em>
-               <a target="_blank" href="https://www.globalquakemodel.org/openquake/about/">{% trans "About" %}</a> | <a href="../account/terms">{% trans "Terms of use" %}</a>
+            <li>
+            {#{% trans "Powered by" %}#} <!--<a href="http://geonode.org">{#{% trans "GeoNode" %}#}</a> <em>{#{% trans "version" %} {{ VERSION }}#}</em>-->
+             Openquake Platform | <a target="_blank" href="https://www.globalquakemodel.org/tools-products">{% trans "About" %}</a> | <a href="../account/terms">{% trans "Terms of use" %}</a>
             <li>
           </ul>
           <label class="hidden">{% trans "Language" %}</label>
