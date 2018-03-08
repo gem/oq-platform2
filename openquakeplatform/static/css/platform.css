@@ -52,7 +52,7 @@ input[type="checkbox"], input[type="radio"] {
 }
 #wrap {
     padding: 0px 0 0 0px!important;
-    min-height: 800px;
+    min-height: 700px;
     margin: 0px auto 30px!important;
     width: 980px;
 }
@@ -469,9 +469,6 @@ div#search-inp:after {
 }
 .ui-widget-header {                                                                                                                      
     border: 0!important;
-}
-.ui-widget {
-    font-size: 0.8em!important;
 }
 .dataTables_paginate .paginate_button.disabled,
 .dataTables_wrapper .dataTables_paginate .paginate_button {
