@@ -160,7 +160,7 @@ def validate_export(request):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-# @sign_in_required
+@sign_in_required
 def export_exposure(request):
     """
     Perform a streaming export of the requested exposure data.
@@ -398,7 +398,7 @@ def _stream_exposure_as_nrml(req_pars):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-# @sign_in_required
+@sign_in_required
 def get_country_list(request):
     """
     Get the list of countries available in the GED database
@@ -413,7 +413,7 @@ def get_country_list(request):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-# @sign_in_required
+@sign_in_required
 def get_geographic_regions_by_iso(request):
     """
     Given an ISO code, get the list of geographic regions belonging to the
@@ -439,7 +439,7 @@ def get_geographic_regions_by_iso(request):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-# @sign_in_required
+@sign_in_required
 def get_all_studies(request):
     """
     Get GED studies for all national levels
@@ -478,7 +478,7 @@ def get_all_studies(request):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-# @sign_in_required
+@sign_in_required
 def get_studies_by_country(request):
     """
     Get GED studies for the country having the provided ISO code
@@ -531,7 +531,7 @@ def get_studies_by_country(request):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-# @sign_in_required
+@sign_in_required
 def get_study_region_info(request):
     """
     For a given study region id, retrieve
@@ -569,7 +569,7 @@ def get_study_region_info(request):
 
 @condition(etag_func=None)
 @allowed_methods(('GET', ))
-# @sign_in_required
+@sign_in_required
 def export_fractions_by_study_region_id(request):
     """
     Export, as csv file, the fractions for the given study region id.
