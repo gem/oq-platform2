@@ -1,0 +1,36 @@
+# Copyright (C) 2014 GEM Foundation
+#
+# Contributions by: see http://storage.globalquakemodel.org/contributors
+#
+# You may use this work under the terms of the CC-BY-NC-SA 3.0 (unported)
+# [http://creativecommons.org/licenses/by-nc-sa/3.0/]
+#
+# THE WORK IS PROTECTED BY COPYRIGHT AND/OR OTHER APPLICABLE LAW. INSOFAR
+# AS THIS WORK IS PROTECTED BY LAWS THAT NEIGHBOUR OR ARE SIMILARLY RELATED
+# TO COPYRIGHT, SUCH AS DATABASE RIGHTS AS INTRODUCED IN EUROPE BY THE
+# DIRECTIVE 96/9/EC, YOU ALSO MAY USE THIS WORK UNDER THE TERMS OF
+# CC-BY-NC-SA 3.0 (unported).
+# [http://creativecommons.org/licenses/by-nc-sa/3.0/]
+#
+# ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS LICENSE OR
+# DIRECTLY ALLOWED BY THE APPLICABLE LAW IS PROHIBITED.
+#
+# If you have any questions or if you wish to seek permission to use this
+# data beyond what is offered by CC-BY-NC-SA 3.0 (unported), please contact
+# the GEM Foundation at: licensing@globalquakemodel.org
+#
+# More information on licensing: http://www.globalquakemodel.org/terms-of-use
+#
+#
+is_urban,is_residential,building_type,building_fraction,dwelling_fraction,replace_cost_per_area,avg_dwelling_per_build,avg_floor_area
+True,True,DX/MAT99//DY/MAT99///////////RSH99+RMT6+RME,,0.03125,1302.95325555,1.0,
+True,True,DX/MUR+CBS//DY/MUR+CBS///////////RSH99+RMT6+RME,,0.34375,1302.95325555,3.0,
+True,True,DX/MUR+CBS//DY/MUR+CBS///////////RSH99+RMT1+R99,,0.03125,1302.95325555,3.0,
+True,True,DX/MUR+CBS//DY/MUR+CBS///////////RSH99+RMN+RC,,0.015625,1302.95325555,3.0,
+True,True,DX/W+WWD//DY/W+WWD///////////RSH99+RMT6+RME,,0.015625,1302.95325555,1.0,
+True,True,DX/W+W99//DY/W+W99///////////RSH99+RMT6+RME,,0.109375,1302.95325555,1.0,
+True,True,DX/W+WS//DY/W+WS///////////RSH99+RMT6+RME,,0.03125,1302.95325555,1.0,
+True,True,DX/MUR+ADO//DY/MUR+ADO///////////RSH99+RMT6+RME,,0.421875,1302.95325555,3.0,
+False,True,DX/MUR+ADO//DY/MUR+ADO///////////RSH99+RMT6+RME,,0.848484848485,1302.95325555,1.0,
+False,True,DX/W+W99//DY/W+W99///////////RSH99+RMT6+RME,,0.121212121212,1302.95325555,1.0,
+False,True,DX/W+WWD//DY/W+WWD///////////RSH99+RMT6+RME,,0.030303030303,1302.95325555,1.0,

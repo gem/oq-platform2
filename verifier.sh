@@ -115,7 +115,7 @@ else
     ffox_can="\$(echo "\$ffox_pol" | grep '^  Candidate:' | sed 's/.*: //g')"
     if [ "\$ffox_cur" != "\$ffox_can" ]; then
         echo "WARNING: firefox has been upgraded, run it to accomplish update operations"
-        sudo apt-get -y upgrade
+        sudo apt-get -y dist-upgrade
         sudo apt-get -y install wmctrl
         export DISPLAY=:1
         firefox &
@@ -241,6 +241,7 @@ _devtest_innervm_run () {
 export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
 export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
 export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
+export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 
 \"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\" \"$notests\"
 "
@@ -303,6 +304,9 @@ copy_dev () {
     scp "${lxc_ip}:/var/log/openquake/webui.log" "out/dev_webui.log" || true
     scp "${lxc_ip}:dev_*.png" "out/" || true
     scp "${lxc_ip}:xunit-platform-dev.xml" "out/" || true
+    # scp "${lxc_ip}:latest_requirements.txt" "out/" || true
+    scp "${lxc_ip}:gem_geonode_requirements.txt" "out/" || true
+    scp "${lxc_ip}:latest_geonode_commit.txt" "out/" || true
 }
 
 

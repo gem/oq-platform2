@@ -1,0 +1,63 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %} Share - {{ block.super }} {% endblock title %}
+
+{% block middle %}
+  {{ block.super }}
+  {% block hero %}
+<div class="jumbotron">
+        <div class="container">
+          <h1>{% trans "OpenQuake Calculate" %}</h1>
+            <p></p>
+            <div class="paragraf">
+            <!-- Main page content goes here -->
+
+            <b>The OpenQuake Engine:</b><br/>
+            Seismic hazard and risk calculations can be performed using the OpenQuake engine.
+            <ul>
+                <li><a href="https://github.com/gem/oq-engine#openquake-engine" target="_blank">learn more</a> about the Engine and it's calculators</li>
+                <li>
+                  read the <a href="https://docs.openquake.org/manuals/OpenQuake%20Manual%20(latest).pdf" target="_blank">OpenQuake Engine manual</a>
+                </li>
+            </ul>
+
+            <b>Calculate on a desktop computer or server:</b>
+              <ul>
+                <li><a href="https://github.com/gem/oq-engine#installation" target="_blank">Download the OpenQuake Engine</a></li>
+              </ul>
+
+            <b>Modelling Tools:</b>
+              <ul>
+                <li>
+                  <a href="http://docs.openquake.org/oq-hazardlib/stable/openquake.hmtk.html" target="_blank">Hazard Modeller's Toolkit</a> - A suite of tools used to create PSHA input models, mostly developed by GEM scientists. It's provided by the <a href="https://github.com/gem/oq-engine#installation">OpenQuake Engine</a> packages.
+                </li>
+                <li>
+                  <a href="{% url 'ipt:home' %}">Risk Input Preparation Toolkit</a> - Tools used to create exposure, fragility and vulnerability risk input models.
+                </li>
+                <li>
+                  <a href="https://github.com/GEMScienceTools/gmpe-smtk" target="_blank">GMPE Strong Motion Modeller's Toolkit</a> - Python and OpenQuake-based Toolkit for Analysis of Strong Motions and Interpretation of GMPEs
+                </li>
+              </ul>
+            <b>Social Vulnerability and Integrated Risk</b><br/>
+            Integrated Risk calculations, combining Social and Economic Vulnerability with Physical Risk can be performed using GEM's <a target="_blank" href="http://plugins.qgis.org/plugins/svir/">QGIS plugin</a>.
+              <ul>
+                <li>
+                  To install the plugin in QGIS simply search for 'SVIR' in the QGIS Plugin Manager and then click "Install Plugin".
+                </li>
+              </ul>
+
+            <b>Supporting material:</b>
+              <ul>
+                <li>
+                  GEM respository for <a href="https://github.com/GEMScienceTools/notebooks" target="_blank">ipython notebook examples</a> demonstrating use of GEM scientific libraries (e.g., oq-hazardlib, hmtk etc.)
+                </li>
+              </ul>
+</div>
+
+</div>
+</div>
+{% include 'includes/sidebar.html' %}
+{% endblock %}
+{% endblock %}

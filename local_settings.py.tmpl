@@ -1,5 +1,5 @@
 import os
-from geonode.settings import GEONODE_APPS, TEMPLATES
+from geonode.settings import TEMPLATES, INSTALLED_APPS
 import geonode.settings
 import openquakeplatform
 
@@ -20,25 +20,35 @@ FILE_PATH_FIELD_DIRECTORY = '%(datadir)s/'
 
 # ROOT_URLCONF = 'openquakeplatform.urls'
 
+REGISTRATION_OPEN = 'True'
+
+THIRD_PARTY_URLS = {
+    'leaflet_base_map': (
+        'http://{s}.tiles.mapbox.com/v3/unhcr.map-8bkai3wa/{z}/{x}/{y}.png'
+    ),
+}
+
+TILESTREAM_URL = '//tilestream.openquake.org'
+
 GEOSERVER_LOCATION = 'http://%(lxc_ip)s:8080/geoserver/'
 GEOSERVER_PUBLIC_LOCATION = 'http://%(lxc_ip)s:8080/geoserver/'
 
 DATABASES = {
     'default': {
-         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': '%(db_name)s',
-         'USER': '%(db_user)s',
-         'PASSWORD': '%(db_pass)s',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': '%(db_name)s',
+        'USER': '%(db_user)s',
+        'PASSWORD': '%(db_pass)s',
      },
     # vector datastore for uploads
-    'datastore' : {
+    'datastore': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        #'ENGINE': '', # Empty ENGINE name disables
+        # 'ENGINE': '', # Empty ENGINE name disables
         'NAME': 'geonode_dev-imports',
-        'USER' : '%(db_user)s',
-        'PASSWORD' : '%(db_pass)s',
-        'HOST' : 'localhost',
-        'PORT' : '5432',
+        'USER': '%(db_user)s',
+        'PASSWORD': '%(db_pass)s',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -68,17 +78,18 @@ OGC_SERVER = {
         # the proxy won't work and the integration tests will fail
         # the entire block has to be overridden in the local_settings
         'PUBLIC_LOCATION': GEOSERVER_PUBLIC_LOCATION,
-        'USER' : OGC_SERVER_DEFAULT_USER,
-        'PASSWORD' : OGC_SERVER_DEFAULT_PASSWORD,
-        'MAPFISH_PRINT_ENABLED' : True,
-        'PRINT_NG_ENABLED' : True,
-        'GEONODE_SECURITY_ENABLED' : True,
-        'GEOGIG_ENABLED' : False,
-        'WMST_ENABLED' : False,
+        'USER': OGC_SERVER_DEFAULT_USER,
+        'PASSWORD': OGC_SERVER_DEFAULT_PASSWORD,
+        'MAPFISH_PRINT_ENABLED': True,
+        'PRINT_NG_ENABLED': True,
+        'GEONODE_SECURITY_ENABLED': True,
+        'GEOGIG_ENABLED': False,
+        'WMST_ENABLED': False,
         'BACKEND_WRITE_ENABLED': True,
-        'WPS_ENABLED' : False,
+        'WPS_ENABLED': False,
         'LOG_FILE': '%%s/geoserver/data/logs/geoserver.log' %% os.path.abspath(os.path.join(PROJECT_ROOT, os.pardir)),
-        # Set to dictionary identifier of database containing spatial data in DATABASES dictionary to enable
+        # Set to dictionary identifier of database
+        # containing spatial data in DATABASES dictionary to enable
         'DATASTORE': '', #'datastore',
         'PG_GEOGIG': False,
         'TIMEOUT': 10  # number of seconds to allow for HTTP requests
@@ -92,6 +103,8 @@ STATICFILES_DIRS = [
 ]
 
 TEMPLATES[0]['DIRS'].insert(0, os.path.join(OQPLATFORM_ROOT, 'templates'))
+TEMPLATES[0]['OPTIONS']['context_processors'].append(
+    'openquakeplatform.utils.oq_context_processor')
 
 ALLOWED_DOCUMENT_TYPES = [
     'csv', 'doc', 'docx', 'xls', 'xlsx', 'odt', 'ods', 'pdf',
@@ -100,67 +113,29 @@ ALLOWED_DOCUMENT_TYPES = [
 ]
 MAX_DOCUMENT_SIZE = 100
 
-INSTALLED_APPS = (
-
-    'modeltranslation',
-
-    # ioostrap admin theme
-    # 'django_admin_bootstrapped.bootstrap3',
-    # 'django_admin_bootstrapped',
-
-    # Apps bundled with Django
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.admin',
-    'django.contrib.sitemaps',
-    'django.contrib.staticfiles',
-    'django.contrib.messages',
-    'django.contrib.humanize',
-    'django.contrib.gis',
-    'django.contrib.redirects',
-    # Third party apps
-
-    # Utility
-    'pagination',
-    'taggit',
-    'treebeard',
-    'friendlytagloader',
-    'geoexplorer',
-    'leaflet',
-    'django_extensions',
-    #'geonode-client',
-    # 'haystack',
-    'autocomplete_light',
-    'mptt',
-    # 'modeltranslation',
-    'djcelery',
-    'storages',
-
-    # Theme
-    "pinax_theme_bootstrap_account",
-    "pinax_theme_bootstrap",
-    'django_forms_bootstrap',
-
-    # Social
-    'account',
-    'avatar',
-    'dialogos',
-    'agon_ratings',
-    # 'notification',
-    'announcements',
-    'actstream',
-    'user_messages',
-    'tastypie',
-    'polymorphic',
-    'guardian',
-    'oauth2_provider',
-
-    # taxtweb
-    'openquakeplatform_taxtweb',
+STANDALONE_APPS = (
     'openquakeplatform_ipt',
-) + GEONODE_APPS
+    'openquakeplatform_taxtweb',
+    'openquakeplatform_building_class',
+)
+
+inst_new = tuple()
+for app in INSTALLED_APPS:
+    if app == 'django.contrib.admin':
+        inst_new += ('nested_inlines', app)
+    else:
+        inst_new += (app, )
+INSTALLED_APPS = inst_new
+
+INSTALLED_APPS += (
+    'django.contrib.redirects',
+    'nested_inline',
+    'chained_multi_checkboxes',
+    'chained_selectbox',
+) + STANDALONE_APPS + (
+    'openquakeplatform.vulnerability',
+    'openquakeplatform.geodetic',
+)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -170,13 +145,15 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'pagination.middleware.PaginationMiddleware',
     # irv needs csrf to be disabled to work
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     # geonode.security is enabled to lockdown the website
     'geonode.security.middleware.LoginRequiredMiddleware',
 
-    # If you use SessionAuthenticationMiddleware, be sure it appears before OAuth2TokenMiddleware.
-    # SessionAuthenticationMiddleware is NOT required for using django-oauth-toolkit.
+    # If you use SessionAuthenticationMiddleware,
+    # be sure it appears before OAuth2TokenMiddleware.
+    # SessionAuthenticationMiddleware
+    # is NOT required for using django-oauth-toolkit.
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'oauth2_provider.middleware.OAuth2TokenMiddleware',
 )
@@ -211,10 +188,12 @@ OAUTH2_PROVIDER = {
         'groups': 'Access to your groups'
     },
 
-    'CLIENT_ID_GENERATOR_CLASS': 'oauth2_provider.generators.ClientIdGenerator',
+    'CLIENT_ID_GENERATOR_CLASS': 
+        'oauth2_provider.generators.ClientIdGenerator',
 }
 
-# Absolute filesystem path to the directory that will be used to upload/download schema.xsd files through gsschema app
+# Absolute filesystem path to the directory
+# that will be used to upload/download schema.xsd files through gsschema app
 GSSCHEMA_CONFIG = {
     'gsschema_dir': '/var/lib/geoserver_data/'
 }
@@ -270,6 +249,14 @@ FILESERVICE_CONFIG = {
     'store_dir': '/var/lib/geoserver_data/file-service-store',
     # example: ('*', ) or ('.mov', '.jpg', ...),
     'types_allowed': ('*', ),
-    # maploom will replace {} with the media item name such as 7ff194b54ab57a829094dc0afc624c78815ec02c.jpg
     'url_template': '/api/fileservice/view/{}'
 }
+
+# These limits define the maximum data that can be retreived
+# from GEM in the Exposure app
+# Max area size in degrees (i.e. 2 * 2)
+EXPOSURE_MAX_EXPORT_AREA_SQ_DEG = 4
+# Max number of rows
+EXPOSURE_MAX_TOT_GRID_COUNT = 100000
+
+TIME_INVARIANT_OUTPUTS = False

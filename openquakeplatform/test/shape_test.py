@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 import os
 import unittest
-from openquakeplatform.test import pla
+from openquake.moon import platform_get
 from selenium.webdriver.common.keys import Keys
 
 
+@unittest.skip("temporarily disabled")
 class ShapeTest(unittest.TestCase):
 
     def upload_shape_test(self):
-        sph = os.path.join(os.path.expanduser("~"), 'oq-platform2',
-                                                    'openquakeplatform',
-                                                    'test/shapefile',
-                                                    'exampleshape.zip')
+
+        pla = platform_get()
+
         pla.get('')
 
         # layers in homepage
@@ -20,7 +20,7 @@ class ShapeTest(unittest.TestCase):
             100, 1)
         linklayer.click()
 
-        pla.wait_new_page(linklayer, '/layers', timeout=10)
+        pla.wait_new_page(linklayer, '/layers/?limit=100&offset=0', timeout=10)
 
         # upload layers
         uploadlayer = pla.xpath_finduniq(
@@ -31,10 +31,16 @@ class ShapeTest(unittest.TestCase):
         pla.wait_new_page(uploadlayer, '/layers/upload', timeout=10)
 
         # choose shape file
+        sph = os.path.join(os.path.expanduser("~"), 'oq-platform2',
+                                                    'openquakeplatform',
+                                                    'test',
+                                                    'shapefile',
+                                                    'exampleshape.zip')
+
         chooselayer = pla.xpath_finduniq(
              "//input[@type='file'and @id='file-input']",
              100, 1)
-        chooselayer.send_keys(sph)
+        chooselayer.send_keys(os.path.join(os.getcwd(), sph))
 
         # confirm upload layers
         confuplayer = pla.xpath_finduniq(
