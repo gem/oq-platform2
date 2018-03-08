@@ -1,3 +1,11 @@
+#oq-body-heading {
+    padding: 0 30px; 
+}
+
+#oq-body-heading h1 {
+    margin-bottom: 0;
+}
+
 .exposure_export_form {
     padding-left: 50px;
 }
@@ -5,6 +13,11 @@
 #radioCountryList {
 	float: left;
 	width: 30%;
+}
+
+.ui-button-icon-only .ui-button-text,
+.ui-button-icons-only .ui-button-text {
+    padding: 0;
 }
 
 #radioSubRegionList {
@@ -54,7 +67,7 @@ label {
 }
 
 div#map-tools {
-    margin: 10px 0;
+    margin: 10px 30px;
 }
 
 span.ui-button-text {
