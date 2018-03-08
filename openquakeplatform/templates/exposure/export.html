@@ -33,9 +33,15 @@ Exposure Export {{ block.super }}
 {% endblock extra_head %}
 
 {% block body_outer %}
-{{block.super}}
 
-<div id="absoluteSpinner" class="loading">Loading&#8230;</div>`
+<div id="oq-body-heading">
+    <h1>Exposure Export</h1>
+    <br />
+</div>
+
+
+{{block.super}}
+<div id="absoluteSpinner" class="loading">Loading&#8230;</div>
 <div id="cover" ></div>
 {% verbatim %}
 <div ng-app="exposureApp" >
