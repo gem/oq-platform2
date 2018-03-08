@@ -19,7 +19,7 @@
 {% extends "data_viewer_base.html" %}
 
 {% block title %}
-Exposure Export {{ block.super }}
+Exposure Export
 {% endblock title %}
 
 {% block extra_head %}
@@ -38,7 +38,7 @@ Exposure Export {{ block.super }}
     <br />
 </div>
 {{block.super}}
-<div id="absoluteSpinner" class="loading">Loading&#8230;</div>`
+<div id="absoluteSpinner" class="loading">Loading&#8230;</div>
 <div id="cover" ></div>
 {% verbatim %}
 <div ng-app="exposureApp" >
