@@ -25,7 +25,8 @@ GEO_STABLE_HASH="1c65c9b"
 
 geonode_setup_env()
 {
-    export PYTHONPATH=$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
+    export PYTHONPATH=$HOME/oq-platform2:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
+    #export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
     export LOCKDOWN_GEONODE='true'
 }
 
@@ -57,7 +58,7 @@ exec_test () {
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
     
     # cd $GIT_REPO
-    export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt
+    export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
 
     export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
 
@@ -152,7 +153,7 @@ fi
 ## install engine
 sudo apt-get install -y software-properties-common
 # sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
-sudo add-apt-repository -y ppa:openquake/release-2.7
+sudo add-apt-repository -y ppa:openquake/release-2.8
 sudo apt-get update
 sudo apt-get install -y --force-yes python-oq-engine
 
@@ -179,9 +180,7 @@ sudo cp $HOME/$GIT_REPO/urls.py $HOME/geonode/geonode
 ## clone and setting pythonpath taxtweb, ipt and oq-platform2
 cd ~
 
-# git clone -b oq-platform2 https://github.com/gem/oq-platform-ipt.git
-
-for repo in oq-platform-taxtweb oq-platform-ipt; do
+for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
 # for repo in oq-platform-taxtweb; do
     if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
 done

@@ -116,6 +116,7 @@ MAX_DOCUMENT_SIZE = 100
 STANDALONE_APPS = (
     'openquakeplatform_ipt',
     'openquakeplatform_taxtweb',
+    'openquakeplatform_building_class',
 )
 
 inst_new = tuple()
@@ -134,6 +135,7 @@ INSTALLED_APPS += (
 ) + STANDALONE_APPS + (
     'openquakeplatform.vulnerability',
     'openquakeplatform.grv',
+    'openquakeplatform.geodetic',
 )
 
 MIDDLEWARE_CLASSES = (
