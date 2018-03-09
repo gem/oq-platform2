@@ -208,10 +208,10 @@ python ./manage.py vuln_groups_create
 python manage.py loaddata ~/oq-platform2/openquakeplatform/vulnerability/post_fixtures/initial_data.json
 pip install simplejson==2.0.9
 
-cd ~/ 
-if [ "$NO_EXEC_TEST" != "notest" ] ; then
-    exec_test
-fi
+# cd ~/ 
+# if [ "$NO_EXEC_TEST" != "notest" ] ; then
+#     exec_test
+# fi
 
 ## install layer 
 pip install gsconfig
@@ -234,8 +234,8 @@ if [ "$GEM_TEST_LATEST" = "true" ]; then
     cd -
 fi
 ## Stop Geonode
-cd ~/geonode
-sudo supervisorctl stop openquake-webui
-paver stop
+# cd ~/geonode
+# sudo supervisorctl stop openquake-webui
+# paver stop
 
 
