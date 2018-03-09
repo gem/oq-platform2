@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-## metadata ##
+# metadata
 
 folder_rest = "http://localhost:8080/geoserver/rest/"
 
@@ -12,11 +12,9 @@ name = "ghec"
 
 title = "Global Historical Earthquake Catalogue"
 
-abstract = "825 earthquakes of M >= 7 87 studies supplying the most reliable
-input datasets from the archive"
+abstract = "825 earthquakes of M >= 7 87 studies supplying the most reliable input datasets from the archive"
 
-keywords =
-["GC","GEM-supplemental-laye","catalog","component","event","global","historical"]
+keywords = ["GC", "GEM-supplemental-laye", "catalog", "component", "event", "global", "historical"]
 
 name_layer = "geonode:ghec"
 
