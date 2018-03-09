@@ -26,6 +26,8 @@ class GrvTest(unittest.TestCase):
         action_chart.move_to_element_with_offset(
             content_map, 550, 50).click().perform()
 
+        # import time
+        # time.sleep(50000)
         category_tabs = pla.xpath_finduniq(
             "//div[@id='categoryTabs']", TIMEOUT)
 
@@ -35,7 +37,7 @@ class GrvTest(unittest.TestCase):
             "//div[@id='econ-chart-pcc']"
             "//*[name()='svg']/*[name()='g']"
             "/*[name()='g' and @class='foreground']"
-            "/*[name()='path' and @class='Germany']",
+            "/*[name()='path' and @class='Poland']",
             el=category_tabs)
 
         pla.scroll_into_view(economy_tabs)
