@@ -175,6 +175,19 @@ cd ~
 # Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
+## install layer 
+pip install gsconfig
+cd ~/
+git clone --depth=1 https://gitlab.openquake.org/openquake/oq-private.git
+cd oq-private
+unzip ghec_data.zip -d ghec_data
+cd ~/oq-platform2/openquakeplatform/data
+python setup.py
+
+## Install or update layer
+cd $HOME/geonode
+python manage.py updatelayers
+
 sudo cp $HOME/$GIT_REPO/urls.py $HOME/geonode/geonode
 
 ## clone and setting pythonpath taxtweb, ipt and oq-platform2
@@ -213,18 +226,6 @@ pip install simplejson==2.0.9
 #     exec_test
 # fi
 
-## install layer 
-pip install gsconfig
-cd ~/
-git clone --depth=1 https://gitlab.openquake.org/openquake/oq-private.git
-cd oq-private
-unzip ghec_data.zip -d ghec_data
-cd ~/oq-platform2/openquakeplatform/data
-python setup.py
-
-## Install or update layer
-cd $HOME/geonode
-python manage.py updatelayers
 
 if [ "$GEM_TEST_LATEST" = "true" ]; then
     # pip freeze > ~/latest_requirements.txt
