@@ -178,7 +178,7 @@ ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osg
 ## install layer 
 pip install gsconfig
 cd ~/
-git clone --depth=1 https://gitlab.openquake.org/openquake/oq-private.git
+git clone --depth=1 git@gitlab.openquake.org:openquake/oq-private.git
 cd oq-private
 unzip ghec_data.zip -d ghec_data
 cd ~/oq-platform2/openquakeplatform/data
