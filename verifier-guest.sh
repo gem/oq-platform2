@@ -220,7 +220,7 @@ if [ "$GEM_TEST_LATEST" = "true" ]; then
     git log -1 > ~/latest_geonode_commit.txt
     cd -
 fi
-sleep(500000)
+sleep 500000
 
 ## install layer 
 pip install gsconfig
