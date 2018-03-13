@@ -228,16 +228,15 @@ git clone --depth=1 git@gitlab.openquake.org:openquake/oq-private.git
 cd oq-private
 unzip ghec_data.zip -d ghec_data
 cd ~/oq-platform2/openquakeplatform/data
-python setup.py
+python ghec_setup.py
 
 ## Install or update layer
 cd $HOME/geonode
 python manage.py updatelayers
 
-sleep 500000
-
 ## Stop Geonode
 cd ~/geonode
+sleep 500000
 sudo supervisorctl stop openquake-webui
 paver stop
 
