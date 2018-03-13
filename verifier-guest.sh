@@ -220,7 +220,6 @@ if [ "$GEM_TEST_LATEST" = "true" ]; then
     git log -1 > ~/latest_geonode_commit.txt
     cd -
 fi
-sleep 500000
 
 ## install layer 
 pip install gsconfig
@@ -234,6 +233,9 @@ python setup.py
 ## Install or update layer
 cd $HOME/geonode
 python manage.py updatelayers
+
+sleep 500000
+
 ## Stop Geonode
 cd ~/geonode
 sudo supervisorctl stop openquake-webui
