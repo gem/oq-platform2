@@ -1,0 +1,144 @@
+{% load i18n avatar_tags announcements_tags %}
+<script type="text/javascript">
+            function search_click() {   
+                if(document.getElementById('search-inp').style.display == "none") {
+                          $("#search-inp").fadeIn();
+                          $("#oq-share").fadeOut();
+                          $("dropdown-menu").fadeOut();
+                          return false;
+                 } else { 
+                          $("#search-inp").fadeOut();
+                          $("dropdown-menu").fadeOut();
+                          return false;
+                 }       
+                 stopPropagation(); 
+             } 
+             function share_click() {        
+                 if(document.getElementById('oq-share').style.display == "none") {
+                          $("#oq-share").fadeIn();
+                          $("#search-inp").fadeOut();
+                          $("dropdown-menu").fadeOut();
+                          return false;
+                  } else {
+                          $("#oq-share").fadeOut();
+                          $("dropdown-menu").fadeOut();
+                          return false;
+                  }
+             
+             }
+             function dropdown_click() {
+                 if(document.getElementById('dropdown-menu').style.display == "none") {
+                          $("#oq-share").fadeIn();
+                          $("#search-inp").fadeIn();
+                          return false; 
+                  } else {
+                          $("#oq-share").fadeOut();
+                          $("#search-inp").fadeOut();
+                          return false;
+                  }
+             }   
+      </script>    
+
+{% block header %}
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	  <div class="container">
+        <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	        <i class="fa fa-navicon fa-lg"></i>
+	      </button>
+	      <a class="navbar-brand" href="{% url "home" %}">GeoNode</a>
+	    </div>
+	    <div id="navbar" class="navbar-collapse collapse">
+	     <ul class="nav navbar-nav toolbar">
+	        {% block tabs %}
+               <li id="nav_calculate">
+                   <a href="{% url "calculate" %}">Calculate</a>
+               </li>
+               <li id="nav_share">
+                   <a href="{% url "share" %}">Share</a>
+               </li>
+               <li id="nav_explore">
+                   <a href="{% url "explore" %}">Explore</a>
+               </li>
+	        {% block extra_tab %}
+            {% endblock %}
+            {% endblock %}
+          </ul>
+	      <ul id="oq-menu-right" class="nav navbar-nav navbar-right">
+            {% if not user.is_authenticated and REGISTRATION_OPEN %}
+            <li><a href="{% url "account_signup" %}">{% trans "Register" %}</a></li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li class="oq-right-user">
+             <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="dropdown_click()">{#{% avatar user 42 %}#} <img src="https://www.gravatar.com/avatar/e2b6ed912af51f071943424ca7bdcff8/?s=40&amp;d=http%3A%2F%2Fftp.openquake.org%2Foq-platform%2Foq-avatar-40.png" alt="hascar" width="40" height="40"> {{ user.username }}<i class="fa fa-angle-down fa-lg"></i></a>
+              <ul id="dropdown-menu" class="dropdown-menu">
+                <li><a href="{{ user.get_absolute_url }}"><i class="fa fa-user fa-2x" aria-hidden="true"></i>  {% trans "Profile" %}</a></li>
+                <li><a href="{% url "messages_inbox" %}"><i class="fa fa-inbox fa-2x" aria-hidden="true"></i>  {% trans "Inbox" %}</a></li>
+                <!--<li role="separator" class="divider"></li>-->
+                <li><a href="{% url "admin:index" %}"><i class="fa fa-cog fa-2x" aria-hidden="true"></i>  Admin</a></li>
+                <li><a href="{% url "recent-activity" %}"><i class="fa fa-fire fa-2x" aria-hidden="true"></i>  {% trans "Recent Activity" %}</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/account/logout/"><i class="fa fa-power-off fa-2x" aria-hidden="true"></i>  Log out</a></li>
+                </ul>
+              </li>
+		      {% else %}
+		      <li class="oq-right-user-signin"><a href="#" data-toggle="modal" data-target="#SigninModal" role="button" >{% trans "Sign in" %} </a></li>
+              {% endif %}
+              {% if user.is_authenticated %}
+                          <li class="oq-right-search">
+                                  <a href="javascript:void(0)" onclick="search_click()">
+                                          <img alt="" src="/static/geonode/img/oq-search.png" />
+                                  </a>
+                          </li>
+              {% endif %}
+                          <li class="oq-right-help">
+                                  <a href="https://www.globalquakemodel.org/openquake/support/documentation/platform/" target="_blank">
+                                          <img alt="" src="/static/geonode/img/oq-help.png" />
+                                  </a>
+                          </li>
+              {% if user.is_authenticated %}
+                          <li class="oq-right-share">
+                                  <a href="javascript:void(0)" onclick="share_click()">
+                                          <img alt="" src="/static/geonode/img/oq-share.png" />
+                                  </a>
+                          </li>
+              {% endif %}
+            </ul>
+          </div> <!--/.nav-collapse -->
+        </div>
+        <div class="right-bar"><a href="https://www.globalquakemodel.org/" target="_blank"><img alt="oq-gem" src="{{ STATIC_URL }}geonode/img/oq-gem.png" /></a></div>
+      </nav>
+{% endblock header %}
+
+
+<div class="oq-menu">
+
+        <div class="oq-search">
+         <form class="navbar-form" id="search" action="{% url "search" %}" >
+            <div class="col-md-3">
+              <div id="search-inp" class="input-group" style="display:none;">
+                {% if HAYSTACK_SEARCH %}
+                <input id="search_input" type="text" placeholder="Search" class="form-control" name="q">
+                {% else %}
+                <input id="search_input" type="text" placeholder="Search" class="form-control" name="title__icontains">
+                {% endif %}
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div id="oq-share" class="oq-share" style="display:none;">
+           <div class="col-md-3">
+                 <ul>
+                         <li><a href=""><i class="fa fa-facebook fa-2x" aria-hidden="true"></i>  Share on Facebook</a></li>
+                         <li><a href=""><i class="fa fa-twitter fa-2x" aria-hidden="true"></i>  Share on Twitter</a></li>
+                         <li><a href=""><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i>  Share on Google Plus</a></li>
+                 </ul>
+           </div>
+        </div>
+
+       </div>
+
