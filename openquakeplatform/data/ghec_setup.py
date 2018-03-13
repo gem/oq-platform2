@@ -3,15 +3,15 @@
 from geoserver.catalog import Catalog
 import geoserver.util
 from ghec import (folder_rest,
-                      name_workspace,
-                      folder_workspace,
-                      name,
-                      name_store,
-                      name_layer,
-                      title,
-                      abstract,
-                      keywords,
-                      folder_shape)
+                  name_workspace,
+                  folder_workspace,
+                  name,
+                  name_store,
+                  name_layer,
+                  title,
+                  abstract,
+                  keywords,
+                  folder_shape)
 
 cat = Catalog("%s" % folder_rest, "admin", "geoserver")
 
@@ -27,7 +27,7 @@ else:
 with open("%s/%s.sld" % (folder_shape, name)) as f:
     cat.create_style(name, f.read(), overwrite=True)
 
-fs = cat.create_featurestore("%s" %name, dir_shapefile, workspace)
+fs = cat.create_featurestore("%s" % name, dir_shapefile, workspace)
 
 layer = cat.get_layer("%s" % name_layer)
 layer._set_default_style("%s" % name_store)
