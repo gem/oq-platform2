@@ -42,7 +42,7 @@
       </style>
     <![endif]-->
     <link href="{{ STATIC_URL }}geonode/img/favicon.png" rel="shortcut icon"/>
-    <link rel="search" type="application/opensearchdescription+xml" href="/catalogue/opensearch" title="GeoNode Search"/>
+    <link rel="search" type="application/opensearchdescription+xml" href="/catalogue/opensearch" title="Openquake Platform Search"/>
     
     <!--function for open modal menu -->
     <script type="text/javascript">
@@ -95,7 +95,7 @@
 	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 	        <i class="fa fa-navicon fa-lg"></i>
 	      </button>
-	      <a class="navbar-brand" href="{% url "home" %}">GeoNode</a>
+	      <a class="navbar-brand" href="{% url "home" %}">Openquake Platform</a>
 	    </div>
 	    <div id="navbar" class="navbar-collapse collapse">
 	     <ul class="nav navbar-nav toolbar">
@@ -200,7 +200,7 @@
 	  
     <div class="alert alert-danger alert-dismissible" role="alert" id="ieflag" style="display:none">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <h1>You are using an outdated browser that is not supported by GeoNode.</h1>
+      <h1>You are using an outdated browser that is not supported by Openquake Platform.</h1>
       <p>Please use a <strong>modern browser</strong> like Mozilla Firefox, Google Chrome or Safari.</p>
     </div>
 
@@ -267,9 +267,8 @@
         </div>
         <div class="col-md-6 text-right">
           <ul class="list-unstyled">	  
-            <li>
-            {#{% trans "Powered by" %}#} <!--<a href="http://geonode.org">{#{% trans "GeoNode" %}#}</a> <em>{#{% trans "version" %} {{ VERSION }}#}</em>-->
-             Openquake Platform | <a target="_blank" href="https://www.globalquakemodel.org/tools-products">{% trans "About" %}</a> | <a href="../account/terms">{% trans "Terms of use" %}</a>
+            <li>{% trans "Powered by" %} <a href="/">{% trans "Openquake Platform" %}</a> <em>{% trans "version" %} {{ VERSION }}</em>
+               <a target="_blank" href="https://www.globalquakemodel.org/openquake/about/">{% trans "About" %}</a> | <a href="../account/terms">{% trans "Terms of use" %}</a>
             <li>
           </ul>
           <label class="hidden">{% trans "Language" %}</label>

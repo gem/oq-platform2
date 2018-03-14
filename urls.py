@@ -81,6 +81,8 @@ urlpatterns = patterns('',
                            name='terms'),
                        url(r'^versions/$', oq_common_views.versions,
                            name='oq_common_versions'),
+                       url(r'^grv/$', TemplateView.as_view(
+                           template_name="grv/grv_viewer.html"), name='grv'),
                        # Layer views
                        (r'^layers/', include('geonode.layers.urls')),
 
@@ -107,6 +109,12 @@ urlpatterns = patterns('',
                            TemplateView.as_view(
                                template_name='search/search.html'),
                            name='search'),
+
+                       # geodetic
+                       url(r'^geodetic/$',
+                           TemplateView.as_view(
+                               template_name="geodetic.html"),
+                           name='geodetic'),
 
                        # Social views
                        (r"^account/", include("account.urls")),
@@ -149,6 +157,8 @@ urlpatterns = patterns('',
                        (r'^documents/', include('geonode.documents.urls')),
                        (r'^services/', include('geonode.services.urls')),
 
+                       # GeoServer Helper Views
+                       (r'^gs/', include('geonode.geoserver.urls')),
                        # OAuth Provider
                        url(r'^o/', include('oauth2_provider.urls',
                            namespace='oauth2_provider')),
@@ -222,6 +232,9 @@ urlpatterns += patterns('',
                         (r'^ipt/',
                          include('openquakeplatform_ipt.urls',
                                  namespace='ipt')),
+                        (r'^building-class/',
+                         include('openquakeplatform_building_class.urls',
+                                 namespace='building_class')),
                         (r'^vulnerability/',
                          include('openquakeplatform.vulnerability.urls',
                                  namespace='vulnerability')),
