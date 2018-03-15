@@ -13,7 +13,8 @@ Ext.onReady(function() {
 {% autoescape off %}
     GeoExt.Lang.set("{{ LANGUAGE_CODE }}");
     var config = Ext.apply({
-        authStatus: {% if user.is_authenticated %} 200{% else %} 401{% endif %},
+        //authStatus: {% if user.is_authenticated %} 200{% else %} 401{% endif %},
+        authStatus: 200,
         {% if PROXY_URL %}
         proxy: '{{ PROXY_URL }}',
         {% endif %}
