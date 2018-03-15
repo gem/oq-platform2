@@ -12,8 +12,8 @@ var app;
 Ext.onReady(function() {
 {% autoescape off %}
     var config = Ext.apply({
-        //authStatus: {% if user.is_authenticated %} 200{% else %} 401{% endif %},
-        authStatus: 200,
+        authStatus: {% if user.is_authenticated %} 200{% else %} 401{% endif %},
+        //authStatus: 200,
         proxy: '{{ PROXY_URL }}',
         {% if MAPFISH_PRINT_ENABLED %}
         printService: "{{GEOSERVER_BASE_URL}}pdf/",
