@@ -188,5 +188,5 @@ var tilestreamPlugin = {
 };
 
 gxp.plugins.TileStreamSource = Ext.extend(gxp.plugins.LayerSource, tilestreamPlugin);
-console.log(gxp.plugins.TileStreamSource);
+//console.log(gxp.plugins.TileStreamSource);
 Ext.preg(gxp.plugins.TileStreamSource.prototype.ptype, gxp.plugins.TileStreamSource);
