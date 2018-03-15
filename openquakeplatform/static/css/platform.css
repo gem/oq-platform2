@@ -486,6 +486,14 @@ div#search-inp:after {
 .leaflet-control-coordinates .uiElement .labelFirst {
     color: #000;
 }
+.map_warning {
+    text-align: left;
+    padding: 2px 0;
+    background-color: yellow;
+    height: 28px;
+    font-size: 14px; 
+}
+
 
 /*mobile*/
 @media (max-width: 991px) {
