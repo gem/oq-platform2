@@ -9,6 +9,8 @@ OQPLATFORM_ROOT = os.path.dirname(openquakeplatform.__file__)
 SITEURL = 'http://%(lxc_ip)s:8000'
 ALLOWED_HOSTS = ['%(lxc_ip)s', 'localhost']
 
+PROXY_ALLOWED_HOSTS = ('%(lxc_ip)s', 'localhost')
+
 AUTH_IP_WHITELIST = ['%(lxc_ip)s']
 
 GEOSERVER_LOCATION = 'http://%(lxc_ip)s:8000/geoserver'
