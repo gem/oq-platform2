@@ -25,7 +25,7 @@
   {% elif preview == 'OL3' %}
     {% include "layers/layer_ol3_map.html" %}
   {% elif preview == 'react' %}
-                {% include 'geonode-client/layer_map.html' %}
+		{% include 'geonode-client/layer_map.html' %}
   {% else %}
     {% include "layers/layer_leaflet_map.html" %}
   {% endif %}
@@ -161,7 +161,7 @@
               <thead>
                 <tr>
                   <th>{% trans "Attribute Name" %}</th>
-<th>{% trans "Label" %}</th>
+                  <th>{% trans "Label" %}</th>
                   <th>{% trans "Description" %}</th>
                   {% if wps_enabled %}
                     <th>{% trans "Range" %}</th>
@@ -201,7 +201,7 @@
       </article>
 
       {% block social_links %}
- {% if SOCIAL_BUTTONS %}
+      {% if SOCIAL_BUTTONS %}
         {% include "social_links.html" %}
       {% endif %}
       {% endblock %}
@@ -242,7 +242,7 @@
   <div class="col-md-4">
 
     <ul class="list-group">
-{% if resource.storeType != "remoteStore" %}
+      {% if resource.storeType != "remoteStore" %}
         <li class="list-group-item">
         {% if links or links_download %}
            <button class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#download-layer">{% trans "Download Layer" %}</button>
@@ -283,7 +283,6 @@
                     </div>
                 {% endif %}
                 {% if links_download %}
-{% if links_download %}
                     <div class="tab-pane" id="download_tab2">
                         <li>
                             <ul>
@@ -325,7 +324,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title" id="myModalLabel">{% trans "Edit Layer" %}</h4>
           </div>
-<div class="modal-body">
+          <div class="modal-body">
             <div class="row edit-modal">
               {% if "change_resourcebase_metadata" in perms_list %}
               <div class="col-sm-3">
@@ -367,7 +366,7 @@
                 <a class="btn btn-danger btn-block btn-xs" href="{% url "layer_remove" resource.service_typename %}">{% trans "Remove" %}</a>
                 {% endif %}
               </div>
-{% endif %}
+              {% endif %}
             </div>
           </div>
           <div class="modal-footer">
@@ -385,10 +384,6 @@
               </li>
          {% endif %}
     {% endfor %}
-
-    <li class="list-group-item">
-      <button class="btn btn-default btn-md btn-block" data-toggle="modal" data-target="#download-metadata">{% trans "Download Metadata" %}</button>
-    </li>
 
     <div class="modal fade" id="download-metadata" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -411,6 +406,20 @@
                         <h5 class="modal-title" id="myModalLabel">
                         Standard Metadata - XML format
                         </h5>
+=======
+		    <div style="margin-bottom:20px">
+				 <h5 class="modal-title" id="myModalLabel">
+				Full metadata
+				 </h5>
+                 <ul>
+ 					<li><a target="_blank" href="../catalogue/csw_to_extra_format/{{resource.uuid}}/{{resource.title}}.txt"> Text format </a></li>
+ 					<li><a target="_blank" href="../catalogue/csw_to_extra_format/{{resource.uuid}}/{{resource.title}}.html"> HTML format </a></li>
+ 				</ul>
+			</div>
+		    <div style="margin-bottom:20px">
+			<h5 class="modal-title" id="myModalLabel">
+			Standard Metadata - XML format
+			</h5>
             <ul>
               {% for link in metadata %}
                 <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
@@ -448,7 +457,7 @@
     {% endif %}
     <li class="list-group-item">
       <h4>{% trans "Maps using this layer" %}</h4>
-{% if resource.maps %}
+      {% if resource.maps %}
         <p>{% trans "List of maps using this layer:" %}</p>
         {% endif %}
         <ul class="list-unstyled">
@@ -459,11 +468,13 @@
           {% endfor %}
         </ul>
     </li>
+    {% if user.is_authenticated %} 
     <li class="list-group-item">
       <h4>{% trans "Create a map using this layer" %}</h4>
       <p>{% trans "Click the button below to generate a new map based on this layer." %}</p>
         <a href="{% url "new_map" %}?layer={{resource.service_typename}}" class="btn btn-primary btn-block">{% trans "Create a Map" %}</a>
     </li>
+    {% endif %}
 
     {% if documents.count > 0 %}
     <li class="list-group-item">
@@ -492,7 +503,7 @@
           {% endif %}
           <a href="{{ GEOSERVER_BASE_URL }}{{ style.absolute_url }}" >{{ style.sld_title }}</a>
         </li>
-{% empty %}
+        {% empty %}
         <li>{% trans "No styles associated with this layer" %}</li>
         {% endfor %}
       </ul>
@@ -535,7 +546,7 @@
     {% if GEOGIG_ENABLED and resource.link_set.geogig %}
         {% with "_geogig_scripts.html" as geogig_scripts_template %}
             {% include  geogig_scripts_template %}
-{% endwith %}
+        {% endwith %}
     {% endif %}
 
     {% if request.user.is_authenticated %}
@@ -555,7 +566,7 @@
                 $('#form_post_comment_div').modal().find('form')[0].reset();
                 $('#form_post_comment_div').modal('hide');
                 $('#comments_section').load(window.location.pathname + ' #comments_section',
-                                function(){$(this).children().unwrap()})
+                		function(){$(this).children().unwrap()})
               }
             });
             return false;
@@ -577,7 +588,7 @@
 
     });
     {% endif %}
-</script>
+        </script>
     <script type="text/javascript">
       $('#set_thumbnail').click(function(){
         createMapThumbnail();

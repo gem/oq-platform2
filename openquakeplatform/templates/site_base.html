@@ -23,6 +23,14 @@
         {% endfor %}
         var CURRENT_USER = "{{request.user}}";
     </script>
+    
+    <style>
+    {% if not user.is_authenticated %}
+    #mapmenu {
+        display:none;
+    }
+    {% endif %}
+    </style>
 {% endblock extra_head %}
 
 {% block body_outer %}
