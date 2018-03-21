@@ -495,7 +495,21 @@ div#search-inp:after {
     height: 28px;
     font-size: 14px; 
 }
-
+button#toggleCompIndWidgetBtn,
+button#toggleSviThemeWidgetBtn,
+button#loadProjectdialogBtn,
+button#toggleIriChartWidgetBtn,
+button#toggleProjDefWidgetBtn {
+    background: #f7931e;
+    color: #fff;
+}
+button#toggleCompIndWidgetBtn:hover, 
+button#toggleSviThemeWidgetBtn:hover,
+button#loadProjectdialogBtn:hover,
+button#toggleIriChartWidgetBtn:hover,
+button#toggleProjDefWidgetBtn:hover {
+    background: #f05a24;
+}
 
 /*mobile*/
 @media (max-width: 991px) {
