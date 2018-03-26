@@ -162,7 +162,7 @@ ul.dropdown-menu li {
     right: -36px;
 }
 .home .jumbotron {
-   padding: 40px 0 0 0;
+   padding: 20px 0 0 0;
 }
 .jumbotron {
     width: 75%;
@@ -221,7 +221,7 @@ ul.dropdown-menu li {
 .oq-button-home {
     width: 23%;
     float: left;
-    padding: 130px 0 0 0;
+    padding: 110px 0 0 0;
     text-align: center;
 }
 .oq-button-home .col-md-4 {
