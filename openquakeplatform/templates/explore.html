@@ -31,10 +31,10 @@
 
             <b>Social Vulnerability and Integrated Risk Data Sets:</b>
             <ul>
-              <li><a href="{#{% url 'grv' %}#}">Social Vulnerability Global Risk Viewer</a></li>
-             {% if is_gem_experimental %}
-              <li><a href="{#{% url 'irv' %}#}">Social Vulnerability Integrated Risk Viewer</a></li>
-             {% endif %}
+              <li><a href="{% url 'grv' %}">Social Vulnerability Global Risk Viewer</a></li>
+             {#{% if is_gem_experimental %}#}
+              <li><a href="{% url 'irv' %}">Social Vulnerability Integrated Risk Viewer</a></li>
+             {#{% endif %}#}
             </ul>
             <b>GEM Building Taxonomy Tools:</b>
             <ul>
