@@ -363,12 +363,16 @@ div#search-inp:after {
     top: -7px;
     right: 50px;
 }
+#oq-body-heading {
+    height: 50px;
+}
 #oq-body-heading h1 {
     color: #1b75a7;
     font-size: 40px;
     text-transform: uppercase;
     font-weight: 300;
     font-family: 'Lato',sans-serif;
+    margin: 10px 0;
 }
 .dropdown-menu {
    border: 1px solid #ccc;
