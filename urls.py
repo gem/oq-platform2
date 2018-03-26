@@ -49,130 +49,131 @@ sitemaps = {
     "map": MapSitemap
 }
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
+    # Static pages
+    url(r'^/?$',
+        TemplateView.as_view(template_name='index.html'),
+        name='home'),
+    url(r'^help/$',
+        TemplateView.as_view(template_name='help.html'),
+        name='help'),
+    url(r'^developer/$',
+        TemplateView.as_view(
+            template_name='developer.html'),
+        name='developer'),
+    url(r'^about/$',
+        RedirectView.as_view(
+            url='https://www.globalquakemodel.org/oq-getting-started'),
+        name='about'),
+    url(r'^explore/$',
+        TemplateView.as_view(template_name='explore.html'),
+        name='explore'),
+    url(r'^share/$',
+        TemplateView.as_view(template_name='share.html'),
+        name='share'),
+    url(r'^calculate/$',
+        TemplateView.as_view(
+            template_name='calculate.html'),
+        name='calculate'),
+    url(r'^account/terms/$',
+        TemplateView.as_view(
+            template_name='account/terms.html'),
+        name='terms'),
+    url(r'^versions/$', oq_common_views.versions,
+        name='oq_common_versions'),
+    url(r'^grv/$', TemplateView.as_view(
+        template_name="grv/grv_viewer.html"), name='grv'),
+    url(r'^irv/',
+        include('openquakeplatform.irv.urls')),
+    # Layer views
+    (r'^layers/', include('geonode.layers.urls')),
 
-                       # Static pages
-                       url(r'^/?$',
-                           TemplateView.as_view(template_name='index.html'),
-                           name='home'),
-                       url(r'^help/$',
-                           TemplateView.as_view(template_name='help.html'),
-                           name='help'),
-                       url(r'^developer/$',
-                           TemplateView.as_view(
-                               template_name='developer.html'),
-                           name='developer'),
-                       url(r'^about/$',
-                           RedirectView.as_view(url='https://www.globalquakemodel.org/oq-getting-started'),
-                           name='about'),
-                       url(r'^explore/$',
-                           TemplateView.as_view(template_name='explore.html'),
-                           name='explore'),
-                       url(r'^share/$',
-                           TemplateView.as_view(template_name='share.html'),
-                           name='share'),
-                       url(r'^calculate/$',
-                           TemplateView.as_view(
-                               template_name='calculate.html'),
-                           name='calculate'),
-                       url(r'^account/terms/$',
-                           TemplateView.as_view(
-                               template_name='account/terms.html'),
-                           name='terms'),
-                       url(r'^versions/$', oq_common_views.versions,
-                           name='oq_common_versions'),
-                       url(r'^grv/$', TemplateView.as_view(
-                           template_name="grv/grv_viewer.html"), name='grv'),
-                       url(r'^irv/', 
-                           include('openquakeplatform.irv.urls')),
-                       # Layer views
-                       (r'^layers/', include('geonode.layers.urls')),
+    # Map views
+    (r'^maps/', include('geonode.maps.urls')),
 
-                       # Map views
-                       (r'^maps/', include('geonode.maps.urls')),
+    # Catalogue views
+    (r'^catalogue/', include('geonode.catalogue.urls')),
 
-                       # Catalogue views
-                       (r'^catalogue/', include('geonode.catalogue.urls')),
+    # data.json
+    url(r'^data.json$', 'geonode.catalogue.views.data_json',
+        name='data_json'),
 
-                       # data.json
-                       url(r'^data.json$', 'geonode.catalogue.views.data_json',
-                           name='data_json'),
+    # ident
+    url(r'^ident.json$', 'geonode.views.ident_json',
+        name='ident_json'),
 
-                       # ident
-                       url(r'^ident.json$', 'geonode.views.ident_json',
-                           name='ident_json'),
+    # h keywords
+    url(r'^h_keywords_api$', 'geonode.views.h_keywords',
+        name='h_keywords_api'),
 
-                       # h keywords
-                       url(r'^h_keywords_api$', 'geonode.views.h_keywords',
-                           name='h_keywords_api'),
+    # Search views
+    url(r'^search/$',
+        TemplateView.as_view(
+            template_name='search/search.html'),
+        name='search'),
 
-                       # Search views
-                       url(r'^search/$',
-                           TemplateView.as_view(
-                               template_name='search/search.html'),
-                           name='search'),
+    # geodetic
+    url(r'^geodetic/$',
+        TemplateView.as_view(
+            template_name="geodetic.html"),
+        name='geodetic'),
 
-                       # geodetic
-                       url(r'^geodetic/$',
-                           TemplateView.as_view(
-                               template_name="geodetic.html"),
-                           name='geodetic'),
+    # Social views
+    (r"^account/", include("account.urls")),
+    (r'^people/', include('geonode.people.urls')),
+    (r'^avatar/', include('avatar.urls')),
+    (r'^comments/', include('dialogos.urls')),
+    (r'^ratings/', include('agon_ratings.urls')),
+    (r'^activity/', include('actstream.urls')),
+    (r'^announcements/', include('announcements.urls')),
+    (r'^messages/', include('user_messages.urls')),
+    (r'^social/', include('geonode.social.urls')),
+    (r'^security/', include('geonode.security.urls')),
 
-                       # Social views
-                       (r"^account/", include("account.urls")),
-                       (r'^people/', include('geonode.people.urls')),
-                       (r'^avatar/', include('avatar.urls')),
-                       (r'^comments/', include('dialogos.urls')),
-                       (r'^ratings/', include('agon_ratings.urls')),
-                       (r'^activity/', include('actstream.urls')),
-                       (r'^announcements/', include('announcements.urls')),
-                       (r'^messages/', include('user_messages.urls')),
-                       (r'^social/', include('geonode.social.urls')),
-                       (r'^security/', include('geonode.security.urls')),
+    # Accounts
+    url(r'^account/ajax_login$', 'geonode.views.ajax_login',
+        name='account_ajax_login'),
+    url(r'^account/ajax_lookup$',
+        'geonode.views.ajax_lookup',
+        name='account_ajax_lookup'),
 
-                       # Accounts
-                       url(r'^account/ajax_login$', 'geonode.views.ajax_login',
-                           name='account_ajax_login'),
-                       url(r'^account/ajax_lookup$',
-                           'geonode.views.ajax_lookup',
-                           name='account_ajax_lookup'),
+    # Meta
+    url(r'^lang\.js$',
+        TemplateView.as_view(
+            template_name='lang.js',
+            content_type='text/javascript'),
+        name='lang'),
 
-                       # Meta
-                       url(r'^lang\.js$',
-                           TemplateView.as_view(
-                               template_name='lang.js',
-                               content_type='text/javascript'),
-                           name='lang'),
+    url(r'^jsi18n/$',
+        'django.views.i18n.javascript_catalog',
+        js_info_dict, name='jscat'),
+    url(r'^sitemap\.xml$',
+        'django.contrib.sitemaps.views.sitemap',
+        {'sitemaps': sitemaps},
+        name='sitemap'),
 
-                       url(r'^jsi18n/$',
-                           'django.views.i18n.javascript_catalog',
-                           js_info_dict, name='jscat'),
-                       url(r'^sitemap\.xml$',
-                           'django.contrib.sitemaps.views.sitemap',
-                           {'sitemaps': sitemaps},
-                           name='sitemap'),
+    (r'^i18n/', include('django.conf.urls.i18n')),
+    (r'^autocomplete/', include('autocomplete_light.urls')),
+    (r'^admin/', include(admin.site.urls)),
+    (r'^groups/', include('geonode.groups.urls')),
+    (r'^documents/', include('geonode.documents.urls')),
+    (r'^services/', include('geonode.services.urls')),
 
-                       (r'^i18n/', include('django.conf.urls.i18n')),
-                       (r'^autocomplete/', include('autocomplete_light.urls')),
-                       (r'^admin/', include(admin.site.urls)),
-                       (r'^groups/', include('geonode.groups.urls')),
-                       (r'^documents/', include('geonode.documents.urls')),
-                       (r'^services/', include('geonode.services.urls')),
+    # GeoServer Helper Views
+    (r'^gs/', include('geonode.geoserver.urls')),
+    # OAuth Provider
+    url(r'^o/', include('oauth2_provider.urls',
+        namespace='oauth2_provider')),
 
-                       # GeoServer Helper Views
-                       (r'^gs/', include('geonode.geoserver.urls')),
-                       # OAuth Provider
-                       url(r'^o/', include('oauth2_provider.urls',
-                           namespace='oauth2_provider')),
-
-                       # Api Views
-                       url(r'^api/o/v4/tokeninfo', verify_token,
-                           name='tokeninfo'),
-                       url(r'^api/roles', roles, name='roles'),
-                       url(r'^api/adminRole', admin_role, name='adminRole'),
-                       url(r'^api/users', users, name='users'),
-                       url(r'', include(api.urls)),
-                       )
+    # Api Views
+    url(r'^api/o/v4/tokeninfo', verify_token,
+        name='tokeninfo'),
+    url(r'^api/roles', roles, name='roles'),
+    url(r'^api/adminRole', admin_role, name='adminRole'),
+    url(r'^api/users', users, name='users'),
+    url(r'', include(api.urls)),
+    )
 
 if "geonode.contrib.dynamic" in settings.INSTALLED_APPS:
     urlpatterns += patterns('',
@@ -215,9 +216,9 @@ urlpatterns += geonode.proxy.urls.urlpatterns
 # Enable internal geoserver proxy in development mode.
 # In production it must be done by Apache/Nginx, not by Django
 if settings.DEBUG:
-    urlpatterns += patterns('',
-        url(r'^geoserver/', 'openquakeplatform.proxy.geoserver',
-            name="geoserver"),
+    urlpatterns += patterns(
+        '', url(r'^geoserver/', 'openquakeplatform.proxy.geoserver',
+                name="geoserver"),
     )
 
 urlpatterns += geonode.proxy.urls.urlpatterns
@@ -228,27 +229,29 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 handler403 = 'geonode.views.err403'
 
 # Featured Maps Pattens
-urlpatterns += patterns('',
-                        (r'^featured/(?P<site>[A-Za-z0-9_\-]+)/$',
-                         'geonode.maps.views.featured_map'),
-                        (r'^featured/(?P<site>[A-Za-z0-9_\-]+)/info$',
-                         'geonode.maps.views.featured_map_info'),
-                        )
+urlpatterns += patterns(
+    '',
+    (r'^featured/(?P<site>[A-Za-z0-9_\-]+)/$',
+     'geonode.maps.views.featured_map'),
+    (r'^featured/(?P<site>[A-Za-z0-9_\-]+)/info$',
+     'geonode.maps.views.featured_map_info'),
+    )
 
 # openquake_platform
-urlpatterns += patterns('',
-                        (r'^taxtweb/',
-                         include('openquakeplatform_taxtweb.urls',
-                                 namespace='taxtweb')),
-                        (r'^ipt/',
-                         include('openquakeplatform_ipt.urls',
-                                 namespace='ipt')),
-                        (r'^building-class/',
-                         include('openquakeplatform_building_class.urls',
-                                 namespace='building_class')),
-                        (r'^vulnerability/',
-                         include('openquakeplatform.vulnerability.urls',
-                                 namespace='vulnerability')),
-                        (r'^exposure/',
-                         include('openquakeplatform.exposure.urls')),
-                        )
+urlpatterns += patterns(
+    '',
+    (r'^taxtweb/',
+     include('openquakeplatform_taxtweb.urls',
+             namespace='taxtweb')),
+    (r'^ipt/',
+     include('openquakeplatform_ipt.urls',
+             namespace='ipt')),
+    (r'^building-class/',
+     include('openquakeplatform_building_class.urls',
+             namespace='building_class')),
+    (r'^vulnerability/',
+     include('openquakeplatform.vulnerability.urls',
+             namespace='vulnerability')),
+    (r'^exposure/',
+     include('openquakeplatform.exposure.urls')),
+    )
