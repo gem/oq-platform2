@@ -161,7 +161,8 @@ ul.dropdown-menu li {
 .navbar-right .dropdown-menu {
     right: -36px;
 }
-.home .jumbotron {
+.home .jumbotron,
+.menu_page {
    padding: 20px 0 0 0;
 }
 .jumbotron {
