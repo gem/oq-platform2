@@ -161,3 +161,6 @@ select#layer-list {
 .ui-dialog {
   z-index: 1000;
 }
+#oq-data-body-content {
+    margin-top: 170px;
+}
