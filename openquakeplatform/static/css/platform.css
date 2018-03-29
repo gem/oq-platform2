@@ -497,9 +497,6 @@ div#search-inp:after {
 .accept_terms {
     padding: 0;
 }
-input.accetp_terms {
-
-}
 .accept_terms input {
     width: 100px;
 }
