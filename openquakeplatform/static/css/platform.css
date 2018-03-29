@@ -494,7 +494,9 @@ div#search-inp:after {
     height: 28px;
     font-size: 14px; 
 }
-
+.accep_terms {
+    padding: 0;
+}
 
 /*mobile*/
 @media (max-width: 991px) {
