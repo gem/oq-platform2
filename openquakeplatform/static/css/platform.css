@@ -237,6 +237,7 @@ ul.dropdown-menu li {
     font-weight: 700;
     color: #fff!important;
     width: 195px;
+    text-align: left;
 }
 .oq-button-home .col-md-4 .oq-button-home-btn:hover,
 .oq-button-home .col-md-4 .oq-button-home-btn:focus {
