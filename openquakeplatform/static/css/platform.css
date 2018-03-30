@@ -236,6 +236,7 @@ ul.dropdown-menu li {
     font-weight: 700;
     color: #fff!important;
     width: 195px;
+    text-align: left;
 }
 .oq-button-home .col-md-4 .oq-button-home-btn:hover,
 .oq-button-home .col-md-4 .oq-button-home-btn:focus {
@@ -400,11 +401,12 @@ div#search-inp:after {
 #footer {
     border-top: 0!important;
     z-index: 1000;
-    background: #bebebe;
-    font-size: 12px;
+    /*background: #bebebe;*/
+    background: #1b75a5 url(/static/geonode/img/oq-header.png) no-repeat left top;
+    font-size: 14px;
     position: fixed;
     bottom: 0;
-    padding: 0 0 0 12%!important;
+    padding: 8px 0 8px 12%!important;
     width: 100%;
     height: auto;
     padding-top: 0;
