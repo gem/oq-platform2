@@ -33,7 +33,7 @@
                 </li>
                 <li><a ng-if="item.detail_url.indexOf('/maps/') > -1" href="/maps/{% verbatim %}{{item.id}}{% endverbatim %}/view"><i class="fa fa-map-marker"></i>View Map</a></li>
 
-			<li>
+                        <li>
 <a ng-if="item.category__gn_description == 'SVIR' && item.detail_url.indexOf('/layers/') > -1" href="/irv/{% verbatim %}{{ item.detail_url.substring(8) }}{% endverbatim %}">Open in Irv</a>
                 </li>
 
