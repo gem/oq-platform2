@@ -23,7 +23,7 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from geonode.sitemap import LayerSitemap, MapSitemap
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 from django.contrib import admin
 import openquakeplatform.common.views as oq_common_views
 
@@ -63,7 +63,7 @@ urlpatterns = patterns('',
                                template_name='developer.html'),
                            name='developer'),
                        url(r'^about/$',
-                           TemplateView.as_view(template_name='about.html'),
+                           RedirectView.as_view(url='https://www.globalquakemodel.org/oq-getting-started'),
                            name='about'),
                        url(r'^explore/$',
                            TemplateView.as_view(template_name='explore.html'),

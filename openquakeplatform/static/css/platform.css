@@ -1,5 +1,6 @@
 body {
     background: #fff;
+    padding-top: 40px;
 }
 h3 {
     line-height: 18px;
@@ -487,6 +488,14 @@ div#search-inp:after {
 .leaflet-control-coordinates .uiElement .labelFirst {
     color: #000;
 }
+.map_warning {
+    text-align: left;
+    padding: 2px 0;
+    background-color: yellow;
+    height: 28px;
+    font-size: 14px; 
+}
+
 
 /*mobile*/
 @media (max-width: 991px) {
