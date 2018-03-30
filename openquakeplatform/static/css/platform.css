@@ -161,8 +161,9 @@ ul.dropdown-menu li {
 .navbar-right .dropdown-menu {
     right: -36px;
 }
-.home .jumbotron {
-   padding: 40px 0 0 0;
+.home .jumbotron,
+.menu_page {
+   padding: 0;
 }
 .jumbotron {
     width: 75%;
@@ -221,7 +222,7 @@ ul.dropdown-menu li {
 .oq-button-home {
     width: 23%;
     float: left;
-    padding: 130px 0 0 0;
+    padding: 90px 0 0 0;
     text-align: center;
 }
 .oq-button-home .col-md-4 {
@@ -363,12 +364,16 @@ div#search-inp:after {
     top: -7px;
     right: 50px;
 }
+#oq-body-heading {
+    height: 50px;
+}
 #oq-body-heading h1 {
     color: #1b75a7;
     font-size: 40px;
     text-transform: uppercase;
     font-weight: 300;
     font-family: 'Lato',sans-serif;
+    margin: 10px 0;
 }
 .dropdown-menu {
    border: 1px solid #ccc;
@@ -495,7 +500,21 @@ div#search-inp:after {
     height: 28px;
     font-size: 14px; 
 }
-
+button#toggleCompIndWidgetBtn,
+button#toggleSviThemeWidgetBtn,
+button#loadProjectdialogBtn,
+button#toggleIriChartWidgetBtn,
+button#toggleProjDefWidgetBtn {
+    background: #f7931e;
+    color: #fff;
+}
+button#toggleCompIndWidgetBtn:hover, 
+button#toggleSviThemeWidgetBtn:hover,
+button#loadProjectdialogBtn:hover,
+button#toggleIriChartWidgetBtn:hover,
+button#toggleProjDefWidgetBtn:hover {
+    background: #f05a24;
+}
 
 /*mobile*/
 @media (max-width: 991px) {

@@ -25,6 +25,10 @@ IRV - {{block.super}}
 <div id="projectDefWeightDialog" title="Set weights and inversions">
 </div>
 
+<div id="oq-body-heading">
+    <h1>Social Vulnerability Integrated Risk Viewer</h1>
+    <br />
+</div>
 {% endblock %}
 
 {% block body_outer %}
@@ -161,8 +165,4 @@ IRV - {{block.super}}
     <script src="{{ STATIC_URL }}irv/js/irv_viewer_PCP_theme.js"></script>
     <script src="{{ STATIC_URL }}irv/js/irv_viewer_PCP_primary.js"></script>
     <script src="{{ STATIC_URL }}irv/js/irvController.js"></script>
-    <script>
-        help=document.getElementById("help_url");
-        if(typeof help !== "undefined") { help.href+='/irv/'; }
-    </script>
 {% endblock extra_script %}

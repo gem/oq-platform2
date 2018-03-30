@@ -1508,6 +1508,7 @@ function has_custom_fields(projDef) {
 function getGeoServerLayers() {
     $('#load-project-spinner').show();
     var IRMTLayerNames = [];
+    //var url = "/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
     var url = "/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
     // Get layers from GeoServer and populate the layer selection menu
     $.ajax({
@@ -1690,7 +1691,7 @@ var startApp = function() {
     });
 
     $('#map-tools').append(
-        '<button id="loadProjectdialogBtn" type="button" class="btn btn-blue">Load Project</button>'
+        '<div class="l_proj"><button id="loadProjectdialogBtn" type="button" class="btn btn-blue">Load Project</button></div>'
     );
     // Using the list in order to keep the order
     $.each(['indicators', 'svi', 'iri', 'projDef'], function(i, widgetName) {
@@ -1698,15 +1699,15 @@ var startApp = function() {
         var buttonId = widgetsAndButtons[widgetName].button.slice(1);
         var buttonText = widgetsAndButtons[widgetName].buttonText;
         $('#map-tools').append(
-            '<button id="' + buttonId + '" type="button" class="btn btn-blue" disabled>' + buttonText + '</button>'
+            '<div class="but_l_proj"><button id="' + buttonId + '" type="button" class="btn btn-blue" disabled>' + buttonText + '</button></div>'
         );
     });
 
     if (webGl === false) {
         $('#map-tools').append(
-            '<select id="leafletThematicSelection">'+
+            '<div><select id="leafletThematicSelection">'+
                 '<option>Select Indicator</option>'+
-            '</select>'
+            '</select><div>'
         );
 
         $('#leafletThematicSelection').hide();
@@ -1714,9 +1715,9 @@ var startApp = function() {
         setupLeafletMap();
     } else {
         $('#map-tools').append(
-            '<select id="webGlThematicSelection">'+
+            '<div><select id="webGlThematicSelection">'+
                 '<option>Select Indicator</option>'+
-            '</select>'
+            '</select></div>'
         );
 
         $('#webGlThematicSelection').hide();
@@ -1814,11 +1815,22 @@ var startApp = function() {
         'z-index': 6
     });
 
-    $('#loadProjectdialogBtn').css({
-        'position': 'fixed',
-        'left': '50px'
+    $('.l_proj').css({
+        'float': 'left',
+        'background-color': '#d9edf7',
+        'border-color': '#bce8f1',
+        'color': '#31708f',
+        'padding': '10px',
+        'width': '405px'
     });
 
+    $('.but_l_proj').css({
+        'float': 'left',
+        'background-color': '#d9edf7',
+        'border-color': '#bce8f1',
+        'color': '#31708f',
+        'padding': '10px 4px',
+    });
     $.each(widgetsAndButtons, function(key, widgetAndBtn) {
         $(widgetAndBtn.button).css({
             'position': 'relative',
@@ -1874,7 +1886,7 @@ function attributeInfoRequest(selectedLayer) {
     // Get layer attributes from GeoServer
     return $.ajax({
         type: 'get',
-        url: '/geoserver/oqplatform/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&outputFormat=json',
+        url: '/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&outputFormat=json',
         success: function(data) {
             projectChange = true;
             // Make a global variable used by the d3-tree chart

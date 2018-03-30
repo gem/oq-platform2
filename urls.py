@@ -83,6 +83,8 @@ urlpatterns = patterns('',
                            name='oq_common_versions'),
                        url(r'^grv/$', TemplateView.as_view(
                            template_name="grv/grv_viewer.html"), name='grv'),
+                       url(r'^irv/', 
+                           include('openquakeplatform.irv.urls')),
                        # Layer views
                        (r'^layers/', include('geonode.layers.urls')),
 
@@ -210,10 +212,19 @@ if "djmp" in settings.INSTALLED_APPS:
 # Set up proxy
 urlpatterns += geonode.proxy.urls.urlpatterns
 
-# Serve static files
+# Enable internal geoserver proxy in development mode.
+# In production it must be done by Apache/Nginx, not by Django
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^geoserver/', 'openquakeplatform.proxy.geoserver',
+            name="geoserver"),
+    )
+
+urlpatterns += geonode.proxy.urls.urlpatterns
+
+# Server static files
 urlpatterns += staticfiles_urlpatterns()
-urlpatterns += static(settings.LOCAL_MEDIA_URL,
-                      document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 handler403 = 'geonode.views.err403'
 
 # Featured Maps Pattens
