@@ -7,7 +7,7 @@ TIMEOUT = 100
 
 class MapsTest(unittest.TestCase):
 
-    def map_no_login_test(self):
+    def new_map_page_no_login_test(self):
 
         pla = platform_get()
 
