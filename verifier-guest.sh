@@ -147,6 +147,7 @@ else
     git clone -n https://github.com/GeoNode/geonode.git
     cd geonode
     # git checkout "$GEO_STABLE_HASH"
+    git checkout "$GIT_GEO_REPO"
     cd ..
 fi
 
