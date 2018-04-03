@@ -52,7 +52,7 @@
         $( "#signup_form" ).submit(function( event ) {
             if ( $('#id_terms').val() != 'accept') {
                 $('#div_id_terms').addClass('error');
-                $('#error_id_terms').text('Please accept the Terms');
+                $('#error_id_terms').text('Type "accept" to agree OpenQuake Platform Terms of Use');
                 $('#id_terms').focus();
                 event.preventDefault();
             }
