@@ -162,10 +162,10 @@ sudo apt-get install -y --force-yes python-oq-engine
 cd geonode
 pip install -r requirements.txt
 
-if [ "$GEM_TEST_LATEST" != "true" ]; then
-    ## more stable dependencies installed
-    pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
-fi
+# if [ "$GEM_TEST_LATEST" != "true" ]; then
+#     ## more stable dependencies installed
+#     pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
+# fi
 
 pip install -e .
 
