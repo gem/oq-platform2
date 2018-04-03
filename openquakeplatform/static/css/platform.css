@@ -496,7 +496,12 @@ div#search-inp:after {
     height: 28px;
     font-size: 14px; 
 }
-
+.accept_terms {
+    padding: 0;
+}
+.accept_terms input {
+    width: 100px;
+}
 
 /*mobile*/
 @media (max-width: 991px) {
