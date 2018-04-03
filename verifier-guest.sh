@@ -146,7 +146,7 @@ if [ "$GEM_TEST_LATEST" = "true" ]; then
 else
     git clone -n https://github.com/GeoNode/geonode.git
     cd geonode
-    git checkout "$GEO_STABLE_HASH"
+    # git checkout "$GEO_STABLE_HASH"
     cd ..
 fi
 
