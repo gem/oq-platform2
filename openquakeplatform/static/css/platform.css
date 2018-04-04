@@ -411,7 +411,7 @@ div#search-inp:after {
     font-size: 14px;
     position: fixed;
     bottom: 0;
-    padding: 8px 0 8px 12%!important;
+    padding: 2px 0 2px 12%!important;
     width: 100%;
     height: auto;
     padding-top: 0;
