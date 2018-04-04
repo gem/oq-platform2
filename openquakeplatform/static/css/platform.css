@@ -55,7 +55,7 @@ input[type="checkbox"], input[type="radio"] {
     padding: 0px 0 0 0px!important;
     min-height: 700px;
     margin: 0px auto 30px!important;
-    width: 980px;
+    width: 1000px;
 }
 #wrap .container {
     width: 100%;
@@ -230,14 +230,17 @@ ul.dropdown-menu li {
 }
 .oq-button-home .col-md-4 .oq-button-home-btn {
     display: block!important;
-    font-size: 20px;
+    font-size: 18px;
     margin: 0 0 15px;
     background: #f7931e;
     border-color: #f7931e;
-    font-weight: 700;
+    font-weight: normal;
     color: #fff!important;
     width: 195px;
     text-align: left;
+}
+.fa {
+    padding: 0 2px;
 }
 .oq-button-home .col-md-4 .oq-button-home-btn:hover,
 .oq-button-home .col-md-4 .oq-button-home-btn:focus {
@@ -315,6 +318,8 @@ div#search-inp:after {
 }
 .oq-calc {
     margin-top: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 .right-bar {
     float: right;

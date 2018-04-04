@@ -164,3 +164,6 @@ select#layer-list {
 #oq-data-body-content {
     margin-top: 140px;
 }
+.l_proj {
+    width: 340px!important;
+}
