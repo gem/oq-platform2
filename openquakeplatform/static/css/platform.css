@@ -437,6 +437,7 @@ div#search-inp:after {
 }
 #footer .col-md-6.text-right {
     width: auto!important;
+    padding-top: 5px;
 }
 .search {
     display: block;
