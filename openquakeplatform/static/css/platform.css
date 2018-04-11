@@ -16,6 +16,9 @@ select, input[type="file"] {
     height: auto;
     line-height: 28px;
 }
+.dl-horizontal dd p {
+    margin: 0;
+}
 .ui-icon-help {
     background-position: -49px -145px !important;
 }
