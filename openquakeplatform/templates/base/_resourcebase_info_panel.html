@@ -89,15 +89,6 @@
     <dt>{% trans "Point of Contact" %}</dt>
     <dd><a href="{{ resource.poc.user.get_absolute_url }}">{{ resource.poc.user.username }}</a></dd>
     {% endif %}
-  </dl>
-
-  <dl class="dl-horizontal">
-    <dt><a href="#more" data-toggle="collapse" data-target=".more">{% trans "More info" %}</a></dt>
-    <dd>-</dd>
-  </dl>
-
-  <dl class="dl-horizontal">
-    <div class="more collapse">
 
     {% if resource.srid and SRID_DETAIL == 'below' %}
     <dt>{% trans "SRID" %}</dt>
@@ -165,8 +156,6 @@
     <dt>{% trans "Spatial Representation Type" %}</dt>
     <dd>{{ resource.spatial_representation_type }}</dd>
     {% endif %}
-
-  </div>
 
   </dl>
 
