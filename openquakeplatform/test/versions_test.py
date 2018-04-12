@@ -15,8 +15,7 @@ class AppVersionsTest(unittest.TestCase):
         pla.get(versions_url)
 
         pla.xpath_finduniq(
-            "//h2[@class='page-title'"
-            " and normalize-space(text())='Versions']")
+            "//h1[normalize-space(text())='Versions']")
 
         # macthing if the version of applications
         # content numbers and points
