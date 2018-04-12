@@ -31,7 +31,7 @@ def oq_context_processor(request):
     context = {}
 
     context['SITEURL'] = settings.SITEURL
-    # context['OQP_VERSION'] = openquakeplatform.__version__
+    context['OQP_VERSION'] = openquakeplatform.__version__
     context['third_party_urls'] = settings.THIRD_PARTY_URLS
     # BING API key for their maps
     # context['bing_key'] = settings.BING_KEY
