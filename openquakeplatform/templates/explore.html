@@ -15,38 +15,38 @@
             <!-- Main page content goes here -->
             <b>Seismic Hazard Data Sets and Models:</b>
             <ul>
-              <li><a href="/maps/23">Global Instrumental Earthquake Catalogue (1900 - 2009)</a></li>
-              <li><a href="/maps/24">Global Historical Earthquake Catalogue and Archive (1000-1903)</a></li>
-              <li><a href="/maps/25">Homogeneous Active Faults</a></li>
-              <li><a href="/maps/26">Geodetic Strain Rate Model</a></li>
-              <li><a href="{#{% url 'hrde' %}#}">Explore Hazard Models</a> Hazard input models and results obtained using recent models that GEM adapted to the OpenQuake-engine - more info available here: <a target="_blank" href="https://hazardwiki.openquake.org/">https://hazardwiki.openquake.org/</a></li>
+              <li><a class="static-link" href="/maps/23">Global Instrumental Earthquake Catalogue (1900 - 2009)</a></li>
+              <li><a class="static-link" href="/maps/24">Global Historical Earthquake Catalogue and Archive (1000-1903)</a></li>
+              <li><a class="static-link" href="/maps/25">Homogeneous Active Faults</a></li>
+              <li><a class="static-link" href="/maps/26">Geodetic Strain Rate Model</a></li>
+              <li>Hazard input models and results obtained using recent models that GEM adapted to the OpenQuake-engine - more info available here: <a class="static-link" target="_blank" href="https://hazardwiki.openquake.org/">https://hazardwiki.openquake.org/</a></li>
             </ul>
 
             <b>Physical Risk Data Sets:</b>
             <ul>
-              <li><a href="{% url 'exposure' %}">Exposure Export</a></li>
-              <li><a href="{#{% url 'hazus' %}#}">HAZUS Building Fractions </a></li>
-              <li><a href="{% url 'vulnerability:list' %}">Physical Vulnerability</a></li>
+              <li><a class="static-link" href="{% url 'exposure' %}">Exposure Export</a></li>
+              <li><a class="static-link" href="{#{% url 'hazus' %}#}">HAZUS Building Fractions </a></li>
+              <li><a class="static-link" href="{% url 'vulnerability:list' %}">Physical Vulnerability</a></li>
 </ul>
 
             <b>Social Vulnerability and Integrated Risk Data Sets:</b>
             <ul>
-              <li><a href="{% url 'grv' %}">Social Vulnerability Global Risk Viewer</a></li>
+              <li><a class="static-link" href="{% url 'grv' %}">Social Vulnerability Global Risk Viewer</a></li>
              {#{% if is_gem_experimental %}#}
-              <li><a href="{% url 'irv' %}">Social Vulnerability Integrated Risk Viewer</a></li>
+              <li><a class="static-link" href="{% url 'irv' %}">Social Vulnerability Integrated Risk Viewer</a></li>
              {#{% endif %}#}
             </ul>
             <b>GEM Building Taxonomy Tools:</b>
             <ul>
-              <li><a href="/taxtweb" target="_blank">TaxTweb</a> Online graphical tool for editing GEM Taxonomy strings</li>
+              <li><a class="static-link" href="/taxtweb" target="_blank">TaxTweb</a> Online graphical tool for editing GEM Taxonomy strings</li>
             </ul>
 
             <b>Explore:</b>
             <ul>
-              <li><a href="{% url 'maps_browse' %}">Maps</a></li>
-              <li><a href="{% url 'layer_browse' %}">Individual Datasets (Layers)</a></li>
-              <li><a href="/documents/">Documents</a></li>
-              <li><a href="{% url 'profile_browse' %}">People</a></li>
+              <li><a class="static-link" href="{% url 'maps_browse' %}">Maps</a></li>
+              <li><a class="static-link" href="{% url 'layer_browse' %}">Individual Datasets (Layers)</a></li>
+              <li><a class="static-link" href="/documents/">Documents</a></li>
+              <li><a class="static-link" href="{% url 'profile_browse' %}">People</a></li>
             </ul>
             </div>
 
