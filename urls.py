@@ -131,6 +131,10 @@ urlpatterns = patterns(
     (r'^social/', include('geonode.social.urls')),
     (r'^security/', include('geonode.security.urls')),
 
+    # svir
+    (r'^svir/', include('openquakeplatform.svir.urls')),
+    (r'^world/', include('openquakeplatform.world.urls')),
+
     # Accounts
     url(r'^account/ajax_login$', 'geonode.views.ajax_login',
         name='account_ajax_login'),
