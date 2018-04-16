@@ -86,6 +86,13 @@ urlpatterns = patterns(
         template_name="grv/grv_viewer.html"), name='grv'),
     url(r'^irv/',
         include('openquakeplatform.irv.urls')),
+
+    # svir
+    (r'^svir/', include('openquakeplatform.svir.urls')),
+    (r'^world/', include('openquakeplatform.world.urls')),
+    url(r'^irv/',
+        include('openquakeplatform.irv.urls')),
+
     # Layer views
     (r'^layers/', include('geonode.layers.urls')),
 
