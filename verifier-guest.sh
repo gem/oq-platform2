@@ -134,6 +134,7 @@ sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON spatial_ref_sys TO
 
 #insert line in pg_hba.conf postgres
 sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+
 #restart postgres
 sudo service postgresql restart
 
@@ -181,7 +182,7 @@ sudo cp $HOME/$GIT_REPO/urls.py $HOME/geonode/geonode
 ## clone and setting pythonpath taxtweb, ipt and oq-platform2
 cd ~
 
-for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
+for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class oq-platform-data; do
 # for repo in oq-platform-taxtweb; do
     if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
 done
@@ -208,6 +209,10 @@ python ./manage.py vuln_groups_create
 ## load data and install simplejson for vulnerability application
 python manage.py loaddata ~/oq-platform2/openquakeplatform/vulnerability/post_fixtures/initial_data.json
 pip install simplejson==2.0.9
+
+## load data for svir
+python manage.py loaddata ~/oq-platform2/openquakeplatform/oq-platform-data/api/data/world_prod.json.bz2
+python manage.py loaddata ~/oq-platform2/openquakeplatform/oq-platform-data/api/data/svir_prod.json.bz2
 
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
