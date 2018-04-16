@@ -211,8 +211,8 @@ python manage.py loaddata ~/oq-platform2/openquakeplatform/vulnerability/post_fi
 pip install simplejson==2.0.9
 
 ## load data for svir
-python manage.py loaddata ~/oq-platform2/openquakeplatform/oq-platform-data/api/data/world_prod.json.bz2
-python manage.py loaddata ~/oq-platform2/openquakeplatform/oq-platform-data/api/data/svir_prod.json.bz2
+python manage.py loaddata ~/oq-platform-data/api/data/world_prod.json.bz2
+python manage.py loaddata ~/oq-platform-data/api/data/svir_prod.json.bz2
 
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
