@@ -1509,7 +1509,7 @@ function getGeoServerLayers() {
     $('#load-project-spinner').show();
     var IRMTLayerNames = [];
     //var url = "/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
-    var url = "/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
+    var url = "/geoserver/geonode/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
     // Get layers from GeoServer and populate the layer selection menu
     $.ajax({
         url: url,
@@ -1563,41 +1563,6 @@ function getGeoServerLayers() {
             $('#ajaxErrorDialog').dialog('open');
         }
     });
-}
-
-
-function versionCompare(a, b) {
-    // This version check ignores the patch numbers
-    if (a === undefined) {
-        return -1;
-    }
-
-    var i, cmp, len, re = /(\.0)+[^\.]*$/;
-    a = (a + '').replace(re, '').split('.');
-    b = (b + '').replace(re, '').split('.');
-    len = Math.min(a.length, b.length);
-
-    // Check for a match between major release numbers
-    if (a[0] !== b[0]) {
-        return -1;
-    }
-    // Check for a match between minor release numbers
-    else {
-        // eg. '1.7' vrs '1.6.7'
-        if (a[1] > b[1]) {
-            return -1;
-        }
-
-        // eg. '1.7' vrs '1.8.7'
-        if (a[1] < b[1]) {
-            return -1;
-        }
-
-        // eg. '1.7' vrs '1.7.1', '1.7' vrs '1.7.5', '1.7' vrs '1.7.9'
-        if (a[1] == b[1]) {
-            return 1;
-        }
-    }
 }
 
 var startApp = function() {
@@ -1817,16 +1782,15 @@ var startApp = function() {
 
     $('.l_proj').css({
         'float': 'left',
-        'background-color': '#d9edf7',
+        'border-bottom': '2px solid #d9edf7',
         'border-color': '#bce8f1',
         'color': '#31708f',
-        'padding': '10px',
-        'width': '405px'
+        'padding': '10px'
     });
 
     $('.but_l_proj').css({
-        'float': 'left',
-        'background-color': '#d9edf7',
+        'float': 'right',
+        'border-bottom': '2px solid #d9edf7',
         'border-color': '#bce8f1',
         'color': '#31708f',
         'padding': '10px 4px',
@@ -1851,8 +1815,9 @@ var startApp = function() {
     });
 
     $('#webGlThematicSelection').css({
-        'position': 'fixed',
-        'left': '160px',
+        'position': 'absolute',
+        'right': '15px',
+        'top': '125px',
         'margin-bottom' : 0
     });
 
@@ -1886,7 +1851,8 @@ function attributeInfoRequest(selectedLayer) {
     // Get layer attributes from GeoServer
     return $.ajax({
         type: 'get',
-        url: '/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&outputFormat=json',
+        // url: '/geoserver/geonode/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&outputFormat=application:json',
+        url: '/geoserver/geonode/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&maxFeatures=50&outputFormat=application%2Fjson',
         success: function(data) {
             projectChange = true;
             // Make a global variable used by the d3-tree chart
@@ -1951,19 +1917,6 @@ function projDefJSONRequest(selectedLayer) {
             } else if (data.hasOwnProperty('irmt_plugin_version')) {
                 thisVersion = data.irmt_plugin_version;
             } else {
-                $('#projectDef-spinner').hide();
-                $('#project-def').append(
-                    '<div id="alert" class="alert alert-danger" role="alert">' +
-                        'The project you are trying to load was created with a version of the SVIR QGIS tool kit that is not compatible with this application' +
-                    '</div>'
-                );
-                return;
-            }
-
-            var versionCheck = versionCompare(COMPATIBILITY_VERSION, thisVersion);
-
-            if (versionCheck < 0) {
-                // Warn the user and stop the application
                 $('#projectDef-spinner').hide();
                 $('#project-def').append(
                     '<div id="alert" class="alert alert-danger" role="alert">' +

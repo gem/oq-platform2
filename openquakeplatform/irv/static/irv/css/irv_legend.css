@@ -1,8 +1,17 @@
 #mapLegend {
-    position: fixed;
-    left: 400px;
+    /*position: fixed;*/
+    right: 45px;
+    top: 180px;
+    background: #fff;
+    padding: 22px 20px 5px 25px;
+    float: right;
+    border-radius: 4px;
 }
-
+optgroup {
+    font-weight: 700;
+    background: #eee;
+    padding: 0;
+}
 #mapInfo {
     position: fixed;
     margin-top: 40px;
@@ -48,3 +57,11 @@
 .my-legend a {
     color: #777;
     }
+.select_legend {
+    display: inline-block;
+    position: absolute;
+    margin-bottom: 0px;
+    float: right;
+    right: 15px;
+    top: 125px;
+}
