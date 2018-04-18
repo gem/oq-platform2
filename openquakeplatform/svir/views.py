@@ -95,7 +95,7 @@ def get_supplemental_information(request):
     except PermissionDenied:
         return HttpResponse(
             'You are not allowed to view this layer',
-            mimetype='text/plain',
+            content_type='text/plain',
             status=401)
     supplemental_information_str = layer.supplemental_information
     try:
@@ -137,7 +137,7 @@ def get_project_definitions(request):
     except PermissionDenied:
         return HttpResponse(
             'You are not allowed to view this layer',
-            mimetype='text/plain',
+            content_type='text/plain',
             status=401)
     supplemental_information_str = layer.supplemental_information
     try:
@@ -228,7 +228,7 @@ def add_project_definition(request):
     except PermissionDenied:
         return HttpResponse(
             'You are not allowed to modify this layer',
-            mimetype='text/plain',
+            content_type='text/plain',
             status=401)
     supplemental_information_str = layer.supplemental_information
     try:
@@ -494,7 +494,7 @@ def export_variables_data(request):
     filename = 'sv_data_by_variables_ids_export.csv'
     content_disp = 'attachment; filename="%s"' % filename
     mimetype = 'text/csv'
-    response = HttpResponse(response_data, mimetype=mimetype)
+    response = HttpResponse(response_data, content_type=mimetype)
     response['Content-Disposition'] = content_disp
     # response['content-length'] = len(response.content)
     return response
