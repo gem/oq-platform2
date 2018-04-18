@@ -1,3 +1,8 @@
+#map,
+#wrap,
+canvas.mapboxgl-canvas {
+    height: 690px!important;
+}
 .pointer {
   cursor: pointer;
 }
@@ -103,7 +108,6 @@ div.tooltip {
   stroke: #fff;
   shape-rendering: crispEdges;
 }
-
 .content-wrap {
   min-height:300px;
 }
@@ -164,7 +168,8 @@ select#layer-list {
 #oq-data-body-content {
     margin-top: 140px;
 }
-#project-def-widget {
-    left: 44px!important;
-    top: 180px!important;
+.ng-scope {
+    position: absolute;
+    top: 180px;
+    z-index: 170;
 }
