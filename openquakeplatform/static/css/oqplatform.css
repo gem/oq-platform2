@@ -270,6 +270,16 @@ div#search-inp:after {
     top: -7px;
     right: 50px;
 }
+.oq-align {
+    float: none;
+    margin: auto;
+}
+.oq-align-h2 {
+    text-align: center;
+}
+.oq-align-button {
+    float: right;
+}
 .oq-share {
     display: none;
 }
@@ -538,11 +548,14 @@ button#toggleProjDefWidgetBtn:hover {
 .col-xs-12.profile-avatar:hover,
 .col-xs-12.profile-avatar:focus {
     background: #eee;
+    border-radius: 4px;
 }
 .item-container {
     padding: 0;
 }
-
+.list-unstyled li {
+    word-wrap: break-word;
+}
 
 
 /* responsive */
