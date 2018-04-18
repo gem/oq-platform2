@@ -1776,7 +1776,7 @@ var startApp = function() {
         'position': 'absolute',
         'top': '43px',
         'left': '39px',
-        'width': '94%',
+        'width': '93.3%',
         'z-index': 6
     });
 
