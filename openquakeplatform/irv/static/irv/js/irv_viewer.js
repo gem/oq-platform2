@@ -1508,13 +1508,16 @@ function has_custom_fields(projDef) {
 function getGeoServerLayers() {
     $('#load-project-spinner').show();
     var IRMTLayerNames = [];
-    //var url = "/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
-    var url = "/geoserver/geonode/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
+    var url = "/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
+    // var url = "/geoserver/geonode/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
     // Get layers from GeoServer and populate the layer selection menu
+
     $.ajax({
         url: url,
         contentType: 'application/json',
         success: function(xml) {
+
+
             //convert XML to JSON
             var xmlText = new XMLSerializer().serializeToString(xml);
             var x2js = new X2JS();
@@ -1541,6 +1544,15 @@ function getGeoServerLayers() {
                 }
             }
 
+            if (IRMTLayerNames.length == 0) {
+		$('#load-project-spinner').hide();
+		$('#ajaxErrorDialog').empty();
+		$('#ajaxErrorDialog').append(
+		    '<p>No layer found.</p>'
+		);
+		$('#ajaxErrorDialog').dialog('open');
+            }
+
             // Create AngularJS dropdown menu
             var mapScope = angular.element($("#layer-list")).scope();
             var mapLayerList = [];
@@ -1556,6 +1568,7 @@ function getGeoServerLayers() {
             $('#load-project-spinner').hide();
         },
         error: function() {
+            console.log('error')
             $('#ajaxErrorDialog').empty();
             $('#ajaxErrorDialog').append(
                 '<p>This application was not able to get a list of layers from GeoServer</p>'
@@ -1847,7 +1860,7 @@ function loadProject() {
 
 function attributeInfoRequest(selectedLayer) {
     $('#loadProjectDialog').dialog('close');
-    $('#absoluteSpinner').show();
+    // $('#absoluteSpinner').show();
     // Get layer attributes from GeoServer
     return $.ajax({
         type: 'get',
