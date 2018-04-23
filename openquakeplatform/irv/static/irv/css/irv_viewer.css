@@ -174,3 +174,11 @@ select#layer-list {
     top: 180px;
     z-index: 170;
 }
+button#saveBtn {
+    background: #f7931e;
+    color: #fff;
+}
+button#saveBtn:hover,
+button#saveBtn:focus {
+    background: #f05a24;
+}
