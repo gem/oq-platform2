@@ -213,6 +213,21 @@ if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
 fi
 
+## install layer 
+pip install gsconfig
+git clone --depth=1 git@gitlab.openquake.org:openquake/oq-private.git
+cd oq-private
+unzip ghec_data.zip -d ghec_data
+unzip isc-gem.zip -d isc-gem2
+cd ~/oq-platform2/openquakeplatform/data
+python layer_setup.py ghec
+python layer_setup.py isc
+
+## Install or update layer
+cd $HOME/geonode
+python manage.py updatelayers
+
+
 if [ "$GEM_TEST_LATEST" = "true" ]; then
     # pip freeze > ~/latest_requirements.txt
     $HOME/$GIT_REPO/create_gem_requirements.sh > gem_geonode_requirements.txt  
