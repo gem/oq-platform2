@@ -52,6 +52,8 @@ sitemaps = {
 urlpatterns = patterns('',
 
                        # Static pages
+                       url(r'^ghec_viewer/$', TemplateView.as_view(
+                           template_name="ghec_viewer.html"), name='ghec_viewer'),
                        url(r'^/?$',
                            TemplateView.as_view(template_name='index.html'),
                            name='home'),
