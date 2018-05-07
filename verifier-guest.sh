@@ -176,9 +176,6 @@ cd ~
 # Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
-sudo mv $HOME/geonode/geonode/urls.py $HOME/geonode/geonode/urls.py.orig
-sudo cp $HOME/$GIT_REPO/urls.py $HOME/geonode/geonode
-
 ## clone and setting pythonpath taxtweb, ipt and oq-platform2
 cd ~
 
