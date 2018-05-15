@@ -1,15 +1,9 @@
 import os
 
-from setuptools.command import easy_install
-from urlparse import urlparse
-
-from paver.easy import task, options, cmdopts, needs
-from paver.easy import path, sh, info, call_task
-from paver.easy import BuildFailure
+from paver.easy import task, options, cmdopts, info
 
 
 GEM_LOCAL_SETTINGS_TMPL = 'local_settings.py.tmpl'
-
 
 
 def _write_local_settings(lxc_ip, webuiurl, datadir, db_name, db_user, db_pass):
@@ -43,5 +37,3 @@ def setup():
     # info(lxc_ip)
     _write_local_settings(lxc_ip, webuiurl, datadir, db_name, db_user, db_pass)
     info("Local setting changed.")
-
-
