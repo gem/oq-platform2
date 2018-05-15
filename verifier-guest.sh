@@ -78,7 +78,7 @@ rem_sig_hand() {
     geonode_setup_env
 
     cd ~/geonode
-    paver stop
+    paver -f $HOME/$GIT_REPO/pavement.py stop
 
     exit 1
 }
