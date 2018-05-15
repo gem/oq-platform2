@@ -190,11 +190,9 @@ cd ~/geonode
 
 paver -f $HOME/$GIT_REPO/pavement.py setup
 
-## modify local_settings with pavement from repo
-# cd ~/oq-platform2
+## Create local_settings with pavement from repo
 paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data
 
-# cd ~/geonode
 python manage.py migrate account --noinput
 paver -f $HOME/$GIT_REPO/pavement.py sync
 paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
@@ -202,7 +200,7 @@ paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
 python ./manage.py import_vuln_geo_applicability_csv ~/oq-platform2/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
 python ./manage.py vuln_groups_create
 
-## load data and install simplejson for vulnerability application
+## Load data and install simplejson for vulnerability application
 python manage.py loaddata ~/oq-platform2/openquakeplatform/vulnerability/post_fixtures/initial_data.json
 pip install simplejson==2.0.9
 
@@ -218,6 +216,7 @@ if [ "$GEM_TEST_LATEST" = "true" ]; then
     git log -1 > ~/latest_geonode_commit.txt
     cd -
 fi
+
 ## Stop Geonode
 cd ~/geonode
 sudo supervisorctl stop openquake-webui
