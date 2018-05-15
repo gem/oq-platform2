@@ -188,11 +188,12 @@ geonode_setup_env
 ## Sync and setup GeoNode
 cd ~/geonode
 
+paver oqsetup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data
 paver -f $HOME/$GIT_REPO/pavement.py setup
 
 ## modify local_settings with pavement from repo
 # cd ~/oq-platform2
-paver oqsetup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data
+# paver oqsetup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data
 
 # cd ~/geonode
 python manage.py migrate account --noinput
