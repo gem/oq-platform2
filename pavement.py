@@ -759,4 +759,4 @@ def oqsetup():
     datadir = options.get('datadir', '')
     # info(lxc_ip)
     _write_local_settings(lxc_ip, webuiurl, datadir, db_name, db_user, db_pass)
-    info("Local setting changed.")
+    info("Local setting created.")
