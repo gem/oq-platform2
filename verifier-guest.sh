@@ -192,7 +192,7 @@ paver -f $HOME/$GIT_REPO/pavement.py setup
 
 ## modify local_settings with pavement from repo
 # cd ~/oq-platform2
-paver -f $HOME/oq-platform2/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data
+paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data
 
 # cd ~/geonode
 python manage.py migrate account --noinput
