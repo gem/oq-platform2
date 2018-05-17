@@ -109,7 +109,7 @@ web_del () {
 }
 
 
-# Examples: 
+# Examples:
 #   curl -v -s -o output/ws.ged.post.xml -u <user>:<password> -XPOST -H Content-type: text/xml -d '<workspace><name>ged</name></workspace>' ${GEM_PROTO}://oq-platform2-mn.gem.lan${GEM_PORT}/geoserver/rest/workspaces
 #   curl -v -s -o output/ws.ged.post.xml -u <user>:<password> -H Content-type: text/xml -d '<workspace><name>ged</name></workspace>' -XPOST ${GEM_PROTO}://oq-platform2-mn.gem.lan${GEM_PORT}/geoserver/rest/workspaces
 web_post_and_put () {
@@ -231,6 +231,27 @@ layer_manage() {
         echo "Layer [$la_name] removed."
     else
         echo "Layer [$la_name] dumped."
+    fi
+
+    return 0
+}
+
+#
+#  role_geofence_manage: Remove or dump a Geogence data role
+role_geofence_manage() {
+    local is_drop="$1" ro_fence_id="$2"
+
+
+    fname="geofence/rules/${ro_fence_id}.xml"
+    web_get "$fname" "${GEM_SITE}/geoserver/geofence/rest/rules/id/${ro_fence_id}.xml" 200
+
+    if [ "$is_drop" = "true" ]; then
+        fname="tmp/geofence/rules/${ro_fence_id}.del.xml"
+        web_del "$fname" "${GEM_SITE}/geoserver/geofence/rest/rules/id/${ro_fence_id}.xml" 200
+
+        echo "Data Role Geofence [$ro_fence_id] removed."
+    else
+        echo "Data Role Geofence [$ro_fence_id] dumped."
     fi
 
     return 0
@@ -517,7 +538,7 @@ all_data_drop() {
     }
 
 all_data_dump() {
-    mkdir -p "${OUTDIR}tmp" 
+    mkdir -p "${OUTDIR}tmp"
     all_data_manage false
     rm -rf "${OUTDIR}tmp"
     find "${OUTDIR}" -name '*.hea' -exec rm {} \;
@@ -571,6 +592,19 @@ all_data_manage() {
     for ws in $WS; do
         workspace_manage "$is_drop" "$ws"
         echo
+    done
+
+    #
+    # manage data roles Geofence
+    fname="rules.xml"
+    web_get "$fname" "${GEM_SITE}/geoserver/geofence/rest/rules.xml" 200
+
+    RoFence="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" ${OUTDIR}${fname})" || true
+
+    for rofence in $RoFence; do
+        role_geofence_manage "$is_drop" "$rofence"
+        echo
+        echo $rofence
     done
 
     #
@@ -874,6 +908,21 @@ workspace_restore () {
     return $ret
 }
 
+role_geofence_restore () {
+    local gr_id="$1"
+    local ret
+
+    fname="tmp/geofence/rules/${gr_id}.post.xml"
+    web_post "$fname" "text/xml" "" "${RESTDIR}/geofence/rules/${gr_id}.xml" "${GEM_SITE}/geoserver/geofence/rest/rules" 201
+    ret=$?
+    if [ $ret -eq 0 ]; then
+        echo "  Geofence Rule [$gr_id] restored."
+    fi
+
+    return $ret
+    }
+
+
 all_data_restore () {
     local ws_list ret oldifs
 
@@ -949,6 +998,15 @@ all_data_restore () {
     done
 #    set +x
 
+    geofence_rule_ids="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" "${RESTDIR}/geofence/rules.xml")"
+    for geofence_rule_id in $geofence_rule_ids; do
+        role_geofence_restore "$geofence_rule_id"
+        ret=$?
+        if [ $ret -ne 0 ]; then
+            break
+        fi
+    done
+#
     IFS="$oldifs"
 
     return $ret
@@ -970,6 +1028,7 @@ geoserver_population () {
     # moved outside rm -rf "$dstdir/build-gs-tree"
     mkdir -p "$dstdir/build-gs-tree"
     mkdir -p "$dstdir/build-gs-tree/styles"
+    mkdir -p "$dstdir/build-gs-tree/geofence"
     mkdir -p "$dstdir/build-gs-tree/layers"
     mkdir -p "$dstdir/build-gs-tree/workspaces"
     mkdir -p "$dstdir/build-gs-tree/workspaces/${workspace_name_default}/datastores"

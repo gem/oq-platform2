@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Rule><access>ALLOW</access><layer>*</layer><priority>1</priority><request>*</request><service>*</service><userName>*</userName><workspace>oqplatform</workspace></Rule>
