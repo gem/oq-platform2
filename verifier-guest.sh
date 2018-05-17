@@ -216,6 +216,10 @@ python manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/de
 cd ~/oq-platform2
 $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
 
+## Update layers from Geoserver to geonode
+cd ~/geonode
+python manage.py updatelayers
+
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
