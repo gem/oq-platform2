@@ -197,6 +197,9 @@ python manage.py migrate account --noinput
 paver -f $HOME/$GIT_REPO/pavement.py sync
 paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
 
+## Symbolic link to solve spatialite warning of Geoserver
+sudo ln -s /usr/lib/x86_64-linux-gnu/libproj.so.9 /usr/lib/x86_64-linux-gnu/libproj.so.0
+
 python ./manage.py import_vuln_geo_applicability_csv $HOME/$GIT_REPO/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
 python ./manage.py vuln_groups_create
 
