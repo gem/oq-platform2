@@ -209,6 +209,10 @@ python manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_
 
 python manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
 
+## populate geoserver data infrastructure
+cd ~/oq-platform2
+$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
+
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
