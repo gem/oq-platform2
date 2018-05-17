@@ -51,6 +51,6 @@ CREATE TABLE "ghec_viewer_measure" (
 );
         """,
                           reverse_sql="""
-CREATE TABLE "ghec_viewer_measure";
+DROP TABLE "ghec_viewer_measure";
 """),
     ]
