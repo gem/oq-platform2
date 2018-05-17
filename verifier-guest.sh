@@ -113,7 +113,7 @@ pip install scipy
 cd ~
 
 #install and configuration postgres
-sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts
+sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet
 sudo -u postgres createdb geonode_dev
 sudo -u postgres createdb geonode_dev-imports
 
