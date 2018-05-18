@@ -1016,15 +1016,13 @@ all_data_restore () {
 #
 geoserver_population () {
     local srcdir="$1" dstdir="$2" bindir="$3"
-#    local workspace_name="$GEM_GS_WS_NAME" datastore_name="$GEM_GS_DS_NAME"
     local workspace_name_default="$4" datastore_name_default="$5"
     local db_name="$6" db_user="$7" db_pass="$8" gs_datadir="$9"
     shift 9
     declare -a gem_app_list=("$@")
     local workspace_name datastore_name
-
-    echo "QUIZ"
     echo $gem_app_list
+
     # moved outside rm -rf "$dstdir/build-gs-tree"
     mkdir -p "$dstdir/build-gs-tree"
     mkdir -p "$dstdir/build-gs-tree/styles"
