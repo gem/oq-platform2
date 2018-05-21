@@ -49,7 +49,6 @@ sitemaps = {
     "map": MapSitemap
 }
 
-<<<<<<< HEAD
 urlpatterns = patterns(
     '',
     # Static pages
@@ -85,8 +84,6 @@ urlpatterns = patterns(
         name='oq_common_versions'),
     url(r'^grv/$', TemplateView.as_view(
         template_name="grv/grv_viewer.html"), name='grv'),
-    url(r'^irv/',
-        include('openquakeplatform.irv.urls')),
 
     # svir
     (r'^svir/', include('openquakeplatform.svir.urls')),
@@ -186,7 +183,7 @@ urlpatterns = patterns(
     url(r'^api/users', users, name='users'),
     url(r'', include(api.urls)),
     )
-=======
+
 urlpatterns = patterns('',
                        # Static pages
                        url(r'^isc_viewer/$', TemplateView.as_view(
