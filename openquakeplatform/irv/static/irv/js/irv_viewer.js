@@ -1865,7 +1865,7 @@ function attributeInfoRequest(selectedLayer) {
     return $.ajax({
         type: 'get',
         // url: '/geoserver/geonode/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&outputFormat=application:json',
-        url: '/geoserver/geonode/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&maxFeatures=50&outputFormat=application%2Fjson',
+        url: window.location.hostname +':8080/geoserver/oqplatform/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&maxFeatures=50&outputFormat=application%2Fjson',
         success: function(data) {
             projectChange = true;
             // Make a global variable used by the d3-tree chart
