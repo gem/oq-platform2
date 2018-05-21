@@ -113,7 +113,7 @@ pip install scipy
 cd ~
 
 #install and configuration postgres
-sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts
+sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet
 sudo -u postgres createdb geonode_dev
 sudo -u postgres createdb geonode_dev-imports
 
@@ -197,12 +197,28 @@ python manage.py migrate account --noinput
 paver -f $HOME/$GIT_REPO/pavement.py sync
 paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
 
-python ./manage.py import_vuln_geo_applicability_csv ~/oq-platform2/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
+## Symbolic link to solve spatialite warning of Geoserver
+sudo ln -s /usr/lib/x86_64-linux-gnu/libproj.so.9 /usr/lib/x86_64-linux-gnu/libproj.so.0
+
+python ./manage.py import_vuln_geo_applicability_csv $HOME/$GIT_REPO/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
 python ./manage.py vuln_groups_create
 
-## Load data and install simplejson for vulnerability application
-python manage.py loaddata ~/oq-platform2/openquakeplatform/vulnerability/post_fixtures/initial_data.json
+## load data and install simplejson for vulnerability application
+python manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
 pip install simplejson==2.0.9
+
+## load data for gec and isc viewer
+python manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
+
+python manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
+
+## populate geoserver data infrastructure
+cd ~/oq-platform2
+$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
+
+## Update layers from Geoserver to geonode
+cd ~/geonode
+python manage.py updatelayers
 
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
