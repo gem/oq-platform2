@@ -49,6 +49,7 @@ sitemaps = {
     "map": MapSitemap
 }
 
+<<<<<<< HEAD
 urlpatterns = patterns(
     '',
     # Static pages
@@ -185,6 +186,132 @@ urlpatterns = patterns(
     url(r'^api/users', users, name='users'),
     url(r'', include(api.urls)),
     )
+=======
+urlpatterns = patterns('',
+                       # Static pages
+                       url(r'^isc_viewer/$', TemplateView.as_view(
+                           template_name="isc_viewer.html"), name='isc_viewer'),
+                       url(r'^ghec_viewer/$', TemplateView.as_view(
+                           template_name="ghec_viewer.html"), name='ghec_viewer'),
+                       url(r'^/?$',
+                           TemplateView.as_view(template_name='index.html'),
+                           name='home'),
+                       url(r'^help/$',
+                           TemplateView.as_view(template_name='help.html'),
+                           name='help'),
+                       url(r'^developer/$',
+                           TemplateView.as_view(
+                               template_name='developer.html'),
+                           name='developer'),
+                       url(r'^about/$',
+                           RedirectView.as_view(url='https://www.globalquakemodel.org/oq-getting-started'),
+                           name='about'),
+                       url(r'^explore/$',
+                           TemplateView.as_view(template_name='explore.html'),
+                           name='explore'),
+                       url(r'^share/$',
+                           TemplateView.as_view(template_name='share.html'),
+                           name='share'),
+                       url(r'^calculate/$',
+                           TemplateView.as_view(
+                               template_name='calculate.html'),
+                           name='calculate'),
+                       url(r'^account/terms/$',
+                           TemplateView.as_view(
+                               template_name='account/terms.html'),
+                           name='terms'),
+                       url(r'^versions/$', oq_common_views.versions,
+                           name='oq_common_versions'),
+                       url(r'^grv/$', TemplateView.as_view(
+                           template_name="grv/grv_viewer.html"), name='grv'),
+                       # Layer views
+                       (r'^layers/', include('geonode.layers.urls')),
+
+                       # Map views
+                       (r'^maps/', include('geonode.maps.urls')),
+
+                       # Catalogue views
+                       (r'^catalogue/', include('geonode.catalogue.urls')),
+
+                       # data.json
+                       url(r'^data.json$', 'geonode.catalogue.views.data_json',
+                           name='data_json'),
+
+                       # ident
+                       url(r'^ident.json$', 'geonode.views.ident_json',
+                           name='ident_json'),
+
+                       # h keywords
+                       url(r'^h_keywords_api$', 'geonode.views.h_keywords',
+                           name='h_keywords_api'),
+
+                       # Search views
+                       url(r'^search/$',
+                           TemplateView.as_view(
+                               template_name='search/search.html'),
+                           name='search'),
+
+                       # geodetic
+                       url(r'^geodetic/$',
+                           TemplateView.as_view(
+                               template_name="geodetic.html"),
+                           name='geodetic'),
+
+                       # Social views
+                       (r"^account/", include("account.urls")),
+                       (r'^people/', include('geonode.people.urls')),
+                       (r'^avatar/', include('avatar.urls')),
+                       (r'^comments/', include('dialogos.urls')),
+                       (r'^ratings/', include('agon_ratings.urls')),
+                       (r'^activity/', include('actstream.urls')),
+                       (r'^announcements/', include('announcements.urls')),
+                       (r'^messages/', include('user_messages.urls')),
+                       (r'^social/', include('geonode.social.urls')),
+                       (r'^security/', include('geonode.security.urls')),
+
+                       # Accounts
+                       url(r'^account/ajax_login$', 'geonode.views.ajax_login',
+                           name='account_ajax_login'),
+                       url(r'^account/ajax_lookup$',
+                           'geonode.views.ajax_lookup',
+                           name='account_ajax_lookup'),
+
+                       # Meta
+                       url(r'^lang\.js$',
+                           TemplateView.as_view(
+                               template_name='lang.js',
+                               content_type='text/javascript'),
+                           name='lang'),
+
+                       url(r'^jsi18n/$',
+                           'django.views.i18n.javascript_catalog',
+                           js_info_dict, name='jscat'),
+                       url(r'^sitemap\.xml$',
+                           'django.contrib.sitemaps.views.sitemap',
+                           {'sitemaps': sitemaps},
+                           name='sitemap'),
+
+                       (r'^i18n/', include('django.conf.urls.i18n')),
+                       (r'^autocomplete/', include('autocomplete_light.urls')),
+                       (r'^admin/', include(admin.site.urls)),
+                       (r'^groups/', include('geonode.groups.urls')),
+                       (r'^documents/', include('geonode.documents.urls')),
+                       (r'^services/', include('geonode.services.urls')),
+
+                       # GeoServer Helper Views
+                       (r'^gs/', include('geonode.geoserver.urls')),
+                       # OAuth Provider
+                       url(r'^o/', include('oauth2_provider.urls',
+                           namespace='oauth2_provider')),
+
+                       # Api Views
+                       url(r'^api/o/v4/tokeninfo', verify_token,
+                           name='tokeninfo'),
+                       url(r'^api/roles', roles, name='roles'),
+                       url(r'^api/adminRole', admin_role, name='adminRole'),
+                       url(r'^api/users', users, name='users'),
+                       url(r'', include(api.urls)),
+                       )
 
 if "geonode.contrib.dynamic" in settings.INSTALLED_APPS:
     urlpatterns += patterns('',
