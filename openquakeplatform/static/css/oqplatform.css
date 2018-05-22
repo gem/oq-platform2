@@ -619,11 +619,11 @@ button#toggleProjDefWidgetBtn:hover {
        width: 85%;
    }
 }
-@media (max-width: 640px) {
-.list-unstyled {
-    text-align: center!important;
+@media (max-width: 1240px) {
+   .list-unstyled {
+       text-align: center!important;
+   }
+   #footer {
+       padding: 2px 0 2px 2%!important;
+   }
 }
-#footer {
-    padding: 2px 0 2px 2%!important;
-}
-
