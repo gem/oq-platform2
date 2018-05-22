@@ -205,6 +205,10 @@ python ./manage.py vuln_groups_create
 
 mv $HOME/geonode/geoserver/geoserver/WEB-INF/lib/postgresql-9.4.1211.jar $HOME/geonode/geoserver/geoserver/WEB-INF/lib/old_postgresql-9.4.1211.jar
 
+## Stop and start Geoserver after rename postgres jar
+paver stop_geoserver
+paver start_geoserver
+
 ## load data and install simplejson for vulnerability application
 python manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
 pip install simplejson==2.0.9
