@@ -17,11 +17,12 @@ import json
 import re
 import os
 from django.core.management.base import BaseCommand, CommandError
-from openquakeplatform.isc_viewer.models import Measure
 from geonode.maps.models import Map, MapLayer, MapSnapshot
 from geonode.people.models import Profile
 from geonode.base.models import Link
 from django.core.files.storage import default_storage as storage
+from geonode.settings import GEOSERVER_LOCATION
+from geonode.settings import SITEURL
 
 from pprint import pprint
 
@@ -32,7 +33,11 @@ class Command(BaseCommand):
             '(catalogue and appendix)')
 
     def handle(self, isc_map_comps_fname, *args, **options):
-        map_comps = json.load(open(isc_map_comps_fname))
+        map_json = open(isc_map_comps_fname).read()
+        map_json = map_json.replace('#GEOSERVER_LOCATION#',
+                                    GEOSERVER_LOCATION)
+        map_json = map_json.replace('#SITEURL#', SITEURL)
+        map_comps = json.loads(map_json)
         map = None
         res_base = None
 
@@ -91,14 +96,13 @@ class Command(BaseCommand):
 
         print("THUMB: [%s]" % kw['thumbnail_url'])
         map_new = Map(**kw)
-        # map_new.save()
-        # map_new.thumbnail_url = kw['thumbnail_url']
-        thumb_filename = re.sub('.*/', '', kw['thumbnail_url'])
 
+        map_new.save()
+
+        thumb_filename = re.sub('.*/', '', kw['thumbnail_url'])
         thumb_filepath = os.path.join(
             os.path.dirname(__file__), '..', '..', 'dev_data',
             'isc_map_comps_files', thumb_filename)
-        map_new.save()
         map_new.save_thumbnail(thumb_filename, open(thumb_filepath).read())
 
         for maplayer in maplayers:
@@ -129,12 +133,28 @@ class Command(BaseCommand):
                 else:
                     kw[field] = fields[field]
 
+            if kw['name'] == 'Thumbnail':
+                thumb_filename = re.sub('.*/', '', kw['url'])
+                thumb_filepath = os.path.join(
+                    os.path.dirname(__file__), '..', '..', 'dev_data',
+                    'isc_map_comps_files', thumb_filename)
+                thumb_file = open(thumb_filepath)
+
+                upload_path = os.path.join('thumbs/', thumb_filename)
+
+                if storage.exists(upload_path):
+                    # Delete if exists otherwise the (FileSystemStorage)
+                    # implementation will create a new file with a unique name
+                    storage.delete(upload_path)
+
+                storage.save(upload_path, thumb_file)
+
             link_new = Link(**kw)
             link_new.save()
 
         # MapSnapshot
         pprint(mapsnapshot)
-        
+
         kw = {}
         fields = mapsnapshot['fields']
         for field in fields:
