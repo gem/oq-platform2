@@ -619,7 +619,7 @@ button#toggleProjDefWidgetBtn:hover {
        width: 85%;
    }
 }
-@media (max-width: 1240px) {
+@media (max-width: 1024px) {
    .list-unstyled {
        text-align: center!important;
    }
