@@ -200,9 +200,6 @@ paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
 ## Symbolic link to solve spatialite warning of Geoserver
 sudo ln -s /usr/lib/x86_64-linux-gnu/libproj.so.9 /usr/lib/x86_64-linux-gnu/libproj.so.0
 
-python ./manage.py import_vuln_geo_applicability_csv $HOME/$GIT_REPO/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
-python ./manage.py vuln_groups_create
-
 ## Stop Geoserver before rename postgres jar
 paver stop_geoserver
 
@@ -211,6 +208,10 @@ mv $HOME/geonode/geoserver/geoserver/WEB-INF/lib/postgresql-9.4.1211.jar $HOME/g
 
 ## Start Geoserver after rename postgres jar
 paver start_geoserver
+
+## Create vulnerability groups
+python ./manage.py import_vuln_geo_applicability_csv $HOME/$GIT_REPO/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
+python ./manage.py vuln_groups_create
 
 ## load data and install simplejson for vulnerability application
 python manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
