@@ -211,9 +211,7 @@ ul.dropdown-menu li {
     right: 0;
 }
 #oq-menu-right {
-    height: 40px;
     margin: 0px 80px 0 0!important;
-    padding: 0 0 0 0;
 }
 .oq-right-user a {
     margin: 10px 15px 0;
@@ -556,7 +554,9 @@ button#toggleProjDefWidgetBtn:hover {
 .list-unstyled li {
     word-wrap: break-word;
 }
-
+img#legend_icon {
+    width: 100%;
+}
 
 /* responsive */
 @media (max-width: 991px) {
