@@ -53,7 +53,7 @@ def oq_context_processor(request):
 
     ghec_map = Map.objects.filter(
         title_en='Global Instrumental Earthquake Catalogue (1900 - 2009)')
-    context['ISC_MAP_ID'] = ghec_map[0].pk
+    context['GHEC_MAP_ID'] = ghec_map[0].pk
 
     return context
 
