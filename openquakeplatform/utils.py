@@ -51,9 +51,9 @@ def oq_context_processor(request):
     # Google Analytics tracking code
     # context['GOOGLE_UA'] = getattr(settings, 'GOOGLE_UA', False)
 
-    isc_map = Map.objects.filter(
+    ghec_map = Map.objects.filter(
         title_en='Global Instrumental Earthquake Catalogue (1900 - 2009)')
-    context['ISC_MAP_ID'] = isc_map[0].pk
+    context['ISC_MAP_ID'] = ghec_map[0].pk
 
     return context
 
