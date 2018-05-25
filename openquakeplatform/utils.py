@@ -5,6 +5,8 @@ import openquakeplatform
 from django.conf import settings
 from django.http import HttpResponse
 
+from geonode.maps.models import Map
+
 SIGN_IN_REQUIRED = ('You must be signed into the OpenQuake Platform to use '
                     'this feature.')
 
@@ -48,6 +50,10 @@ def oq_context_processor(request):
         settings.EXPOSURE_MAX_TOT_GRID_COUNT
     # Google Analytics tracking code
     # context['GOOGLE_UA'] = getattr(settings, 'GOOGLE_UA', False)
+
+    isc_map = Map.objects.filter(
+        title_en='Global Instrumental Earthquake Catalogue (1900 - 2009)')
+    context['ISC_MAP_ID'] = isc_map[0].pk
 
     return context
 
