@@ -4,8 +4,8 @@ import os
 from openquake.moon import platform_get
 
 
-class IscTest(unittest.TestCase):
-    def isc_test(self):
+class GhecTest(unittest.TestCase):
+    def ghec_test(self):
 
         pla = platform_get()
 
