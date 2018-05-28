@@ -230,7 +230,7 @@ $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatfo
 cd ~/geonode
 python manage.py updatelayers
 
-# create programmatically ISC mnd ghec ap
+# Create programmatically ISC and GHEC json
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
 python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
 
