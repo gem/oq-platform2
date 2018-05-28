@@ -18,7 +18,7 @@ class GhecTest(unittest.TestCase):
         # <a href="/maps/23">
         enter_button = pla.xpath_finduniq(
             "//li/a[normalize-space(text()) = 'Global "
-            "Historical Earthquake Catalogue']")
+            "Historical Earthquake Catalogue and Archive (1000-1903)']")
 
         href = enter_button.get_attribute('href')
         id_map = os.path.basename(href)
