@@ -28,12 +28,12 @@ from pprint import pprint
 
 
 class Command(BaseCommand):
-    args = '<isc_map_comps.json>'
-    help = ('Import csv of GEM Global Instrumental Catalogue '
+    args = '<ghec_map_comps.json>'
+    help = ('Import csv of GEM Global Historical Catalogue '
             '(catalogue and appendix)')
 
-    def handle(self, isc_map_comps_fname, *args, **options):
-        map_json = open(isc_map_comps_fname).read()
+    def handle(self, ghec_map_comps_fname, *args, **options):
+        map_json = open(ghec_map_comps_fname).read()
         map_json = map_json.replace('#GEOSERVER_LOCATION#',
                                     GEOSERVER_LOCATION)
         map_json = map_json.replace('#SITEURL#', SITEURL)
@@ -102,7 +102,7 @@ class Command(BaseCommand):
         thumb_filename = re.sub('.*/', '', kw['thumbnail_url'])
         thumb_filepath = os.path.join(
             os.path.dirname(__file__), '..', '..', 'dev_data',
-            'isc_map_comps_files', thumb_filename)
+            'ghec_map_comps_files', thumb_filename)
         map_new.save_thumbnail(thumb_filename, open(thumb_filepath).read())
 
         for maplayer in maplayers:
@@ -137,7 +137,7 @@ class Command(BaseCommand):
                 thumb_filename = re.sub('.*/', '', kw['url'])
                 thumb_filepath = os.path.join(
                     os.path.dirname(__file__), '..', '..', 'dev_data',
-                    'isc_map_comps_files', thumb_filename)
+                    'ghec_map_comps_files', thumb_filename)
                 thumb_file = open(thumb_filepath)
 
                 upload_path = os.path.join('thumbs/', thumb_filename)
