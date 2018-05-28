@@ -23,6 +23,10 @@ class GhecTest(unittest.TestCase):
         href = enter_button.get_attribute('href')
         id_map = os.path.basename(href)
         enter_button.click()
+      
+        import time
+        time.sleep(5000)
+
         pla.wait_new_page(enter_button, '/maps/%s' % id_map)
 
         enter_button = pla.xpath_finduniq(
