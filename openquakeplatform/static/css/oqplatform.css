@@ -491,6 +491,7 @@ div#search-inp:after {
 }
 #footer .col-md-6.text-right {
     width: auto!important;
+    padding-top: 5px;
 }
 .search {
     display: block;
@@ -575,6 +576,13 @@ img#legend_icon {
 }
 
 /*mobile*/
+@media (max-width: 640px) {
+.list-unstyled {
+    text-align: center!important;
+}
+#footer {
+    padding: 2px 0 2px 2%!important;
+}
 @media (max-width: 991px) {
    #wrap,
    #wrap .container {
