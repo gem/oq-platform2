@@ -1,12 +1,34 @@
+html {
+    height: 100%;
+}
 body {
     background: #fff;
-    padding-top: 40px;
+}
+body.home {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: url(/static/geonode/img/back_platform.gif) no-repeat center top;
+    position: relative;
+    z-index: -1;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 h3 {
     line-height: 18px;
     font-size: 18px;
     font-weight: normal;
     margin-bottom: 0 !important;
+}
+.home #wrap {
+    margin-top: -60px;
+    padding-bottom: 0;
+    background: rgba(0, 0, 0, 0.8)!important;
+    margin-top: 40px!important;
+    height: 560px;
 }
 select {
     width: 220px;
@@ -17,7 +39,6 @@ select, input[type="file"] {
     line-height: 28px;
 }
 .ui-icon-help {
-    background-position: -49px -145px !important;
 }
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
     display: inline-block;
@@ -53,12 +74,15 @@ input[type="checkbox"], input[type="radio"] {
 }
 #wrap {
     padding: 0px 0 0 0px!important;
-    min-height: 700px;
     margin: 0px auto 30px!important;
     width: 980px;
 }
 #wrap .container {
-    width: 100%;
+    width: 980px;
+}
+.home .jumbotron .container {
+    padding-left: 25px;
+    padding-right: 5px;
 }
 #wrap .big-search,
 #datasets,
@@ -162,7 +186,9 @@ ul.dropdown-menu li {
     right: -36px;
 }
 .home .jumbotron {
-   padding: 40px 0 0 0;
+   padding: 30px 0 0 0;
+   background: none!important;
+   min-height: 550px;
 }
 .jumbotron {
     width: 75%;
@@ -171,6 +197,7 @@ ul.dropdown-menu li {
     color: #000!important;
     text-shadow: none!important;
     min-height: 400px;
+    margin-top: 0px;
 }
 .jumbotron .paragraf {
     font-size: 18px;
@@ -190,6 +217,20 @@ ul.dropdown-menu li {
 .jumbotron a {
     color: #2d7681!important;
     text-decoration: none;
+}
+.home .oq-button-home {
+    width: 23%;
+    float: left;
+    padding: 46px 0 0 0;
+    text-align: center;
+    height: 550px;
+}
+.home .jumbotron h1,
+.home .jumbotron .paragraf {
+    color: #fff;
+}
+.home .jumbotron .paragraf a {
+    color: #ff8f31!important;
 }
 .oq-right-user-separated {
     margin: 10px 0 0!important;
@@ -221,7 +262,7 @@ ul.dropdown-menu li {
 .oq-button-home {
     width: 23%;
     float: left;
-    padding: 130px 0 0 0;
+    padding: 125px 0 0 0;
     text-align: center;
 }
 .oq-button-home .col-md-4 {
@@ -315,7 +356,7 @@ div#search-inp:after {
     right: 86px;
 }
 .oq-calc {
-    margin-top: 40px;
+    margin-top: 20px;
 }
 .right-bar {
     float: right;
