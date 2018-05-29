@@ -200,6 +200,7 @@ ul.dropdown-menu li {
     text-shadow: none!important;
     min-height: 400px;
     margin-top: 0px;
+    padding: 10px 0 60px
 }
 .jumbotron .paragraf {
     font-size: 18px;
@@ -264,7 +265,7 @@ ul.dropdown-menu li {
 .oq-button-home {
     width: 23%;
     float: left;
-    padding: 125px 0 0 0;
+    padding: 95px 0 0 0;
     text-align: center;
 }
 .oq-button-home .col-md-4 {
