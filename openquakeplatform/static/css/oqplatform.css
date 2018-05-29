@@ -574,8 +574,18 @@ img#legend_icon {
     background: #f05a24;
     border-color: #f05a24;
 }
+.col-xs-8.item-details {
+    background: none;
+}
+.col-xs-12.profile-avatar:hover,
+.col-xs-12.profile-avatar:focus {
+    background: #eee;
+}
+.item-container {
+    padding: 0;
+}
 
-/*mobile*/
+/*responsive*/
 @media (max-width: 640px) {
 .list-unstyled {
     text-align: center!important;
