@@ -27,7 +27,7 @@ h3 {
     margin-top: -60px;
     padding-bottom: 0;
     background: rgba(0, 0, 0, 0.8)!important;
-    margin-top: 40px!important;
+    margin-top: 10px!important;
     height: 560px;
 }
 select {
@@ -76,6 +76,8 @@ input[type="checkbox"], input[type="radio"] {
     padding: 0px 0 0 0px!important;
     margin: 0px auto 30px!important;
     width: 980px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
 }
 #wrap .container {
     width: 980px;
