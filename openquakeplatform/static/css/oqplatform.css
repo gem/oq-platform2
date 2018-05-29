@@ -366,6 +366,24 @@ div#search-inp:after {
     right: 4px;
     top: 0px;
 }
+#home_ul {
+    color: #fff;
+}
+#home_ul li {
+    font-size:14px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 200;
+    margin-bottom: 10px;
+}
+#home_ul li a {
+    font-size:20px;
+    color: #fff!important;
+    font-family: 'Lato', sans-serif;
+    font-weight: 200;
+}
+#home_ul li a:hover {
+    color: #ff8f31!important;
+}
 .hero-unit .btn {
     background: #f7931e;
     color: #fff;
