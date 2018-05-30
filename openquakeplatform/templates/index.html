@@ -10,6 +10,16 @@
 {% block middle %}
   {{ block.super }}
   {% block hero %}
+
+{% if user.is_authenticated %}
+<style>
+    .home #wrap {
+        height: 640px;
+    }
+</style>
+{% endif %}
+
+
   <div class="jumbotron">
         <div class="container">
                 <h1>{#{% trans "Welcome" %}#}The Openquake platform</h1>
@@ -17,6 +27,16 @@
                 <p class="paragraf">
                 Welcome to the OpenQuake Platform, by the <a target="_blank" href="https://www.globalquakemodel.org">GEM Foundation</a>. This web-based platform offers an interactive environment in which users can access, manipulate, share and add data, and explore models and tools for integrated assessment of earthquake risk.
                 </p>
+                <ul id="home_ul">
+                {% if user.is_authenticated %}
+                    <li><a href="/ipt">Risk Input Preparation Toolkit</a><br>Tools used to create exposure, fragility and vulnerability risk input models.</li>
+                    <li><a target="_blank" href="http://plugins.qgis.org/plugins/svir/">Integrated Risk Modelling Toolkit</a><br>Integrated Risk calculations, combining Social and Economic Vulnerability with Physical Risk</li>
+                    <li><a href="/taxtweb">The Building Classification Survey tool</a><br>Allows users to share information regarding the building stock of a given region.</li>
+                {% endif %}
+                    <li><a href="/taxtweb">TaxTweb</a><br>Graphical tool for editing GEM Taxonomy strings, web version</li>
+                    <li><a href="/vulnerability">The Physical Vulnerability suite</a><br>Allows users to explore and contribute to a comprehensive global vulnerability database that includes fragility, vulnerability, damage-to-loss functions and capacity curves for different types of structure.</li>
+</ul>
+
         </div>
   </div>
 <div class="oq-button-home">
