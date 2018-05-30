@@ -221,6 +221,9 @@ ul.dropdown-menu li {
     color: #2d7681!important;
     text-decoration: none;
 }
+.jumbotron a:hover {
+    text-decoration: underline;
+}
 .home .oq-button-home {
     width: 23%;
     float: left;
