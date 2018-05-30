@@ -465,13 +465,12 @@ div#search-inp:after {
 #footer {
     border-top: 0!important;
     z-index: 1000;
-    /*background: #bebebe;*/
     background: #1b75a5 url(/static/geonode/img/oq-header.png) no-repeat left top;
     font-size: 14px;
     position: fixed;
     bottom: 0;
     padding: 2px 0 2px 12%!important;
-    width: 100%;
+    width: 100%!important;
     height: auto;
     padding-top: 0;
     left: 0;
