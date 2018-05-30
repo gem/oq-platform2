@@ -139,7 +139,7 @@ class Command(BaseCommand):
                     os.path.dirname(__file__), '..', '..', 'dev_data',
                     'isc_map_comps_files', thumb_filename)
                 thumb_file = open(thumb_filepath)
-
+                print("FROMPATH: [%s]" % thumb_filepath)
                 upload_path = os.path.join('thumbs/', thumb_filename)
 
                 if storage.exists(upload_path):
@@ -148,10 +148,14 @@ class Command(BaseCommand):
                     storage.delete(upload_path)
 
                 storage.save(upload_path, thumb_file)
+                print("PATH: [%s] FILE [%s]" % (upload_path, thumb_file))
 
             link_new = Link(**kw)
             link_new.save()
 
+        import time
+        time.sleep(300)
+            
         # MapSnapshot
         pprint(mapsnapshot)
 

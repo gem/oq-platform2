@@ -244,7 +244,7 @@ _devtest_innervm_run () {
     git clone . "_shuttle/$GEM_GIT_PACKAGE"
     scp -r "_shuttle/$GEM_GIT_PACKAGE" ${lxc_ip}:
     rm -rf _shuttle
-    read a || true
+    read aaaa
     
     ssh -t  $lxc_ip "
 export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
@@ -272,6 +272,8 @@ devtest_run () {
         branch_geonode="2.6.x"
     fi
  
+    read aaaa
+
     sudo echo
     if [ "$GEM_EPHEM_EXE" = "$GEM_EPHEM_NAME" ]; then
         _lxc_name_and_ip_get
