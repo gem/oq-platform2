@@ -97,6 +97,7 @@ fi
 sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
 
+# Used a local clone (see verifier.sh)
 # git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git
 
 ## Check if exist and  create the virtualenv
