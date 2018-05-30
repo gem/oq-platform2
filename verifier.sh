@@ -237,6 +237,15 @@ _devtest_innervm_run () {
 
     scp verifier-guest.sh "$lxc_ip:"
 
+    if [ -d "_shuttle" ]; then
+        rm -rf _shuttle
+    fi
+    mkdir -p "_shuttle/$GEM_GIT_PACKAGE"
+    git clone . "_shuttle/$GEM_GIT_PACKAGE"
+    scp -r "_shuttle/$GEM_GIT_PACKAGE" ${lxc_ip}:
+    rm -rf _shuttle
+    read a || true
+    
     ssh -t  $lxc_ip "
 export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
 export GEM_GIT_REPO=\"$GEM_GIT_REPO\"

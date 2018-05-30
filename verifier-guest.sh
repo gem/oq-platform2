@@ -97,7 +97,8 @@ fi
 sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
 
-git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git                                                                                           
+# git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git
+
 ## Check if exist and  create the virtualenv
 if [ ! -f ~/env/bin/activate ]; then
     virtualenv ~/env
@@ -113,7 +114,7 @@ pip install scipy
 cd ~
 
 #install and configuration postgres
-sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet
+sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor
 sudo -u postgres createdb geonode_dev
 sudo -u postgres createdb geonode_dev-imports
 
