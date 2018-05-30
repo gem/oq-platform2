@@ -16,7 +16,7 @@
 import json
 import re
 import os
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from geonode.maps.models import Map, MapLayer, MapSnapshot
 from geonode.people.models import Profile
 from geonode.base.models import Link
