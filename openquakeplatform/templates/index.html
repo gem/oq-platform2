@@ -35,7 +35,7 @@
                     <li><a href="/building-class">The Building Classification Survey tool</a><br>Allows users to share information regarding the building stock of a given region.</li>
                 {% endif %}
                     <li><a href="/taxtweb">TaxTweb</a><br>Graphical tool for editing GEM Taxonomy strings, web version</li>
-                    <li><a href="/vulnerability">The Physical Vulnerability suite</a><br>Allows users to explore and contribute to a comprehensive global vulnerability database that includes fragility, vulnerability, damage-to-loss functions and capacity curves for different types of structure.</li>
+                    <li><a href="/vulnerability">The Physical Vulnerability Suite {% if not user.is_authenticated %}View{% endif %}</a><br>Allows users to explore and contribute to a comprehensive global vulnerability database that includes fragility, vulnerability, damage-to-loss functions and capacity curves for different types of structure.</li>
 </ul>
 
         </div>
