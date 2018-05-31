@@ -37,7 +37,12 @@
 
 {% block body_outer %}
 <div class="page-header">
-  <h2 class="page-title">{{ resource.title|default:resource.typename }}</h2>
+  <h2 class="page-title">
+      {{ resource.title|default:resource.typename }}
+      {% if resource.owner.username != 'GEM' %}
+        <span class="user-contrib">(User Contributed)</span>
+      {% endif %}
+  </h2>
 </div>
 
 <div class="row">
