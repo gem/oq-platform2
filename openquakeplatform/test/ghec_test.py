@@ -55,9 +55,9 @@ class GhecTest(unittest.TestCase):
             "&FORMAT=image%2Fpng&TRANSPARENT=TRUE&SERVICE=WMS&VERSION="
             "1.1.1&REQUEST=GetMap&STYLES=&TILED=true&SRS=EPSG%3A900913&"
             "BBOX=-10018754.17,-10018754.17,0,0&WIDTH=256&HEIGHT=256')]",
-            timeout=5)
+            timeout=50)
 
         pla.add_click_event()
         pla.click_at(100 + x, 31 + y)
 
-        pla.xpath_find_any("//div[text() = 'Third test item']", timeout=5)
+        pla.xpath_find_any("//div[text() = 'Third test item']", timeout=50)
