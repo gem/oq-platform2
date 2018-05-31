@@ -60,10 +60,10 @@ def oq_context_processor(request):
 
     try:
     	ghec_map = Map.objects.filter(
-    	    title_en='Global Historical Earthquake Catalogue')
+	    title_en='Global Historic Catalogue')
     	context['GHEC_MAP_ID'] = ghec_map[0].pk
     except:
-        context['GHEC_MAP_ID'] = 23
+        context['GHEC_MAP_ID'] = 24
 
     return context
 
