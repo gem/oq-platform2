@@ -25,8 +25,6 @@ class GhecTest(unittest.TestCase):
         id_map = os.path.basename(href)
         enter_button.click()
       
-        # import time
-        # time.sleep(5000)
 
         pla.wait_new_page(enter_button, '/maps/%s' % id_map)
 
@@ -35,6 +33,9 @@ class GhecTest(unittest.TestCase):
             "normalize-space(text()) = 'View Map']" % id_map)
         enter_button.click()
         pla.wait_new_page(enter_button, '/maps/%s/view' % id_map, timeout=15)
+
+        import time
+        time.sleep(5)
 
         # <button id="ext-gen159" class=" x-btn-text gxp-icon-getfeatureinfo"
         # type="button">Identify
