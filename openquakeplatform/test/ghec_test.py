@@ -18,14 +18,15 @@ class GhecTest(unittest.TestCase):
         # <a href="/maps/23">
         enter_button = pla.xpath_finduniq(
             "//li/a[normalize-space(text()) = 'Global "
-            "Historical Earthquake Catalogue and Archive (1000-1903)']")
+            "Historical Earthquake Catalogue "
+            "and Archive (1000-1903)']")
 
         href = enter_button.get_attribute('href')
         id_map = os.path.basename(href)
         enter_button.click()
       
-        import time
-        time.sleep(5000)
+        # import time
+        # time.sleep(5000)
 
         pla.wait_new_page(enter_button, '/maps/%s' % id_map)
 
@@ -52,10 +53,10 @@ class GhecTest(unittest.TestCase):
             "//img[contains(@src, 'LAYERS=oqplatform%3Aghec_viewer_measure"
             "&FORMAT=image%2Fpng&TRANSPARENT=TRUE&SERVICE=WMS&VERSION="
             "1.1.1&REQUEST=GetMap&STYLES=&TILED=true&SRS=EPSG%3A900913&"
-            "BBOX=-5009377.085,0,0,5009377.085&WIDTH=256&HEIGHT=256')]",
-            timeout=50)
+            "BBOX=-10018754.17,-10018754.17,0,0&WIDTH=256&HEIGHT=256')]",
+            timeout=5)
 
         pla.add_click_event()
-        pla.click_at(107 + x, 70 + y)
+        pla.click_at(100 + x, 31 + y)
 
-        pla.xpath_finduniq("//div[text() = '1942-02-09T12:11:00']", timeout=50)
+        pla.xpath_find_any("//div[text() = 'Third test item']", timeout=5)
