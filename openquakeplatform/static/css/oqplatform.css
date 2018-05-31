@@ -500,9 +500,6 @@ div#search-inp:after {
 .accept_terms input {
     width: 100px;
 }
-.gx-popup {
-    z-index: 0!important;
-}
 
 /*mobile*/
 @media (max-width: 991px) {
