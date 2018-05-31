@@ -52,16 +52,16 @@ def oq_context_processor(request):
     # context['GOOGLE_UA'] = getattr(settings, 'GOOGLE_UA', False)
 
     try:
-    	isc_map = Map.objects.filter(
-    	    title_en='Global Instrumental Earthquake Catalogue (1900 - 2009)')
-    	context['ISC_MAP_ID'] = isc_map[0].pk
+        isc_map = Map.objects.filter(
+            title_en='Global Instrumental Earthquake Catalogue (1900 - 2009)')
+        context['ISC_MAP_ID'] = isc_map[0].pk
     except:
         context['ISC_MAP_ID'] = 23
 
     try:
-    	ghec_map = Map.objects.filter(
-	    title_en='Global Historic Catalogue')
-    	context['GHEC_MAP_ID'] = ghec_map[0].pk
+        ghec_map = Map.objects.filter(
+            title_en='Global Historic Catalogue')
+        context['GHEC_MAP_ID'] = ghec_map[0].pk
     except:
         context['GHEC_MAP_ID'] = 24
 
