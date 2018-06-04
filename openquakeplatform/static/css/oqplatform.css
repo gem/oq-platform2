@@ -73,6 +73,7 @@ li.oq-right-search {
 }
 .navbar {
     min-height: 40px;
+    z-index: 10000;
 }
 #navbar .nav {
     height: 40px;
