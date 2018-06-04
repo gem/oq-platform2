@@ -61,9 +61,3 @@ class GhecTest(unittest.TestCase):
         pla.click_at(100 + x, 31 + y)
 
         pla.xpath_find_any("//div[text() = 'Third test item']", timeout=50)
-
-        # Close geoexplorer popup
-        close_popup = pla.xpath_finduniq(
-            "//div[contains(concat(' ', @class, ' '),"
-            " ' x-tool-close ')]", timeout=15)
-        close_popup.click()
