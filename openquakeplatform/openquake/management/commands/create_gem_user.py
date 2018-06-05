@@ -6,27 +6,28 @@ class Command(BaseCommand):
 
     def handle(*args, **options):
 
-        pwgem = 'GEM'
+        gem_username = 'GEM'
+        gem_pwd = 'GEM'
         groupname = 'vulnerability-editors'
 
         ## Create Gem user without password
         User = get_user_model()
-        UserGem = User.objects.create_user(username=pwgem,
+        gem_user = User.objects.create_user(username=gem_username,
                                            email='info@globalquakemodel.org',
-                                           first_name=pwgem,
+                                           first_name=gem_username,
                                            last_name='Foundation')
 
         ## Set pwd for Gem user
-        UserGem = User.objects.get(username=pwgem)
-        UserGem.set_password(pwgem)
-        UserGem.save()
+        gem_user = User.objects.get(username=gem_username)
+        gem_user.set_password(gem_pwd)
+        gem_user.save()
 
         ## Added Gen user in a group
         UserGroup = Group.objects.get(name=groupname)
-        UserGem.groups.add(UserGroup)
+        gem_user.groups.add(UserGroup)
 
         ## Print if create Gem user is successfully 
-        if UserGem.first_name == pwgem:
+        if gem_user.first_name == gem_username:
             print('GEM user created')
         else:
             raise ValueError
