@@ -6,20 +6,22 @@ class Command(BaseCommand):
 
     def handle(*args, **options):
 
-        ## create Gem user without password
+        pwgem = 'GEM'
+
+        ## Create Gem user without password
         User = get_user_model()
-        UserGem = User.objects.create_user(username='GEM',
+        UserGem = User.objects.create_user(username=pwgem,
                                            email='info@globalquakemodel.org',
-                                           first_name='GEM',
+                                           first_name=pwgem,
                                            last_name='Foundation')
 
         ## Set pwd for Gem user
-        UserGem = User.objects.get(username='GEM')
-        UserGem.set_password('GEM')
+        UserGem = User.objects.get(username=pwgem)
+        UserGem.set_password(pwgem)
         UserGem.save()
 
         ## Print if create Gem user is successfully 
-        if UserGem.first_name == 'GEM':
+        if UserGem.first_name == pwgem:
             print('GEM user created')
         else:
             raise ValueError
