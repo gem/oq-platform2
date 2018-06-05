@@ -211,9 +211,6 @@ mv $HOME/geonode/geoserver/geoserver/WEB-INF/lib/postgresql-9.4.1211.jar $HOME/g
 ## Start Geoserver after rename postgres jar
 paver start_geoserver
 
-## Create Gem user
-python ./manage.py create_gem_user
-
 ## Create vulnerability groups
 python ./manage.py import_vuln_geo_applicability_csv $HOME/$GIT_REPO/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
 python ./manage.py vuln_groups_create
@@ -226,6 +223,9 @@ pip install simplejson==2.0.9
 python manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
 
 python manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
+
+## Create Gem user
+python ./manage.py create_gem_user
 
 ## populate geoserver data infrastructure
 cd ~/oq-platform2
