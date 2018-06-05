@@ -1,8 +1,0 @@
-HTTP/1.1 401 No AuthenticationProvider found for org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-Set-Cookie: remember-me=;Path=/geoserver;Expires=Thu, 01-Jan-1970 00:00:00 GMT
-WWW-Authenticate: Basic realm="GeoServer Realm"
-Content-Type: text/html;charset=ISO-8859-1
-Cache-Control: must-revalidate,no-cache,no-store
-Content-Length: 1601
-Server: Jetty(8.y.z-SNAPSHOT)
-
