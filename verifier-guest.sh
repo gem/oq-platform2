@@ -233,7 +233,7 @@ $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatfo
 
 ## Update layers from Geoserver to geonode
 cd ~/geonode
-python manage.py updatelayers
+python manage.py updatelayers -u GEM
 
 # create programmatically ISC map
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
