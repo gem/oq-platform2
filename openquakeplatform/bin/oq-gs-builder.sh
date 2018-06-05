@@ -12,7 +12,7 @@ export PS4='+${LINENO}:${FUNCNAME[0]}: '
 #  global vars
 # === experimental geoserver 2.0 ===
 # GEM_USER=here-your-user
-GEM_USER=admin
+GEM_USER=GEM
 # GEM_PASS=here-your-pass
 GEM_PASS=geoserver
 # GEM_HOST=oq-platform-mn.gem.lan
