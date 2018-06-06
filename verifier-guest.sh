@@ -235,8 +235,9 @@ $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatfo
 cd ~/geonode
 python manage.py updatelayers -u GEM
 
-# create programmatically ISC map
+# Create programmatically ISC and GHEC json
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
+python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
 
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
