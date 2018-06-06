@@ -1,10 +1,33 @@
-{% extends "maps/map_detail_gemorig.html" %}
+{% extends "maps/map_base.html" %}
 {% load i18n %}
 {% load dialogos_tags %}
 {% load agon_ratings_tags %}
 {% load url from future %}
 {% load base_tags %}
 {% load guardian_tags %}
+
+{% block title %}{{ resource.title }} — {{ block.super }}{% endblock %}
+
+{% block head %}
+  {% if TWITTER_CARD %}
+    {% include "base/_resourcebase_twittercard.html" %}
+  {% endif %}
+  {% if OPENGRAPH_ENABLED %}
+    {% include "base/_resourcebase_opengraph.html" %}
+  {% endif %}
+  {% if preview == 'OL3' %}
+    {% include "maps/map_ol3.html" %}
+  {% elif preview == 'leaflet' %}
+    {% include "maps/map_leaflet.html" %}
+  {% elif preview == 'react' %}
+		{% include 'geonode-client/map_detail.html' %}
+  {% else %}
+    {% include "maps/map_include.html" %}
+  {% endif %}
+  {{ block.super }}
+{% endblock %}
+
+{% block body_class %}maps{% endblock %}
 
 {% block body_outer %}
   {% overall_rating resource "map" as map_rating %}
@@ -213,5 +236,93 @@
     </div>
 
   </div>
+
+  {% endblock %}
+
+{% block extra_script %}
+{{ block.super }}
+{% if SOCIAL_BUTTONS %}
+  {% include 'facebook_sdk.html' %}
+{% endif %}
+{% if request.user.is_authenticated %}
+      {% user_rating_js request.user resource "map" %}
+{% else %}
+      {% overall_rating resource "map" as the_map_rating %}
+{% endif %}
+{% include 'rating.html' %}
+<script type="text/javascript">
+ $(function() {
+
+  {% verbatim %}
+  // Publish layer group
+  // TODO: this should really not be inside a script tag...
+  var $wmsBtn = $("#layer-group"),
+      layerGroupElTpl;
+
+  if ($wmsBtn.length > 0) {
+
+    $wmsBtn.on("click", function(event) {
+      event.preventDefault();
+
+      $.ajax({
+        type: "PUT",
+        url: $wmsBtn.attr("href")
+      })
+
+        .done(function(data) {
+          layerGroupElTpl = "<dt>WMS layer group for local map layers:</dt> \
+            <dd><em>{{layerGroupName}}</em> (on <a href='{{ows}}?service=WMS&request=GetCapabilities'>local OWS</a>)</dd>";
+          $.each(data, function(key, value) {
+            // client-side template hack
+            layerGroupElTpl = layerGroupElTpl.replace("{{"+ key + "}}", value);
+          });
+        })
+
+        .fail(function(){
+          layerGroupElTpl = "<dt>Error:</dt> \
+            <dd>Layer group could not be created.</dd>";
+        })
+
+        .always(function(){
+          $("#layer-group-dl").html(layerGroupElTpl);
+        });
+
+    });
+  };
+  {% endverbatim %}
+
+
+ });
+{% if SOCIAL_BUTTONS %}
+ (function() {
+   var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+   po.src = 'https://apis.google.com/js/plusone.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+ })();
+{% endif %}
+  $("#comment_submit_btn").click(function(event) {
+    $.ajax({
+      type: "POST",
+      url: $("#form_post_comment").attr('action'),
+      data: $("#form_post_comment").serialize(),
+      success: function() {
+        $('#form_post_comment_div').modal().find('form')[0].reset();
+        $('#form_post_comment_div').modal('hide');
+        $('#comments_section').load(window.location.pathname + ' #comments_section',
+        		function(){$(this).children().unwrap()})
+      }
+    });
+    return false;
+  });
+
+</script>
+{% include "_permissions_form_js.html" %}
+<script type="text/javascript" src="{{ STATIC_URL}}geonode/js/utils/thumbnail.js"></script>
+<script type="text/javascript">
+  $('#set_thumbnail').click(function(){
+    createMapThumbnail();
+    $('#edit-map').modal('toggle');
+  });
+</script>
 
 {% endblock %}
