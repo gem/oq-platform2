@@ -15,7 +15,12 @@ class Command(BaseCommand):
         gem_user = User.objects.create_user(username=gem_username,
                                            email='info@globalquakemodel.org',
                                            first_name=gem_username,
-                                           last_name='Foundation')
+                                           last_name='Foundation',
+                                           organization='Gem Foundation',
+                                           city='Pavia (PV)',
+                                           voice='+3903825169865',
+                                           zipcode='27100',
+                                           country='ITA')
 
         ## Set pwd for Gem user
         gem_user = User.objects.get(username=gem_username)
