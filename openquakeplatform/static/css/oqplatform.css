@@ -28,7 +28,7 @@ h3 {
     padding-bottom: 0;
     background: rgba(0, 0, 0, 0.8)!important;
     margin-top: 10px!important;
-    height: 560px;
+    height: 650px;
 }
 select {
     width: 220px;
@@ -198,7 +198,7 @@ ul.dropdown-menu li {
     text-shadow: none!important;
     min-height: 400px;
     margin-top: 0px;
-    padding: 10px 0 60px
+    padding: 10px 0 60px;
 }
 .jumbotron .paragraf {
     font-size: 18px;
@@ -372,6 +372,8 @@ div#search-inp:after {
 }
 #home_ul {
     color: #fff;
+    list-style-type: none;
+    padding: 0 0 0 20px;
 }
 #home_ul li {
     font-size:14px;
@@ -384,6 +386,15 @@ div#search-inp:after {
     color: #fff!important;
     font-family: 'Lato', sans-serif;
     font-weight: 200;
+}
+#home_ul li .oq_div_one {
+    width: auto;
+    float: left;
+    padding-right: 4px;
+}
+#home_ul li .oq_div_two {
+    width: 90%;
+    float: left;
 }
 .hero-unit .btn {
     background: #f7931e;
