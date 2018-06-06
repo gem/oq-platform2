@@ -502,6 +502,10 @@ div#search-inp:after {
 .accept_terms input {
     width: 100px;
 }
+.user-contrib {
+    font-size:18px;
+    font-style:italic;
+}
 
 /*mobile*/
 @media (max-width: 991px) {

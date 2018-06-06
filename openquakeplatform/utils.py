@@ -1,5 +1,3 @@
-import os
-import subprocess
 import openquakeplatform
 
 from django.conf import settings
@@ -84,4 +82,3 @@ def sign_in_required(func):
         else:
             return func(request)
     return wrapped
-
