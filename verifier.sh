@@ -242,6 +242,7 @@ _devtest_innervm_run () {
     fi
     mkdir -p "_shuttle/$GEM_GIT_PACKAGE"
     git clone . "_shuttle/$GEM_GIT_PACKAGE"
+    git -C "_shuttle/$GEM_GIT_PACKAGE" remote set-url origin "$(git config --get remote.origin.url)"
     scp -r "_shuttle/$GEM_GIT_PACKAGE" ${lxc_ip}:
     rm -rf _shuttle
 

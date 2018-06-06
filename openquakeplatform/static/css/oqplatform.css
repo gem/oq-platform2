@@ -99,6 +99,7 @@ li.oq-right-search {
 }
 .navbar {
     min-height: 40px;
+    z-index: 10000;
 }
 #navbar .nav {
     height: 40px;
@@ -110,9 +111,6 @@ li.oq-right-search {
     background: url(/static/geonode/img/oq-header.png) no-repeat left top;
     background-color: #1b75a5;
     height: 40px;
-}
-.navbar-nav .dropdown-menu {
-    border-top: 1px solid #ccc;
 }
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
     background-color: #1b75a5;
@@ -414,6 +412,7 @@ div#search-inp:after {
     margin-top: 6px;
 }
 .navbar-nav .dropdown-menu {
+    border-top: 1px solid #ccc;
     background-color: #fff;
     margin-top: 15px!important;
 }
@@ -568,10 +567,6 @@ div#search-inp:after {
 }
 img#legend_icon {
     max-width: 100%;
-}
-
-    background: #f05a24;
-    border-color: #f05a24;
 }
 .col-xs-8.item-details {
     background: none;

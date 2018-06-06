@@ -224,16 +224,20 @@ python manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_
 
 python manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
 
+## Create Gem user
+python ./manage.py create_gem_user
+
 ## populate geoserver data infrastructure
 cd ~/oq-platform2
 $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
 
 ## Update layers from Geoserver to geonode
 cd ~/geonode
-python manage.py updatelayers
+python manage.py updatelayers -u GEM
 
-# create programmatically ISC map
+# Create programmatically ISC and GHEC json
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
+python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
 
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then

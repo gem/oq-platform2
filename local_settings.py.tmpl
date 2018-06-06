@@ -140,6 +140,7 @@ INSTALLED_APPS += (
     'openquakeplatform.geodetic',
     'openquakeplatform.ghec_viewer',
     'openquakeplatform.isc_viewer',
+    'openquakeplatform.pla_common',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -176,6 +177,7 @@ AUTH_EXEMPT_URLS = ('/$',
                     '/api/layers/.*',
                     '/api/maps/.*',
                     '/proxy/',
+                    '/uploaded/thumbs/',
                     '/vulnerability',
                     '/vulnerability/intensity_measure_csc?.*',
                     '/vulnerability/engineering_demand_csc?.*',
