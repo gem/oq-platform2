@@ -1,9 +1,5 @@
 import json
-# import re
-# import os
 from django.core.management.base import BaseCommand
-from geonode.base.models import Link
-from django.core.files.storage import default_storage as storage
 
 
 class Command(BaseCommand):
@@ -15,4 +11,7 @@ class Command(BaseCommand):
         doc_load = json.loads(doc_json)
 
         for doc in doc_load:
-            print(doc['pk'])
+            print('%s' % doc['pk'])
+            print('%s' % doc['model'])
+            print('%s' % doc['fields']['doc_file'])
+            print('%s' % doc['fields']['extension'])
