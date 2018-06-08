@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 
 
 class Command(BaseCommand):
-    args = '<auth_user.json>'
+    args = '<auth_user_demo.json>'
     help = ('Import users')
 
     def handle(self, user_fname, *args, **options):
@@ -23,6 +23,7 @@ class Command(BaseCommand):
             gem_user = User.objects.create_user(
                                            username=username,
                                            email=email,
+                                           password=password,
                                            first_name=first_name,
                                            last_name=last_name)
 
@@ -32,11 +33,3 @@ class Command(BaseCommand):
             else:
                 raise ValueError
 
-            # Set pwd for Gem user
-            gem_user.set_password(password)
-            gem_user.save()
-
-            # print(user['fields']['username'])
-            # print(user['fields']['email'])
-            # print(user['fields']['first_name'])
-            # print(user['fields']['last_name'])
