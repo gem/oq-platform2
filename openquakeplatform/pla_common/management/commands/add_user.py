@@ -20,13 +20,21 @@ class Command(BaseCommand):
             first_name = fields['first_name']
             last_name = fields['last_name']
             password = fields['password']
+            is_active = fields['is_active']
+            is_superuser = fields['is_superuser']
+            is_staff = fields['is_staff']
 
-            gem_user = User.objects.create_user(
+            gem_user = User.objects.model(
                                            username=username,
                                            email=email,
                                            password=password,
                                            first_name=first_name,
-                                           last_name=last_name)
+                                           last_name=last_name,
+                                           is_active=is_active,
+                                           is_superuser=is_superuser,
+                                           is_staff=is_staff
+                                         )
+            gem_user.save()
 
             # Print if create Gem user is successfully
             if gem_user.username == username:
