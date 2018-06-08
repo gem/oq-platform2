@@ -1,22 +1,24 @@
 [
  {
-   "pk": 1820, 
-        "model": "auth.user", 
+        "pk": 1820,
+        "model": "auth.user",
         "fields": {
-            "username": "hascar", 
-            "first_name": "", 
-            "last_name": "", 
-            "is_active": true, 
-            "is_superuser": true, 
-            "is_staff": true, 
-            "last_login": "2018-06-06T08:38:32", 
+            "username": "hascar",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2018-06-06T08:38:32",
             "groups": [
-                1
-            ], 
-            "user_permissions": [], 
-            "password": "pbkdf2_sha256$10000$i11lC0ng0u1P$QwXWnuIYEVpoVNl3yJjTUCOL/d4i8b3Ujv7kUfgiHso=", 
-            "email": "armando.scarpati@globalquakemodel.org", 
+                [
+                    "vulnerability-admins"
+                ]
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$i11lC0ng0u1P$QwXWnuIYEVpoVNl3yJjTUCOL/d4i8b3Ujv7kUfgiHso=",
+            "email": "armando.scarpati@globalquakemodel.org",
             "date_joined": "2016-11-22T16:29:59"
         }
- }
+    }
 ]
