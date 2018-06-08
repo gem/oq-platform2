@@ -14,11 +14,12 @@ class Command(BaseCommand):
         User = get_user_model()
 
         for user in user_load:
-            username = user['fields']['username']
-            email = user['fields']['email']
-            first_name = user['fields']['first_name']
-            last_name = user['fields']['last_name']
-            password = user['fields']['password']
+            fields = user['fields']
+            username = fields['username']
+            email = fields['email']
+            first_name = fields['first_name']
+            last_name = fields['last_name']
+            password = fields['password']
 
             gem_user = User.objects.create_user(
                                            username=username,
