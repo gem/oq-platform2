@@ -36,7 +36,7 @@ class UserLoginTest(unittest.TestCase):
         plb.wait_visibility(passwd_field, 1)
         passwd_field.send_keys(gem_pwd)
 
-        # <button class="btn pull-right" type="submit">Sign in</button>
+        # Click button Sign in
         submit_button = plb.xpath_finduniq(
             "//button[@type='submit' and text()='%s']" %
             ("Sign in"))
