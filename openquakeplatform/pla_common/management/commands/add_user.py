@@ -21,9 +21,11 @@ class Command(BaseCommand):
             anonymous = 'AnonymousUser'
             admin = 'admin'
 
-            if fields['username'] != '%s' % gem:
-                if fields['username'] != '%s' % anonymous:
-                    if fields['username'] != '%s' % admin:
+            # Add users
+            if (fields['username'] != '%s' % gem
+                and fields['username'] != '%s' % anonymous
+                    and fields['username'] != '%s' % admin):
+
                         username = fields['username']
                         email = fields['email']
                         first_name = fields['first_name']
@@ -45,7 +47,7 @@ class Command(BaseCommand):
                                                      )
                         gem_user.save()
 
-                        # Print if create Gem user is successfully
+                        # Print if create users is successfully
                         if gem_user.username == username:
                             print('%s user created' % username)
                         else:
