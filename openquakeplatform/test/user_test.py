@@ -44,7 +44,7 @@ class UserLoginTest(unittest.TestCase):
 
         # Check if user logged is correct
         check_user = plb.xpath_finduniq(
-            "//img[@alt='GEM']", TIMEOUT)
+            "//img[@alt='%s']" % gem_user, TIMEOUT)
         # "//a[@href='#' and"
         # " normalize-space(@class)='dropdown-toggle avatar']", TIMEOUT)
         # " and normalize-space(text())='%s']" % gem_user, TIMEOUT)
