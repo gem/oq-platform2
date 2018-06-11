@@ -86,5 +86,49 @@
             "email": "info@globalquakemodel.org",
             "date_joined": "2014-12-01T00:00:00"
         }
+    },
+{
+        "pk": 7,
+        "model": "auth.user",
+        "fields": {
+            "username": "paul",
+            "first_name": "",
+            "last_name": "",
+            "is_active": false,
+            "is_superuser": false,
+            "is_staff": true,
+            "last_login": "2017-09-01T08:24:36.529",
+            "groups": [
+                [
+                    "vulnerability-editors"
+                ]
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$MkXVTyenubdV$NsXav6IwW42HGWCwwFUdGKlSrtpdbvg31ziI/UOzvgI=",
+            "email": "paul.sl.henshaw@gmail.com",
+            "date_joined": "2014-12-23T17:57:37.048"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "auth.user",
+        "fields": {
+            "username": "michele",
+            "first_name": "",
+            "last_name": "",
+            "is_active": false,
+            "is_superuser": false,
+            "is_staff": true,
+            "last_login": "2017-04-10T10:08:35.630",
+            "groups": [
+                [
+                    "vulnerability-editors"
+                ]
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$jEpiPK3BKISW$YaagjvxmRTHGVhed1+rRRuP67+UJQrFlkY3EAwf1e08=",
+            "email": "michele.simionato@gmail.com",
+            "date_joined": "2014-12-24T12:59:48.268"
+        }
     }
 ]
