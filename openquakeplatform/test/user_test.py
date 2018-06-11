@@ -19,8 +19,8 @@ class UserLoginTest(unittest.TestCase):
         plb.init(landing='/', autologin=False)
 
         # New login
-        input = plb.xpath_finduniq("//a[normalize-space(text()) = 'Sign in']")
-        input.click()
+        signin = plb.xpath_finduniq("//a[normalize-space(text()) = 'Sign in']")
+        signin.click()
 
         user_field = plb.xpath_find(
             "//form[@class='%s' or @class='%s']//input[@id="
