@@ -70,7 +70,7 @@
             {% endif %}
             {% if user.is_authenticated %}
             <li class="oq-right-user">
-             <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="dropdown_click()">{#{% avatar user 42 %}#} <img src="https://www.gravatar.com/avatar/e2b6ed912af51f071943424ca7bdcff8/?s=40&amp;d=http%3A%2F%2Fftp.openquake.org%2Foq-platform%2Foq-avatar-40.png" alt="hascar" width="40" height="40"> {{ user.username }}<i class="fa fa-angle-down fa-lg"></i></a>
+             <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="dropdown_click()">{#{% avatar user 42 %}#} <img src="https://www.gravatar.com/avatar/e2b6ed912af51f071943424ca7bdcff8/?s=40&amp;d=http%3A%2F%2Fftp.openquake.org%2Foq-platform%2Foq-avatar-40.png" alt="openquakeplatform/templates/includes/header.html" width="40" height="40"> {{ user.username }}<i class="fa fa-angle-down fa-lg"></i></a>
               <ul id="dropdown-menu" class="dropdown-menu">
                 <li><a href="{{ user.get_absolute_url }}"><i class="fa fa-user fa-2x" aria-hidden="true"></i>  {% trans "Profile" %}</a></li>
                 <li><a href="{% url "messages_inbox" %}"><i class="fa fa-inbox fa-2x" aria-hidden="true"></i>  {% trans "Inbox" %}</a></li>
