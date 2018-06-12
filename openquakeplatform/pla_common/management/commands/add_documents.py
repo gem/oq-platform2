@@ -9,7 +9,8 @@ class Command(BaseCommand):
     def handle(self, doc_fname, *args, **options):
         doc_json = open(doc_fname).read()
         doc_load = json.loads(doc_json)
-
+        
+        # Print documents fields
         for doc in doc_load:
             print('%s' % doc['pk'])
             print('%s' % doc['model'])
