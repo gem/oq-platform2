@@ -36,9 +36,9 @@ class Command(BaseCommand):
                         is_super = fields['is_superuser']
                         is_staff = fields['is_staff']
 
-                        for groupname in fields['groups']:
-                            groupname = groupname[0]
-                            groupname = groupname.encode("utf-8")
+                        # Set list of groups
+                        groupnames = [groupname.encode("utf-8")
+                                      for groupname in fields['groups'][0]]
 
                         gem_user = User.objects.model(
                                                        username=username,
@@ -52,9 +52,11 @@ class Command(BaseCommand):
                                                      )
                         gem_user.save()
 
-                        # Add group to user
-                        UserGroup = Group.objects.get(name=groupname)
-                        gem_user.groups.add(UserGroup)
+                        # Add list group for single user
+                        for groupname in groupnames:
+                            # Add group to user
+                            UserGroup = Group.objects.get(name=groupname)
+                            gem_user.groups.add(UserGroup)
 
                         # Print if create users is successfully
                         if gem_user.username == username:
