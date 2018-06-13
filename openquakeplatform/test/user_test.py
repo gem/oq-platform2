@@ -7,7 +7,7 @@ TIMEOUT = 100
 
 class UserLoginTest(unittest.TestCase):
 
-    def user_login_test(self):
+    def gem_user_login_test(self):
 
         pla = platform_get()
 
