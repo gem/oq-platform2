@@ -227,6 +227,9 @@ python manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/de
 ## Create Gem user
 python ./manage.py create_gem_user
 
+## Added other users
+python manage.py add_user ~/oq-platform2/openquakeplatform/dump/auth_user_demo.json
+
 ## populate geoserver data infrastructure
 cd ~/oq-platform2
 $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer

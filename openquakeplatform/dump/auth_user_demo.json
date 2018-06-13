@@ -1,0 +1,134 @@
+[
+{
+        "pk": 1,
+        "model": "auth.user",
+        "fields": {
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2015-02-10T17:35:15.549",
+            "groups": [
+                [
+                    "vulnerability-editors"
+                ]
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$4CZB0YlwjQN2$/JWVwn9bfzp1I4pPfrIwhfT1t5++Xaem/bCmN5ej48U=",
+            "email": "info@openquake.org",
+            "date_joined": "2014-12-01T00:00:00"
+        }
+    },
+{
+        "pk": 100000,
+        "model": "auth.user",
+        "fields": {
+            "username": "AnonymousUser",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "",
+            "groups": [
+                [
+                    "vulnerability-editors"
+                ]
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$4CZB0YlwjQN2$/JWVwn9bfzp1I4pPfrIwhfT1t5++Xaem/bCmN5ej48U=",
+            "email": "info@openquake.org",
+            "date_joined": "2014-12-01T00:00:00"
+        }
+    },
+ {
+        "pk": 1820,
+        "model": "auth.user",
+        "fields": {
+            "username": "hascar",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2018-06-06T08:38:32",
+            "groups": [
+                [
+                    "vulnerability-admins"
+                ]
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$i11lC0ng0u1P$QwXWnuIYEVpoVNl3yJjTUCOL/d4i8b3Ujv7kUfgiHso=",
+            "email": "armando.scarpati@globalquakemodel.org",
+            "date_joined": "2016-11-22T16:29:59"
+        }
+    },
+{
+        "pk": 2,
+        "model": "auth.user",
+        "fields": {
+            "username": "GEM",
+            "first_name": "GEM ",
+            "last_name": "Foundation",
+            "is_active": false,
+            "is_superuser": false,
+            "is_staff": true,
+            "last_login": "2014-12-01T00:00:00",
+            "groups": [
+                [
+                    "vulnerability-editors"
+                ]
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$MbuAHzSmqqVy$B8MioOUinOt1Ar308HwqyHun1TrzZGD96edxsUyTMvc=",
+            "email": "info@globalquakemodel.org",
+            "date_joined": "2014-12-01T00:00:00"
+        }
+    },
+{
+        "pk": 7,
+        "model": "auth.user",
+        "fields": {
+            "username": "paul",
+            "first_name": "",
+            "last_name": "",
+            "is_active": false,
+            "is_superuser": false,
+            "is_staff": true,
+            "last_login": "2017-09-01T08:24:36.529",
+            "groups": [
+                [
+                    "vulnerability-editors"
+                ]
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$MkXVTyenubdV$NsXav6IwW42HGWCwwFUdGKlSrtpdbvg31ziI/UOzvgI=",
+            "email": "paul.sl.henshaw@gmail.com",
+            "date_joined": "2014-12-23T17:57:37.048"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "auth.user",
+        "fields": {
+            "username": "michele",
+            "first_name": "",
+            "last_name": "",
+            "is_active": false,
+            "is_superuser": false,
+            "is_staff": true,
+            "last_login": "2017-04-10T10:08:35.630",
+            "groups": [
+                [
+                    "vulnerability-editors"
+                ]
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$jEpiPK3BKISW$YaagjvxmRTHGVhed1+rRRuP67+UJQrFlkY3EAwf1e08=",
+            "email": "michele.simionato@gmail.com",
+            "date_joined": "2014-12-24T12:59:48.268"
+        }
+    }
+]
