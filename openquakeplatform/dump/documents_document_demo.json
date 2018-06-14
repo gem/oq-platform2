@@ -1,0 +1,19 @@
+[                                                                                                                                            
+    {   
+        "pk": 47, 
+        "model": "documents.document", 
+        "fields": {
+            "extension": "pdf", 
+            "popular_count": 43, 
+            "object_id": 23, 
+            "regions": [], 
+            "content_type": [
+                "maps", 
+                "map"
+            ],  
+            "doc_file": "documents/GEGD-ISC-GEM-Instrumental-Catalogue-Report-201201-V01.pdf", 
+            "share_count": 0
+        }   
+    }  
+]
+
