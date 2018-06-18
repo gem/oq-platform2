@@ -1,0 +1,47 @@
+[
+{
+        "pk": 24, 
+        "model": "base.resourcebase", 
+        "fields": {
+            "constraints_other": "", 
+            "bbox_x0": "-180.0000000000", 
+            "csw_mdsource": "local", 
+            "distribution_description": "", 
+            "csw_typename": "gmd:MD_Metadata", 
+            "date_type": "publication", 
+            "srid": "EPSG:4326", 
+            "bbox_x1": "-90.0000000000", 
+            "metadata_xml": "<gmd:MD_Metadata xmlns:gmd=\"http://www.isotc211.org/2005/gmd\"/>", 
+            "edition": "", 
+            "owner": [
+                "GEM"
+            ], 
+            "category": 2, 
+            "spatial_representation_type": null, 
+            "uuid": "40ec50da-70bf-11e4-824f-00163ee17841", 
+            "title": "Global Historic Catalogue", 
+            "csw_schema": "http://www.isotc211.org/2005/gmd", 
+            "regions": [], 
+            "abstract": "825 earthquakes of M >= 7\r\n87 studies supplying the most reliable input datasets from the archive", 
+            "bbox_y0": "180.0000000000", 
+            "distribution_url": "", 
+            "csw_insert_date": "2014-11-20T14:12:25.747", 
+            "purpose": "Only by working together on a global scale can earthquake hazard and risk assessment advance, as critical input for decisions to mitigate and reduce earthquake risk. The Global Historical Earthquake Catalogue and Archive provide a global starting point for continuous improvement of seismicity both for science and concrete applications, especially in regional contexts.", 
+            "csw_wkt_geometry": "POLYGON((-180 -90,-180 90,180 90,180 -90,-180 -90))", 
+            "date": "2014-11-20T14:12:25", 
+            "bbox_y1": "90.0000000000", 
+            "temporal_extent_end": "1903-12-31", 
+            "license": 3, 
+            "language": "eng", 
+            "restriction_code_type": null, 
+            "maintenance_frequency": null, 
+            "csw_anytext": null, 
+            "supplemental_information": "http://www.globalquakemodel.org/what/seismic-hazard/historical-catalogue/\r\n\r\nThe global historical earthquake archive is accessible at this link:\r\nhttp://www.emidius.eu/GEH/\r\n\r\nPublications:\r\n- Albini, P., R. M. W. Musson, A. Rovida, M. Locati, A. A. Gomez Capera, D. Vigano\u0300 (2014). The Global Earthquake History. Earthquake Spectra, 30(2): 607-624.", 
+            "thumbnail": 17, 
+            "csw_type": "dataset", 
+            "metadata_uploaded": false, 
+            "data_quality_statement": "", 
+            "temporal_extent_start": "1000-01-01"
+        }
+    }
+]
