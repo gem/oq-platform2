@@ -216,22 +216,25 @@ python ./manage.py import_vuln_geo_applicability_csv $HOME/$GIT_REPO/openquakepl
 python ./manage.py vuln_groups_create
 
 ## load data and install simplejson for vulnerability application
-python manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
+python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
 pip install simplejson==2.0.9
 
 ## load data for gec and isc viewer
-python manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
+python ./manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
 
-python manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
+python ./manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
 
 ## Create Gem user
 python ./manage.py create_gem_user
 
 ## Add other users
-python manage.py add_user ~/oq-platform2/openquakeplatform/dump/auth_user_demo.json
+python ./manage.py add_user $HOME/$GIT_REPO/openquakeplatform/dump/auth_user_demo.json
+
+## Add Gem category
+python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json 
 
 ## Add old documents
-python manage.py add_documents
+python ./manage.py add_documents
 
 ## populate geoserver data infrastructure
 cd ~/oq-platform2
