@@ -230,11 +230,11 @@ python ./manage.py create_gem_user
 ## Add other users
 python ./manage.py add_user $HOME/$GIT_REPO/openquakeplatform/dump/auth_user_demo.json
 
-## Add Gem category
-python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json 
-
 ## Add old documents
 python ./manage.py add_documents
+
+## Add Gem category
+python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
 
 ## populate geoserver data infrastructure
 cd ~/oq-platform2
