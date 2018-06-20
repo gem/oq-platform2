@@ -1,0 +1,32 @@
+[
+    {
+        "pk": 2, 
+        "model": "base.topiccategory", 
+        "fields": {
+            "is_choice": true, 
+            "gn_description": "Hazard", 
+            "identifier": "hazard", 
+            "description": "Seismic Hazard"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "base.topiccategory", 
+        "fields": {
+            "is_choice": true, 
+            "gn_description": "Risk", 
+            "identifier": "risk", 
+            "description": "Seismic Risk"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "base.topiccategory", 
+        "fields": {
+            "is_choice": true, 
+            "gn_description": "SVIR", 
+            "identifier": "svir", 
+            "description": "Social Vulnerability and Integrated Risk"
+        }
+    }
+]
