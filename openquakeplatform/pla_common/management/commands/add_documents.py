@@ -1,3 +1,4 @@
+import os
 import json
 from django.core.management.base import BaseCommand
 from geonode.documents.models import Document
@@ -12,26 +13,26 @@ class Command(BaseCommand):
     def handle(doc_fname, *args, **options):
 
         # Read documents json
-        doc_fname = ('/home/ubuntu/oq-platform2/'
-                     'openquakeplatform/dump/documents_document_demo.json')
+        doc_fname = (os.path.join(os.path.expanduser("~"), 'oq-platform2/'
+                     'openquakeplatform/dump/documents_document_demo.json'))
         doc_json = open(doc_fname).read()
         doc_load = json.loads(doc_json)
 
         # Read resourcebase json
-        resource_name = ('/home/ubuntu/oq-platform2/'
-                         'openquakeplatform/dump/base_resourcebase_demo.json')
+        resource_name = (os.path.join(os.path.expanduser("~"), 'oq-platform2/'
+                         'openquakeplatform/dump/base_resourcebase_demo.json'))
         resource_json = open(resource_name).read()
         resource_load = json.loads(resource_json)
 
         # Read category json
-        category_name = ('/home/ubuntu/oq-platform2/'
-                         'openquakeplatform/dump/base_topiccategory.json')
+        category_name = (os.path.join(os.path.expanduser("~"), 'oq-platform2/'
+                         'openquakeplatform/dump/base_topiccategory.json'))
         category_json = open(category_name).read()
         category_load = json.loads(category_json)
 
         # Read license json
-        license_name = ('/home/ubuntu/oq-platform2/'
-                        'openquakeplatform/dump/base_license.json')
+        license_name = (os.path.join(os.path.expanduser("~"), 'oq-platform2/'
+                        'openquakeplatform/dump/base_license.json'))
         license_json = open(license_name).read()
         license_load = json.loads(license_json)
 
