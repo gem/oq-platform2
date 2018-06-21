@@ -35,12 +35,6 @@ class Command(BaseCommand):
         license_json = open(license_name).read()
         license_load = json.loads(license_json)
 
-        # Read region json
-        # region_fname = ('/home/ubuntu/oq-platform2/'
-        #                 'openquakeplatform/dump/base_regions.json')
-        # region_json = open(region_fname).read()
-        # region_load = json.loads(region_json)
-
         # Delete all categories
         topiccategory = TopicCategory.objects.all()
         topiccategory.delete()
@@ -99,26 +93,19 @@ class Command(BaseCommand):
                 category = resource_fields['category']
                 edition = resource_fields['edition']
                 licenses = resource_fields['license']
-                print(licenses)
+
                 regions = [region.encode("utf-8")
                            for region in resource_fields['regions']]
-
-                print(owner)
-                print(category)
-                print(regions)
 
                 # Istance user
                 User = get_user_model()
                 owners = User.objects.get(username=owner)
-                print(owners)
 
                 # Istance category
                 cat = TopicCategory.objects.get(id=category)
-                print(cat)
 
                 # Istance license
                 license = License.objects.get(id=licenses)
-                print(license)
 
                 pk = object_id
                 newdoc = Document.objects.model(
@@ -141,3 +128,9 @@ class Command(BaseCommand):
                 for reg in regions:
                     Reg = Region.objects.get(id=regions)
                     newdoc.regions.add(Reg)
+
+                # Print if create documents is successfully
+                if newdoc.id == doc_pk:
+                    print('%s created' % title)
+                else:
+                    raise ValueError
