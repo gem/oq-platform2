@@ -1,7 +1,7 @@
 import json
 from django.core.management.base import BaseCommand
 from geonode.documents.models import Document
-from geonode.base.models import TopicCategory, Region
+from geonode.base.models import TopicCategory, Region, License
 from django.contrib.auth import get_user_model
 
 
@@ -29,6 +29,12 @@ class Command(BaseCommand):
         category_json = open(category_name).read()
         category_load = json.loads(category_json)
 
+        # Read license json
+        license_name = ('/home/ubuntu/oq-platform2/'
+                        'openquakeplatform/dump/base_license.json')
+        license_json = open(license_name).read()
+        license_load = json.loads(license_json)
+
         # Read region json
         # region_fname = ('/home/ubuntu/oq-platform2/'
         #                 'openquakeplatform/dump/base_regions.json')
@@ -39,19 +45,23 @@ class Command(BaseCommand):
         topiccategory = TopicCategory.objects.all()
         topiccategory.delete()
 
-        # Upload all regions
-        # for region in region_load:
-        #     reg = region['fields']
-        #     pk = region['pk']
-        #     code = reg['code']
-        #     name = reg['name']
+        # Upload all licenses
+        for license in license_load:
+            pk = license['pk']
+            lic = license['fields']
+            url = lic['url']
+            license_text = lic['license_text']
+            name = lic['name']
+            description = lic['description']
 
-        #     new_region = Region.objects.model(
-        #                                       pk=pk,
-        #                                       code=code,
-        #                                       name=name
-        #                                       )
-        #     new_region.save()
+            new_license = License.objects.model(
+                                                pk=pk,
+                                                url=url,
+                                                license_text_en=license_text,
+                                                name=name,
+                                                description=description
+                                                )
+            new_license.save()
 
         # Upload category
         for category in category_load:
@@ -88,7 +98,8 @@ class Command(BaseCommand):
                 sinfo = resource_fields['supplemental_information']
                 category = resource_fields['category']
                 edition = resource_fields['edition']
-                # region = resource_fields['regions']
+                licenses = resource_fields['license']
+                print(licenses)
                 regions = [region.encode("utf-8")
                            for region in resource_fields['regions']]
 
@@ -105,9 +116,9 @@ class Command(BaseCommand):
                 cat = TopicCategory.objects.get(id=category)
                 print(cat)
 
-                # Istance regions
-                # reg = Region.objects.get(id=region)
-                # print(reg)
+                # Istance license
+                license = License.objects.get(id=licenses)
+                print(license)
 
                 pk = object_id
                 newdoc = Document.objects.model(
@@ -120,6 +131,7 @@ class Command(BaseCommand):
                                                 doc_file=doc_file,
                                                 object_id=object_id,
                                                 category=cat,
+                                                license=license,
                                                 edition=edition,
                                                 supplemental_information=sinfo
                                                 )
