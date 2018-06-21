@@ -25,14 +25,17 @@ class Command(BaseCommand):
         resource_load = json.loads(resource_json)
 
         # Read category json
-        category_name = (os.path.join(os.path.expanduser("~"), 'oq-platform2/'
-                         'openquakeplatform/dump/base_topiccategory.json'))
+        category_name = (
+            os.path.join(os.path.expanduser("~"), 'oq-private/'
+                                                  'old_platform_documents/'
+                                                  'json/'
+                                                  'base_topiccategory.json'))
         category_json = open(category_name).read()
         category_load = json.loads(category_json)
 
         # Read license json
-        license_name = (os.path.join(os.path.expanduser("~"), 'oq-platform2/'
-                        'openquakeplatform/dump/base_license.json'))
+        license_name = (os.path.join(os.path.expanduser("~"), 'oq-private/'
+                        'old_platform_documents/json/base_license.json'))
         license_json = open(license_name).read()
         license_load = json.loads(license_json)
 
