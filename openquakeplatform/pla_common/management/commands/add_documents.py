@@ -88,7 +88,6 @@ class Command(BaseCommand):
             doc_file = docs['doc_file']
 
             for resource in resource_load:
-
                 resource_fields = resource['fields']
                 owner = resource_fields['owner'][0]
                 title = resource_fields['title']
