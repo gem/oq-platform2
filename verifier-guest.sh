@@ -224,6 +224,9 @@ python ./manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/de
 
 python ./manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
 
+## Clone oq-private
+git clone git@gitlab.openquake.org:openquake/oq-private.git
+
 ## Create Gem user
 python ./manage.py create_gem_user
 
