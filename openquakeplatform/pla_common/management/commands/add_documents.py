@@ -43,7 +43,7 @@ class Command(BaseCommand):
         topiccategory = TopicCategory.objects.all()
         topiccategory.delete()
 
-        # Upload all licenses
+        # Import all licenses
         for license in license_load:
             pk = license['pk']
             lic = license['fields']
@@ -61,7 +61,7 @@ class Command(BaseCommand):
                                                 )
             new_license.save()
 
-        # Upload category
+        # Import all categories
         for category in category_load:
             cat = category['fields']
             pk = category['pk']
@@ -79,7 +79,21 @@ class Command(BaseCommand):
                                                   )
             new_cat.save()
 
-        # Print documents fields
+        # ResourceBase json with pk equal object_id of documents json
+        new_resources = {}
+        for resource in resource_load:
+            new_resources[resource['pk']] = {
+                'owner': resource['fields']['owner'][0],
+                'title': resource['fields']['title'],
+                'abstract': resource['fields']['abstract'],
+                'sinfo': resource['fields']['supplemental_information'],
+                'category': resource['fields']['category'],
+                'edition': resource['fields']['edition'],
+                'licenses': resource['fields']['license'],
+                'regions': resource['fields']['regions'],
+                                             }
+
+        # Import documents
         for doc in doc_load:
             docs = doc['fields']
             doc_pk = doc['pk']
@@ -87,53 +101,49 @@ class Command(BaseCommand):
             object_id = docs['object_id']
             doc_file = docs['doc_file']
 
-            for resource in resource_load:
-                resource_fields = resource['fields']
-                owner = resource_fields['owner'][0]
-                title = resource_fields['title']
-                abstract = resource_fields['abstract']
-                sinfo = resource_fields['supplemental_information']
-                category = resource_fields['category']
-                edition = resource_fields['edition']
-                licenses = resource_fields['license']
+            doc['resource'] = new_resources[object_id]
 
-                regions = [region.encode("utf-8")
-                           for region in resource_fields['regions']]
+            licenses = doc['resource']['licenses']
 
-                # Istance user
-                User = get_user_model()
-                owners = User.objects.get(username=owner)
+            # Istance regions
+            regions = [region.encode("utf-8")
+                       for region in doc['resource']['regions']]
 
-                # Istance category
-                cat = TopicCategory.objects.get(id=category)
+            # Istance user
+            User = get_user_model()
+            owners = User.objects.get(username=doc['resource']['owner'])
 
-                # Istance license
-                license = License.objects.get(id=licenses)
+            # Istance category
+            cat = TopicCategory.objects.get(id=doc['resource']['category'])
 
-                pk = object_id
-                newdoc = Document.objects.model(
-                                                id=doc_pk,
-                                                title_en=title,
-                                                pk=pk,
-                                                owner=owners,
-                                                extension=extension,
-                                                abstract=abstract,
-                                                doc_file=doc_file,
-                                                object_id=object_id,
-                                                category=cat,
-                                                license=license,
-                                                edition=edition,
-                                                supplemental_information=sinfo
-                                                )
-                newdoc.save()
+            # Istance license
+            license = License.objects.get(id=licenses)
 
-                # Add regions
-                for reg in regions:
-                    Reg = Region.objects.get(id=regions)
-                    newdoc.regions.add(Reg)
+            # Save documents
+            pk = object_id
+            newdoc = Document.objects.model(
+                id=doc_pk,
+                title_en=doc['resource']['title'],
+                pk=pk,
+                owner=owners,
+                extension=extension,
+                abstract=doc['resource']['abstract'],
+                doc_file=doc_file,
+                object_id=object_id,
+                category=cat,
+                license=license,
+                edition=doc['resource']['edition'],
+                supplemental_information=doc['resource']['sinfo']
+                )
+            newdoc.save()
 
-                # Print if create documents is successfully
-                if newdoc.id == doc_pk:
-                    print('%s created' % title)
-                else:
-                    raise ValueError
+            # Add regions
+            for reg in regions:
+                Reg = Region.objects.get(id=regions)
+                newdoc.regions.add(Reg)
+
+            # Print if create documents is successfully
+            if newdoc.id == doc_pk:
+                print('%s created' % doc['resource']['title'])
+            else:
+                raise ValueError
