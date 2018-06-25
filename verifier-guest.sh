@@ -226,7 +226,7 @@ python ./manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/
 
 ## Clone oq-private
 # git clone git@gitlab.openquake.org:openquake/oq-private.git
-git clone --depth=1 https://gitlab.openquake.org/openquake/oq-private.git
+git clone https://$USER_GITL:$PWD_GITL@gitlab.openquake.org/openquake/oq-private
 
 ## Create Gem user
 python ./manage.py create_gem_user
