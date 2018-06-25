@@ -177,7 +177,7 @@ cd ~
 # Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
-## clone and setting pythonpath taxtweb, ipt and oq-platform2
+## clone and setting pythonpath taxtweb, ipt, oq-platform2 and oq-private
 cd ~
 
 for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
@@ -185,7 +185,11 @@ for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
     if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
 done
 
+## Setup environment
 geonode_setup_env
+
+## Clone oq-private
+git clone git@gitlab.openquake.org:openquake/oq-private.git
 
 ## Sync and setup GeoNode
 cd ~/geonode
@@ -224,9 +228,6 @@ python ./manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/de
 
 python ./manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
 
-## Clone oq-private
-git clone git@gitlab.openquake.org:openquake/oq-private.git
-
 ## Create Gem user
 python ./manage.py create_gem_user
 
@@ -235,6 +236,7 @@ python ./manage.py add_user $HOME/$GIT_REPO/openquakeplatform/dump/auth_user_dem
 
 ## Add old documents
 python ./manage.py add_documents
+cp $HOME/oq-private/old_platform_documents/documents $HOME/geonode/geonode/uploaded/documents/
 
 ## Add Gem category
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
