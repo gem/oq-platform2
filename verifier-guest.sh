@@ -236,7 +236,7 @@ python ./manage.py add_user $HOME/$GIT_REPO/openquakeplatform/dump/auth_user_dem
 
 ## Add old documents
 python ./manage.py add_documents
-cp $HOME/oq-private/old_platform_documents/documents $HOME/geonode/geonode/uploaded/documents/
+cp $HOME/oq-private/old_platform_documents/documents/ $HOME/geonode/geonode/uploaded/documents/
 
 ## Add Gem category
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
