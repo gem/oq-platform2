@@ -159,7 +159,7 @@ class Command(BaseCommand):
 
                 # Print if create documents is successfully
                 if newdoc.id == doc_pk:
-                    print('%s created' % doc['resource']['title'])
+                    print('%s: %s created' % (doc_pk, doc['resource']['title']))
                 else:
                     raise ValueError
 
