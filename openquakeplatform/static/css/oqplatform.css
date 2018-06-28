@@ -472,6 +472,9 @@ div#search-inp:after {
 #permission_form .select2-container {
     width: 225px;
 }
+nav.filter h4 {
+    background: #1b75a5;
+}
 #footer {
     border-top: 0!important;
     z-index: 1000;
