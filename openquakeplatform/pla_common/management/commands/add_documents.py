@@ -116,7 +116,7 @@ class Command(BaseCommand):
             doc_file = docs['doc_file']
 
             try:
-                doc['resource'] = new_resources[object_id]
+                doc['resource'] = new_resources[doc_pk]
 
                 licenses = doc['resource']['licenses']
 
@@ -135,9 +135,9 @@ class Command(BaseCommand):
                 license = License.objects.get(id=licenses)
 
                 # Save documents
-                pk = object_id
+                pk = doc_pk
                 newdoc = Document.objects.model(
-                    id=doc_pk,
+                    # id=doc_pk,
                     title_en=doc['resource']['title'],
                     pk=pk,
                     owner=owners,
@@ -159,7 +159,8 @@ class Command(BaseCommand):
 
                 # Print if create documents is successfully
                 if newdoc.id == doc_pk:
-                    print('%s: %s created' % (doc_pk, doc['resource']['title']))
+                    title = doc['resource']['title'])
+                    print('%s: %s created' % (doc_pk, title))
                 else:
                     raise ValueError
 
