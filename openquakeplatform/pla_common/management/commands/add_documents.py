@@ -115,54 +115,50 @@ class Command(BaseCommand):
             object_id = docs['object_id']
             doc_file = docs['doc_file']
 
-            try:
-                doc['resource'] = new_resources[doc_pk]
+            doc['resource'] = new_resources[doc_pk]
 
-                licenses = doc['resource']['licenses']
+            licenses = doc['resource']['licenses']
 
-                # Istance regions
-                regions = [region.encode("utf-8")
-                           for region in doc['resource']['regions']]
+            # Istance regions
+            regions = [region.encode("utf-8")
+                       for region in doc['resource']['regions']]
 
-                # Istance user
-                User = get_user_model()
-                owners = User.objects.get(username=doc['resource']['owner'])
+            # Istance user
+            User = get_user_model()
+            owners = User.objects.get(username=doc['resource']['owner'])
 
-                # Istance category
-                cat = TopicCategory.objects.get(id=doc['resource']['category'])
+            # Istance category
+            cat = TopicCategory.objects.get(id=doc['resource']['category'])
 
-                # Istance license
-                license = License.objects.get(id=licenses)
+            # Istance license
+            license = License.objects.get(id=licenses)
 
-                # Save documents
-                pk = doc_pk
-                newdoc = Document.objects.model(
-                    # id=doc_pk,
-                    title_en=doc['resource']['title'],
-                    pk=pk,
-                    owner=owners,
-                    extension=extension,
-                    abstract=doc['resource']['abstract'],
-                    doc_file=doc_file,
-                    object_id=object_id,
-                    category=cat,
-                    license=license,
-                    edition=doc['resource']['edition'],
-                    supplemental_information=doc['resource']['sinfo']
-                    )
-                newdoc.save()
+            # Save documents
+            pk = doc_pk
+            newdoc = Document.objects.model(
+                # id=doc_pk,
+                title_en=doc['resource']['title'],
+                # pk=pk,
+                owner=owners,
+                extension=extension,
+                abstract=doc['resource']['abstract'],
+                doc_file=doc_file,
+                object_id=object_id,
+                category=cat,
+                license=license,
+                edition=doc['resource']['edition'],
+                supplemental_information=doc['resource']['sinfo']
+                )
+            newdoc.save()
 
-                # Add regions
-                for reg in regions:
-                    Reg = Region.objects.get(id=regions)
-                    newdoc.regions.add(Reg)
+            # Add regions
+            for reg in regions:
+                Reg = Region.objects.get(id=regions)
+                newdoc.regions.add(Reg)
 
-                # Print if create documents is successfully
-                if newdoc.id == doc_pk:
-                    title = doc['resource']['title'])
-                    print('%s: %s created' % (doc_pk, title))
-                else:
-                    raise ValueError
-
-            except:
-                pass
+            # Print if create documents is successfully
+            if newdoc.id == doc_pk:
+                title = doc['resource']['title'])
+                print('%s: %s created' % (doc_pk, title))
+            else:
+                raise ValueError
