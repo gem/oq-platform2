@@ -17,15 +17,10 @@ class Command(BaseCommand):
         for user in user_load:
             fields = user['fields']
 
-            # User not to be imported
-            gem = 'GEM'
-            anonymous = 'AnonymousUser'
-            admin = 'admin'
-
             # Add users
-            if (fields['username'] != '%s' % gem
-                and fields['username'] != '%s' % anonymous
-                    and fields['username'] != '%s' % admin):
+            if (fields['username'] != 'GEM'
+                and fields['username'] != 'AnonymousUser'
+                    and fields['username'] != 'admin'):
 
                         username = fields['username']
                         email = fields['email']
