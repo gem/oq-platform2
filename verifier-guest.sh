@@ -21,7 +21,7 @@ LXC_IP="$4"
 GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
-GEO_STABLE_HASH="1c65c9b"
+GEO_STABLE_HASH="aa5932d"
 
 geonode_setup_env()
 {
