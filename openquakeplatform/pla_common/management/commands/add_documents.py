@@ -14,36 +14,36 @@ class Command(BaseCommand):
 
         # Read documents json
         doc_fname = (
-            os.path.join(os.path.expanduser("~"), 'oq-private/'
-                                                  'old_platform_documents/'
-                                                  'json/'
-                                                  'documents_document.json'))
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-private/old_platform_documents/json/'
+                'documents_document.json'))
         doc_json = open(doc_fname).read()
         doc_load = json.loads(doc_json)
 
         # Read resourcebase json
         resource_name = (
-            os.path.join(os.path.expanduser("~"), 'oq-private/'
-                                                  'old_platform_documents/'
-                                                  'json/'
-                                                  'base_resource_base.json'))
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-private/old_platform_documents/json/'
+                'base_resource_base.json'))
         resource_json = open(resource_name).read()
         resource_load = json.loads(resource_json)
 
         # Read category json
         category_name = (
-            os.path.join(os.path.expanduser("~"), 'oq-private/'
-                                                  'old_platform_documents/'
-                                                  'json/'
-                                                  'base_topiccategory.json'))
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-private/old_platform_documents/json/'
+                'base_topiccategory.json'))
         category_json = open(category_name).read()
         category_load = json.loads(category_json)
 
         # Read license json
         license_name = (
-            os.path.join(os.path.expanduser("~"), 'oq-private/'
-                                                  'old_platform_documents/'
-                                                  'json/base_license.json'))
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-private/old_platform_documents/json/base_license.json'))
         license_json = open(license_name).read()
         license_load = json.loads(license_json)
 
@@ -61,12 +61,8 @@ class Command(BaseCommand):
             description = lic['description']
 
             new_license = License.objects.model(
-                                                pk=pk,
-                                                url=url,
-                                                license_text_en=license_text,
-                                                name=name,
-                                                description=description
-                                                )
+                pk=pk, url=url, license_text_en=license_text, name=name,
+                description=description)
             new_license.save()
 
         # Import all categories
@@ -79,71 +75,54 @@ class Command(BaseCommand):
             description = cat['description']
 
             new_cat = TopicCategory.objects.model(
-                                                  pk=pk,
-                                                  is_choice=is_choice,
-                                                  gn_description=gn_descript,
-                                                  identifier=identifier,
-                                                  description=description
-                                                  )
+                pk=pk, is_choice=is_choice, gn_description=gn_descript,
+                identifier=identifier, description=description)
             new_cat.save()
 
         # ResourceBase json with pk equal object_id of documents json
         new_resources = {}
         for resource in resource_load:
-            new_resources[resource['pk']] = {
-                'owner': resource['fields']['owner'][0],
-                'title': resource['fields']['title'],
-                'abstract': resource['fields']['abstract'],
-                'sinfo': resource['fields']['supplemental_information'],
-                'category': resource['fields']['category'],
-                'edition': resource['fields']['edition'],
-                'licenses': resource['fields']['license'],
-                'regions': resource['fields']['regions'],
-                                             }
+            new_resources[resource['pk']] = resource['fields']
 
         # Import documents
-        for doc in doc_load:
-            docs = doc['fields']
-            doc_pk = doc['pk']
-            extension = docs['extension']
-            object_id = docs['object_id']
-            doc_file = docs['doc_file']
+        for doc_full in doc_load:
+            doc = doc_full['fields']
 
-            doc['resource'] = new_resources[doc_pk]
+            res = new_resources[doc_full['pk']]
 
             # Istance regions
-            regions = [region for region in doc['resource']['regions']]
+            regions = [region for region in res['regions']]
 
             # Istance user
             User = get_user_model()
-            owners = User.objects.get(username=doc['resource']['owner'])
+            owner = User.objects.get(username=res['owner'][0])
 
             # Istance category
-            cat = TopicCategory.objects.get(id=doc['resource']['category'])
+            cat = TopicCategory.objects.get(id=res['category'])
 
             # Istance license
-            licenses = doc['resource']['licenses']
-            if licenses is not None:
-                license = License.objects.get(id=licenses)
+            license_id = res['license']
+            if license_id is not None:
+                license = License.objects.get(id=license_id)
             else:
                 license = None
 
             # Save documents
             newdoc = Document.objects.model(
-                title_en=doc['resource']['title'],
-                owner=owners,
-                extension=extension,
-                abstract=doc['resource']['abstract'],
-                doc_file=doc_file,
-                object_id=object_id,
+                title_en=res['title'],
+                owner=owner,
+                extension=doc['extension'],
+                abstract=res['abstract'],
+                doc_file=doc['doc_file'],
+                object_id=doc['object_id'],
                 category=cat,
                 license=license,
-                edition=doc['resource']['edition'],
-                supplemental_information=doc['resource']['sinfo']
+                edition=res['edition'],
+                supplemental_information=res['supplemental_information']
                 )
             newdoc.save()
 
-            print(doc['resource']['title'])
+            print(res['title'])
 
             # Add regions
             for reg in regions:
