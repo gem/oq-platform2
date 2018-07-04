@@ -7,14 +7,12 @@ from django.contrib.auth import get_user_model
 
 
 class Command(BaseCommand):
-    args = '<documents_document_demo.json>'
+    args = '<documents_document.json>'
     help = ('Import documents')
 
     def handle(doc_fname, *args, **options):
 
         # Read documents json
-        # doc_fname = (os.path.join(os.path.expanduser("~"), 'oq-platform2/'
-        #             'openquakeplatform/dump/documents_document_demo.json'))
         doc_fname = (
             os.path.join(os.path.expanduser("~"), 'oq-private/'
                                                   'old_platform_documents/'
@@ -24,10 +22,6 @@ class Command(BaseCommand):
         doc_load = json.loads(doc_json)
 
         # Read resourcebase json
-        # resource_name = (
-        #     os.path.join(os.path.expanduser("~"), 'oq-platform2/'
-        #                                           'openquakeplatform/dump/'
-        #                                           'base_resourcebase_demo.json'))
         resource_name = (
             os.path.join(os.path.expanduser("~"), 'oq-private/'
                                                   'old_platform_documents/'
@@ -117,11 +111,8 @@ class Command(BaseCommand):
 
             doc['resource'] = new_resources[doc_pk]
 
-            licenses = doc['resource']['licenses']
-
             # Istance regions
-            regions = [region.encode("utf-8")
-                       for region in doc['resource']['regions']]
+            regions = [region for region in doc['resource']['regions']]
 
             # Istance user
             User = get_user_model()
@@ -131,14 +122,15 @@ class Command(BaseCommand):
             cat = TopicCategory.objects.get(id=doc['resource']['category'])
 
             # Istance license
-            license = License.objects.get(id=licenses)
+            licenses = doc['resource']['licenses']
+            if licenses is not None:
+                license = License.objects.get(id=licenses)
+            else:
+                license = None
 
             # Save documents
-            pk = doc_pk
             newdoc = Document.objects.model(
-                # id=doc_pk,
                 title_en=doc['resource']['title'],
-                # pk=pk,
                 owner=owners,
                 extension=extension,
                 abstract=doc['resource']['abstract'],
@@ -151,14 +143,9 @@ class Command(BaseCommand):
                 )
             newdoc.save()
 
+            print(doc['resource']['title'])
+
             # Add regions
             for reg in regions:
-                Reg = Region.objects.get(id=regions)
+                Reg = Region.objects.get(id=reg)
                 newdoc.regions.add(Reg)
-
-            # Print if create documents is successfully
-            if newdoc.id == doc_pk:
-                title = doc['resource']['title']
-                print('%s: %s created' % (doc_pk, title))
-            else:
-                raise ValueError
