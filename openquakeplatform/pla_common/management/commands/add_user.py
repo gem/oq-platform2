@@ -21,11 +21,7 @@ class Command(BaseCommand):
             if (fields['username'] == 'GEM'
                 or fields['username'] == 'AnonymousUser'
                     or fields['username'] == 'admin'):
-<<<<<<< HEAD
                 continue
-=======
-                continue    
->>>>>>> 2c039dbbf10211bcc0333394f28168fdd746023c
 
             username = fields['username']
             email = fields['email']
