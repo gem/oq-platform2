@@ -269,7 +269,7 @@ devtest_run () {
     local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3"
 
     if [ "$branch_geonode" == "" ] ; then
-        branch_geonode="2.8.0"
+        branch_geonode="2.6.x"
     fi
  
     sudo echo
