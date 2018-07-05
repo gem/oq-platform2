@@ -4,6 +4,9 @@ from django.core.management.base import BaseCommand
 from geonode.documents.models import Document
 from geonode.base.models import TopicCategory, Region, License
 from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.models import ContentType
+# from taggit.models import TagBase
+# from taggit.managers import TaggableManager
 
 
 class Command(BaseCommand):
@@ -47,6 +50,14 @@ class Command(BaseCommand):
         license_json = open(license_name).read()
         license_load = json.loads(license_json)
 
+        # Read tag json
+        # tag_name = (
+        #     os.path.join(
+        #         os.path.expanduser("~"),
+        #         'oq-private/old_platform_documents/json/taggit_tag.json'))
+        # tag_json = open(tag_name).read()
+        # tag_load = json.loads(tag_json)
+
         # Delete all categories
         topiccategory = TopicCategory.objects.all()
         topiccategory.delete()
@@ -65,6 +76,17 @@ class Command(BaseCommand):
                 description=description)
             new_license.save()
 
+        # Import all tags
+        # for tag in tag_load:
+        #     tags = tag['fields']
+        #     pk = tag['pk']
+        #     name = tags['name']
+        #     slug = tags['slug']
+
+        #     new_tag = Keywords.objects.model(
+        #         pk=pk, name=name, slug=slug)
+        #     new_tag.save()
+
         # Import all categories
         for category in category_load:
             cat = category['fields']
@@ -79,7 +101,7 @@ class Command(BaseCommand):
                 identifier=identifier, description=description)
             new_cat.save()
 
-        # ResourceBase json with pk equal object_id of documents json
+        # ResourceBase json with pk equal pk of documents json
         new_resources = {}
         for resource in resource_load:
             new_resources[resource['pk']] = resource['fields']
@@ -92,6 +114,15 @@ class Command(BaseCommand):
 
             # Istance regions
             regions = [region for region in res['regions']]
+
+            # Istance content_type
+            ctype_name = doc['content_type']
+            if ctype_name is not None:
+                ctype = [ctype for ctype in doc['content_type']]
+                # print(ctype)
+                cont_type = ctype[1]
+                print(cont_type)
+                content_type = ContentType.objects.get(model=cont_type)
 
             # Istance user
             User = get_user_model()
@@ -117,8 +148,11 @@ class Command(BaseCommand):
                 object_id=doc['object_id'],
                 category=cat,
                 license=license,
+                content_type=content_type,
                 edition=res['edition'],
-                supplemental_information=res['supplemental_information']
+                supplemental_information=res['supplemental_information'],
+                popular_count=doc['popular_count'],
+                share_count=doc['share_count']
                 )
             newdoc.save()
 
