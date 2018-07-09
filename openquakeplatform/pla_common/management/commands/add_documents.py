@@ -3,10 +3,10 @@ import json
 from django.core.management.base import BaseCommand
 from geonode.documents.models import Document
 from geonode.base.models import TopicCategory, Region, License
+from geonode.base.models import HierarchicalKeyword
+from geonode.base.models import ResourceBase, TaggedContentItem
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
-# from taggit.models import TagBase
-# from taggit.managers import TaggableManager
 
 
 class Command(BaseCommand):
@@ -33,6 +33,11 @@ class Command(BaseCommand):
         resource_json = open(resource_name).read()
         resource_load = json.loads(resource_json)
 
+        # ResourceBase json with pk equal pk of documents json
+        new_resources = {}
+        for resource in resource_load:
+            new_resources[resource['pk']] = resource['fields']
+
         # Read category json
         category_name = (
             os.path.join(
@@ -51,16 +56,25 @@ class Command(BaseCommand):
         license_load = json.loads(license_json)
 
         # Read tag json
-        # tag_name = (
-        #     os.path.join(
-        #         os.path.expanduser("~"),
-        #         'oq-private/old_platform_documents/json/taggit_tag.json'))
-        # tag_json = open(tag_name).read()
-        # tag_load = json.loads(tag_json)
+        tag_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-private/old_platform_documents/'
+                'json/taggit_tag.json'))
+        tag_json = open(tag_name).read()
+        tag_load = json.loads(tag_json)
+        print("tag load: %d" % len(tag_load))
+
+        tag_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-private/old_platform_documents/'
+                'json/taggit_taggeditem.json'))
+        tag_json = open(tag_name).read()
+        tag_item_load = json.loads(tag_json)
 
         # Delete all categories
-        topiccategory = TopicCategory.objects.all()
-        topiccategory.delete()
+        TopicCategory.objects.all().delete()
 
         # Import all licenses
         for license in license_load:
@@ -76,35 +90,21 @@ class Command(BaseCommand):
                 description=description)
             new_license.save()
 
-        # Import all tags
-        # for tag in tag_load:
-        #     tags = tag['fields']
-        #     pk = tag['pk']
-        #     name = tags['name']
-        #     slug = tags['slug']
-
-        #     new_tag = Keywords.objects.model(
-        #         pk=pk, name=name, slug=slug)
-        #     new_tag.save()
+        HierarchicalKeyword.objects.all().delete()
 
         # Import all categories
         for category in category_load:
-            cat = category['fields']
+            field = category['fields']
             pk = category['pk']
-            is_choice = cat['is_choice']
-            gn_descript = cat['gn_description']
-            identifier = cat['identifier']
-            description = cat['description']
+            is_choice = field['is_choice']
+            gn_descript = field['gn_description']
+            identifier = field['identifier']
+            description = field['description']
 
             new_cat = TopicCategory.objects.model(
                 pk=pk, is_choice=is_choice, gn_description=gn_descript,
                 identifier=identifier, description=description)
             new_cat.save()
-
-        # ResourceBase json with pk equal pk of documents json
-        new_resources = {}
-        for resource in resource_load:
-            new_resources[resource['pk']] = resource['fields']
 
         # Import documents
         for doc_full in doc_load:
@@ -119,10 +119,10 @@ class Command(BaseCommand):
             ctype_name = doc['content_type']
             if ctype_name is not None:
                 ctype = [ctype for ctype in doc['content_type']]
-                # print(ctype)
+                label_type = ctype[0]
                 cont_type = ctype[1]
-                print(cont_type)
-                content_type = ContentType.objects.get(model=cont_type)
+                content_type = ContentType.objects.get(
+                    app_label=label_type, model=cont_type)
 
             # Istance user
             User = get_user_model()
@@ -140,6 +140,7 @@ class Command(BaseCommand):
 
             # Save documents
             newdoc = Document.objects.model(
+                uuid=res['uuid'],
                 title_en=res['title'],
                 owner=owner,
                 extension=doc['extension'],
@@ -162,3 +163,42 @@ class Command(BaseCommand):
             for reg in regions:
                 Reg = Region.objects.get(id=reg)
                 newdoc.regions.add(Reg)
+
+        new_tags = {}
+
+        # Import all tags
+        for tag in tag_load:
+            field = tag['fields']
+            new_tags[tag['pk']] = tag['fields']
+            name = field['name']
+            HierarchicalKeyword.add_root(name=name)
+
+        # Import all tagged items
+        for tag_item in tag_item_load:
+            print('tag_item')
+            field = tag_item['fields']
+
+            tagitem_type_name = field['content_type']
+            if tagitem_type_name is not None:
+                tag_item_type = [tagitem_type
+                                 for tagitem_type in field['content_type']]
+                label_type = tag_item_type[0]
+                cont_type = tag_item_type[1]
+                content_type = ContentType.objects.get(
+                    app_label=label_type, model=cont_type)
+
+            try:
+                print(field['object_id'])
+                print(new_resources[field['object_id']]['uuid'])
+                content_object = ResourceBase.objects.get(
+                    uuid=new_resources[field['object_id']]['uuid'])
+            except:
+                print('exception rized')
+                continue
+            print('taggedcontentitem_new')
+
+            new_tag_item = TaggedContentItem.objects.model(
+                tag=HierarchicalKeyword.objects.get(
+                    name=new_tags[field['tag']]['name']),
+                content_object=content_object)
+            new_tag_item.save()
