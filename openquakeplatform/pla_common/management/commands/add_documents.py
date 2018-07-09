@@ -145,6 +145,7 @@ class Command(BaseCommand):
                 owner=owner,
                 extension=doc['extension'],
                 abstract=res['abstract'],
+                purpose=res['purpose'],
                 doc_file=doc['doc_file'],
                 object_id=doc['object_id'],
                 category=cat,
