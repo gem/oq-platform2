@@ -172,10 +172,8 @@ class Command(BaseCommand):
                 # Search in old region json
                 for region in region_load:
                     field = region['fields']
-                    print('field regioni %s' % field)
                     if region['pk'] == reg:
                         name = field['name']
-                        print('name: %s' % name)
                     else:
                         continue
                 # Add region to each document
