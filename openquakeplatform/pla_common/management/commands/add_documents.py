@@ -47,6 +47,14 @@ class Command(BaseCommand):
         category_json = open(category_name).read()
         category_load = json.loads(category_json)
 
+        # Read regions json
+        region_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-private/old_platform_documents/json/base_region.json'))
+        region_json = open(region_name).read()
+        region_load = json.loads(region_json)
+
         # Read license json
         license_name = (
             os.path.join(
@@ -112,9 +120,6 @@ class Command(BaseCommand):
 
             res = new_resources[doc_full['pk']]
 
-            # Istance regions
-            regions = [region for region in res['regions']]
-
             # Istance content_type
             ctype_name = doc['content_type']
             if ctype_name is not None:
@@ -160,14 +165,26 @@ class Command(BaseCommand):
 
             print(res['title'])
 
-            # Add regions
+            # Istance and add regions
+            regions = [region for region in res['regions']]
+
             for reg in regions:
-                Reg = Region.objects.get(id=reg)
+                # Search in old region json
+                for region in region_load:
+                    field = region['fields']
+                    print('field regioni %s' % field)
+                    if region['pk'] == reg:
+                        name = field['name']
+                        print('name: %s' % name)
+                    else:
+                        continue
+                # Add region to each document
+                Reg = Region.objects.get(name=name)
                 newdoc.regions.add(Reg)
 
+        # Import all tags
         new_tags = {}
 
-        # Import all tags
         for tag in tag_load:
             field = tag['fields']
             new_tags[tag['pk']] = tag['fields']
