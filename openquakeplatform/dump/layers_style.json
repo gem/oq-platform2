@@ -1,0 +1,50 @@
+[
+    {
+        "pk": 1, 
+        "model": "layers.style", 
+        "fields": {
+            "name": "point", 
+            "sld_url": "http://localhost:8080/geoserver/rest/styles/point.sld", 
+            "sld_version": null, 
+            "sld_title": "Default Point", 
+            "sld_body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><sld:StyledLayerDescriptor xmlns=\"http://www.opengis.net/sld\" xmlns:sld=\"http://www.opengis.net/sld\" xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:gml=\"http://www.opengis.net/gml\" version=\"1.0.0\"><sld:NamedLayer><sld:Name>point</sld:Name><sld:UserStyle><sld:Name>point</sld:Name><sld:Title>Default Point</sld:Title><sld:Abstract>A sample style that draws a point</sld:Abstract><sld:FeatureTypeStyle><sld:Name>name</sld:Name><sld:Rule><sld:Name>rule1</sld:Name><sld:Title>Red Square</sld:Title><sld:Abstract>A 6 pixel square with a red fill and no stroke</sld:Abstract><sld:PointSymbolizer><sld:Graphic><sld:Mark><sld:Fill><sld:CssParameter name=\"fill\">#FF0000</sld:CssParameter></sld:Fill></sld:Mark><sld:Size>6</sld:Size></sld:Graphic></sld:PointSymbolizer></sld:Rule></sld:FeatureTypeStyle></sld:UserStyle></sld:NamedLayer></sld:StyledLayerDescriptor>", 
+            "workspace": null
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "layers.style", 
+        "fields": {
+            "name": "faulted_earth_faultsection", 
+            "sld_url": "http://localhost:8080/geoserver/rest/styles/faulted_earth_faultsection.sld", 
+            "sld_version": null, 
+            "sld_title": "Fault Section", 
+            "sld_body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><sld:StyledLayerDescriptor xmlns=\"http://www.opengis.net/sld\" xmlns:sld=\"http://www.opengis.net/sld\" xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:gml=\"http://www.opengis.net/gml\" version=\"1.0.0\"><sld:NamedLayer><sld:Name>faulted_earth_faultsection</sld:Name><sld:UserStyle><sld:Name>faulted_earth_faultsection</sld:Name><sld:Title>Fault Section</sld:Title><sld:Abstract>Style for rendering fault sections.</sld:Abstract><sld:FeatureTypeStyle><sld:Name>name</sld:Name><sld:Rule><sld:LineSymbolizer><sld:Stroke><sld:CssParameter name=\"stroke-linecap\">round</sld:CssParameter><sld:CssParameter name=\"stroke-width\">3</sld:CssParameter></sld:Stroke></sld:LineSymbolizer></sld:Rule></sld:FeatureTypeStyle><sld:FeatureTypeStyle><sld:Name>name</sld:Name><sld:Rule><sld:LineSymbolizer><sld:Stroke><sld:CssParameter name=\"stroke\">#9C5E42</sld:CssParameter><sld:CssParameter name=\"stroke-linecap\">round</sld:CssParameter></sld:Stroke></sld:LineSymbolizer></sld:Rule></sld:FeatureTypeStyle></sld:UserStyle></sld:NamedLayer></sld:StyledLayerDescriptor>", 
+            "workspace": null
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "layers.style", 
+        "fields": {
+            "name": "faulted_earth_faultsource", 
+            "sld_url": "http://localhost:8080/geoserver/rest/styles/faulted_earth_faultsource.sld", 
+            "sld_version": null, 
+            "sld_title": "Fault Source", 
+            "sld_body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><sld:StyledLayerDescriptor xmlns=\"http://www.opengis.net/sld\" xmlns:sld=\"http://www.opengis.net/sld\" xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:gml=\"http://www.opengis.net/gml\" version=\"1.0.0\"><sld:NamedLayer><sld:Name>faulted_earth_faultsource</sld:Name><sld:UserStyle><sld:Name>faulted_earth_faultsource</sld:Name><sld:Title>Fault Source</sld:Title><sld:Abstract>Style for rendering fault sources.</sld:Abstract><sld:FeatureTypeStyle><sld:Name>name</sld:Name><sld:Rule><sld:LineSymbolizer><sld:Stroke><sld:CssParameter name=\"stroke-linecap\">round</sld:CssParameter></sld:Stroke></sld:LineSymbolizer></sld:Rule></sld:FeatureTypeStyle><sld:FeatureTypeStyle><sld:Name>name</sld:Name><sld:Rule><sld:LineSymbolizer><sld:Stroke><sld:CssParameter name=\"stroke\">#3066FB</sld:CssParameter><sld:CssParameter name=\"stroke-linecap\">round</sld:CssParameter></sld:Stroke></sld:LineSymbolizer></sld:Rule></sld:FeatureTypeStyle></sld:UserStyle></sld:NamedLayer></sld:StyledLayerDescriptor>", 
+            "workspace": null
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "layers.style", 
+        "fields": {
+            "name": "faulted_earth_fault", 
+            "sld_url": "http://localhost:8080/geoserver/rest/styles/faulted_earth_fault.sld", 
+            "sld_version": null, 
+            "sld_title": "Fault", 
+            "sld_body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><sld:StyledLayerDescriptor xmlns=\"http://www.opengis.net/sld\" xmlns:sld=\"http://www.opengis.net/sld\" xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:gml=\"http://www.opengis.net/gml\" version=\"1.0.0\"><sld:NamedLayer><sld:Name>faulted_earth_fault</sld:Name><sld:UserStyle><sld:Name>faulted_earth_fault</sld:Name><sld:Title>Fault</sld:Title><sld:Abstract>Style for rendering faults.</sld:Abstract><sld:FeatureTypeStyle><sld:Name>name</sld:Name><sld:Rule><sld:LineSymbolizer><sld:Stroke><sld:CssParameter name=\"stroke-linecap\">round</sld:CssParameter><sld:CssParameter name=\"stroke-width\">3</sld:CssParameter></sld:Stroke></sld:LineSymbolizer></sld:Rule></sld:FeatureTypeStyle><sld:FeatureTypeStyle><sld:Name>name</sld:Name><sld:Rule><sld:LineSymbolizer><sld:Stroke><sld:CssParameter name=\"stroke\">#DF0C00</sld:CssParameter><sld:CssParameter name=\"stroke-linecap\">round</sld:CssParameter></sld:Stroke></sld:LineSymbolizer></sld:Rule></sld:FeatureTypeStyle></sld:UserStyle></sld:NamedLayer></sld:StyledLayerDescriptor>", 
+            "workspace": null
+        }
+    }
+]
