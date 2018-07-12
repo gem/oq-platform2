@@ -2,6 +2,7 @@ import os
 import json
 from django.core.management.base import BaseCommand
 from geonode.documents.models import Document
+from geonode.layers.models import Layer
 from geonode.base.models import TopicCategory, Region, License
 from geonode.base.models import HierarchicalKeyword
 from geonode.base.models import ResourceBase, TaggedContentItem
@@ -11,7 +12,7 @@ from django.contrib.contenttypes.models import ContentType
 
 class Command(BaseCommand):
     args = '<documents_document.json>'
-    help = ('Import documents')
+    help = ('Import data')
 
     def handle(doc_fname, *args, **options):
 
@@ -19,16 +20,43 @@ class Command(BaseCommand):
         doc_fname = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-private/old_platform_documents/json/'
+                'oq-platform2/openquakeplatform/dump/'
                 'documents_document.json'))
         doc_json = open(doc_fname).read()
         doc_load = json.loads(doc_json)
+
+        # Read Style layer json
+        layer_style_fname = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-platform2/openquakeplatform/dump/'
+                'layers_style.json'))
+        layer_style_json = open(layer_style_fname).read()
+        layer_style_load = json.loads(layer_style_json)
+
+        # Read layer attribute json
+        # layer_attr_name = (
+        #     os.path.join(os.path.expanduser("~"), 'oq-private/'
+        #                                           'old_platform_documents/'
+        #                                           'json/'
+        #                                           'layers_attribute.json'))
+        # layer_attr_json = open(layer_attr_name).read()
+        # layer_attr_load = json.loads(layer_attr_json)
+
+        # Read layer json
+        layer_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-platform2/openquakeplatform/dump/'
+                'layers_layer.json'))
+        layer_json = open(layer_name).read()
+        layer_load = json.loads(layer_json)
 
         # Read resourcebase json
         resource_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-private/old_platform_documents/json/'
+                'oq-platform2/openquakeplatform/dump/'
                 'base_resource_base.json'))
         resource_json = open(resource_name).read()
         resource_load = json.loads(resource_json)
@@ -180,6 +208,63 @@ class Command(BaseCommand):
                 Reg = Region.objects.get(name=name)
                 newdoc.regions.add(Reg)
 
+        # Import layers
+        for layer_full in layer_load:
+
+            layer = layer_full['fields']
+            lay = new_resources[layer_full['pk']]
+
+            # Istance user
+            User = get_user_model()
+            owner = User.objects.get(username=lay['owner'][0])
+
+            # Istance category
+            category_id = lay['category']
+            if category_id is not None:
+                cat = TopicCategory.objects.get(id=category_id)
+            else:
+                cat = None
+
+            # Istance license
+            license_id = lay['license']
+            if license_id is not None:
+                license = License.objects.get(id=license_id)
+            else:
+                license = None
+
+            # Save layers
+            newlayer = Layer.objects.model(
+                uuid=lay['uuid'],
+                owner=owner,
+                abstract=lay['abstract'],
+                purpose=lay['purpose'],
+                title_en=lay['title'],
+                category=cat,
+                license=license,
+                typename=layer['typename'],
+                store=layer['store'],
+                workspace=layer['workspace'],
+                storeType=layer['storeType']
+                )
+            newlayer.save()
+
+            print(lay['title'])
+
+            # Istance and add regions
+            regions = [region for region in lay['regions']]
+
+            for reg in regions:
+                # Search in old region json
+                for region in region_load:
+                    field = region['fields']
+                    if region['pk'] == reg:
+                        name = field['name']
+                    else:
+                        continue
+                # Add region to each document
+                Reg = Region.objects.get(name=name)
+                newlayer.regions.add(Reg)
+
         # Import all tags
         new_tags = {}
 
@@ -191,7 +276,7 @@ class Command(BaseCommand):
 
         # Import all tagged items
         for tag_item in tag_item_load:
-            print('tag_item')
+            # print('tag_item')
             field = tag_item['fields']
 
             tagitem_type_name = field['content_type']
@@ -204,14 +289,14 @@ class Command(BaseCommand):
                     app_label=label_type, model=cont_type)
 
             try:
-                print(field['object_id'])
-                print(new_resources[field['object_id']]['uuid'])
+                # print(field['object_id'])
+                # print(new_resources[field['object_id']]['uuid'])
                 content_object = ResourceBase.objects.get(
                     uuid=new_resources[field['object_id']]['uuid'])
             except:
                 print('exception rized')
                 continue
-            print('taggedcontentitem_new')
+            # print('taggedcontentitem_new')
 
             new_tag_item = TaggedContentItem.objects.model(
                 tag=HierarchicalKeyword.objects.get(
