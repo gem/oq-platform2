@@ -232,7 +232,7 @@ python ./manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/
 python ./manage.py create_gem_user
 
 ## Add other users
-python ./manage.py add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
+python ./manage.py add_user $HOME/oq-platform2/openquakeplatform/dump/auth_user.json
 
 ## Add old documents
 python ./manage.py add_documents
