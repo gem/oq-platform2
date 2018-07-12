@@ -70,5 +70,24 @@
             "share_count": 0, 
             "store": "oqplatform"
         }
+    }, 
+    {
+        "pk": 1076, 
+        "model": "layers.layer", 
+        "fields": {
+            "styles": [
+                214, 
+                207
+            ], 
+            "name": "fallas", 
+            "popular_count": 15, 
+            "regions": [], 
+            "typename": "oqplatform:fallas", 
+            "default_style": null, 
+            "workspace": "oqplatform", 
+            "storeType": "dataStore", 
+            "share_count": 0, 
+            "store": "datastore"
+        }
     }
 ]

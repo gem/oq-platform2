@@ -62,5 +62,20 @@
             "doc_file": "documents/GEGD-Global_Geodetic_Strain_Rate_Model-201407-V01_4.pdf", 
             "share_count": 0
         }
-    } 
+    },
+    {
+        "pk": 936, 
+        "model": "documents.document", 
+        "fields": {
+            "extension": "zip", 
+            "popular_count": 30, 
+            "object_id": null, 
+            "regions": [
+                10
+            ], 
+            "content_type": null, 
+            "doc_file": "documents/arg-l0-exposure.zip", 
+            "share_count": 0
+        }
+    }
 ]

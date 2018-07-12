@@ -152,6 +152,49 @@
             "email": "catalina.yepes@globalquakemodel.org", 
             "date_joined": "2014-08-06T08:09:16"
         }
+    },
+    {
+        "pk": 113,
+        "model": "auth.user",
+        "fields": {
+            "username": "peruzza",
+            "first_name": "",
+            "last_name": "",
+            "is_active": false,
+            "is_superuser": false,
+            "is_staff": true,
+            "last_login": "2017-05-30T17:48:17.998",
+            "groups": [
+                [
+                    "vulnerability-editors"
+                ]
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$xGiRGZnlyZ4B$Ja98IllvqIOLsimelBmLdKoK7Z0ZqyhBRGcJ/zorZfs=",
+            "email": "lperuzza@inogs.it",
+            "date_joined": "2015-01-30T17:30:11.399"
+        }
+    },
+    {
+        "pk": 1076,
+        "model": "auth.user",
+        "fields": {
+            "username": "Klaus",
+            "first_name": "",
+            "last_name": "",
+            "is_active": false,
+            "is_superuser": false,
+            "is_staff": true,
+            "last_login": "2016-01-14T18:13:42.974",
+            "groups": [
+                [
+                    "vulnerability-editors"
+                ]
+            ],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$1u4KbBUbMlLx$dgwR6E/tQTZfwwteNnjNI6KatYW8VHdXi6eXTLUe+BI=",
+            "email": "lwat054@stanford.edu",
+            "date_joined": "2016-01-14T18:13:42.809"
+        }
     }
-
 ]
