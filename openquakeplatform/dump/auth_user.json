@@ -130,5 +130,28 @@
             "email": "michele.simionato@gmail.com",
             "date_joined": "2014-12-24T12:59:48.268"
         }
+    }, 
+    {
+        "pk": 13, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "cyepes", 
+            "first_name": "Catalina", 
+            "last_name": "Yepes", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": true, 
+            "last_login": "2017-12-04T09:57:49.403", 
+            "groups": [
+                [
+                    "vulnerability-admins"
+                ]
+            ], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$Xy2xXU4rRc7S$elGrLqp7ScgTiv6SiIQPqLG1u6+DchiTB5zVni7mjrc=", 
+            "email": "catalina.yepes@globalquakemodel.org", 
+            "date_joined": "2014-08-06T08:09:16"
+        }
     }
+
 ]
