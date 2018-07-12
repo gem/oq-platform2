@@ -2,7 +2,7 @@ import os
 import json
 from django.core.management.base import BaseCommand
 from geonode.documents.models import Document
-from geonode.layers.models import Layer
+# from geonode.layers.models import Layer
 from geonode.base.models import TopicCategory, Region, License
 from geonode.base.models import HierarchicalKeyword
 from geonode.base.models import ResourceBase, TaggedContentItem
@@ -26,13 +26,13 @@ class Command(BaseCommand):
         doc_load = json.loads(doc_json)
 
         # Read Style layer json
-        layer_style_fname = (
-            os.path.join(
-                os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/dump/'
-                'layers_style.json'))
-        layer_style_json = open(layer_style_fname).read()
-        layer_style_load = json.loads(layer_style_json)
+        # layer_style_fname = (
+        #     os.path.join(
+        #         os.path.expanduser("~"),
+        #         'oq-platform2/openquakeplatform/dump/'
+        #         'layers_style.json'))
+        # layer_style_json = open(layer_style_fname).read()
+        # layer_style_load = json.loads(layer_style_json)
 
         # Read layer attribute json
         # layer_attr_name = (
@@ -44,13 +44,13 @@ class Command(BaseCommand):
         # layer_attr_load = json.loads(layer_attr_json)
 
         # Read layer json
-        layer_name = (
-            os.path.join(
-                os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/dump/'
-                'layers_layer.json'))
-        layer_json = open(layer_name).read()
-        layer_load = json.loads(layer_json)
+        # layer_name = (
+        #     os.path.join(
+        #         os.path.expanduser("~"),
+        #         'oq-platform2/openquakeplatform/dump/'
+        #         'layers_layer.json'))
+        # layer_json = open(layer_name).read()
+        # layer_load = json.loads(layer_json)
 
         # Read resourcebase json
         resource_name = (
@@ -208,62 +208,62 @@ class Command(BaseCommand):
                 Reg = Region.objects.get(name=name)
                 newdoc.regions.add(Reg)
 
-        # Import layers
-        for layer_full in layer_load:
+        # # Import layers
+        # for layer_full in layer_load:
 
-            layer = layer_full['fields']
-            lay = new_resources[layer_full['pk']]
+        #     layer = layer_full['fields']
+        #     lay = new_resources[layer_full['pk']]
 
-            # Istance user
-            User = get_user_model()
-            owner = User.objects.get(username=lay['owner'][0])
+        #     # Istance user
+        #     User = get_user_model()
+        #     owner = User.objects.get(username=lay['owner'][0])
 
-            # Istance category
-            category_id = lay['category']
-            if category_id is not None:
-                cat = TopicCategory.objects.get(id=category_id)
-            else:
-                cat = None
+        #     # Istance category
+        #     category_id = lay['category']
+        #     if category_id is not None:
+        #         cat = TopicCategory.objects.get(id=category_id)
+        #     else:
+        #         cat = None
 
-            # Istance license
-            license_id = lay['license']
-            if license_id is not None:
-                license = License.objects.get(id=license_id)
-            else:
-                license = None
+        #     # Istance license
+        #     license_id = lay['license']
+        #     if license_id is not None:
+        #         license = License.objects.get(id=license_id)
+        #     else:
+        #         license = None
 
-            # Save layers
-            newlayer = Layer.objects.model(
-                uuid=lay['uuid'],
-                owner=owner,
-                abstract=lay['abstract'],
-                purpose=lay['purpose'],
-                title_en=lay['title'],
-                category=cat,
-                license=license,
-                typename=layer['typename'],
-                store=layer['store'],
-                workspace=layer['workspace'],
-                storeType=layer['storeType']
-                )
-            newlayer.save()
+        #     # Save layers
+        #     newlayer = Layer.objects.model(
+        #         uuid=lay['uuid'],
+        #         owner=owner,
+        #         abstract=lay['abstract'],
+        #         purpose=lay['purpose'],
+        #         title_en=lay['title'],
+        #         category=cat,
+        #         license=license,
+        #         typename=layer['typename'],
+        #         store=layer['store'],
+        #         workspace=layer['workspace'],
+        #         storeType=layer['storeType']
+        #         )
+        #     newlayer.save()
 
-            print(lay['title'])
+        #     print(lay['title'])
 
-            # Istance and add regions
-            regions = [region for region in lay['regions']]
+        #     # Istance and add regions
+        #     regions = [region for region in lay['regions']]
 
-            for reg in regions:
-                # Search in old region json
-                for region in region_load:
-                    field = region['fields']
-                    if region['pk'] == reg:
-                        name = field['name']
-                    else:
-                        continue
-                # Add region to each document
-                Reg = Region.objects.get(name=name)
-                newlayer.regions.add(Reg)
+        #     for reg in regions:
+        #         # Search in old region json
+        #         for region in region_load:
+        #             field = region['fields']
+        #             if region['pk'] == reg:
+        #                 name = field['name']
+        #             else:
+        #                 continue
+        #         # Add region to each document
+        #         Reg = Region.objects.get(name=name)
+        #         newlayer.regions.add(Reg)
 
         # Import all tags
         new_tags = {}
