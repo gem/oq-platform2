@@ -35,13 +35,13 @@ class Command(BaseCommand):
         layer_style_load = json.loads(layer_style_json)
 
         # Read layer attribute json
-        # layer_attr_name = (
-        #     os.path.join(os.path.expanduser("~"), 'oq-private/'
-        #                                           'old_platform_documents/'
-        #                                           'json/'
-        #                                           'layers_attribute.json'))
-        # layer_attr_json = open(layer_attr_name).read()
-        # layer_attr_load = json.loads(layer_attr_json)
+        layer_attr_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-platform2/openquakeplatform/dump/'
+                'layers_attribute.json'))
+        layer_attr_json = open(layer_attr_name).read()
+        layer_attr_load = json.loads(layer_attr_json)
 
         # Read layer json
         layer_name = (
@@ -261,7 +261,8 @@ class Command(BaseCommand):
                 owner=owner,
                 abstract=lay['abstract'],
                 purpose=lay['purpose'],
-                title_en=lay['title'],
+                name=layer['name'],
+                title_en=layer['name'],
                 category=cat,
                 license=license,
                 typename=layer['typename'],
@@ -287,7 +288,14 @@ class Command(BaseCommand):
                 Reg = Region.objects.get(name=name)
                 newlayer.regions.add(Reg)
 
-            print(lay['title'])
+            # Instance and add styles
+            style = [style for style in layer['styles']]
+
+            for sty in style:
+                Newstyle = Style.objects.get(id=sty)
+                newlayer.styles.add(Newstyle)
+
+            print(layer['name'])
 
         # Import all tags
         new_tags = {}
