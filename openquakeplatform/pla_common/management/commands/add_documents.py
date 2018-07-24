@@ -342,6 +342,7 @@ class Command(BaseCommand):
             # Save maps
             newmap = Map.objects.model(
                 uuid=mapp['uuid'],
+                pk=map_full['pk'],
                 projection=maps['projection'],
                 title_en=mapp['title'],
                 zoom=maps['zoom'],
