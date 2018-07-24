@@ -21,7 +21,7 @@ LXC_IP="$4"
 GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
-GEO_STABLE_HASH="1c65c9b"
+GEO_STABLE_HASH="aa5932d"
 
 geonode_setup_env()
 {
@@ -155,7 +155,7 @@ fi
 ## install engine
 sudo apt-get install -y software-properties-common
 # sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
-sudo add-apt-repository -y ppa:openquake/release-2.8
+sudo add-apt-repository -y ppa:openquake/release-3.0
 sudo apt-get update
 sudo apt-get install -y --force-yes python-oq-engine
 
