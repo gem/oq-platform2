@@ -505,6 +505,15 @@ div#search-inp:after {
     font-size:18px;
     font-style:italic;
 }
+.modal-dialog {
+    width: 500px;
+    margin: 60px auto;
+}
+.form-signin {
+    max-width: 500px;
+    padding: 15px;
+    margin: 0 auto;
+}        
 
 /*mobile*/
 @media (max-width: 991px) {
