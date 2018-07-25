@@ -3,7 +3,7 @@ import json
 from django.core.management.base import BaseCommand
 from geonode.documents.models import Document
 from geonode.layers.models import Layer, Style
-from geonode.maps.models import Map
+from geonode.maps.models import Map, MapLayer
 from geonode.base.models import TopicCategory, Region, License
 from geonode.base.models import HierarchicalKeyword
 from geonode.base.models import ResourceBase, TaggedContentItem
@@ -72,13 +72,12 @@ class Command(BaseCommand):
         maps_load = json.loads(maps_json)
 
         # Read maplayer json
-        # maplayer_name = (
-        #     os.path.join(
-        #         os.path.expanduser("~"),
-        #         'oq-platform2/openquakeplatform/dump/'
-        #         'maps_maplayer.json'))
-        # maplayer_json = open(maplayer_name).read()
-        # maplayer_load = json.loads(maplayer_json)
+        maplayer_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-platform2/openquakeplatform/dump/maps_maplayer.json'))
+        maplayer_json = open(maplayer_name).read()
+        maplayer_load = json.loads(maplayer_json)
 
         # ResourceBase json with pk equal pk of documents json
         new_resources = {}
@@ -176,10 +175,108 @@ class Command(BaseCommand):
                 sld_title=sld_title, sld_body=sld_body, workspace=workspace)
             new_style.save()
 
+        # Import maps
+        map_old_refs = {}
+        for map_full in maps_load:
+
+            maps = map_full['fields']
+            mapp = new_resources[map_full['pk']]
+
+            # if (mapp['title'] == 'Global Historic Catalogue'):
+            #     continue
+
+            # Istance user
+            User = get_user_model()
+            owner = User.objects.get(username=mapp['owner'][0])
+
+            # Istance category
+            category_id = mapp['category']
+            if category_id is not None:
+                cat = TopicCategory.objects.get(id=category_id)
+            else:
+                cat = None
+
+            # Istance license
+            license_id = mapp['license']
+            if license_id is not None:
+                license = License.objects.get(id=license_id)
+            else:
+                license = None
+
+            # Save maps
+            newmap = Map.objects.model(
+                uuid=mapp['uuid'],
+                projection=maps['projection'],
+                title_en=mapp['title'],
+                zoom=maps['zoom'],
+                last_modified=maps['last_modified'],
+                center_x=maps['center_x'],
+                center_y=maps['center_y'],
+                owner=owner,
+                abstract=mapp['abstract'],
+                purpose=mapp['purpose'],
+                category=cat,
+                license=license,
+                edition=mapp['edition'],
+                supplemental_information=mapp['supplemental_information'],
+                popular_count=maps['popular_count'],
+                share_count=maps['share_count']
+                )
+            newmap.save()
+            map_old_refs[map_full['pk']] = newmap
+
+            # Istance and add regions
+            regions = [region for region in mapp['regions']]
+
+            for reg in regions:
+                # Search in old region json
+                for region in region_load:
+                    field = region['fields']
+                    if region['pk'] == reg:
+                        name = field['name']
+                    else:
+                        continue
+                # Add region to each document
+                Reg = Region.objects.get(name=name)
+                newmap.regions.add(Reg)
+
+            print('Imported map: %s' % mapp['title'])
+
+        # Import maplayers
+        for maplayer_full in maplayer_load:
+
+            mapslayer = maplayer_full['fields']
+            map_id = map_old_refs[mapslayer['map']].pk
+
+            # Istance Map
+            if map_id is not None:
+                map_id = Map.objects.get(id=map_id)
+            else:
+                map_id = None
+
+            # Save mapslayer
+            newmaplayer = MapLayer.objects.model(
+                opacity=mapslayer['opacity'],
+                map=map_id,
+                group=mapslayer['group'],
+                name=mapslayer['name'],
+                format=mapslayer['format'],
+                visibility=mapslayer['visibility'],
+                source_params=mapslayer['source_params'],
+                layer_params=mapslayer['layer_params'],
+                ows_url=mapslayer['ows_url'],
+                stack_order=mapslayer['stack_order'],
+                styles=mapslayer['styles'],
+                fixed=mapslayer['fixed'],
+                local=mapslayer['local'],
+                transparent=mapslayer['transparent']
+                )
+            newmaplayer.save()
+
         # Import documents
         for doc_full in doc_load:
-            doc = doc_full['fields']
 
+            doc = doc_full['fields']
             res = new_resources[doc_full['pk']]
 
             # Istance content_type
@@ -205,6 +302,12 @@ class Command(BaseCommand):
             else:
                 license = None
 
+            object_id = None
+            # associate optional map with document
+            if doc['object_id'] is not None:
+                object_id = map_old_refs[doc['object_id']].pk
+
+            print('Old: %s New Object_id: %s' % (doc['object_id'], object_id))
             # Save documents
             newdoc = Document.objects.model(
                 uuid=res['uuid'],
@@ -214,7 +317,7 @@ class Command(BaseCommand):
                 abstract=res['abstract'],
                 purpose=res['purpose'],
                 doc_file=doc['doc_file'],
-                object_id=doc['object_id'],
+                object_id=object_id,
                 category=cat,
                 license=license,
                 content_type=content_type,
@@ -240,7 +343,7 @@ class Command(BaseCommand):
                 Reg = Region.objects.get(name=name)
                 newdoc.regions.add(Reg)
 
-            print(res['title'])
+            print('Imported document: %s' % res['title'])
 
         # Import layers
         # for layer_full in layer_load:
@@ -314,69 +417,6 @@ class Command(BaseCommand):
         #         newlayer.styles.add(Newstyle)
 
         #     print(layer['name'])
-
-        # Import maps
-        for map_full in maps_load:
-
-            maps = map_full['fields']
-            mapp = new_resources[map_full['pk']]
-
-            # Istance user
-            User = get_user_model()
-            owner = User.objects.get(username=mapp['owner'][0])
-
-            # Istance category
-            category_id = mapp['category']
-            if category_id is not None:
-                cat = TopicCategory.objects.get(id=category_id)
-            else:
-                cat = None
-
-            # Istance license
-            license_id = mapp['license']
-            if license_id is not None:
-                license = License.objects.get(id=license_id)
-            else:
-                license = None
-
-            # Save maps
-            newmap = Map.objects.model(
-                uuid=mapp['uuid'],
-                pk=map_full['pk'],
-                projection=maps['projection'],
-                title_en=mapp['title'],
-                zoom=maps['zoom'],
-                last_modified=maps['last_modified'],
-                center_x=maps['center_x'],
-                center_y=maps['center_y'],
-                owner=owner,
-                abstract=mapp['abstract'],
-                purpose=mapp['purpose'],
-                category=cat,
-                license=license,
-                edition=mapp['edition'],
-                supplemental_information=mapp['supplemental_information'],
-                popular_count=maps['popular_count'],
-                share_count=maps['share_count']
-                )
-            newmap.save()
-
-            # Istance and add regions
-            regions = [region for region in mapp['regions']]
-
-            for reg in regions:
-                # Search in old region json
-                for region in region_load:
-                    field = region['fields']
-                    if region['pk'] == reg:
-                        name = field['name']
-                    else:
-                        continue
-                # Add region to each document
-                Reg = Region.objects.get(name=name)
-                newmap.regions.add(Reg)
-
-            print(mapp['title'])
 
         # Import all tags
         new_tags = {}
