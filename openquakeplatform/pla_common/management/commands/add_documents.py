@@ -2,7 +2,7 @@ import os
 import json
 from django.core.management.base import BaseCommand
 from geonode.documents.models import Document
-from geonode.layers.models import Layer, Style
+from geonode.layers.models import Layer, Style, Attribute
 from geonode.maps.models import Map, MapLayer
 from geonode.base.models import TopicCategory, Region, License
 from geonode.base.models import HierarchicalKeyword
@@ -346,6 +346,7 @@ class Command(BaseCommand):
             print('Imported document: %s' % res['title'])
 
         # Import layers
+        # layer_old_refs = {}
         # for layer_full in layer_load:
 
         #     layer = layer_full['fields']
@@ -393,6 +394,7 @@ class Command(BaseCommand):
         #         storeType=layer['storeType']
         #         )
         #     newlayer.save()
+        #     layer_old_refs[layer_full['pk']] = newlayer
 
         #     # Istance and add regions
         #     regions = [region for region in lay['regions']]
@@ -417,6 +419,32 @@ class Command(BaseCommand):
         #         newlayer.styles.add(Newstyle)
 
         #     print(layer['name'])
+
+        # Import layer attribute
+        for attr in layer_attr_load:
+
+            field = attr['fields']
+            layer_id = layer_old_refs[field['layer']].pk
+
+            new_attr = Attribute.objects.model(
+                count=field['count'],
+                layer=layer_id,
+                description=field['description'],
+                min=field['min'],
+                attribute_label=field['attribute_label'],
+                attribute=field['attribute'],
+                display_order=field['display_order'],
+                unique_values=field['unique_values'],
+                median=field['median'],
+                sum=field['sum'],
+                visible=field['visible'],
+                last_stats_updated=field['last_stats_updated'],
+                stddev=field['stddev'],
+                attribute_type=field['attribute_type'],
+                average=field['average'],
+                max=field['max']
+                )
+            new_attr.save()
 
         # Import all tags
         new_tags = {}
