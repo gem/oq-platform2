@@ -88,8 +88,7 @@ class Command(BaseCommand):
         category_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-private/old_platform_documents/json/'
-                'base_topiccategory.json'))
+                'oq-platform2/openquakeplatform/dump/base_topiccategory.json'))
         category_json = open(category_name).read()
         category_load = json.loads(category_json)
 
@@ -97,7 +96,7 @@ class Command(BaseCommand):
         region_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-private/old_platform_documents/json/base_region.json'))
+                'oq-platform2/openquakeplatform/dump/base_region.json'))
         region_json = open(region_name).read()
         region_load = json.loads(region_json)
 
@@ -105,7 +104,7 @@ class Command(BaseCommand):
         license_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-private/old_platform_documents/json/base_license.json'))
+                'oq-platform2/openquakeplatform/dump/base_license.json'))
         license_json = open(license_name).read()
         license_load = json.loads(license_json)
 
@@ -113,7 +112,7 @@ class Command(BaseCommand):
         tag_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-private/old_platform_documents/json/taggit_tag.json'))
+                'oq-platform2/openquakeplatform/dump/taggit_tag.json'))
         tag_json = open(tag_name).read()
         tag_load = json.loads(tag_json)
         print("tag load: %d" % len(tag_load))
@@ -121,8 +120,8 @@ class Command(BaseCommand):
         tag_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-private/old_platform_documents/'
-                'json/taggit_taggeditem.json'))
+                'oq-platform2/openquakeplatform/dump/'
+                '/taggit_taggeditem.json'))
         tag_json = open(tag_name).read()
         tag_item_load = json.loads(tag_json)
 
