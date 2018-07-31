@@ -346,79 +346,79 @@ class Command(BaseCommand):
             print('Imported document: %s' % res['title'])
 
         # Import layers
-        # layer_old_refs = {}
-        # for layer_full in layer_load:
+        layer_old_refs = {}
+        for layer_full in layer_load:
 
-        #     layer = layer_full['fields']
-        #     lay = new_resources[layer_full['pk']]
+            layer = layer_full['fields']
+            lay = new_resources[layer_full['pk']]
 
-        #     # Istance user
-        #     User = get_user_model()
-        #     owner = User.objects.get(username=lay['owner'][0])
+            # Istance user
+            User = get_user_model()
+            owner = User.objects.get(username=lay['owner'][0])
 
-        #     # Istance category
-        #     category_id = lay['category']
-        #     if category_id is not None:
-        #         cat = TopicCategory.objects.get(id=category_id)
-        #     else:
-        #         cat = None
+            # Istance category
+            category_id = lay['category']
+            if category_id is not None:
+                cat = TopicCategory.objects.get(id=category_id)
+            else:
+                cat = None
 
-        #     # Istance license
-        #     license_id = lay['license']
-        #     if license_id is not None:
-        #         license = License.objects.get(id=license_id)
-        #     else:
-        #         license = None
+            # Istance license
+            license_id = lay['license']
+            if license_id is not None:
+                license = License.objects.get(id=license_id)
+            else:
+                license = None
 
-        #     # Instance default style
-        #     style_id = layer['default_style']
-        #     if style_id is not None:
-        #         default_style = Style.objects.get(id=style_id)
-        #     else:
-        #         default_style = None
+            # Instance default style
+            style_id = layer['default_style']
+            if style_id is not None:
+                default_style = Style.objects.get(id=style_id)
+            else:
+                default_style = None
 
-        #     # Save layers
-        #     newlayer = Layer.objects.model(
-        #         uuid=lay['uuid'],
-        #         owner=owner,
-        #         abstract=lay['abstract'],
-        #         purpose=lay['purpose'],
-        #         name=layer['name'],
-        #         title_en=layer['name'],
-        #         category=cat,
-        #         license=license,
-        #         typename=layer['typename'],
-        #         store=layer['store'],
-        #         workspace=layer['workspace'],
-        #         default_style=default_style,
-        #         storeType=layer['storeType']
-        #         )
-        #     newlayer.save()
-        #     layer_old_refs[layer_full['pk']] = newlayer
+            # Save layers
+            newlayer = Layer.objects.model(
+                uuid=lay['uuid'],
+                owner=owner,
+                abstract=lay['abstract'],
+                purpose=lay['purpose'],
+                name=layer['name'],
+                title_en=layer['name'],
+                category=cat,
+                license=license,
+                typename=layer['typename'],
+                store=layer['store'],
+                workspace=layer['workspace'],
+                default_style=default_style,
+                storeType=layer['storeType']
+                )
+            newlayer.save()
+            layer_old_refs[layer_full['pk']] = newlayer
 
-        #     # Istance and add regions
-        #     regions = [region for region in lay['regions']]
+            # Istance and add regions
+            regions = [region for region in lay['regions']]
 
-        #     for reg in regions:
-        #         # Search in old region json
-        #         for region in region_load:
-        #             field = region['fields']
-        #             if region['pk'] == reg:
-        #                 name = field['name']
-        #             else:
-        #                 continue
-        #         # Add region to each document
-        #         Reg = Region.objects.get(name=name)
-        #         newlayer.regions.add(Reg)
+            for reg in regions:
+                # Search in old region json
+                for region in region_load:
+                    field = region['fields']
+                    if region['pk'] == reg:
+                        name = field['name']
+                    else:
+                        continue
+                # Add region to each document
+                Reg = Region.objects.get(name=name)
+                newlayer.regions.add(Reg)
 
-        #     # Instance and add styles
-        #     style = [style for style in layer['styles']]
+            # Instance and add styles
+            style = [style for style in layer['styles']]
 
-        #     for sty in style:
-        #         Newstyle = Style.objects.get(id=sty)
-        #         newlayer.styles.add(Newstyle)
+            for sty in style:
+                Newstyle = Style.objects.get(id=sty)
+                newlayer.styles.add(Newstyle)
 
-        #     print(layer['name'])
+            print(layer['name'])
 
         # Import layer attribute
         for attr in layer_attr_load:
