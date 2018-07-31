@@ -177,7 +177,7 @@ cd ~
 # Create a symbolic link in your virtualenv
 ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
-## clone and setting pythonpath taxtweb, ipt, oq-platform2 and oq-private
+## clone and setting pythonpath taxtweb, ipt, oq-platform2
 cd ~
 
 for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
@@ -187,9 +187,6 @@ done
 
 ## Setup environment
 geonode_setup_env
-
-## Clone oq-private
-git clone git@gitlab.openquake.org:openquake/oq-private.git
 
 ## Sync and setup GeoNode
 cd ~/geonode
