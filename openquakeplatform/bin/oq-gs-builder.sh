@@ -932,6 +932,22 @@ all_data_restore () {
     RESTDIR="$1"
     ret=0
 
+    geofence_rule_ids="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" "${RESTDIR}/geofence/rules.xml")"
+    echo "Geofence rule ids $geofence_rule_ids"
+    # exit 123
+    read -p "checkpoint" aeiou
+    for geofence_rule_id in $geofence_rule_ids; do
+        role_geofence_restore "$geofence_rule_id"
+        ret=$?
+        if [ $ret -ne 0 ]; then
+            break
+        fi
+    done
+
+    if [ $ret -ne 0 ]; then
+        return "$ret"
+    fi
+
     echo "Styles"
 
     st_list="$(ls ${RESTDIR}/styles/*.xml 2>/dev/null)" || true
@@ -947,7 +963,8 @@ all_data_restore () {
     if [ $ret -ne 0 ]; then
         return "$ret"
     fi
-    defa_name="$(xmlstarlet sel -t -m "/workspace" -v "concat(name, '$NL')" "${RESTDIR}/workspaces_default.xml")" || true
+
+#   defa_name="$(xmlstarlet sel -t -m "/workspace" -v "concat(name, '$NL')" "${RESTDIR}/workspaces_default.xml")" || true
     ws_list="$(ls ${RESTDIR}/workspaces/*.xml 2>/dev/null)" || true
     for iter in 1 2; do
         for ws in $ws_list; do
@@ -998,14 +1015,14 @@ all_data_restore () {
     done
 #    set +x
 
-    geofence_rule_ids="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" "${RESTDIR}/geofence/rules.xml")"
-    for geofence_rule_id in $geofence_rule_ids; do
-        role_geofence_restore "$geofence_rule_id"
-        ret=$?
-        if [ $ret -ne 0 ]; then
-            break
-        fi
-    done
+#     geofence_rule_ids="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" "${RESTDIR}/geofence/rules.xml")"
+#    for geofence_rule_id in $geofence_rule_ids; do
+#        role_geofence_restore "$geofence_rule_id"
+#        ret=$?
+#        if [ $ret -ne 0 ]; then
+#            break
+#        fi
+#    done
 #
     IFS="$oldifs"
 
