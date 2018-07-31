@@ -189,7 +189,7 @@ done
 geonode_setup_env
 
 ## Clone oq-private
-git clone git@gitlab.openquake.org:openquake/oq-private.git
+# git clone git@gitlab.openquake.org:openquake/oq-private.git
 
 ## Sync and setup GeoNode
 cd ~/geonode
