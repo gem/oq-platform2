@@ -924,13 +924,37 @@ role_geofence_restore () {
 
 
 all_data_restore () {
-    local ws_list ret oldifs
-
+    local ws_list ret oldifs d f
     oldifs="$IFS"
     IFS="$NL"
 
     RESTDIR="$1"
+    local db_name="$2" db_user="$3" db_pass="$4"
     ret=0
+
+    if [ "$db_name" -o "$db_user" -o "$db_pass" ]; then
+        for d in $(find "$RESTDIR" -type d -name 'datastores'); do
+            for f in "${d}/"*.xml; do
+                # if globbing doesn't match the glob string is kept as is
+                if [[ "$f" =~ .*\*\.xml$ ]] ; then
+                    continue
+                fi
+                if [ "$db_name" ]; then
+                    xmlstarlet ed -O -P -L -u '//connectionParameters/entry[@key="database"]' -v "$db_name" "$f"
+                fi
+                if [ "$db_user" ]; then
+                    xmlstarlet ed -O -P -L -u '//connectionParameters/entry[@key="user"]' -v "$db_user" "$f"
+                fi
+                if [ "$db_pass" ]; then
+                    xmlstarlet ed -O -P -L -u '//connectionParameters/entry[@key="passwd"]' -v "$db_pass" "$f"
+                fi
+            done
+        done
+    fi
+
+    if [ "$GEM_GEONODE_PORT" ]; then
+        sed -i "s@localhost:8000@localhost:$GEM_GEONODE_PORT@g;s@127\.0\.0\.1:8080@127.0.0.1:$GEM_GEOSERVER_PORT@g" $(find "$RESTDIR" -type f -name '*.xml')
+    fi
 
     geofence_rule_ids="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" "${RESTDIR}/geofence/rules.xml")"
     echo "Geofence rule ids $geofence_rule_ids"
@@ -1081,12 +1105,9 @@ geoserver_population () {
         fi
     done
 
-    sed -i "s@#DB_NAME#@$db_name@g;s@#DB_USER#@$db_user@g;s@#DB_PASS#@$db_pass@g" $(find "${dstdir}/build-gs-tree" -name '*.xml')
-    sed -i "s@localhost:8000@localhost:$GEM_GEONODE_PORT@g;s@127\.0\.0\.1:8080@127.0.0.1:$GEM_GEOSERVER_PORT@g" $(find "${dstdir}/build-gs-tree" -name '*.xml')
-
     rm -rf output
     ${bindir}/oq-gs-builder.sh drop
-    ${bindir}/oq-gs-builder.sh restore "${dstdir}/build-gs-tree"
+    ${bindir}/oq-gs-builder.sh restore "${dstdir}/build-gs-tree" "$db_name" "$db_user" "$db_pass"
 
     #
     #  post population
@@ -1120,12 +1141,15 @@ case $act in
         ;;
 
     restore)
-        all_data_restore "$2"
+        shift
+        all_data_restore "$@"
         ;;
+
     populate)
         shift
         geoserver_population "$@"
         ;;
+
     *)
         usage $0
         exit 1
