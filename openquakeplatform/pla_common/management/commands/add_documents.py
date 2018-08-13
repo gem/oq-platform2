@@ -428,7 +428,7 @@ class Command(BaseCommand):
         for attr in layer_attr_load:
 
             field = attr['fields']
-            layer_id = layer_old_refs[field['layer']].pk
+            layer_id = layer_old_refs[field['layer']]
 
             new_attr = Attribute.objects.model(
                 count=field['count'],
