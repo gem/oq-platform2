@@ -243,12 +243,19 @@ cp $HOME/oq-private/old_platform_documents/documents/* $HOME/geonode/geonode/upl
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
 
 ## populate geoserver data infrastructure
-cd ~/oq-platform2
-$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
+# cd ~/oq-platform2
+# $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
+# 
+# ## Update layers from Geoserver to geonode
+# cd ~/geonode
+# python manage.py updatelayers -u GEM
 
-## Update layers from Geoserver to geonode
+$HOME/$GIT_REPO/openquakeplatform/bin
+./oq-gs-builder.sh restore ~/oq-platform2/gs_data/output geonode_dev geonode_dev geonode_dev
 cd ~/geonode
-python manage.py updatelayers -u GEM
+python manage.py add_documents
+
+python manage.py updatelayers
 
 # Create programmatically ISC and GHEC json
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
