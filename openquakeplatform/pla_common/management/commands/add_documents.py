@@ -120,7 +120,7 @@ class Command(BaseCommand):
                 'taggit_tag.json'))
         tag_json = open(tag_name).read()
         tag_load = json.loads(tag_json)
-        print("tag load: %d" % len(tag_load))
+        # print("tag load: %d" % len(tag_load))
 
         tag_name = (
             os.path.join(
@@ -311,7 +311,7 @@ class Command(BaseCommand):
             if doc['object_id'] is not None:
                 object_id = map_old_refs[doc['object_id']].pk
 
-            print('Old: %s New Object_id: %s' % (doc['object_id'], object_id))
+            # print('Old %s New Object_id: %s' % (doc['object_id'], object_id))
             # Save documents
             newdoc = Document.objects.model(
                 uuid=res['uuid'],
@@ -422,7 +422,7 @@ class Command(BaseCommand):
                 Newstyle = Style.objects.get(id=sty)
                 newlayer.styles.add(Newstyle)
 
-            print(layer['name'])
+            print('Imported layer: %s' % layer['name'])
 
         # Import layer attribute
         for attr in layer_attr_load:
