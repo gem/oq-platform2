@@ -250,8 +250,9 @@ python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccat
 # cd ~/geonode
 # python manage.py updatelayers -u GEM
 
-$HOME/$GIT_REPO/openquakeplatform/bin
+cd $HOME/$GIT_REPO/openquakeplatform/bin
 ./oq-gs-builder.sh restore ~/oq-platform2/gs_data/output geonode_dev geonode_dev geonode_dev
+
 cd ~/geonode
 python manage.py add_documents
 
