@@ -235,7 +235,6 @@ python ./manage.py create_gem_user
 ## Add other users
 python ./manage.py add_user $HOME/oq-platform2/openquakeplatform/common/gs_data/dump/auth_user.json
 
-
 ## Add Gem category
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
 
@@ -251,12 +250,12 @@ cd $HOME/$GIT_REPO/openquakeplatform/bin
 ./oq-gs-builder.sh restore ~/oq-platform2/gs_data/output geonode_dev geonode_dev geonode_dev
 
 ## Add old documents
+mkdir $HOME/geonode/geonode/uploaded/documents/
 cd ~/geonode
 python ./manage.py add_documents
-mkdir $HOME/geonode/geonode/uploaded/documents/
 cp $HOME/oq-platform2/openquakeplatform/common/gs_data/documents/* $HOME/geonode/geonode/uploaded/documents/
 
-python manage.py updatelayers
+python ./manage.py updatelayers
 
 # Create programmatically ISC and GHEC json
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
