@@ -246,6 +246,7 @@ python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccat
 # python manage.py updatelayers -u GEM
 
 cd $HOME/$GIT_REPO/openquakeplatform/bin
+./oq-gs-builder.sh drop
 ./oq-gs-builder.sh restore ~/oq-platform2/gs_data/output geonode_dev geonode_dev geonode_dev
 
 ## Add old documents
