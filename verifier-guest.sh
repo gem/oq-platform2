@@ -223,6 +223,7 @@ python ./manage.py vuln_groups_create
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
 pip install simplejson==2.0.9
 
+ME/oq-platform2/openquakeplatform/common/gs_data/documents/* $HOME/geonode/geonode/uploaded/documents/
 ## load data for gec and isc viewer
 python ./manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
 
@@ -234,10 +235,6 @@ python ./manage.py create_gem_user
 ## Add other users
 python ./manage.py add_user $HOME/oq-platform2/openquakeplatform/common/gs_data/dump/auth_user.json
 
-## Add old documents
-python ./manage.py add_documents
-mkdir $HOME/geonode/geonode/uploaded/documents/
-cp $HOME/oq-private/old_platform_documents/documents/* $HOME/geonode/geonode/uploaded/documents/
 
 ## Add Gem category
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
@@ -253,8 +250,11 @@ python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccat
 cd $HOME/$GIT_REPO/openquakeplatform/bin
 ./oq-gs-builder.sh restore ~/oq-platform2/gs_data/output geonode_dev geonode_dev geonode_dev
 
+## Add old documents
 cd ~/geonode
-python manage.py add_documents
+python ./manage.py add_documents
+mkdir $HOME/geonode/geonode/uploaded/documents/
+cp $HOME/oq-platform2/openquakeplatform/common/gs_data/documents/* $HOME/geonode/geonode/uploaded/documents/
 
 python manage.py updatelayers
 
