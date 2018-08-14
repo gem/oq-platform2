@@ -1,0 +1,18 @@
+<layer>
+  <name>qgis_irmt_0c7902da_535c_4dea_95c5_6a241d78f2bf</name>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <name>qgis_irmt_0c7902da_535c_4dea_95c5_6a241d78f2bf</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/qgis_irmt_0c7902da_535c_4dea_95c5_6a241d78f2bf.xml" type="application/xml"/>
+  </defaultStyle>
+  <resource class="featureType">
+    <name>qgis_irmt_0c7902da_535c_4dea_95c5_6a241d78f2bf</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/workspaces/oqplatform/datastores/datastore/featuretypes/qgis_irmt_0c7902da_535c_4dea_95c5_6a241d78f2bf.xml" type="application/xml"/>
+  </resource>
+  <queryable>true</queryable>
+  <attribution>
+    <title>mjourneay</title>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>

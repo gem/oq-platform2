@@ -1,0 +1,18 @@
+<layer>
+  <name>qgis_irmt_6c0db971_2051_4ae6_9383_6bf5dfd29a5e</name>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <name>qgis_irmt_6c0db971_2051_4ae6_9383_6bf5dfd29a5e</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/qgis_irmt_6c0db971_2051_4ae6_9383_6bf5dfd29a5e.xml" type="application/xml"/>
+  </defaultStyle>
+  <resource class="featureType">
+    <name>qgis_irmt_6c0db971_2051_4ae6_9383_6bf5dfd29a5e</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/workspaces/oqplatform/datastores/datastore/featuretypes/qgis_irmt_6c0db971_2051_4ae6_9383_6bf5dfd29a5e.xml" type="application/xml"/>
+  </resource>
+  <queryable>true</queryable>
+  <attribution>
+    <title>dvigano</title>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>

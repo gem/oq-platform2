@@ -1,0 +1,18 @@
+<layer>
+  <name>himalayanfrontalthrust_20_06_14</name>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <name>himalayanfrontalthrust_20_06_14</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/himalayanfrontalthrust_20_06_14.xml" type="application/xml"/>
+  </defaultStyle>
+  <resource class="featureType">
+    <name>himalayanfrontalthrust_20_06_14</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/workspaces/oqplatform/datastores/datastore/featuretypes/himalayanfrontalthrust_20_06_14.xml" type="application/xml"/>
+  </resource>
+  <queryable>true</queryable>
+  <attribution>
+    <title>marco.pagani</title>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>

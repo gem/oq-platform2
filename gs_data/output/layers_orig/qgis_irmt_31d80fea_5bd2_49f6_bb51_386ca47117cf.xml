@@ -1,0 +1,18 @@
+<layer>
+  <name>qgis_irmt_31d80fea_5bd2_49f6_bb51_386ca47117cf</name>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <name>qgis_irmt_31d80fea_5bd2_49f6_bb51_386ca47117cf</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/qgis_irmt_31d80fea_5bd2_49f6_bb51_386ca47117cf.xml" type="application/xml"/>
+  </defaultStyle>
+  <resource class="featureType">
+    <name>qgis_irmt_31d80fea_5bd2_49f6_bb51_386ca47117cf</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/workspaces/oqplatform/datastores/datastore/featuretypes/qgis_irmt_31d80fea_5bd2_49f6_bb51_386ca47117cf.xml" type="application/xml"/>
+  </resource>
+  <queryable>true</queryable>
+  <attribution>
+    <title>MTOQUICA</title>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>

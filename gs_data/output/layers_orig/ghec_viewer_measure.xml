@@ -1,0 +1,24 @@
+<layer>
+  <name>ghec_viewer_measure</name>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <name>ghec_viewer_measure</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/ghec_viewer_measure.xml" type="application/xml"/>
+  </defaultStyle>
+  <styles class="linked-hash-set">
+    <style>
+      <name>ghec_viewer_measure_c84285c6</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/ghec_viewer_measure_c84285c6.xml" type="application/xml"/>
+    </style>
+  </styles>
+  <resource class="featureType">
+    <name>ghec_viewer_measure</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/workspaces/oqplatform/datastores/oqplatform/featuretypes/ghec_viewer_measure.xml" type="application/xml"/>
+  </resource>
+  <queryable>true</queryable>
+  <attribution>
+    <title>GEM</title>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>

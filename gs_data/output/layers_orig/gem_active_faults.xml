@@ -1,0 +1,18 @@
+<layer>
+  <name>gem_active_faults</name>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <name>gem_active_faults</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/gem_active_faults.xml" type="application/xml"/>
+  </defaultStyle>
+  <resource class="featureType">
+    <name>gem_active_faults</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/workspaces/oqplatform/datastores/datastore/featuretypes/gem_active_faults.xml" type="application/xml"/>
+  </resource>
+  <queryable>true</queryable>
+  <attribution>
+    <title>pslh</title>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>
