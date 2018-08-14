@@ -223,7 +223,6 @@ python ./manage.py vuln_groups_create
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
 pip install simplejson==2.0.9
 
-cp $HOME/oq-platform2/openquakeplatform/common/gs_data/documents/* $HOME/geonode/geonode/uploaded/documents/
 ## load data for gec and isc viewer
 python ./manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
 
