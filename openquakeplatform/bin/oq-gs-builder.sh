@@ -959,7 +959,7 @@ all_data_restore () {
     geofence_rule_ids="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" "${RESTDIR}/geofence/rules.xml")"
     echo "Geofence rule ids $geofence_rule_ids"
     # exit 123
-    read -p "checkpoint" aeiou
+    # read -p "checkpoint" aeiou
     for geofence_rule_id in $geofence_rule_ids; do
         role_geofence_restore "$geofence_rule_id"
         ret=$?
