@@ -253,7 +253,7 @@ cd $HOME/$GIT_REPO/openquakeplatform/bin
 # mkdir $HOME/geonode/geonode/uploaded/documents/
 cd ~/geonode
 # python ./manage.py add_documents
-cp -r $HOME/oq-platform2/openquakeplatform/common/gs_data/documents/* $HOME/geonode/geonode/uploaded/documents/
+cp -r $HOME/oq-platform2/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
 
 python ./manage.py updatelayers
 
