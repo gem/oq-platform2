@@ -238,16 +238,16 @@ python ./manage.py add_user $HOME/oq-platform2/openquakeplatform/common/gs_data/
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
 
 ## populate geoserver data infrastructure
-# cd ~/oq-platform2
-# $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
+cd ~/oq-platform2
+$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
 # 
 # ## Update layers from Geoserver to geonode
-# cd ~/geonode
-# python manage.py updatelayers -u GEM
+cd ~/geonode
+python manage.py updatelayers -u GEM
 
-# cd $HOME/$GIT_REPO/openquakeplatform/bin
-# ./oq-gs-builder.sh drop
-# ./oq-gs-builder.sh restore ~/oq-platform2/gs_data/output geonode_dev geonode_dev geonode_dev
+cd $HOME/$GIT_REPO/openquakeplatform/bin
+./oq-gs-builder.sh drop
+./oq-gs-builder.sh restore ~/oq-platform2/gs_data/output geonode_dev geonode_dev geonode_dev
 
 ## Add old documents
 # mkdir $HOME/geonode/geonode/uploaded/documents/
