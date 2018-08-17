@@ -259,6 +259,12 @@ cp -r $HOME/oq-platform2/openquakeplatform/common/gs_data/documents $HOME/geonod
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
 python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
 
+cd ~/geonode
+paver stop_geoserver
+paver start_geoserver
+
+python ./manage.py updatelayers
+
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
@@ -274,13 +280,18 @@ fi
 
 ## Stop Geonode
 cd ~/geonode
-paver -f $HOME/$GIT_REPO/pavement.py stop
+# paver stop_geoserver
+# paver start_geoserver
+# 
+# python ./manage.py updatelayers
 
-python manage.py migrate account --noinput
-paver -f $HOME/$GIT_REPO/pavement.py sync
-paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
-
-python ./manage.py updatelayers
+# paver -f $HOME/$GIT_REPO/pavement.py stop
+# 
+# python manage.py migrate account --noinput
+# paver -f $HOME/$GIT_REPO/pavement.py sync
+# paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
+# 
+# python ./manage.py updatelayers
 
 sudo supervisorctl stop openquake-webui
 paver -f $HOME/$GIT_REPO/pavement.py stop
