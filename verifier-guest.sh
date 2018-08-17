@@ -255,11 +255,12 @@ cd ~/geonode
 python ./manage.py add_documents
 cp -r $HOME/oq-platform2/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
 
-# python ./manage.py updatelayers
-
 # Create programmatically ISC and GHEC json
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
 python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
+
+
+python ./manage.py updatelayers
 
 cd ~/ 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
