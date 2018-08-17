@@ -255,7 +255,7 @@ cd ~/geonode
 python ./manage.py add_documents
 cp -r $HOME/oq-platform2/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
 
-python ./manage.py updatelayers
+# python ./manage.py updatelayers
 
 # Create programmatically ISC and GHEC json
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
