@@ -277,11 +277,11 @@ cd ~/geonode
 
 paver -f $HOME/$GIT_REPO/pavement.py stop
  
-python manage.py migrate account --noinput
-paver -f $HOME/$GIT_REPO/pavement.py sync
-paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
-
-python ./manage.py updatelayers
-
-sudo supervisorctl stop openquake-webui
-paver -f $HOME/$GIT_REPO/pavement.py stop
+# python manage.py migrate account --noinput
+# paver -f $HOME/$GIT_REPO/pavement.py sync
+# paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
+# 
+# python ./manage.py updatelayers
+# 
+# sudo supervisorctl stop openquake-webui
+# paver -f $HOME/$GIT_REPO/pavement.py stop
