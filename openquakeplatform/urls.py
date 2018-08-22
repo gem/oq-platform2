@@ -255,4 +255,3 @@ if settings.DEBUG:
                             url(r'^geoserver/',
                                 'openquakeplatform.proxy.geoserver',
                                 name="geoserver"),)
-urlpatterns += geonode.proxy.urls.urlpatterns
