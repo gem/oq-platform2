@@ -7,6 +7,17 @@
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 
+# HOW TO CALL FOR REINSTALL FROM verifier.sh:
+#
+# cp oq-platform2/verifier-guest.sh .
+# export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
+# export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
+# export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
+# export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
+
+# \"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\" \"$notests\"
+
+
 sudo systemctl stop apt-daily.timer
 
 set -o errtrace
@@ -59,7 +70,9 @@ exec_test () {
     tar zxvf "geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     sudo cp geckodriver /usr/local/bin
     pip install -U selenium==${GEM_SELENIUM_VERSION}
-    git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
+    if [ -z "$REINSTALL" ]; then
+        git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
+    fi
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
     
     # cd $GIT_REPO
