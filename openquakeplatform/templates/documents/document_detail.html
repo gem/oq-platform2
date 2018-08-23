@@ -75,7 +75,9 @@
   </div>
 
   <div class="col-md-4">
-
+    <li class="list-group-item">
+          <a href="/documents" class="btn btn-default btn-md btn-block oq-button-undo"><i class="fa fa-undo"></i> {% trans "All documents" %}</a>     
+    </li> 
     <li class="list-group-item">
         <a href="{% url "document_metadata_detail" resource.id %}">
             <button class="btn btn-primary btn-md btn-block">{% trans "Metadata Detail" %}</button>
