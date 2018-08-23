@@ -293,6 +293,8 @@ $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatfo
 # 
 # ## Update layers from Geoserver to geonode
 cd ~/geonode
+python manage.py makemigrations
+python manage.py migrate
 python manage.py updatelayers -u GEM
 
 cd $HOME/$GIT_REPO/openquakeplatform/bin
