@@ -192,6 +192,10 @@ if [ -z "$REINSTALL" ]; then
         git checkout "$GEO_STABLE_HASH"
         cd ..
     fi
+else
+    cd geonode
+    git clean -dfx
+    cd -
 fi
 
 ## install engine
