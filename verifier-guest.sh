@@ -7,6 +7,17 @@
 # by the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 
+# HOW TO CALL FOR REINSTALL FROM verifier.sh:
+#
+# cp oq-platform2/verifier-guest.sh .
+# export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
+# export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
+# export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
+# export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
+
+# \"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\" \"$notests\"
+
+
 sudo systemctl stop apt-daily.timer
 
 set -o errtrace
@@ -14,6 +25,11 @@ set -o errtrace
 #display each command before executing it
 . .gem_init.sh
 
+REINSTALL=
+if [ "$1"  = "-r" -o "$1" = "--reinstall" ]; then
+    REINSTALL=true
+    shift
+fi
 GIT_BRANCH="$1"
 GIT_GEO_REPO="$2"
 GIT_REPO="$3"
@@ -54,7 +70,9 @@ exec_test () {
     tar zxvf "geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     sudo cp geckodriver /usr/local/bin
     pip install -U selenium==${GEM_SELENIUM_VERSION}
-    git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
+    if [ -z "$REINSTALL" ]; then
+        git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
+    fi
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
     
     # cd $GIT_REPO
@@ -100,10 +118,27 @@ sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openj
 # Used a local clone (see verifier.sh)
 # git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git
 
-## Check if exist and  create the virtualenv
-if [ ! -f ~/env/bin/activate ]; then
-    virtualenv ~/env
+# if reinstall try to turn off all running daemon
+if [ "$REINSTALL" ]; then
+    if [ -f ~/env/bin/activate -a -f ~/oq-platform2/pavement.py -a -d ~/geonode ]; then
+        . ~/env/bin/activate
+        cd ~/geonode
+        sudo supervisorctl stop openquake-webui || true
+        paver -f ~/oq-platform2/pavement.py stop || true
+        deactivate
+    else
+        echo "Reinstall required but ~/env/bin/activate, ~/oq-platform2/pavement.py or ~/geonode doesn't exists"
+        read -p "Press Enter to continue or Ctrl+C to interrupt the installation"
+    fi
 fi
+
+
+## Check if exist and  create the virtualenv
+if [ -d ~/env ]; then
+    rm -rf ~/env
+fi
+virtualenv ~/env
+
 
 source ~/env/bin/activate
 
@@ -116,9 +151,12 @@ cd ~
 
 #install and configuration postgres
 sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor
+if [ "$REINSTALL" ]; then
+    sudo -u postgres dropdb geonode_dev
+    sudo -u postgres dropdb geonode_dev-imports
+fi
 sudo -u postgres createdb geonode_dev
 sudo -u postgres createdb geonode_dev-imports
-
 
 cat << EOF | sudo -u postgres psql
     CREATE USER "$GEO_DBUSER" WITH PASSWORD '$GEO_DBPWD';
@@ -135,7 +173,9 @@ sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON geometry_columns T
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
 
 #insert line in pg_hba.conf postgres
-sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+if ! sudo head -n 1 /etc/postgresql/9.5/main/pg_hba.conf | grep -q "local \+all \+$GEO_DBUSER \+md5"; then
+    sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+fi
 #restart postgres
 sudo service postgresql restart
 
@@ -143,13 +183,19 @@ sudo service postgresql restart
 pip install numpy
 
 ## Clone GeoNode
-if [ "$GEM_TEST_LATEST" = "true" ]; then
-    git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
+if [ -z "$REINSTALL" ]; then
+    if [ "$GEM_TEST_LATEST" = "true" ]; then
+        git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
+    else
+        git clone -n https://github.com/GeoNode/geonode.git
+        cd geonode
+        git checkout "$GEO_STABLE_HASH"
+        cd ..
+    fi
 else
-    git clone -n https://github.com/GeoNode/geonode.git
     cd geonode
-    git checkout "$GEO_STABLE_HASH"
-    cd ..
+    git clean -dfx
+    cd -
 fi
 
 ## install engine
@@ -175,15 +221,17 @@ sudo apt-get install -y python-gdal
 
 cd ~
 # Create a symbolic link in your virtualenv
-ln -s /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
+ln -sf /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/osgeo
 
 ## clone and setting pythonpath taxtweb, ipt, oq-platform2
 cd ~
 
-for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
-# for repo in oq-platform-taxtweb; do
-    if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
-done
+if [ -z "$REINSTALL" ]; then
+    for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
+        # for repo in oq-platform-taxtweb; do
+        if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
+    done
+fi
 
 ## Setup environment
 geonode_setup_env
@@ -204,13 +252,15 @@ paver -f $HOME/$GIT_REPO/pavement.py sync
 paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
 
 ## Symbolic link to solve spatialite warning of Geoserver
-sudo ln -s /usr/lib/x86_64-linux-gnu/libproj.so.9 /usr/lib/x86_64-linux-gnu/libproj.so.0
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libproj.so.9 /usr/lib/x86_64-linux-gnu/libproj.so.0
 
 ## Stop Geoserver before rename postgres jar
 paver stop_geoserver
 
 ## Rename postgres jar in WEB-INF of Geoserver
-mv $HOME/geonode/geoserver/geoserver/WEB-INF/lib/postgresql-9.4.1211.jar $HOME/geonode/geoserver/geoserver/WEB-INF/lib/old_postgresql-9.4.1211.jar
+if [ -f $HOME/geonode/geoserver/geoserver/WEB-INF/lib/postgresql-9.4.1211.jar ]; then
+    mv $HOME/geonode/geoserver/geoserver/WEB-INF/lib/postgresql-9.4.1211.jar $HOME/geonode/geoserver/geoserver/WEB-INF/lib/old_postgresql-9.4.1211.jar
+fi
 
 ## Start Geoserver after rename postgres jar
 paver start_geoserver
