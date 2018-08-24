@@ -11,6 +11,17 @@ from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 
 
+def base_attrs(base):
+    base_new = {}
+    base_new.update(base)
+    base_new['thumbnail_url'] = base['thumbnail']
+    del base_new['thumbnail']
+    del base_new['distribution_description']
+    del base_new['distribution_url']
+    del base_new['regions']
+    return base_new
+
+
 class Command(BaseCommand):
     args = '<documents_document.json>'
     help = ('Import data')
@@ -354,21 +365,21 @@ class Command(BaseCommand):
         for layer_full in layer_load:
 
             layer = layer_full['fields']
-            lay = new_resources[layer_full['pk']]
+            base = new_resources[layer_full['pk']]
 
             # Istance user
             User = get_user_model()
-            owner = User.objects.get(username=lay['owner'][0])
+            owner = User.objects.get(username=base['owner'][0])
 
             # Istance category
-            category_id = lay['category']
+            category_id = base['category']
             if category_id is not None:
                 cat = TopicCategory.objects.get(id=category_id)
             else:
                 cat = None
 
             # Istance license
-            license_id = lay['license']
+            license_id = base['license']
             if license_id is not None:
                 license = License.objects.get(id=license_id)
             else:
@@ -381,27 +392,26 @@ class Command(BaseCommand):
             else:
                 default_style = None
 
-            # Save layers
-            newlayer = Layer.objects.model(
-                uuid=lay['uuid'],
-                owner=owner,
-                abstract=lay['abstract'],
-                purpose=lay['purpose'],
-                name=layer['name'],
-                title_en=layer['name'],
-                category=cat,
-                license=license,
-                typename=layer['typename'],
-                store=layer['store'],
-                workspace=layer['workspace'],
-                default_style=default_style,
-                storeType=layer['storeType']
-                )
+            attrs = base_attrs(base)
+            attrs.update({
+                'owner': owner,
+                'title_en': layer['name'],
+                'category': cat,
+                'license': license,
+                'typename': layer['typename'],
+                'store': layer['store'],
+                'workspace': layer['workspace'],
+                'default_style': default_style,
+                'storeType': layer['storeType']
+            })
+
+            # Save layer
+            newlayer = Layer.objects.model(**attrs)
             newlayer.save()
             layer_old_refs[layer_full['pk']] = newlayer
 
             # Istance and add regions
-            regions = [region for region in lay['regions']]
+            regions = [region for region in base['regions']]
 
             for reg in regions:
                 # Search in old region json
