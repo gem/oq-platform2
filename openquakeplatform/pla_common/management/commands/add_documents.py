@@ -29,6 +29,11 @@ class Command(BaseCommand):
 
     def handle(doc_fname, *args, **options):
 
+        # Delete all layer
+        Layer.objects.all().exclude(
+            title_en='isc_viewer_measure').exclude(
+            title_en='ghec_viewer_measure').delete()
+
         # Read documents json
         doc_fname = (
             os.path.join(
@@ -370,11 +375,6 @@ class Command(BaseCommand):
 
             print('Imported document: %s' % res['title'])
 
-        # Delete all layer
-        Layer.objects.all().exclude(
-            title_en='isc_viewer_measure').exclude(
-            title_en='ghec_viewer_measure').delete()
-
         # Import layers
         layer_old_refs = {}
         for layer_full in layer_load:
@@ -476,17 +476,17 @@ class Command(BaseCommand):
             new_attr.save()
 
         # Import layer rating
-        for rating in layer_rating_load:
-
-            field = rating['fields']
-            layer_id = layer_old_refs[field['layer']]
-
-            new_rating = OverallRating.objects.model(
-                category=field['category'],
-                rating=field['rating'],
-                object_id=layer_id,
-                )
-            new_rating.save()
+#        for rating in layer_rating_load:
+#
+#            field = rating['fields']
+#            layer_id = layer_old_refs[field['layer']]
+#
+#            new_rating = OverallRating.objects.model(
+#                category=field['category'],
+#                rating=field['rating'],
+#                object_id=layer_id,
+#                )
+#            new_rating.save()
 
         # Import all tags
         new_tags = {}
