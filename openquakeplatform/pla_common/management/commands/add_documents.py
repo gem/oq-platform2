@@ -9,6 +9,7 @@ from geonode.base.models import HierarchicalKeyword
 from geonode.base.models import ResourceBase, TaggedContentItem
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
+from agon_ratings.models import OverallRating
 
 
 def base_attrs(base):
@@ -54,6 +55,15 @@ class Command(BaseCommand):
                 'layers_attribute.json'))
         layer_attr_json = open(layer_attr_name).read()
         layer_attr_load = json.loads(layer_attr_json)
+
+        # Read layer rating json
+        layer_rating_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'rating_overallrating.json'))
+        layer_rating_json = open(layer_rating_name).read()
+        layer_rating_load = json.loads(layer_rating_json)
 
         # Read layer json
         layer_name = (
@@ -360,6 +370,11 @@ class Command(BaseCommand):
 
             print('Imported document: %s' % res['title'])
 
+        # Delete all layer
+        Layer.objects.all().exclude(
+            title_en='isc_viewer_measure').exclude(
+            title_en='ghec_viewer_measure').delete()
+
         # Import layers
         layer_old_refs = {}
         for layer_full in layer_load:
@@ -459,6 +474,19 @@ class Command(BaseCommand):
                 max=field['max']
                 )
             new_attr.save()
+
+        # Import layer rating
+        for rating in layer_rating_load:
+
+            field = rating['fields']
+            layer_id = layer_old_refs[field['layer']]
+
+            new_rating = OverallRating.objects.model(
+                category=field['category'],
+                rating=field['rating'],
+                object_id=layer_id,
+                )
+            new_rating.save()
 
         # Import all tags
         new_tags = {}
