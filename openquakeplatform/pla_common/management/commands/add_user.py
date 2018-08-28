@@ -2,7 +2,6 @@ import json
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from geonode.layers.models import Style
 
 
 class Command(BaseCommand):
@@ -56,5 +55,3 @@ class Command(BaseCommand):
                 gem_user.groups.add(UserGroup)
 
             print('%s user created' % username)
-
-            Style.objects.all().delete()
