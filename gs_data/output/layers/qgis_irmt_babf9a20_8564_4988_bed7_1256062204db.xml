@@ -1,0 +1,18 @@
+<layer>
+  <name>qgis_irmt_babf9a20_8564_4988_bed7_1256062204db</name>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <name>qgis_irmt_babf9a20_8564_4988_bed7_1256062204db</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/qgis_irmt_babf9a20_8564_4988_bed7_1256062204db.xml" type="application/xml"/>
+  </defaultStyle>
+  <resource class="featureType">
+    <name>qgis_irmt_babf9a20_8564_4988_bed7_1256062204db</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/workspaces/oqplatform/datastores/datastore/featuretypes/qgis_irmt_babf9a20_8564_4988_bed7_1256062204db.xml" type="application/xml"/>
+  </resource>
+  <queryable>true</queryable>
+  <attribution>
+    <title>christopher.burton</title>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>

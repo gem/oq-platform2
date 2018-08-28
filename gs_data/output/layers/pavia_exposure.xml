@@ -1,0 +1,16 @@
+<layer>
+  <name>pavia_exposure</name>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <name>point</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/point.xml" type="application/xml"/>
+  </defaultStyle>
+  <resource class="featureType">
+    <name>pavia_exposure</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/workspaces/oqplatform/datastores/datastore/featuretypes/pavia_exposure.xml" type="application/xml"/>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>

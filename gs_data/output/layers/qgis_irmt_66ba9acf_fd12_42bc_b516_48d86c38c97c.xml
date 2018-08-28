@@ -1,0 +1,18 @@
+<layer>
+  <name>qgis_irmt_66ba9acf_fd12_42bc_b516_48d86c38c97c</name>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <name>qgis_irmt_66ba9acf_fd12_42bc_b516_48d86c38c97c</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/qgis_irmt_66ba9acf_fd12_42bc_b516_48d86c38c97c.xml" type="application/xml"/>
+  </defaultStyle>
+  <resource class="featureType">
+    <name>qgis_irmt_66ba9acf_fd12_42bc_b516_48d86c38c97c</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/workspaces/oqplatform/datastores/datastore/featuretypes/qgis_irmt_66ba9acf_fd12_42bc_b516_48d86c38c97c.xml" type="application/xml"/>
+  </resource>
+  <queryable>true</queryable>
+  <attribution>
+    <title>Michael</title>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>

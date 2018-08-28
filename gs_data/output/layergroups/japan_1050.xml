@@ -1,0 +1,23 @@
+<layerGroup>
+  <name>japan_1050</name>
+  <mode>SINGLE</mode>
+  <publishables>
+    <published type="layer">
+      <name>gaf_viewer_faulttrace</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/layers/gaf_viewer_faulttrace.xml" type="application/xml"/>
+    </published>
+  </publishables>
+  <styles>
+    <style>
+      <name>gaf_viewer__ns_net_slip_rate</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/gaf_viewer__ns_net_slip_rate.xml" type="application/xml"/>
+    </style>
+  </styles>
+  <bounds>
+    <minx>-180.0</minx>
+    <maxx>180.0</maxx>
+    <miny>-90.0</miny>
+    <maxy>90.0</maxy>
+    <crs>EPSG:4326</crs>
+  </bounds>
+</layerGroup>
