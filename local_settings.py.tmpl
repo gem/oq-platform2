@@ -55,7 +55,7 @@ DATABASES = {
 CACHE_TIME = int(os.getenv('CACHE_TIME', '0'))
 
 GEOSERVER_LOCATION = os.getenv(
-    'GEOSERVER_LOCATION', 'http://%(lxc_ip)s:8080/geoserver/'
+    'GEOSERVER_LOCATION', 'http://localhost:8080/geoserver/'
 )
 
 GEOSERVER_PUBLIC_LOCATION = os.getenv(
