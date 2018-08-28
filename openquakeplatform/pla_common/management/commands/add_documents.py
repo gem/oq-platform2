@@ -9,6 +9,18 @@ from geonode.base.models import HierarchicalKeyword
 from geonode.base.models import ResourceBase, TaggedContentItem
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
+from agon_ratings.models import OverallRating
+
+
+def base_attrs(base):
+    base_new = {}
+    base_new.update(base)
+    base_new['thumbnail_url'] = base['thumbnail']
+    del base_new['thumbnail']
+    del base_new['distribution_description']
+    del base_new['distribution_url']
+    del base_new['regions']
+    return base_new
 
 
 class Command(BaseCommand):
@@ -43,6 +55,15 @@ class Command(BaseCommand):
                 'layers_attribute.json'))
         layer_attr_json = open(layer_attr_name).read()
         layer_attr_load = json.loads(layer_attr_json)
+
+        # Read layer rating json
+        layer_rating_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'rating_overallrating.json'))
+        layer_rating_json = open(layer_rating_name).read()
+        layer_rating_load = json.loads(layer_rating_json)
 
         # Read layer json
         layer_name = (
@@ -130,9 +151,9 @@ class Command(BaseCommand):
         tag_json = open(tag_name).read()
         tag_item_load = json.loads(tag_json)
 
-        # Delete all categories
-        TopicCategory.objects.all().delete()
-
+        # Delete all licenses
+        License.objects.all().delete()
+        old_license_refs = {}
         # Import all licenses
         for license in license_load:
             pk = license['pk']
@@ -143,12 +164,16 @@ class Command(BaseCommand):
             description = lic['description']
 
             new_license = License.objects.model(
-                pk=pk, url=url, license_text_en=license_text, name=name,
+                url=url, license_text_en=license_text, name=name,
                 description=description)
             new_license.save()
-
+            old_license_refs[pk] = new_license
         HierarchicalKeyword.objects.all().delete()
 
+        # Delete all categories
+        TopicCategory.objects.all().delete()
+
+        old_category_refs = {}
         # Import all categories
         for category in category_load:
             field = category['fields']
@@ -159,10 +184,13 @@ class Command(BaseCommand):
             description = field['description']
 
             new_cat = TopicCategory.objects.model(
-                pk=pk, is_choice=is_choice, gn_description=gn_descript,
+                is_choice=is_choice, gn_description=gn_descript,
                 identifier=identifier, description=description)
             new_cat.save()
+            old_category_refs[pk] = new_cat
 
+        Style.objects.all().delete()
+        old_style_refs = {}
         # Import all styles
         for style in layer_style_load:
             pk = style['pk']
@@ -175,9 +203,10 @@ class Command(BaseCommand):
             workspace = field['workspace']
 
             new_style = Style.objects.model(
-                pk=pk, name=name, sld_url=sld_url, sld_version=sld_version,
+                name=name, sld_url=sld_url, sld_version=sld_version,
                 sld_title=sld_title, sld_body=sld_body, workspace=workspace)
             new_style.save()
+            old_style_refs[pk] = new_style
 
         # Import maps
         map_old_refs = {}
@@ -193,20 +222,6 @@ class Command(BaseCommand):
             User = get_user_model()
             owner = User.objects.get(username=mapp['owner'][0])
 
-            # Istance category
-            category_id = mapp['category']
-            if category_id is not None:
-                cat = TopicCategory.objects.get(id=category_id)
-            else:
-                cat = None
-
-            # Istance license
-            license_id = mapp['license']
-            if license_id is not None:
-                license = License.objects.get(id=license_id)
-            else:
-                license = None
-
             # Save maps
             newmap = Map.objects.model(
                 uuid=mapp['uuid'],
@@ -219,8 +234,12 @@ class Command(BaseCommand):
                 owner=owner,
                 abstract=mapp['abstract'],
                 purpose=mapp['purpose'],
-                category=cat,
-                license=license,
+                category=(old_category_refs[mapp['category']]
+                          if mapp['category'] is not None
+                          else None),
+                license=(old_license_refs[mapp['license']]
+                         if mapp['license'] is not None
+                         else None),
                 edition=mapp['edition'],
                 supplemental_information=mapp['supplemental_information'],
                 popular_count=maps['popular_count'],
@@ -296,16 +315,6 @@ class Command(BaseCommand):
             User = get_user_model()
             owner = User.objects.get(username=res['owner'][0])
 
-            # Istance category
-            cat = TopicCategory.objects.get(id=res['category'])
-
-            # Istance license
-            license_id = res['license']
-            if license_id is not None:
-                license = License.objects.get(id=license_id)
-            else:
-                license = None
-
             object_id = None
             # associate optional map with document
             if doc['object_id'] is not None:
@@ -322,8 +331,10 @@ class Command(BaseCommand):
                 purpose=res['purpose'],
                 doc_file=doc['doc_file'],
                 object_id=object_id,
-                category=cat,
-                license=license,
+                category=old_category_refs[res['category']],
+                license=(old_license_refs[res['license']]
+                         if res['license'] is not None
+                         else None),
                 content_type=content_type,
                 edition=res['edition'],
                 supplemental_information=res['supplemental_information'],
@@ -349,59 +360,51 @@ class Command(BaseCommand):
 
             print('Imported document: %s' % res['title'])
 
+        # Delete all layer
+        Layer.objects.all().exclude(
+            title_en='isc_viewer_measure').exclude(
+            title_en='ghec_viewer_measure').delete()
+
         # Import layers
         layer_old_refs = {}
         for layer_full in layer_load:
 
             layer = layer_full['fields']
-            lay = new_resources[layer_full['pk']]
+            base = new_resources[layer_full['pk']]
 
             # Istance user
             User = get_user_model()
-            owner = User.objects.get(username=lay['owner'][0])
-
-            # Istance category
-            category_id = lay['category']
-            if category_id is not None:
-                cat = TopicCategory.objects.get(id=category_id)
-            else:
-                cat = None
-
-            # Istance license
-            license_id = lay['license']
-            if license_id is not None:
-                license = License.objects.get(id=license_id)
-            else:
-                license = None
+            owner = User.objects.get(username=base['owner'][0])
 
             # Instance default style
-            style_id = layer['default_style']
-            if style_id is not None:
-                default_style = Style.objects.get(id=style_id)
-            else:
-                default_style = None
+            default_style = (old_style_refs[layer['default_style']]
+                             if layer['default_style'] is not None
+                             else None)
 
-            # Save layers
-            newlayer = Layer.objects.model(
-                uuid=lay['uuid'],
-                owner=owner,
-                abstract=lay['abstract'],
-                purpose=lay['purpose'],
-                name=layer['name'],
-                title_en=layer['name'],
-                category=cat,
-                license=license,
-                typename=layer['typename'],
-                store=layer['store'],
-                workspace=layer['workspace'],
-                default_style=default_style,
-                storeType=layer['storeType']
-                )
-            newlayer.save()
-            layer_old_refs[layer_full['pk']] = newlayer
+            attrs = base_attrs(base)
+            attrs.update({
+                'owner': owner,
+                'title_en': layer['name'],
+                'category': (old_category_refs[base['category']]
+                             if base['category'] is not None
+                             else None),
+                'license': (old_license_refs[base['license']]
+                            if base['license'] is not None
+                            else None),
+                'typename': layer['typename'],
+                'store': layer['store'],
+                'workspace': layer['workspace'],
+                'default_style': default_style,
+                'storeType': layer['storeType']
+            })
+
+            # Save layer
+            new_layer = Layer.objects.model(**attrs)
+            new_layer.save()
+            layer_old_refs[layer_full['pk']] = new_layer
 
             # Istance and add regions
-            regions = [region for region in lay['regions']]
+            regions = [region for region in base['regions']]
 
             for reg in regions:
                 # Search in old region json
@@ -413,14 +416,11 @@ class Command(BaseCommand):
                         continue
                 # Add region to each document
                 Reg = Region.objects.get(name=name)
-                newlayer.regions.add(Reg)
+                new_layer.regions.add(Reg)
 
             # Instance and add styles
-            style = [style for style in layer['styles']]
-
-            for sty in style:
-                Newstyle = Style.objects.get(id=sty)
-                newlayer.styles.add(Newstyle)
+            for sty in layer['styles']:
+                new_layer.styles.add(old_style_refs[sty])
 
             print('Imported layer: %s' % layer['name'])
 
@@ -449,6 +449,19 @@ class Command(BaseCommand):
                 max=field['max']
                 )
             new_attr.save()
+
+        # Import layer rating
+#        for rating in layer_rating_load:
+#
+#            field = rating['fields']
+#            layer_id = layer_old_refs[field['layer']]
+#
+#            new_rating = OverallRating.objects.model(
+#                category=field['category'],
+#                rating=field['rating'],
+#                object_id=layer_id,
+#                )
+#            new_rating.save()
 
         # Import all tags
         new_tags = {}
