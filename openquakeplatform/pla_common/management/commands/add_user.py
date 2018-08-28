@@ -56,5 +56,3 @@ class Command(BaseCommand):
                 gem_user.groups.add(UserGroup)
 
             print('%s user created' % username)
-
-            Style.objects.all().delete()
