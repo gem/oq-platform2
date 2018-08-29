@@ -287,6 +287,15 @@ python ./manage.py add_user $HOME/oq-platform2/openquakeplatform/common/gs_data/
 ## Add Gem category
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
 
+# cd $HOME/
+$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh drop
+$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh restore ~/oq-platform2/gs_data/output geonode_dev geonode_dev geonode_dev
+
+## Add old documents
+cd ~/geonode
+python ./manage.py add_documents
+cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
+
 ## populate geoserver data infrastructure
 cd ~/oq-platform2
 $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
@@ -296,16 +305,6 @@ cd ~/geonode
 python manage.py makemigrations
 python manage.py migrate
 python manage.py updatelayers -u GEM
-
-cd $HOME/
-$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh drop
-$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh restore ~/oq-platform2/gs_data/output geonode_dev geonode_dev geonode_dev
-
-## Add old documents
-# mkdir $HOME/geonode/geonode/uploaded/documents/
-cd ~/geonode
-python ./manage.py add_documents
-cp -r $HOME/oq-platform2/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
 
 # Create programmatically ISC and GHEC json
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
@@ -328,12 +327,3 @@ fi
 cd ~/geonode
 
 paver -f $HOME/$GIT_REPO/pavement.py stop
- 
-# python manage.py migrate account --noinput
-# paver -f $HOME/$GIT_REPO/pavement.py sync
-# paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
-# 
-# python ./manage.py updatelayers
-# 
-# sudo supervisorctl stop openquake-webui
-# paver -f $HOME/$GIT_REPO/pavement.py stop
