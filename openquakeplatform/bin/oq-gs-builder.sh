@@ -1056,6 +1056,11 @@ all_data_restore () {
 #
 #
 geoserver_population () {
+    APPEND_TREE=""
+    if [ "$1" = "-a" ]; then
+        APPEND_TREE="$2"
+        shift 2
+    fi
     local srcdir="$1" dstdir="$2" bindir="$3"
     local workspace_name_default="$4" datastore_name_default="$5"
     local db_name="$6" db_user="$7" db_pass="$8" gs_datadir="$9"
@@ -1074,6 +1079,9 @@ geoserver_population () {
     featuretypes_dir="workspaces/${workspace_name_default}/datastores/${datastore_name_default}/featuretypes"
     mkdir -p "$dstdir/build-gs-tree/${featuretypes_dir}"
     cp -rn "$srcdir/common/gs_data/"* "$dstdir/build-gs-tree"
+    if [ "$APPEND_TREE" ]; then
+        cp -rn "$APPEND_TREE"/* "${dstdir}/build-gs-tree"
+    fi
     for app in "${gem_app_list[@]}"; do
         workspace_name="$workspace_name_default"
         if [ ! -d "${srcdir}/${app}/gs_data" ]; then

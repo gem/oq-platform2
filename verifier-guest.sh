@@ -154,6 +154,7 @@ sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-script
 if [ "$REINSTALL" ]; then
     sudo -u postgres dropdb geonode_dev
     sudo -u postgres dropdb geonode_dev-imports
+    sudo -u postgres dropuser "$GEO_DBUSER"
 fi
 sudo -u postgres createdb geonode_dev
 sudo -u postgres createdb geonode_dev-imports
@@ -287,20 +288,17 @@ python ./manage.py add_user $HOME/oq-platform2/openquakeplatform/common/gs_data/
 ## Add Gem category
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
 
-# cd $HOME/
-$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh drop
-$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh restore ~/oq-platform2/gs_data/output geonode_dev geonode_dev geonode_dev
-
-## Add old documents
-cd ~/geonode
-python ./manage.py add_documents
-cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
-
 ## populate geoserver data infrastructure
 cd ~/oq-platform2
-$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
+$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a ~/oq-platform2/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
+
 # 
-# ## Update layers from Geoserver to geonode
+## Add old documents
+cd ~/geonode
+cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
+python ./manage.py add_documents
+
+## Update layers from Geoserver to geonode
 cd ~/geonode
 python manage.py makemigrations
 python manage.py migrate
