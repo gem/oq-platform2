@@ -295,6 +295,7 @@ $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a ~/oq-platform
 # 
 ## Add old documents
 cd ~/geonode
+mkdir -p $HOME/geonode/geonode/uploaded/
 cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
 python ./manage.py add_documents
 
