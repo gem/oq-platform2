@@ -10,7 +10,7 @@ from geonode.base.models import ResourceBase, TaggedContentItem
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from agon_ratings.models import OverallRating
-
+from decimal import Decimal
 
 def base_attrs(base):
     base_new = {}
@@ -451,17 +451,31 @@ class Command(BaseCommand):
             new_attr.save()
 
         # Import layer rating
-#        for rating in layer_rating_load:
-#
-#            field = rating['fields']
-#            layer_id = layer_old_refs[field['layer']]
-#
-#            new_rating = OverallRating.objects.model(
-#                category=field['category'],
-#                rating=field['rating'],
-#                object_id=layer_id,
-#                )
-#            new_rating.save()
+        for rating in layer_rating_load:
+
+            field = rating['fields']
+
+            # Istance content_type
+            ctype_name = field['content_type']
+            if ctype_name is not None:
+                r_type = [r_type for r_type in field['content_type']]
+                label_type = r_type[0]
+                cont_type = r_type[1]
+                content_type = ContentType.objects.get(
+                    app_label=label_type, model=cont_type)
+
+            object_id = None
+            if field['object_id'] is not None:
+                object_id = layer_old_refs[field['object_id']].pk
+
+            OverallRating.objects.all().delete()
+            new_rating = OverallRating.objects.model(
+                category=field['category'],
+                rating=Decimal(value=field['rating']),
+                object_id=object_id,
+                content_type=content_type
+                )
+            new_rating.save()
 
         # Import all tags
         new_tags = {}
