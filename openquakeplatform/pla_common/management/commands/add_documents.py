@@ -16,6 +16,7 @@ def base_attrs(base):
     base_new = {}
     base_new.update(base)
     base_new['thumbnail_url'] = base['thumbnail']
+    base_new['title_en'] = base['title']
     del base_new['thumbnail']
     del base_new['distribution_description']
     del base_new['distribution_url']
@@ -384,7 +385,7 @@ class Command(BaseCommand):
             attrs = base_attrs(base)
             attrs.update({
                 'owner': owner,
-                'title_en': layer['name'],
+                'name': layer['name'],
                 'category': (old_category_refs[base['category']]
                              if base['category'] is not None
                              else None),
