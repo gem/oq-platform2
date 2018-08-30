@@ -19,7 +19,7 @@ class Command(BaseCommand):
                                             last_name='Foundation',
                                             organization='Gem Foundation',
                                             city='Pavia (PV)',
-                                            voice='+3903825169865',
+                                            voice='+390000000000',
                                             zipcode='27100',
                                             country='ITA')
 
