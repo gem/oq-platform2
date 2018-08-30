@@ -12,7 +12,7 @@
 <div class="page-header">
   <h2 class="page-title">
       {{ resource.title|default:resource.typename }}
-      {% if resource.owner.username != 'GEM' %}
+      {% if resource.owner.username != 'GEM' and resource.owner.username != 'admin' %}
         <span class="user-contrib">(User Contributed)</span>
       {% endif %}
   </h2>
@@ -221,6 +221,9 @@
   <div class="col-md-4">
 
     <ul class="list-group">
+        <li class="list-group-item">
+            <a href="/layers" class="btn btn-default btn-md btn-block oq-button-undo"><i class="fa fa-undo"></i> {% trans "All Layers" %}</a>
+        </li>
       {% if resource.storeType != "remoteStore" %}
         <li class="list-group-item">
         {% if links or links_download %}

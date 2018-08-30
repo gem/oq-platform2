@@ -28,7 +28,7 @@
 <div class="page-header">
   <h2>
       {{ resource.title }}
-      {% if resource.owner.username != 'GEM' %}
+      {% if resource.owner.username != 'GEM' and resource.owner.username != 'admin' %}
         <span class="user-contrib">(User Contributed)</span>
       {% endif %}
   </h2>

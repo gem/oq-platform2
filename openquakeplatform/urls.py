@@ -52,9 +52,11 @@ sitemaps = {
 urlpatterns = patterns('',
                        # Static pages
                        url(r'^isc_viewer/$', TemplateView.as_view(
-                           template_name="isc_viewer.html"), name='isc_viewer'),
+                           template_name="isc_viewer.html"),
+                           name='isc_viewer'),
                        url(r'^ghec_viewer/$', TemplateView.as_view(
-                           template_name="ghec_viewer.html"), name='ghec_viewer'),
+                           template_name="ghec_viewer.html"),
+                           name='ghec_viewer'),
                        url(r'^/?$',
                            TemplateView.as_view(template_name='index.html'),
                            name='home'),
@@ -66,7 +68,9 @@ urlpatterns = patterns('',
                                template_name='developer.html'),
                            name='developer'),
                        url(r'^about/$',
-                           RedirectView.as_view(url='https://www.globalquakemodel.org/oq-getting-started'),
+                           RedirectView.as_view(
+                               url='https://www.'
+                                   'globalquakemodel.org/oq-getting-started'),
                            name='about'),
                        url(r'^explore/$',
                            TemplateView.as_view(template_name='explore.html'),
@@ -244,3 +248,10 @@ urlpatterns += patterns('',
                         (r'^exposure/',
                          include('openquakeplatform.exposure.urls')),
                         )
+# Enable internal geoserver proxy in development mode.
+# In production it must be done by Apache/Nginx, not by Django
+if settings.DEBUG:
+    urlpatterns += patterns('',
+                            url(r'^geoserver/',
+                                'openquakeplatform.proxy.geoserver',
+                                name="geoserver"),)
