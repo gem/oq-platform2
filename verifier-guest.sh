@@ -58,7 +58,7 @@ extra_deps_install() {
 }
 
 #function complete procedure for tests
-exec_test () {   
+exec_test () {
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
     sudo apt-get -y install python-pip wget
     pip install --upgrade pip
@@ -74,7 +74,7 @@ exec_test () {
         git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
     fi
     cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
-    
+
     # cd $GIT_REPO
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
 
@@ -292,7 +292,7 @@ python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccat
 cd ~/oq-platform2
 $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a ~/oq-platform2/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
 
-# 
+#
 ## Add old documents
 cd ~/geonode
 mkdir -p $HOME/geonode/geonode/uploaded/
@@ -309,14 +309,14 @@ python manage.py updatelayers -u GEM
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
 python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
 
-cd ~/ 
+cd ~/
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
 fi
 
 if [ "$GEM_TEST_LATEST" = "true" ]; then
     # pip freeze > ~/latest_requirements.txt
-    $HOME/$GIT_REPO/create_gem_requirements.sh > gem_geonode_requirements.txt  
+    $HOME/$GIT_REPO/create_gem_requirements.sh > gem_geonode_requirements.txt
     cd ~/geonode
     git log -1 > ~/latest_geonode_commit.txt
     cd -
@@ -324,5 +324,5 @@ fi
 
 ## Stop Geonode
 cd ~/geonode
-
+sudo supervisorctl stop openquake-webui
 paver -f $HOME/$GIT_REPO/pavement.py stop
