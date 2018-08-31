@@ -1,0 +1,24 @@
+<layer>
+  <name>fallas</name>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <name>fallas</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/fallas.xml" type="application/xml"/>
+  </defaultStyle>
+  <styles class="linked-hash-set">
+    <style>
+      <name>fallas_3bd79836</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/styles/fallas_3bd79836.xml" type="application/xml"/>
+    </style>
+  </styles>
+  <resource class="featureType">
+    <name>fallas</name>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://platform.openquake.org/geoserver/rest/workspaces/oqplatform/datastores/datastore/featuretypes/fallas.xml" type="application/xml"/>
+  </resource>
+  <queryable>true</queryable>
+  <attribution>
+    <title>peruzza</title>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layer>

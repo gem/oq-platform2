@@ -76,6 +76,7 @@ li.oq-right-search {
 }
 .navbar {
     min-height: 40px;
+    z-index: 10000;
 }
 #navbar .nav {
     height: 40px;
@@ -87,9 +88,6 @@ li.oq-right-search {
     background: url(/static/geonode/img/oq-header.png) no-repeat left top;
     background-color: #1b75a5;
     height: 40px;
-}
-.navbar-nav .dropdown-menu {
-    border-top: 1px solid #ccc;
 }
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
     background-color: #1b75a5;
@@ -367,6 +365,7 @@ div#search-inp:after {
     margin-top: 6px;
 }
 .navbar-nav .dropdown-menu {
+    border-top: 1px solid #ccc;
     background-color: #fff;
     margin-top: 15px!important;
 }
@@ -540,25 +539,21 @@ button#toggleProjDefWidgetBtn:hover {
 .accept_terms input {
     width: 100px;
 }
-.col-xs-8.item-details {
-    background: none;
+.user-contrib {
+    font-size:18px;
+    font-style:italic;
 }
-.col-xs-12.profile-avatar:hover,
-.col-xs-12.profile-avatar:focus {
-    background: #eee;
-    border-radius: 4px;
+.modal-dialog {
+    /*width: 500px;*/
+    margin: 60px auto;
 }
-.item-container {
-    padding: 0;
-}
-.list-unstyled li {
-    word-wrap: break-word;
-}
-img#legend_icon {
-    width: 100%;
-}
+.form-signin {
+    max-width: 500px;
+    padding: 15px;
+    margin: 0 auto;
+}        
 
-/* responsive */
+/* mobile */
 @media (max-width: 991px) {
    #wrap,
    #wrap .container {

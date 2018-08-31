@@ -924,13 +924,52 @@ role_geofence_restore () {
 
 
 all_data_restore () {
-    local ws_list ret oldifs
-
+    local ws_list ret oldifs d f
     oldifs="$IFS"
     IFS="$NL"
 
     RESTDIR="$1"
+    local db_name="$2" db_user="$3" db_pass="$4"
     ret=0
+
+    if [ "$db_name" -o "$db_user" -o "$db_pass" ]; then
+        for d in $(find "$RESTDIR" -type d -name 'datastores'); do
+            for f in "${d}/"*.xml; do
+                # if globbing doesn't match the glob string is kept as is
+                if [[ "$f" =~ .*\*\.xml$ ]] ; then
+                    continue
+                fi
+                if [ "$db_name" ]; then
+                    xmlstarlet ed -O -P -L -u '//connectionParameters/entry[@key="database"]' -v "$db_name" "$f"
+                fi
+                if [ "$db_user" ]; then
+                    xmlstarlet ed -O -P -L -u '//connectionParameters/entry[@key="user"]' -v "$db_user" "$f"
+                fi
+                if [ "$db_pass" ]; then
+                    xmlstarlet ed -O -P -L -u '//connectionParameters/entry[@key="passwd"]' -v "$db_pass" "$f"
+                fi
+            done
+        done
+    fi
+
+    if [ "$GEM_GEONODE_PORT" ]; then
+        sed -i "s@localhost:8000@localhost:$GEM_GEONODE_PORT@g;s@127\.0\.0\.1:8080@127.0.0.1:$GEM_GEOSERVER_PORT@g" $(find "$RESTDIR" -type f -name '*.xml')
+    fi
+
+    geofence_rule_ids="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" "${RESTDIR}/geofence/rules.xml")"
+    echo "Geofence rule ids $geofence_rule_ids"
+
+    for geofence_rule_id in $geofence_rule_ids; do
+        role_geofence_restore "$geofence_rule_id"
+        ret=$?
+        if [ $ret -ne 0 ]; then
+            break
+        fi
+    done
+
+    if [ $ret -ne 0 ]; then
+        return "$ret"
+    fi
 
     echo "Styles"
 
@@ -947,6 +986,7 @@ all_data_restore () {
     if [ $ret -ne 0 ]; then
         return "$ret"
     fi
+
     defa_name="$(xmlstarlet sel -t -m "/workspace" -v "concat(name, '$NL')" "${RESTDIR}/workspaces_default.xml")" || true
     ws_list="$(ls ${RESTDIR}/workspaces/*.xml 2>/dev/null)" || true
     for iter in 1 2; do
@@ -996,17 +1036,7 @@ all_data_restore () {
             break
         fi
     done
-#    set +x
 
-    geofence_rule_ids="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" "${RESTDIR}/geofence/rules.xml")"
-    for geofence_rule_id in $geofence_rule_ids; do
-        role_geofence_restore "$geofence_rule_id"
-        ret=$?
-        if [ $ret -ne 0 ]; then
-            break
-        fi
-    done
-#
     IFS="$oldifs"
 
     return $ret
@@ -1015,6 +1045,11 @@ all_data_restore () {
 #
 #
 geoserver_population () {
+    APPEND_TREE=""
+    if [ "$1" = "-a" ]; then
+        APPEND_TREE="$2"
+        shift 2
+    fi
     local srcdir="$1" dstdir="$2" bindir="$3"
     local workspace_name_default="$4" datastore_name_default="$5"
     local db_name="$6" db_user="$7" db_pass="$8" gs_datadir="$9"
@@ -1033,6 +1068,9 @@ geoserver_population () {
     featuretypes_dir="workspaces/${workspace_name_default}/datastores/${datastore_name_default}/featuretypes"
     mkdir -p "$dstdir/build-gs-tree/${featuretypes_dir}"
     cp -rn "$srcdir/common/gs_data/"* "$dstdir/build-gs-tree"
+    if [ "$APPEND_TREE" ]; then
+        cp -rn "$APPEND_TREE"/* "${dstdir}/build-gs-tree"
+    fi
     for app in "${gem_app_list[@]}"; do
         workspace_name="$workspace_name_default"
         if [ ! -d "${srcdir}/${app}/gs_data" ]; then
@@ -1064,12 +1102,9 @@ geoserver_population () {
         fi
     done
 
-    sed -i "s@#DB_NAME#@$db_name@g;s@#DB_USER#@$db_user@g;s@#DB_PASS#@$db_pass@g" $(find "${dstdir}/build-gs-tree" -name '*.xml')
-    sed -i "s@localhost:8000@localhost:$GEM_GEONODE_PORT@g;s@127\.0\.0\.1:8080@127.0.0.1:$GEM_GEOSERVER_PORT@g" $(find "${dstdir}/build-gs-tree" -name '*.xml')
-
     rm -rf output
     ${bindir}/oq-gs-builder.sh drop
-    ${bindir}/oq-gs-builder.sh restore "${dstdir}/build-gs-tree"
+    ${bindir}/oq-gs-builder.sh restore "${dstdir}/build-gs-tree" "$db_name" "$db_user" "$db_pass"
 
     #
     #  post population
@@ -1103,12 +1138,15 @@ case $act in
         ;;
 
     restore)
-        all_data_restore "$2"
+        shift
+        all_data_restore "$@"
         ;;
+
     populate)
         shift
         geoserver_population "$@"
         ;;
+
     *)
         usage $0
         exit 1

@@ -1,0 +1,81 @@
+[
+    {
+        "pk": 47, 
+        "model": "documents.document", 
+        "fields": {
+            "extension": "pdf", 
+            "popular_count": 43, 
+            "object_id": 23, 
+            "regions": [], 
+            "content_type": [
+                "maps", 
+                "map"
+            ], 
+            "doc_file": "documents/GEGD-ISC-GEM-Instrumental-Catalogue-Report-201201-V01.pdf", 
+            "share_count": 0
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "documents.document", 
+        "fields": {
+            "extension": "pdf", 
+            "popular_count": 52, 
+            "object_id": 24, 
+            "regions": [], 
+            "content_type": [
+                "maps", 
+                "map"
+            ], 
+            "doc_file": "documents/GEGD-Historical-Earthquake-Archive-Catalogue-201301-V01.pdf", 
+            "share_count": 0
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "documents.document", 
+        "fields": {
+            "extension": "pdf", 
+            "popular_count": 46, 
+            "object_id": 25, 
+            "regions": [], 
+            "content_type": [
+                "maps", 
+                "map"
+            ], 
+            "doc_file": "documents/Fearth_D3_BulkDbUploads_v1_May2013.pdf", 
+            "share_count": 0
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "documents.document", 
+        "fields": {
+            "extension": "pdf", 
+            "popular_count": 41, 
+            "object_id": 26, 
+            "regions": [], 
+            "content_type": [
+                "maps", 
+                "map"
+            ], 
+            "doc_file": "documents/GEGD-Global_Geodetic_Strain_Rate_Model-201407-V01_4.pdf", 
+            "share_count": 0
+        }
+    },
+    {
+        "pk": 936, 
+        "model": "documents.document", 
+        "fields": {
+            "extension": "zip", 
+            "popular_count": 30, 
+            "object_id": null, 
+            "regions": [
+                10
+            ], 
+            "content_type": null, 
+            "doc_file": "documents/arg-l0-exposure.zip", 
+            "share_count": 0
+        }
+    }
+]

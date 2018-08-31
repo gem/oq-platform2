@@ -50,9 +50,13 @@ DATABASES = {
     }
 }
 
+# Search Snippet Cache Time in Seconds
+CACHE_TIME = int(os.getenv('CACHE_TIME', '0'))
+
 GEOSERVER_LOCATION = os.getenv(
-    'GEOSERVER_LOCATION', 'http://%(lxc_ip)s:8080/geoserver/'
+    'GEOSERVER_LOCATION', 'http://localhost:8080/geoserver/'
 )
+
 GEOSERVER_PUBLIC_LOCATION = os.getenv(
     'GEOSERVER_PUBLIC_LOCATION', 'http://%(lxc_ip)s:8080/geoserver/'
 )
@@ -139,6 +143,7 @@ INSTALLED_APPS += (
     'openquakeplatform.svir',
     'openquakeplatform.ghec_viewer',
     'openquakeplatform.isc_viewer',
+    'openquakeplatform.pla_common',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -175,6 +180,7 @@ AUTH_EXEMPT_URLS = ('/$',
                     '/api/layers/.*',
                     '/api/maps/.*',
                     '/proxy/',
+                    '/uploaded/thumbs/',
                     '/vulnerability',
                     '/vulnerability/intensity_measure_csc?.*',
                     '/vulnerability/engineering_demand_csc?.*',
