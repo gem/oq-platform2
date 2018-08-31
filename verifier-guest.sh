@@ -227,19 +227,12 @@ ln -sf /usr/lib/python2.7/dist-packages/osgeo env/lib/python2.7/site-packages/os
 ## clone and setting pythonpath taxtweb, ipt, oq-platform2
 cd ~
 
-<<<<<<< HEAD
-for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class oq-platform-data; do
-# for repo in oq-platform-taxtweb; do
-    if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
-done
-=======
 if [ -z "$REINSTALL" ]; then
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
         # for repo in oq-platform-taxtweb; do
         if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
     done
 fi
->>>>>>> origin/master
 
 ## Setup environment
 geonode_setup_env
