@@ -1,0 +1,898 @@
+[
+    {
+        "pk": 1, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "global component", 
+            "slug": "global-component"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "catalogue", 
+            "slug": "catalogue"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "GC", 
+            "slug": "gc"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "event", 
+            "slug": "event"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "historical", 
+            "slug": "historical"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "instrumental", 
+            "slug": "instrumental"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "ISC", 
+            "slug": "isc"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "faults", 
+            "slug": "faults"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "strain", 
+            "slug": "strain"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "geodetic", 
+            "slug": "geodetic"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "GEM", 
+            "slug": "gem"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "relocation", 
+            "slug": "relocation"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "instrumental catalogue", 
+            "slug": "instrumental-catalogue"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "depth", 
+            "slug": "depth"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "magnitude", 
+            "slug": "magnitude"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "location", 
+            "slug": "location"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "isc", 
+            "slug": "isc_1"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "earthquake", 
+            "slug": "earthquake"
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "earthquake history", 
+            "slug": "earthquake-history"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "tools", 
+            "slug": "tools"
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "archive", 
+            "slug": "archive"
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "active fault database", 
+            "slug": "active-fault-database"
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "upload", 
+            "slug": "upload"
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "fault source database", 
+            "slug": "fault-source-database"
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "GMPE", 
+            "slug": "gmpe"
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "attenuation", 
+            "slug": "attenuation"
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "ground motion", 
+            "slug": "ground-motion"
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "hazard", 
+            "slug": "hazard"
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "database", 
+            "slug": "database"
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "near-fault effects", 
+            "slug": "near-fault-effects"
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "field-survey", 
+            "slug": "field-survey"
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "remote sensing tools", 
+            "slug": "remote-sensing-tools"
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "spatial inventory data development", 
+            "slug": "spatial-inventory-data-development"
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "homogeneous zones", 
+            "slug": "homogeneous-zones"
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "land-use maps", 
+            "slug": "land-use-maps"
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "mapping schemes", 
+            "slug": "mapping-schemes"
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "mobile tools", 
+            "slug": "mobile-tools"
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "sampling strategy", 
+            "slug": "sampling-strategy"
+        }
+    }, 
+    {
+        "pk": 40, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Inventory\tData\tCapture Tools", 
+            "slug": "inventory-data-capture-tools"
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "SVIR, user-contributed", 
+            "slug": "svir-user-contributed"
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "neotectonic fault", 
+            "slug": "neotectonic-fault"
+        }
+    }, 
+    {
+        "pk": 43, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "neotectonic fold", 
+            "slug": "neotectonic-fold"
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "fault source", 
+            "slug": "fault-source"
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "global", 
+            "slug": "global"
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "component", 
+            "slug": "component"
+        }
+    }, 
+    {
+        "pk": 47, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "download", 
+            "slug": "download"
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "GC global component strain geodetic", 
+            "slug": "gc-global-component-strain-geodetic"
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "data", 
+            "slug": "data"
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "input", 
+            "slug": "input"
+        }
+    }, 
+    {
+        "pk": 51, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "hazard model", 
+            "slug": "hazard-model"
+        }
+    }, 
+    {
+        "pk": 52, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "model", 
+            "slug": "model"
+        }
+    }, 
+    {
+        "pk": 53, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Cuba", 
+            "slug": "cuba"
+        }
+    }, 
+    {
+        "pk": 54, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "South East Asia", 
+            "slug": "south-east-asia"
+        }
+    }, 
+    {
+        "pk": 55, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Europe", 
+            "slug": "europe"
+        }
+    }, 
+    {
+        "pk": 56, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "SHARE", 
+            "slug": "share"
+        }
+    }, 
+    {
+        "pk": 57, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "United States of America", 
+            "slug": "united-states-of-america"
+        }
+    }, 
+    {
+        "pk": 58, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "USGS", 
+            "slug": "usgs"
+        }
+    }, 
+    {
+        "pk": 59, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Taiwan", 
+            "slug": "taiwan"
+        }
+    }, 
+    {
+        "pk": 60, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "TEM", 
+            "slug": "tem"
+        }
+    }, 
+    {
+        "pk": 61, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "SVIR, user-contributed, SVIR_QGIS_Plugin", 
+            "slug": "svir-user-contributed-svir_qgis_plugin"
+        }
+    }, 
+    {
+        "pk": 62, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "SVIR", 
+            "slug": "svir"
+        }
+    }, 
+    {
+        "pk": 63, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "user-contributed", 
+            "slug": "user-contributed"
+        }
+    }, 
+    {
+        "pk": 64, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "SVIR_QGIS_Plugin", 
+            "slug": "svir_qgis_plugin"
+        }
+    }, 
+    {
+        "pk": 65, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "calendar", 
+            "slug": "calendar"
+        }
+    }, 
+    {
+        "pk": 66, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "sun", 
+            "slug": "sun"
+        }
+    }, 
+    {
+        "pk": 67, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "prediction", 
+            "slug": "prediction"
+        }
+    }, 
+    {
+        "pk": 68, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "seismology", 
+            "slug": "seismology"
+        }
+    }, 
+    {
+        "pk": 69, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "planets", 
+            "slug": "planets"
+        }
+    }, 
+    {
+        "pk": 70, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "time", 
+            "slug": "time"
+        }
+    }, 
+    {
+        "pk": 71, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "seismic", 
+            "slug": "seismic"
+        }
+    }, 
+    {
+        "pk": 72, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "earthquakes", 
+            "slug": "earthquakes"
+        }
+    }, 
+    {
+        "pk": 73, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "assessment", 
+            "slug": "assessment"
+        }
+    }, 
+    {
+        "pk": 74, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "risk", 
+            "slug": "risk"
+        }
+    }, 
+    {
+        "pk": 75, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "paleoseismology", 
+            "slug": "paleoseismology"
+        }
+    }, 
+    {
+        "pk": 76, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "earthquake preparedness", 
+            "slug": "earthquake-preparedness"
+        }
+    }, 
+    {
+        "pk": 77, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "neotectonic processes", 
+            "slug": "neotectonic-processes"
+        }
+    }, 
+    {
+        "pk": 78, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "geotechnical", 
+            "slug": "geotechnical"
+        }
+    }, 
+    {
+        "pk": 79, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "geosynthetics", 
+            "slug": "geosynthetics"
+        }
+    }, 
+    {
+        "pk": 80, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "GEM-supplemental-layer", 
+            "slug": "gem-supplemental-layer"
+        }
+    }, 
+    {
+        "pk": 81, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "IRMT_QGIS_Plugin", 
+            "slug": "irmt_qgis_plugin"
+        }
+    }, 
+    {
+        "pk": 82, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Gravimetry", 
+            "slug": "gravimetry"
+        }
+    }, 
+    {
+        "pk": 83, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Aeromagnetism", 
+            "slug": "aeromagnetism"
+        }
+    }, 
+    {
+        "pk": 84, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Geologist", 
+            "slug": "geologist"
+        }
+    }, 
+    {
+        "pk": 85, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "3D Model", 
+            "slug": "3d-model"
+        }
+    }, 
+    {
+        "pk": 86, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "integrated earthquake risk assessment", 
+            "slug": "integrated-earthquake-risk-assessment"
+        }
+    }, 
+    {
+        "pk": 87, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Science-Policy Integration", 
+            "slug": "science-policy-integration"
+        }
+    }, 
+    {
+        "pk": 88, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "DRR Planning", 
+            "slug": "drr-planning"
+        }
+    }, 
+    {
+        "pk": 89, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "buildings", 
+            "slug": "buildings"
+        }
+    }, 
+    {
+        "pk": 90, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "exposure model", 
+            "slug": "exposure-model"
+        }
+    }, 
+    {
+        "pk": 92, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Earthquake", 
+            "slug": "earthquake_1"
+        }
+    }, 
+    {
+        "pk": 94, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Seismology", 
+            "slug": "seismology_1"
+        }
+    }, 
+    {
+        "pk": 95, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Disaster Risk Reduction", 
+            "slug": "disaster-risk-reduction"
+        }
+    }, 
+    {
+        "pk": 96, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Disaster", 
+            "slug": "disaster"
+        }
+    }, 
+    {
+        "pk": 97, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "build", 
+            "slug": "build"
+        }
+    }, 
+    {
+        "pk": 98, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "inventory", 
+            "slug": "inventory"
+        }
+    }, 
+    {
+        "pk": 99, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "accept", 
+            "slug": "accept"
+        }
+    }, 
+    {
+        "pk": 100, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "data analysis", 
+            "slug": "data-analysis"
+        }
+    }, 
+    {
+        "pk": 101, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "scientific computing", 
+            "slug": "scientific-computing"
+        }
+    }, 
+    {
+        "pk": 102, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "machine learning", 
+            "slug": "machine-learning"
+        }
+    }, 
+    {
+        "pk": 103, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "seismic hazard", 
+            "slug": "seismic-hazard"
+        }
+    }, 
+    {
+        "pk": 104, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "seismic risk", 
+            "slug": "seismic-risk"
+        }
+    }, 
+    {
+        "pk": 105, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "vulnerability", 
+            "slug": "vulnerability"
+        }
+    }, 
+    {
+        "pk": 106, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "PSHA", 
+            "slug": "psha"
+        }
+    }, 
+    {
+        "pk": 107, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "ground-motion prediction equations", 
+            "slug": "ground-motion-prediction-equations"
+        }
+    }, 
+    {
+        "pk": 108, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "site effects", 
+            "slug": "site-effects"
+        }
+    }, 
+    {
+        "pk": 109, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "H.Y.J", 
+            "slug": "hyj"
+        }
+    }, 
+    {
+        "pk": 110, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Firm", 
+            "slug": "firm"
+        }
+    }, 
+    {
+        "pk": 111, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Law", 
+            "slug": "law"
+        }
+    }, 
+    {
+        "pk": 112, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "mines", 
+            "slug": "mines"
+        }
+    }, 
+    {
+        "pk": 113, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "barcelona", 
+            "slug": "barcelona"
+        }
+    }, 
+    {
+        "pk": 114, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Civil", 
+            "slug": "civil"
+        }
+    }, 
+    {
+        "pk": 115, 
+        "model": "taggit.tag", 
+        "fields": {
+            "name": "Engineer", 
+            "slug": "engineer"
+        }
+    }
+]

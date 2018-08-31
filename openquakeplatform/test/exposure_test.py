@@ -1,14 +1,19 @@
 #!/usr/bin/env python
-import os
 import unittest
-from openquakeplatform.test import pla
+from openquake.moon import platform_get
+from selenium.webdriver.common.keys import Keys
 
+# path exposure
 url_exp = "/exposure"
+
 
 class ExposureTest(unittest.TestCase):
 
     def load_data_region_test(self):
-        
+
+        pla = platform_get()
+
+        # go to first page
         pla.get(url_exp)
 
         clickldbyreg = pla.xpath_finduniq(
@@ -17,46 +22,29 @@ class ExposureTest(unittest.TestCase):
         clickldbyreg.click()
 
         # click paging
-
-        page25 = pla.xpath_finduniq(
-            "//button/span[normalize-space(text())='25']",
-            100, 1)
-        page25.click()
+        nation = "Algeria"
 
         # click nation
-
-        class_tr = "Angola18"
-
         clicknation = pla.xpath_finduniq(
-            "//table/tbody/tr[contains(@gem_class, '%s')]" % class_tr )     
+            "//table/tbody//td[@class='ng-binding'"
+            " and contains(text(), '%s')]" % nation)
         clicknation.click()
 
-        # click second level nation
-
-        text_td = "Cabinda"
-
-        leveltwo = pla.xpath_finduniq(
-            "//table/tbody//td[contains(text(), '%s')]" % text_td )      
-        leveltwo.click()   
-       
         # click download csv of fractions
-
         downreg = pla.xpath_finduniq(
-            "//button[@id='subDwellingFractionsDownload']"
+            "//button[@id='dwellingFractionsDownload']"
             "/span[normalize-space(text())='Download']",
             100, 1)
         downreg.click()
-        
-        # click download nrml or csv of sub-national
 
+        # click download nrml or csv of sub-national
         downsubnat = pla.xpath_finduniq(
-            "//button[@id='subNationalExposureBldgDownload']"
+            "//button[@id='nationalExposureBldgDownload']"
             "/span[normalize-space(text())='Download']",
             100, 1)
-        downsubnat.click()        
+        downsubnat.click()
 
         # close final windows
-
         close_win_wait_download = pla.xpath_finduniq(
             "//button["
             "../span[normalize-space(text())='Download']"
@@ -64,10 +52,5 @@ class ExposureTest(unittest.TestCase):
             100, 1)
         close_win_wait_download.click()
 
-        close_win_wait_download = pla.xpath_finduniq(
-            "//button["
-            "../span[normalize-space(text())='Study: Cabinda Angola, L1, UN Habitat']"
-            " and @title='close']",
-           100, 1)
-        close_win_wait_download.click()
-
+        # return to first page
+        pla.get(url_exp)

@@ -1,0 +1,19 @@
+#paneltbar {
+    margin-top: 41px;
+}
+.gxp-crumbpanel-header ul,
+.x-panel-noborder .x-panel-tbar-noborder .x-toolbar {
+    border-bottom: 1px solid #dbdbdb;
+}
+ul, ol {
+    margin-bottom: 0px!important;
+}
+.ext-el-mask {
+    background: rgba(0,0,0,1);
+    -webkit-transition: opacity .15s linear;
+    -o-transition: opacity .15s linear;
+    transition: opacity .15s linear;
+}
+ul.x-tab-strip-top {
+    background-color: #eee;
+}

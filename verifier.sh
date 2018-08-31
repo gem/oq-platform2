@@ -115,7 +115,7 @@ else
     ffox_can="\$(echo "\$ffox_pol" | grep '^  Candidate:' | sed 's/.*: //g')"
     if [ "\$ffox_cur" != "\$ffox_can" ]; then
         echo "WARNING: firefox has been upgraded, run it to accomplish update operations"
-        sudo apt-get -y upgrade
+        sudo apt-get -y dist-upgrade
         sudo apt-get -y install wmctrl
         export DISPLAY=:1
         firefox &
@@ -236,6 +236,15 @@ _devtest_innervm_run () {
     repo_id="$GEM_GIT_REPO"
 
     scp verifier-guest.sh "$lxc_ip:"
+
+    if [ -d "_shuttle" ]; then
+        rm -rf _shuttle
+    fi
+    mkdir -p "_shuttle/$GEM_GIT_PACKAGE"
+    git clone . "_shuttle/$GEM_GIT_PACKAGE"
+    git -C "_shuttle/$GEM_GIT_PACKAGE" remote set-url origin "$(git config --get remote.origin.url)"
+    scp -r "_shuttle/$GEM_GIT_PACKAGE" ${lxc_ip}:
+    rm -rf _shuttle
 
     ssh -t  $lxc_ip "
 export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"

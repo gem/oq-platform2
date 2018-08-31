@@ -1,0 +1,58 @@
+[
+    {
+        "pk": 23, 
+        "model": "maps.map", 
+        "fields": {
+            "projection": "EPSG:900913", 
+            "popular_count": 1366, 
+            "zoom": 3, 
+            "regions": [], 
+            "center_x": 0.0, 
+            "center_y": 0.0, 
+            "last_modified": "2014-11-20T14:11:56.646", 
+            "share_count": 0
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "maps.map", 
+        "fields": {
+            "projection": "EPSG:900913", 
+            "popular_count": 892, 
+            "zoom": 3, 
+            "regions": [], 
+            "center_x": 0.0, 
+            "center_y": 0.0, 
+            "last_modified": "2014-11-20T14:12:25.761", 
+            "share_count": 0
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "maps.map", 
+        "fields": {
+            "projection": "EPSG:900913", 
+            "popular_count": 1156, 
+            "zoom": 3, 
+            "regions": [], 
+            "center_x": 0.0, 
+            "center_y": 0.0, 
+            "last_modified": "2014-11-20T14:13:10.249", 
+            "share_count": 0
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "maps.map", 
+        "fields": {
+            "projection": "EPSG:900913", 
+            "popular_count": 956, 
+            "zoom": 3, 
+            "regions": [], 
+            "center_x": 0.0, 
+            "center_y": 0.0, 
+            "last_modified": "2014-12-19T12:23:26.079", 
+            "share_count": 0
+        }
+    }
+]

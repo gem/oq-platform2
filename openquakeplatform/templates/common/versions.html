@@ -1,0 +1,70 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+
+{% block title %} {% trans page_title %} {% endblock title %}
+{% block indexclass %} class="here" {% endblock indexclass %}
+{% block body_class %}bodyclass{% endblock %}
+{% block extra_head %}
+<style>
+  div.versions_content {
+  /* border: 1px solid red; */
+  padding: 16px;
+  width: 75%;
+  float: none;
+  margin: auto;
+  }
+
+  div.versions_subcontent {
+  /* border: 1px solid green; */
+  text-align: right;
+  margin-top: 16px;
+  }
+
+  table.versions_table {
+  /* border: 1px solid #cccccc; */
+  float: right;
+  }
+
+  table.versions_table td {
+  border-bottom: 1px solid #cccccc;
+  padding: 8px;
+  font-size: 16px;
+  text-align: left;
+  }
+
+  table.versions_table td.second {
+  border-left: 1px solid #cccccc;
+  text-align: right;
+  }
+
+  hr.versions {
+  border-color: #cccccc;
+  margin: 32px 0;
+  }
+
+  div.single {
+  padding: 0 8px 0 0;
+  }
+</style>
+{{ block.super }}
+{% endblock %}
+
+{% block middle %}
+<div id="oq-body-heading" class="versions_content jumbotron">
+  <h1>{{page_title}}</h1>
+  <br><br>
+  <h2>Platform</h2>
+  <div class="versions_subcontent single">
+    {{ OQP_VERSION }}
+  </div>
+<hr class="versions">
+  <h2>Applications</h2>
+  <div class="versions_subcontent">
+    <table class="versions_table">
+      {% for app in apps_list %}
+      <tr><td>{{ app.name }}</td><td class="second">{{ app.vers }}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}

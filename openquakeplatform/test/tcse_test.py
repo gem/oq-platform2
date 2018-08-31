@@ -1,15 +1,13 @@
 #!/usr/bin/env python
-import os
 import unittest
-from openquakeplatform.test import pla
-from selenium.webdriver.common.keys import Keys
+from openquake.moon import platform_get
 
 
 class TcseTest(unittest.TestCase):
 
     def calculate_test(self):
 
-        #pla.get('')
+        pla = platform_get()
 
         # calculate
         cal = pla.xpath_finduniq(
@@ -19,11 +17,13 @@ class TcseTest(unittest.TestCase):
 
         pla.wait_new_page(cal, '/calculate', timeout=10)
 
-        #search title page
+        # search title page
         pla.xpath_finduniq(
             "//h1[normalize-space(text())='OpenQuake Calculate']")
 
     def explore_test(self):
+
+        pla = platform_get()
 
         # calculate
         exp = pla.xpath_finduniq(
@@ -33,11 +33,13 @@ class TcseTest(unittest.TestCase):
 
         pla.wait_new_page(exp, '/explore', timeout=10)
 
-        #search title page
+        # search title page
         pla.xpath_finduniq(
             "//h1[normalize-space(text())='OpenQuake Explore']")
 
     def share_test(self):
+
+        pla = platform_get()
 
         # calculate
         sha = pla.xpath_finduniq(
@@ -47,11 +49,13 @@ class TcseTest(unittest.TestCase):
 
         pla.wait_new_page(sha, '/share', timeout=10)
 
-        #search title page
+        # search title page
         pla.xpath_finduniq(
             "//h1[normalize-space(text())='OpenQuake Share']")
 
     def terms_test(self):
+
+        pla = platform_get()
 
         pla.get('')
 
@@ -63,6 +67,6 @@ class TcseTest(unittest.TestCase):
 
         pla.wait_new_page(ter, '/account/terms', timeout=10)
 
-        #search title page
+        # search title page
         pla.xpath_finduniq(
             "//h1[normalize-space(text())='Terms of use']")

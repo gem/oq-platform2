@@ -1,9 +1,9 @@
-import os
-import subprocess
 import openquakeplatform
 
 from django.conf import settings
 from django.http import HttpResponse
+
+from geonode.maps.models import Map
 
 SIGN_IN_REQUIRED = ('You must be signed into the OpenQuake Platform to use '
                     'this feature.')
@@ -31,7 +31,7 @@ def oq_context_processor(request):
     context = {}
 
     context['SITEURL'] = settings.SITEURL
-    # context['OQP_VERSION'] = openquakeplatform.__version__
+    context['OQP_VERSION'] = openquakeplatform.__version__
     context['third_party_urls'] = settings.THIRD_PARTY_URLS
     # BING API key for their maps
     # context['bing_key'] = settings.BING_KEY
@@ -48,6 +48,20 @@ def oq_context_processor(request):
         settings.EXPOSURE_MAX_TOT_GRID_COUNT
     # Google Analytics tracking code
     # context['GOOGLE_UA'] = getattr(settings, 'GOOGLE_UA', False)
+
+    try:
+        isc_map = Map.objects.filter(
+            uuid='ee8019c0-5a77-11e8-af87-00163ec54f0a')
+        context['ISC_MAP_ID'] = isc_map[0].pk
+    except:
+        context['ISC_MAP_ID'] = 23
+
+    try:
+        ghec_map = Map.objects.filter(
+            uuid='6a6737e4-6252-11e8-ae52-e2db80e0bfca')
+        context['GHEC_MAP_ID'] = ghec_map[0].pk
+    except:
+        context['GHEC_MAP_ID'] = 24
 
     return context
 
@@ -75,4 +89,3 @@ def sign_in_required(func):
         else:
             return func(request)
     return wrapped
-

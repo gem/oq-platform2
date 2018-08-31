@@ -1,3 +1,6 @@
+# Custom hided files
+/openquakeplatform/test/config/moon_config.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
