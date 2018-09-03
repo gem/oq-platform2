@@ -818,7 +818,7 @@ function scale(IndicatorObj) {
 function setupMapboxGlMap() {
 
     // Create mapbox map element
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYmVuamFtaW4td3lzcyIsImEiOiJVcm5FdEw4In0.S8HRIEq8NqdtFVz2-BwQog';
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZ2VtZGV2IiwiYSI6ImNqbG1kamlmYTE3MHUzdWxkZWEweHRoeHUifQ.wErApo8meMm031A9a2n26Q';
 
     map = new mapboxgl.Map({
         container: 'map',
