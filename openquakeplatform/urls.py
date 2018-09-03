@@ -122,7 +122,7 @@ urlpatterns = patterns('',
                            TemplateView.as_view(
                                template_name="geodetic.html"),
                            name='geodetic'),
-                       
+
                        # irv
                        url(r'^irv/', include('openquakeplatform.irv.urls')),
 
