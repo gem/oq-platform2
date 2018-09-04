@@ -1508,8 +1508,8 @@ function has_custom_fields(projDef) {
 function getGeoServerLayers() {
     $('#load-project-spinner').show();
     var IRMTLayerNames = [];
-    var url = "/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
-    // var url = "/geoserver/geonode/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
+    var url = "http://'+ window.location.hostname +':8000/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
+
     // Get layers from GeoServer and populate the layer selection menu
 
     $.ajax({
@@ -1864,8 +1864,7 @@ function attributeInfoRequest(selectedLayer) {
     // Get layer attributes from GeoServer
     return $.ajax({
         type: 'get',
-        // url: window.location.hostname +':8080/geoserver/oqplatform/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&outputFormat=application:json',
-        url: 'http://'+ window.location.hostname +':8080/geoserver/oqplatform/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&maxFeatures=50&outputFormat=application%2Fjson',
+        url: 'http://'+ window.location.hostname +':8000/geoserver/oqplatform/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&maxFeatures=50&outputFormat=application%2Fjson',
         success: function(data) {
             projectChange = true;
             // Make a global variable used by the d3-tree chart
