@@ -1,6 +1,8 @@
 .divgrid {
     font-family: Ubuntu, Helvetica, sans-serif;
     font-size: 11px;
+    float: right;
+    position: relative!important;
 }
 .divgrid-row, .divgrid-header, .divgrid-cell {
     height: 18px;
