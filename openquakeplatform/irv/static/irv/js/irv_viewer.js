@@ -1716,8 +1716,14 @@ var startApp = function() {
         // Let's change the button text before toggling the widget
         if (btnText.indexOf('Hide ') >= 0) {  // Change Hide -> Show
             btnText = 'Show ' + btnText.slice(5);
+            $(widgetAndBtn.button).css({
+                'background': '#f7931e'
+            });
         } else {                              // Change Show -> Hide
             btnText = 'Hide ' + btnText.slice(5);
+            $(widgetAndBtn.button).css({
+                'background': '#f05a24'
+            });
         }
         $(widgetAndBtn.button).html(btnText);
         $(widgetAndBtn.widget).toggle();
