@@ -182,3 +182,7 @@ button#saveBtn:hover,
 button#saveBtn:focus {
     background: #f05a24;
 }
+div#project-def-widget,
+div#iri-chart-widget {
+    top: 180px!important;
+}
