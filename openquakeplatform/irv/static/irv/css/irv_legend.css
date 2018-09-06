@@ -65,3 +65,21 @@ optgroup {
     right: 15px;
     top: 125px;
 }
+#layer-list {
+    border-top: 1px solid #000;
+    overflow: auto;
+    height: 95%;
+    display: block;
+    padding: 10px 0;
+}    
+#layer-list div {
+    font-size: 16px;
+}    
+#layer-list div:hover {
+    background: #ccc;
+    color: #fff;
+}
+#layer-list div:hover,
+#layer-list a:hover{
+    text-decoration: none;
+}    
