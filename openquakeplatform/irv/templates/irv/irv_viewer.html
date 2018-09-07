@@ -59,20 +59,15 @@ IRV - {{block.super}}
     <div id="saveState-spinner" >Saving ...<img src="{{ STATIC_URL }}img/ajax-loader.gif" /></div>
   </div>
 
-  <div
-    id="loadProjectDialog"
-    ng-app="HazardMapDropdown"
-    title="Load Project"
-    style="overflow: hidden;">
-      <div id="load-project-spinner" >Loading ...<img src="{{ STATIC_URL }}img/ajax-loader.gif" /></div>
+  <div id="loadProjectDialog" title="Load Project" style="overflow: hidden;">
 
-      Filter the project list:<br><input type="text" ng-model="search">
-      <br><br>
-      <select size="5" id="layer-list" ng-model="selected_map" ng-options="map.name for map in maps | filter:search | orderBy:'name'">
-        <option style="display:none" value="">select a type</option>
-      </select>
+      <!--Filter the project list:<br><input type="text" ng-model="search">
+      <br><br>-->
+      Click on a project to show:
       <br>
-      <input type="button" id="loadProjectBtn" style="display:none" class="btn btn-blue" disabled="disabled" value="Load Selection">
+      <div id="layer-list">
+      <div id="load-project-spinner" >Loading ...<img src="{{ STATIC_URL }}img/ajax-loader.gif" /></div>
+      </div><br>
   </div>
 
   <div id="project-def-widget">
