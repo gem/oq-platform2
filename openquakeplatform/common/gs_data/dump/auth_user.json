@@ -196,5 +196,27 @@
             "email": "lwat054@stanford.edu",
             "date_joined": "2016-01-14T18:13:42.809"
         }
+    },
+    {
+        "pk": 952, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "MTOQUICA", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": true, 
+            "last_login": "2017-09-12T12:46:42.445", 
+            "groups": [
+                [
+                    "vulnerability-editors"
+                ]
+            ], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$Jub0dCnumgRm$qT6CZ+ePgtReLD4Yt9n33qVKOia1wdUdpimk6qg/Tww=", 
+            "email": "miguel.toquica@globalquakemodel.org", 
+            "date_joined": "2015-11-11T13:45:51"
+        }
     }
 ]
