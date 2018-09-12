@@ -818,7 +818,7 @@ function scale(IndicatorObj) {
 function setupMapboxGlMap() {
 
     // Create mapbox map element
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYmVuamFtaW4td3lzcyIsImEiOiJVcm5FdEw4In0.S8HRIEq8NqdtFVz2-BwQog';
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZ2VtZGV2IiwiYSI6ImNqbG1kamlmYTE3MHUzdWxkZWEweHRoeHUifQ.wErApo8meMm031A9a2n26Q';
 
     map = new mapboxgl.Map({
         container: 'map',
@@ -1508,12 +1508,16 @@ function has_custom_fields(projDef) {
 function getGeoServerLayers() {
     $('#load-project-spinner').show();
     var IRMTLayerNames = [];
-    var url = "/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
+    var IRMTLayerTitle = [];
+    var url = "http://"+ window.location.hostname +":8000/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
     // Get layers from GeoServer and populate the layer selection menu
+
     $.ajax({
         url: url,
         contentType: 'application/json',
         success: function(xml) {
+
+
             //convert XML to JSON
             var xmlText = new XMLSerializer().serializeToString(xml);
             var x2js = new X2JS();
@@ -1523,7 +1527,7 @@ function getGeoServerLayers() {
             var featureType = jsonElement.WFS_Capabilities.FeatureTypeList.FeatureType;
 
             // Find the IRMT keywords
-            var stringsToLookFor = ['SVIR_QGIS_Plugin', 'IRMT_QGIS_Plugin'];
+            var stringsToLookFor = ['SVIR', 'IRMT_QGIS_Plugin'];
             // Reload if the api call was incomplete
             if (featureType.length === undefined) {
                 getGeoServerLayers();
@@ -1534,27 +1538,41 @@ function getGeoServerLayers() {
                 for (var j=0; j < stringsToLookFor.length; j++) {
                     stringToLookFor = stringsToLookFor[j];
                     if (featureType[i].Keywords.indexOf(stringToLookFor) > -1) {
-                        IRMTLayerNames.push(featureType[i].Title + " (" + featureType[i].Name + ")");
+                        // IRMTLayerNames.push(featureType[i].Title + " (" + featureType[i].Name + ")");
+                        IRMTLayerNames.push(featureType[i].Name);
+                        IRMTLayerTitle.push(featureType[i].Title);
                         break;
                     }
                 }
             }
 
-            // Create AngularJS dropdown menu
-            var mapScope = angular.element($("#layer-list")).scope();
-            var mapLayerList = [];
-            for (var ij = 0; ij < IRMTLayerNames.length; ij++) {
-                var tempObj = {};
-                tempObj.name = IRMTLayerNames[ij];
-                mapLayerList.push(tempObj);
+            if (IRMTLayerNames.length == 0) {
+		        $('#load-project-spinner').hide();
+		        $('#ajaxErrorDialog').empty();
+		        $('#ajaxErrorDialog').append(
+		            '<p>No layer found.</p>'
+		        );
+		        $('#ajaxErrorDialog').dialog('open');
             }
 
-            mapScope.$apply(function(){
-                mapScope.maps = mapLayerList;
-            });
+            // Create AngularJS dropdown menu
+            var mapLayerList = [];
+            for (var ij = 0; ij < IRMTLayerNames.length; ij++) {
+                var Obj = {};
+                Obj.name = IRMTLayerNames[ij];
+                Obj.title = IRMTLayerTitle[ij];
+
+                $('#layer-list').append('<div id="list' + ij +'">' + Obj.title + '</div>'); 
+
+                $('#list'+ ij).on('click', function () {
+                    window.location = 'http://' + location.hostname + ':8000/irv/' + Obj.name;                     
+                });    
+            }
+
             $('#load-project-spinner').hide();
         },
         error: function() {
+            console.log('error')
             $('#ajaxErrorDialog').empty();
             $('#ajaxErrorDialog').append(
                 '<p>This application was not able to get a list of layers from GeoServer</p>'
@@ -1564,40 +1582,25 @@ function getGeoServerLayers() {
     });
 }
 
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+        $scope.count = 0;
+});
 
-function versionCompare(a, b) {
-    // This version check ignores the patch numbers
-    if (a === undefined) {
-        return -1;
-    }
-
-    var i, cmp, len, re = /(\.0)+[^\.]*$/;
-    a = (a + '').replace(re, '').split('.');
-    b = (b + '').replace(re, '').split('.');
-    len = Math.min(a.length, b.length);
-
-    // Check for a match between major release numbers
-    if (a[0] !== b[0]) {
-        return -1;
-    }
-    // Check for a match between minor release numbers
-    else {
-        // eg. '1.7' vrs '1.6.7'
-        if (a[1] > b[1]) {
-            return -1;
-        }
-
-        // eg. '1.7' vrs '1.8.7'
-        if (a[1] < b[1]) {
-            return -1;
-        }
-
-        // eg. '1.7' vrs '1.7.1', '1.7' vrs '1.7.5', '1.7' vrs '1.7.9'
-        if (a[1] == b[1]) {
-            return 1;
-        }
-    }
-}
+angular.module('angularBootstrap.dropdown', []).directive('bootstrapDropdown', function () {
+    return function(scope, element, attrs) {
+        
+        jQuery('html').on('click', function () {
+            element.removeClass('open')
+        })
+        
+        jQuery('.dropdown-toggle', element).on('click', function(e) {
+            element.toggleClass('open');
+            return false;
+        });
+            
+    };
+});
 
 var startApp = function() {
 
@@ -1657,7 +1660,7 @@ var startApp = function() {
         widget.css({
             'display': 'none',
             // perhaps we should not set width and height here, and let things automatically resize
-            'width': '700px',
+            'width': '860px',
             'height': '600px',
             'overflow': 'hidden',
             // 'overflow': 'auto',  // to add scrollbars (but they should be added to the chart, not to the widget)
@@ -1690,7 +1693,7 @@ var startApp = function() {
     });
 
     $('#map-tools').append(
-        '<button id="loadProjectdialogBtn" type="button" class="btn btn-blue">Load Project</button>'
+        '<div class="l_proj"><button id="loadProjectdialogBtn" type="button" class="btn btn-blue">Load Project</button></div>'
     );
     // Using the list in order to keep the order
     $.each(['indicators', 'svi', 'iri', 'projDef'], function(i, widgetName) {
@@ -1698,15 +1701,15 @@ var startApp = function() {
         var buttonId = widgetsAndButtons[widgetName].button.slice(1);
         var buttonText = widgetsAndButtons[widgetName].buttonText;
         $('#map-tools').append(
-            '<button id="' + buttonId + '" type="button" class="btn btn-blue" disabled>' + buttonText + '</button>'
+            '<div class="but_l_proj"><button id="' + buttonId + '" type="button" class="btn btn-blue" disabled>' + buttonText + '</button></div>'
         );
     });
 
     if (webGl === false) {
         $('#map-tools').append(
-            '<select id="leafletThematicSelection">'+
+            '<div><select id="leafletThematicSelection">'+
                 '<option>Select Indicator</option>'+
-            '</select>'
+            '</select><div>'
         );
 
         $('#leafletThematicSelection').hide();
@@ -1714,9 +1717,9 @@ var startApp = function() {
         setupLeafletMap();
     } else {
         $('#map-tools').append(
-            '<select id="webGlThematicSelection">'+
+            '<div><select id="webGlThematicSelection">'+
                 '<option>Select Indicator</option>'+
-            '</select>'
+            '</select></div>'
         );
 
         $('#webGlThematicSelection').hide();
@@ -1737,8 +1740,14 @@ var startApp = function() {
         // Let's change the button text before toggling the widget
         if (btnText.indexOf('Hide ') >= 0) {  // Change Hide -> Show
             btnText = 'Show ' + btnText.slice(5);
+            $(widgetAndBtn.button).css({
+                'background': '#f7931e'
+            });
         } else {                              // Change Show -> Hide
             btnText = 'Hide ' + btnText.slice(5);
+            $(widgetAndBtn.button).css({
+                'background': '#f05a24'
+            });
         }
         $(widgetAndBtn.button).html(btnText);
         $(widgetAndBtn.widget).toggle();
@@ -1755,25 +1764,25 @@ var startApp = function() {
     $('#svir-project-list').hide();
 
     $('#svir-project-list').css({ 'margin-bottom' : 0 });
-    $('#loadProjectBtn').prop('disabled', true);
+    // $('#loadProjectBtn').prop('disabled', true);
 
     // Enable the load project button once a project has been selected
     $('#layer-list').change(function() {
-        $('#loadProjectBtn').prop('disabled', false);
+        // $('#loadProjectBtn').prop('disabled', false);
     });
 
-    $('#loadProjectBtn').click(function() {
-        setWidgetsToDefault();
+    $('#loadProjectBtnx').click(function() {
+        // setWidgetsToDefault();
 
-        // FIXME This will not work if the title contains '(' or ')'
-        // Get the selected layer
-        var scope = angular.element($("#layer-list")).scope();
-        selectedLayer = scope.selected_map.name;
+        // // FIXME This will not work if the title contains '(' or ')'
+        // // Get the selected layer
+        // var scope = angular.element($("#layer-list")).scope();
+        // selectedLayer = scope.selected_map.name;
 
-        // clean the selected layer to get just the layer name
-        selectedLayer = selectedLayer.substring(selectedLayer.indexOf("(") + 1);
-        selectedLayer = selectedLayer.replace(/[)]/g, '');
-        loadProject();
+        // // clean the selected layer to get just the layer name
+        // selectedLayer = selectedLayer.substring(selectedLayer.indexOf("(") + 1);
+        // selectedLayer = selectedLayer.replace(/[)]/g, '');
+        // loadProject();
     });
 
     // AJAX error dialog
@@ -1793,11 +1802,11 @@ var startApp = function() {
         position: {at: 'right bottom'}
     });
 
-     $('#loadProjectDialog').dialog({
+    $('#loadProjectDialog').dialog({
         autoOpen: false,
         height: 520,
         width: 620,
-        closeOnEscape: true
+        // closeOnEscape: true
     });
 
     $('#loadProjectDialog').draggable({
@@ -1810,15 +1819,25 @@ var startApp = function() {
         'position': 'absolute',
         'top': '43px',
         'left': '39px',
-        'width': '94%',
+        'width': '93.3%',
         'z-index': 6
     });
 
-    $('#loadProjectdialogBtn').css({
-        'position': 'fixed',
-        'left': '50px'
+    $('.l_proj').css({
+        'float': 'left',
+        'border-bottom': '2px solid #d9edf7',
+        'border-color': '#bce8f1',
+        'color': '#31708f',
+        'padding': '10px'
     });
 
+    $('.but_l_proj').css({
+        'float': 'right',
+        'border-bottom': '2px solid #d9edf7',
+        'border-color': '#bce8f1',
+        'color': '#31708f',
+        'padding': '10px 4px',
+    });
     $.each(widgetsAndButtons, function(key, widgetAndBtn) {
         $(widgetAndBtn.button).css({
             'position': 'relative',
@@ -1839,8 +1858,9 @@ var startApp = function() {
     });
 
     $('#webGlThematicSelection').css({
-        'position': 'fixed',
-        'left': '160px',
+        'position': 'absolute',
+        'right': '15px',
+        'top': '125px',
         'margin-bottom' : 0
     });
 
@@ -1870,11 +1890,10 @@ function loadProject() {
 
 function attributeInfoRequest(selectedLayer) {
     $('#loadProjectDialog').dialog('close');
-    $('#absoluteSpinner').show();
     // Get layer attributes from GeoServer
     return $.ajax({
         type: 'get',
-        url: '/geoserver/oqplatform/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&outputFormat=json',
+        url: 'http://'+ window.location.hostname +':8000/geoserver/oqplatform/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&maxFeatures=50&outputFormat=application%2Fjson',
         success: function(data) {
             projectChange = true;
             // Make a global variable used by the d3-tree chart
@@ -1939,19 +1958,6 @@ function projDefJSONRequest(selectedLayer) {
             } else if (data.hasOwnProperty('irmt_plugin_version')) {
                 thisVersion = data.irmt_plugin_version;
             } else {
-                $('#projectDef-spinner').hide();
-                $('#project-def').append(
-                    '<div id="alert" class="alert alert-danger" role="alert">' +
-                        'The project you are trying to load was created with a version of the SVIR QGIS tool kit that is not compatible with this application' +
-                    '</div>'
-                );
-                return;
-            }
-
-            var versionCheck = versionCompare(COMPATIBILITY_VERSION, thisVersion);
-
-            if (versionCheck < 0) {
-                // Warn the user and stop the application
                 $('#projectDef-spinner').hide();
                 $('#project-def').append(
                     '<div id="alert" class="alert alert-danger" role="alert">' +
