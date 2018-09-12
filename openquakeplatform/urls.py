@@ -123,6 +123,12 @@ urlpatterns = patterns('',
                                template_name="geodetic.html"),
                            name='geodetic'),
 
+                       # irv
+                       url(r'^irv/', include('openquakeplatform.irv.urls')),
+
+                       # svir
+                       (r'^svir/', include('openquakeplatform.svir.urls')),
+
                        # Social views
                        (r"^account/", include("account.urls")),
                        (r'^people/', include('geonode.people.urls')),
