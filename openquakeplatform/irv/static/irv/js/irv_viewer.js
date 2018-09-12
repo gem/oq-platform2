@@ -1527,7 +1527,7 @@ function getGeoServerLayers() {
             var featureType = jsonElement.WFS_Capabilities.FeatureTypeList.FeatureType;
 
             // Find the IRMT keywords
-            var stringsToLookFor = ['SVIR', 'IRMT_QGIS_Plugin'];
+            var stringsToLookFor = ['SVIR_QGIS_Plugin', 'IRMT_QGIS_Plugin'];
             // Reload if the api call was incomplete
             if (featureType.length === undefined) {
                 getGeoServerLayers();
