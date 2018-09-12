@@ -1558,14 +1558,14 @@ function getGeoServerLayers() {
             // Create AngularJS dropdown menu
             var mapLayerList = [];
             for (var ij = 0; ij < IRMTLayerNames.length; ij++) {
-                var layer.Properties = {};
-                layer.Properties.name = IRMTLayerNames[ij];
-                layer.Properties.title = IRMTLayerTitle[ij];
+                var layerProperties = {};
+                layerProperties.name = IRMTLayerNames[ij];
+                layerProperties.title = IRMTLayerTitle[ij];
 
-                $('#layer-list').append('<div id="list' + ij +'">' + layer.Properties.title + '</div>');
+                $('#layer-list').append('<div id="list' + ij +'">' + layerProperties.title + '</div>');
 
                 $('#list'+ ij).on('click', function () {
-                    window.location = 'http://' + location.hostname + ':8000/irv/' + layer.Properties.name;
+                    window.location = 'http://' + location.hostname + ':8000/irv/' + layerProperties.name;
                 });    
             }
 
