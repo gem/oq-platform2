@@ -185,3 +185,6 @@ button#saveBtn:focus {
 div#primary-tab-widget {
     height: 635px!important;
 }
+div#project-def-widget {
+    top: 160px!important;
+}
