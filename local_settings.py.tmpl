@@ -7,14 +7,13 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(geonode.__file__))
 OQPLATFORM_ROOT = os.path.dirname(openquakeplatform.__file__)
 
 SITEURL = 'http://%(lxc_ip)s:8000'
-ALLOWED_HOSTS = ['%(lxc_ip)s', 'localhost']
+SITENAME = 'Openquake Platform'
 
+ALLOWED_HOSTS = ['%(lxc_ip)s', 'localhost']
 PROXY_ALLOWED_HOSTS = ('%(lxc_ip)s', 'localhost')
+PROXY_BASE_URL = '%(lxc_ip)s:8000/geoserver'
 
 AUTH_IP_WHITELIST = ['%(lxc_ip)s']
-
-# GEOSERVER_LOCATION = 'http://%(lxc_ip)s:8000/geoserver'
-# GEOSERVER_PUBLIC_LOCATION = 'http://%(lxc_ip)s:8000/geoserver'
 
 WEBUIURL = 'http://%(webuiurl)s/'
 
@@ -139,6 +138,9 @@ INSTALLED_APPS += (
     'openquakeplatform.vulnerability',
     'openquakeplatform.grv',
     'openquakeplatform.geodetic',
+    'openquakeplatform.irv',
+    'openquakeplatform.world',
+    'openquakeplatform.svir',
     'openquakeplatform.ghec_viewer',
     'openquakeplatform.isc_viewer',
     'openquakeplatform.pla_common',

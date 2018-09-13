@@ -41,7 +41,7 @@
         }
       </style>
     <![endif]-->
-    <link href="{{ STATIC_URL }}geonode/img/favicon.png" rel="shortcut icon"/>
+    <link href="{{ STATIC_URL }}img/favicon.png" rel="shortcut icon"/>
     <link rel="search" type="application/opensearchdescription+xml" href="/catalogue/opensearch" title="Openquake Platform Search"/>
     
     <!--function for open modal menu -->
@@ -129,10 +129,10 @@
                 </ul>
               </li>
 		      {% else %}
-		      <li class="oq-right-user-signin"><a href="#" data-toggle="modal" data-target="#SigninModal" role="button" >{% trans "Sign in" %} </a></li>
+		      <li class="oq-right-user-signin"><a href="#" data-toggle="modal" data-target="#SigninModal" role="button" >Sign in</a></li>
                       {% if not user.is_authenticated and REGISTRATION_OPEN %}
                       <li class="oq-right-user-separated">|</li>
-                      <li class="oq-right-user-signup"><a href="{% url "account_signup" %}">{% trans "Register" %}</a></li>
+                      <li class="oq-right-user-signup"><a href="{% url "account_signup" %}">Register</a></li>
                       {% endif %}
               {% endif %}
               {% if user.is_authenticated %}

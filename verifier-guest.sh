@@ -274,6 +274,10 @@ python ./manage.py vuln_groups_create
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
 pip install simplejson==2.0.9
 
+## load data for svir
+python manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/world/dev_data/world.json.bz2
+python manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/svir/dev_data/svir.json.bz2
+
 ## load data for gec and isc viewer
 python ./manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
 
