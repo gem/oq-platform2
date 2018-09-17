@@ -301,7 +301,6 @@ $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a ~/oq-platform
 cd ~/geonode
 mkdir -p $HOME/geonode/geonode/uploaded/
 cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
-python ./manage.py add_documents
 
 ## Update layers from Geoserver to geonode
 cd ~/geonode
@@ -328,5 +327,6 @@ fi
 
 ## Stop Geonode
 cd ~/geonode
+python ./manage.py add_documents
 sudo supervisorctl stop openquake-webui
 paver -f $HOME/$GIT_REPO/pavement.py stop
