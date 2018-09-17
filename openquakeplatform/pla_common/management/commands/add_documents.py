@@ -243,7 +243,7 @@ class Command(BaseCommand):
                          if mapp['license'] is not None
                          else None),
                 edition=mapp['edition'],
-                supplemental_information=mapp['supplemental_information'],
+                supplemental_information_en=mapp['supplemental_information'],
                 popular_count=maps['popular_count'],
                 share_count=maps['share_count']
                 )
@@ -339,7 +339,7 @@ class Command(BaseCommand):
                          else None),
                 content_type=content_type,
                 edition=res['edition'],
-                supplemental_information=res['supplemental_information'],
+                supplemental_information_en=res['supplemental_information'],
                 popular_count=doc['popular_count'],
                 share_count=doc['share_count']
                 )
@@ -398,7 +398,7 @@ class Command(BaseCommand):
                 'workspace': layer['workspace'],
                 'default_style': default_style,
                 'storeType': layer['storeType'],
-                'supplemental_information': base['supplemental_information']
+                'supplemental_information_en': base['supplemental_information']
             })
 
             # Save layer
