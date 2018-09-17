@@ -365,7 +365,7 @@ class Command(BaseCommand):
         # Delete all layer
         Layer.objects.all().exclude(
             title_en='isc_viewer_measure').exclude(
-            title_en='ghec_viewer_measure').delete()
+            title_en='ghec_viewer_measure')
 
         # Import layers
         layer_old_refs = {}
