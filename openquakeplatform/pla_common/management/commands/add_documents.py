@@ -12,6 +12,7 @@ from django.contrib.contenttypes.models import ContentType
 from agon_ratings.models import OverallRating
 from decimal import Decimal
 
+
 def base_attrs(base):
     base_new = {}
     base_new.update(base)
@@ -396,7 +397,8 @@ class Command(BaseCommand):
                 'store': layer['store'],
                 'workspace': layer['workspace'],
                 'default_style': default_style,
-                'storeType': layer['storeType']
+                'storeType': layer['storeType'],
+                'supplemental_information': base['supplemental_information']
             })
 
             # Save layer
