@@ -327,6 +327,6 @@ fi
 
 ## Stop Geonode
 cd ~/geonode
-# python ./manage.py add_documents
+python ./manage.py add_documents
 sudo supervisorctl stop openquake-webui
 paver -f $HOME/$GIT_REPO/pavement.py stop
