@@ -398,6 +398,10 @@ class Command(BaseCommand):
                 'workspace': layer['workspace'],
                 'default_style': default_style,
                 'storeType': layer['storeType'],
+                "bbox_x0": base['bbox_x0'],
+                "bbox_x1": base['bbox_x1'],
+                "bbox_y0": base['bbox_y0'],
+                "bbox_y1": base['bbox_y1'],
                 'supplemental_information_en': base['supplemental_information']
             })
 
