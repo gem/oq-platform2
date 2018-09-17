@@ -306,7 +306,7 @@ cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/g
 cd ~/geonode
 python manage.py makemigrations
 python manage.py migrate
-# python manage.py updatelayers -u GEM
+python manage.py updatelayers -u GEM
 
 # Create programmatically ISC and GHEC json
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
@@ -328,6 +328,5 @@ fi
 ## Stop Geonode
 cd ~/geonode
 python ./manage.py add_documents
-python manage.py updatelayers
 sudo supervisorctl stop openquake-webui
 paver -f $HOME/$GIT_REPO/pavement.py stop
