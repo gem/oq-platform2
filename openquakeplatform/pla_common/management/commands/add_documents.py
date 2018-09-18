@@ -363,9 +363,9 @@ class Command(BaseCommand):
             print('Imported document: %s' % res['title'])
 
         # Delete all layer
-        # Layer.objects.all().exclude(
-        #     title_en='isc_viewer_measure').exclude(
-        #     title_en='ghec_viewer_measure').delete()
+        Layer.objects.all().exclude(
+            title_en='isc_viewer_measure').exclude(
+            title_en='ghec_viewer_measure').delete()
 
         # Import layers
         layer_old_refs = {}
