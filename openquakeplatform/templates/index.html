@@ -10,7 +10,11 @@
 {% block middle %}
   {{ block.super }}
   {% block hero %}
-
+<style>
+#oq-body-wrapper {
+    display: none;
+}
+</style>
   <div class="jumbotron">
         <div class="container">
         <h1>{#{% trans "Welcome" %}#}The Openquake platform</h1>
