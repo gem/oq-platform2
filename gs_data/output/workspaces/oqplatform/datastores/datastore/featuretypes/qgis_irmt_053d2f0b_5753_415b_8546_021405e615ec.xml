@@ -63,14 +63,14 @@
   UNIT[&quot;m&quot;, 1.0], 
   AXIS[&quot;Easting&quot;, EAST], 
   AXIS[&quot;Northing&quot;, NORTH], 
-  AUTHORITY[&quot;EPSG&quot;,&quot;32718&quot;]]</nativeCRS>
-  <srs>EPSG:32718</srs>
+  AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]</nativeCRS>
+  <srs>EPSG:4326</srs>
   <nativeBoundingBox>
     <minx>-203260.789695469</minx>
     <maxx>1190990.76605372</maxx>
     <miny>7964768.91159927</miny>
     <maxy>9995732.85844146</maxy>
-    <crs class="projected">EPSG:32718</crs>
+    <crs class="projected">EPSG:4326</crs>
   </nativeBoundingBox>
   <latLonBoundingBox>
     <minx>-81.64209769669311</minx>
