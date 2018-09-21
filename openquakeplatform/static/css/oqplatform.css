@@ -78,12 +78,12 @@ input[type="checkbox"], input[type="radio"] {
 #wrap {
     padding: 0px 0 0 0px!important;
     margin: 0px auto 30px!important;
-    width: 980px;
+    width: 90%;
     border-radius: 10px;
     -moz-border-radius: 10px;
 }
 #wrap .container {
-    width: 980px;
+    width: 100%;
 }
 .home .jumbotron .container {
     padding-left: 25px;
