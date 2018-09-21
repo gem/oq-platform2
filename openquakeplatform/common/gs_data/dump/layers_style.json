@@ -1,0 +1,38 @@
+[
+    {
+        "pk": 1, 
+        "model": "layers.style", 
+        "fields": {
+            "name": "point", 
+            "sld_url": "http://localhost:8080/geoserver/rest/styles/point.sld", 
+            "sld_version": null, 
+            "sld_title": "Default Point", 
+            "sld_body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><sld:StyledLayerDescriptor xmlns=\"http://www.opengis.net/sld\" xmlns:sld=\"http://www.opengis.net/sld\" xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:gml=\"http://www.opengis.net/gml\" version=\"1.0.0\"><sld:NamedLayer><sld:Name>point</sld:Name><sld:UserStyle><sld:Name>point</sld:Name><sld:Title>Default Point</sld:Title><sld:Abstract>A sample style that draws a point</sld:Abstract><sld:FeatureTypeStyle><sld:Name>name</sld:Name><sld:Rule><sld:Name>rule1</sld:Name><sld:Title>Red Square</sld:Title><sld:Abstract>A 6 pixel square with a red fill and no stroke</sld:Abstract><sld:PointSymbolizer><sld:Graphic><sld:Mark><sld:Fill><sld:CssParameter name=\"fill\">#FF0000</sld:CssParameter></sld:Fill></sld:Mark><sld:Size>6</sld:Size></sld:Graphic></sld:PointSymbolizer></sld:Rule></sld:FeatureTypeStyle></sld:UserStyle></sld:NamedLayer></sld:StyledLayerDescriptor>", 
+            "workspace": null
+        }
+    },
+    {
+        "pk": 207, 
+        "model": "layers.style", 
+        "fields": {
+            "name": "fallas", 
+            "sld_url": "http://localhost:8080/geoserver/rest/styles/fallas.xml", 
+            "sld_version": null, 
+            "sld_title": "fallas", 
+            "sld_body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><sld:StyledLayerDescriptor xmlns:sld=\"http://www.opengis.net/sld\" version=\"1.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.opengis.net/sld http://schemas.opengis.net/sld/1.0.0/StyledLayerDescriptor.xsd\" xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:gml=\"http://www.opengis.net/gml\"><sld:NamedLayer><sld:Name>oqplatform:fallas</sld:Name><sld:UserStyle><sld:Name>fallas</sld:Name><sld:Title>fallas</sld:Title><sld:IsDefault>1</sld:IsDefault><sld:FeatureTypeStyle><sld:Rule><sld:LineSymbolizer><sld:Stroke><sld:CssParameter name=\"stroke\">#880000</sld:CssParameter><sld:CssParameter name=\"stroke-width\">3</sld:CssParameter></sld:Stroke></sld:LineSymbolizer></sld:Rule><sld:Rule><sld:LineSymbolizer><sld:Stroke/></sld:LineSymbolizer></sld:Rule></sld:FeatureTypeStyle><sld:FeatureTypeStyle><sld:Rule><sld:LineSymbolizer><sld:Stroke><sld:CssParameter name=\"stroke\">#ffbbbb</sld:CssParameter></sld:Stroke></sld:LineSymbolizer></sld:Rule></sld:FeatureTypeStyle></sld:UserStyle></sld:NamedLayer></sld:StyledLayerDescriptor>", 
+            "workspace": null
+        }
+    },
+    {
+        "pk": 214, 
+        "model": "layers.style", 
+        "fields": {
+            "name": "fallas_3bd79836", 
+            "sld_url": "http://localhost:8080/geoserver/rest/styles/fallas_3bd79836.xml", 
+            "sld_version": null, 
+            "sld_title": "fallas_3bd79836", 
+            "sld_body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><sld:StyledLayerDescriptor xmlns:sld=\"http://www.opengis.net/sld\" version=\"1.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.opengis.net/sld http://schemas.opengis.net/sld/1.0.0/StyledLayerDescriptor.xsd\" xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:gml=\"http://www.opengis.net/gml\"><sld:NamedLayer><sld:Name>oqplatform:fallas</sld:Name><sld:UserStyle><sld:Name>fallas_3bd79836</sld:Name><sld:FeatureTypeStyle><sld:Rule><sld:LineSymbolizer><sld:Stroke/></sld:LineSymbolizer></sld:Rule></sld:FeatureTypeStyle></sld:UserStyle></sld:NamedLayer></sld:StyledLayerDescriptor>", 
+            "workspace": null
+        }
+    }
+]

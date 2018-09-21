@@ -1,10 +1,10 @@
 import httplib2
-from urllib2 import urlparse
 from django.conf import settings
 from django.http import HttpResponse
 
-#from geonode.utils import ogc_server_settings
+# from geonode.utils import ogc_server_settings
 from geonode.geoserver.helpers import ogc_server_settings
+
 
 def geoserver(request):
     """
@@ -45,4 +45,3 @@ def fake_proxy(request):
     url = request.GET['url']
     url = url[url.index("/"):]
     return _make_request(request, url)
-

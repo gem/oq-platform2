@@ -12,7 +12,7 @@
 <div class="page-header">
   <h2 class="page-title">
       {{ resource.title }}
-      {% if resource.owner.username != 'GEM' %}
+      {% if resource.owner.username != 'GEM' and resource.owner.username != 'admin' %}
           <span class="user-contrib">(User Contributed)</span>
       {% endif %}
   </h2>
@@ -64,6 +64,9 @@
 
     <div class="col-md-4">
       <ul class="list-group">
+          <li class="list-group-item">
+            <a href="/maps" class="btn btn-default btn-md btn-block oq-button-undo"><i class="fa fa-undo"></i> {% trans "All Maps" %}</a>
+          </li>
         {% if "download_resourcebase" in perms_list %}
         <li class="list-group-item">
           <button class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#download-map">{% trans "Download Map" %}</button>

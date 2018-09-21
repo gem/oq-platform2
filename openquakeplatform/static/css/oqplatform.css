@@ -78,7 +78,7 @@ input[type="checkbox"], input[type="radio"] {
 #wrap {
     padding: 0px 0 0 0px!important;
     margin: 0px auto 30px!important;
-    width: 90%;
+    width: 85%;
     border-radius: 10px;
     -moz-border-radius: 10px;
 }
@@ -226,7 +226,7 @@ ul.dropdown-menu li {
     text-decoration: underline;
 }
 .home .oq-button-home {
-    width: 23%;
+    width: 229px;
     float: left;
     padding: 46px 0 0 0;
     text-align: center;
@@ -265,7 +265,7 @@ ul.dropdown-menu li {
     margin-top: 0!important;
 }
 .oq-button-home {
-    width: 23%;
+    width: 229px;
     float: left;
     padding: 95px 0 0 0;
     text-align: center;
@@ -640,6 +640,15 @@ img#legend_icon {
 form.user-settings {
     margin-top: 130px;
 }
+.modal-dialog {
+    /*width: 500px;*/
+    margin: 60px auto;
+}
+.form-signin {
+    max-width: 500px;
+    padding: 15px;
+    margin: 0 auto;
+}        
 
 /* mobile */
 @media (max-width: 640px) {

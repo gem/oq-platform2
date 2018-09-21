@@ -12,7 +12,7 @@
 <div class="page-header">
   <h2 class="page-title">
       {{ resource.title|default:resource.typename }}
-      {% if resource.owner.username != 'GEM' %}
+      {% if resource.owner.username != 'GEM' and resource.owner.username != 'admin' %}
         <span class="user-contrib">(User Contributed)</span>
       {% endif %}
   </h2>
@@ -221,6 +221,9 @@
   <div class="col-md-4">
 
     <ul class="list-group">
+        <li class="list-group-item">
+            <a href="/layers" class="btn btn-default btn-md btn-block oq-button-undo"><i class="fa fa-undo"></i> {% trans "All Layers" %}</a>
+        </li>
       {% if resource.storeType != "remoteStore" %}
         <li class="list-group-item">
         {% if links or links_download %}
@@ -356,6 +359,14 @@
     </div>
     {% endif %}
 
+    {% for keyword in resource.keywords.all %}
+        {% if keyword.name == 'IRMT_QGIS_Plugin' %}
+        <li class="list-group-item">
+            <a href="/irv/{{ resource.typename }}" class="btn btn-default btn-md btn-block oq-button-irv">{% trans "Open in Irv" %}</a>
+        </li>
+        {% endif %}
+    {% endfor %}
+
     <li class="list-group-item">
       <button class="btn btn-default btn-md btn-block" data-toggle="modal" data-target="#download-metadata">{% trans "Download Metadata" %}</button>
     </li>
@@ -462,7 +473,7 @@
           {% else %}
           <input type="radio" name="style" id="{{ style.name }}" value="{{ style.title }}"/>
           {% endif %}
-          <a href="{{ GEOSERVER_BASE_URL }}{{ style.absolute_url }}" >{{ style.sld_title }}</a>
+          <a href="{{ GEOSERVER_BASE_URL }}{{ style.absolute_url }}" >{{ style.sld_title|slice:"30" }}...</a>
         </li>
         {% empty %}
         <li>{% trans "No styles associated with this layer" %}</li>

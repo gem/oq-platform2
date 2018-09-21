@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group
 
 
 class Command(BaseCommand):
-    args = '<auth_user_demo.json>'
+    args = '<auth_user.json>'
     help = ('Import users')
 
     def handle(self, user_fname, *args, **options):
@@ -17,49 +17,41 @@ class Command(BaseCommand):
         for user in user_load:
             fields = user['fields']
 
-            # User not to be imported
-            gem = 'GEM'
-            anonymous = 'AnonymousUser'
-            admin = 'admin'
-
             # Add users
-            if (fields['username'] != '%s' % gem
-                and fields['username'] != '%s' % anonymous
-                    and fields['username'] != '%s' % admin):
+            if (fields['username'] == 'GEM'
+                or fields['username'] == 'AnonymousUser'
+                    or fields['username'] == 'admin'):
+                continue
 
-                        username = fields['username']
-                        email = fields['email']
-                        first_name = fields['first_name']
-                        last_name = fields['last_name']
-                        password = fields['password']
-                        is_active = fields['is_active']
-                        is_super = fields['is_superuser']
-                        is_staff = fields['is_staff']
+            username = fields['username']
+            email = fields['email']
+            first_name = fields['first_name']
+            last_name = fields['last_name']
+            password = fields['password']
+            is_active = fields['is_active']
+            is_super = fields['is_superuser']
+            is_staff = fields['is_staff']
 
-                        # Set list of groups
-                        groupnames = [groupname.encode("utf-8")
-                                      for groupname in fields['groups'][0]]
+            # Set list of groups
+            groupnames = [groupname.encode("utf-8")
+                          for groupname in fields['groups'][0]]
 
-                        gem_user = User.objects.model(
-                                                       username=username,
-                                                       email=email,
-                                                       password=password,
-                                                       first_name=first_name,
-                                                       last_name=last_name,
-                                                       is_active=is_active,
-                                                       is_superuser=is_super,
-                                                       is_staff=is_staff
-                                                     )
-                        gem_user.save()
+            gem_user = User.objects.model(
+                                           username=username,
+                                           email=email,
+                                           password=password,
+                                           first_name=first_name,
+                                           last_name=last_name,
+                                           is_active=is_active,
+                                           is_superuser=is_super,
+                                           is_staff=is_staff
+                                         )
+            gem_user.save()
 
-                        # Add list group for single user
-                        for groupname in groupnames:
-                            # Add group to user
-                            UserGroup = Group.objects.get(name=groupname)
-                            gem_user.groups.add(UserGroup)
+            # Add list group for single user
+            for groupname in groupnames:
+                # Add group to user
+                UserGroup = Group.objects.get(name=groupname)
+                gem_user.groups.add(UserGroup)
 
-                        # Print if create users is successfully
-                        if gem_user.username == username:
-                            print('%s user created' % username)
-                        else:
-                            raise ValueError
+            print('%s user created' % username)

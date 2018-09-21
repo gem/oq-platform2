@@ -8,11 +8,11 @@
 
 {% block body %}
 <div class="page-header">
-  <h2>{% trans "Sign up" %}</h2>
+  <h2 class="oq-align-h2">{% trans "Sign up" %}</h2>
   <p>Registering is free and open to anyone worldwide.<br />By registering you agree to the <a href="/account/terms"/>OpenQuake Platform Terms</a> of Use and declare to have read and understood our <a target="_blank" href="http://www.globalquakemodel.org/terms-of-use">Privacy Policy</a>.</p>
 </div>
 <div class="row">
-  <div class="col-md-8">
+  <div class="oq-align col-md-8">
   {% if REGISTRATION_OPEN %}
     <form id="signup_form" method="post" action="{% url "account_signup" %}" autocapitalize="off" class="form-horizontal"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
       {% csrf_token %}
@@ -30,7 +30,7 @@
       </div>
 
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary">{% trans "Sign up" %}</button>
+          <button type="submit" class="oq-align-button btn btn-primary">{% trans "Sign up" %}</button>
         </div>
     </form>
     {% else %}
