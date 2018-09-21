@@ -246,7 +246,7 @@ cd ~/geonode
 paver -f $HOME/$GIT_REPO/pavement.py setup
 
 ## Create local_settings with pavement from repo
-paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data
+paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s $HOME/geonode/data
 
 python manage.py migrate account --noinput
 paver -f $HOME/$GIT_REPO/pavement.py sync
