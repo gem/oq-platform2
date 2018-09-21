@@ -619,7 +619,7 @@ img#legend_icon {
 }
 .col-xs-12.profile-avatar:hover,
 .col-xs-12.profile-avatar:focus {
-    background: #eee;
+    background: #f5f5f5;
 }
 .item-container {
     padding: 0;
@@ -717,6 +717,15 @@ form.user-settings {
    }
    #footer .row .col-md-6 {
        width: 85%;
+   }
+}
+@media (max-width: 900px) {
+   .oq-button-home .col-md-4 .oq-button-home-btn {
+       width: auto;
+       text-align: center;
+   }
+   .home .oq-button-home {
+       width: 100%;
    }
 }
 @media (max-width: 1024px) {
