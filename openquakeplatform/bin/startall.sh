@@ -5,6 +5,6 @@ source setall.sh
 # export DJANGO_SETTINGS_MODULE='openquakeplatform.settings'
 # export LOCKDOWN_GEONODE='True'
 cd ~/geonode
-paver -f /home/ubuntu/oq-platform2/pavement.py start -b 0.0.0.0:8000
+paver -f $HOME/oq-platform2/pavement.py start -b 0.0.0.0:8000
 sudo supervisorctl start openquake-webui
 
