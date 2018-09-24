@@ -314,7 +314,7 @@ python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_
 python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
 
 cd ~/
-# sudo -u postgres psql -d geonode_dev -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
+sudo -u postgres psql -d geonode_dev -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
 fi
