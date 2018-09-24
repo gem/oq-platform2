@@ -17,7 +17,7 @@
             ],
             "user_permissions": [],
             "password": "pbkdf2_sha256$10000$4CZB0YlwjQN2$/JWVwn9bfzp1I4pPfrIwhfT1t5++Xaem/bCmN5ej48U=",
-            "email": "info@openquake.org",
+            "email": "demo@demo.demo",
             "date_joined": "2014-12-01T00:00:00"
         }
     },
@@ -39,7 +39,7 @@
             ],
             "user_permissions": [],
             "password": "pbkdf2_sha256$10000$4CZB0YlwjQN2$/JWVwn9bfzp1I4pPfrIwhfT1t5++Xaem/bCmN5ej48U=",
-            "email": "info@openquake.org",
+            "email": "demo@demo.demo",
             "date_joined": "2014-12-01T00:00:00"
         }
     },
@@ -60,8 +60,8 @@
                 ]
             ],
             "user_permissions": [],
-            "password": "pbkdf2_sha256$10000$i11lC0ng0u1P$QwXWnuIYEVpoVNl3yJjTUCOL/d4i8b3Ujv7kUfgiHso=",
-            "email": "armando.scarpati@globalquakemodel.org",
+            "password": "pbkdf2_sha256$20000$cg1e67YPxLK5$Z3hMAsoudSuAuGmBALaVL3W2a0JYTn/5LekUtWxVmU8=",
+            "email": "demo@demo.demo",
             "date_joined": "2016-11-22T16:29:59"
         }
     },
@@ -82,8 +82,8 @@
                 ]
             ],
             "user_permissions": [],
-            "password": "pbkdf2_sha256$10000$MbuAHzSmqqVy$B8MioOUinOt1Ar308HwqyHun1TrzZGD96edxsUyTMvc=",
-            "email": "info@globalquakemodel.org",
+            "password": "pbkdf2_sha256$20000$cg1e67YPxLK5$Z3hMAsoudSuAuGmBALaVL3W2a0JYTn/5LekUtWxVmU8=",
+            "email": "demo@demo.demo",
             "date_joined": "2014-12-01T00:00:00"
         }
     },
@@ -104,8 +104,8 @@
                 ]
             ],
             "user_permissions": [],
-            "password": "pbkdf2_sha256$10000$MkXVTyenubdV$NsXav6IwW42HGWCwwFUdGKlSrtpdbvg31ziI/UOzvgI=",
-            "email": "paul.sl.henshaw@gmail.com",
+            "password": "pbkdf2_sha256$20000$cg1e67YPxLK5$Z3hMAsoudSuAuGmBALaVL3W2a0JYTn/5LekUtWxVmU8=",
+            "email": "demo@demo.demo",
             "date_joined": "2014-12-23T17:57:37.048"
         }
     },
@@ -126,8 +126,8 @@
                 ]
             ],
             "user_permissions": [],
-            "password": "pbkdf2_sha256$10000$jEpiPK3BKISW$YaagjvxmRTHGVhed1+rRRuP67+UJQrFlkY3EAwf1e08=",
-            "email": "michele.simionato@gmail.com",
+            "password": "pbkdf2_sha256$20000$cg1e67YPxLK5$Z3hMAsoudSuAuGmBALaVL3W2a0JYTn/5LekUtWxVmU8=",
+            "email": "demo@demo.demo",
             "date_joined": "2014-12-24T12:59:48.268"
         }
     }, 
@@ -148,8 +148,8 @@
                 ]
             ], 
             "user_permissions": [], 
-            "password": "pbkdf2_sha256$10000$Xy2xXU4rRc7S$elGrLqp7ScgTiv6SiIQPqLG1u6+DchiTB5zVni7mjrc=", 
-            "email": "catalina.yepes@globalquakemodel.org", 
+            "password": "pbkdf2_sha256$20000$cg1e67YPxLK5$Z3hMAsoudSuAuGmBALaVL3W2a0JYTn/5LekUtWxVmU8=", 
+            "email": "demo@demo.demo", 
             "date_joined": "2014-08-06T08:09:16"
         }
     },
@@ -170,8 +170,8 @@
                 ]
             ],
             "user_permissions": [],
-            "password": "pbkdf2_sha256$10000$xGiRGZnlyZ4B$Ja98IllvqIOLsimelBmLdKoK7Z0ZqyhBRGcJ/zorZfs=",
-            "email": "lperuzza@inogs.it",
+            "password": "pbkdf2_sha256$20000$cg1e67YPxLK5$Z3hMAsoudSuAuGmBALaVL3W2a0JYTn/5LekUtWxVmU8=",
+            "email": "demo@demo.demo",
             "date_joined": "2015-01-30T17:30:11.399"
         }
     },
@@ -192,8 +192,8 @@
                 ]
             ],
             "user_permissions": [],
-            "password": "pbkdf2_sha256$10000$1u4KbBUbMlLx$dgwR6E/tQTZfwwteNnjNI6KatYW8VHdXi6eXTLUe+BI=",
-            "email": "lwat054@stanford.edu",
+            "password": "pbkdf2_sha256$20000$cg1e67YPxLK5$Z3hMAsoudSuAuGmBALaVL3W2a0JYTn/5LekUtWxVmU8=",
+            "email": "demo@demo.demo",
             "date_joined": "2016-01-14T18:13:42.809"
         }
     },
@@ -214,8 +214,8 @@
                 ]
             ], 
             "user_permissions": [], 
-            "password": "pbkdf2_sha256$10000$Jub0dCnumgRm$qT6CZ+ePgtReLD4Yt9n33qVKOia1wdUdpimk6qg/Tww=", 
-            "email": "miguel.toquica@globalquakemodel.org", 
+            "password": "pbkdf2_sha256$20000$cg1e67YPxLK5$Z3hMAsoudSuAuGmBALaVL3W2a0JYTn/5LekUtWxVmU8=", 
+            "email": "demo@demo.demo", 
             "date_joined": "2015-11-11T13:45:51"
         }
     }
