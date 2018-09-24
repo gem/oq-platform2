@@ -53,7 +53,7 @@
     UNIT[&quot;degree&quot;, 0.017453292519943295], 
     AXIS[&quot;Geodetic longitude&quot;, EAST], 
     AXIS[&quot;Geodetic latitude&quot;, NORTH], 
-    AUTHORITY[&quot;EPSG&quot;,&quot;32718&quot;]], 
+    AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]], 
   PROJECTION[&quot;Transverse_Mercator&quot;], 
   PARAMETER[&quot;central_meridian&quot;, -75.0], 
   PARAMETER[&quot;latitude_of_origin&quot;, 0.0], 
