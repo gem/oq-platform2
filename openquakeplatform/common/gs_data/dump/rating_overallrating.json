@@ -1,6 +1,6 @@
 [
     {
-        "pk": 1, 
+        "pk": 974, 
         "model": "agon_ratings.overallrating", 
         "fields": {
             "category": 1, 
@@ -10,32 +10,6 @@
                 "map"
             ], 
             "object_id": 1
-        }
-    }, 
-    {
-        "pk": 2, 
-        "model": "agon_ratings.overallrating", 
-        "fields": {
-            "category": 2, 
-            "rating": "5.0", 
-            "content_type": [
-                "documents", 
-                "document"
-            ], 
-            "object_id": 2
-        }
-    }, 
-    {
-        "pk": 3, 
-        "model": "agon_ratings.overallrating", 
-        "fields": {
-            "category": 1, 
-            "rating": "4.0", 
-            "content_type": [
-                "maps", 
-                "map"
-            ], 
-            "object_id": 3
         }
     } 
 ]
