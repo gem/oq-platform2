@@ -188,3 +188,6 @@ div#primary-tab-widget {
 div#project-def-widget {
     top: 160px!important;
 }
+div#ajaxErrorDialog {
+    font-size: 16px;
+}
