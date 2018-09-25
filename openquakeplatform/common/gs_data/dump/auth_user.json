@@ -198,6 +198,28 @@
         }
     },
     {
+        "pk": 105, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "preinh", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": false, 
+            "is_superuser": false, 
+            "is_staff": true, 
+            "last_login": "2015-07-14T15:22:55.878", 
+            "groups": [
+                [
+                    "vulnerability-editors"
+                ]
+            ], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$OrbLBkIpPABU$VLrtCIPO/bNkEJeOyq09l+bntArLT53zpKULCtF9Mos=", 
+            "email": "demo11@demo.demo", 
+            "date_joined": "2015-01-30T16:17:21.896"
+        }
+    },
+    {
         "pk": 952, 
         "model": "auth.user", 
         "fields": {
