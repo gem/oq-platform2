@@ -321,6 +321,9 @@ sudo -u postgres psql -d geonode_dev -c '\copy qgis_irmt_053d2f0b_5753_415b_8546
 # sql assumpcao2014 layer
 sudo -u postgres psql -d geonode_dev -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
 
+cd ~/geonode
+python manage.py updatelayers
+
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
 fi
