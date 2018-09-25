@@ -16,5 +16,23 @@
             "share_count": 0, 
             "store": "datastore"
         }
+    }, 
+    {
+        "pk": 651, 
+        "model": "layers.layer", 
+        "fields": {
+            "styles": [
+                53
+            ], 
+            "name": "assumpcao2014", 
+            "popular_count": 32, 
+            "regions": [], 
+            "typename": "oqplatform:assumpcao2014", 
+            "default_style": 53, 
+            "workspace": "oqplatform", 
+            "storeType": "dataStore", 
+            "share_count": 0, 
+            "store": "datastore"
+        }
     }
 ]

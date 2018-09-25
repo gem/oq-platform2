@@ -1648,5 +1648,158 @@
             "average": "NA", 
             "max": "NA"
         }
+    },{
+        "pk": 16974, 
+        "model": "layers.attribute", 
+        "fields": {
+            "count": 1, 
+            "layer": 651, 
+            "description": null, 
+            "min": "NA", 
+            "attribute_label": "The_Geom", 
+            "attribute": "the_geom", 
+            "display_order": 1, 
+            "unique_values": "NA", 
+            "median": "NA", 
+            "sum": "NA", 
+            "visible": false, 
+            "last_stats_updated": "2016-05-12T07:22:36.911", 
+            "stddev": "NA", 
+            "attribute_type": "gml:MultiPolygonPropertyType", 
+            "average": "NA", 
+            "max": "NA"
+        }
+    }, 
+    {
+        "pk": 16975, 
+        "model": "layers.attribute", 
+        "fields": {
+            "count": 1, 
+            "layer": 651, 
+            "description": null, 
+            "min": "NA", 
+            "attribute_label": "Id", 
+            "attribute": "id", 
+            "display_order": 2, 
+            "unique_values": "NA", 
+            "median": "NA", 
+            "sum": "NA", 
+            "visible": true, 
+            "last_stats_updated": "2016-05-12T07:22:36.926", 
+            "stddev": "NA", 
+            "attribute_type": "xsd:string", 
+            "average": "NA", 
+            "max": "NA"
+        }
+    }, 
+    {
+        "pk": 16976, 
+        "model": "layers.attribute", 
+        "fields": {
+            "count": 1, 
+            "layer": 651, 
+            "description": null, 
+            "min": "NA", 
+            "attribute_label": "Name", 
+            "attribute": "name", 
+            "display_order": 3, 
+            "unique_values": "NA", 
+            "median": "NA", 
+            "sum": "NA", 
+            "visible": true, 
+            "last_stats_updated": "2016-05-12T07:22:36.930", 
+            "stddev": "NA", 
+            "attribute_type": "xsd:string", 
+            "average": "NA", 
+            "max": "NA"
+        }
+    }, 
+    {
+        "pk": 16977, 
+        "model": "layers.attribute", 
+        "fields": {
+            "count": 1, 
+            "layer": 651, 
+            "description": null, 
+            "min": "NA", 
+            "attribute_label": "Dip_", 
+            "attribute": "dip_", 
+            "display_order": 4, 
+            "unique_values": "NA", 
+            "median": "NA", 
+            "sum": "NA", 
+            "visible": true, 
+            "last_stats_updated": "2016-05-12T07:22:36.935", 
+            "stddev": "NA", 
+            "attribute_type": "xsd:string", 
+            "average": "NA", 
+            "max": "NA"
+        }
+    }, 
+    {
+        "pk": 16978, 
+        "model": "layers.attribute", 
+        "fields": {
+            "count": 1, 
+            "layer": 651, 
+            "description": null, 
+            "min": "NA", 
+            "attribute_label": "Strike_", 
+            "attribute": "strike_", 
+            "display_order": 5, 
+            "unique_values": "NA", 
+            "median": "NA", 
+            "sum": "NA", 
+            "visible": true, 
+            "last_stats_updated": "2016-05-12T07:22:36.939", 
+            "stddev": "NA", 
+            "attribute_type": "xsd:string", 
+            "average": "NA", 
+            "max": "NA"
+        }
+    }, 
+    {
+        "pk": 16979, 
+        "model": "layers.attribute", 
+        "fields": {
+            "count": 1, 
+            "layer": 651, 
+            "description": null, 
+            "min": "NA", 
+            "attribute_label": "Rake_", 
+            "attribute": "rake_", 
+            "display_order": 6, 
+            "unique_values": "NA", 
+            "median": "NA", 
+            "sum": "NA", 
+            "visible": true, 
+            "last_stats_updated": "2016-05-12T07:22:36.944", 
+            "stddev": "NA", 
+            "attribute_type": "xsd:string", 
+            "average": "NA", 
+            "max": "NA"
+        }
+    }, 
+    {
+        "pk": 16980, 
+        "model": "layers.attribute", 
+        "fields": {
+            "count": 0, 
+            "layer": 651, 
+            "description": null, 
+            "min": "NA", 
+            "attribute_label": "Area", 
+            "attribute": "area", 
+            "display_order": 7, 
+            "unique_values": "", 
+            "median": "NA", 
+            "sum": "NA", 
+            "visible": true, 
+            "last_stats_updated": "2016-05-12T07:22:37.749", 
+            "stddev": "NA", 
+            "attribute_type": "xsd:double", 
+            "average": "NA", 
+            "max": "NA"
+        }
     }
 ]
