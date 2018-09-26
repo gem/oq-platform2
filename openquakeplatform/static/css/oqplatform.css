@@ -489,7 +489,9 @@ div#search-inp:after {
     width: 225px;
 }
 nav.filter h4 {
-    background: #1b75a5;
+    background: gba(0, 0, 0, 0.8);
+    font-weight: 400;
+    text-transform: capitalize;
 }
 #footer {
     border-top: 0!important;
