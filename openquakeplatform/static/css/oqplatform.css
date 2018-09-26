@@ -653,6 +653,12 @@ form.user-settings {
 }        
 
 /* mobile */
+@media (max-width: 1200px) {
+   #wrap,
+   #wrap .container {
+        width: auto!important;
+   }
+}
 @media (max-width: 640px) {
     .list-unstyled {
         text-align: center!important;
@@ -662,10 +668,6 @@ form.user-settings {
     }
 }        
 @media (max-width: 991px) {
-   #wrap,
-   #wrap .container {
-        width: auto!important;
-   }
    .navbar-toggle {
         margin-right: 90px;
         padding: 0px 10px;
