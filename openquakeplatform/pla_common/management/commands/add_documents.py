@@ -5,6 +5,7 @@ from geonode.documents.models import Document
 from geonode.layers.models import Layer, Style, Attribute
 from geonode.maps.models import Map, MapLayer
 from geonode.base.models import TopicCategory, Region, License
+from geonode.base.models import SpatialRepresentationType
 from geonode.base.models import HierarchicalKeyword
 from geonode.base.models import ResourceBase, TaggedContentItem
 from django.contrib.auth import get_user_model
@@ -35,7 +36,8 @@ class Command(BaseCommand):
         doc_fname = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 'documents_document.json'))
         doc_json = open(doc_fname).read()
         doc_load = json.loads(doc_json)
@@ -44,7 +46,8 @@ class Command(BaseCommand):
         layer_style_fname = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 'layers_style.json'))
         layer_style_json = open(layer_style_fname).read()
         layer_style_load = json.loads(layer_style_json)
@@ -53,7 +56,8 @@ class Command(BaseCommand):
         layer_attr_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 'layers_attribute.json'))
         layer_attr_json = open(layer_attr_name).read()
         layer_attr_load = json.loads(layer_attr_json)
@@ -62,8 +66,9 @@ class Command(BaseCommand):
         layer_rating_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
-                'rating_overallrating.json'))
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'rating_overall_rating.json'))
         layer_rating_json = open(layer_rating_name).read()
         layer_rating_load = json.loads(layer_rating_json)
 
@@ -71,7 +76,8 @@ class Command(BaseCommand):
         layer_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 'layers_layer.json'))
         layer_json = open(layer_name).read()
         layer_load = json.loads(layer_json)
@@ -80,7 +86,8 @@ class Command(BaseCommand):
         resource_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 'base_resource_base.json'))
         resource_json = open(resource_name).read()
         resource_load = json.loads(resource_json)
@@ -89,7 +96,8 @@ class Command(BaseCommand):
         maps_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 'maps_map.json'))
         maps_json = open(maps_name).read()
         maps_load = json.loads(maps_json)
@@ -98,7 +106,8 @@ class Command(BaseCommand):
         maplayer_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 'maps_maplayer.json'))
         maplayer_json = open(maplayer_name).read()
         maplayer_load = json.loads(maplayer_json)
@@ -112,7 +121,8 @@ class Command(BaseCommand):
         category_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 'base_topiccategory.json'))
         category_json = open(category_name).read()
         category_load = json.loads(category_json)
@@ -121,7 +131,8 @@ class Command(BaseCommand):
         region_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 'base_region.json'))
         region_json = open(region_name).read()
         region_load = json.loads(region_json)
@@ -130,16 +141,28 @@ class Command(BaseCommand):
         license_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 'base_license.json'))
         license_json = open(license_name).read()
         license_load = json.loads(license_json)
+
+        # Read SpatialRepresentationType json
+        srt_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'base_spatialrepresentationtype.json'))
+        srt_json = open(srt_name).read()
+        srt_load = json.loads(srt_json)
 
         # Read tag json
         tag_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 'taggit_tag.json'))
         tag_json = open(tag_name).read()
         tag_load = json.loads(tag_json)
@@ -148,7 +171,8 @@ class Command(BaseCommand):
         tag_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
+                # 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 '/taggit_taggeditem.json'))
         tag_json = open(tag_name).read()
         tag_item_load = json.loads(tag_json)
@@ -265,7 +289,9 @@ class Command(BaseCommand):
                 Reg = Region.objects.get(name=name)
                 newmap.regions.add(Reg)
 
-            print('Imported map: %s' % mapp['title'])
+            print(
+                'Imported map: %s with pk %s' % (
+                    mapp['title'], map_full['pk']))
 
         # Import maplayers
         for maplayer_full in maplayer_load:
@@ -367,12 +393,33 @@ class Command(BaseCommand):
             title_en='isc_viewer_measure').exclude(
             title_en='ghec_viewer_measure').delete()
 
+        # Import SpatialRepresentationType
+        srt_old_refs = {}
+        for srt_full in srt_load:
+
+            field = srt_full['fields']
+            # layer_id = layer_old_refs[field['layer']]
+
+            new_srt = SpatialRepresentationType.objects.model(
+                is_choice=field['is_choice'],
+                gn_description=field['gn_description'],
+                identifier=field['identifier'],
+                description=field['description']
+                )
+            new_srt.save()
+            srt_old_refs[srt_full['pk']] = new_srt
+
         # Import layers
         layer_old_refs = {}
         for layer_full in layer_load:
 
             layer = layer_full['fields']
             base = new_resources[layer_full['pk']]
+
+            # Instance default SpatialRepresentationType
+            srt = (srt_old_refs[srt_full['pk']]
+                   if base['spatial_representation_type'] is not None
+                   else None)
 
             # Istance user
             User = get_user_model()
@@ -398,10 +445,11 @@ class Command(BaseCommand):
                 'workspace': layer['workspace'],
                 'default_style': default_style,
                 'storeType': layer['storeType'],
-                "bbox_x0": base['bbox_x0'],
-                "bbox_x1": base['bbox_x1'],
-                "bbox_y0": base['bbox_y0'],
-                "bbox_y1": base['bbox_y1'],
+                'bbox_x0': base['bbox_x0'],
+                'bbox_x1': base['bbox_x1'],
+                'bbox_y0': base['bbox_y0'],
+                'bbox_y1': base['bbox_y1'],
+                'spatial_representation_type': srt,
                 'supplemental_information_en': base['supplemental_information']
             })
 
