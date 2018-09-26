@@ -656,7 +656,10 @@ form.user-settings {
 @media (max-width: 1200px) {
    #wrap,
    #wrap .container {
-        width: auto!important;
+        width: auto;
+   }
+   #footer .container {
+       width: 100%!important;
    }
 }
 @media (max-width: 640px) {
