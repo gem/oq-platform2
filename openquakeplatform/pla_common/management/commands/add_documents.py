@@ -159,7 +159,7 @@ class Command(BaseCommand):
             os.path.join(
                 os.path.expanduser("~"),
                 'oq-platform2/openquakeplatform/common/gs_data/dump/'
-                '/taggit_taggeditem.json'))
+                'taggit_taggeditem.json'))
         tag_json = open(tag_name).read()
         tag_item_load = json.loads(tag_json)
 
@@ -416,25 +416,25 @@ class Command(BaseCommand):
 
             attrs = base_attrs(base)
             attrs.update({
-                'owner': owner,
-                'name': layer['name'],
-                'category': (old_category_refs[base['category']]
+                "owner": owner,
+                "name": layer['name'],
+                "category": (old_category_refs[base['category']]
                              if base['category'] is not None
                              else None),
-                'license': (old_license_refs[base['license']]
+                "license": (old_license_refs[base['license']]
                             if base['license'] is not None
                             else None),
-                'typename': layer['typename'],
-                'store': layer['store'],
-                'workspace': layer['workspace'],
-                'default_style': default_style,
-                'storeType': layer['storeType'],
-                'bbox_x0': base['bbox_x0'],
-                'bbox_x1': base['bbox_x1'],
-                'bbox_y0': base['bbox_y0'],
-                'bbox_y1': base['bbox_y1'],
-                'spatial_representation_type': srt,
-                'supplemental_information_en': base['supplemental_information']
+                "typename": layer['typename'],
+                "store": layer['store'],
+                "workspace": layer['workspace'],
+                "default_style": default_style,
+                "storeType": layer['storeType'],
+                "bbox_x0": base['bbox_x0'],
+                "bbox_x1": base['bbox_x1'],
+                "bbox_y0": base['bbox_y0'],
+                "bbox_y1": base['bbox_y1'],
+                "spatial_representation_type": srt,
+                "supplemental_information_en": base['supplemental_information']
             })
 
             # Save layer
