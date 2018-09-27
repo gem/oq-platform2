@@ -12,6 +12,7 @@ from django.contrib.contenttypes.models import ContentType
 from agon_ratings.models import OverallRating
 from decimal import Decimal
 
+
 def base_attrs(base):
     base_new = {}
     base_new.update(base)
@@ -242,7 +243,7 @@ class Command(BaseCommand):
                          if mapp['license'] is not None
                          else None),
                 edition=mapp['edition'],
-                supplemental_information=mapp['supplemental_information'],
+                supplemental_information_en=mapp['supplemental_information'],
                 popular_count=maps['popular_count'],
                 share_count=maps['share_count']
                 )
@@ -338,7 +339,7 @@ class Command(BaseCommand):
                          else None),
                 content_type=content_type,
                 edition=res['edition'],
-                supplemental_information=res['supplemental_information'],
+                supplemental_information_en=res['supplemental_information'],
                 popular_count=doc['popular_count'],
                 share_count=doc['share_count']
                 )
@@ -396,7 +397,12 @@ class Command(BaseCommand):
                 'store': layer['store'],
                 'workspace': layer['workspace'],
                 'default_style': default_style,
-                'storeType': layer['storeType']
+                'storeType': layer['storeType'],
+                "bbox_x0": base['bbox_x0'],
+                "bbox_x1": base['bbox_x1'],
+                "bbox_y0": base['bbox_y0'],
+                "bbox_y1": base['bbox_y1'],
+                'supplemental_information_en': base['supplemental_information']
             })
 
             # Save layer

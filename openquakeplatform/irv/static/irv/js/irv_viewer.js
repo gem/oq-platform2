@@ -1787,11 +1787,12 @@ var startApp = function() {
 
     // AJAX error dialog
     $('#ajaxErrorDialog').dialog({
-        autoOpen: false,
-        height: 150,
-        width: 400,
-        closeOnEscape: true,
-        modal: true
+        'autoOpen': false,
+        'height': 150,
+        'width': 400,
+        'z-index': 999,
+        'closeOnEscape': true,
+        'modal': true,
     });
 
     $('#saveStateDialog').dialog({

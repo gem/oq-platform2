@@ -1,89 +1,34 @@
 [
     {
-        "pk": 1, 
+        "pk": 974, 
         "model": "layers.layer", 
         "fields": {
             "styles": [
-                1
+                153
             ], 
-            "name": "event", 
-            "popular_count": 12, 
+            "name": "qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec", 
+            "popular_count": 1, 
             "regions": [], 
-            "typename": "oqplatform:event", 
-            "default_style": 1, 
+            "typename": "oqplatform:qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec", 
+            "default_style": 153, 
             "workspace": "oqplatform", 
             "storeType": "dataStore", 
             "share_count": 0, 
-            "store": "oqplatform"
+            "store": "datastore"
         }
     }, 
     {
-        "pk": 2, 
+        "pk": 651, 
         "model": "layers.layer", 
         "fields": {
             "styles": [
-                1
+                53
             ], 
-            "name": "faulted_earth_displacement", 
-            "popular_count": 23, 
+            "name": "assumpcao2014", 
+            "popular_count": 32, 
             "regions": [], 
-            "typename": "oqplatform:faulted_earth_displacement", 
-            "default_style": 1, 
-            "workspace": "oqplatform", 
-            "storeType": "dataStore", 
-            "share_count": 0, 
-            "store": "oqplatform"
-        }
-    }, 
-    {
-        "pk": 3, 
-        "model": "layers.layer", 
-        "fields": {
-            "styles": [
-                1
-            ], 
-            "name": "faulted_earth_event", 
-            "popular_count": 7, 
-            "regions": [], 
-            "typename": "oqplatform:faulted_earth_event", 
-            "default_style": 1, 
-            "workspace": "oqplatform", 
-            "storeType": "dataStore", 
-            "share_count": 0, 
-            "store": "oqplatform"
-        }
-    }, 
-    {
-        "pk": 4, 
-        "model": "layers.layer", 
-        "fields": {
-            "styles": [
-                1
-            ], 
-            "name": "faulted_earth_faultgeometry", 
-            "popular_count": 17, 
-            "regions": [], 
-            "typename": "oqplatform:faulted_earth_faultgeometry", 
-            "default_style": 1, 
-            "workspace": "oqplatform", 
-            "storeType": "dataStore", 
-            "share_count": 0, 
-            "store": "oqplatform"
-        }
-    }, 
-    {
-        "pk": 1076, 
-        "model": "layers.layer", 
-        "fields": {
-            "styles": [
-                214, 
-                207
-            ], 
-            "name": "fallas", 
-            "popular_count": 15, 
-            "regions": [], 
-            "typename": "oqplatform:fallas", 
-            "default_style": null, 
+            "typename": "oqplatform:assumpcao2014", 
+            "default_style": 53, 
             "workspace": "oqplatform", 
             "storeType": "dataStore", 
             "share_count": 0, 

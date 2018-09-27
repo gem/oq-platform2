@@ -87,6 +87,11 @@ exec_test () {
 
 }
 
+updatelayer() {
+    cd ~/geonode
+    python manage.py updatelayers
+}
+
 rem_sig_hand() {
     trap "" ERR
     echo 'signal trapped'
@@ -246,7 +251,7 @@ cd ~/geonode
 paver -f $HOME/$GIT_REPO/pavement.py setup
 
 ## Create local_settings with pavement from repo
-paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /home/ubuntu/geonode/data
+paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s $HOME/geonode/data
 
 python manage.py migrate account --noinput
 paver -f $HOME/$GIT_REPO/pavement.py sync
@@ -294,7 +299,7 @@ python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccat
 
 ## populate geoserver data infrastructure
 cd ~/oq-platform2
-$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a ~/oq-platform2/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
+$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/$GIT_REPO/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
 
 #
 ## Add old documents
@@ -314,6 +319,17 @@ python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_
 python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
 
 cd ~/
+
+# sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
+sudo -u postgres psql -d geonode_dev -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
+
+# sql assumpcao2014 layer
+sudo -u postgres psql -d geonode_dev -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
+
+updatelayer
+
+cd ~/
+
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
 fi
