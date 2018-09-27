@@ -292,7 +292,7 @@ python ./manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/
 python ./manage.py create_gem_user
 
 ## Add other users
-python ./manage.py add_user $HOME/oq-platform2/openquakeplatform/common/gs_data/dump/auth_user.json
+python ./manage.py add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
 
 ## Add Gem category
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
