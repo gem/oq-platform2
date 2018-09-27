@@ -334,7 +334,6 @@ class Command(BaseCommand):
             if doc['object_id'] is not None:
                 object_id = map_old_refs[doc['object_id']].pk
 
-            # print('Old %s New Object_id: %s' % (doc['object_id'], object_id))
             # Save documents
             newdoc = Document.objects.model(
                 uuid=res['uuid'],
@@ -384,7 +383,6 @@ class Command(BaseCommand):
         for srt_full in srt_load:
 
             field = srt_full['fields']
-            # layer_id = layer_old_refs[field['layer']]
 
             new_srt = SpatialRepresentationType.objects.model(
                 is_choice=field['is_choice'],
