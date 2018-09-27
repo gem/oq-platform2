@@ -46,7 +46,7 @@ class Command(BaseCommand):
         layer_style_fname = (
             os.path.join(
                 os.path.expanduser("~"),
-                #'oq-private/old_platform_documents/json/'
+                # 'oq-private/old_platform_documents/json/'
                 'oq-platform2/openquakeplatform/common/gs_data/dump/'
                 'layers_style.json'))
         layer_style_json = open(layer_style_fname).read()
@@ -477,7 +477,9 @@ class Command(BaseCommand):
             for sty in layer['styles']:
                 new_layer.styles.add(old_style_refs[sty])
 
-            print('Imported layer: %s' % layer['name'])
+            print(
+                'Imported layer: %s with pk: %s' % (
+                    layer['name'], layer_full['pk']))
 
         # Import layer attribute
         for attr in layer_attr_load:
