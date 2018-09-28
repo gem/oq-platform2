@@ -89,8 +89,8 @@ exec_test () {
 
 updatelayer() {
     cd ~/geonode
-    paver stop_geoserver
-    paver start_geoserver
+    paver -f $HOME/$GIT_REPO/pavement.py stop_geoserver
+    paver -f $HOME/$GIT_REPO/pavement.py start_geoserver
     python manage.py updatelayers
 }
 
@@ -263,7 +263,7 @@ paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
 sudo ln -sf /usr/lib/x86_64-linux-gnu/libproj.so.9 /usr/lib/x86_64-linux-gnu/libproj.so.0
 
 ## Stop Geoserver before rename postgres jar
-paver stop_geoserver
+paver -f $HOME/$GIT_REPO/pavement.py stop_geoserver
 
 ## Rename postgres jar in WEB-INF of Geoserver
 if [ -f $HOME/geonode/geoserver/geoserver/WEB-INF/lib/postgresql-9.4.1211.jar ]; then
@@ -271,7 +271,7 @@ if [ -f $HOME/geonode/geoserver/geoserver/WEB-INF/lib/postgresql-9.4.1211.jar ];
 fi
 
 ## Start Geoserver after rename postgres jar
-paver start_geoserver
+paver -f $HOME/$GIT_REPO/pavement.py start_geoserver
 
 ## Create vulnerability groups
 python ./manage.py import_vuln_geo_applicability_csv $HOME/$GIT_REPO/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
