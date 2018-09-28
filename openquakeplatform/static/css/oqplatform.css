@@ -408,6 +408,9 @@ div#search-inp:after {
     width: 90%;
     float: left;
 }
+#home_ul li .oq_div_two p { 
+    font-size: 15px;
+}
 .hero-unit .btn {
     background: #f7931e;
     color: #fff;
@@ -660,6 +663,9 @@ form.user-settings {
    }
    #footer .container {
        width: 100%!important;
+   }
+   #home_ul li .oq_div_two p {
+       display: none;
    }
 }
 @media (max-width: 640px) {
