@@ -89,6 +89,8 @@ exec_test () {
 
 updatelayer() {
     cd ~/geonode
+    paver stop_geoserver
+    paver start_geoserver
     python manage.py updatelayers
 }
 
