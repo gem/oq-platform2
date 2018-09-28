@@ -315,8 +315,8 @@ cd ~/geonode
 python manage.py makemigrations
 python manage.py migrate
 
-paver stop_geoserver
-paver start_geoserver
+paver -f $HOME/$GIT_REPO/pavement.py stop_geoserver
+paver -f $HOME/$GIT_REPO/pavement.py start_geoserver
 python manage.py updatelayers -u GEM
 
 # Create programmatically ISC and GHEC json
