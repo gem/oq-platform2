@@ -314,6 +314,9 @@ python ./manage.py add_documents
 cd ~/geonode
 python manage.py makemigrations
 python manage.py migrate
+
+paver stop_geoserver
+paver start_geoserver
 python manage.py updatelayers -u GEM
 
 # Create programmatically ISC and GHEC json
