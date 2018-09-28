@@ -403,7 +403,7 @@ def start_geoserver(options):
             javapath = 'START /B "" "' + javapath_opt + '"'
 
         sh((
-            '%(javapath)s -Xmx1024m -XX:MaxPermSize=512m'
+            '%(javapath)s -Xmx2048m -XX:MaxPermSize=1024m'
             ' -DGEOSERVER_DATA_DIR=%(data_dir)s'
             # workaround for JAI sealed jar issue and jetty classloader
             ' -Dorg.eclipse.jetty.server.webapp.parentLoaderPriority=true'
