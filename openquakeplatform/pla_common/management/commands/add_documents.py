@@ -384,12 +384,7 @@ class Command(BaseCommand):
 
             field = srt_full['fields']
 
-            new_srt = SpatialRepresentationType.objects.model(
-                is_choice=field['is_choice'],
-                gn_description=field['gn_description'],
-                identifier=field['identifier'],
-                description=field['description']
-                )
+            new_srt = SpatialRepresentationType.objects.model(**field)
             new_srt.save()
             srt_old_refs[srt_full['pk']] = new_srt
 
