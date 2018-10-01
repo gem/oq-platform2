@@ -5,6 +5,7 @@ from geonode.documents.models import Document
 from geonode.layers.models import Layer, Style, Attribute
 from geonode.maps.models import Map, MapLayer
 from geonode.base.models import TopicCategory, Region, License
+from geonode.base.models import SpatialRepresentationType
 from geonode.base.models import HierarchicalKeyword
 from geonode.base.models import ResourceBase, TaggedContentItem
 from django.contrib.auth import get_user_model
@@ -63,7 +64,7 @@ class Command(BaseCommand):
             os.path.join(
                 os.path.expanduser("~"),
                 'oq-platform2/openquakeplatform/common/gs_data/dump/'
-                'rating_overallrating.json'))
+                'rating_overall_rating.json'))
         layer_rating_json = open(layer_rating_name).read()
         layer_rating_load = json.loads(layer_rating_json)
 
@@ -135,6 +136,15 @@ class Command(BaseCommand):
         license_json = open(license_name).read()
         license_load = json.loads(license_json)
 
+        # Read SpatialRepresentationType json
+        srt_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'base_spatialrepresentationtype.json'))
+        srt_json = open(srt_name).read()
+        srt_load = json.loads(srt_json)
+
         # Read tag json
         tag_name = (
             os.path.join(
@@ -149,7 +159,7 @@ class Command(BaseCommand):
             os.path.join(
                 os.path.expanduser("~"),
                 'oq-platform2/openquakeplatform/common/gs_data/dump/'
-                '/taggit_taggeditem.json'))
+                'taggit_taggeditem.json'))
         tag_json = open(tag_name).read()
         tag_item_load = json.loads(tag_json)
 
@@ -265,7 +275,9 @@ class Command(BaseCommand):
                 Reg = Region.objects.get(name=name)
                 newmap.regions.add(Reg)
 
-            print('Imported map: %s' % mapp['title'])
+            print(
+                'Imported map: %s with pk %s' % (
+                    mapp['title'], map_full['pk']))
 
         # Import maplayers
         for maplayer_full in maplayer_load:
@@ -322,7 +334,6 @@ class Command(BaseCommand):
             if doc['object_id'] is not None:
                 object_id = map_old_refs[doc['object_id']].pk
 
-            # print('Old %s New Object_id: %s' % (doc['object_id'], object_id))
             # Save documents
             newdoc = Document.objects.model(
                 uuid=res['uuid'],
@@ -367,12 +378,27 @@ class Command(BaseCommand):
             title_en='isc_viewer_measure').exclude(
             title_en='ghec_viewer_measure').delete()
 
+        # Import SpatialRepresentationType
+        srt_old_refs = {}
+        for srt_full in srt_load:
+
+            field = srt_full['fields']
+
+            new_srt = SpatialRepresentationType.objects.model(**field)
+            new_srt.save()
+            srt_old_refs[srt_full['pk']] = new_srt
+
         # Import layers
         layer_old_refs = {}
         for layer_full in layer_load:
 
             layer = layer_full['fields']
             base = new_resources[layer_full['pk']]
+
+            # Instance default SpatialRepresentationType
+            srt = (srt_old_refs[srt_full['pk']]
+                   if base['spatial_representation_type'] is not None
+                   else None)
 
             # Istance user
             User = get_user_model()
@@ -385,24 +411,25 @@ class Command(BaseCommand):
 
             attrs = base_attrs(base)
             attrs.update({
-                'owner': owner,
-                'name': layer['name'],
-                'category': (old_category_refs[base['category']]
+                "owner": owner,
+                "name": layer['name'],
+                "category": (old_category_refs[base['category']]
                              if base['category'] is not None
                              else None),
-                'license': (old_license_refs[base['license']]
+                "license": (old_license_refs[base['license']]
                             if base['license'] is not None
                             else None),
-                'typename': layer['typename'],
-                'store': layer['store'],
-                'workspace': layer['workspace'],
-                'default_style': default_style,
-                'storeType': layer['storeType'],
+                "typename": layer['typename'],
+                "store": layer['store'],
+                "workspace": layer['workspace'],
+                "default_style": default_style,
+                "storeType": layer['storeType'],
                 "bbox_x0": base['bbox_x0'],
                 "bbox_x1": base['bbox_x1'],
                 "bbox_y0": base['bbox_y0'],
                 "bbox_y1": base['bbox_y1'],
-                'supplemental_information_en': base['supplemental_information']
+                "spatial_representation_type": srt,
+                "supplemental_information_en": base['supplemental_information']
             })
 
             # Save layer
@@ -429,7 +456,9 @@ class Command(BaseCommand):
             for sty in layer['styles']:
                 new_layer.styles.add(old_style_refs[sty])
 
-            print('Imported layer: %s' % layer['name'])
+            print(
+                'Imported layer: %s with pk: %s' % (
+                    layer['name'], layer_full['pk']))
 
         # Import layer attribute
         for attr in layer_attr_load:
