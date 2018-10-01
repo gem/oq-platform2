@@ -326,10 +326,14 @@ python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/de
 cd ~/
 
 # sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
-sudo -u postgres psql -d geonode_dev -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
-
+# sudo -u postgres psql -d geonode_dev -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
+# 
 # sql assumpcao2014 layer
-sudo -u postgres psql -d geonode_dev -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
+# sudo -u postgres psql -d geonode_dev -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
+
+for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
+    sudo -u postgres psql -d geonode_dev -c '\copy '$lay' FROM '$HOME/oq-private/old_platform_documents/sql_layers/out/$lay''
+done
 
 updatelayer
 
