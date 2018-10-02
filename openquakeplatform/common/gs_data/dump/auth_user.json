@@ -220,6 +220,28 @@
         }
     },
     {
+        "pk": 787, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "muriel", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": true, 
+            "last_login": "2018-07-24T05:27:33.070", 
+            "groups": [
+                [
+                    "vulnerability-editors"
+                ]
+            ], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$20000$cg1e67YPxLK5$Z3hMAsoudSuAuGmBALaVL3W2a0JYTn/5LekUtWxVmU8=", 
+            "email": "demo12@demo.demo", 
+            "date_joined": "2015-09-08T04:45:24"
+        }
+    },
+    {
         "pk": 952, 
         "model": "auth.user", 
         "fields": {
