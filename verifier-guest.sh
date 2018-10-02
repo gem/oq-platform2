@@ -323,6 +323,9 @@ python manage.py updatelayers -u GEM
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
 python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
 
+# Import all vulnerability curves
+python manage.py loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json_old/all_vulnerability.json
+
 cd ~/
 
 # sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
