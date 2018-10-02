@@ -324,7 +324,7 @@ python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_
 python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
 
 # Import all vulnerability curves
-python manage.py loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json_old/all_vulnerability.json
+python manage.py loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
 
 cd ~/
 
