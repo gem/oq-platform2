@@ -342,10 +342,11 @@ if [ "$GEM_TEST_LATEST" = "true" ]; then
     cd -
 fi
 
+cd ~/geonode
+
 # Import vulnerability curves
 python manage.py loaddata -v 3 --app vulnerability $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/all_vulnerability.json
 
 ## Stop Geonode
-cd ~/geonode
 sudo supervisorctl stop openquake-webui
 paver -f $HOME/$GIT_REPO/pavement.py stop
