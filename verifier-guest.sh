@@ -178,6 +178,8 @@ sudo -u postgres psql -d geonode_dev-imports -c 'CREATE EXTENSION postgis;'
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
 sudo -u postgres psql -d geonode_dev-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
 
+sudo -u postgres psql -d geonode_dev -c 'ALTER ROLE geonode_dev SUPERUSER;'
+
 #insert line in pg_hba.conf postgres
 if ! sudo head -n 1 /etc/postgresql/9.5/main/pg_hba.conf | grep -q "local \+all \+$GEO_DBUSER \+md5"; then
     sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
