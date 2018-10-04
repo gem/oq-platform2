@@ -1,4 +1,4 @@
-# Copyright (c) 2015, GEM Foundation.
+# Copyright (c) 2018, GEM Foundation.
 #
 # This program is free software: you can redistribute it and/or modify
 # under the terms of the GNU Affero General Public License as published
@@ -14,34 +14,22 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.contrib.gis.db import models
-from django.db.models.sql.constants import QUERY_TERMS
-from django.db.backends.postgresql_psycopg2.base import DatabaseWrapper
-from django.db.backends.postgresql_psycopg2.operations import (
-    DatabaseOperations)
-
-QUERY_TERMS.add('unaccent')
-DatabaseWrapper.operators['unaccent'] = '=~@ %s'
+from django.db.models import Lookup
+from django.db.models.fields import Field
 
 
-def my_lookup_cast(self, lookup_type, internal_type=None):
+@Field.register_lookup
+class CaseInsensitiveMatch(Lookup):
     """
-    Adding 'unaccent' to the standard lookup_cast
+    Adding 'unaccent' to the standard lookup_name
     """
-    lookup = '%s'
+    lookup_name = 'unaccent'
 
-    # Cast text lookups to text to allow things like filter(x__contains=4)
-    if lookup_type in ('iexact', 'contains', 'icontains', 'unaccent',
-                       'startswith', 'istartswith', 'endswith', 'iendswith'):
-        lookup = "%s::text"
-
-    # Use UPPER(x) for case-insensitive lookups; it's faster.
-    if lookup_type in ('iexact', 'icontains', 'unaccent',
-                       'istartswith', 'iendswith'):
-        lookup = 'UPPER(%s)' % lookup
-
-    return lookup
-
-DatabaseOperations.lookup_cast = my_lookup_cast
+    def as_sql(self, compiler, connection):
+        lhs, lhs_params = self.process_lhs(compiler, connection)
+        rhs, rhs_params = self.process_rhs(compiler, connection)
+        params = lhs_params + rhs_params
+        return '%s =~@ %s' % (lhs, rhs), params
 
 
 class UnaccentCharField(models.CharField):
@@ -60,7 +48,8 @@ class UnaccentCharField(models.CharField):
             # filter(authors__unaccent=author), with author='test'
             # would produce a query like:
             # SELECT [...] WHERE
-            # UPPER("vulnerability_generalinformation"."authors"::text) =~@ %test%
+            # UPPER
+            # ("vulnerability_generalinformation"."authors"::text) =~@ %test%
             return ["%%%s%%" % connection.ops.prep_for_like_query(value)]
         else:
             return super(UnaccentCharField, self).get_db_prep_lookup(
@@ -72,3 +61,4 @@ class UnaccentCharField(models.CharField):
         else:
             return super(UnaccentCharField, self).get_prep_lookup(lookup_type,
                                                                   value)
+    pass
