@@ -344,6 +344,9 @@ python manage.py updatelayers -u GEM
 python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
 python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
 
+# Import vulnerability curves
+python manage.py loaddata -v 3 --app vulnerability $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/all_vulnerability.json
+
 cd ~/
 
 # sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
@@ -369,9 +372,6 @@ if [ "$GEM_TEST_LATEST" = "true" ]; then
 fi
 
 cd ~/geonode
-
-# Import vulnerability curves
-python manage.py loaddata -v 3 --app vulnerability $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/all_vulnerability.json
 
 ## Stop Geonode
 sudo supervisorctl stop openquake-webui
