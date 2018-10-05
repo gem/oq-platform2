@@ -230,9 +230,6 @@ else
     cd -
 fi
 
-# override dev-config yml into the Geonode
-patch < $HOME/$GIT_REPO/bin/dev_config_yml.patch
-
 ## install engine
 sudo apt-get install -y software-properties-common
 # sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
@@ -271,11 +268,15 @@ fi
 ## Setup environment
 geonode_setup_env
 
-## Clone oq-private
-# git clone git@gitlab.openquake.org:openquake/oq-private.git
-
 ## Sync and setup GeoNode
 cd ~/geonode
+
+# override dev-config yml into the Geonode
+if [ "$REINSTALL" ]; then
+    git checkout dev_config.yml
+fi
+
+patch < $HOME/$GIT_REPO/openquakeplatform/bin/dev_config_yml.patch
 
 paver -f $HOME/$GIT_REPO/pavement.py setup
 
