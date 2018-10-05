@@ -230,6 +230,9 @@ else
     cd -
 fi
 
+# override dev-config yml into the Geonode
+patch < $HOME/$GIT_REPO/bin/dev_config_yml.patch
+
 ## install engine
 sudo apt-get install -y software-properties-common
 # sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
