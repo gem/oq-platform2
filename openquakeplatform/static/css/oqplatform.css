@@ -677,6 +677,22 @@ form.user-settings {
     }
 }        
 @media (max-width: 991px) {
+   .oq-right-help,
+   .oq-right-search,
+   .oq-right-share {
+       display: none!important;
+   }
+   ul#dropdown-menu {
+       width: 100%;
+       margin: 0 auto 0px;
+       text-align: center;
+       right: 0;
+   }
+   ul.dropdown-menu li,
+   ul.dropdown-menu li a {
+       text-align:center;
+       padding: 10px 0!important;
+   }
    .navbar-toggle {
         margin-right: 90px;
         padding: 0px 10px;
