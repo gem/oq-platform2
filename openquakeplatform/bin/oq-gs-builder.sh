@@ -1040,6 +1040,7 @@ all_data_restore () {
     IFS="$oldifs"
 
     return $ret
+
 }
 
 #
@@ -1101,7 +1102,7 @@ geoserver_population () {
             cp -rn "${srcdir}/${app}/gs_data/tmpl/"* "${dstdir}/build-gs-tree/tmpl/${app}"
         fi
     done
-
+ 
     rm -rf output
     ${bindir}/oq-gs-builder.sh drop
     ${bindir}/oq-gs-builder.sh restore "${dstdir}/build-gs-tree" "$db_name" "$db_user" "$db_pass"
@@ -1113,6 +1114,7 @@ geoserver_population () {
             cp -rn "${dstdir}/build-gs-tree/tmpl/${app}/datastore/"* "${gs_datadir}/workspaces/${workspace_name}/"
         fi
     done
+    rm -rf $HOME/oq-platform2/openquakeplatform/build-gs-tree
 }
 
 

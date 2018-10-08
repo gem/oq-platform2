@@ -1,0 +1,15 @@
+[
+    {
+        "pk": 1, 
+        "model": "agon_ratings.overallrating", 
+        "fields": {
+            "category": 1, 
+            "rating": "4.5", 
+            "content_type": [
+                "maps", 
+                "map"
+            ], 
+            "object_id": 651
+        }
+    } 
+]
