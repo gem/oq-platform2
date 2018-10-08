@@ -684,7 +684,7 @@ form.user-settings {
    }
    ul#dropdown-menu {
        width: 100%;
-       margin: 0 auto 0px;
+       margin: 0 auto 0px!important;
        text-align: center;
        right: 0;
    }
