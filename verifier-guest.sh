@@ -370,6 +370,9 @@ done
 
 updatelayer
 
+cd ~/geonode
+python ./manage.py add_maps
+
 cd ~/
 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
