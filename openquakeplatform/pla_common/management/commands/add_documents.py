@@ -245,6 +245,10 @@ class Command(BaseCommand):
                 center_y=maps['center_y'],
                 owner=owner,
                 abstract=mapp['abstract'],
+                bbox_x0=mapp['bbox_x0'],
+                bbox_x1=mapp['bbox_x1'],
+                bbox_y0=mapp['bbox_y0'],
+                bbox_y1=mapp['bbox_y1'],
                 purpose=mapp['purpose'],
                 category=(old_category_refs[mapp['category']]
                           if mapp['category'] is not None
