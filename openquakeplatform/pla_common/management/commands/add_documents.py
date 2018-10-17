@@ -285,22 +285,22 @@ class Command(BaseCommand):
             # Update thumb_url resourcebase
             # for th_full in th_load:
 
-            if new_thumb[map_full['pk']] is not None
-            th = new_thumb[map_full['pk']]
-            ths = new_thumbs[map_full['pk']]
-            print(th['pk'])
+            # if new_thumb[map_full['pk']] is not None
+            # th = new_thumb[map_full['pk']]
+            # ths = new_thumbs[map_full['pk']]
+            # print(th['pk'])
 
-            # Istance Map
-            # if map_id is not None:
-            map_id = Map.objects.get(uuid=mapp['uuid'])
-            # else:
-            #    map_id = None
+            # # Istance Map
+            # # if map_id is not None:
+            # map_id = Map.objects.get(uuid=mapp['uuid'])
+            # # else:
+            # #    map_id = None
 
-            ResourceBase.objects.filter(id=map_id[pk]).update(
-                thumbnail_url=ths['thumb_file'])
+            # ResourceBase.objects.filter(id=map_id[pk]).update(
+            #     thumbnail_url=ths['thumb_file'])
 
-            print(
-                'Update thumb_url for resourcebasewith pk: %s' % map_id)
+            # print(
+            #     'Update thumb_url for resourcebasewith pk: %s' % map_id)
 
             # Istance and add regions
             regions = [region for region in mapp['regions']]
