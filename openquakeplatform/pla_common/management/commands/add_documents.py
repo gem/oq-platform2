@@ -6,6 +6,7 @@ from geonode.layers.models import Layer, Style, Attribute
 from geonode.maps.models import Map, MapLayer
 from geonode.base.models import TopicCategory, Region, License
 from geonode.base.models import SpatialRepresentationType
+# from geonode.base.models import Get_thumbnail_url
 from geonode.base.models import HierarchicalKeyword
 from geonode.base.models import ResourceBase, TaggedContentItem
 from django.contrib.auth import get_user_model
@@ -17,7 +18,7 @@ from decimal import Decimal
 def base_attrs(base):
     base_new = {}
     base_new.update(base)
-    base_new['thumbnail_url'] = base['thumbnail']
+    # base_new['thumbnail_url'] = base['thumbnail']
     base_new['title_en'] = base['title']
     del base_new['thumbnail']
     del base_new['distribution_description']
@@ -163,6 +164,22 @@ class Command(BaseCommand):
         tag_json = open(tag_name).read()
         tag_item_load = json.loads(tag_json)
 
+        # Read SpatialRepresentationType json
+        th_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-private/old_platform_documents/json/'
+                'maps_thumbs.json'))
+        th_json = open(th_name).read()
+        th_load = json.loads(th_json)
+
+        # Thumbs json with pk equal pk of maps json
+        new_thumb = {}
+        new_thumbs = {}
+        for thumb in th_load:
+            new_thumb[thumb['pk']] = thumb['pk']
+            new_thumbs[thumb['pk']] = thumb['fields']
+
         # Delete all licenses
         License.objects.all().delete()
         old_license_refs = {}
@@ -239,6 +256,7 @@ class Command(BaseCommand):
                 uuid=mapp['uuid'],
                 projection=maps['projection'],
                 title_en=mapp['title'],
+                metadata_xml=mapp['metadata_xml'],
                 zoom=maps['zoom'],
                 last_modified=maps['last_modified'],
                 center_x=maps['center_x'],
@@ -263,6 +281,26 @@ class Command(BaseCommand):
                 )
             newmap.save()
             map_old_refs[map_full['pk']] = newmap
+
+            # Update thumb_url resourcebase
+            # for th_full in th_load:
+
+            if new_thumb[map_full['pk']] is not None
+            th = new_thumb[map_full['pk']]
+            ths = new_thumbs[map_full['pk']]
+            print(th['pk'])
+
+            # Istance Map
+            # if map_id is not None:
+            map_id = Map.objects.get(uuid=mapp['uuid'])
+            # else:
+            #    map_id = None
+
+            ResourceBase.objects.filter(id=map_id[pk]).update(
+                thumbnail_url=ths['thumb_file'])
+
+            print(
+                'Update thumb_url for resourcebasewith pk: %s' % map_id)
 
             # Istance and add regions
             regions = [region for region in mapp['regions']]
@@ -313,6 +351,9 @@ class Command(BaseCommand):
                 transparent=mapslayer['transparent']
                 )
             newmaplayer.save()
+
+            print(
+                'Imported maplayer: %s' % map_id)
 
         # Import documents
         for doc_full in doc_load:
