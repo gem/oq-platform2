@@ -167,8 +167,8 @@ class Command(BaseCommand):
         th_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                # 'oq-private/old_platform_documents/json/'
-                'dump/maps_thumbs.json'))
+                'oq-private/old_platform_documents/json/'
+                'maps_thumbs.json'))
         th_json = open(th_name).read()
         th_load = json.loads(th_json)
 
