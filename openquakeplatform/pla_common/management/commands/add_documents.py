@@ -164,13 +164,13 @@ class Command(BaseCommand):
         tag_item_load = json.loads(tag_json)
 
         # Read SpatialRepresentationType json
-        th_name = (
-            os.path.join(
-                os.path.expanduser("~"),
-                # 'oq-private/old_platform_documents/json/'
-                'dump/maps_thumbs.json'))
-        th_json = open(th_name).read()
-        th_load = json.loads(th_json)
+        # th_name = (
+        #     os.path.join(
+        #         os.path.expanduser("~"),
+        #         # 'oq-private/old_platform_documents/json/'
+        #         'dump/maps_thumbs.json'))
+        # th_json = open(th_name).read()
+        # th_load = json.loads(th_json)
 
         # Delete all licenses
         License.objects.all().delete()
@@ -278,13 +278,13 @@ class Command(BaseCommand):
             map_old_refs[map_full['pk']] = newmap
 
             # Import thumbs in Resourcebase
-            for th in th_load:
+            # for th in th_load:
 
-                field = th['fields']
+            #     field = th['fields']
 
-                if mapp['thumbnail'] == th['pk']:
-                    ResourceBase.objects.filter(uuid=mapp['uuid']).update(
-                        thumbnail_url=field['thumb_file'])
+            #     if mapp['thumbnail'] == th['pk']:
+            #         ResourceBase.objects.filter(uuid=mapp['uuid']).update(
+            #             thumbnail_url=field['thumb_file'])
 
             # Istance and add regions
             regions = [region for region in mapp['regions']]
