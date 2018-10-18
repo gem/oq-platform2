@@ -250,7 +250,6 @@ class Command(BaseCommand):
                 title_en=mapp['title'],
                 metadata_xml=mapp['metadata_xml'],
                 zoom=maps['zoom'],
-                last_modified=maps['last_modified'],
                 center_x=maps['center_x'],
                 center_y=maps['center_y'],
                 owner=owner,
@@ -262,6 +261,8 @@ class Command(BaseCommand):
                 purpose=mapp['purpose'],
                 csw_wkt_geometry=mapp['csw_wkt_geometry'],
                 csw_anytext=mapp['csw_anytext'],
+                date=mapp['csw_insert_date'],
+                srid=mapp['srid'],
                 category=(old_category_refs[mapp['category']]
                           if mapp['category'] is not None
                           else None),
@@ -378,6 +379,7 @@ class Command(BaseCommand):
                          else None),
                 content_type=content_type,
                 edition=res['edition'],
+                date=res['csw_insert_date'],
                 supplemental_information_en=res['supplemental_information'],
                 popular_count=doc['popular_count'],
                 share_count=doc['share_count']
