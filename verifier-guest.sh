@@ -337,6 +337,7 @@ $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-priv
 ## Add old documents
 cd ~/geonode
 mkdir -p $HOME/geonode/geonode/uploaded/
+cp -r $HOME/oq-private/old_platform_documents/thumbs $HOME/geonode/geonode/uploaded/
 cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
 python ./manage.py add_documents
 
@@ -357,12 +358,6 @@ python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/de
 python manage.py loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
 
 cd ~/
-
-# sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
-# sudo -u postgres psql -d geonode_dev -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
-# 
-# sql assumpcao2014 layer
-# sudo -u postgres psql -d geonode_dev -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
 
 for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
     sudo -u postgres psql -d geonode_dev -c '\copy '$lay' FROM '$HOME/oq-private/old_platform_documents/sql_layers/out/$lay''
