@@ -6,7 +6,6 @@ from geonode.layers.models import Layer, Style, Attribute
 from geonode.maps.models import Map, MapLayer
 from geonode.base.models import TopicCategory, Region, License
 from geonode.base.models import SpatialRepresentationType
-# from geonode.base.models import Get_thumbnail_url
 from geonode.base.models import HierarchicalKeyword
 from geonode.base.models import ResourceBase, TaggedContentItem
 from django.contrib.auth import get_user_model
@@ -165,13 +164,13 @@ class Command(BaseCommand):
         tag_item_load = json.loads(tag_json)
 
         # Read SpatialRepresentationType json
-        th_name = (
-            os.path.join(
-                os.path.expanduser("~"),
-                # 'oq-private/old_platform_documents/json/'
-                'dump/maps_thumbs.json'))
-        th_json = open(th_name).read()
-        th_load = json.loads(th_json)
+        # th_name = (
+        #     os.path.join(
+        #         os.path.expanduser("~"),
+        #         # 'oq-private/old_platform_documents/json/'
+        #         'dump/maps_thumbs.json'))
+        # th_json = open(th_name).read()
+        # th_load = json.loads(th_json)
 
         # Delete all licenses
         License.objects.all().delete()
@@ -277,21 +276,14 @@ class Command(BaseCommand):
             newmap.save()
             map_old_refs[map_full['pk']] = newmap
 
-            #
-            # new_thumb = {}
-            # new_thumbs = {}
-            for th in th_load:
+            # Import thumbs in Resourcebase
+            # for th in th_load:
 
-                # new_thumb[th['pk']] = th['pk']
-                # new_thumbs[map_full['pk']] = th['fields']
-                field = th['fields']
+            #     field = th['fields']
 
-                # # Update thumb_url resourcebase
-                # if mapp['thumbnail'] in new_thumb:
-                #     thss = new_thumbs[map_full['pk']]
-                if mapp['thumbnail'] == th['pk']:
-                    ResourceBase.objects.filter(uuid=mapp['uuid']).update(
-                        thumbnail_url=field['thumb_file'])
+            #     if mapp['thumbnail'] == th['pk']:
+            #         ResourceBase.objects.filter(uuid=mapp['uuid']).update(
+            #             thumbnail_url=field['thumb_file'])
 
             # Istance and add regions
             regions = [region for region in mapp['regions']]
