@@ -173,13 +173,6 @@ class Command(BaseCommand):
         th_json = open(th_name).read()
         th_load = json.loads(th_json)
 
-        # Thumbs json with pk equal pk of maps json
-        new_thumb = {}
-        new_thumbs = {}
-        for thumb in th_load:
-            new_thumb[thumb['pk']] = thumb['pk']
-            new_thumbs[thumb['pk']] = thumb['fields']
-
         # Delete all licenses
         License.objects.all().delete()
         old_license_refs = {}
@@ -268,6 +261,8 @@ class Command(BaseCommand):
                 bbox_y0=mapp['bbox_y0'],
                 bbox_y1=mapp['bbox_y1'],
                 purpose=mapp['purpose'],
+                csw_wkt_geometry=mapp['csw_wkt_geometry'],
+                csw_anytext=mapp['csw_anytext'],
                 category=(old_category_refs[mapp['category']]
                           if mapp['category'] is not None
                           else None),
@@ -282,25 +277,21 @@ class Command(BaseCommand):
             newmap.save()
             map_old_refs[map_full['pk']] = newmap
 
-            # Update thumb_url resourcebase
-            # for th_full in th_load:
+            #
+            # new_thumb = {}
+            # new_thumbs = {}
+            for th in th_load:
 
-            # if new_thumb[map_full['pk']] is not None
-            # th = new_thumb[map_full['pk']]
-            # ths = new_thumbs[map_full['pk']]
-            # print(th['pk'])
+                # new_thumb[th['pk']] = th['pk']
+                # new_thumbs[map_full['pk']] = th['fields']
+                field = th['fields']
 
-            # # Istance Map
-            # # if map_id is not None:
-            # map_id = Map.objects.get(uuid=mapp['uuid'])
-            # # else:
-            # #    map_id = None
-
-            # ResourceBase.objects.filter(id=map_id[pk]).update(
-            #     thumbnail_url=ths['thumb_file'])
-
-            # print(
-            #     'Update thumb_url for resourcebasewith pk: %s' % map_id)
+                # # Update thumb_url resourcebase
+                # if mapp['thumbnail'] in new_thumb:
+                #     thss = new_thumbs[map_full['pk']]
+                if mapp['thumbnail'] == th['pk']:
+                    ResourceBase.objects.filter(uuid=mapp['uuid']).update(
+                        thumbnail_url=field['thumb_file'])
 
             # Istance and add regions
             regions = [region for region in mapp['regions']]
