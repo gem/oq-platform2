@@ -519,6 +519,7 @@ class Command(BaseCommand):
                          else None),
                 content_type=content_type,
                 edition=res['edition'],
+                date=res['csw_insert_date'],
                 supplemental_information_en=res['supplemental_information'],
                 popular_count=doc['popular_count'],
                 share_count=doc['share_count']
