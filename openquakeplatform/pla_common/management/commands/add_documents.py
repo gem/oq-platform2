@@ -381,8 +381,8 @@ class Command(BaseCommand):
                 edition=res['edition'],
                 date=res['csw_insert_date'],
                 supplemental_information_en=res['supplemental_information'],
-                popular_count=res['popular_count'],
-                share_count=res['share_count']
+                popular_count=doc['popular_count'],
+                share_count=doc['share_count']
                 )
             newdoc.save()
 
