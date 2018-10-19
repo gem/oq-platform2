@@ -271,7 +271,7 @@ class Command(BaseCommand):
                          else None),
                 edition=mapp['edition'],
                 supplemental_information_en=mapp['supplemental_information'],
-                popular_count=maps['popular_count'],
+                popular_count=mapp['popular_count'],
                 share_count=maps['share_count']
                 )
             newmap.save()
