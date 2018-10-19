@@ -19,10 +19,10 @@ def base_attrs(base):
     base_new.update(base)
     # base_new['thumbnail_url'] = base['thumbnail']
     base_new['title_en'] = base['title']
-    del base_new['thumbnail']
-    del base_new['distribution_description']
-    del base_new['distribution_url']
-    del base_new['regions']
+    # del base_new['thumbnail']
+    # del base_new['distribution_description']
+    # del base_new['distribution_url']
+    # del base_new['regions']
     return base_new
 
 
@@ -439,31 +439,34 @@ class Command(BaseCommand):
                              if layer['default_style'] is not None
                              else None)
 
-            attrs = base_attrs(base)
-            attrs.update({
-                "owner": owner,
-                "name": layer['name'],
-                "category": (old_category_refs[base['category']]
-                             if base['category'] is not None
-                             else None),
-                "license": (old_license_refs[base['license']]
-                            if base['license'] is not None
-                            else None),
-                "typename": layer['typename'],
-                "store": layer['store'],
-                "workspace": layer['workspace'],
-                "default_style": default_style,
-                "storeType": layer['storeType'],
-                "bbox_x0": base['bbox_x0'],
-                "bbox_x1": base['bbox_x1'],
-                "bbox_y0": base['bbox_y0'],
-                "bbox_y1": base['bbox_y1'],
-                "spatial_representation_type": srt,
-                "supplemental_information_en": base['supplemental_information']
-            })
+            # attrs = base_attrs(base)
+            # attrs.update({
+            new_layer = Layer.objects.model(
+                owner=owner,
+                title_en=layer['title_en'],
+                name=layer['name'],
+                category=(old_category_refs[base['category']]
+                          if base['category'] is not None
+                          else None),
+                license=(old_license_refs[base['license']]
+                         if base['license'] is not None
+                         else None),
+                typename=layer['typename'],
+                store=layer['store'],
+                workspace=layer['workspace'],
+                default_style=default_style,
+                storeType=layer['storeType'],
+                bbox_x0=base['bbox_x0'],
+                bbox_x1=base['bbox_x1'],
+                bbox_y0=base['bbox_y0'],
+                bbox_y1=base['bbox_y1'],
+                spatial_representation_type=srt,
+                thumbnail_url=base['thumbnail_url'],
+                supplemental_information_en=base['supplemental_information']
+            )
 
             # Save layer
-            new_layer = Layer.objects.model(**attrs)
+            # new_layer = Layer.objects.model(**attrs)
             new_layer.save()
             layer_old_refs[layer_full['pk']] = new_layer
 
