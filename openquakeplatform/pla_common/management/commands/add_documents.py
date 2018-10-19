@@ -402,6 +402,7 @@ class Command(BaseCommand):
                 purpose=mapp['purpose'],
                 csw_wkt_geometry=mapp['csw_wkt_geometry'],
                 csw_anytext=mapp['csw_anytext'],
+                date=mapp['csw_insert_date'],
                 category=(old_category_refs[mapp['category']]
                           if mapp['category'] is not None
                           else None),
