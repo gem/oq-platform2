@@ -229,6 +229,146 @@ class Command(BaseCommand):
             new_style.save()
             old_style_refs[pk] = new_style
 
+        # Delete all layer
+        Layer.objects.all().exclude(
+            title_en='isc_viewer_measure').exclude(
+            title_en='ghec_viewer_measure').delete()
+
+        # Import SpatialRepresentationType
+        srt_old_refs = {}
+        for srt_full in srt_load:
+
+            field = srt_full['fields']
+
+            new_srt = SpatialRepresentationType.objects.model(**field)
+            new_srt.save()
+            srt_old_refs[srt_full['pk']] = new_srt
+
+        # Import layers
+        layer_old_refs = {}
+        for layer_full in layer_load:
+
+            layer = layer_full['fields']
+            base = new_resources[layer_full['pk']]
+
+            # Instance default SpatialRepresentationType
+            srt = (srt_old_refs[srt_full['pk']]
+                   if base['spatial_representation_type'] is not None
+                   else None)
+
+            # Istance user
+            User = get_user_model()
+            owner = User.objects.get(username=base['owner'][0])
+
+            # Instance default style
+            default_style = (old_style_refs[layer['default_style']]
+                             if layer['default_style'] is not None
+                             else None)
+
+            attrs = base_attrs(base)
+            attrs.update({
+                "owner": owner,
+                "name": layer['name'],
+                "category": (old_category_refs[base['category']]
+                             if base['category'] is not None
+                             else None),
+                "license": (old_license_refs[base['license']]
+                            if base['license'] is not None
+                            else None),
+                "typename": layer['typename'],
+                "store": layer['store'],
+                "workspace": layer['workspace'],
+                "default_style": default_style,
+                "storeType": layer['storeType'],
+                # "bbox_x0": base['bbox_x0'],
+                # "bbox_x1": base['bbox_x1'],
+                # "bbox_y0": base['bbox_y0'],
+                # "bbox_y1": base['bbox_y1'],
+                "spatial_representation_type": srt,
+                "supplemental_information_en": base['supplemental_information']
+            })
+
+            # Save layer
+            new_layer = Layer.objects.model(**attrs)
+            new_layer.save()
+            layer_old_refs[layer_full['pk']] = new_layer
+
+            # Istance and add regions
+            regions = [region for region in base['regions']]
+
+            for reg in regions:
+                # Search in old region json
+                for region in region_load:
+                    field = region['fields']
+                    if region['pk'] == reg:
+                        name = field['name']
+                    else:
+                        continue
+                # Add region to each document
+                Reg = Region.objects.get(name=name)
+                new_layer.regions.add(Reg)
+
+            # Instance and add styles
+            for sty in layer['styles']:
+                new_layer.styles.add(old_style_refs[sty])
+
+            print(
+                'Imported layer: %s with pk: %s' % (
+                    layer['name'], layer_full['pk']))
+
+        # Import layer attribute
+        for attr in layer_attr_load:
+
+            field = attr['fields']
+            layer_id = layer_old_refs[field['layer']]
+
+            new_attr = Attribute.objects.model(
+                count=field['count'],
+                layer=layer_id,
+                description=field['description'],
+                min=field['min'],
+                attribute_label=field['attribute_label'],
+                attribute=field['attribute'],
+                display_order=field['display_order'],
+                unique_values=field['unique_values'],
+                median=field['median'],
+                sum=field['sum'],
+                visible=field['visible'],
+                last_stats_updated=field['last_stats_updated'],
+                stddev=field['stddev'],
+                attribute_type=field['attribute_type'],
+                average=field['average'],
+                max=field['max']
+                )
+            new_attr.save()
+
+        # Import layer rating
+        for rating in layer_rating_load:
+
+            field = rating['fields']
+
+            # Istance content_type
+            ctype_name = field['content_type']
+            if ctype_name is not None:
+                r_type = [r_type for r_type in field['content_type']]
+                label_type = r_type[0]
+                cont_type = r_type[1]
+                content_type = ContentType.objects.get(
+                    app_label=label_type, model=cont_type)
+
+            object_id = None
+            if field['object_id'] is not None:
+                object_id = layer_old_refs[field['object_id']].pk
+
+            OverallRating.objects.all().delete()
+            new_rating = OverallRating.objects.model(
+                category=field['category'],
+                rating=Decimal(value=field['rating']),
+                object_id=object_id,
+                content_type=content_type
+                )
+            new_rating.save()
+
         # Import maps
         map_old_refs = {}
         for map_full in maps_load:
@@ -255,10 +395,10 @@ class Command(BaseCommand):
                 center_y=maps['center_y'],
                 owner=owner,
                 abstract=mapp['abstract'],
-                bbox_x0=mapp['bbox_x0'],
-                bbox_x1=mapp['bbox_x1'],
-                bbox_y0=mapp['bbox_y0'],
-                bbox_y1=mapp['bbox_y1'],
+                # bbox_x0=mapp['bbox_x0'],
+                # bbox_x1=mapp['bbox_x1'],
+                # bbox_y0=mapp['bbox_y0'],
+                # bbox_y1=mapp['bbox_y1'],
                 purpose=mapp['purpose'],
                 csw_wkt_geometry=mapp['csw_wkt_geometry'],
                 csw_anytext=mapp['csw_anytext'],
@@ -277,13 +417,13 @@ class Command(BaseCommand):
             map_old_refs[map_full['pk']] = newmap
 
             # Import thumbs in Resourcebase
-            for th in th_load:
+            # for th in th_load:
 
-                field = th['fields']
+            #     field = th['fields']
 
-                if mapp['thumbnail'] == th['pk']:
-                    ResourceBase.objects.filter(uuid=mapp['uuid']).update(
-                        thumbnail_url=field['thumb_file'])
+            #     if mapp['thumbnail'] == th['pk']:
+            #         ResourceBase.objects.filter(uuid=mapp['uuid']).update(
+            #             thumbnail_url=field['thumb_file'])
 
             # Istance and add regions
             regions = [region for region in mapp['regions']]
@@ -400,146 +540,6 @@ class Command(BaseCommand):
                 newdoc.regions.add(Reg)
 
             print('Imported document: %s' % res['title'])
-
-        # Delete all layer
-        Layer.objects.all().exclude(
-            title_en='isc_viewer_measure').exclude(
-            title_en='ghec_viewer_measure').delete()
-
-        # Import SpatialRepresentationType
-        srt_old_refs = {}
-        for srt_full in srt_load:
-
-            field = srt_full['fields']
-
-            new_srt = SpatialRepresentationType.objects.model(**field)
-            new_srt.save()
-            srt_old_refs[srt_full['pk']] = new_srt
-
-        # Import layers
-        layer_old_refs = {}
-        for layer_full in layer_load:
-
-            layer = layer_full['fields']
-            base = new_resources[layer_full['pk']]
-
-            # Instance default SpatialRepresentationType
-            srt = (srt_old_refs[srt_full['pk']]
-                   if base['spatial_representation_type'] is not None
-                   else None)
-
-            # Istance user
-            User = get_user_model()
-            owner = User.objects.get(username=base['owner'][0])
-
-            # Instance default style
-            default_style = (old_style_refs[layer['default_style']]
-                             if layer['default_style'] is not None
-                             else None)
-
-            attrs = base_attrs(base)
-            attrs.update({
-                "owner": owner,
-                "name": layer['name'],
-                "category": (old_category_refs[base['category']]
-                             if base['category'] is not None
-                             else None),
-                "license": (old_license_refs[base['license']]
-                            if base['license'] is not None
-                            else None),
-                "typename": layer['typename'],
-                "store": layer['store'],
-                "workspace": layer['workspace'],
-                "default_style": default_style,
-                "storeType": layer['storeType'],
-                "bbox_x0": base['bbox_x0'],
-                "bbox_x1": base['bbox_x1'],
-                "bbox_y0": base['bbox_y0'],
-                "bbox_y1": base['bbox_y1'],
-                "spatial_representation_type": srt,
-                "supplemental_information_en": base['supplemental_information']
-            })
-
-            # Save layer
-            new_layer = Layer.objects.model(**attrs)
-            new_layer.save()
-            layer_old_refs[layer_full['pk']] = new_layer
-
-            # Istance and add regions
-            regions = [region for region in base['regions']]
-
-            for reg in regions:
-                # Search in old region json
-                for region in region_load:
-                    field = region['fields']
-                    if region['pk'] == reg:
-                        name = field['name']
-                    else:
-                        continue
-                # Add region to each document
-                Reg = Region.objects.get(name=name)
-                new_layer.regions.add(Reg)
-
-            # Instance and add styles
-            for sty in layer['styles']:
-                new_layer.styles.add(old_style_refs[sty])
-
-            print(
-                'Imported layer: %s with pk: %s' % (
-                    layer['name'], layer_full['pk']))
-
-        # Import layer attribute
-        for attr in layer_attr_load:
-
-            field = attr['fields']
-            layer_id = layer_old_refs[field['layer']]
-
-            new_attr = Attribute.objects.model(
-                count=field['count'],
-                layer=layer_id,
-                description=field['description'],
-                min=field['min'],
-                attribute_label=field['attribute_label'],
-                attribute=field['attribute'],
-                display_order=field['display_order'],
-                unique_values=field['unique_values'],
-                median=field['median'],
-                sum=field['sum'],
-                visible=field['visible'],
-                last_stats_updated=field['last_stats_updated'],
-                stddev=field['stddev'],
-                attribute_type=field['attribute_type'],
-                average=field['average'],
-                max=field['max']
-                )
-            new_attr.save()
-
-        # Import layer rating
-        for rating in layer_rating_load:
-
-            field = rating['fields']
-
-            # Istance content_type
-            ctype_name = field['content_type']
-            if ctype_name is not None:
-                r_type = [r_type for r_type in field['content_type']]
-                label_type = r_type[0]
-                cont_type = r_type[1]
-                content_type = ContentType.objects.get(
-                    app_label=label_type, model=cont_type)
-
-            object_id = None
-            if field['object_id'] is not None:
-                object_id = layer_old_refs[field['object_id']].pk
-
-            OverallRating.objects.all().delete()
-            new_rating = OverallRating.objects.model(
-                category=field['category'],
-                rating=Decimal(value=field['rating']),
-                object_id=object_id,
-                content_type=content_type
-                )
-            new_rating.save()
 
         # Import all tags
         new_tags = {}
