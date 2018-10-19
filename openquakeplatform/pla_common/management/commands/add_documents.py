@@ -272,7 +272,7 @@ class Command(BaseCommand):
                 edition=mapp['edition'],
                 supplemental_information_en=mapp['supplemental_information'],
                 popular_count=mapp['popular_count'],
-                share_count=mapp['share_count']
+                share_count=maps['share_count']
                 )
             newmap.save()
             map_old_refs[map_full['pk']] = newmap
