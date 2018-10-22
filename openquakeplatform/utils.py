@@ -20,6 +20,13 @@ class allowed_methods(object):
         return wrapped
 
 
+def oq_is_qgis_browser(request):
+    for k in request.META:
+        if k.startswith('HTTP_GEM__QGIS_'):
+            return True
+    return False
+
+
 def oq_context_processor(request):
     """
     A custom context processor which allows injection of additional
@@ -47,6 +54,8 @@ def oq_context_processor(request):
     # Google Analytics tracking code
     # context['GOOGLE_UA'] = getattr(settings, 'GOOGLE_UA', False)
 
+    if oq_is_qgis_browser(request):
+        context['gem_qgis'] = True
 
     return context
 
