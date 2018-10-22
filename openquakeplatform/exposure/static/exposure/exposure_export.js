@@ -44,6 +44,8 @@ var startApp = function() {
 
     $('#map-tools').append('<button type="button" id="countries-list">Load Data by Region</button>');
     $('#countries-list').button().click(function() {
+        $('#countriesListDialog').style.z-index='-1!important';
+        console.log('style');
         $('#countriesListDialog').dialog('open');
     });
 

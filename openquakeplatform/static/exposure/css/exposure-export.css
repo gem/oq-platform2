@@ -1,6 +1,5 @@
 #oq-body-heading {
     padding: 0 30px; 
-    position: absolute;
     top: 45px;
     background: #fff;
     z-index: 999999;
@@ -74,12 +73,14 @@ label {
 }
 
 div#map-tools {
-    position: fixed;
-    top: 100px;
+    position: absolute;
+    top: 54px;
     right: 50px;
     z-index: 999999;
 }
-
+.ui-dialog .ui-dialog-content {
+   height: 560px!important;
+}
 span.ui-button-text {
     background: #f7931e;
     color: #fff;
