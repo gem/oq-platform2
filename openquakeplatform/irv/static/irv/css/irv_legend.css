@@ -1,11 +1,12 @@
 #mapLegend {
-    /*position: fixed;*/
+    position: fixed;
     right: 45px;
-    top: 180px;
+    top: 155px;
     background: #fff;
     padding: 22px 20px 5px 25px;
     float: right;
     border-radius: 4px;
+    z-index: -1;
 }
 optgroup {
     font-weight: 700;

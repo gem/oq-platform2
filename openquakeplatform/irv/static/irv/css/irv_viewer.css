@@ -1,8 +1,8 @@
 #map,
 #wrap,
 canvas.mapboxgl-canvas {
-    min-height: 500px!important;
-    max-height: 690px!important;
+    min-height: 700px!important;
+    max-height: 890px!important;
 }
 .pointer {
   cursor: pointer;
@@ -167,7 +167,7 @@ select#layer-list {
   z-index: 1000;
 }
 #oq-data-body-content {
-    margin: 140px 0;
+    margin: 80px 0;
 }
 .ng-scope {
     position: absolute;
@@ -186,7 +186,7 @@ div#primary-tab-widget {
     height: 635px!important;
 }
 div#project-def-widget {
-    top: 160px!important;
+    top: 138px!important;
 }
 div#ajaxErrorDialog {
     font-size: 16px;

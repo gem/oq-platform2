@@ -1,5 +1,12 @@
 #oq-body-heading {
     padding: 0 30px; 
+    position: absolute;
+    top: 45px;
+    background: #fff;
+    z-index: 999999;
+    left: 0;
+    width: 100%;
+    text-align: center;
 }
 
 #oq-body-heading h1 {
@@ -67,7 +74,10 @@ label {
 }
 
 div#map-tools {
-    margin: 10px 30px;
+    position: fixed;
+    top: 100px;
+    right: 50px;
+    z-index: 999999;
 }
 
 span.ui-button-text {
