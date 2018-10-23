@@ -362,51 +362,6 @@
         }
     },
     {
-        "pk": 25,
-        "model": "base.resourcebase",
-        "fields": {
-            "constraints_other": "",
-            "bbox_x0": "-180.0000000000",
-            "csw_mdsource": "local",
-            "distribution_description": "",
-            "csw_typename": "gmd:MD_Metadata",
-            "date_type": "publication",
-            "srid": "EPSG:4326",
-            "bbox_x1": "-90.0000000000",
-            "metadata_xml": "<gmd:MD_Metadata xmlns:gmd=\"http://www.isotc211.org/2005/gmd\"/>",
-            "edition": "",
-            "owner": [
-                "GEM"
-            ],
-            "category": 2,
-            "spatial_representation_type": null,
-            "uuid": "5b6faefc-70bf-11e4-ac4c-00163ee17841",
-            "title": "Homogeneous Active Faults",
-            "csw_schema": "http://www.isotc211.org/2005/gmd",
-            "regions": [],
-            "abstract": "The knowledge of fault positions and current activity is of vital knowledge for the calculation of seismic hazard. The current state of the art only consists of a number of national and regional databases that are compiled according to different criteria and parameters. The first version of this database therefore is a unified database that is capable of incorporating information from different sources and formats. It is accompanied by a tool for capture of new data, so that the database can continue to compile faults from around the globe.",
-            "bbox_y0": "180.0000000000",
-            "distribution_url": "",
-            "csw_insert_date": "2014-11-20T14:13:10.230",
-            "purpose": "",
-            "csw_wkt_geometry": "POLYGON((-180 -90,-180 90,180 90,180 -90,-180 -90))",
-            "date": "2014-11-20T14:13:10",
-            "bbox_y1": "90.0000000000",
-            "temporal_extent_end": null,
-            "license": 4,
-            "language": "eng",
-            "restriction_code_type": null,
-            "maintenance_frequency": null,
-            "csw_anytext": null,
-            "supplemental_information": "No info",
-            "thumbnail": 18,
-            "csw_type": "dataset",
-            "metadata_uploaded": false,
-            "data_quality_statement": "",
-            "temporal_extent_start": null
-        }
-    },
-    {
         "pk": 26,
         "model": "base.resourcebase",
         "fields": {
