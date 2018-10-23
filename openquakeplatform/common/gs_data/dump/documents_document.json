@@ -32,22 +32,6 @@
         }
     }, 
     {
-        "pk": 49, 
-        "model": "documents.document", 
-        "fields": {
-            "extension": "pdf", 
-            "popular_count": 46, 
-            "object_id": 25, 
-            "regions": [], 
-            "content_type": [
-                "maps", 
-                "map"
-            ], 
-            "doc_file": "documents/Fearth_D3_BulkDbUploads_v1_May2013.pdf", 
-            "share_count": 0
-        }
-    }, 
-    {
         "pk": 50, 
         "model": "documents.document", 
         "fields": {
