@@ -58,7 +58,7 @@ extra_deps_install() {
 }
 
 #function complete procedure for tests
-exec_test () {
+initialize_test () {
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
     sudo apt-get -y install python-pip wget
     pip install --upgrade pip
@@ -73,18 +73,21 @@ exec_test () {
     if [ -z "$REINSTALL" ]; then
         git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
     fi
-    cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
+    cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
 
     # cd $GIT_REPO
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
+}
 
+exec_all_tests () {
     export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
-
     export GEM_PLA_ADMIN_ID=1000
-
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
+}
 
+exec_set_map_thumbs () {
+    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/set_thumbs/mapthumbnail_test.py
 }
 
 updatelayer() {
@@ -290,6 +293,9 @@ paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
 ## Symbolic link to solve spatialite warning of Geoserver
 sudo ln -sf /usr/lib/x86_64-linux-gnu/libproj.so.9 /usr/lib/x86_64-linux-gnu/libproj.so.0
 
+## install geckodriver and selenium
+initialize_test
+
 ## Stop Geoserver before rename postgres jar
 paver stop_geoserver
 
@@ -363,8 +369,11 @@ updatelayer
 
 cd ~/
 
+# Set thumbnails all maps
+exec_set_map_thumbs
+
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
-    exec_test
+    exec_all_tests
 fi
 
 if [ "$GEM_TEST_LATEST" = "true" ]; then
