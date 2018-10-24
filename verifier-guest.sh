@@ -87,7 +87,7 @@ exec_all_tests () {
 }
 
 exec_set_map_thumbs () {
-    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/set_thumbs/mapthumbnail_test.py
+    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test/mapthumbnail_test.py
 }
 
 updatelayer() {
