@@ -16,22 +16,6 @@
         }
     }, 
     {
-        "pk": 48, 
-        "model": "documents.document", 
-        "fields": {
-            "extension": "pdf", 
-            "popular_count": 52, 
-            "object_id": 24, 
-            "regions": [], 
-            "content_type": [
-                "maps", 
-                "map"
-            ], 
-            "doc_file": "documents/GEGD-Historical-Earthquake-Archive-Catalogue-201301-V01.pdf", 
-            "share_count": 0
-        }
-    }, 
-    {
         "pk": 50, 
         "model": "documents.document", 
         "fields": {
