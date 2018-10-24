@@ -13,6 +13,7 @@ class SetThumbsTest(unittest.TestCase):
         pla = platform_get()
 
         pla.get('/maps/')
+
         # New window with platform without login
         plb = pla.platform_create(user='admin', passwd='admin')
 
@@ -20,8 +21,6 @@ class SetThumbsTest(unittest.TestCase):
 
         maps = pla.driver.find_elements_by_xpath(
             "//a[@class='oq-map ng-binding ng-scope']")
-        # "//a[@class='ng-binding']")
-        print(maps)
 
         for links in maps:
             link = links.get_attribute("href")
@@ -32,21 +31,14 @@ class SetThumbsTest(unittest.TestCase):
             edit_map_button = plb.xpath_finduniq(
                 "//button[@data-target='#edit-map'"
                 "and normalize-space(text())='Edit Map']",
-                100, 1)
+                TIMEOUT, 1)
             edit_map_button.click()
 
             # Click set thumbnail
             edit_thumb = plb.xpath_finduniq(
                 "//a[@id='set_thumbnail'"
                 "and normalize-space(text())='Set']",
-                100, 1)
+                TIMEOUT, 1)
             edit_thumb.click()
 
             plb.window_close()
-
-        # href = maps.get_attribute('href')
-        # href_map = os.path.basename(href)
-        # print(href_map)
-        # for link in href_map:
-        #     print(link)
-        #     pla.get("/maps/%s" % link)
