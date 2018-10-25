@@ -87,6 +87,7 @@ exec_all_tests () {
 }
 
 exec_set_map_thumbs () {
+    export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test/mapthumbnail_test.py
 }
 
