@@ -371,7 +371,7 @@ updatelayer
 cd ~/
 
 # Set thumbnails all maps
-exec_set_map_thumbs
+# exec_set_map_thumbs
 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_all_tests
