@@ -371,7 +371,7 @@ updatelayer
 cd ~/
 
 # Clone Moon, geckodriver and set pythonpath
-initialize_test ()
+initialize_test
 
 # Set thumbnails all maps
 # exec_set_map_thumbs
