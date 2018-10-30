@@ -4,7 +4,7 @@
 <script type="text/javascript" src="{{ STATIC_URL}}geonode/js/extjs/GeoNode-mixin.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL}}geonode/js/extjs/Geonode-CatalogueApiSearch.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL}}geonode/js/extjs/GeoNode-GeoExplorer.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL}}js/TileStreamSource.js"></script>
+<!--<script type="text/javascript" src="{{ STATIC_URL}}js/TileStreamSource.js"></script>-->
 <script type="text/javascript" src="{{ STATIC_URL}}geonode/js/utils/thumbnail.js"></script>
 <script type="text/javascript">
 var app;
