@@ -189,6 +189,10 @@ ul.dropdown-menu li {
 .navbar-right .dropdown-menu {
     right: -36px;
 }
+span.user-contrib {
+    font-size: 15px;
+    font-style: italic;
+}
 .home .jumbotron {
    padding: 30px 0 0 0;
    background: none!important;
