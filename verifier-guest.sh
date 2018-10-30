@@ -294,9 +294,6 @@ paver -f $HOME/$GIT_REPO/pavement.py start -b 0.0.0.0:8000
 ## Symbolic link to solve spatialite warning of Geoserver
 sudo ln -sf /usr/lib/x86_64-linux-gnu/libproj.so.9 /usr/lib/x86_64-linux-gnu/libproj.so.0
 
-## install geckodriver and selenium
-initialize_test
-
 ## Stop Geoserver before rename postgres jar
 paver stop_geoserver
 
@@ -346,6 +343,8 @@ cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/g
 python ./manage.py add_documents
 
 cd ~/
+## install geckodriver and selenium
+initialize_test
 # Set thumbnails all maps
 exec_set_map_thumbs
 
