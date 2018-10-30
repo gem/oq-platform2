@@ -79,7 +79,7 @@ initialize_test () {
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
 }
 
-exec_all_tests () {
+exec_test () {
     export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
     export GEM_PLA_ADMIN_ID=1000
     export DISPLAY=:1
@@ -373,7 +373,7 @@ updatelayer
 cd ~/
 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
-    exec_all_tests
+    exec_test
 fi
 
 if [ "$GEM_TEST_LATEST" = "true" ]; then
