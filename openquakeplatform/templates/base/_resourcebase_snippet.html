@@ -17,7 +17,7 @@
           <p class="item-meta"><span class="item-category">{{ item.category__gn_description }}</span></p>
           <h4>
               <a ng-if="item.detail_url.indexOf('/layers/') > -1" href="{{ item.detail_url }}"><i class="fa fa-clone"></i> {{ item.title }}</a>
-              <a ng-if="item.detail_url.indexOf('/maps/') > -1" href="{{ item.detail_url }}"><i class="fa fa-map-marker"></i> {{ item.title }}</a>
+              <a class="oq-map" ng-if="item.detail_url.indexOf('/maps/') > -1" href="{{ item.detail_url }}"><i class="fa fa-map-marker"></i> {{ item.title }}</a>
               <a ng-if="item.detail_url.indexOf('/documents/') > -1" href="{{ item.detail_url }}"><i class="fa fa-file"></i> {{ item.title }}</a>
           </h4>
           <p class="abstract">{{ item.abstract | limitTo: 300 }}{{ item.abstract.length  > 300 ? '...' : ''}}</p>

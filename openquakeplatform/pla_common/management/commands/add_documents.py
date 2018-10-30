@@ -246,6 +246,7 @@ class Command(BaseCommand):
                 owner=owner,
                 abstract=mapp['abstract'],
                 purpose=mapp['purpose'],
+                date=mapp['csw_insert_date'],
                 category=(old_category_refs[mapp['category']]
                           if mapp['category'] is not None
                           else None),
