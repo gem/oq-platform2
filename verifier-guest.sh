@@ -88,7 +88,7 @@ exec_all_tests () {
 
 exec_set_map_thumbs () {
     export DISPLAY=:1
-    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test/mapthumbnail_test.py
+    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/set_thumb/mapthumbnail_test.py
 }
 
 updatelayer() {
@@ -345,6 +345,10 @@ mkdir -p $HOME/geonode/geonode/uploaded/
 cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
 python ./manage.py add_documents
 
+cd ~/
+# Set thumbnails all maps
+exec_set_map_thumbs
+
 ## Update layers from Geoserver to geonode
 cd ~/geonode
 python manage.py makemigrations
@@ -359,7 +363,6 @@ python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/de
 python manage.py loaddata -v 3 --app vulnerability $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/all_vulnerability.json
 
 cd ~/
-
 # sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
 sudo -u postgres psql -d geonode_dev -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
 
@@ -369,12 +372,6 @@ sudo -u postgres psql -d geonode_dev -c '\copy assumpcao2014 FROM '$HOME/$GIT_RE
 updatelayer
 
 cd ~/
-
-# Clone Moon, geckodriver and set pythonpath
-initialize_test
-
-# Set thumbnails all maps
-# exec_set_map_thumbs
 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_all_tests
