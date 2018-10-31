@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import unittest
+import time
 from openquake.moon import platform_get
 
 TIMEOUT = 100
@@ -14,6 +15,8 @@ class SetThumbsTest(unittest.TestCase):
 
         pla.get('/maps/')
 
+        time.sleep(5)
+
         maps = pla.driver.find_elements_by_xpath(
             "//a[@class='oq-map ng-binding ng-scope']")
 
@@ -24,6 +27,8 @@ class SetThumbsTest(unittest.TestCase):
 
         for link in links:
             pla.get('/maps/%s' % link)
+
+            time.sleep(5)
 
             # Click edit map
             edit_map_button = pla.xpath_finduniq(
