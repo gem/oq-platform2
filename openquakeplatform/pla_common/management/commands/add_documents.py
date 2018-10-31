@@ -163,15 +163,6 @@ class Command(BaseCommand):
         tag_json = open(tag_name).read()
         tag_item_load = json.loads(tag_json)
 
-        # Read SpatialRepresentationType json
-        th_name = (
-            os.path.join(
-                os.path.expanduser("~"),
-                'oq-private/old_platform_documents/json/'
-                'maps_thumbs.json'))
-        th_json = open(th_name).read()
-        th_load = json.loads(th_json)
-
         # Delete all licenses
         License.objects.all().delete()
         old_license_refs = {}
