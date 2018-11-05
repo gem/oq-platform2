@@ -51,12 +51,6 @@ sitemaps = {
 
 urlpatterns = patterns('',
                        # Static pages
-                       url(r'^isc_viewer/$', TemplateView.as_view(
-                           template_name="isc_viewer.html"),
-                           name='isc_viewer'),
-                       url(r'^ghec_viewer/$', TemplateView.as_view(
-                           template_name="ghec_viewer.html"),
-                           name='ghec_viewer'),
                        url(r'^/?$',
                            TemplateView.as_view(template_name='index.html'),
                            name='home'),
@@ -73,7 +67,8 @@ urlpatterns = patterns('',
                                    'globalquakemodel.org/oq-getting-started'),
                            name='about'),
                        url(r'^explore/$',
-                           TemplateView.as_view(template_name='explore.html'),
+                           oq_common_views.ExploreView.as_view(
+                               template_name='explore.html'),
                            name='explore'),
                        url(r'^share/$',
                            TemplateView.as_view(template_name='share.html'),
