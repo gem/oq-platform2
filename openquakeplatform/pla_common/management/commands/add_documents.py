@@ -91,7 +91,7 @@ class Command(BaseCommand):
             os.path.join(
                 os.path.expanduser("~"),
                 'oq-private/old_platform_documents/json/'
-                'maps_map.json'))
+                'maps_map_new.json'))
         maps_json = open(maps_name).read()
         maps_load = json.loads(maps_json)
 
@@ -100,7 +100,7 @@ class Command(BaseCommand):
             os.path.join(
                 os.path.expanduser("~"),
                 'oq-private/old_platform_documents/json/'
-                'maps_maplayer.json'))
+                'maps_maplayer_new.json'))
         maplayer_json = open(maplayer_name).read()
         maplayer_load = json.loads(maplayer_json)
 
