@@ -360,6 +360,8 @@ class Command(BaseCommand):
                 )
             new_rating.save()
 
+        Map.objects.all().delete()
+
         # Import maps
         map_old_refs = {}
         for map_full in maps_load:
