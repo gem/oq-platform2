@@ -18,6 +18,10 @@ body.home {
     -o-background-size: cover;
     background-size: cover;
 }
+div#oq-body-content {
+    width: 50%!important;
+    margin: auto;
+}
 h3 {
     line-height: 18px;
     font-size: 18px;
