@@ -93,7 +93,7 @@ input[type="checkbox"], input[type="radio"] {
 #wrap {
     padding: 0px 0 0 0px!important;
     margin: 0px auto 30px!important;
-    width: 1180px;
+    width: 1160px;
     border-radius: 10px;
     -moz-border-radius: 10px;
 }
@@ -212,10 +212,10 @@ span.user-contrib {
     font-style: italic;
 }
 .home .jumbotron {
-   padding: 30px 0 0 0;
+   padding: 30px;
    background: none!important;
    min-height: 550px;
-   width: 80%;
+   width: 77%;
 }
 .jumbotron {
     width: 75%;
@@ -706,6 +706,9 @@ form.user-settings {
     }
 }        
 @media (max-width: 991px) {
+   .navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+       max-height: unset;
+   }
    .oq-right-help,
    .oq-right-search,
    .oq-right-share {
@@ -713,14 +716,16 @@ form.user-settings {
    }
    ul#dropdown-menu {
        width: 100%;
-       margin: 0 auto 0px!important;
+       margin: 20px auto 0px!important;
        text-align: center;
        right: 0;
+       background-color: #fff;
    }
    ul.dropdown-menu li,
    ul.dropdown-menu li a {
        text-align:center;
-       padding: 10px 0!important;
+       padding: 4px 0!important;
+       color: #000!important;
    }
    .navbar-toggle {
         margin-right: 90px;
@@ -745,7 +750,7 @@ form.user-settings {
        margin: 10px 0;
        display: block;
        position: relative;
-       height: 40px;
+       height: auto;
        width: 100%;
        text-align: center;
    }
