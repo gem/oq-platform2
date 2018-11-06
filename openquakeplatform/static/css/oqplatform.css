@@ -759,7 +759,7 @@ form.user-settings {
 }
 @media (max-width: 800px) {
    .jumbotron {
-        width: 100%;
+        width: 100%!important;
         float: none;
    }
    .oq-button-home {
