@@ -27,7 +27,15 @@
       <link href="{{ STATIC_URL }}geonode/css/ext-compatibility.css?v={{ VERSION }}" rel="stylesheet" />
       <link href="{{ STATIC_URL }}geonode/css/base.css?v={{ VERSION }}" rel="stylesheet" />
       <link href="{{ STATIC_URL }}css/oqplatform.css" rel="stylesheet" />
-      <style type="text/css">[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}</style>
+      <style type="text/css">
+          [ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){
+              display:none !important;}
+          {% if not user.is_authenticated %}
+          nav.filter, .selections {
+              display: none!important;
+          }
+          {% endif %}
+      </style>
       {% block extra_head %}
       {% endblock %}
     {% endblock %}
