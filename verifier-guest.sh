@@ -58,7 +58,7 @@ extra_deps_install() {
 }
 
 #function complete procedure for tests
-exec_test () {
+initialize_test () {
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
     sudo apt-get -y install python-pip wget
     pip install --upgrade pip
@@ -73,18 +73,22 @@ exec_test () {
     if [ -z "$REINSTALL" ]; then
         git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
     fi
-    cp $GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/test/config/moon_config.py
+    cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
 
     # cd $GIT_REPO
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
+}
 
+exec_test () {
     export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
-
     export GEM_PLA_ADMIN_ID=1000
-
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
+}
 
+exec_set_map_thumbs () {
+    export DISPLAY=:1
+    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/set_thumb/mapthumbnail_test.py
 }
 
 updatelayer() {
@@ -338,6 +342,12 @@ mkdir -p $HOME/geonode/geonode/uploaded/
 cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
 python ./manage.py add_documents
 
+cd ~/
+## install geckodriver and selenium
+initialize_test
+# Set thumbnails all maps
+exec_set_map_thumbs
+
 ## Update layers from Geoserver to geonode
 cd ~/geonode
 python manage.py makemigrations
@@ -352,7 +362,6 @@ python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/de
 python manage.py loaddata -v 3 --app vulnerability $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/all_vulnerability.json
 
 cd ~/
-
 # sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
 sudo -u postgres psql -d geonode_dev -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
 
