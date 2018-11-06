@@ -320,9 +320,9 @@ python manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/world/dev_data/world
 python manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/svir/dev_data/svir.json.bz2
 
 ## load data for gec and isc viewer
-python ./manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
+# python ./manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
 
-python ./manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
+# python ./manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
 
 ## Create Gem user
 python ./manage.py create_gem_user
@@ -335,7 +335,8 @@ python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccat
 
 ## populate geoserver data infrastructure
 cd ~/oq-platform2
-$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
+# $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data" isc_viewer ghec_viewer
+$HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "$GEO_DBNAME" "$GEO_DBUSER" "$GEO_DBPWD" "geoserver/data"
 
 #
 ## Add old documents
@@ -345,12 +346,6 @@ cp -r $HOME/oq-private/old_platform_documents/thumbs $HOME/geonode/geonode/uploa
 cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
 python ./manage.py add_documents
 
-cd ~/
-## install geckodriver and selenium
-initialize_test
-# Set thumbnails all maps
-exec_set_map_thumbs
-
 ## Update layers from Geoserver to geonode
 cd ~/geonode
 python manage.py makemigrations
@@ -358,11 +353,11 @@ python manage.py migrate
 
 paver -f $HOME/$GIT_REPO/pavement.py stop_geoserver
 paver -f $HOME/$GIT_REPO/pavement.py start_geoserver
-python manage.py updatelayers -u GEM
+# python manage.py updatelayers -u GEM
 
 # Create programmatically ISC and GHEC json
-python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
-python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
+# python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
+# python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
 
 # Import all vulnerability curves
 python manage.py loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
@@ -376,6 +371,10 @@ done
 updatelayer
 
 cd ~/
+## install geckodriver and selenium
+initialize_test
+# Set thumbnails all maps
+exec_set_map_thumbs
 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
     exec_test
