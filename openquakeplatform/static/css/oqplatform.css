@@ -44,6 +44,20 @@ select, input[type="file"] {
 }
 .ui-icon-help {
 }
+div#ext-comp-1012,
+div#ext-gen23,
+div#ext-comp-1013,
+div#ext-gen26,
+div#ext-gen27,
+div#ext-comp-1007,
+div#ext-gen31,
+div#ext-comp-1003,
+div#ext-gen34,
+div#ext-comp-1002,
+div#ext-gen35,
+div#paneltbar {
+    width: 100%!important;
+}
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
     display: inline-block;
     padding: 4px 6px;
@@ -79,12 +93,16 @@ input[type="checkbox"], input[type="radio"] {
 #wrap {
     padding: 0px 0 0 0px!important;
     margin: 0px auto 30px!important;
-    width: 990px;
+    width: 1180px;
     border-radius: 10px;
     -moz-border-radius: 10px;
 }
 #wrap .container {
     width: 100%;
+}
+@media (min-width: 992px)
+.col-md-4 {
+    width: 30%!important;
 }
 .home .jumbotron .container {
     padding-left: 25px;
@@ -189,10 +207,15 @@ ul.dropdown-menu li {
 .navbar-right .dropdown-menu {
     right: -36px;
 }
+span.user-contrib {
+    font-size: 15px;
+    font-style: italic;
+}
 .home .jumbotron {
    padding: 30px 0 0 0;
    background: none!important;
    min-height: 550px;
+   width: 80%;
 }
 .jumbotron {
     width: 75%;
@@ -544,11 +567,12 @@ div.filters {
     border: 1px solid #eeeeee;
 }
 .profile-avatar {
-    padding: 5px 5px 5px;
+    padding: 0;
     border-top: 1px solid #ccc!important;
     border-right: 0;
     border-left: 0;
     border-bottom: 0;
+    margin: 5px;
 }
 .oq-button-irv {
     color: #ffffff;
