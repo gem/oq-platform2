@@ -321,7 +321,6 @@ python manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/svir/dev_data/svir.j
 
 ## load data for gec and isc viewer
 # python ./manage.py import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
-
 # python ./manage.py import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
 
 ## Create Gem user
@@ -356,8 +355,8 @@ paver -f $HOME/$GIT_REPO/pavement.py start_geoserver
 # python manage.py updatelayers -u GEM
 
 # Create programmatically ISC and GHEC json
-python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
-python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
+# python manage.py create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
+# python manage.py create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
 
 # Import all vulnerability curves
 python manage.py loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
