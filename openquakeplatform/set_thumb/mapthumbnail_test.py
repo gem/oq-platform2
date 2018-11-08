@@ -28,18 +28,44 @@ class SetThumbsTest(unittest.TestCase):
         for link in links:
             pla.get('/maps/%s' % link)
 
-            time.sleep(5)
+            time.sleep(3)
 
             # Click edit map
             edit_map_button = pla.xpath_finduniq(
                 "//button[@data-target='#edit-map'"
-                "and normalize-space(text())='Edit Map']",
+                " and normalize-space(text())='Edit Map']",
                 TIMEOUT, 1)
             edit_map_button.click()
 
             # Click set thumbnail
             edit_thumb = pla.xpath_finduniq(
                 "//a[@id='set_thumbnail'"
-                "and normalize-space(text())='Set']",
+                " and normalize-space(text())='Set']",
                 TIMEOUT, 1)
             edit_thumb.click()
+
+        for link_meta in links:
+            if link_meta == '69' or link_meta == '70':
+
+                pla.get('/maps/%s' % link_meta)
+
+                time.sleep(3)
+
+                # Click edit map
+                edit_map_button_meta = pla.xpath_finduniq(
+                    "//button[@data-target='#edit-map'"
+                    " and normalize-space(text())='Edit Map']",
+                    TIMEOUT, 1)
+                edit_map_button_meta.click()
+
+                edit_meta = pla.xpath_finduniq(
+                    "//a[@href='/maps/%s/metadata'"
+                    " and normalize-space(text())='Edit']" % link_meta,
+                    TIMEOUT, 1)
+                edit_meta.click()
+
+                # Click update metadata
+                update_button_meta = pla.xpath_findfirst(
+                    "//input[@type='submit' and @value='Update']",
+                    TIMEOUT, 1)
+                update_button_meta.click()
