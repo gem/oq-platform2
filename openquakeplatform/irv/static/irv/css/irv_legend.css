@@ -1,7 +1,7 @@
 #mapLegend {
-    position: fixed;
-    right: 45px;
-    top: 200px;
+    position: relative;
+    right: 6px;
+    top: 30px;
     background: #fff;
     padding: 22px 20px 5px 25px;
     float: right;
