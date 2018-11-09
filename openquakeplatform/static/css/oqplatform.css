@@ -444,6 +444,10 @@ div#search-inp:after {
 #home_ul li .oq_div_two p { 
     font-size: 14px;
 }
+.page-header p {
+    width: 800px;
+    margin: auto;
+}    
 .hero-unit .btn {
     background: #f7931e;
     color: #fff;
