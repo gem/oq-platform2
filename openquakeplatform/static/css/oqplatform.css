@@ -17,6 +17,7 @@ body.home {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-attachment: fixed;
 }
 div.disclaimer {
     margin: 8px auto 16px auto;
@@ -444,6 +445,9 @@ div#search-inp:after {
 #home_ul li .oq_div_two p { 
     font-size: 14px;
 }
+.page-header {
+    margin: 22px 0;
+}    
 .page-header p {
     width: 800px;
     margin: auto;
