@@ -85,3 +85,17 @@ optgroup {
 #layer-list a:hover{
     text-decoration: none;
 }    
+/* mobile */
+@media (min-width: 1290px) and (max-width:1350px) {                                                                                                            #mapLegend {
+        position: absolute;
+        right: 6px;
+        top: 115px;
+    }
+}
+@media (min-width: 1351px) and (max-width:3000px) {                                                                                                            #mapLegend {
+        position: absolute;
+        right: 6px;
+        top: 115px;
+    }
+}
+
