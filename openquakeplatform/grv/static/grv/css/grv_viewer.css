@@ -188,3 +188,15 @@ button:hover {
     cursor: pointer!important;
     padding: 5px!important;
 }
+tr.odd td.sorting_1 {
+    background-color: #c8c8c8;
+}
+tr.even td.sorting_1 {
+    background-color: #e8e8e8;
+}
+tr.odd td.sorting_2 {
+    background-color: #d8d8d8;
+}
+tr.even td.sorting_2 {
+    background-color: #f2f2f2;
+}
