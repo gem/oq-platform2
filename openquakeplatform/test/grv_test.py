@@ -37,7 +37,7 @@ class GrvTest(unittest.TestCase):
             "//div[@id='econ-chart-pcc']"
             "//*[name()='svg']/*[name()='g']"
             "/*[name()='g' and @class='foreground']"
-            "/*[name()='path' and @class='Poland']",
+            "/*[name()='path' and @class='Sweden']",
             el=category_tabs)
 
         pla.scroll_into_view(economy_tabs)
