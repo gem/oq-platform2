@@ -1,3 +1,15 @@
+body {
+    font-size: 14px;
+}
+#map {
+    height: 400px!important;
+}
+.ui-dialog, .ui-widget {
+    z-index: 0!important;
+}
+div#categoryTabs {
+    margin-top: 400px;
+}
 .ui-front {
     z-index: 0;
 }    
@@ -157,8 +169,22 @@ svg {
 select#layer-list {
   width: 95%;
   height: 70%;
-
+}
 .ui-dialog {
   z-index: 1000;
 }
-
+button {
+    background: #f7931e!important;
+    border-color: #f7931e!important;
+    color: #fff!important;
+}
+button:hover {
+    background: #f05a24!important;
+    border-color: #f05a24!important;
+}
+#prev_next,
+.dataTables_paginate .paginate_button.disabled, 
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    cursor: pointer!important;
+    padding: 5px!important;
+}
