@@ -2,13 +2,13 @@ body {
     font-size: 14px;
 }
 #map {
-    height: 400px!important;
+    height: 450px!important;
 }
 .ui-dialog, .ui-widget {
     z-index: 0!important;
 }
 div#categoryTabs {
-    margin-top: 400px;
+    margin-top: 450px;
 }
 .ui-front {
     z-index: 0;
