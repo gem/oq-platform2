@@ -1,3 +1,6 @@
+.ui-front {
+    z-index: 0;
+}    
 #oq-body-heading {
   padding: 0 30px;
 }
