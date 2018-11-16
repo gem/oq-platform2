@@ -788,6 +788,9 @@ form.user-settings {
    }
 }
 @media (max-width: 800px) {
+   .navbar-inverse .navbar-nav>li>a {
+       margin: auto;
+   } 
    .page-header p {
         width: 550px;
         margin: auto;
