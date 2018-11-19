@@ -262,3 +262,10 @@ EXPOSURE_MAX_EXPORT_AREA_SQ_DEG = 4
 EXPOSURE_MAX_TOT_GRID_COUNT = 100000
 
 TIME_INVARIANT_OUTPUTS = False
+
+# read settings from ged
+try:                                                                                                                                                                                                            
+    from ged_settings import DATABASES as GED_DATABASES                            
+    DATABASES.update(GED_DATABASES)                                                
+except:                                                                            
+    pass
