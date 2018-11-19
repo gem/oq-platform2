@@ -451,11 +451,11 @@ def get_all_studies(request):
                          non residential data
     """
     if 'geddb' not in connections:
-        response_data = gem_fake_db_get('get_all_studies.json') 
+        response_data = gem_fake_db_get('get_all_studies.json')
         response = HttpResponse(response_data, content_type='text/json')
         return response
 
-	studies = []
+    studies = []
     StudyRecord = namedtuple(
         'StudyRecord',
         'iso num_studies num_l1_names num_l2_names study_id'
