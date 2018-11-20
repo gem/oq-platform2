@@ -37,10 +37,15 @@ setup(
               'openquakeplatform.irv',
               'openquakeplatform.test',
               ],
-    # NOTE:  django-chained-multi-checkboxes is following the new convention: a floating tag on github v<major>.<minor> only follows
-    #        the lifecicle of all the bugfix versions of the repository and pip depends on it.
-    #        Follow the same rule for all the other gem dependencies when an update is needed.
-    # ATTENTION: Please, do not split following lines, the deploy.sh script manages them automatically.
+    # NOTE:  django-chained-multi-checkboxes
+    #        is following the new convention: a floating tag on github
+    #        v<major>.<minor> only follows
+    #        the lifecicle of all the bugfix versions of the repository
+    #        and pip depends on it.
+    #        Follow the same rule for all the other gem dependencies when
+    #        an update is needed.
+    # ATTENTION: Please, do not split following lines,
+    #            the deploy.sh script manages them automatically.
     dependency_links = ['http://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2',
                         'http://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4',
                         'http://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1',
