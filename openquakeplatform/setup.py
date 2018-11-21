@@ -46,11 +46,11 @@ setup(
     #        an update is needed.
     # ATTENTION: Please, do not split following lines,
     #            the deploy.sh script manages them automatically.
-    dependency_links = ['http://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2',
-                        'http://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4',
-                        'http://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1',
-                        'http://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2',
-                        ],
+    dependency_links=['http://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2',
+                      'http://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4',
+                      'http://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1',
+                      'http://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2',
+                      ],
     install_requires=[
         "amqp >= 1.4.9 , < 1.5",
         "anyjson >= 0.3.3 , < 0.4",
