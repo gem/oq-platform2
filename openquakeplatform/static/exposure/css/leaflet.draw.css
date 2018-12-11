@@ -6,11 +6,16 @@
 }
 
 .leaflet-control-draw a {
-	background-position: 50% 50%;
-	background-repeat: no-repeat;
-	display: block;
-	width: 22px;
-	height: 22px;
+    background-color: rgba(255, 255, 255, 0.75);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    display: block;
+    margin-top: 5px;
+    width: 30px;
+    height: 32px;
 }
 
 .leaflet-control-draw a:hover {
