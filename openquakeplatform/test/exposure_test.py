@@ -44,6 +44,13 @@ class ExposureTest(unittest.TestCase):
             100, 1)
         downsubnat.click()
 
+        # click download nrml or csv Gridded Building
+        grid_build = pla.xpath_finduniq(
+            "//button[@id='selectBbox']"
+            "/span[normalize-space(text())='Proceed']",
+            100, 1)
+        grid_build.click()
+
         # close final windows
         close_win_wait_download = pla.xpath_finduniq(
             "//button["
