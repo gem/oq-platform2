@@ -634,6 +634,18 @@ div.filters {
     border-radius: 4px;
     cursor: pointer;
 }                        
+#oq-body-heading {
+    height: 24px;
+    text-align: center;
+}
+#oq-body-heading h1 {
+    color: #1b75a7;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-family: 'Lato',sans-serif;
+    margin: 0;
+}
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     background: #f05a24!important;
     border: 1px solid #f05a24!important;

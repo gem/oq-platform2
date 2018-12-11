@@ -288,7 +288,7 @@ def export_exposure(request):
         else:
             raise NotImplementedError(
                 'output_type [%s] is not available' % output_type)
-    response = HttpResponse(response_data, mimetype=mimetype)
+    response = HttpResponse(response_data, content_type=mimetype)
     response['Content-Disposition'] = content_disp
     return response
 
@@ -398,7 +398,7 @@ def get_country_list(request):
     """
     country_list = util._get_iso_and_name_for_all_countries()
     response_data = json.dumps(country_list)
-    response = HttpResponse(response_data, mimetype='text/json')
+    response = HttpResponse(response_data, content_type='text/json')
     return response
 
 
@@ -424,7 +424,7 @@ def get_geographic_regions_by_iso(request):
         return response
     geographic_regions = util._get_geographic_region_id_and_name_by_iso(iso)
     response_data = json.dumps(geographic_regions)
-    response = HttpResponse(response_data, mimetype='text/json')
+    response = HttpResponse(response_data, content_type='text/json')
     return response
 
 
@@ -451,11 +451,11 @@ def get_all_studies(request):
                          non residential data
     """
     if 'geddb' not in connections:
-        response_data = gem_fake_db_get('get_all_studies.json') 
+        response_data = gem_fake_db_get('get_all_studies.json')
         response = HttpResponse(response_data, content_type='text/json')
         return response
 
-	studies = []
+    studies = []
     StudyRecord = namedtuple(
         'StudyRecord',
         'iso num_studies num_l1_names num_l2_names study_id'
@@ -553,7 +553,7 @@ def get_study_region_info(request):
         assert len(sr_info) == 1, ('_get_study_region_info(sr_id) returned '
                                    '%d rows. It should return one') % len(sr_info)
     response_data = json.dumps(sr_info[0])
-    response = HttpResponse(response_data, mimetype='text/json')
+    response = HttpResponse(response_data, content_type='text/json')
     return response
 
 
@@ -595,7 +595,7 @@ def export_fractions_by_study_region_id(request):
     content_disp = 'attachment; filename="%s"' % filename
     mimetype = 'text/csv'
 
-    response = HttpResponse(mimetype=mimetype)
+    response = HttpResponse(content_type=mimetype)
     response['Content-Disposition'] = content_disp
 
     copyright = copyright_csv(COPYRIGHT_HEADER)
