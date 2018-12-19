@@ -1,6 +1,6 @@
 
     # Location of the expanded GeoNode tarball
-    INSTALL_DIR=geonode
+    INSTALL_DIR=./package
     # Location of the target filesystem, it may be blank
     # or something like $(CURDIR)/debian/geonode/                                                                                                                    
     TARGET_ROOT=''
@@ -37,3 +37,4 @@
     else
         GEOGRAPHY=0
     fi   
+
