@@ -749,13 +749,15 @@ def _write_local_settings(lxc_ip, webuiurl, datadir, db_name, db_user, db_pass):
     ('lxc_ip=', 'l', 'Bind server to provided IP address and port number.'),
     ('webuiurl=', 'u', 'Bind server to provided URL of webui.'),
     ('datadir=', 's', 'Value for FILE_PATH_FIELD_DIRECTORY in ipt')
+    ('db_login=', 'dl', 'Value for user of db')
+    ('db_pwd=', 'dw', 'Value for pwd of db')
 ])
 def oqsetup():
     lxc_ip = options.get('lxc_ip', '')
     webuiurl = options.get('webuiurl', '')
-    db_name = "geonode_dev"
-    db_user = "geonode_dev"
-    db_pass = "geonode_dev"
+    db_name = options.get('db_login', '')
+    db_user = options.get('db_login', '')
+    db_pass = options.get('db_pwd', '')
     datadir = options.get('datadir', '')
     # info(lxc_ip)
     _write_local_settings(lxc_ip, webuiurl, datadir, db_name, db_user, db_pass)
