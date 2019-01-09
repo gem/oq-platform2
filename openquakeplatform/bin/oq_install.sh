@@ -5,7 +5,7 @@
 #
 
 set -x
-# set -e
+set -e
 
 source ~/env/bin/activate
 
@@ -68,14 +68,59 @@ function randpass() {
     echo
 }
 
+# function setup_postgres_once() {
+#     su - postgres <<EOF
+# createdb -E UTF8 -l en_US.UTF8 -T template0 geonode
+# createdb -E UTF8 -l en_US.UTF8 -T template0 geonode_data
+# psql -d geonode_data -c 'CREATE EXTENSION postgis'
+# EOF
+# su - postgres -c "psql" <<EOF
+# CREATE ROLE geonode WITH LOGIN PASSWORD '$psqlpass' SUPERUSER INHERIT;
+# EOF
+# }
+
 function setup_postgres_once() {
-    su - postgres <<EOF
-createdb -E UTF8 -l en_US.UTF8 -T template0 geonode
-createdb -E UTF8 -l en_US.UTF8 -T template0 geonode_data
-psql -d geonode_data -c 'CREATE EXTENSION postgis'
+
+sudo -u postgres createdb geonode
+sudo -u postgres createdb geonode-imports
+
+cat << EOF | sudo -u postgres psql
+    CREATE USER "geonode" WITH PASSWORD '$psqlpass';
+    GRANT ALL PRIVILEGES ON DATABASE "geonode" to geonode;
+    GRANT ALL PRIVILEGES ON DATABASE "geonode-imports" to geonode;
 EOF
-su - postgres -c "psql" <<EOF
-CREATE ROLE geonode WITH LOGIN PASSWORD '$psqlpass' SUPERUSER INHERIT;
+
+sudo -u postgres psql -d geonode -c 'CREATE EXTENSION postgis;'
+sudo -u postgres psql -d geonode -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
+sudo -u postgres psql -d geonode -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
+
+sudo -u postgres psql -d geonode-imports -c 'CREATE EXTENSION postgis;'
+sudo -u postgres psql -d geonode-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
+sudo -u postgres psql -d geonode-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
+
+# add unaccent extension and icompare_unaccent function into postgres
+cat << EOF | sudo -u postgres psql -d geonode
+    -- NOTE: originally deployed as migration, we realized that this sql script must
+    --       be executed for every new installation (devel or production).
+    --       The script is idempotent so we decided to keep the original migration script too
+    
+    DROP OPERATOR IF EXISTS =~@ (character varying, character varying);
+    DROP FUNCTION IF EXISTS icompare_unaccent(character varying, character varying);
+    DROP EXTENSION IF EXISTS unaccent;
+    
+    CREATE EXTENSION unaccent;
+    CREATE FUNCTION icompare_unaccent(character varying, character varying) RETURNS boolean
+        AS 'SELECT upper(unaccent(\$1)) LIKE upper(unaccent(\$2));'
+        LANGUAGE SQL
+        IMMUTABLE
+        RETURNS NULL ON NULL INPUT;
+    
+    CREATE OPERATOR =~@ (
+        LEFTARG = character varying,
+        RIGHTARG = character varying,
+        PROCEDURE = icompare_unaccent,
+        NEGATOR = !=~@
+    );
 EOF
 }
 
@@ -103,9 +148,16 @@ function setup_django_every_time() {
     whoami
     geonodedir=`python -c "import geonode;import os;print os.path.dirname(geonode.__file__)"`
 
+    # Create local_settings with pavement from repo
+    cd $HOME/oq-platform2
+    paver -f $HOME/oq-platform2/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s $HOME/geonode/data -dl geonode -dw $psqlpass
+
+    cd -
+    sudo mv /etc/geonode/local_settings.py /etc/geonode/geonode_local_settings.py                                                                                                                                    
+    sudo cp  $HOME/oq-platform2/local_settings.py /etc/geonode/
     # ln -sf $GEONODE_ETC/local_settings.py $geonodedir/local_settings.py
     # ln -sf $HOME/oq-platform2/local_settings.py $geonodedir/local_settings.py
-    ln -sf $HOME/oq-platform2/local_settings.py $HOME/env/lib/python2.7/site-packages/geonode/local_settings
+    ln -sf /etc/geonode/local_settings.py $HOME/env/lib/python2.7/site-packages/geonode/local_settings.py
     ln -sf /usr/lib/python2.7/dist-packages/osgeo $HOME/env/lib/python2.7/site-packages
 
     # Set up logging symlink
@@ -129,6 +181,10 @@ function setup_django_every_time() {
     # processes like updatelayers and collectstatic can write here
     chmod 777 -R $GEONODE_WWW/uploaded
     chmod 777 -R $GEONODE_WWW/static
+    sudo cp -r ~/env/lib/python2.7/site-packages/autocomplete_light/static/autocomplete_light/ /var/www/geonode/static/
+    sudo cp -r ~/env/lib/python2.7/site-packages/leaflet/static/leaflet /var/www/geonode/static/
+    sudo cp -r ~/env/lib/python2.7/site-packages/geoexplorer/static/geoexplorer /var/www/geonode/static/
+    sudo cp -r ~/geonode/geonode/static/* /var/www/geonode/static/
 }
 
 function setup_apache_once() {
@@ -166,7 +222,10 @@ function setup_geoserver() {
     pushd ../
     paver setup
     popd
-    mv ../downloaded/geoserver.war $TOMCAT_WEBAPPS
+    echo $HOME
+    wget http://ftp.openquake.org/oq-platform2/geoserver-2.9.x-oauth2.war
+    mv geoserver-2.9.x-oauth2.war geoserver.war
+    mv geoserver.war $TOMCAT_WEBAPPS
 }
 
 function postinstall() {
