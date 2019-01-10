@@ -749,8 +749,8 @@ def _write_local_settings(lxc_ip, webuiurl, datadir, db_name, db_user, db_pass):
     ('lxc_ip=', 'l', 'Bind server to provided IP address and port number.'),
     ('webuiurl=', 'u', 'Bind server to provided URL of webui.'),
     ('datadir=', 's', 'Value for FILE_PATH_FIELD_DIRECTORY in ipt')
-    ('db_login=', 'dl', 'Value for user of db')
-    ('db_pwd=', 'dw', 'Value for pwd of db')
+    ('db_login=', 'd', 'Value for user of db')
+    ('db_pwd=', 'p', 'Value for pwd of db')
 ])
 def oqsetup():
     lxc_ip = options.get('lxc_ip', '')
