@@ -729,7 +729,7 @@ def justcopy(origin, target):
 
 
 # Create local settings
-def _write_local_settings(lxc_ip, webuiurl, datadir, db_name, db_user, db_pass):
+def _write_local_settings(lxc_ip, geo_ip, webuiurl, datadir, db_name, db_user, db_pass):
 
     local_settings = open(GEM_LOCAL_SETTINGS_TMPL, 'r').read()
     with open(os.path.join(os.path.expanduser("~"), 'oq-platform2',
