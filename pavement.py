@@ -766,5 +766,5 @@ def oqsetup():
     db_pass = options.get('db_pwd', '')
     datadir = options.get('datadir', '')
     # info(lxc_ip)
-    _write_local_settings(lxc_ip, geo_ip, webuiurl, datadir, db_name, db_user, db_pass)
+    _write_local_settings(lxc_ip, geo_ip, geo_public_ip, webuiurl, datadir, db_name, db_user, db_pass)
     info("Local setting created.")
