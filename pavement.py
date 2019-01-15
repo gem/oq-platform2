@@ -729,7 +729,7 @@ def justcopy(origin, target):
 
 
 # Create local settings
-def _write_local_settings(lxc_ip, geo_ip, webuiurl, datadir, db_name, db_user, db_pass):
+def _write_local_settings(lxc_ip, geo_ip, geo_public_ip, webuiurl, datadir, db_name, db_user, db_pass):
 
     local_settings = open(GEM_LOCAL_SETTINGS_TMPL, 'r').read()
     with open(os.path.join(os.path.expanduser("~"), 'oq-platform2',
@@ -737,6 +737,7 @@ def _write_local_settings(lxc_ip, geo_ip, webuiurl, datadir, db_name, db_user, d
                                                     '.py'), 'w') as fh:
         fh.write(local_settings % dict(lxc_ip=lxc_ip,
                                        geo_ip=geo_ip,
+                                       geo_public_ip=geo_public_ip,
                                        webuiurl=webuiurl,
                                        db_name=db_name,
                                        db_user=db_user,
@@ -749,6 +750,7 @@ def _write_local_settings(lxc_ip, geo_ip, webuiurl, datadir, db_name, db_user, d
 @cmdopts([
     ('lxc_ip=', 'l', 'Bind server to provided IP address and port number.'),
     ('geo_ip=', 'g', 'Bind geoserver to provided IP address and port number.'),
+    ('geo_public_ip=', 'x', 'Bind geoserver public to provided IP address and port number.'),
     ('webuiurl=', 'u', 'Bind server to provided URL of webui.'),
     ('datadir=', 's', 'Value for FILE_PATH_FIELD_DIRECTORY in ipt'),
     ('db_login=', 'd', 'Value for user of db'),
@@ -757,11 +759,12 @@ def _write_local_settings(lxc_ip, geo_ip, webuiurl, datadir, db_name, db_user, d
 def oqsetup():
     lxc_ip = options.get('lxc_ip', '')
     geo_ip = options.get('geo_ip', '')
+    geo_public_ip = options.get('geo_public_ip', '')
     webuiurl = options.get('webuiurl', '')
     db_name = options.get('db_login', '')
     db_user = options.get('db_login', '')
     db_pass = options.get('db_pwd', '')
     datadir = options.get('datadir', '')
     # info(lxc_ip)
-    _write_local_settings(lxc_ip, geo_ip, webuiurl, datadir, db_name, db_user, db_pass)
+    _write_local_settings(lxc_ip, geo_ip, geo_public_ip, webuiurl, datadir, db_name, db_user, db_pass)
     info("Local setting created.")

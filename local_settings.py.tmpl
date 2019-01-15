@@ -42,7 +42,7 @@ DATABASES = {
     'datastore': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         # 'ENGINE': '', # Empty ENGINE name disables
-        'NAME': '%(db_name)s-imports',
+        'NAME': '%(db_user)s-imports',
         'USER': '%(db_user)s',
         'PASSWORD': '%(db_pass)s',
         'HOST': '%(lxc_ip)s',
@@ -58,7 +58,7 @@ GEOSERVER_LOCATION = os.getenv(
 )
 
 GEOSERVER_PUBLIC_LOCATION = os.getenv(
-    'GEOSERVER_PUBLIC_LOCATION', 'http://%(geo_ip)s/geoserver/'
+    'GEOSERVER_PUBLIC_LOCATION', 'http://%(geo_public_ip)s/geoserver/'
 )
 
 OGC_SERVER_DEFAULT_USER = os.getenv(
