@@ -17,7 +17,7 @@ from decimal import Decimal
 def base_attrs(base):
     base_new = {}
     base_new.update(base)
-    base_new['thumbnail_url'] = base['thumbnail']
+    # base_new['thumbnail_url'] = base['thumbnail']
     base_new['title_en'] = base['title']
     del base_new['thumbnail']
     del base_new['distribution_description']
@@ -36,7 +36,7 @@ class Command(BaseCommand):
         doc_fname = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'documents_document.json'))
         doc_json = open(doc_fname).read()
         doc_load = json.loads(doc_json)
@@ -45,7 +45,7 @@ class Command(BaseCommand):
         layer_style_fname = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'layers_style.json'))
         layer_style_json = open(layer_style_fname).read()
         layer_style_load = json.loads(layer_style_json)
@@ -54,7 +54,7 @@ class Command(BaseCommand):
         layer_attr_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'layers_attribute.json'))
         layer_attr_json = open(layer_attr_name).read()
         layer_attr_load = json.loads(layer_attr_json)
@@ -63,7 +63,7 @@ class Command(BaseCommand):
         layer_rating_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'rating_overall_rating.json'))
         layer_rating_json = open(layer_rating_name).read()
         layer_rating_load = json.loads(layer_rating_json)
@@ -72,7 +72,7 @@ class Command(BaseCommand):
         layer_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'layers_layer.json'))
         layer_json = open(layer_name).read()
         layer_load = json.loads(layer_json)
@@ -81,7 +81,7 @@ class Command(BaseCommand):
         resource_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'base_resource_base.json'))
         resource_json = open(resource_name).read()
         resource_load = json.loads(resource_json)
@@ -90,7 +90,7 @@ class Command(BaseCommand):
         maps_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'maps_map.json'))
         maps_json = open(maps_name).read()
         maps_load = json.loads(maps_json)
@@ -99,7 +99,7 @@ class Command(BaseCommand):
         maplayer_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'maps_maplayer.json'))
         maplayer_json = open(maplayer_name).read()
         maplayer_load = json.loads(maplayer_json)
@@ -113,7 +113,7 @@ class Command(BaseCommand):
         category_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'base_topiccategory.json'))
         category_json = open(category_name).read()
         category_load = json.loads(category_json)
@@ -122,7 +122,7 @@ class Command(BaseCommand):
         region_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'base_region.json'))
         region_json = open(region_name).read()
         region_load = json.loads(region_json)
@@ -131,7 +131,7 @@ class Command(BaseCommand):
         license_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'base_license.json'))
         license_json = open(license_name).read()
         license_load = json.loads(license_json)
@@ -140,7 +140,7 @@ class Command(BaseCommand):
         srt_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'base_spatialrepresentationtype.json'))
         srt_json = open(srt_name).read()
         srt_load = json.loads(srt_json)
@@ -149,7 +149,7 @@ class Command(BaseCommand):
         tag_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'taggit_tag.json'))
         tag_json = open(tag_name).read()
         tag_load = json.loads(tag_json)
@@ -158,7 +158,7 @@ class Command(BaseCommand):
         tag_name = (
             os.path.join(
                 os.path.expanduser("~"),
-                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'oq-private/old_platform_documents/json/'
                 'taggit_taggeditem.json'))
         tag_json = open(tag_name).read()
         tag_item_load = json.loads(tag_json)
@@ -220,160 +220,6 @@ class Command(BaseCommand):
             new_style.save()
             old_style_refs[pk] = new_style
 
-        # Import maps
-        map_old_refs = {}
-        for map_full in maps_load:
-
-            maps = map_full['fields']
-            mapp = new_resources[map_full['pk']]
-
-            # if (mapp['title'] == 'Global Historic Catalogue'):
-            #     continue
-
-            # Istance user
-            User = get_user_model()
-            owner = User.objects.get(username=mapp['owner'][0])
-
-            # Save maps
-            newmap = Map.objects.model(
-                uuid=mapp['uuid'],
-                projection=maps['projection'],
-                title_en=mapp['title'],
-                zoom=maps['zoom'],
-                last_modified=maps['last_modified'],
-                center_x=maps['center_x'],
-                center_y=maps['center_y'],
-                owner=owner,
-                abstract=mapp['abstract'],
-                purpose=mapp['purpose'],
-                date=mapp['csw_insert_date'],
-                category=(old_category_refs[mapp['category']]
-                          if mapp['category'] is not None
-                          else None),
-                license=(old_license_refs[mapp['license']]
-                         if mapp['license'] is not None
-                         else None),
-                edition=mapp['edition'],
-                supplemental_information_en=mapp['supplemental_information'],
-                popular_count=maps['popular_count'],
-                share_count=maps['share_count']
-                )
-            newmap.save()
-            map_old_refs[map_full['pk']] = newmap
-
-            # Istance and add regions
-            regions = [region for region in mapp['regions']]
-
-            for reg in regions:
-                # Search in old region json
-                for region in region_load:
-                    field = region['fields']
-                    if region['pk'] == reg:
-                        name = field['name']
-                    else:
-                        continue
-                # Add region to each document
-                Reg = Region.objects.get(name=name)
-                newmap.regions.add(Reg)
-
-            print(
-                'Imported map: %s with pk %s' % (
-                    mapp['title'], map_full['pk']))
-
-        # Import maplayers
-        for maplayer_full in maplayer_load:
-
-            mapslayer = maplayer_full['fields']
-            map_id = map_old_refs[mapslayer['map']].pk
-
-            # Istance Map
-            if map_id is not None:
-                map_id = Map.objects.get(id=map_id)
-            else:
-                map_id = None
-
-            # Save mapslayer
-            newmaplayer = MapLayer.objects.model(
-                opacity=mapslayer['opacity'],
-                map=map_id,
-                group=mapslayer['group'],
-                name=mapslayer['name'],
-                format=mapslayer['format'],
-                visibility=mapslayer['visibility'],
-                source_params=mapslayer['source_params'],
-                layer_params=mapslayer['layer_params'],
-                ows_url=mapslayer['ows_url'],
-                stack_order=mapslayer['stack_order'],
-                styles=mapslayer['styles'],
-                fixed=mapslayer['fixed'],
-                local=mapslayer['local'],
-                transparent=mapslayer['transparent']
-                )
-            newmaplayer.save()
-
-        # Import documents
-        for doc_full in doc_load:
-
-            doc = doc_full['fields']
-            res = new_resources[doc_full['pk']]
-
-            # Istance content_type
-            ctype_name = doc['content_type']
-            if ctype_name is not None:
-                ctype = [ctype for ctype in doc['content_type']]
-                label_type = ctype[0]
-                cont_type = ctype[1]
-                content_type = ContentType.objects.get(
-                    app_label=label_type, model=cont_type)
-
-            # Istance user
-            User = get_user_model()
-            owner = User.objects.get(username=res['owner'][0])
-
-            object_id = None
-            # associate optional map with document
-            if doc['object_id'] is not None:
-                object_id = map_old_refs[doc['object_id']].pk
-
-            # Save documents
-            newdoc = Document.objects.model(
-                uuid=res['uuid'],
-                title_en=res['title'],
-                owner=owner,
-                extension=doc['extension'],
-                abstract=res['abstract'],
-                purpose=res['purpose'],
-                doc_file=doc['doc_file'],
-                object_id=object_id,
-                category=old_category_refs[res['category']],
-                license=(old_license_refs[res['license']]
-                         if res['license'] is not None
-                         else None),
-                content_type=content_type,
-                edition=res['edition'],
-                supplemental_information_en=res['supplemental_information'],
-                popular_count=doc['popular_count'],
-                share_count=doc['share_count']
-                )
-            newdoc.save()
-
-            # Istance and add regions
-            regions = [region for region in res['regions']]
-
-            for reg in regions:
-                # Search in old region json
-                for region in region_load:
-                    field = region['fields']
-                    if region['pk'] == reg:
-                        name = field['name']
-                    else:
-                        continue
-                # Add region to each document
-                Reg = Region.objects.get(name=name)
-                newdoc.regions.add(Reg)
-
-            print('Imported document: %s' % res['title'])
-
         # Delete all layer
         Layer.objects.all().exclude(
             title_en='isc_viewer_measure').exclude(
@@ -425,10 +271,10 @@ class Command(BaseCommand):
                 "workspace": layer['workspace'],
                 "default_style": default_style,
                 "storeType": layer['storeType'],
-                "bbox_x0": base['bbox_x0'],
-                "bbox_x1": base['bbox_x1'],
-                "bbox_y0": base['bbox_y0'],
-                "bbox_y1": base['bbox_y1'],
+                # "bbox_x0": base['bbox_x0'],
+                # "bbox_x1": base['bbox_x1'],
+                # "bbox_y0": base['bbox_y0'],
+                # "bbox_y1": base['bbox_y1'],
                 "spatial_representation_type": srt,
                 "supplemental_information_en": base['supplemental_information']
             })
@@ -513,6 +359,182 @@ class Command(BaseCommand):
                 content_type=content_type
                 )
             new_rating.save()
+
+        # Map.objects.all().delete()
+
+        # Import maps
+        map_old_refs = {}
+        for map_full in maps_load:
+
+            maps = map_full['fields']
+            mapp = new_resources[map_full['pk']]
+
+            # if (mapp['title'] == 'Global Historic Catalogue'):
+            #     continue
+
+            # Istance user
+            User = get_user_model()
+            owner = User.objects.get(username=mapp['owner'][0])
+
+            # Save maps
+            newmap = Map.objects.model(
+                uuid=mapp['uuid'],
+                projection=maps['projection'],
+                title_en=mapp['title'],
+                metadata_xml=mapp['metadata_xml'],
+                zoom=maps['zoom'],
+                last_modified=maps['last_modified'],
+                center_x=maps['center_x'],
+                center_y=maps['center_y'],
+                owner=owner,
+                abstract=mapp['abstract'],
+                # bbox_x0=mapp['bbox_x0'],
+                # bbox_x1=mapp['bbox_x1'],
+                # bbox_y0=mapp['bbox_y0'],
+                # bbox_y1=mapp['bbox_y1'],
+                purpose=mapp['purpose'],
+                csw_wkt_geometry=mapp['csw_wkt_geometry'],
+                csw_anytext=mapp['csw_anytext'],
+                date=mapp['csw_insert_date'],
+                category=(old_category_refs[mapp['category']]
+                          if mapp['category'] is not None
+                          else None),
+                license=(old_license_refs[mapp['license']]
+                         if mapp['license'] is not None
+                         else None),
+                edition=mapp['edition'],
+                supplemental_information_en=mapp['supplemental_information'],
+                popular_count=maps['popular_count'],
+                share_count=maps['share_count']
+                )
+            newmap.save()
+            map_old_refs[map_full['pk']] = newmap
+
+            # Import thumbs in Resourcebase
+            # for th in th_load:
+
+            #     field = th['fields']
+
+            #     if mapp['thumbnail'] == th['pk']:
+            #         ResourceBase.objects.filter(uuid=mapp['uuid']).update(
+            #             thumbnail_url=field['thumb_file'])
+
+            # Istance and add regions
+            regions = [region for region in mapp['regions']]
+
+            for reg in regions:
+                # Search in old region json
+                for region in region_load:
+                    field = region['fields']
+                    if region['pk'] == reg:
+                        name = field['name']
+                    else:
+                        continue
+                # Add region to each document
+                Reg = Region.objects.get(name=name)
+                newmap.regions.add(Reg)
+
+            print(
+                'Imported map: %s with pk %s' % (
+                    mapp['title'], map_full['pk']))
+
+        # Import maplayers
+        for maplayer_full in maplayer_load:
+
+            mapslayer = maplayer_full['fields']
+            map_id = map_old_refs[mapslayer['map']].pk
+
+            # Istance Map
+            if map_id is not None:
+                map_id = Map.objects.get(id=map_id)
+            else:
+                map_id = None
+
+            # Save mapslayer
+            newmaplayer = MapLayer.objects.model(
+                opacity=mapslayer['opacity'],
+                map=map_id,
+                group=mapslayer['group'],
+                name=mapslayer['name'],
+                format=mapslayer['format'],
+                visibility=mapslayer['visibility'],
+                source_params=mapslayer['source_params'],
+                layer_params=mapslayer['layer_params'],
+                ows_url=mapslayer['ows_url'],
+                stack_order=mapslayer['stack_order'],
+                styles=mapslayer['styles'],
+                fixed=mapslayer['fixed'],
+                local=mapslayer['local'],
+                transparent=mapslayer['transparent']
+                )
+            newmaplayer.save()
+
+            print(
+                'Imported maplayer: %s' % map_id)
+
+        # Import documents
+        for doc_full in doc_load:
+
+            doc = doc_full['fields']
+            res = new_resources[doc_full['pk']]
+
+            # Istance content_type
+            ctype_name = doc['content_type']
+            if ctype_name is not None:
+                ctype = [ctype for ctype in doc['content_type']]
+                label_type = ctype[0]
+                cont_type = ctype[1]
+                content_type = ContentType.objects.get(
+                    app_label=label_type, model=cont_type)
+
+            # Istance user
+            User = get_user_model()
+            owner = User.objects.get(username=res['owner'][0])
+
+            object_id = None
+            # associate optional map with document
+            if doc['object_id'] is not None:
+                object_id = map_old_refs[doc['object_id']].pk
+
+            # Save documents
+            newdoc = Document.objects.model(
+                uuid=res['uuid'],
+                title_en=res['title'],
+                owner=owner,
+                extension=doc['extension'],
+                abstract=res['abstract'],
+                purpose=res['purpose'],
+                doc_file=doc['doc_file'],
+                object_id=object_id,
+                category=old_category_refs[res['category']],
+                license=(old_license_refs[res['license']]
+                         if res['license'] is not None
+                         else None),
+                content_type=content_type,
+                edition=res['edition'],
+                date=res['csw_insert_date'],
+                supplemental_information_en=res['supplemental_information'],
+                popular_count=doc['popular_count'],
+                share_count=doc['share_count']
+                )
+            newdoc.save()
+
+            # Istance and add regions
+            regions = [region for region in res['regions']]
+
+            for reg in regions:
+                # Search in old region json
+                for region in region_load:
+                    field = region['fields']
+                    if region['pk'] == reg:
+                        name = field['name']
+                    else:
+                        continue
+                # Add region to each document
+                Reg = Region.objects.get(name=name)
+                newdoc.regions.add(Reg)
+
+            print('Imported document: %s' % res['title'])
 
         # Import all tags
         new_tags = {}
