@@ -281,23 +281,23 @@ styles_manage () {
     return 0
     }
 
-layergroup_manage() {
-    local is_drop="$1" lg_name="$2" lg_url="$3"
-
-    fname="layergroups/${lg_name}.xml"
-    web_get "$fname" "$lg_url" 200
-
-    if [ "$is_drop" = "true" ]; then
-        fname="tmp/layergroups/${lg_name}.del.xml"
-        web_del "$fname" "$lg_url" 200
-
-        echo "LayerGroup [$lg_name] removed."
-    else
-        echo "LayerGroup [$lg_name] dumped."
-    fi
-
-    return 0
-    }
+#layergroup_manage() {
+#    local is_drop="$1" lg_name="$2" lg_url="$3"
+#
+#    fname="layergroups/${lg_name}.xml"
+#    web_get "$fname" "$lg_url" 200
+#
+#    if [ "$is_drop" = "true" ]; then
+#        fname="tmp/layergroups/${lg_name}.del.xml"
+#        web_del "$fname" "$lg_url" 200
+#
+#        echo "LayerGroup [$lg_name] removed."
+#    else
+#        echo "LayerGroup [$lg_name] dumped."
+#    fi
+#
+#    return 0
+#    }
 
 #
 #  featuretype_manage: Remove all featureTypes from a dataStore
@@ -558,15 +558,15 @@ all_data_manage() {
     web_post "$fname" "text/xml" "" "" "${GEM_SITE}/geoserver/rest/reset.xml" 200
     #
     # manage layergroups
-    fname="tmp/layergroups-list.get.xml"
-    web_get "$fname" "${GEM_SITE}/geoserver/rest/layergroups.xml" 200
-    LG="$( xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -m "/layerGroups/layerGroup" -v "concat(name, '|', atom:link/@href, '$NL')" ${OUTDIR}${fname} )" || true
+    # fname="tmp/layergroups-list.get.xml"
+    # web_get "$fname" "${GEM_SITE}/geoserver/rest/layergroups.xml" 200
+    # LG="$( xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -m "/layerGroups/layerGroup" -v "concat(name, '|', atom:link/@href, '$NL')" ${OUTDIR}${fname} )" || true
 
-    for lg_line in $LG; do
-        lg_name="$(echo "$lg_line" | cut -d '|' -f 1)"
-        lg_url="$(echo "$lg_line" | cut -d '|' -f 2 | sed "s@^https\?://@@g;s@^[^/]\+/@${GEM_SITE}/@g")"
-        layergroup_manage "$is_drop" "$lg_name" "$lg_url"
-    done
+    # for lg_line in $LG; do
+    #     lg_name="$(echo "$lg_line" | cut -d '|' -f 1)"
+    #     lg_url="$(echo "$lg_line" | cut -d '|' -f 2 | sed "s@^https\?://@@g;s@^[^/]\+/@${GEM_SITE}/@g")"
+    #     layergroup_manage "$is_drop" "$lg_name" "$lg_url"
+    # done
 
     #
     # manage layers
