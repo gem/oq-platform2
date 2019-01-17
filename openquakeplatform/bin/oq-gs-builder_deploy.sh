@@ -1059,18 +1059,18 @@ geoserver_population () {
     local workspace_name datastore_name
     echo $gem_app_list
 
-    # moved outside rm -rf "$dstdir/build-gs-tree"
-    mkdir -p "$dstdir/build-gs-tree"
-    mkdir -p "$dstdir/build-gs-tree/styles"
+    # moved outside rm -rf "$dstdir/build-gs-tree_deploy"
+    mkdir -p "$dstdir/build-gs-tree_deploy"
+    mkdir -p "$dstdir/build-gs-tree_deploy/styles"
     # mkdir -p "$dstdir/build-gs-tree/geofence"
-    mkdir -p "$dstdir/build-gs-tree/layers"
-    mkdir -p "$dstdir/build-gs-tree/workspaces"
-    mkdir -p "$dstdir/build-gs-tree/workspaces/${workspace_name_default}/datastores"
+    mkdir -p "$dstdir/build-gs-tree_deploy/layers"
+    mkdir -p "$dstdir/build-gs-tree_deploy/workspaces"
+    mkdir -p "$dstdir/build-gs-tree_deploy/workspaces/${workspace_name_default}/datastores"
     featuretypes_dir="workspaces/${workspace_name_default}/datastores/${datastore_name_default}/featuretypes"
-    mkdir -p "$dstdir/build-gs-tree/${featuretypes_dir}"
-    cp -rn "$srcdir/common/gs_data/"* "$dstdir/build-gs-tree"
+    mkdir -p "$dstdir/build-gs-tree_deploy/${featuretypes_dir}"
+    cp -rn "$srcdir/common/gs_data/"* "$dstdir/build-gs-tree_deploy"
     if [ "$APPEND_TREE" ]; then
-        cp -rn "$APPEND_TREE"/* "${dstdir}/build-gs-tree"
+        cp -rn "$APPEND_TREE"/* "${dstdir}/build-gs-tree_deploy"
     fi
     for app in "${gem_app_list[@]}"; do
         workspace_name="$workspace_name_default"
@@ -1078,43 +1078,43 @@ geoserver_population () {
             continue
         fi
         if [ -d "${srcdir}/${app}/gs_data/datastores" ]; then
-            cp "${srcdir}/${app}/gs_data/datastores/"* "$dstdir/build-gs-tree/workspaces/${workspace_name}/datastores"
+            cp "${srcdir}/${app}/gs_data/datastores/"* "$dstdir/build-gs-tree_deploy/workspaces/${workspace_name}/datastores"
             datastore_name="$(basename "${srcdir}/${app}/gs_data/datastores/"* .xml)"
         else
             datastore_name="$datastore_name_default"
         fi
         featuretypes_dir="workspaces/${workspace_name}/datastores/${datastore_name}/featuretypes"
         if [ ! -d "$featuretypes_dir" ]; then
-            mkdir -p "$dstdir/build-gs-tree/${featuretypes_dir}"
+            mkdir -p "$dstdir/build-gs-tree_deploy/${featuretypes_dir}"
         fi
 
         if [ -d "${srcdir}/${app}/gs_data/layers" ]; then
-            cp -rn "${srcdir}/${app}/gs_data/layers/"*       "${dstdir}/build-gs-tree/layers"
+            cp -rn "${srcdir}/${app}/gs_data/layers/"*       "${dstdir}/build-gs-tree_deploy/layers"
         fi
         if [ -d "${srcdir}/${app}/gs_data/styles" ]; then
-            cp -rn "${srcdir}/${app}/gs_data/styles/"*       "${dstdir}/build-gs-tree/styles"
+            cp -rn "${srcdir}/${app}/gs_data/styles/"*       "${dstdir}/build-gs-tree_deploy/styles"
         fi
         if [ -d "${srcdir}/${app}/gs_data/featuretypes" ]; then
-            cp -rn "${srcdir}/${app}/gs_data/featuretypes/"* "${dstdir}/build-gs-tree/${featuretypes_dir}"
+            cp -rn "${srcdir}/${app}/gs_data/featuretypes/"* "${dstdir}/build-gs-tree_deploy/${featuretypes_dir}"
         fi
         if [ -d "${srcdir}/${app}/gs_data/"tmpl ]; then
-            mkdir -p "${dstdir}/build-gs-tree/tmpl/${app}"
-            cp -rn "${srcdir}/${app}/gs_data/tmpl/"* "${dstdir}/build-gs-tree/tmpl/${app}"
+            mkdir -p "${dstdir}/build-gs-tree_deploy/tmpl/${app}"
+            cp -rn "${srcdir}/${app}/gs_data/tmpl/"* "${dstdir}/build-gs-tree_deploy/tmpl/${app}"
         fi
     done
  
     rm -rf output
     ${bindir}/oq-gs-builder.sh drop
-    ${bindir}/oq-gs-builder.sh restore "${dstdir}/build-gs-tree" "$db_name" "$db_user" "$db_pass"
+    ${bindir}/oq-gs-builder.sh restore "${dstdir}/build-gs-tree_deploy" "$db_name" "$db_user" "$db_pass"
 
     #
     #  post population
     for app in "${gem_app_list[@]}"; do
-        if [ -d "${dstdir}/build-gs-tree/tmpl/${app}/datastore" ]; then
-            cp -rn "${dstdir}/build-gs-tree/tmpl/${app}/datastore/"* "${gs_datadir}/workspaces/${workspace_name}/"
+        if [ -d "${dstdir}/build-gs-tree_deploy/tmpl/${app}/datastore" ]; then
+            cp -rn "${dstdir}/build-gs-tree_deploy/tmpl/${app}/datastore/"* "${gs_datadir}/workspaces/${workspace_name}/"
         fi
     done
-    rm -rf $HOME/oq-platform2/openquakeplatform/build-gs-tree
+    rm -rf $HOME/oq-platform2/openquakeplatform/build-gs-tree_deploy
 }
 
 
