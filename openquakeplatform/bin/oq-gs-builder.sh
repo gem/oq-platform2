@@ -569,7 +569,7 @@ all_data_manage() {
     done
 
     
-    manage layers
+    # manage layers
     fname="tmp/layers-list.get.xml"
     web_get "$fname" "${GEM_SITE}/geoserver/rest/layers.xml" 200
 
