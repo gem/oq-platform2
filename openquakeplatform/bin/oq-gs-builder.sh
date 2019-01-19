@@ -557,7 +557,7 @@ all_data_manage() {
     fname="tmp/reset.post.xml"
     web_post "$fname" "text/xml" "" "" "${GEM_SITE}/geoserver/rest/reset.xml" 200
     #
-    manage layergroups
+    # manage layergroups
     fname="tmp/layergroups-list.get.xml"
     web_get "$fname" "${GEM_SITE}/geoserver/rest/layergroups.xml" 200
     LG="$( xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -m "/layerGroups/layerGroup" -v "concat(name, '|', atom:link/@href, '$NL')" ${OUTDIR}${fname} )" || true
