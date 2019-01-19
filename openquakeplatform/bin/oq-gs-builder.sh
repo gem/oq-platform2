@@ -238,24 +238,24 @@ layer_manage() {
 
 #
 #  role_geofence_manage: Remove or dump a Geogence data role
-# role_geofence_manage() {
-#     local is_drop="$1" ro_fence_id="$2"
-# 
-# 
-#     fname="geofence/rules/${ro_fence_id}.xml"
-#     web_get "$fname" "${GEM_SITE}/geoserver/geofence/rest/rules/id/${ro_fence_id}.xml" 200
-# 
-#     if [ "$is_drop" = "true" ]; then
-#         fname="tmp/geofence/rules/${ro_fence_id}.del.xml"
-#         web_del "$fname" "${GEM_SITE}/geoserver/geofence/rest/rules/id/${ro_fence_id}.xml" 200
-# 
-#         echo "Data Role Geofence [$ro_fence_id] removed."
-#     else
-#         echo "Data Role Geofence [$ro_fence_id] dumped."
-#     fi
-# 
-#     return 0
-# }
+role_geofence_manage() {
+    local is_drop="$1" ro_fence_id="$2"
+
+
+    fname="geofence/rules/${ro_fence_id}.xml"
+    web_get "$fname" "${GEM_SITE}/geoserver/geofence/rest/rules/id/${ro_fence_id}.xml" 200
+
+    if [ "$is_drop" = "true" ]; then
+        fname="tmp/geofence/rules/${ro_fence_id}.del.xml"
+        web_del "$fname" "${GEM_SITE}/geoserver/geofence/rest/rules/id/${ro_fence_id}.xml" 200
+
+        echo "Data Role Geofence [$ro_fence_id] removed."
+    else
+        echo "Data Role Geofence [$ro_fence_id] dumped."
+    fi
+
+    return 0
+}
 
 #
 #  styles_manage: Remove or dump all styles from a workspaces
@@ -281,23 +281,23 @@ styles_manage () {
     return 0
     }
 
-#layergroup_manage() {
-#    local is_drop="$1" lg_name="$2" lg_url="$3"
-#
-#    fname="layergroups/${lg_name}.xml"
-#    web_get "$fname" "$lg_url" 200
-#
-#    if [ "$is_drop" = "true" ]; then
-#        fname="tmp/layergroups/${lg_name}.del.xml"
-#        web_del "$fname" "$lg_url" 200
-#
-#        echo "LayerGroup [$lg_name] removed."
-#    else
-#        echo "LayerGroup [$lg_name] dumped."
-#    fi
-#
-#    return 0
-#    }
+layergroup_manage() {
+    local is_drop="$1" lg_name="$2" lg_url="$3"
+
+    fname="layergroups/${lg_name}.xml"
+    web_get "$fname" "$lg_url" 200
+
+    if [ "$is_drop" = "true" ]; then
+        fname="tmp/layergroups/${lg_name}.del.xml"
+        web_del "$fname" "$lg_url" 200
+
+        echo "LayerGroup [$lg_name] removed."
+    else
+        echo "LayerGroup [$lg_name] dumped."
+    fi
+
+    return 0
+    }
 
 #
 #  featuretype_manage: Remove all featureTypes from a dataStore
@@ -557,19 +557,19 @@ all_data_manage() {
     fname="tmp/reset.post.xml"
     web_post "$fname" "text/xml" "" "" "${GEM_SITE}/geoserver/rest/reset.xml" 200
     #
-    # manage layergroups
-    # fname="tmp/layergroups-list.get.xml"
-    # web_get "$fname" "${GEM_SITE}/geoserver/rest/layergroups.xml" 200
-    # LG="$( xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -m "/layerGroups/layerGroup" -v "concat(name, '|', atom:link/@href, '$NL')" ${OUTDIR}${fname} )" || true
+    manage layergroups
+    fname="tmp/layergroups-list.get.xml"
+    web_get "$fname" "${GEM_SITE}/geoserver/rest/layergroups.xml" 200
+    LG="$( xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -m "/layerGroups/layerGroup" -v "concat(name, '|', atom:link/@href, '$NL')" ${OUTDIR}${fname} )" || true
 
-    # for lg_line in $LG; do
-    #     lg_name="$(echo "$lg_line" | cut -d '|' -f 1)"
-    #     lg_url="$(echo "$lg_line" | cut -d '|' -f 2 | sed "s@^https\?://@@g;s@^[^/]\+/@${GEM_SITE}/@g")"
-    #     layergroup_manage "$is_drop" "$lg_name" "$lg_url"
-    # done
+    for lg_line in $LG; do
+        lg_name="$(echo "$lg_line" | cut -d '|' -f 1)"
+        lg_url="$(echo "$lg_line" | cut -d '|' -f 2 | sed "s@^https\?://@@g;s@^[^/]\+/@${GEM_SITE}/@g")"
+        layergroup_manage "$is_drop" "$lg_name" "$lg_url"
+    done
 
-    #
-    # manage layers
+    
+    manage layers
     fname="tmp/layers-list.get.xml"
     web_get "$fname" "${GEM_SITE}/geoserver/rest/layers.xml" 200
 
@@ -596,16 +596,16 @@ all_data_manage() {
 
     #
     # manage data roles Geofence
-    # fname="rules.xml"
-    # web_get "$fname" "${GEM_SITE}/geoserver/geofence/rest/rules.xml" 200
+    fname="rules.xml"
+    web_get "$fname" "${GEM_SITE}/geoserver/geofence/rest/rules.xml" 200
 
-    # RoFence="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" ${OUTDIR}${fname})" || true
+    RoFence="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" ${OUTDIR}${fname})" || true
 
-    # for rofence in $RoFence; do
-    #     role_geofence_manage "$is_drop" "$rofence"
-    #     echo
-    #     echo $rofence
-    # done
+    for rofence in $RoFence; do
+        role_geofence_manage "$is_drop" "$rofence"
+        echo
+        echo $rofence
+    done
 
     #
     # delete styles
@@ -908,19 +908,19 @@ workspace_restore () {
     return $ret
 }
 
-# role_geofence_restore () {
-#     local gr_id="$1"
-#     local ret
-# 
-#     fname="tmp/geofence/rules/${gr_id}.post.xml"
-#     web_post "$fname" "text/xml" "" "${RESTDIR}/geofence/rules/${gr_id}.xml" "${GEM_SITE}/geoserver/geofence/rest/rules" 201
-#     ret=$?
-#     if [ $ret -eq 0 ]; then
-#         echo "  Geofence Rule [$gr_id] restored."
-#     fi
-# 
-#     return $ret
-#     }
+role_geofence_restore () {
+    local gr_id="$1"
+    local ret
+
+    fname="tmp/geofence/rules/${gr_id}.post.xml"
+    web_post "$fname" "text/xml" "" "${RESTDIR}/geofence/rules/${gr_id}.xml" "${GEM_SITE}/geoserver/geofence/rest/rules" 201
+    ret=$?
+    if [ $ret -eq 0 ]; then
+        echo "  Geofence Rule [$gr_id] restored."
+    fi
+
+    return $ret
+    }
 
 
 all_data_restore () {
@@ -956,16 +956,16 @@ all_data_restore () {
         sed -i "s@localhost:8000@localhost:$GEM_GEONODE_PORT@g;s@127\.0\.0\.1:8080@127.0.0.1:$GEM_GEOSERVER_PORT@g" $(find "$RESTDIR" -type f -name '*.xml')
     fi
 
-    # geofence_rule_ids="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" "${RESTDIR}/geofence/rules.xml")"
-    # echo "Geofence rule ids $geofence_rule_ids"
+    geofence_rule_ids="$(xmlstarlet sel -t -m "/Rules/Rule" -v "concat(@id, '$NL')" "${RESTDIR}/geofence/rules.xml")"
+    echo "Geofence rule ids $geofence_rule_ids"
 
-    # for geofence_rule_id in $geofence_rule_ids; do
-    #     role_geofence_restore "$geofence_rule_id"
-    #     ret=$?
-    #     if [ $ret -ne 0 ]; then
-    #         break
-    #     fi
-    # done
+    for geofence_rule_id in $geofence_rule_ids; do
+        role_geofence_restore "$geofence_rule_id"
+        ret=$?
+        if [ $ret -ne 0 ]; then
+            break
+        fi
+    done
 
     if [ $ret -ne 0 ]; then
         return "$ret"
