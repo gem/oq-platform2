@@ -729,7 +729,7 @@ def justcopy(origin, target):
 
 
 # Create local settings
-def _write_local_settings(lxc_ip, geo_ip, geo_public_ip, webuiurl, datadir, db_name, db_user, db_pass):
+def _write_local_settings(lxc_ip, geo_ip, geo_public_ip, secret, webuiurl, datadir, db_name, db_user, db_pass):
 
     local_settings = open(GEM_LOCAL_SETTINGS_TMPL, 'r').read()
     with open(os.path.join(os.path.expanduser("~"), 'oq-platform2',
@@ -742,6 +742,7 @@ def _write_local_settings(lxc_ip, geo_ip, geo_public_ip, webuiurl, datadir, db_n
                                        db_name=db_name,
                                        db_user=db_user,
                                        db_pass=db_pass,
+                                       secret=secret,
                                        datadir=datadir
                                        ))
 
@@ -754,7 +755,8 @@ def _write_local_settings(lxc_ip, geo_ip, geo_public_ip, webuiurl, datadir, db_n
     ('webuiurl=', 'u', 'Bind server to provided URL of webui.'),
     ('datadir=', 's', 'Value for FILE_PATH_FIELD_DIRECTORY in ipt'),
     ('db_login=', 'd', 'Value for user of db'),
-    ('db_pwd=', 'p', 'Value for pwd of db')
+    ('db_pwd=', 'p', 'Value for pwd of db'),
+    ('db_pwd=', 'k', 'Value for secret key')
 ])
 def oqsetup():
     lxc_ip = options.get('lxc_ip', '')
@@ -764,7 +766,8 @@ def oqsetup():
     db_name = options.get('db_login', '')
     db_user = options.get('db_login', '')
     db_pass = options.get('db_pwd', '')
+    secret = options.get('secret', '')
     datadir = options.get('datadir', '')
     # info(lxc_ip)
-    _write_local_settings(lxc_ip, geo_ip, geo_public_ip, webuiurl, datadir, db_name, db_user, db_pass)
+    _write_local_settings(lxc_ip, geo_ip, geo_public_ip, secret, webuiurl, datadir, db_name, db_user, db_pass)
     info("Local setting created.")

@@ -1509,7 +1509,7 @@ function getGeoServerLayers() {
     $('#load-project-spinner').show();
     var IRMTLayerNames = [];
     var IRMTLayerTitle = [];
-    var url = "http://"+ window.location.hostname +":8000/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
+    var url = "http://"+ window.location.hostname +"/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
     // Get layers from GeoServer and populate the layer selection menu
 
     $.ajax({
@@ -1565,7 +1565,7 @@ function getGeoServerLayers() {
                 $('#layer-list').append('<div id="list' + ij +'">' + layerProperties.title + '</div>');
 
                 $('#list'+ ij).on('click', function () {
-                    window.location = 'http://' + location.hostname + ':8000/irv/' + layerProperties.name;
+                    window.location = 'http://' + location.hostname + '/irv/' + layerProperties.name;
                 });    
             }
 
@@ -1894,7 +1894,7 @@ function attributeInfoRequest(selectedLayer) {
     // Get layer attributes from GeoServer
     return $.ajax({
         type: 'get',
-        url: 'http://'+ window.location.hostname +':8000/geoserver/oqplatform/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&maxFeatures=50&outputFormat=application%2Fjson',
+        url: 'http://'+ window.location.hostname +'/geoserver/oqplatform/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&maxFeatures=50&outputFormat=application%2Fjson',
         success: function(data) {
             projectChange = true;
             // Make a global variable used by the d3-tree chart
