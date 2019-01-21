@@ -756,7 +756,7 @@ def _write_local_settings(lxc_ip, geo_ip, geo_public_ip, secret, webuiurl, datad
     ('datadir=', 's', 'Value for FILE_PATH_FIELD_DIRECTORY in ipt'),
     ('db_login=', 'd', 'Value for user of db'),
     ('db_pwd=', 'p', 'Value for pwd of db'),
-    ('db_pwd=', 'k', 'Value for secret key')
+    ('secret=', 'k', 'Value for secret key')
 ])
 def oqsetup():
     lxc_ip = options.get('lxc_ip', '')
