@@ -166,30 +166,15 @@ function setup_apache_every_time() {
 
 function setup_geoserver() {
     cd $HOME/geonode
-    # pushd ../
-    # paver setup
-    # popd
-    # paver -f $HOME/oq-platform2/pavement.py setup
-    # paver -f $HOME/oq-platform2/pavement.py start
-
-    # echo $HOME
-    # wget http://ftp.openquake.org/oq-platform2/geoserver-2.9.4-war.zip
-    # unzip geoserver-2.9.4-war.zip
     wget http://ftp.openquake.org/oq-platform2/geoserver-2.9.x-oauth2.war
+    # wget http://ftp.openquake.org/oq-platform2/data-2.9.x-oauth2.zip
     mv geoserver-2.9.x-oauth2.war geoserver.war
     mv geoserver.war $TOMCAT_WEBAPPS
-    # mv geoserver.war $TOMCAT_WEBAPPS
 
     ## Symbolic link to solve spatialite warning of Geoserver
     # sudo ln -sf /usr/lib/x86_64-linux-gnu/libproj.so.9 /usr/lib/x86_64-linux-gnu/libproj.so.0
-    
-    # export CATALINA_OPTS="-Xms2048M -Xmx2048M"
-    $TOMCAT_SERVICE restart
 
-    ## Rename postgres jar in WEB-INF of Geoserver
-    # if [ -f $HOME/geonode/geoserver/geoserver/WEB-INF/lib/postgresql-9.4.1211.jar ]; then                              
- #     mv $HOME/geonode/geoserver/geoserver/WEB-INF/lib/postgresql-9.4.1211.jar $HOME/geonode/geoserver/geoserver/WEB-INF/lib/old_postgresql-9.4.1211.jar
-    # fi
+    $TOMCAT_SERVICE restart
 
     ## Symbolic link to solve spatialite warning of Geoserver
     sudo ln -sf /usr/lib/x86_64-linux-gnu/libproj.so.9 /usr/lib/x86_64-linux-gnu/libproj.so.0
@@ -245,7 +230,6 @@ case $stepval in
     all)
         echo "Running GeoNode installation ..."
         preinstall
-        # one_time_setup
         setup_geoserver
         postinstall
         setup_apache_once

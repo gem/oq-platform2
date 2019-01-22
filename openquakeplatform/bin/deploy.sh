@@ -30,7 +30,7 @@ sudo apt install -y git python-virtualenv
 
 # if [ "$GEM_IS_INSTALL" == "y" ]; then
     # delete all folder used
-    sudo rm -rf env oq-platform2 geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt
+    sudo rm -rf env oq-platform2 geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data
     
     # if exists, delete postgres:
     sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5
@@ -153,12 +153,14 @@ function clone_platform() {
 function oq_application() {
     # clone ipt, taxtweb, building-classification-survey
     cd $HOME
-    for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
+    for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class oq-platform-data; do
         # for repo in oq-platform-taxtweb; do
         if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
-        cd ${repo}
-        pip install -e .
-        cd $HOME
+        if [ "${repo}" != "oq-platform-data" ]; then
+            cd ${repo}
+            pip install -e .
+            cd $HOME
+        fi
     done
 }
 
@@ -166,6 +168,9 @@ function install_geonode() {
     # clone geonode
     cd $HOME
     git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
+
+    # download Geonode zip
+    wget http://ftp.openquake.org/oq-platform2/GeoNode-2.6.x.zip
     
     # override dev-config yml into the Geonode
     cd $HOME/geonode
@@ -223,7 +228,7 @@ function apply_data() {
     sudo service tomcat7 restart
     
     cd $HOME/oq-platform2
-    $HOME/oq-platform2/openquakeplatform/bin/oq-gs-builder.sh populate -a /home/ubuntu/oq-private/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
+    $HOME/oq-platform2/openquakeplatform/bin/oq-gs-builder.sh populate -a /home/ubuntu/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
     
     cd ~/
     # Put sql for all layers
@@ -245,12 +250,10 @@ function apply_data() {
 function svir_world_data() {
     sudo sed -i 's/:8000//g' $HOME/env/local/lib/python2.7/site-packages/geonode/static_root/irv/js/irv_viewer.js
     geonode collectstatic --noinput --verbosity 0 
-    git clone https://github.com/gem/oq-platform-data.git 
     geonode migrate
     geonode loaddata oq-platform-data/api/data/world_prod.json.bz2 
     geonode loaddata oq-platform-data/api/data/svir_prod.json.bz2
 }
-
 
 #function complete procedure for tests
 function initialize_test() {
@@ -272,12 +275,13 @@ function initialize_test() {
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl oq-platform2/openquakeplatform/set_thumb/moon_config.py
 
     sudo sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
+    sudo sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
     # cd $GIT_REPO
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
 }
 
-function exec_set_map_thumbs () {
+function exec_set_map_thumbs() {
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/set_thumb/mapthumbnail_test.py
 }
