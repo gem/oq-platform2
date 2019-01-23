@@ -122,24 +122,10 @@ function setup_django_every_time() {
     sudo ln -sf $HOME/env/lib/python2.7/site-packages/geonode/static_root/ /var/www/geonode/static
 
     # ipt folder
-    cd $HOME/geonode/
+    sudo chmod 777 -R $GEONODE_WWW 
+    cd $GEONODE_WWW
     mkdir data                  
-    cd data
-    mkdir 1
-    cd 1
-    mkdir ipt
-    cd ipt
-    mkdir rupture_file
-    mkdir list_of_sites
-    mkdir gmf_file
-    mkdir exposure_model
-    mkdir fragility_model
-    mkdir fragility_cons
-    mkdir vulnerability_model
-    mkdir site_conditions
-    mkdir gsim_logic_tree_file
-    mkdir source_model_logic_tree_file
-    mkdir source_model_file
+    sudo chown -R www-data.www-data $GEONODE_WWW/data
 }
 
 function setup_apache_once() {
@@ -148,7 +134,7 @@ function setup_apache_once() {
 
     sed -i '1d' $APACHE_SITES/geonode.conf
     sed -i "1i WSGIDaemonProcess geonode user=www-data threads=15 processes=2" $APACHE_SITES/geonode.conf
-    sudo sed -i '1 s@^@WSGIPythonHome /home/ubuntu/env\n@g' $APACHE_SITES/geonode.conf
+    sudo sed -i '1 s@^@WSGIPythonHome /home/openquake/env\n@g' $APACHE_SITES/geonode.conf
 
     #FIXME: This could be removed if setup_apache_every_time is called after setup_apache_once
     $APACHE_SERVICE restart
