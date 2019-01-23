@@ -100,6 +100,16 @@ OGC_SERVER = {
     }
 }
 
+CATALOGUE = {
+    'default': {
+        # The underlying CSW backend
+        # ("pycsw_http", "pycsw_local", "geonetwork", "deegree")
+        'ENGINE': 'geonode.catalogue.backends.pycsw_local',
+        # The FULLY QUALIFIED base url to the CSW instance for this GeoNode
+        'URL': '%scatalogue/csw' % SITEURL,
+    }
+}
+
 # Additional directories which hold static files
 STATICFILES_DIRS = [
     os.path.join(OQPLATFORM_ROOT, 'static'),
