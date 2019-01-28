@@ -9,6 +9,17 @@ class MetadataTest(unittest.TestCase):
 
         pla = platform_get()
 
+        gem_user = 'GEM'                                                        
+        gem_pwd = 'GEM'                                                         
+                                                                                
+        # New window with platform without other login                             
+        plb = pla.platform_create(user=None, passwd=None)                          
+        plb.init(landing='/', autologin=False)                                     
+                                                                                
+        # New login                                                             
+        signin = plb.xpath_finduniq("//a[normalize-space(text()) = 'Sign in']") 
+        signin.click()                         
+
         pla.get('/layer')
 
         # click on layer
