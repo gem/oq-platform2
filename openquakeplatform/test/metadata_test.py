@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import unittest
+import time
 from openquake.moon import platform_get
 
 
@@ -26,6 +27,8 @@ class MetadataTest(unittest.TestCase):
             "//a[normalize-space(text()) = 'Dublin Core']")
         standard_meta.click()
 
+        time.sleep(2)
+
         # switch window tab
         window_after = pla.driver.window_handles[1]
         pla.driver.switch_to.window(window_after)
@@ -46,3 +49,6 @@ class MetadataTest(unittest.TestCase):
             login.click()
         except:
             raise ValueError('Cannot do login')
+
+        # close tab and return to main window
+        pla.windows_reset()
