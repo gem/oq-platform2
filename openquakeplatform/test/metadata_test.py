@@ -9,17 +9,6 @@ class MetadataTest(unittest.TestCase):
 
         pla = platform_get()
 
-        # gem_user = 'GEM'
-        # gem_pwd = 'GEM'
-
-        # # New window with platform without other login
-        # plb = pla.platform_create(user=None, passwd=None)
-        # plb.init(landing='/', autologin=False)
-        #
-        # # New login
-        # signin = plb.xpath_finduniq("//a[normalize-space(text()) = 'Sign in']")
-        # signin.click()
-
         pla.get('/layers')
 
         # click on layer
@@ -36,12 +25,6 @@ class MetadataTest(unittest.TestCase):
         standard_meta = pla.xpath_finduniq(
             "//a[normalize-space(text()) = 'Dublin Core']")
         standard_meta.click()
-
-        # import time
-        # time.sleep(5000000)
-
-        import time
-        time.sleep(2)
 
         # switch window tab
         window_after = pla.driver.window_handles[1]
