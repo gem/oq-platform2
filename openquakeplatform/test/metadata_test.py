@@ -43,16 +43,23 @@ class MetadataTest(unittest.TestCase):
         import time
         time.sleep(2)
 
+        # switch window tab
         window_after = pla.driver.window_handles[1]
+        pla.driver.switch_to.window(window_after)
 
-        page_meta = pla.driver.switch_to.window(window_after)
+        # if do login is not localhost
+        try:
+            # login
+            user = pla.xpath_findfirst(
+                "//input[@id = 'id_username']")
+            user.send_keys('admin')
 
-        print(window_after)
-        print(page_meta)
+            pwd = pla.xpath_findfirst(
+                "//input[@id = 'id_password']")
+            pwd.send_keys('admin')
 
-        # check metadata page
-        pla.wait_new_page(
-            page_meta, 'http://localhost:8000/catalogue/csw?outputschema'
-            '=http%3A%2F%2Fwww.opengis.net%2Fcat%2Fcsw%2F2.0.2&service'
-            '=CSW&request=GetRecordById&version=2.0.2&elementsetname='
-            'full&id=4b9fc50b-7dae-4839-a2d0-2f62121da2d8', timeout=10)
+            login = pla.xpath_finduniq(
+                "//button[normalize-space(text())='Log in']")
+            login.click()
+        except:
+            raise ValueError('Cannot do login')
