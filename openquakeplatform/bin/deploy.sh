@@ -134,8 +134,8 @@ EOF
 
 #insert line in pg_hba.conf postgres
 sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-# sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP"'/32             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP"'/32             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+# sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
 sudo sed -i "1 s@^@listen_addresses = '127.0.0.1,localhost,"$LXC_IP"'\n@g" /etc/postgresql/9.5/main/postgresql.conf
 
 #restart postgres
@@ -208,7 +208,7 @@ function install_geonode() {
     sudo ./package/oq_install.sh -s post $HOME/oq-platform2/openquakeplatform/common/geonode_install_post.sh
     sudo ./package/oq_install.sh -s setup_geoserver $HOME/oq-platform2/openquakeplatform/common/geonode_install_pre.sh
     
-    sudo sed -i '1 s@^@WSGIPythonHome /home/openquake/env\n@g' /etc/apache2/sites-enabled/geonode.conf
+    sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
     sudo invoke-rc.d apache2 restart                      
 }
 
@@ -229,7 +229,7 @@ function apply_data() {
     sudo service tomcat7 restart
     
     cd $HOME/oq-platform2
-    $HOME/oq-platform2/openquakeplatform/bin/oq-gs-builder.sh populate -a /home/openquake/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
+    $HOME/oq-platform2/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
     
     cd ~/
     # Put sql for all layers
