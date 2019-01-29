@@ -60,7 +60,11 @@ class MetadataTest(unittest.TestCase):
 
         pla.driver.window_handles[1]
 
-        pla.wait_new_page(
-            login, 'http://%s:8000/catalogue/csw' % get_ip)
-
+        try:
+            pla.wait_new_page(
+                login, 'http://%s:8000/catalogue/csw' % get_ip)
+        except:
+            # for continous integration
+            pla.wait_new_page(
+                login, 'http://127.0.1.1:8000/catalogue/csw')
         pla.driver.window_handles[0]
