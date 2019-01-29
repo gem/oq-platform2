@@ -11,6 +11,8 @@ class MetadataTest(unittest.TestCase):
 
         get_ip = socket.gethostbyname(socket.gethostname())
 
+        print('Get_ip: %s' % get_ip)
+
         pla = platform_get()
 
         pla.get('/layers')
@@ -55,6 +57,8 @@ class MetadataTest(unittest.TestCase):
 
         # close tab and return to main window
         # pla.windows_reset()
+
+        pla.driver.window_handles[1]
 
         pla.wait_new_page(
             login, 'http://%s:8000/catalogue/csw' % get_ip)
