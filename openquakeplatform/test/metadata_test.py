@@ -4,30 +4,38 @@ import time
 from openquake.moon import platform_get
 
 
+# try download metadata from some layer
+def download_meta(self):
+
+    pla = platform_get()
+
+    pla.get('/layers')
+
+    # click on layer ghec
+    layer = pla.xpath_finduniq(
+        "//a[normalize-space(text()) = 'ghec_viewer_measure']")
+    layer.click()
+
+    # click download metadata in layer page detail ghec
+    download_meta = pla.xpath_finduniq(
+        "//button[@data-target = '#download-metadata']")
+    download_meta.click()
+
+    # click standard metadata ghec
+    standard_meta = pla.xpath_finduniq(
+        "//a[normalize-space(text()) = 'Dublin Core']")
+    standard_meta.click()
+
+    time.sleep(2)
+
+
 class MetadataTest(unittest.TestCase):
 
     def check_metadata_test(self):
 
         pla = platform_get()
 
-        pla.get('/layers')
-
-        # click on layer
-        layer = pla.xpath_finduniq(
-            "//a[normalize-space(text()) = 'ghec_viewer_measure']")
-        layer.click()
-
-        # click download metadata in layer page detail
-        download_meta = pla.xpath_finduniq(
-            "//button[@data-target = '#download-metadata']")
-        download_meta.click()
-
-        # click standard metadata
-        standard_meta = pla.xpath_finduniq(
-            "//a[normalize-space(text()) = 'Dublin Core']")
-        standard_meta.click()
-
-        time.sleep(2)
+        download_meta(self)
 
         # switch window tab
         window_after = pla.driver.window_handles[1]
@@ -51,4 +59,8 @@ class MetadataTest(unittest.TestCase):
             raise ValueError('Cannot do login')
 
         # close tab and return to main window
-        pla.windows_reset()
+        # pla.windows_reset()
+
+        download_meta(self)
+
+        pla.driver.window_handles[0]
