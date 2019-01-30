@@ -9,8 +9,7 @@ class MetadataTest(unittest.TestCase):
 
     def check_metadata_test(self):
 
-        # get_ip = socket.gethostbyname(socket.gethostname())
-
+        # check ip adress
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(('8.8.8.8', 1))  # connect() for UDP doesn't send packets
         get_ip = s.getsockname()[0]
@@ -59,16 +58,13 @@ class MetadataTest(unittest.TestCase):
         except:
             raise ValueError('Cannot do login')
 
-        # close tab and return to main window
-        # pla.windows_reset()
-
         pla.driver.window_handles[1]
 
-        try:
-            pla.wait_new_page(
+        pla.wait_new_page(
                 login, 'http://%s:8000/catalogue/csw' % get_ip)
-        except:
-            # for continous integration
-            pla.wait_new_page(
-                login, 'http://127.0.1.1:8000/catalogue/csw')
-        pla.driver.window_handles[0]
+
+        # close window and swith to previous window
+        pla.window_close()
+        window_before = pla.driver.window_handles[0]
+        pla.driver.switch_to.window(window_before)
+
