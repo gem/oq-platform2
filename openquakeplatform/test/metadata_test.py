@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+
+##### with this test we can check if pycsw works
+##### and if catalogue is correctly setted in local settings
+
 import unittest
 import time
 import socket
