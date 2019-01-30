@@ -9,7 +9,11 @@ class MetadataTest(unittest.TestCase):
 
     def check_metadata_test(self):
 
-        get_ip = socket.gethostbyname(socket.gethostname())
+        # get_ip = socket.gethostbyname(socket.gethostname())
+
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('8.8.8.8', 1))  # connect() for UDP doesn't send packets
+        get_ip = s.getsockname()[0]
 
         print('Get_ip: %s' % get_ip)
 
@@ -22,7 +26,7 @@ class MetadataTest(unittest.TestCase):
             "//a[normalize-space(text()) = 'ghec_viewer_measure']")
         layer.click()
 
-        # click download metadata in layer page detail ghec
+        # click download metadata in layer page detail
         download_meta = pla.xpath_finduniq(
             "//button[@data-target = '#download-metadata']")
         download_meta.click()
