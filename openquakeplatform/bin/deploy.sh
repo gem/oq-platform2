@@ -193,7 +193,7 @@ function install_geonode() {
     
     # install Geonode
     cd ..
-    sudo ./package/oq_install.sh -s pre ~/oq-platform2/openquakeplatform/common/geonode_install_pre.sh
+    sudo ./package/oq_install.sh -s pre ~/oq-platform2/openquakeplatform/common/geonode_install.sh
     
     # enable wsgi apache
     sudo apt-get install libapache2-mod-wsgi
@@ -205,7 +205,7 @@ function install_geonode() {
     sudo mv /etc/geonode/local_settings.py /etc/geonode/geonode_local_settings.py                                                                                                                                    
     sudo cp  $HOME/oq-platform2/local_settings.py /etc/geonode/
     sudo ./package/oq_install.sh -s post $HOME/oq-platform2/openquakeplatform/common/geonode_install_post.sh
-    sudo ./package/oq_install.sh -s setup_geoserver $HOME/oq-platform2/openquakeplatform/common/geonode_install_pre.sh
+    sudo ./package/oq_install.sh -s setup_geoserver $HOME/oq-platform2/openquakeplatform/common/geonode_install.sh
     
     sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
     sudo invoke-rc.d apache2 restart                      
