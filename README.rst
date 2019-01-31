@@ -1,4 +1,4 @@
-penquake Platform
+Openquake Platform
 ==================
 
 Development Installation
