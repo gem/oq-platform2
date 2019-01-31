@@ -8,11 +8,12 @@
     <title>Openquake platform {% if resource.title %}- {{ resource.title }}{% endif %}</title>
     <meta property="og:title" content="OpenQuake Platform {% if resource.title %}- {{ resource.title }}{% endif %}" />
     <meta property="og:site_name" content="OpenQuake Platform" />
-    <meta property="og:url" content="http://{{ SITE_DOMAIN }}{{ resource.detail_url }}" />
-    <meta property="og:description" content="{% if resource.description %}{{ resource.description  }}{% else %}Welcome to the OpenQuake Platform, by the GEM Foundation.{% endif %}" />
-    <meta name="og:image" content="{{ resource.thumbnail_url }}" />
-    <meta name="og:image:width" content="200" />
-    <meta name="og:image:height" content="150" />
+    <meta property="og:url" content="http://platform-staging.openquake.org" />
+    <meta property="og:description" content="Welcome to the OpenQuake Platform, by the GEM Foundation." />
+    <meta property="og:image" content="https://storage-scw1.globalquakemodel.org/public/Logos/oq-logo.png" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="150" />
+
     {% block head %}
       {% if DEBUG_STATIC %}
       <link href="{{ STATIC_URL }}lib/css/jquery.dataTables.css?v={{ VERSION }}" rel="stylesheet" />
