@@ -194,7 +194,6 @@ function install_geonode() {
     # install Geonode
     cd ..
     sudo ./package/oq_install.sh -s pre ~/oq-platform2/openquakeplatform/common/geonode_install_pre.sh
-    # sudo ./package/oq_install.sh -s once ~/oq-platform2/openquakeplatform/common/geonode_install_once.sh
     
     # enable wsgi apache
     sudo apt-get install libapache2-mod-wsgi
