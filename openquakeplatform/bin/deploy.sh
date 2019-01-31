@@ -28,9 +28,11 @@ fi
 sudo apt-get update
 sudo apt install -y git python-virtualenv wget
 
+GIT_REPO="oq-platform2"
+
 # if [ "$GEM_IS_INSTALL" == "y" ]; then
     # delete all folder used
-    sudo rm -rf env oq-platform2 geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data
+    sudo rm -rf env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data
     
     # if exists, delete postgres:
     sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5
@@ -65,7 +67,6 @@ LXC_IP="$1"
 GIT_BRANCH="$2"
 GIT_GEO_REPO="2.6.x"
 GEO_STABLE_HASH="aa5932d"
-GIT_REPO="oq-platform2"
 GEO_DBUSER="geonode"
 GEM_GIT_REPO="git://github.com/gem"
 NO_EXEC_TEST="$3"
@@ -143,10 +144,10 @@ sudo service postgresql restart
 }
 
 function clone_platform() {
-    # clone oq-platform2
+    # clone oq-platform
     cd $HOME
     git clone https://github.com/gem/oq-platform2.git
-    cd oq-platform2
+    cd $GIT_REPO
     git checkout oqstyle
     pip install -e .
 }
@@ -156,7 +157,7 @@ function oq_application() {
     cd $HOME
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class oq-platform-data; do
         # for repo in oq-platform-taxtweb; do
-        if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
+        if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b $GIT_REPO https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
         if [ "${repo}" != "oq-platform-data" ]; then
             cd ${repo}
             pip install -e .
@@ -171,7 +172,7 @@ function install_geonode() {
     git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
 
     # download Geonode zip
-    wget http://ftp.openquake.org/oq-platform2/GeoNode-2.6.x.zip
+    wget http://ftp.openquake.org/$GIT_REPO/GeoNode-2.6.x.zip
     
     # override dev-config yml into the Geonode
     cd $HOME/geonode
@@ -193,7 +194,7 @@ function install_geonode() {
     
     # install Geonode
     cd ..
-    sudo ./package/oq_install.sh -s pre ~/oq-platform2/openquakeplatform/common/geonode_install.sh
+    sudo ./package/oq_install.sh -s pre $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     # enable wsgi apache
     sudo apt-get install libapache2-mod-wsgi
@@ -201,11 +202,11 @@ function install_geonode() {
     sudo invoke-rc.d apache2 restart
     
     # Create local_settings with pavement from repo
-    paver -f $HOME/oq-platform2/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s $HOME/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
+    paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s $HOME/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
     sudo mv /etc/geonode/local_settings.py /etc/geonode/geonode_local_settings.py                                                                                                                                    
-    sudo cp  $HOME/oq-platform2/local_settings.py /etc/geonode/
-    sudo ./package/oq_install.sh -s post $HOME/oq-platform2/openquakeplatform/common/geonode_install_post.sh
-    sudo ./package/oq_install.sh -s setup_geoserver $HOME/oq-platform2/openquakeplatform/common/geonode_install.sh
+    sudo cp  $HOME/$GIT_REPO/local_settings.py /etc/geonode/
+    sudo ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
+    sudo ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
     sudo invoke-rc.d apache2 restart                      
@@ -227,8 +228,8 @@ function apply_data() {
     sudo sed -i 's/-Xmx128m/-Xmx4096m/g' /etc/default/tomcat7
     sudo service tomcat7 restart
     
-    cd $HOME/oq-platform2
-    $HOME/oq-platform2/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
+    cd $HOME/$GIT_REPO
+    $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
     
     cd ~/
     # Put sql for all layers
@@ -269,10 +270,10 @@ function initialize_test() {
     sudo cp geckodriver /usr/local/bin
     pip install -U selenium==${GEM_SELENIUM_VERSION}
     if [ -z "$REINSTALL" ]; then
-        git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
+        git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b $GIT_REPO "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
     fi
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
-    cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl oq-platform2/openquakeplatform/set_thumb/moon_config.py
+    cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
     sudo sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
     sudo sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
