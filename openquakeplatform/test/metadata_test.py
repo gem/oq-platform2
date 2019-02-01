@@ -5,6 +5,7 @@
 
 import unittest
 import time
+import os
 import socket
 from openquake.moon import platform_get
 
@@ -14,9 +15,7 @@ class MetadataTest(unittest.TestCase):
     def check_metadata_test(self):
 
         # check ip adress
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(('8.8.8.8', 1))  # connect() for UDP doesn't send packets
-        get_ip = s.getsockname()[0]
+        get_ip = os.environ("LXC_IP")
 
         print('Get_ip: %s' % get_ip)
 
