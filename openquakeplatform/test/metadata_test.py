@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 
-##### with this test we can check if pycsw works
-##### and if catalogue is correctly setted in local settings
+# with this test we can check if pycsw works
+# and if catalogue is correctly setted in local settings
 
 import unittest
 import time
 import os
-import socket
 from openquake.moon import platform_get
 
 
@@ -15,7 +14,7 @@ class MetadataTest(unittest.TestCase):
     def check_metadata_test(self):
 
         # check ip adress
-        get_ip = os.environ("LXC_IP")
+        get_ip = os.getenv("LXC_IP")
 
         print('Get_ip: %s' % get_ip)
 
@@ -70,4 +69,3 @@ class MetadataTest(unittest.TestCase):
         pla.window_close()
         window_before = pla.driver.window_handles[0]
         pla.driver.switch_to.window(window_before)
-
