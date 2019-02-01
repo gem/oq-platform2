@@ -1,5 +1,11 @@
 #!/usr/bin/env python
+
+##### with this test we can check if pycsw works
+##### and if catalogue is correctly setted in local settings
+
 import unittest
+import time
+import socket
 from openquake.moon import platform_get
 
 
@@ -7,22 +13,18 @@ class MetadataTest(unittest.TestCase):
 
     def check_metadata_test(self):
 
+        # check ip adress
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('8.8.8.8', 1))  # connect() for UDP doesn't send packets
+        get_ip = s.getsockname()[0]
+
+        print('Get_ip: %s' % get_ip)
+
         pla = platform_get()
 
-        gem_user = 'GEM'                                                        
-        gem_pwd = 'GEM'                                                         
-                                                                                
-        # New window with platform without other login                             
-        plb = pla.platform_create(user=None, passwd=None)                          
-        plb.init(landing='/', autologin=False)                                     
-                                                                                
-        # New login                                                             
-        signin = plb.xpath_finduniq("//a[normalize-space(text()) = 'Sign in']") 
-        signin.click()                         
+        pla.get('/layers')
 
-        pla.get('/layer')
-
-        # click on layer
+        # click on layer ghec
         layer = pla.xpath_finduniq(
             "//a[normalize-space(text()) = 'ghec_viewer_measure']")
         layer.click()
@@ -32,7 +34,41 @@ class MetadataTest(unittest.TestCase):
             "//button[@data-target = '#download-metadata']")
         download_meta.click()
 
-        # click standard metadata
+        # click standard metadata ghec
         standard_meta = pla.xpath_finduniq(
             "//a[normalize-space(text()) = 'Dublin Core']")
         standard_meta.click()
+
+        time.sleep(2)
+
+        # switch window tab
+        window_after = pla.driver.window_handles[1]
+        pla.driver.switch_to.window(window_after)
+
+        # if do login is not localhost
+        try:
+            # login
+            user = pla.xpath_findfirst(
+                "//input[@id = 'id_username']")
+            user.send_keys('admin')
+
+            pwd = pla.xpath_findfirst(
+                "//input[@id = 'id_password']")
+            pwd.send_keys('admin')
+
+            login = pla.xpath_finduniq(
+                "//button[normalize-space(text())='Log in']")
+            login.click()
+        except:
+            raise ValueError('Cannot do login')
+
+        pla.driver.window_handles[1]
+
+        pla.wait_new_page(
+                login, 'http://%s:8000/catalogue/csw' % get_ip)
+
+        # close window and swith to previous window
+        pla.window_close()
+        window_before = pla.driver.window_handles[0]
+        pla.driver.switch_to.window(window_before)
+
