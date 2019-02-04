@@ -229,7 +229,9 @@ function apply_data() {
     geonode loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
     geonode import_vuln_geo_applicability_csv $HOME/$GIT_REPO/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
     geonode loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
-    geonode loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
+    if [ $DEVEL_DATA != "y" ]; then
+        geonode loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
+    fi
     geonode create_gem_user
     pip install simplejson==2.0.9
     # export CATALINA_OPTS="-Xms4096M -Xmx4096M"
