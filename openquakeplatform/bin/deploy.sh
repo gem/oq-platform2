@@ -236,15 +236,30 @@ function apply_data() {
     $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
     
     cd ~/
-    # Put sql for all layers
-    for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
-        sudo -u postgres psql -d $GEO_DBUSER -c '\copy '$lay' FROM '$HOME/oq-private/old_platform_documents/sql_layers/out/$lay''
-    done
+
+    if [ $DEVELDATA = "Y" ]; then
+        # sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
+        sudo -u postgres psql -d geonode_dev -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
+        
+        # sql assumpcao2014 layer
+        sudo -u postgres psql -d geonode_dev -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
+    else
+        # Put sql for all layers
+        for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
+            sudo -u postgres psql -d $GEO_DBUSER -c '\copy '$lay' FROM '$HOME/oq-private/old_platform_documents/sql_layers/out/$lay''
+        done
+    fi
     
     sudo cp -r $HOME/oq-private/old_platform_documents/thumbs/ $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
     sudo chmod 777 -R $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
     sudo cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
-    geonode add_documents_prod
+
+    if [ $DEVELDATA = "Y" ]; then
+        geonode add_documents
+        shift
+    else
+        geonode add_documents_prod
+    fi
     # geonode updatelayers
     # geonode sync_geofence
 
