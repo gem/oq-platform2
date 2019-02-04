@@ -318,6 +318,102 @@ copy_dev () {
     scp "${lxc_ip}:latest_geonode_commit.txt" "out/" || true
 }
 
+#
+#  _prodtest_innervm_run <branch_id> <lxc_ip> - part of source test performed on lxc
+#                     the following activities are performed:
+#                       files and install them
+#
+#      <branch_id>    name of the tested branch
+#      <lxc_ip>       the IP address of lxc instance
+#
+_prodtest_innervm_run () {
+    local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2" notests="$3"
+
+    trap 'local LASTERR="$?" ; trap ERR ; (exit $LASTERR) ; return' ERR
+
+    scp .gem_init.sh ${lxc_ip}:
+    scp .gem_ffox_init.sh ${lxc_ip}:
+
+    repo_id="$GEM_GIT_REPO"
+
+    # scp verifier-guest.sh "$lxc_ip:"
+
+    if [ -d "_shuttle" ]; then
+        rm -rf _shuttle
+    fi
+    mkdir -p "_shuttle/$GEM_GIT_PACKAGE"
+    git clone . "_shuttle/$GEM_GIT_PACKAGE"
+    git -C "_shuttle/$GEM_GIT_PACKAGE" remote set-url origin "$(git config --get remote.origin.url)"
+    scp -r "_shuttle/$GEM_GIT_PACKAGE" ${lxc_ip}:
+    rm -rf _shuttle
+
+    ssh -t  $lxc_ip "
+export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
+export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
+export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
+export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
+
+\"./deploy.sh\" -d \"$lxc_ip\" \"$branch_id\" \"$notests\"
+"
+    echo "_devtest_innervm_run: exit"
+
+    return 0
+}
+
+#
+#  prodtest_run <branch_id> <branch_geonode> <notests> - main function for development test
+#      <branch_id>        name of the tested branch
+#      <branch_geonode>   name of the geonode branch
+#      <notests>          name of variable for activate or deactivate tests 
+#
+prodtest_run () {
+    local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3"
+
+    if [ "$branch_geonode" == "" ] ; then
+        branch_geonode="2.6.x"
+    fi
+ 
+    sudo echo
+    if [ "$GEM_EPHEM_EXE" = "$GEM_EPHEM_NAME" ]; then
+        _lxc_name_and_ip_get
+    else
+        sudo ${GEM_EPHEM_EXE} 2>&1 | tee /tmp/packager.eph.$$.log &
+        _lxc_name_and_ip_get /tmp/packager.eph.$$.log
+        rm /tmp/packager.eph.$$.log
+    fi
+
+    _wait_ssh $lxc_ip
+    set +e
+    _prodtest_innervm_run "$branch_id" "$branch_geonode" "$notests"
+    inner_ret=$?
+
+    copy_common prod
+    copy_prod
+
+    if [ $inner_ret != 0 ]; then
+        # cleanup in error case
+        :
+    fi
+
+    if [ "$LXC_DESTROY" = "true" ]; then
+        sudo $LXC_TERM -n $lxc_name
+    fi
+
+    set -e
+
+    return $inner_ret
+}
+
+copy_prod () {
+    scp "${lxc_ip}:/var/log/apache2/access.log" "out/dev_apache2_access.log" || true
+    scp "${lxc_ip}:/var/log/apache2/error.log" "out/dev_apache2_error.log" || true
+    scp "${lxc_ip}:/var/log/openquake/webui.log" "out/dev_webui.log" || true
+    scp "${lxc_ip}:dev_*.png" "out/" || true
+    scp "${lxc_ip}:xunit-platform-dev.xml" "out/" || true
+    # scp "${lxc_ip}:latest_requirements.txt" "out/" || true
+    scp "${lxc_ip}:gem_geonode_requirements.txt" "out/" || true
+    scp "${lxc_ip}:latest_geonode_commit.txt" "out/" || true
+}
 
 #
 #  sig_hand - manages cleanup if the build is aborted
