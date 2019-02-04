@@ -110,19 +110,19 @@ function setup_django_every_time() {
 
     # Open up the permissions of the media folders so the python
     # processes like updatelayers and collectstatic can write here
-    chmod 777 -R $GEONODE_WWW/uploaded
-    chmod 777 -R $GEONODE_WWW/static
-    chmod 777 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/
-    chmod 777 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/layers
-    chmod 777 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/documents
-    chmod 777 -R $HOME/env/local/lib/python2.7/site-packages/geonode/static_root
+    chmod 775 -R $GEONODE_WWW/uploaded
+    chmod 775 -R $GEONODE_WWW/static
+    chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/
+    chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/layers
+    chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/documents
+    chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/static_root
 
     # for install geonode
     sudo rm -rf /var/www/geonode/static
     sudo ln -sf $HOME/env/lib/python2.7/site-packages/geonode/static_root/ /var/www/geonode/static
 
     # ipt folder
-    sudo chmod 777 -R $GEONODE_WWW 
+    sudo chmod 775 -R $GEONODE_WWW 
     cd $GEONODE_WWW
     mkdir data                  
     sudo chown -R www-data.www-data $GEONODE_WWW/data

@@ -49,10 +49,10 @@ sudo apt install -y apache2 tomcat7
 python -m pip install "django<2"
 pip install django-nested-inline
 pip install django_extras
-pip install -e git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
-pip install -e git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
-pip install -e git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
-pip install -e git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
+pip install git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
+pip install git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
+pip install git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
+pip install git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
 pip install scipy
 
 
@@ -153,7 +153,7 @@ function clone_platform() {
     git clone https://github.com/gem/oq-platform2.git
     cd $GIT_REPO
     git checkout oqstyle
-    pip install -e .
+    pip install .
 }
 
 function oq_application() {
@@ -164,7 +164,7 @@ function oq_application() {
         if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b $GIT_REPO https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
         if [ "${repo}" != "oq-platform-data" ]; then
             cd ${repo}
-            pip install -e .
+            pip install .
             cd $HOME
         fi
     done
@@ -187,14 +187,14 @@ function install_geonode() {
     git checkout "$GEO_STABLE_HASH"
     pip install -r requirements.txt
     pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
-    pip install -e .
+    pip install .
     
-    sudo apt install -y python-gdal gdal-bin
+    apt install -y python-gdal gdal-bin
     
     # copy Geonode zip and oq_install script in package folder of Geonode
     cd $HOME/geonode/package/
-    sudo cp -r $HOME/GeoNode-2.6.x.zip .
-    sudo cp $HOME/oq_install.sh . 
+    cp -r $HOME/GeoNode-2.6.x.zip .
+    cp $HOME/oq_install.sh .
     
     # install Geonode
     cd ..
@@ -253,7 +253,7 @@ function apply_data() {
 }
 
 function svir_world_data() {
-    sudo sed -i 's/:8000//g' $HOME/env/local/lib/python2.7/site-packages/geonode/static_root/irv/js/irv_viewer.js
+    sed -i 's/:8000//g' $HOME/env/local/lib/python2.7/site-packages/geonode/static_root/irv/js/irv_viewer.js
     geonode collectstatic --noinput --verbosity 0 
     geonode migrate
     geonode loaddata oq-platform-data/api/data/world_prod.json.bz2 
