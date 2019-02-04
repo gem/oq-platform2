@@ -221,18 +221,19 @@ function apply_data() {
     geonode syncdb  
     geonode migrate
     geonode vuln_groups_create
-    if [ $DEVEL_DATA = "y" ]; then
-        geonode add_user $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/auth_user.json 
-    else
-        geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
-    fi    
     geonode loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
     geonode import_vuln_geo_applicability_csv $HOME/$GIT_REPO/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
+    geonode vuln_groups_create
     geonode loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
     if [ $DEVEL_DATA != "y" ]; then
         geonode loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
     fi
     geonode create_gem_user
+    if [ $DEVEL_DATA = "y" ]; then
+        geonode add_user $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/auth_user.json 
+    else
+        geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
+    fi    
     pip install simplejson==2.0.9
     # export CATALINA_OPTS="-Xms4096M -Xmx4096M"
     sudo sed -i 's/-Xmx128m/-Xmx4096m/g' /etc/default/tomcat7
@@ -257,12 +258,11 @@ function apply_data() {
     fi
     
     sudo cp -r $HOME/oq-private/old_platform_documents/thumbs/ $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
-    sudo chmod 777 -R $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
+    sudo chmod 775 -R $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
     sudo cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
 
     if [ "$DEVEL_DATA" = "y" ]; then
         geonode add_documents
-        shift
     else
         geonode add_documents_prod
     fi
@@ -277,8 +277,13 @@ function svir_world_data() {
     sed -i 's/:8000//g' $HOME/env/local/lib/python2.7/site-packages/geonode/static_root/irv/js/irv_viewer.js
     geonode collectstatic --noinput --verbosity 0 
     geonode migrate
-    geonode loaddata oq-platform-data/api/data/world_prod.json.bz2 
-    geonode loaddata oq-platform-data/api/data/svir_prod.json.bz2
+    if [ "$DEVEL_DATA" = "y" ]; then
+        geonode loaddata $HOME/$GIT_REPO/openquakeplatform/world/dev_data/world.json.bz2
+        geonode loaddata $HOME/$GIT_REPO/openquakeplatform/svir/dev_data/svir.json.bz2
+    else    
+        geonode loaddata oq-platform-data/api/data/world_prod.json.bz2 
+        geonode loaddata oq-platform-data/api/data/svir_prod.json.bz2
+    fi    
 }
 
 #function complete procedure for tests
