@@ -153,7 +153,7 @@ function clone_platform() {
     git clone https://github.com/gem/oq-platform2.git
     cd $GIT_REPO
     git checkout oqstyle-bis
-    pip install .
+    pip install -e .
 }
 
 function oq_application() {
