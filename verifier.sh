@@ -353,6 +353,9 @@ export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
 export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
 export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 
+cp \"$HOME\"/\"$GEM_GIT_PACKAGE\"/openquakeplatform/deploy.sh \"$HOME\"
+cp \"$HOME\"/\"$GEM_GIT_PACKAGE\"/openquakeplatform/oq_install.sh \"$HOME\"
+
 \"./deploy.sh\" -d \"$lxc_ip\" \"$branch_id\" \"$notests\"
 "
     echo "_prodtest_innervm_run: exit"
