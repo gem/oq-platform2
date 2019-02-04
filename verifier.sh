@@ -355,7 +355,7 @@ export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 
 \"./deploy.sh\" -d \"$lxc_ip\" \"$branch_id\" \"$notests\"
 "
-    echo "_devtest_innervm_run: exit"
+    echo "_prodtest_innervm_run: exit"
 
     return 0
 }
