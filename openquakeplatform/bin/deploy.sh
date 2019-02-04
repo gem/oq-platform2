@@ -221,7 +221,7 @@ function apply_data() {
     geonode syncdb  
     geonode migrate
     geonode vuln_groups_create
-    if [ $DEVELDATA = "Y" ]; then
+    if [ $DEVEL_DATA = "Y" ]; then
         geonode add_user $HOME/oq-platform2/openquakeplatform/common/gs_data/dump/auth_user.json 
     else
         geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
