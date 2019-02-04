@@ -471,6 +471,11 @@ while [ $# -gt 0 ]; do
             devtest_run $(echo "$2" | sed 's@.*/@@g') "$3" "$4"
             break
             ;;
+         prodtest)
+            ACTION="$1"
+            prodtest_run $(echo "$2" | sed 's@.*/@@g')
+            break
+            ;;
         *)
             usage 1
             break
