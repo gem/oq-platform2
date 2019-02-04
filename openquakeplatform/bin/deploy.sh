@@ -221,7 +221,11 @@ function apply_data() {
     geonode syncdb  
     geonode migrate
     geonode vuln_groups_create
-    geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
+    if [ $DEVELDATA = "Y" ]; then
+        geonode add_user $HOME/oq-platform2/openquakeplatform/common/gs_data/dump/auth_user.json 
+    else
+        geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
+    fi    
     geonode loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
     geonode import_vuln_geo_applicability_csv $HOME/$GIT_REPO/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
     geonode loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
