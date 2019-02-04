@@ -326,6 +326,9 @@ copy_dev () {
 #      <branch_id>    name of the tested branch
 #      <lxc_ip>       the IP address of lxc instance
 #
+# cp \"$HOME\"/\"$GEM_GIT_PACKAGE\"/openquakeplatform/deploy.sh \"$HOME\"
+# cp \"$HOME\"/\"$GEM_GIT_PACKAGE\"/openquakeplatform/oq_install.sh \"$HOME\"
+
 _prodtest_innervm_run () {
     local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2" notests="$3"
 
@@ -336,7 +339,8 @@ _prodtest_innervm_run () {
 
     repo_id="$GEM_GIT_REPO"
 
-    # scp verifier-guest.sh "$lxc_ip:"
+    scp openquakeplatform/bin/deploy.sh "$lxc_ip:"
+    scp openquakeplatform/bin/oq_install.sh "$lxc_ip:"
 
     if [ -d "_shuttle" ]; then
         rm -rf _shuttle
@@ -352,9 +356,6 @@ export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
 export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
 export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
 export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
-
-cp \"$HOME\"/\"$GEM_GIT_PACKAGE\"/openquakeplatform/deploy.sh \"$HOME\"
-cp \"$HOME\"/\"$GEM_GIT_PACKAGE\"/openquakeplatform/oq_install.sh \"$HOME\"
 
 \"./deploy.sh\" -d \"$lxc_ip\" \"$branch_id\" \"$notests\"
 "
