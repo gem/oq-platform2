@@ -189,7 +189,7 @@ function install_geonode() {
     pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
     pip install .
     
-    apt install -y python-gdal gdal-bin
+    sudo apt install -y python-gdal gdal-bin
     
     # copy Geonode zip and oq_install script in package folder of Geonode
     cd $HOME/geonode/package/
