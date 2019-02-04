@@ -221,8 +221,8 @@ function apply_data() {
     geonode syncdb  
     geonode migrate
     geonode vuln_groups_create
-    if [ $DEVEL_DATA = "Y" ]; then
-        geonode add_user $HOME/oq-platform2/openquakeplatform/common/gs_data/dump/auth_user.json 
+    if [ $DEVEL_DATA = "y" ]; then
+        geonode add_user $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/auth_user.json 
     else
         geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
     fi    
@@ -241,7 +241,7 @@ function apply_data() {
     
     cd ~/
 
-    if [ "$DEVEL_DATA" = "Y" ]; then
+    if [ "$DEVEL_DATA" = "y" ]; then
         # sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
         sudo -u postgres psql -d geonode_dev -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
         
@@ -258,7 +258,7 @@ function apply_data() {
     sudo chmod 777 -R $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
     sudo cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
 
-    if [ "$DEVEL_DATA" = "Y" ]; then
+    if [ "$DEVEL_DATA" = "y" ]; then
         geonode add_documents
         shift
     else
