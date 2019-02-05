@@ -282,8 +282,10 @@ function apply_data() {
 }
 
 function svir_world_data() {
-    sed -i 's/:8000//g' $HOME/env/local/lib/python2.7/site-packages/geonode/static_root/irv/js/irv_viewer.js
-    geonode collectstatic --noinput --verbosity 0 
+    if [ "$DEVEL_DATA" != "y" ]; then
+        sudo sed -i 's/:8000//g' $HOME/env/local/lib/python2.7/site-packages/geonode/static_root/irv/js/irv_viewer.js
+        geonode collectstatic --noinput --verbosity 0 
+    fi    
     geonode migrate
     if [ "$DEVEL_DATA" = "y" ]; then
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/world/dev_data/world.json.bz2
