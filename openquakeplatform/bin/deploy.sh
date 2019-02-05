@@ -209,7 +209,11 @@ function install_geonode() {
     paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s $HOME/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
     sudo mv /etc/geonode/local_settings.py /etc/geonode/geonode_local_settings.py                                                                                                                                    
     sudo cp  $HOME/$GIT_REPO/local_settings.py /etc/geonode/
-    sudo ./package/oq_install.sh -d -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
+    if [ "$DEVEL_DATA" = "y" ]; then
+        sudo ./package/oq_install.sh -d -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
+    else    
+        sudo ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
+    fi    
     sudo ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
