@@ -1,3 +1,4 @@
+import os
 import json
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
@@ -9,6 +10,7 @@ class Command(BaseCommand):
     help = ('Import users')
 
     def handle(self, user_fname, *args, **options):
+        devel_data = os.getenv("DEVEL_DATA")
         user_json = open(user_fname).read()
         user_load = json.loads(user_json)
 
@@ -18,10 +20,11 @@ class Command(BaseCommand):
             fields = user['fields']
 
             # Add users
-            if (fields['username'] == 'GEM'
-                or fields['username'] == 'AnonymousUser'
-                    or fields['username'] == 'admin'):
-                continue
+            if (devel_data != 'y'):
+                if (fields['username'] == 'GEM'
+                    or fields['username'] == 'AnonymousUser'
+                        or fields['username'] == 'admin'):
+                    continue
 
             username = fields['username']
             email = fields['email']
