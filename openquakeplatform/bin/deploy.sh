@@ -262,7 +262,7 @@ function apply_data() {
     fi
     
     if [ "$DEVEL_DATA" = "y" ]; then
-        mkdir $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
+        sudo mkdir $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
     else
         cp -r $HOME/oq-private/old_platform_documents/thumbs/ $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
         sudo chmod 775 -R $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
@@ -314,7 +314,7 @@ function initialize_test() {
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
     sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
-    sudo sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
+    sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
     # cd $GIT_REPO
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
