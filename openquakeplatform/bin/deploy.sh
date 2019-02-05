@@ -139,8 +139,11 @@ EOF
 
 #insert line in pg_hba.conf postgres
 sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP"'/32             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-# sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+if [ "$DEVEL_DATA" = "y" ]; then
+    sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP"'/32             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+else    
+    sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+fi    
 sudo sed -i "1 s@^@listen_addresses = '127.0.0.1,localhost,"$LXC_IP"'\n@g" /etc/postgresql/9.5/main/postgresql.conf
 
 #restart postgres
@@ -206,7 +209,7 @@ function install_geonode() {
     sudo invoke-rc.d apache2 restart
     
     # Create local_settings with pavement from repo
-    paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s $HOME/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
+    paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /var/www/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
     sudo mv /etc/geonode/local_settings.py /etc/geonode/geonode_local_settings.py                                                                                                                                    
     sudo cp  $HOME/$GIT_REPO/local_settings.py /etc/geonode/
     if [ "$DEVEL_DATA" = "y" ]; then
