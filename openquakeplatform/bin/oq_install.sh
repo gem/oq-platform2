@@ -10,7 +10,7 @@ fi
 # set -e
 
 if [ "$1" = "-d" ]; then
-    DEVEL_DATA=y
+    OQ_DEVEL_DATA=y
     shift
 fi
 
@@ -101,7 +101,7 @@ function setup_django_every_time() {
     geonode loaddata $geonodedir/base/fixtures/initial_data.json
     geonode collectstatic --noinput --verbosity 0
 
-    if [ "$DEVEL_DATA" = "y" ]; then
+    if [ "$ OQ_DEVEL_DATA" = "y" ]; then
         geonode createsuperuser
     fi
 

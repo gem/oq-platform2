@@ -213,7 +213,7 @@ function install_geonode() {
     sudo mv /etc/geonode/local_settings.py /etc/geonode/geonode_local_settings.py                                                                                                                                    
     sudo cp  $HOME/$GIT_REPO/local_settings.py /etc/geonode/
     if [ "$DEVEL_DATA" = "y" ]; then
-        sudo ./package/oq_install.sh -d -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
+        sudo ./package/oq_install.sh -s -d post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     else    
         sudo ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     fi    
