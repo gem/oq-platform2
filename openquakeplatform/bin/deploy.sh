@@ -212,11 +212,13 @@ function install_geonode() {
     paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /var/www/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
     sudo mv /etc/geonode/local_settings.py /etc/geonode/geonode_local_settings.py                                                                                                                                    
     sudo cp  $HOME/$GIT_REPO/local_settings.py /etc/geonode/
+    
+    # export variable to do createsuperuser in oq_install script
     if [ "$DEVEL_DATA" = "y" ]; then
-        sudo ./package/oq_install.sh -s -d post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
-    else    
-        sudo ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
-    fi    
+        export OQ_DEVEL_DATA=y
+    fi
+
+    sudo ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     sudo ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
@@ -241,7 +243,6 @@ function apply_data() {
         geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
     fi    
     pip install simplejson==2.0.9
-    # export CATALINA_OPTS="-Xms4096M -Xmx4096M"
     sudo sed -i 's/-Xmx128m/-Xmx4096m/g' /etc/default/tomcat7
     sudo service tomcat7 restart
     
