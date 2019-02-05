@@ -238,7 +238,7 @@ function apply_data() {
     fi
     geonode create_gem_user
     if [ $DEVEL_DATA = "y" ]; then
-        geonode add_user $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/auth_user.json 
+        geonode loaddata $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/auth_user.json
     else
         geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
     fi    
