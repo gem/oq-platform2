@@ -9,6 +9,11 @@ if [ $GEM_SET_DEBUG ]; then
 fi
 # set -e
 
+if [ "$1" = "-d" ]; then
+    DEVEL_DATA=y
+    shift
+fi
+
 source ~/env/bin/activate
 
 if [[ $EUID -ne 0 ]]; then
@@ -95,7 +100,10 @@ function setup_django_every_time() {
     geonode migrate --verbosity 0
     geonode loaddata $geonodedir/base/fixtures/initial_data.json
     geonode collectstatic --noinput --verbosity 0
-    geonode createsuperuser
+
+    if [ "$DEVEL_DATA" = "y" ]; then
+        geonode createsuperuser
+    fi
 
     # Create an empty uploads dir
     mkdir -p $GEONODE_WWW/uploaded
