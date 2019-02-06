@@ -79,6 +79,7 @@ NO_EXEC_TEST="$3"
 GIT_BRANCH_APP="$4"
 if ["$GIT_BRANCH_APP" = '']; then
     $GIT_BRANCH_APP = "master"
+fi
 
 # create secret key
 function key_create () {
