@@ -12,7 +12,7 @@ class UserLoginTest(unittest.TestCase):
         pla = platform_get()
 
         gem_user = 'GEM'
-        gem_pwd = 'GEM'
+        gem_pwd = 'admin'
 
         # New window with platform without other login
         plb = pla.platform_create(user=None, passwd=None)
