@@ -235,8 +235,9 @@ function apply_data() {
     if [ $DEVEL_DATA != "y" ]; then
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
         geonode loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
+        geonode create_gem_user
     fi
-    geonode create_gem_user
+
     if [ $DEVEL_DATA = "y" ]; then
         geonode add_user $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/auth_user.json
     else
