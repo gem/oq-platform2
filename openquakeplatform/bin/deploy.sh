@@ -253,6 +253,14 @@ function apply_data() {
     sudo sed -i 's/-Xmx128m/-Xmx4096m/g' /etc/default/tomcat7
     sudo service tomcat7 restart
     
+    if [ "$DEVEL_DATA" = "y" ]; then
+        sudo mkdir $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
+    else
+        sudo cp -r $HOME/oq-private/old_platform_documents/thumbs/ $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
+        sudo chmod 775 -R $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
+    fi
+    sudo cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
+
     cd $HOME/$GIT_REPO
     if [ "$DEVEL_DATA" = "y" ]; then
 
@@ -277,7 +285,7 @@ function apply_data() {
         
         # sql assumpcao2014 layer
         sudo -u postgres psql -d geonode -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
-        # geonode updatelayers
+        geonode updatelayers
     else
         # Put sql for all layers
         for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
@@ -285,14 +293,6 @@ function apply_data() {
         done
     fi
     
-    if [ "$DEVEL_DATA" = "y" ]; then
-        sudo mkdir $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
-    else
-        sudo cp -r $HOME/oq-private/old_platform_documents/thumbs/ $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
-        sudo chmod 775 -R $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
-    fi
-    sudo cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
-
     if [ "$DEVEL_DATA" = "y" ]; then
         geonode add_documents
     else
