@@ -20,7 +20,7 @@ class Command(BaseCommand):
             fields = user['fields']
 
             # Add users
-            if (devel_data != 'y'):
+            if (devel_data == 'y'):
                 if (fields['username'] == 'GEM'
                     or fields['username'] == 'AnonymousUser'
                         or fields['username'] == 'admin'):
