@@ -14,12 +14,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with OpenQuake.  If not, see <http://www.gnu.org/licenses/>.
 
-# if [ $GEM_SET_DEBUG ]; then
+if [ $GEM_SET_DEBUG ]; then
     set -x
-# fi
+fi
 set -e
 
-if [ -f /etc/openquake/platform/local_settings.py ]; then
+if [ -f /etc/geonode/local_settings.py ]; then
     GEM_IS_INSTALL=n
 else
     GEM_IS_INSTALL=y
@@ -273,6 +273,7 @@ function apply_data() {
         
         # sql assumpcao2014 layer
         sudo -u postgres psql -d geonode -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
+        geonode updatelayers
     else
         # Put sql for all layers
         for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
