@@ -75,6 +75,11 @@ GEO_DBUSER="geonode"
 GEM_GIT_REPO="git://github.com/gem"
 NO_EXEC_TEST="$3"
 
+# branch for ipt, taxtweb, classification survey
+GIT_BRANCH_APP="$4"
+if ["$GIT_BRANCH_APP" = '']; then
+    $GIT_BRANCH_APP = "master"
+
 # create secret key
 function key_create () {
     python -c "import string ; import random
@@ -155,7 +160,7 @@ function clone_platform() {
     cd $HOME
     git clone https://github.com/gem/oq-platform2.git
     cd $GIT_REPO
-    git checkout oqstyle-bis
+    git checkout $GIT_BRANCH
     pip install -e .
 }
 
@@ -164,7 +169,7 @@ function oq_application() {
     cd $HOME
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class oq-platform-data; do
         # for repo in oq-platform-taxtweb; do
-        if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b $GIT_REPO https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
+        if [ "$GIT_BRANCH_APP" = "master" ]; then false ; else git clone -b "$GIT_BRANCH_APP" https://github.com/gem/${repo}.git ; fi || git clone -b $GIT_REPO https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
         if [ "${repo}" != "oq-platform-data" ]; then
             cd ${repo}
             pip install .
@@ -249,6 +254,11 @@ function apply_data() {
     
     cd $HOME/$GIT_REPO
     if [ "$DEVEL_DATA" = "y" ]; then
+
+        ## load data for gec and isc viewer
+        geonode import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
+        geonode import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
+
         $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/$GIT_REPO/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "geoserver/data" isc_viewer ghec_viewer
     else    
         $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
