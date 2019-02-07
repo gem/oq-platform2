@@ -241,10 +241,10 @@ function apply_data() {
     if [ $DEVEL_DATA != "y" ]; then
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
         geonode loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
-        geonode create_gem_user
     fi
 
     if [ $DEVEL_DATA = "y" ]; then
+        geonode create_gem_user
         geonode add_user $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/auth_user.json
     else
         geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
@@ -298,8 +298,6 @@ function apply_data() {
     else
         geonode add_documents_prod
     fi
-    # geonode updatelayers
-    # geonode sync_geofence
 
     sudo invoke-rc.d apache2 restart
     sudo service tomcat7 restart
