@@ -103,10 +103,12 @@ function setup_django_every_time() {
     # Create an empty uploads dir
     mkdir -p $GEONODE_WWW/uploaded
     mkdir -p $GEONODE_WWW/uploaded/thumbs/
+    mkdir -p $GEONODE_WWW/uploaded/layers/
+    mkdir -p $GEONODE_WWW/uploaded/documents/
     # ln -sf $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs $GEONODE_WWW/uploaded
-    mkdir -p $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded
-    mkdir -p $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/layers
-    mkdir -p $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/documents
+    # mkdir -p $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded
+    # mkdir -p $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/layers
+    # mkdir -p $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/documents
 
     # Apply the permissions to the newly created folders.
     sudo chown www-data -R $GEONODE_WWW
@@ -115,10 +117,10 @@ function setup_django_every_time() {
     # processes like updatelayers and collectstatic can write here
     chmod 775 -R $GEONODE_WWW/uploaded
     chmod 775 -R $GEONODE_WWW/static
-    chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/
-    chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/layers
-    chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/documents
-    chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/static_root
+    # chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/
+    # chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/layers
+    # chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/documents
+    # chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/static_root
 
     # for install geonode
     sudo rm -rf /var/www/geonode/static

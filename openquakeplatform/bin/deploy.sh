@@ -254,10 +254,10 @@ function apply_data() {
     sudo service tomcat7 restart
     
     if [ "$DEVEL_DATA" != "y" ]; then
-        sudo cp -r $HOME/oq-private/old_platform_documents/thumbs/ $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
+        sudo cp -r $HOME/oq-private/old_platform_documents/thumbs/ /var/www/geonode/uploaded/
     fi
 
-    sudo cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
+    sudo cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents /var/www/geonode/uploaded/
 
     cd $HOME/$GIT_REPO
     if [ "$DEVEL_DATA" = "y" ]; then
