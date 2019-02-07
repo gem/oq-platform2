@@ -363,6 +363,10 @@ function oq_install() {
     install_geonode
     apply_data
     svir_world_data
+
+    sudo invoke-rc.d apache2 restart
+    sudo service tomcat7 restart
+
     if [ "$NO_EXEC_TEST" != "notest" ] ; then
         initialize_test
         exec_set_map_thumbs
