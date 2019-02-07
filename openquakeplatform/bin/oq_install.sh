@@ -102,8 +102,8 @@ function setup_django_every_time() {
 
     # Create an empty uploads dir
     mkdir -p $GEONODE_WWW/uploaded
-    # mkdir -p $GEONODE_WWW/uploaded/thumbs/
-    ln -sf $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs $GEONODE_WWW/uploaded
+    mkdir -p $GEONODE_WWW/uploaded/thumbs/
+    # ln -sf $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs $GEONODE_WWW/uploaded
     mkdir -p $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded
     mkdir -p $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/layers
     mkdir -p $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/documents
