@@ -128,7 +128,7 @@ function setup_django_every_time() {
     sudo chmod 775 -R $GEONODE_WWW 
     cd $GEONODE_WWW
     mkdir data                  
-    sudo chown -R www-data.www-data $GEONODE_WWW/data
+    sudo chown www-data.www-data -R $GEONODE_WWW/data
 }
 
 function setup_apache_once() {
