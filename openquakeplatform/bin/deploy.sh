@@ -365,8 +365,8 @@ function oq_install() {
     svir_world_data
     if [ "$NO_EXEC_TEST" != "notest" ] ; then
         initialize_test
-        exec_test
         exec_set_map_thumbs
+        exec_test
     fi    
 }
 
