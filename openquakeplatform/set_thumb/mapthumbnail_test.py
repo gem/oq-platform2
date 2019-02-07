@@ -11,9 +11,6 @@ class SetThumbsTest(unittest.TestCase):
 
     def set_thumbs_map_test(self):
 
-        # for production installation
-        time.sleep(5000000000000)
-
         pla = platform_get()
 
         pla.get('/maps/')
