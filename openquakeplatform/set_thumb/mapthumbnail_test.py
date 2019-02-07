@@ -10,6 +10,9 @@ TIMEOUT = 100
 class SetThumbsTest(unittest.TestCase):
 
     def set_thumbs_map_test(self):
+        
+        # for production installation
+        time.sleep(5)
 
         pla = platform_get()
 
