@@ -20,12 +20,11 @@ class Command(BaseCommand):
             fields = user['fields']
 
             # Add users
-            if (fields['username'] == 'AnonymousUser'):
+            if (fields['username'] == 'AnonymousUser'
+                    or fields['username'] == 'GEM'):
                 continue
             if (devel_data == 'y'):
-                if (fields['username'] == 'GEM'
-                    # or fields['username'] == 'AnonymousUser'
-                        or fields['username'] == 'admin'):
+                if (fields['username'] == 'admin'):
                     continue
 
             username = fields['username']

@@ -257,7 +257,7 @@ function apply_data() {
         sudo mkdir $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
     else
         sudo cp -r $HOME/oq-private/old_platform_documents/thumbs/ $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
-        sudo chmod 775 -R $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
+        sudo chmod 777 -R $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
     fi
     sudo cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
 
