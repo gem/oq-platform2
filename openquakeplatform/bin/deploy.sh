@@ -74,6 +74,7 @@ GEO_STABLE_HASH="aa5932d"
 GEO_DBUSER="geonode"
 GEM_GIT_REPO="git://github.com/gem"
 NO_EXEC_TEST="$3"
+export PROD_INSTALL='y'
 
 # branch for ipt, taxtweb, classification survey
 GIT_BRANCH_APP="$4"

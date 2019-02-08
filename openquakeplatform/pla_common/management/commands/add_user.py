@@ -11,6 +11,7 @@ class Command(BaseCommand):
 
     def handle(self, user_fname, *args, **options):
         devel_data = os.getenv("DEVEL_DATA")
+        prod_inst = os.getenv("PROD_INSTALL")
         user_json = open(user_fname).read()
         user_load = json.loads(user_json)
 
@@ -23,7 +24,8 @@ class Command(BaseCommand):
             if (fields['username'] == 'AnonymousUser'
                     or fields['username'] == 'GEM'):
                 continue
-            if (devel_data == 'y'):
+            if (devel_data == 'y'
+                    or prod_inst != 'y'):
                 if (fields['username'] == 'admin'):
                     continue
 
