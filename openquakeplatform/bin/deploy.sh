@@ -103,7 +103,7 @@ gem_db_pass="$(passwd_create)"
 function apache_tomcat_restart() {
    sudo service apache2 restart
    sudo service tomcat7 restart
-   sleep 15
+   sleep 25
 }
 
 function setup_postgres_once() {
