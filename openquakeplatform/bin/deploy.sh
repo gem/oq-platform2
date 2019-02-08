@@ -275,6 +275,11 @@ function apply_data() {
         geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
         sudo chmod o-w /var/www/geonode/uploaded/thumbs
 
+        sudo invoke-rc.d apache2 restart
+        sudo service tomcat7 restart
+
+        sleep 4
+
         $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/$GIT_REPO/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data" isc_viewer ghec_viewer
     else    
         $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
@@ -366,9 +371,6 @@ function oq_install() {
     install_geonode
     apply_data
     svir_world_data
-
-    sudo invoke-rc.d apache2 restart
-    sudo service tomcat7 restart
 
     if [ "$NO_EXEC_TEST" != "notest" ] ; then
         initialize_test
