@@ -372,7 +372,7 @@ function oq_install() {
 
     if [ "$NO_EXEC_TEST" != "notest" ] ; then
         initialize_test
-        exec_set_map_thumbs
+        # exec_set_map_thumbs
         exec_test
     fi    
 }
