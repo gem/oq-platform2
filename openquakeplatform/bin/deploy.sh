@@ -100,6 +100,12 @@ print id_generator()"
 }
 gem_db_pass="$(passwd_create)"
 
+function apache_tomcat_restart() {
+   sudo invoke-rc.d apache2 restart
+   sudo service tomcat7 restart
+   sleep 10
+}
+
 function setup_postgres_once() {
 
 sudo -u postgres createdb $GEO_DBUSER
@@ -275,10 +281,7 @@ function apply_data() {
         geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
         sudo chmod o-w /var/www/geonode/uploaded/thumbs
 
-        sudo invoke-rc.d apache2 restart
-        sudo service tomcat7 restart
-
-        sleep 10
+        apache_tomcat_restart
 
         $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/$GIT_REPO/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data" isc_viewer ghec_viewer
     else    
@@ -307,8 +310,7 @@ function apply_data() {
         geonode add_documents_prod
     fi
 
-    sudo invoke-rc.d apache2 restart
-    sudo service tomcat7 restart
+    apache_tomcat_restart
 }
 
 function svir_world_data() {
