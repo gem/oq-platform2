@@ -278,7 +278,7 @@ function apply_data() {
         sudo invoke-rc.d apache2 restart
         sudo service tomcat7 restart
 
-        sleep 4
+        sleep 10
 
         $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/$GIT_REPO/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data" isc_viewer ghec_viewer
     else    
