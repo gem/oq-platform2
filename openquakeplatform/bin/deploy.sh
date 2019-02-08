@@ -220,7 +220,7 @@ function install_geonode() {
     sudo mv /etc/geonode/local_settings.py /etc/geonode/geonode_local_settings.py                                                                                                                                    
     sudo cp  $HOME/$GIT_REPO/local_settings.py /etc/geonode/
     
-    sudo sed -i "24 s@^MEDIA_ROOT = '/var/www/geonode/uploaded'\n@g" /etc/geonode/local_settings.py
+    sudo sed -i "24 s@^@MEDIA_ROOT = '/var/www/geonode/uploaded'\n@g" /etc/geonode/local_settings.py
 
     # export variable to do createsuperuser in oq_install script
     if [ "$DEVEL_DATA" = "y" ]; then
