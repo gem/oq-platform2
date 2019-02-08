@@ -101,9 +101,9 @@ print id_generator()"
 gem_db_pass="$(passwd_create)"
 
 function apache_tomcat_restart() {
-   sudo invoke-rc.d apache2 restart
+   sudo service apache2 restart
    sudo service tomcat7 restart
-   sleep 10
+   sleep 15
 }
 
 function setup_postgres_once() {
