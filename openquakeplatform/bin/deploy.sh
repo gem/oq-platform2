@@ -296,7 +296,7 @@ function apply_data() {
         
         # sql assumpcao2014 layer
         sudo -u postgres psql -d geonode -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
-        geonode updatelayers
+        # geonode updatelayers
     else
         # Put sql for all layers
         for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
