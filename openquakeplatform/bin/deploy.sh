@@ -277,8 +277,8 @@ function apply_data() {
 
         # Create programmatically ISC and GHEC json
         sudo chmod o+w /var/www/geonode/uploaded/thumbs
-        geonode create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
-        geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
+        geonode create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/prod_isc_map_comps.json
+        geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/prod_ghec_map_comps.json
         sudo chmod o-w /var/www/geonode/uploaded/thumbs
 
         apache_tomcat_restart
@@ -296,7 +296,7 @@ function apply_data() {
         
         # sql assumpcao2014 layer
         sudo -u postgres psql -d geonode -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
-        # geonode updatelayers
+        geonode updatelayers
     else
         # Put sql for all layers
         for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
