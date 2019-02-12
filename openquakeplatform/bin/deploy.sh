@@ -358,7 +358,11 @@ function initialize_test() {
 
 exec_test () {
     export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
-    export GEM_PLA_ADMIN_ID=1000
+    if [ "$DEVEL_DATA" = "y" ]; then
+        export GEM_PLA_ADMIN_ID=1
+    else
+        export GEM_PLA_ADMIN_ID=1000
+    fi    
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
 }
