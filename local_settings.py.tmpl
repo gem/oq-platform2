@@ -55,21 +55,13 @@ DATABASES = {
 # Search Snippet Cache Time in Seconds
 CACHE_TIME = int(os.getenv('CACHE_TIME', '0'))
 
-GEOSERVER_LOCATION = os.getenv(
-    'GEOSERVER_LOCATION', 'http://%(geo_ip)s/geoserver/'
-)
+GEOSERVER_LOCATION = 'http://%(geo_ip)s/geoserver/'
 
-GEOSERVER_PUBLIC_LOCATION = os.getenv(
-    'GEOSERVER_PUBLIC_LOCATION', 'http://%(geo_public_ip)s/geoserver/'
-)
+GEOSERVER_PUBLIC_LOCATION = 'http://%(geo_public_ip)s/geoserver/'
 
-OGC_SERVER_DEFAULT_USER = os.getenv(
-    'GEOSERVER_ADMIN_USER', 'admin'
-)
+OGC_SERVER_DEFAULT_USER = 'GEOSERVER_ADMIN_USER', 'admin'
 
-OGC_SERVER_DEFAULT_PASSWORD = os.getenv(
-    'GEOSERVER_ADMIN_PASSWORD', 'geoserver'
-)
+OGC_SERVER_DEFAULT_PASSWORD = 'GEOSERVER_ADMIN_PASSWORD', 'geoserver'
 
 # OGC (WMS/WFS/WCS) Server Settings
 OGC_SERVER = {
