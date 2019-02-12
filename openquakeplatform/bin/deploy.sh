@@ -82,8 +82,7 @@ if ["$GIT_BRANCH_APP" = '']; then
     GIT_BRANCH_APP="master"
 fi
 
-whoami
-sudo usermod -aG www-data whoami
+sudo usermod -aG www-data $USER
 
 # create secret key
 function key_create () {
