@@ -227,7 +227,7 @@ function install_geonode() {
     # Create local_settings with pavement from repo
     paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /var/www/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
     # sudo mv /etc/geonode/local_settings.py /etc/geonode/geonode_local_settings.py
-    sudo rm /etc/geonode/local_settings.py /etc/geonode/local_settings.py                                                                                                                                    
+    sudo rm /etc/geonode/local_settings.py
     sudo cp  $HOME/$GIT_REPO/local_settings.py /etc/geonode/
     
     sudo sed -i "24 s@^@MEDIA_ROOT = '/var/www/geonode/uploaded'\n@g" /etc/geonode/local_settings.py
