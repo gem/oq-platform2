@@ -116,6 +116,7 @@ function setup_django_every_time() {
     # Open up the permissions of the media folders so the python
     # processes like updatelayers and collectstatic can write here
     chmod 775 -R $GEONODE_WWW/uploaded
+    chmod 775 -R $GEONODE_WWW/geonode
     chmod 775 -R $GEONODE_WWW/static
     # chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/
     # chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/layers
