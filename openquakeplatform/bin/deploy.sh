@@ -30,13 +30,12 @@ sudo apt install -y git python-virtualenv wget
 
 GIT_REPO="oq-platform2"
 
-# if [ "$GEM_IS_INSTALL" == "y" ]; then
-    # delete all folder used
-    sudo rm -rf env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data
-    
-    # if exists, delete postgres:
-    sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5
-# fi
+# delete all folder used
+sudo rm -rf env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data
+
+# if exists, delete postgres:
+sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5
+
 # Create and source virtual env
 virtualenv env
 source $HOME/env/bin/activate
@@ -58,7 +57,6 @@ pip install scipy
 
 # install engine
 sudo apt-get install -y software-properties-common
-# sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
 sudo add-apt-repository -y ppa:openquake/release-3.1
 sudo apt-get update
 sudo apt-get install -y --force-yes python-oq-engine
@@ -226,7 +224,6 @@ function install_geonode() {
     
     # Create local_settings with pavement from repo
     paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /var/www/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
-    # sudo mv /etc/geonode/local_settings.py /etc/geonode/geonode_local_settings.py
     sudo rm /etc/geonode/local_settings.py
     sudo cp  $HOME/$GIT_REPO/local_settings.py /etc/geonode/
     
@@ -301,38 +298,29 @@ function apply_data() {
          # sql assumpcao2014 layer
          sudo -u postgres psql -d geonode -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
          geonode updatelayers
+         geonode add_documents
      else
          # Put sql for all layers
          for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
              sudo -u postgres psql -d $GEO_DBUSER -c '\copy '$lay' FROM '$HOME/oq-private/old_platform_documents/sql_layers/out/$lay''
          done
+         geonode add_documents_prod
      fi
-    
-    if [ "$DEVEL_DATA" = "y" ]; then
-        geonode add_documents
-    else
-        geonode add_documents_prod
-    fi
-
-    # apache_tomcat_restart
 }
 
 function svir_world_data() {
-    if [ "$DEVEL_DATA" != "y" ]; then
-        sudo sed -i 's/:8000//g' $HOME/env/local/lib/python2.7/site-packages/geonode/static_root/irv/js/irv_viewer.js
-        geonode collectstatic --noinput --verbosity 0 
-    fi    
     geonode migrate
     if [ "$DEVEL_DATA" = "y" ]; then
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/world/dev_data/world.json.bz2
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/svir/dev_data/svir.json.bz2
     else    
+        sudo sed -i 's/:8000//g' $HOME/env/local/lib/python2.7/site-packages/geonode/static_root/irv/js/irv_viewer.js
+        geonode collectstatic --noinput --verbosity 0 
         geonode loaddata oq-platform-data/api/data/world_prod.json.bz2 
         geonode loaddata oq-platform-data/api/data/svir_prod.json.bz2
     fi    
 }
 
-#function complete procedure for tests
 function initialize_test() {
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
     sudo apt-get -y install python-pip wget
@@ -353,10 +341,7 @@ function initialize_test() {
 
     sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
     sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
-    # sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
-    # sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
-    # cd $GIT_REPO
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
 }
 
