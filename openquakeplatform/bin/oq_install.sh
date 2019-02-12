@@ -115,6 +115,7 @@ function setup_django_every_time() {
 
     # Open up the permissions of the media folders so the python
     # processes like updatelayers and collectstatic can write here
+    chmod 775 -R $GEONODE_WWW 
     chmod 775 -R $GEONODE_WWW/uploaded
     chmod 775 -R $GEONODE_WWW/geonode
     chmod 775 -R $GEONODE_WWW/static
@@ -124,11 +125,10 @@ function setup_django_every_time() {
     # chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/static_root
 
     # for install geonode
-    sudo rm -rf /var/www/geonode/static
-    sudo ln -sf $HOME/env/lib/python2.7/site-packages/geonode/static_root/ /var/www/geonode/static
+    # sudo rm -rf /var/www/geonode/static
+    # sudo ln -sf $HOME/env/lib/python2.7/site-packages/geonode/static_root/ /var/www/geonode/static
 
     # ipt folder
-    sudo chmod 775 -R $GEONODE_WWW 
     cd $GEONODE_WWW
     mkdir data                  
     sudo chown www-data.www-data -R $GEONODE_WWW/data
