@@ -63,10 +63,12 @@ sudo add-apt-repository -y ppa:openquake/release-3.1
 sudo apt-get update
 sudo apt-get install -y --force-yes python-oq-engine
 
+# check if are dev/prod data installation
 if [ "$1" = "-d" ]; then
     DEVEL_DATA=y
     shift
 fi
+
 export LXC_IP="$1"
 GIT_BRANCH="$2"
 GIT_GEO_REPO="2.6.x"
@@ -104,6 +106,7 @@ function apache_tomcat_restart() {
    sudo service apache2 restart
    sudo service tomcat7 restart
    sleep 250
+   echo "restart Apache/Tomcat"
 }
 
 function setup_postgres_once() {
@@ -312,7 +315,7 @@ function apply_data() {
         geonode add_documents_prod
     fi
 
-    apache_tomcat_restart
+    # apache_tomcat_restart
 }
 
 function svir_world_data() {
@@ -349,8 +352,10 @@ function initialize_test() {
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
-    sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
-    sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
+    # sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
+    # sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
+    sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
+    sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
     # cd $GIT_REPO
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
