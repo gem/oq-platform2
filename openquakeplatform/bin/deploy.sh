@@ -269,26 +269,26 @@ function apply_data() {
     sudo cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents /var/www/geonode/uploaded/
 
     cd $HOME/$GIT_REPO
-    if [ "$DEVEL_DATA" = "y" ]; then
+    # if [ "$DEVEL_DATA" = "y" ]; then
 
-        ## load data for gec and isc viewer
-        geonode import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
-        geonode import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
+    #     ## load data for gec and isc viewer
+    #     geonode import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
+    #     geonode import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
 
-        # Create programmatically ISC and GHEC json
-        sudo chmod o+w /var/www/geonode/uploaded/thumbs
-        sed -i 's/GEOSERVER_LOCATION/GEOSERVER_PUBLIC_LOCATION/g' $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/management/commands/create_ghecmap.py
-        sed -i 's/GEOSERVER_LOCATION/GEOSERVER_PUBLIC_LOCATION/g' $HOME/$GIT_REPO/openquakeplatform/isc_viewer/management/commands/create_iscmap.py
-        geonode create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/prod_isc_map_comps.json
-        geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/prod_ghec_map_comps.json
-        sudo chmod o-w /var/www/geonode/uploaded/thumbs
+    #     # Create programmatically ISC and GHEC json
+    #     sudo chmod o+w /var/www/geonode/uploaded/thumbs
+    #     sed -i 's/GEOSERVER_LOCATION/GEOSERVER_PUBLIC_LOCATION/g' $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/management/commands/create_ghecmap.py
+    #     sed -i 's/GEOSERVER_LOCATION/GEOSERVER_PUBLIC_LOCATION/g' $HOME/$GIT_REPO/openquakeplatform/isc_viewer/management/commands/create_iscmap.py
+    #     geonode create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/prod_isc_map_comps.json
+    #     geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/prod_ghec_map_comps.json
+    #     sudo chmod o-w /var/www/geonode/uploaded/thumbs
 
-        apache_tomcat_restart
+    #     apache_tomcat_restart
 
-        $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/$GIT_REPO/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data" isc_viewer ghec_viewer
-    else    
-        $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
-    fi
+    #     $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/$GIT_REPO/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data" isc_viewer ghec_viewer
+    # else    
+    #     $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
+    # fi
 
     cd $HOME/
 
