@@ -103,7 +103,7 @@ gem_db_pass="$(passwd_create)"
 function apache_tomcat_restart() {
    sudo service apache2 restart
    sudo service tomcat7 restart
-   sleep 200
+   sleep 250
 }
 
 function setup_postgres_once() {
@@ -271,19 +271,19 @@ function apply_data() {
     cd $HOME/$GIT_REPO
     if [ "$DEVEL_DATA" = "y" ]; then
 
-    #     ## load data for gec and isc viewer
-    #     geonode import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
-    #     geonode import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
+         ## load data for gec and isc viewer
+         geonode import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
+         geonode import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
 
-    #     # Create programmatically ISC and GHEC json
-    #     sudo chmod o+w /var/www/geonode/uploaded/thumbs
-    #     sed -i 's/GEOSERVER_LOCATION/GEOSERVER_PUBLIC_LOCATION/g' $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/management/commands/create_ghecmap.py
-    #     sed -i 's/GEOSERVER_LOCATION/GEOSERVER_PUBLIC_LOCATION/g' $HOME/$GIT_REPO/openquakeplatform/isc_viewer/management/commands/create_iscmap.py
-    #     geonode create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/prod_isc_map_comps.json
-    #     geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/prod_ghec_map_comps.json
-    #     sudo chmod o-w /var/www/geonode/uploaded/thumbs
+         # Create programmatically ISC and GHEC json
+         sudo chmod o+w /var/www/geonode/uploaded/thumbs
+         sed -i 's/GEOSERVER_LOCATION/GEOSERVER_PUBLIC_LOCATION/g' $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/management/commands/create_ghecmap.py
+         sed -i 's/GEOSERVER_LOCATION/GEOSERVER_PUBLIC_LOCATION/g' $HOME/$GIT_REPO/openquakeplatform/isc_viewer/management/commands/create_iscmap.py
+         geonode create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/prod_isc_map_comps.json
+         geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/prod_ghec_map_comps.json
+         sudo chmod o-w /var/www/geonode/uploaded/thumbs
 
-    #     apache_tomcat_restart
+         apache_tomcat_restart
 
         $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/$GIT_REPO/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data" isc_viewer ghec_viewer
     else    
@@ -292,19 +292,19 @@ function apply_data() {
 
     cd $HOME/
 
-    # if [ "$DEVEL_DATA" = "y" ]; then
-    #     # sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
-    #     sudo -u postgres psql -d geonode -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
-    #     
-    #     # sql assumpcao2014 layer
-    #     sudo -u postgres psql -d geonode -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
-    #     geonode updatelayers
-    # else
-    #     # Put sql for all layers
-    #     for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
-    #         sudo -u postgres psql -d $GEO_DBUSER -c '\copy '$lay' FROM '$HOME/oq-private/old_platform_documents/sql_layers/out/$lay''
-    #     done
-    # fi
+     if [ "$DEVEL_DATA" = "y" ]; then
+         # sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
+         sudo -u postgres psql -d geonode -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
+         
+         # sql assumpcao2014 layer
+         sudo -u postgres psql -d geonode -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
+         geonode updatelayers
+     else
+         # Put sql for all layers
+         for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
+             sudo -u postgres psql -d $GEO_DBUSER -c '\copy '$lay' FROM '$HOME/oq-private/old_platform_documents/sql_layers/out/$lay''
+         done
+     fi
     
     if [ "$DEVEL_DATA" = "y" ]; then
         geonode add_documents
