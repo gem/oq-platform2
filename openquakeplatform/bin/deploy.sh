@@ -281,8 +281,6 @@ function apply_data() {
 
          # Create programmatically ISC and GHEC json
          sudo chmod o+w /var/www/geonode/uploaded/thumbs
-         sed -i 's/GEOSERVER_LOCATION/GEOSERVER_PUBLIC_LOCATION/g' $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/management/commands/create_ghecmap.py
-         sed -i 's/GEOSERVER_LOCATION/GEOSERVER_PUBLIC_LOCATION/g' $HOME/$GIT_REPO/openquakeplatform/isc_viewer/management/commands/create_iscmap.py
          geonode create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
          geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
          sudo chmod o-w /var/www/geonode/uploaded/thumbs
