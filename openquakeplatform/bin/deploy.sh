@@ -67,7 +67,7 @@ if [ "$1" = "-d" ]; then
     DEVEL_DATA=y
     shift
 fi
-LXC_IP="$1"
+export LXC_IP="$1"
 GIT_BRANCH="$2"
 GIT_GEO_REPO="2.6.x"
 GEO_STABLE_HASH="aa5932d"
