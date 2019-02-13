@@ -341,8 +341,11 @@ function initialize_test() {
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
-    sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
-    sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
+    # sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
+    # sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
+
+    sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
+    sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
 }
