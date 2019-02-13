@@ -105,10 +105,6 @@ function setup_django_every_time() {
     mkdir -p $GEONODE_WWW/uploaded/thumbs/
     mkdir -p $GEONODE_WWW/uploaded/layers/
     mkdir -p $GEONODE_WWW/uploaded/documents/
-    # ln -sf $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs $GEONODE_WWW/uploaded
-    # mkdir -p $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded
-    # mkdir -p $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/layers
-    # mkdir -p $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/documents
 
     # Apply the permissions to the newly created folders.
     sudo chown www-data.www-data -R $GEONODE_WWW
@@ -119,14 +115,6 @@ function setup_django_every_time() {
     chmod 775 -R $GEONODE_WWW/uploaded
     chmod 775 -R $GEONODE_WWW/geonode
     chmod 775 -R $GEONODE_WWW/static
-    # chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/
-    # chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/layers
-    # chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/uploaded/documents
-    # chmod 775 -R $HOME/env/local/lib/python2.7/site-packages/geonode/static_root
-
-    # for install geonode
-    # sudo rm -rf /var/www/geonode/static
-    # sudo ln -sf $HOME/env/lib/python2.7/site-packages/geonode/static_root/ /var/www/geonode/static
 
     # ipt folder
     cd $GEONODE_WWW
@@ -162,9 +150,6 @@ function setup_geoserver() {
     # wget http://ftp.openquake.org/oq-platform2/data-2.9.x-oauth2.zip
     mv geoserver-2.9.x-oauth2.war geoserver.war
     mv geoserver.war $TOMCAT_WEBAPPS
-
-    ## Symbolic link to solve spatialite warning of Geoserver
-    # sudo ln -sf /usr/lib/x86_64-linux-gnu/libproj.so.9 /usr/lib/x86_64-linux-gnu/libproj.so.0
 
     $TOMCAT_SERVICE restart
 

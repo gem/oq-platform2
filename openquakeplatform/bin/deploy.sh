@@ -153,16 +153,15 @@ cat << EOF | sudo -u postgres psql -d geonode
     );
 EOF
 
-#insert line in pg_hba.conf postgres
+# insert line in pg_hba.conf postgres
 sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
 if [ "$DEVEL_DATA" = "y" ]; then
-    sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP"'/32             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-else    
-    sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+    PG='/32'
 fi    
+sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP""$PG"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
 sudo sed -i "1 s@^@listen_addresses = '127.0.0.1,localhost,"$LXC_IP"'\n@g" /etc/postgresql/9.5/main/postgresql.conf
 
-#restart postgres
+# restart postgres
 sudo service postgresql restart
 }
 
@@ -281,9 +280,11 @@ function apply_data() {
 
          # Create programmatically ISC and GHEC json
          # sudo chmod o+w /var/www/geonode/uploaded/thumbs
+         sudo chmod 775 /var/www/geonode/uploaded/thumbs
          geonode create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
          geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
          # sudo chmod o-w /var/www/geonode/uploaded/thumbs
+         sudo chmod 775 /var/www/geonode/uploaded/thumbs
 
          apache_tomcat_restart
 
