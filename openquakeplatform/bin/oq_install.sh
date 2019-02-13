@@ -116,7 +116,7 @@ function setup_django_every_time() {
     # processes like updatelayers and collectstatic can write here
     chmod 775 -R $GEONODE_WWW 
     chmod 775 -R $GEONODE_WWW/uploaded
-    chmod 775 -R $GEONODE_WWW/geonode
+    chmod 775 -R $GEONODE_WWW/uploaded/thumbs
     chmod 775 -R $GEONODE_WWW/static
 
     # ipt folder
