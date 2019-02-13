@@ -637,7 +637,6 @@ div.filters {
 #oq-body-heading {
     height: 24px;
     text-align: center;
-    display: none!important;
 }
 #oq-body-heading h1 {
     color: #1b75a7;
@@ -646,6 +645,7 @@ div.filters {
     font-weight: 300;
     font-family: 'Lato',sans-serif;
     margin: 0;
+    display: none!important;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     background: #f05a24!important;
