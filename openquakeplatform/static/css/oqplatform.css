@@ -637,6 +637,7 @@ div.filters {
 #oq-body-heading {
     height: 24px;
     text-align: center;
+    display: none!important;
 }
 #oq-body-heading h1 {
     color: #1b75a7;
