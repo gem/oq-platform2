@@ -13,6 +13,14 @@ class MetadataTest(unittest.TestCase):
 
     def check_metadata_test(self):
 
+        # set if is production installation
+        prod = os.getenv("PROD")
+
+        if prod == "y":
+            name_maps = "Global Historic Catalogue"
+        else:
+            name_maps = "ghec_viewer_measure"
+
         # check ip adress
         get_ip = os.getenv("LXC_IP")
 
@@ -24,7 +32,7 @@ class MetadataTest(unittest.TestCase):
 
         # click on layer ghec
         layer = pla.xpath_finduniq(
-            "//a[normalize-space(text()) = 'ghec_viewer_measure']")
+            "//a[normalize-space(text()) = '%s']" % name_maps)
         layer.click()
 
         # click download metadata in layer page detail
