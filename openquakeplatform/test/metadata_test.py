@@ -14,7 +14,7 @@ class MetadataTest(unittest.TestCase):
     def check_metadata_test(self):
 
         # set if is production installation
-        prod = os.getenv("PROD")
+        prod = os.getenv("OQ_TEST")
 
         if prod == "y":
             name_maps = "Global Historic Catalogue"

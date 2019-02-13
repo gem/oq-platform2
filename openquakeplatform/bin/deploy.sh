@@ -351,6 +351,7 @@ exec_test () {
     export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
     if [ "$DEVEL_DATA" = "y" ]; then
         export GEM_PLA_ADMIN_ID=2
+        export OQ_TEST="y"
     else
         export GEM_PLA_ADMIN_ID=1000
     fi    
