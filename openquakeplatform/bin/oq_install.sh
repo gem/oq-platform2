@@ -47,7 +47,7 @@ function setup_directories() {
 function reorganize_configuration() {
     cp -rp $INSTALL_DIR/support/geonode.apache $APACHE_SITES/geonode.conf
     cp -rp $INSTALL_DIR/support/geonode.wsgi $GEONODE_WWW/wsgi/
-    if [ "$OQ_DEVEL_DATA" = "y" ]; then
+    if [ "$DEVEL_DATA" = "y" ]; then
         sed -i 's/import os/import os/nos.umask(002)/g' $GEONODE_WWW/wsgi/geonode.wsgi
     fi
     cp -rp $INSTALL_DIR/support/geonode.robots $GEONODE_WWW/robots.txt
@@ -150,7 +150,6 @@ function setup_apache_every_time() {
 function setup_geoserver() {
     cd $HOME/geonode
     wget http://ftp.openquake.org/oq-platform2/geoserver-2.9.x-oauth2.war
-    # wget http://ftp.openquake.org/oq-platform2/data-2.9.x-oauth2.zip
     mv geoserver-2.9.x-oauth2.war geoserver.war
     mv geoserver.war $TOMCAT_WEBAPPS
 

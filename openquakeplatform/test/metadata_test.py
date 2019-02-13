@@ -17,7 +17,7 @@ class MetadataTest(unittest.TestCase):
         prod = os.getenv("OQ_TEST")
 
         if prod == "y":
-            name_maps = "Global Historic Catalogue"
+            name_maps = "assumpcao2014"
         else:
             name_maps = "ghec_viewer_measure"
 
