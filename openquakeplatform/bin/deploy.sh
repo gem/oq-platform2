@@ -216,6 +216,10 @@ function install_geonode() {
     
     # install Geonode
     cd ..
+    if [ "$DEVEL_DATA" = "y" ]; then
+        export OQ_DEVEL_DATA=y
+    fi
+
     sudo -E ./package/oq_install.sh -s pre $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     # enable wsgi apache
