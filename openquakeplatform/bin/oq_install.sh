@@ -124,7 +124,9 @@ function setup_django_every_time() {
     mkdir data
     chown www-data.www-data -R $GEONODE_WWW/data
     chmod 775 -R $GEONODE_WWW/data
-    chmod g+s $GEONODE_WWW/data
+    if [ "$DEVEL_DATA" ]; then
+        chmod g+s $GEONODE_WWW/data
+    fi
 }
 
 function setup_apache_once() {
