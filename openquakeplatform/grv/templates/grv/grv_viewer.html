@@ -1,3 +1,7 @@
+{% extends "data_viewer_base.html" %}
+{% load i18n %}
+
+{% block title %} GRV {% endblock title %}
 <!--
 Copyright (c) 2013-2018, GEM Foundation.
 
@@ -14,11 +18,6 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/agpl.html>.
 -->
-{% extends "data_viewer_base.html" %}
-
-{% block title %}
-GRV - {{block.super}}
-{% endblock %}
 
 {% block map_tools %}
 <link rel="stylesheet" href="{{ STATIC_URL }}grv/css/grv_viewer.css" />
