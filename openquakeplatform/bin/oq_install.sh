@@ -121,8 +121,10 @@ function setup_django_every_time() {
 
     # ipt folder
     cd $GEONODE_WWW
-    mkdir data                  
-    sudo chown www-data.www-data -R $GEONODE_WWW/data
+    mkdir data
+    chown www-data.www-data -R $GEONODE_WWW/data
+    chmod 775 -R $GEONODE_WWW/data
+    chmod g+s $GEONODE_WWW/data
 }
 
 function setup_apache_once() {
