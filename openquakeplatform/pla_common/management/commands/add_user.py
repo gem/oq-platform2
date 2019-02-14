@@ -24,7 +24,7 @@ class Command(BaseCommand):
             if (fields['username'] == 'AnonymousUser'
                     or fields['username'] == 'GEM'):
                 continue
-            if (devel_data == 'y'
+            if (devel_data != 'y'
                     or prod_inst != 'y'):
                 if (fields['username'] == 'admin'):
                     continue
