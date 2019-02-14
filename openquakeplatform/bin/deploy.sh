@@ -342,11 +342,11 @@ function initialize_test() {
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
 }
 
-exec_test () {
+function exec_test() {
     export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
 
     if [ "$DEVEL_DATA" ]; then
-        export GEM_PLA_ADMIN_ID=2
+        export GEM_PLA_ADMIN_ID=1
         export OQ_TEST="y"
     else
         export GEM_PLA_ADMIN_ID=1000
