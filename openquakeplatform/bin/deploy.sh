@@ -63,7 +63,7 @@ sudo apt-get install -y --force-yes python-oq-engine
 
 # check if are dev/prod data installation
 if [ "$1" = "-d" ]; then
-    DEVEL_DATA=y
+    export DEVEL_DATA=y
     shift
 fi
 
@@ -155,7 +155,7 @@ EOF
 
 # insert line in pg_hba.conf postgres
 sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-if [ "$DEVEL_DATA" = "y" ]; then
+if [ "$DEVEL_DATA" ]; then
     PG='/32'
 fi    
 sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP""$PG"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
@@ -216,7 +216,7 @@ function install_geonode() {
     
     # install Geonode
     cd ..
-    sudo ./package/oq_install.sh -s pre $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
+    sudo -E ./package/oq_install.sh -s pre $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     # enable wsgi apache
     sudo apt-get install libapache2-mod-wsgi
@@ -232,12 +232,8 @@ function install_geonode() {
     sudo sed -i "25 s@^@STATIC_ROOT = '/var/www/geonode/static'\n@g" /etc/geonode/local_settings.py
 
     # export variable to do createsuperuser in oq_install script
-    if [ "$DEVEL_DATA" = "y" ]; then
-        export OQ_DEVEL_DATA=y
-    fi
-
-    sudo ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
-    sudo ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
+    sudo -E ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
+    sudo -E ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
     sudo invoke-rc.d apache2 restart                      
@@ -251,7 +247,7 @@ function apply_data() {
     geonode import_vuln_geo_applicability_csv $HOME/$GIT_REPO/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
     geonode vuln_groups_create
 
-    if [ $DEVEL_DATA = "y" ]; then
+    if [ "$DEVEL_DATA" ]; then
         geonode add_user $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/auth_user.json
         geonode loaddata -v 3 --app vulnerability $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/all_vulnerability.json
         geonode create_gem_user
@@ -264,14 +260,14 @@ function apply_data() {
     sudo sed -i 's/-Xmx128m/-Xmx4096m/g' /etc/default/tomcat7
     sudo service tomcat7 restart
     
-    if [ "$DEVEL_DATA" != "y" ]; then
+    if [ -z "$DEVEL_DATA" ]; then
         sudo cp -r $HOME/oq-private/old_platform_documents/thumbs/ /var/www/geonode/uploaded/
     fi
 
     sudo cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents /var/www/geonode/uploaded/
 
     cd $HOME/$GIT_REPO
-    if [ "$DEVEL_DATA" = "y" ]; then
+    if [ "$DEVEL_DATA" ]; then
 
          ## load data for gec and isc viewer
          geonode import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
@@ -292,7 +288,7 @@ function apply_data() {
 
     cd $HOME/
 
-     if [ "$DEVEL_DATA" = "y" ]; then
+     if [ "$DEVEL_DATA" ]; then
          # sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
          sudo -u postgres psql -d geonode -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
          
@@ -311,7 +307,7 @@ function apply_data() {
 
 function svir_world_data() {
     geonode migrate
-    if [ "$DEVEL_DATA" = "y" ]; then
+    if [ "$DEVEL_DATA" ]; then
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/world/dev_data/world.json.bz2
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/svir/dev_data/svir.json.bz2
     else    
@@ -343,17 +339,17 @@ function initialize_test() {
     sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
     sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
-    # sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
-    # sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
-
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
 }
 
 exec_test () {
     export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
-    export GEM_PLA_ADMIN_ID=1000
-    if [ "$DEVEL_DATA" = "y" ]; then
+
+    if [ "$DEVEL_DATA" ]; then
+        export GEM_PLA_ADMIN_ID=2
         export OQ_TEST="y"
+    else
+        export GEM_PLA_ADMIN_ID=1000
     fi    
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
