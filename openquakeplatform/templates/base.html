@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <title>Openquake Platform - {% block title %}{{ SITE_NAME }}{% endblock %}{{ page_title }}</title>
     <meta property="og:title" content="OpenQuake Platform - {{ page_title }}" />
-    <meta property="og:site_name" content="OpenQuake Platform - {% block title %}{{ SITE_NAME }}{% endblock %}{{ page_title }}" />
+    <meta property="og:site_name" content="OpenQuake Platform" />
     <meta property="og:url" content="http://platform-staging.openquake.org" />
     <meta property="og:description" content="Welcome to the OpenQuake Platform, by the GEM Foundation." />
     <meta property="og:image" content="https://storage-scw1.globalquakemodel.org/public/Logos/oq-logo.png" />
@@ -119,7 +119,6 @@
                <li id="nav_explore">
                    <a href="{% url "explore" %}">Explore</a>
                </li>
-               <li>{{ name }}</li>
 	        {% block extra_tab %}
             {% endblock %}
             {% endblock %}
