@@ -252,8 +252,8 @@ function apply_data() {
         geonode loaddata -v 3 --app vulnerability $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/all_vulnerability.json
         geonode create_gem_user
     else
-        geonode loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
         geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
+        geonode loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
         geonode loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
     fi    
     pip install simplejson==2.0.9
