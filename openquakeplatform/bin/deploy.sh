@@ -19,22 +19,16 @@ set -x
 # fi
 set -e
 
-if [ -f /etc/geonode/local_settings.py ]; then
-    GEM_IS_INSTALL=n
-else
-    GEM_IS_INSTALL=y
-fi
-
-sudo apt-get update
-sudo apt install -y git python-virtualenv wget
-
 GIT_REPO="oq-platform2"
 
 # delete all folder used
-sudo rm -rf env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data
+sudo rm -rf env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data    
 
 # if exists, delete postgres:
 sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5
+
+sudo apt-get update
+sudo apt install -y git python-virtualenv wget
 
 # Create and source virtual env
 virtualenv env
