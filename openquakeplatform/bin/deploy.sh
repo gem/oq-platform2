@@ -14,9 +14,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with OpenQuake.  If not, see <http://www.gnu.org/licenses/>.
 
-if [ $GEM_SET_DEBUG ]; then
-    set -x
-fi
+# if [ $GEM_SET_DEBUG ]; then
+set -x
+# fi
 set -e
 
 if [ -f /etc/geonode/local_settings.py ]; then
@@ -75,6 +75,7 @@ GEO_DBUSER="geonode"
 GEM_GIT_REPO="git://github.com/gem"
 NO_EXEC_TEST="$3"
 export PROD_INSTALL='y'
+export DATAPROD="$4"
 
 # branch for ipt, taxtweb, classification survey
 GIT_BRANCH_APP="$4"
@@ -155,9 +156,9 @@ EOF
 
 # insert line in pg_hba.conf postgres
 sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-if [ "$DEVEL_DATA" ]; then
-    PG='/32'
-fi    
+# if [ "$DEVEL_DATA" ]; then
+PG='/32'
+# fi    
 sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP""$PG"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
 sudo sed -i "1 s@^@listen_addresses = '127.0.0.1,localhost,"$LXC_IP"'\n@g" /etc/postgresql/9.5/main/postgresql.conf
 
@@ -255,6 +256,7 @@ function apply_data() {
         geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
         geonode loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
+        geonode create_gem_user
     fi    
     pip install simplejson==2.0.9
     sudo sed -i 's/-Xmx128m/-Xmx4096m/g' /etc/default/tomcat7
@@ -298,9 +300,12 @@ function apply_data() {
          geonode add_documents
      else
          # Put sql for all layers
+         # sudo -u postgres psql -d $GEO_DBUSER -c 'ALTER TABLE faulted_earth_faultsource ALTER COLUMN geom TYPE geometry(MultiLineStringZ) USING ST_Force_3D(geom);' 
+         # sudo -u postgres psql -d $GEO_DBUSER -c 'ALTER TABLE gaf_viewer_faulttrace ALTER COLUMN src_id SET DATA TYPE geometry;' 
          for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
              sudo -u postgres psql -d $GEO_DBUSER -c '\copy '$lay' FROM '$HOME/oq-private/old_platform_documents/sql_layers/out/$lay''
          done
+         # sudo -u postgres psql -d $GEO_DBUSER -c 'ALTER TABLE faulted_earth_faultsource ALTER COLUMN geom SET DATA TYPE geometry(MultiPolygonZ) USING ST_Multi(geom);' 
          geonode add_documents_prod
      fi
 }
@@ -311,7 +316,7 @@ function svir_world_data() {
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/world/dev_data/world.json.bz2
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/svir/dev_data/svir.json.bz2
     else    
-        sudo sed -i 's/:8000//g' $HOME/env/local/lib/python2.7/site-packages/geonode/static_root/irv/js/irv_viewer.js
+        sudo sed -i 's/:8000//g' /var/www/geonode/static/irv/js/irv_viewer.js
         geonode collectstatic --noinput --verbosity 0 
         geonode loaddata oq-platform-data/api/data/world_prod.json.bz2 
         geonode loaddata oq-platform-data/api/data/svir_prod.json.bz2
@@ -360,7 +365,7 @@ function exec_set_map_thumbs() {
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/set_thumb/mapthumbnail_test.py
 }
 
-function oq_install() {
+function platform_install() {
     setup_postgres_once
     clone_platform
     oq_application
@@ -375,4 +380,4 @@ function oq_install() {
     fi    
 }
 
-oq_install
+platform_install

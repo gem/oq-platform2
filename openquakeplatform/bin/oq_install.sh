@@ -47,7 +47,7 @@ function setup_directories() {
 function reorganize_configuration() {
     cp -rp $INSTALL_DIR/support/geonode.apache $APACHE_SITES/geonode.conf
     cp -rp $INSTALL_DIR/support/geonode.wsgi $GEONODE_WWW/wsgi/
-    if [ "$DEVEL_DATA" ]; then
+    if [ "$DEVEL_DATA" ] || [ "$DATA_PROD" ]; then
         sed -i 's/import os/import os\nos.umask(002)/g' $GEONODE_WWW/wsgi/geonode.wsgi
     fi
     cp -rp $INSTALL_DIR/support/geonode.robots $GEONODE_WWW/robots.txt
@@ -110,21 +110,22 @@ function setup_django_every_time() {
     mkdir -p $GEONODE_WWW/uploaded/documents/
 
     # Apply the permissions to the newly created folders.
-    sudo chown www-data.www-data -R $GEONODE_WWW
+    # sudo chown www-data.www-data -R $GEONODE_WWW
 
     # Open up the permissions of the media folders so the python
     # processes like updatelayers and collectstatic can write here
-    chmod 775 -R $GEONODE_WWW 
+    chmod 775 -R $GEONODE_WWW
     chmod 775 -R $GEONODE_WWW/uploaded
     chmod 775 -R $GEONODE_WWW/uploaded/thumbs
     chmod 775 -R $GEONODE_WWW/static
+    chmod g+s $GEONODE_WWW/uploaded/thumbs
 
     # ipt folder
     cd $GEONODE_WWW
     mkdir data
     chown www-data.www-data -R $GEONODE_WWW/data
     chmod 775 -R $GEONODE_WWW/data
-    if [ "$DEVEL_DATA" ]; then
+    if [ "$DEVEL_DATA" ] || [ "$DATA_PROD" ]; then
         chmod g+s $GEONODE_WWW/data
     fi
 }
