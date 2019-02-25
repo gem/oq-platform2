@@ -4,9 +4,9 @@
 # using getopts
 #
 
-if [ $GEM_SET_DEBUG ]; then
-    set -x
-fi
+# if [ $GEM_SET_DEBUG ]; then
+     set -x
+# fi
 set -e
 
 # source ~/env/bin/activate
@@ -93,7 +93,7 @@ function setup_postgres_every_time() {
 
 function setup_django_every_time() {
     echo "setup_django_every_time:"
-#    source ~/env/bin/activate
+    source ~/env/bin/activate
     
     pip -v install /usr/share/geonode/GeoNode-*.zip --no-dependencies --quiet
     geonodedir=`python -c "import geonode;import os;print os.path.dirname(geonode.__file__)"`
