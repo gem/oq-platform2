@@ -110,7 +110,7 @@ function setup_django_every_time() {
     mkdir -p $GEONODE_WWW/uploaded/documents/
 
     # Apply the permissions to the newly created folders.
-    # sudo chown www-data.www-data -R $GEONODE_WWW
+    sudo chown www-data.www-data -R $GEONODE_WWW
 
     # Open up the permissions of the media folders so the python
     # processes like updatelayers and collectstatic can write here

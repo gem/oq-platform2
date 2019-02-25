@@ -75,7 +75,7 @@ GEO_DBUSER="geonode"
 GEM_GIT_REPO="git://github.com/gem"
 NO_EXEC_TEST="$3"
 export PROD_INSTALL='y'
-export DATAPROD="$4"
+export DATA_PROD="$4"
 
 # branch for ipt, taxtweb, classification survey
 GIT_BRANCH_APP="$4"
