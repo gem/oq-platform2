@@ -34,7 +34,7 @@ shift $(($OPTIND - 1))
 function setup_directories() {
     mkdir -p $GEOSERVER_DATA_DIR
     mkdir -p $GEONODE_WWW/static
-    mkdir -p $GEONODE_WWW/uploaded
+    # mkdir -p $GEONODE_WWW/uploaded
     mkdir -p $GEONODE_WWW/wsgi
     mkdir -p $APACHE_SITES
     mkdir -p $GEONODE_BIN
@@ -42,6 +42,24 @@ function setup_directories() {
     mkdir -p $GEONODE_ETC/media
     mkdir -p $GEONODE_ETC/templates
     mkdir -p $GEONODE_SHARE
+
+    # Create an empty uploads dir
+    mkdir -p $GEONODE_WWW/uploaded
+    mkdir -p $GEONODE_WWW/uploaded/thumbs/
+    mkdir -p $GEONODE_WWW/uploaded/layers/
+    mkdir -p $GEONODE_WWW/uploaded/documents/
+
+    # Open up the permissions of the media folders so the python
+    # processes like updatelayers and collectstatic can write here
+    chmod 775 -R $GEONODE_WWW
+    chmod 775 -R $GEONODE_WWW/uploaded
+    chmod 775 -R $GEONODE_WWW/uploaded/thumbs
+    chmod 775 -R $GEONODE_WWW/static
+    chmod g+s $GEONODE_WWW/uploaded/thumbs
+
+    # Apply the permissions to the newly created folders.
+    sudo chown www-data.www-data -R $GEONODE_WWW
+    sudo chown www-data.www-data -R $GEONODE_WWW/static
 }
 
 function reorganize_configuration() {
@@ -102,23 +120,6 @@ function setup_django_every_time() {
     if [ -z "$DEVEL_DATA" ]; then
         geonode createsuperuser
     fi
-
-    # Create an empty uploads dir
-    mkdir -p $GEONODE_WWW/uploaded
-    mkdir -p $GEONODE_WWW/uploaded/thumbs/
-    mkdir -p $GEONODE_WWW/uploaded/layers/
-    mkdir -p $GEONODE_WWW/uploaded/documents/
-
-    # Apply the permissions to the newly created folders.
-    sudo chown www-data.www-data -R $GEONODE_WWW
-
-    # Open up the permissions of the media folders so the python
-    # processes like updatelayers and collectstatic can write here
-    chmod 775 -R $GEONODE_WWW
-    chmod 775 -R $GEONODE_WWW/uploaded
-    chmod 775 -R $GEONODE_WWW/uploaded/thumbs
-    chmod 775 -R $GEONODE_WWW/static
-    chmod g+s $GEONODE_WWW/uploaded/thumbs
 
     # ipt folder
     cd $GEONODE_WWW
