@@ -7,9 +7,9 @@
 if [ $GEM_SET_DEBUG ]; then
     set -x
 fi
-# set -e
+set -e
 
-source ~/env/bin/activate
+# source ~/env/bin/activate
 
 if [[ $EUID -ne 0 ]]; then
     echo "This script must be run as root" 1>&2
@@ -52,14 +52,10 @@ function setup_directories() {
     # Open up the permissions of the media folders so the python
     # processes like updatelayers and collectstatic can write here
     chmod 775 -R $GEONODE_WWW
-    chmod 775 -R $GEONODE_WWW/uploaded
-    chmod 775 -R $GEONODE_WWW/uploaded/thumbs
-    chmod 775 -R $GEONODE_WWW/static
     chmod g+s $GEONODE_WWW/uploaded/thumbs
 
     # Apply the permissions to the newly created folders.
-    sudo chown www-data.www-data -R $GEONODE_WWW
-    sudo chown www-data.www-data -R $GEONODE_WWW/static
+    chown www-data.www-data -R $GEONODE_WWW
 }
 
 function reorganize_configuration() {
@@ -97,7 +93,7 @@ function setup_postgres_every_time() {
 
 function setup_django_every_time() {
     echo "setup_django_every_time:"
-    source ~/env/bin/activate
+#    source ~/env/bin/activate
     
     pip -v install /usr/share/geonode/GeoNode-*.zip --no-dependencies --quiet
     geonodedir=`python -c "import geonode;import os;print os.path.dirname(geonode.__file__)"`

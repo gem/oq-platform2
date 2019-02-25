@@ -83,7 +83,7 @@ if ["$GIT_BRANCH_APP" = '']; then
     GIT_BRANCH_APP="master"
 fi
 
-sudo usermod -aG www-data $USER
+# sudo usermod -aG www-data $USER
 
 # create secret key
 function key_create () {
@@ -112,25 +112,25 @@ function apache_tomcat_restart() {
 
 function setup_postgres_once() {
 
-sudo -u postgres createdb $GEO_DBUSER
-sudo -u postgres createdb $GEO_DBUSER-imports
+    sudo -u postgres createdb $GEO_DBUSER
+    sudo -u postgres createdb $GEO_DBUSER-imports
 
-cat << EOF | sudo -u postgres psql
+    cat << EOF | sudo -u postgres psql
     CREATE USER "geonode" WITH PASSWORD '$gem_db_pass';
     GRANT ALL PRIVILEGES ON DATABASE "$GEO_DBUSER" to geonode;
     GRANT ALL PRIVILEGES ON DATABASE "$GEO_DBUSER-imports" to geonode;
 EOF
 
-sudo -u postgres psql -d $GEO_DBUSER -c 'CREATE EXTENSION postgis;'
-sudo -u postgres psql -d $GEO_DBUSER -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
-sudo -u postgres psql -d $GEO_DBUSER -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
+    sudo -u postgres psql -d $GEO_DBUSER -c 'CREATE EXTENSION postgis;'
+    sudo -u postgres psql -d $GEO_DBUSER -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
+    sudo -u postgres psql -d $GEO_DBUSER -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
 
-sudo -u postgres psql -d $GEO_DBUSER-imports -c 'CREATE EXTENSION postgis;'
-sudo -u postgres psql -d $GEO_DBUSER-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
-sudo -u postgres psql -d $GEO_DBUSER-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
+    sudo -u postgres psql -d $GEO_DBUSER-imports -c 'CREATE EXTENSION postgis;'
+    sudo -u postgres psql -d $GEO_DBUSER-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
+    sudo -u postgres psql -d $GEO_DBUSER-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
 
-# add unaccent extension and icompare_unaccent function into postgres
-cat << EOF | sudo -u postgres psql -d geonode                                                                                                                                                                                         
+    # add unaccent extension and icompare_unaccent function into postgres
+    cat << EOF | sudo -u postgres psql -d geonode                                                                                                                                                                                         
     -- NOTE: originally deployed as migration, we realized that this sql script must
     --       be executed for every new installation (devel or production).
     --       The script is idempotent so we decided to keep the original migration script too
@@ -154,16 +154,16 @@ cat << EOF | sudo -u postgres psql -d geonode
     );
 EOF
 
-# insert line in pg_hba.conf postgres
-sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-# if [ "$DEVEL_DATA" ]; then
-PG='/32'
-# fi    
-sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP""$PG"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-sudo sed -i "1 s@^@listen_addresses = '127.0.0.1,localhost,"$LXC_IP"'\n@g" /etc/postgresql/9.5/main/postgresql.conf
-
-# restart postgres
-sudo service postgresql restart
+    # insert line in pg_hba.conf postgres
+    sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+    # if [ "$DEVEL_DATA" ]; then
+    PG='/32'
+    # fi    
+    sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP""$PG"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+    sudo sed -i "1 s@^@listen_addresses = '127.0.0.1,localhost,"$LXC_IP"'\n@g" /etc/postgresql/9.5/main/postgresql.conf
+    
+    # restart postgres
+    sudo service postgresql restart
 }
 
 function clone_platform() {
@@ -182,9 +182,9 @@ function oq_application() {
         # for repo in oq-platform-taxtweb; do
         if [ "$GIT_BRANCH_APP" = "master" ]; then false ; else git clone -b "$GIT_BRANCH_APP" https://github.com/gem/${repo}.git ; fi || git clone -b $GIT_REPO https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
         if [ "${repo}" != "oq-platform-data" ]; then
-            cd ${repo}
+            pushd ${repo}
             pip install .
-            cd $HOME
+            popd
         fi
     done
 }
@@ -208,6 +208,7 @@ function install_geonode() {
     pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
     pip install .
     
+    #TODO check python-gdal deps
     sudo apt install -y python-gdal gdal-bin
     
     # copy Geonode zip and oq_install script in package folder of Geonode
