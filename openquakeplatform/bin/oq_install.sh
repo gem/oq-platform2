@@ -137,7 +137,7 @@ function setup_apache_once() {
 
     sed -i '1d' $APACHE_SITES/geonode.conf
     sed -i "1i WSGIDaemonProcess geonode user=www-data threads=15 processes=2" $APACHE_SITES/geonode.conf
-    sudo sed -i '1 s@^@WSGIPythonHome /home/openquake/env\n@g' $APACHE_SITES/geonode.conf
+    sed -i '1 s@^@WSGIPythonHome /home/openquake/env\n@g' $APACHE_SITES/geonode.conf
 
     #FIXME: This could be removed if setup_apache_every_time is called after setup_apache_once
     $APACHE_SERVICE restart
