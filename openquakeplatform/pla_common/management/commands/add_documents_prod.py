@@ -376,6 +376,8 @@ class Command(BaseCommand):
             User = get_user_model()
             owner = User.objects.get(username=mapp['owner'][0])
 
+            topic_cat = TopicCategory.objects.get(identifier="none")
+
             # Save maps
             newmap = Map.objects.model(
                 uuid=mapp['uuid'],
@@ -398,7 +400,7 @@ class Command(BaseCommand):
                 date=mapp['csw_insert_date'],
                 category=(old_category_refs[mapp['category']]
                           if mapp['category'] is not None
-                          else None),
+                          else topic_cat),
                 license=(old_license_refs[mapp['license']]
                          if mapp['license'] is not None
                          else None),
