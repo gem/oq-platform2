@@ -34,7 +34,6 @@ shift $(($OPTIND - 1))
 function setup_directories() {
     mkdir -p $GEOSERVER_DATA_DIR
     mkdir -p $GEONODE_WWW/static
-    # mkdir -p $GEONODE_WWW/uploaded
     mkdir -p $GEONODE_WWW/wsgi
     mkdir -p $APACHE_SITES
     mkdir -p $GEONODE_BIN
@@ -53,6 +52,7 @@ function setup_directories() {
     # processes like updatelayers and collectstatic can write here
     chmod 775 -R $GEONODE_WWW
     chmod g+s $GEONODE_WWW/uploaded/thumbs
+    chmod g+s $GEONODE_WWW/static
 
     # Apply the permissions to the newly created folders.
     chown www-data.www-data -R $GEONODE_WWW
@@ -114,6 +114,7 @@ function setup_django_every_time() {
 }
 
 function after_setup_django_every_time() {
+    source ~/env/bin/activate
     if [ -z "$DEVEL_DATA" ]; then
         geonode createsuperuser
     fi
