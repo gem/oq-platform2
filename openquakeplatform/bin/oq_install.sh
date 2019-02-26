@@ -111,8 +111,9 @@ function setup_django_every_time() {
     # geonode runserver &
     geonode migrate --verbosity 0
     geonode loaddata $geonodedir/base/fixtures/initial_data.json
-    geonode collectstatic --noinput --verbosity 0
+}
 
+function after_setup_django_every_time() {
     if [ -z "$DEVEL_DATA" ]; then
         geonode createsuperuser
     fi
@@ -164,6 +165,9 @@ function setup_geoserver() {
 function postinstall() {
     setup_postgres_every_time
     setup_django_every_time
+}
+function after_postinstall() {
+    after_setup_django_every_time
     setup_apache_every_time
     $TOMCAT_SERVICE restart
     $APACHE_SERVICE restart
@@ -199,6 +203,10 @@ case $stepval in
     post)
         echo "Running GeoNode postinstall ..."
         postinstall
+        ;;
+    after_post)
+        echo "second side after install"
+        after_post_install
         ;;
     setup_apache_once)
         echo "Configuring Apache ..."

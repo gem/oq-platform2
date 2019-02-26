@@ -227,8 +227,12 @@ function install_geonode() {
     sudo sed -i "24 s@^@MEDIA_ROOT = '/var/www/geonode/uploaded'\n@g" /etc/geonode/local_settings.py
     sudo sed -i "25 s@^@STATIC_ROOT = '/var/www/geonode/static'\n@g" /etc/geonode/local_settings.py
 
-    # export variable to do createsuperuser in oq_install script
+    # pre and post install platform
     sudo -E ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
+
+    geonode collectstatic --noinput --verbosity 0 
+
+    sudo -E ./package/oq_install.sh -s after_post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     sudo -E ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
