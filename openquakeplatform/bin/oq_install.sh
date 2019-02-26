@@ -207,7 +207,7 @@ case $stepval in
         ;;
     after_post)
         echo "second side after install"
-        after_post_install
+        after_postinstall
         ;;
     setup_apache_once)
         echo "Configuring Apache ..."
