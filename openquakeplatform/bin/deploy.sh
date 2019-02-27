@@ -22,10 +22,16 @@ set -e
 GIT_REPO="oq-platform2"
 
 # delete all folder used
-sudo rm -rf env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data    
+sudo rm -rf env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data /var/www/geonode /etc/geonode /var/lib/tomcat7/webapps GeoNode-2.6.x.zip* 
 
 # if exists, delete postgres:
-sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5
+sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5 tomcat7
+
+sudo a2dissite geonode || true 
+sudo rm /etc/apache2/sites-available/geonode.conf || true
+sudo rm /etc/apache2/sites-enabled/geonode.conf || true
+sudo rm /etc/geonode/local_settings.py || true
+sudo service apache2 restart || true
 
 sudo apt-get update
 sudo apt install -y git python-virtualenv wget
@@ -149,11 +155,11 @@ EOF
 EOF
 
     # insert line in pg_hba.conf postgres
-    sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-    if [ "$DEVEL_DATA" ] || [ "$DATA_PROD" ]; then
-        PG='/32'
-    fi
-    sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP""$PG"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+#     sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
+#    if [ "$DEVEL_DATA" ] || [ "$DATA_PROD" ]; then
+#        PG='/32'
+#    fi
+#    sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP""$PG"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
     sudo sed -i "1 s@^@listen_addresses = '127.0.0.1,localhost,"$LXC_IP"'\n@g" /etc/postgresql/9.5/main/postgresql.conf
     
     # restart postgres
@@ -229,10 +235,6 @@ function install_geonode() {
 
     # pre and post install platform
     sudo -E ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
-
-    geonode collectstatic --noinput --verbosity 0 
-
-    sudo -E ./package/oq_install.sh -s after_post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     sudo -E ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
@@ -262,10 +264,10 @@ function apply_data() {
     sudo service tomcat7 restart
     
     if [ -z "$DEVEL_DATA" ]; then
-        sudo cp -r $HOME/oq-private/old_platform_documents/thumbs/ /var/www/geonode/uploaded/
+        cp -r $HOME/oq-private/old_platform_documents/thumbs/ /var/www/geonode/uploaded/
     fi
 
-    sudo cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents /var/www/geonode/uploaded/
+    cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents /var/www/geonode/uploaded/
 
     cd $HOME/$GIT_REPO
     if [ "$DEVEL_DATA" ]; then
@@ -282,9 +284,9 @@ function apply_data() {
 
          apache_tomcat_restart
 
-        $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/$GIT_REPO/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data" isc_viewer ghec_viewer
+         $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/$GIT_REPO/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data" isc_viewer ghec_viewer
     else    
-        $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
+         $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
     fi
 
     cd $HOME/
@@ -299,12 +301,9 @@ function apply_data() {
          geonode add_documents
      else
          # Put sql for all layers
-         # sudo -u postgres psql -d $GEO_DBUSER -c 'ALTER TABLE faulted_earth_faultsource ALTER COLUMN geom TYPE geometry(MultiLineStringZ) USING ST_Force_3D(geom);' 
-         # sudo -u postgres psql -d $GEO_DBUSER -c 'ALTER TABLE gaf_viewer_faulttrace ALTER COLUMN src_id SET DATA TYPE geometry;' 
          for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
              sudo -u postgres psql -d $GEO_DBUSER -c '\copy '$lay' FROM '$HOME/oq-private/old_platform_documents/sql_layers/out/$lay''
          done
-         # sudo -u postgres psql -d $GEO_DBUSER -c 'ALTER TABLE faulted_earth_faultsource ALTER COLUMN geom SET DATA TYPE geometry(MultiPolygonZ) USING ST_Multi(geom);' 
          geonode add_documents_prod
      fi
 }
