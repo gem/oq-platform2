@@ -19,6 +19,12 @@ body.home {
     background-size: cover;
     background-attachment: fixed;
 }
+.page-title {
+    margin: 0;
+}
+.irv_link a {
+    color: #fff!important;
+}
 div.disclaimer {
     margin: 8px auto 16px auto;
     width: auto;

@@ -30,12 +30,12 @@
                 <li>{% endverbatim %}
                   {% if user.is_authenticated %}
                   <a ng-if="item.detail_url.indexOf('/layers/') > -1" href="{% url "new_map" %}?layer={% verbatim %}{{ item.detail_url.substring(8) }}{% endverbatim %}">
-                  <i class="fa fa-map-marker"></i>{% trans "Create a map" %}</a>
+                  <i class="fa fa-map-marker"></i>{% trans "Create map" %}</a>
                   {% endif %}
                 </li>
                 <li><a ng-if="item.detail_url.indexOf('/maps/') > -1" href="/maps/{% verbatim %}{{item.id}}{% endverbatim %}/view"><i class="fa fa-map-marker"></i>View Map</a></li>
 
-                        <li>
+                        <li class="btn btn-primary pull-right irv_link">
 <a ng-if="item.category__gn_description == 'SVIR' && item.detail_url.indexOf('/layers/') > -1" href="/irv/{% verbatim %}{{ item.detail_url.substring(8) }}{% endverbatim %}"><i class="fa fa-external-link"></i>Open in Irv</a>
                 </li>
 
