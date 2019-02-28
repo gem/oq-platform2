@@ -4,9 +4,9 @@
 # using getopts
 #
 
-# if [ $GEM_SET_DEBUG ]; then
+if [ $GEM_SET_DEBUG ]; then
      set -x
-# fi
+fi
 set -e
 
 # source ~/env/bin/activate
@@ -30,6 +30,13 @@ do
     esac
 done
 shift $(($OPTIND - 1))
+
+function unsudo () {
+    local normal_user cmd="$1"
+
+    normal_user="$(logname)"
+    sudo -u $normal_user -i bash -c "$cmd"
+}
 
 function setup_directories() {
     mkdir -p $GEOSERVER_DATA_DIR
@@ -107,16 +114,13 @@ function setup_django_every_time() {
 
     export DJANGO_SETTINGS_MODULE=geonode.settings
 
-    django-admin migrate account --settings=geonode.settings
-    # geonode runserver &
-    geonode migrate --verbosity 0
-    geonode loaddata $geonodedir/base/fixtures/initial_data.json
-}
+    unsudo 'source env/bin/activate ; django-admin migrate account --settings=geonode.settings'
+    unsudo 'source env/bin/activate ; geonode migrate --verbosity 0'
+    unsudo 'source env/bin/activate ; geonode loaddata $geonodedir/base/fixtures/initial_data.json'
+    unsudo 'source env/bin/activate ; geonode collectstatic --noinput --verbosity 0'
 
-function after_setup_django_every_time() {
-    source ~/env/bin/activate
     if [ -z "$DEVEL_DATA" ]; then
-        geonode createsuperuser
+        unsudo 'source env/bin/activate ; geonode createsuperuser'
     fi
 
     # ipt folder
@@ -166,9 +170,6 @@ function setup_geoserver() {
 function postinstall() {
     setup_postgres_every_time
     setup_django_every_time
-}
-function after_postinstall() {
-    after_setup_django_every_time
     setup_apache_every_time
     $TOMCAT_SERVICE restart
     $APACHE_SERVICE restart
@@ -204,10 +205,6 @@ case $stepval in
     post)
         echo "Running GeoNode postinstall ..."
         postinstall
-        ;;
-    after_post)
-        echo "second side after install"
-        after_postinstall
         ;;
     setup_apache_once)
         echo "Configuring Apache ..."
