@@ -1555,7 +1555,11 @@ function getGeoServerLayers() {
 		        $('#ajaxErrorDialog').dialog('open');
             }
 
+            
+
             // Create AngularJS dropdown menu
+            var mapLayerList = [];
+            
             function target_location(hostname, lp_name) {
                 return function() { window.location = 'http://' + hostname + ':8000/irv/' + lp_name; }; 
             };
