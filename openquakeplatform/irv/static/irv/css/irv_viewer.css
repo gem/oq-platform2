@@ -31,6 +31,10 @@ label {
     padding-right: 1em;
 }
 
+#oq-body-heading {
+    display: none;
+}
+
 input {
   width:240px;
   float:left;
@@ -167,7 +171,7 @@ select#layer-list {
   z-index: 1000;
 }
 #oq-data-body-content {
-    margin: 60px 0;
+    margin: 40px 0;
 }
 .ng-scope {
     position: absolute;

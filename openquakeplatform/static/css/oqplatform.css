@@ -655,7 +655,7 @@ div.filters {
     font-weight: 300;
     font-family: 'Lato',sans-serif;
     margin: 0;
-    display: none!important;
+    /*display: none!important;*/
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     background: #f05a24!important;

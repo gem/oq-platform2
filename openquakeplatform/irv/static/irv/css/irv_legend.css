@@ -1,3 +1,7 @@
+.l_proj,
+.but_l_proj {
+    border: none!important;
+}
 #mapLegend {
     position: relative;
     right: 6px;
