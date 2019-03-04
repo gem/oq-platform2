@@ -10,7 +10,7 @@ body.home {
     height: 100%;
     top: 0;
     left: 0;
-    background: url(/static/img/back_platform.gif) no-repeat center top;
+    background: url(/static/img/back_platform.jpg) no-repeat center top;
     position: relative;
     z-index: -1;
     -webkit-background-size: cover;
