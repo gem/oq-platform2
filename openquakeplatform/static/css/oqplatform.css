@@ -874,3 +874,8 @@ form.user-settings {
        padding: 2px 30px 2px 87px!important
    }
 }
+@media (min-width: 480px) and (max-width: 1480px) {
+   #footer .col-md-6.text-right {
+       width: 35%!important;
+   }
+}
