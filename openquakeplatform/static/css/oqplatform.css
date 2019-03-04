@@ -48,7 +48,7 @@ h3 {
     padding-bottom: 0;
     background: rgba(0, 0, 0, 0.85)!important;
     margin-top: 10px!important;
-    height: 590px;
+    height: 535px;
 }
 select {
     width: 220px;
@@ -237,9 +237,9 @@ span.user-contrib {
     font-style: italic;
 }
 .home .jumbotron {
-   padding: 30px;
+   padding: 0 30px;
    background: none!important;
-   min-height: 550px;
+   min-height: 535px;
    width: 77%;
 }
 .jumbotron {
