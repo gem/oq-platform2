@@ -770,6 +770,11 @@ form.user-settings {
         padding: 2px 0 2px 2%!important;
     }
 }        
+@media (min-width: 768px) {
+    .navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+        display:none!important;
+    }
+}
 @media (max-width: 991px) {
    .navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
        max-height: unset;
@@ -881,6 +886,6 @@ form.user-settings {
 }
 @media (min-width: 1021px) and (max-width: 1480px) {
    #footer .col-md-6.text-right {
-       width: 45%!important;
+       width: 46%!important;
    }
 }
