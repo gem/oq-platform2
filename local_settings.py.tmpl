@@ -253,6 +253,17 @@ MAP_BASELAYERS = [
     }
 ]
 
+# Uncomment to allow open registration.
+# FIXME: there's no admin validation on new accounts.
+REGISTRATION_OPEN = True
+
+# Uncomment to allow open registration.
+# This setting define in how many days an account
+# must be verified by the user.
+ACCOUNT_ACTIVATION_DAYS = 1
+
+ACCOUNT_APPROVAL_REQUIRED = True
+
 FILESERVICE_CONFIG = {
     'store_dir': '/var/lib/geoserver_data/file-service-store',
     # example: ('*', ) or ('.mov', '.jpg', ...),
