@@ -45,27 +45,27 @@ class SetThumbsTest(unittest.TestCase):
             edit_thumb.click()
 
         for link_meta in links:
-            if link_meta == '69' or link_meta == '70':
+            # if link_meta == '69' or link_meta == '70':
 
-                pla.get('/maps/%s' % link_meta)
+            pla.get('/maps/%s' % link_meta)
 
-                time.sleep(3)
+            time.sleep(3)
 
-                # Click edit map
-                edit_map_button_meta = pla.xpath_finduniq(
-                    "//button[@data-target='#edit-map'"
-                    " and normalize-space(text())='Edit Map']",
-                    TIMEOUT, 1)
-                edit_map_button_meta.click()
+            # Click edit map
+            edit_map_button_meta = pla.xpath_finduniq(
+                "//button[@data-target='#edit-map'"
+                " and normalize-space(text())='Edit Map']",
+                TIMEOUT, 1)
+            edit_map_button_meta.click()
 
-                edit_meta = pla.xpath_finduniq(
-                    "//a[@href='/maps/%s/metadata'"
-                    " and normalize-space(text())='Edit']" % link_meta,
-                    TIMEOUT, 1)
-                edit_meta.click()
+            edit_meta = pla.xpath_finduniq(
+                "//a[@href='/maps/%s/metadata'"
+                " and normalize-space(text())='Edit']" % link_meta,
+                TIMEOUT, 1)
+            edit_meta.click()
 
-                # Click update metadata
-                update_button_meta = pla.xpath_findfirst(
-                    "//input[@type='submit' and @value='Update']",
-                    TIMEOUT, 1)
-                update_button_meta.click()
+            # Click update metadata
+            update_button_meta = pla.xpath_findfirst(
+                "//input[@type='submit' and @value='Update']",
+                TIMEOUT, 1)
+            update_button_meta.click()
