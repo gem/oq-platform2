@@ -876,7 +876,7 @@ form.user-settings {
 }
 @media (min-width: 801px) and (max-width: 1020px) {
    #footer .col-md-6.text-right {
-       width: 46%!important;
+       width: 56%!important;
    }
 }
 @media (min-width: 1021px) and (max-width: 1480px) {
