@@ -770,7 +770,7 @@ form.user-settings {
         padding: 2px 0 2px 2%!important;
     }
 }        
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 1030px) {
     .navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
         display:none!important;
     }
