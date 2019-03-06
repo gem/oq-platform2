@@ -1,13 +1,19 @@
 #oq-body-heading {
-    padding: 0 30px; 
+/*    padding: 0 30px; 
     top: 45px;
     background: #fff;
     z-index: 9;
     left: 0;
     width: 100%;
-    text-align: center;
+    text-align: center; */
+    display: none;
 }
-
+#oq-data-body-content {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
 #oq-body-heading h1 {
     margin-bottom: 0;
 }
@@ -74,7 +80,7 @@ label {
 
 div#map-tools {
     position: absolute;
-    top: 54px;
+    top: 80px;
     right: 50px;
     z-index: 999999;
 }
