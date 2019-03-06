@@ -28,6 +28,10 @@ body.home {
 .page-title {
     margin: 0;
 }
+.alert .alert-block .announcement .alert-info {
+    position: relative;
+    margin-top: -75px;
+}
 .irv_link  {
     margin-top: 10px;
 }

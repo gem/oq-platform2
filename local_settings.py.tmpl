@@ -262,6 +262,18 @@ REGISTRATION_OPEN = True
 # must be verified by the user.
 ACCOUNT_ACTIVATION_DAYS = 1
 
+ACCOUNT_EMAIL_CONFIRMATION_EMAIL = True
+
+# Define email service on GeoNode
+EMAIL_ENABLE = True
+
+if EMAIL_ENABLE:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'xxx.xx.xx.xx'
+    EMAIL_PORT = 25
+    DEFAULT_FROM_EMAIL = 'ch@nge.me'
+    THEME_ACCOUNT_CONTACT_EMAIL = 'ch@nge.me'
+
 FILESERVICE_CONFIG = {
     'store_dir': '/var/lib/geoserver_data/file-service-store',
     # example: ('*', ) or ('.mov', '.jpg', ...),
