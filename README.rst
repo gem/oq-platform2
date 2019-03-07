@@ -6,7 +6,7 @@ Development Installation
 
 Install the following dependencies::
 
-    for Ubuntu: build-essential python-dev python-virtualenv virtualenvwrapper git postgresql-9.1 postgresql-server-dev-9.1 postgresql-9.1-postgis openjdk-6-jre libxml2 libxml2-dev libxslt1-dev libxslt1.1 libblas-dev liblapack-dev curl wget xmlstarlet gfortran
+    for Ubuntu: postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor numpy simplejson
 
 Create a virtual environment::
 
@@ -41,14 +41,10 @@ Usage
 Once your development environment is set up, you can just run the application
 from the `openquakeplatform` dir in the root of the git clone::
 
-    $ source /usr/local/bin/virtualenvwrapper.sh  # to enable venv
-    $ paver start -b 0.0.0.0:8000
+    $ source virtualenv/bin/activate  # to enable venv
+    $ paver start -b 0.0.0.0:8000 # from platform folder
 
 To stop the application at any time::
 
     $ paver stop
-
-To re-start the application::
-
-    $ paver start -b 0.0.0.0:8000
 
