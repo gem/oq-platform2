@@ -57,9 +57,9 @@ pip install scipy
 
 # install engine
 sudo apt-get install -y software-properties-common
-sudo add-apt-repository -y ppa:openquake/release-3.1
+sudo add-apt-repository -y ppa:openquake/ppa
 sudo apt-get update
-sudo apt-get install -y --force-yes python-oq-engine
+sudo apt-get install -y --force-yes python3-oq-engine
 
 # check if are dev/prod data installation
 if [ "$1" = "-d" ]; then
