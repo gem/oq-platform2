@@ -311,8 +311,8 @@ copy_dev () {
     scp "${lxc_ip}:/var/log/openquake/webui.log" "out/dev_webui.log" || true
     scp "${lxc_ip}:dev_*.png" "out/" || true
     scp "${lxc_ip}:xunit-platform-dev.xml" "out/" || true
-    scp "${lxc_ip}:gem_geonode_requirements.txt" "out/gem_geonode_requirements.txt" || true
-    scp "${lxc_ip}:latest_geonode_commit.txt" "out/latest_geonode_commit.txt" || true
+    scp "${lxc_ip}:gem_geonode_requirements.txt" "out/" || true
+    scp "${lxc_ip}:latest_geonode_commit.txt" "out/" || true
 }
 
 copy_prod () {
@@ -321,8 +321,8 @@ copy_prod () {
     scp "${lxc_ip}:/var/log/apache2/access.log" "out/prod_apache2_access.log" || true
     scp "${lxc_ip}:/var/log/apache2/error.log" "out/prod_apache2_error.log" || true
     scp "${lxc_ip}:/var/log/tomcat7/catalina.out" "out/prod_tomcat7_catalina.log" || true
-    scp "${lxc_ip}:gem_geonode_requirements.txt" "out/gem_geonode_requirements.txt" || true
-    scp "${lxc_ip}:latest_geonode_commit.txt" "out/latest_geonode_commit.txt" || true
+    scp "${lxc_ip}:gem_geonode_requirements.txt" "out/" || true
+    scp "${lxc_ip}:latest_geonode_commit.txt" "out/" || true
 }
 
 #
