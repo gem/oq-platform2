@@ -62,7 +62,7 @@ if [ "$GEM_EPHEM_CMD" = "" ]; then
     GEM_EPHEM_CMD="lxc-copy"
 fi
 if [ "$GEM_EPHEM_NAME" = "" ]; then
-    GEM_EPHEM_NAME="ubuntu16-x11-lxc"
+    GEM_EPHEM_NAME="ubuntu-x11-lxc-eph"
 fi
 
 LXC_VER=$(lxc-ls --version | cut -d '.' -f 1)
