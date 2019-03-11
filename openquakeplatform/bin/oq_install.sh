@@ -66,7 +66,7 @@ function setup_directories() {
 function reorganize_configuration() {
     cp -rp $INSTALL_DIR/support/geonode.apache $APACHE_SITES/geonode.conf
     cp -rp $INSTALL_DIR/support/geonode.wsgi $GEONODE_WWW/wsgi/
-    if [ "$DEVEL_DATA" ] || [ "$DATA_PROD" ]; then
+    if [ "$DEVEL_DATA" -o "$DATA_PROD" ]; then
         sed -i 's/import os/import os\nos.umask(002)/g' $GEONODE_WWW/wsgi/geonode.wsgi
     fi
     cp -rp $INSTALL_DIR/support/geonode.robots $GEONODE_WWW/robots.txt
