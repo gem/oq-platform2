@@ -318,11 +318,13 @@ copy_dev () {
 copy_prod () {
     scp "${lxc_ip}:/var/log/openquake/webui.log" "out/prod_webui.log" || true
     scp "${lxc_ip}:prod_*.png" "out/" || true
-    scp "${lxc_ip}:/var/log/apache2/access.log" "out/prod_apache2_access.log" || true
-    scp "${lxc_ip}:/var/log/apache2/error.log" "out/prod_apache2_error.log" || true
-    scp "${lxc_ip}:/var/log/tomcat7/catalina.out" "out/prod_tomcat7_catalina.log" || true
-    scp "${lxc_ip}:gem_geonode_requirements.txt" "out/" || true
-    scp "${lxc_ip}:latest_geonode_commit.txt" "out/" || true
+    scp "${lxc_ip}:/var/log/apache2/access.log" "out/" || true
+    scp "${lxc_ip}:/var/log/apache2/error.log" "out/" || true
+    scp "${lxc_ip}:/var/log/tomcat7/catalina.out" "out/" || true
+    scp "${lxc_ip}:xunit-platform-prod.xml" "out/" || true
+    scp "${lxc_ip}:xunit-platform-prod-thumbs-test.xml" "out/" || true
+    # scp "${lxc_ip}:gem_geonode_requirements.txt" "out/" || true
+    # scp "${lxc_ip}:latest_geonode_commit.txt" "out/" || true
 }
 
 #
