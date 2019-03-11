@@ -323,8 +323,8 @@ copy_prod () {
     scp "${lxc_ip}:/var/log/tomcat7/catalina.out" "out/" || true
     scp "${lxc_ip}:xunit-platform-prod.xml" "out/" || true
     scp "${lxc_ip}:xunit-platform-prod-thumbs-test.xml" "out/" || true
-    # scp "${lxc_ip}:gem_geonode_requirements.txt" "out/" || true
-    # scp "${lxc_ip}:latest_geonode_commit.txt" "out/" || true
+    scp "${lxc_ip}:gem_geonode_requirements.txt" "out/" || true
+    scp "${lxc_ip}:latest_geonode_commit.txt" "out/" || true
 }
 
 #
