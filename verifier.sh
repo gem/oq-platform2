@@ -364,7 +364,7 @@ export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
 export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
 export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 
-\"./deploy.sh\"  \"$lxc_ip\" \"$branch_id\" \"$notests\"
+\"./deploy.sh\" -d \"$lxc_ip\" \"$branch_id\" \"$notests\"
 "
     echo "_prodtest_innervm_run: exit"
 
