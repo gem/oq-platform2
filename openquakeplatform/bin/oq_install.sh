@@ -178,8 +178,7 @@ function once() {
     exit 1
 }
 
-if [ $# -eq 1 ]
-then
+if [ $# -eq 1 ]; then
     printf "Sourcing %s as the configuration file\n" $1
     source $1
 else
