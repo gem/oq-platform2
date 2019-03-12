@@ -273,10 +273,8 @@ function apply_data() {
          geonode import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
 
          # Create programmatically ISC and GHEC json
-         sudo chmod o+w /var/www/geonode/uploaded/thumbs
          geonode create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
          geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
-         sudo chmod o-w /var/www/geonode/uploaded/thumbs
 
          apache_tomcat_restart
 
