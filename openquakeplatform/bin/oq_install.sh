@@ -83,7 +83,7 @@ function reorganize_configuration() {
 function preinstall() {
     setup_directories
     reorganize_configuration
-    echo "Fine preinstall"
+    echo "End preinstall"
 }
 
 function randpass() {
@@ -186,12 +186,10 @@ else
         exit 2
 fi
 
-if [ "$stepflag" ]                                                              
-then
+if [ "$stepflag" ]; then
 printf "\tStep: '$stepval specified\n"
 else
     stepval="all"
-    echo "heh"
 fi
 
 case $stepval in
