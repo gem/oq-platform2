@@ -217,7 +217,7 @@ case $stepval in
         setup_apache_once
         ;;
     *)
-        printf "\tValid values for step parameter are: 'pre', 'post','all'\n"
+        printf "\tValid values for step parameter are: 'pre', 'post','setup_apache_once','setup_geoserver'\n"
         printf "\tDefault value for step is 'all'\n"
         ;;
 esac                                     
