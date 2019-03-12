@@ -187,7 +187,7 @@ else
 fi
 
 if [ "$stepflag" ]; then
-printf "\tStep: '$stepval specified\n"
+    printf "\tStep: '$stepval specified\n"
 else
     stepval="all"
 fi
