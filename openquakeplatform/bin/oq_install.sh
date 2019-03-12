@@ -126,7 +126,7 @@ function setup_django_every_time() {
     mkdir data
     chown www-data.www-data -R $GEONODE_WWW/data
     chmod 775 -R $GEONODE_WWW/data
-    if [ "$DEVEL_DATA" ] || [ "$DATA_PROD" ]; then
+    if [ "$DEVEL_DATA" -o "$DATA_PROD" ]; then
         chmod g+s $GEONODE_WWW/data
     fi
 }
