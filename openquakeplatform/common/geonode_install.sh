@@ -29,7 +29,7 @@
     TOMCAT_SERVICE="invoke-rc.d tomcat7"
     
     # For Ubuntu 16.04 (with PostGIS 2.2)
-    if [ -d "/usr/share/postgresql/9.3/contrib/postgis-2.2" ]
+    if [ -d "/usr/share/postgresql/9.5/contrib/postgis-2.2" ]
     then
         POSTGIS_SQL_PATH=/usr/share/postgresql/9.5/contrib/postgis-2.2
         POSTGIS_SQL=postgis.sql
