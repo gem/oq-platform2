@@ -45,7 +45,6 @@ class SetThumbsTest(unittest.TestCase):
             edit_thumb.click()
 
         for link_meta in links:
-            # if link_meta == '69' or link_meta == '70':
 
             pla.get('/maps/%s' % link_meta)
 
