@@ -16,7 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/agpl.html>.
 -->
 {% extends "data_viewer_base.html" %}
 
-{% block title %} IRV {% endblock %}
+{% block title %}IRV - {{ block.super }}{% endblock %}
 
 {% block map_tools %}
 {{block.super}}
