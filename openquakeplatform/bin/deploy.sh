@@ -300,6 +300,8 @@ function apply_data() {
          done
          geonode add_documents_prod
      fi
+     # fix name and sitedomain in db
+     geonode fixsitename
 }
 
 function svir_world_data() {
