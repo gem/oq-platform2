@@ -29,7 +29,7 @@ body.home {
     margin: 0;
 }
 .alert-info {
-    margin-top: -58px!important;
+    margin-top: -58px;
 }
 .alert .alert-block .announcement .alert-info {
     position: relative;
