@@ -5,12 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <title>Openquake platform {% if resource.title %}- {{ resource.title }}{% endif %}</title>
-    <meta property="og:title" content="OpenQuake Platform {% if resource.title %}- {{ resource.title }}{% endif %}" />
-    <meta property="og:site_name" content="OpenQuake Platform" />
-    <meta property="og:url" content="http://platform-staging.openquake.org" />
-    <meta property="og:description" content="Welcome to the OpenQuake Platform, by the GEM Foundation." />
-    <meta property="og:image" content="https://storage-scw1.globalquakemodel.org/public/Logos/oq-logo.png" />
+    <title>{% block title %}{{ SITE_NAME }}{% endblock %}{{ block.super }}{% if page_title %}: {{ page_title }}{% endif %}</title>
+    <meta property="og:image" content="{{ STATIC_URL }}img/oq-logo.png" />
     <meta property="og:image:width" content="200" />
     <meta property="og:image:height" content="150" />
 
@@ -281,7 +277,7 @@
         </div>
         <div class="col-md-6 text-right">
           <ul class="list-unstyled">	  
-              <li><a target="_blank" href="/versions">{% trans "OpenQuake Platform" %} {% now "Y" %}</a> | <a target="_blank" href="/about/">{% trans "About" %}</a> | <a href="../account/terms">{% trans "Terms of use" %}</a> | <a target="_blank" href="https://www.globalquakemodel.org/contact-us">{% trans "Contact us" %}</a>
+              <li><a href="/versions">{% trans "OpenQuake Platform" %} {% now "Y" %}</a> | <a target="_blank" href="/about/">{% trans "About" %}</a> | <a href="../account/terms">{% trans "Terms of use" %}</a> | <a target="_blank" href="https://www.globalquakemodel.org/contact-us">{% trans "Contact us" %}</a>
             <li>
           </ul>
           <label class="hidden">{% trans "Language" %}</label>

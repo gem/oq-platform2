@@ -1555,18 +1555,25 @@ function getGeoServerLayers() {
 		        $('#ajaxErrorDialog').dialog('open');
             }
 
+            
+
             // Create AngularJS dropdown menu
             var mapLayerList = [];
+            
+            function target_location(hostname, lp_name) {
+                return function() { window.location = 'http://' + hostname + ':8000/irv/' + lp_name; }; 
+            };
+
             for (var ij = 0; ij < IRMTLayerNames.length; ij++) {
                 var layerProperties = {};
                 layerProperties.name = IRMTLayerNames[ij];
                 layerProperties.title = IRMTLayerTitle[ij];
 
+                console.log(layerProperties.name);
+
                 $('#layer-list').append('<div id="list' + ij +'">' + layerProperties.title + '</div>');
 
-                $('#list'+ ij).on('click', function () {
-                    window.location = 'http://' + location.hostname + '/irv/' + layerProperties.name;
-                });    
+                $('#list'+ ij).on('click', target_location(location.hostname, layerProperties.name));    
             }
 
             $('#load-project-spinner').hide();

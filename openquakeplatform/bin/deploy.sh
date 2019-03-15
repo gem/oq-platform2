@@ -15,28 +15,27 @@
 # along with OpenQuake.  If not, see <http://www.gnu.org/licenses/>.
 
 # if [ $GEM_SET_DEBUG ]; then
-    set -x
+set -x
 # fi
 set -e
 
-if [ -f /etc/openquake/platform/local_settings.py ]; then
-    GEM_IS_INSTALL=n
-else
-    GEM_IS_INSTALL=y
-fi
+GIT_REPO="oq-platform2"
+
+# delete all folder used
+sudo rm -rf env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data /var/www/geonode /etc/geonode /var/lib/tomcat7/webapps GeoNode-2.6.x.zip* 
+
+# if exists, delete postgres:
+sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5 tomcat7
+
+sudo a2dissite geonode || true 
+sudo rm /etc/apache2/sites-available/geonode.conf || true
+sudo rm /etc/apache2/sites-enabled/geonode.conf || true
+sudo rm /etc/geonode/local_settings.py || true
+sudo service apache2 restart || true
 
 sudo apt-get update
 sudo apt install -y git python-virtualenv wget
 
-GIT_REPO="oq-platform2"
-
-# if [ "$GEM_IS_INSTALL" == "y" ]; then
-    # delete all folder used
-    sudo rm -rf env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data
-    
-    # if exists, delete postgres:
-    sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5
-# fi
 # Create and source virtual env
 virtualenv env
 source $HOME/env/bin/activate
@@ -49,27 +48,42 @@ sudo apt install -y apache2 tomcat7
 python -m pip install "django<2"
 pip install django-nested-inline
 pip install django_extras
-pip install -e git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
-pip install -e git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
-pip install -e git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
-pip install -e git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
+pip install git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
+pip install git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
+pip install git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
+pip install git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
 pip install scipy
 
 
 # install engine
 sudo apt-get install -y software-properties-common
-# sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
-sudo add-apt-repository -y ppa:openquake/release-3.1
+sudo add-apt-repository -y ppa:openquake/ppa
 sudo apt-get update
-sudo apt-get install -y --force-yes python-oq-engine
+sudo apt-get install -y --force-yes python3-oq-engine
 
-LXC_IP="$1"
+# check if are dev/prod data installation
+if [ "$1" = "-d" ]; then
+    export DEVEL_DATA=y
+    shift
+fi
+
+export LXC_IP="$1"
 GIT_BRANCH="$2"
 GIT_GEO_REPO="2.6.x"
 GEO_STABLE_HASH="aa5932d"
 GEO_DBUSER="geonode"
 GEM_GIT_REPO="git://github.com/gem"
 NO_EXEC_TEST="$3"
+export PROD_INSTALL='y'
+export DATA_PROD="$4"
+
+# branch for ipt, taxtweb, classification survey
+GIT_BRANCH_APP="$4"
+if ["$GIT_BRANCH_APP" = '']; then
+    GIT_BRANCH_APP="master"
+fi
+
+# sudo usermod -aG www-data $USER
 
 # create secret key
 function key_create () {
@@ -89,27 +103,34 @@ print id_generator()"
 }
 gem_db_pass="$(passwd_create)"
 
+function apache_tomcat_restart() {
+   sudo service apache2 restart
+   sudo service tomcat7 restart
+   sleep 220
+   echo "restart Apache/Tomcat"
+}
+
 function setup_postgres_once() {
 
-sudo -u postgres createdb $GEO_DBUSER
-sudo -u postgres createdb $GEO_DBUSER-imports
+    sudo -u postgres createdb $GEO_DBUSER
+    sudo -u postgres createdb $GEO_DBUSER-imports
 
-cat << EOF | sudo -u postgres psql
+    cat << EOF | sudo -u postgres psql
     CREATE USER "geonode" WITH PASSWORD '$gem_db_pass';
     GRANT ALL PRIVILEGES ON DATABASE "$GEO_DBUSER" to geonode;
     GRANT ALL PRIVILEGES ON DATABASE "$GEO_DBUSER-imports" to geonode;
 EOF
 
-sudo -u postgres psql -d $GEO_DBUSER -c 'CREATE EXTENSION postgis;'
-sudo -u postgres psql -d $GEO_DBUSER -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
-sudo -u postgres psql -d $GEO_DBUSER -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
+    sudo -u postgres psql -d $GEO_DBUSER -c 'CREATE EXTENSION postgis;'
+    sudo -u postgres psql -d $GEO_DBUSER -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
+    sudo -u postgres psql -d $GEO_DBUSER -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
 
-sudo -u postgres psql -d $GEO_DBUSER-imports -c 'CREATE EXTENSION postgis;'
-sudo -u postgres psql -d $GEO_DBUSER-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
-sudo -u postgres psql -d $GEO_DBUSER-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
+    sudo -u postgres psql -d $GEO_DBUSER-imports -c 'CREATE EXTENSION postgis;'
+    sudo -u postgres psql -d $GEO_DBUSER-imports -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
+    sudo -u postgres psql -d $GEO_DBUSER-imports -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
 
-# add unaccent extension and icompare_unaccent function into postgres
-cat << EOF | sudo -u postgres psql -d geonode                                                                                                                                                                                         
+    # add unaccent extension and icompare_unaccent function into postgres
+    cat << EOF | sudo -u postgres psql -d geonode                                                                                                                                                                                         
     -- NOTE: originally deployed as migration, we realized that this sql script must
     --       be executed for every new installation (devel or production).
     --       The script is idempotent so we decided to keep the original migration script too
@@ -133,14 +154,10 @@ cat << EOF | sudo -u postgres psql -d geonode
     );
 EOF
 
-#insert line in pg_hba.conf postgres
-sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP"'/32             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-# sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-sudo sed -i "1 s@^@listen_addresses = '127.0.0.1,localhost,"$LXC_IP"'\n@g" /etc/postgresql/9.5/main/postgresql.conf
-
-#restart postgres
-sudo service postgresql restart
+    sudo sed -i "1 s@^@listen_addresses = '127.0.0.1,localhost,"$LXC_IP"'\n@g" /etc/postgresql/9.5/main/postgresql.conf
+    
+    # restart postgres
+    sudo service postgresql restart
 }
 
 function clone_platform() {
@@ -148,7 +165,7 @@ function clone_platform() {
     cd $HOME
     git clone https://github.com/gem/oq-platform2.git
     cd $GIT_REPO
-    git checkout oqstyle
+    git checkout $GIT_BRANCH
     pip install -e .
 }
 
@@ -157,11 +174,11 @@ function oq_application() {
     cd $HOME
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class oq-platform-data; do
         # for repo in oq-platform-taxtweb; do
-        if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b $GIT_REPO https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
+        if [ "$GIT_BRANCH_APP" = "master" ]; then false ; else git clone -b "$GIT_BRANCH_APP" https://github.com/gem/${repo}.git ; fi || git clone -b $GIT_REPO https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
         if [ "${repo}" != "oq-platform-data" ]; then
-            cd ${repo}
-            pip install -e .
-            cd $HOME
+            pushd ${repo}
+            pip install .
+            popd
         fi
     done
 }
@@ -183,18 +200,19 @@ function install_geonode() {
     git checkout "$GEO_STABLE_HASH"
     pip install -r requirements.txt
     pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
-    pip install -e .
+    pip install .
     
+    #TODO check python-gdal deps
     sudo apt install -y python-gdal gdal-bin
     
     # copy Geonode zip and oq_install script in package folder of Geonode
     cd $HOME/geonode/package/
-    sudo cp -r $HOME/GeoNode-2.6.x.zip .
-    sudo cp $HOME/oq_install.sh . 
+    cp -r $HOME/GeoNode-2.6.x.zip .
+    cp $HOME/oq_install.sh .
     
     # install Geonode
     cd ..
-    sudo ./package/oq_install.sh -s pre $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
+    sudo -E ./package/oq_install.sh -s pre $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     # enable wsgi apache
     sudo apt-get install libapache2-mod-wsgi
@@ -202,11 +220,16 @@ function install_geonode() {
     sudo invoke-rc.d apache2 restart
     
     # Create local_settings with pavement from repo
-    paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s $HOME/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
-    sudo mv /etc/geonode/local_settings.py /etc/geonode/geonode_local_settings.py                                                                                                                                    
+    paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /var/www/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
+    sudo rm /etc/geonode/local_settings.py
     sudo cp  $HOME/$GIT_REPO/local_settings.py /etc/geonode/
-    sudo ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
-    sudo ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
+    
+    sudo sed -i "24 s@^@MEDIA_ROOT = '/var/www/geonode/uploaded'\n@g" /etc/geonode/local_settings.py
+    sudo sed -i "25 s@^@STATIC_ROOT = '/var/www/geonode/static'\n@g" /etc/geonode/local_settings.py
+
+    # pre and post install platform
+    sudo -E ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
+    sudo -E ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
     sudo invoke-rc.d apache2 restart                      
@@ -216,47 +239,84 @@ function apply_data() {
     cd $HOME
     geonode syncdb  
     geonode migrate
-    geonode vuln_groups_create
-    geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
     geonode loaddata $HOME/$GIT_REPO/openquakeplatform/dump/base_topiccategory.json
     geonode import_vuln_geo_applicability_csv $HOME/$GIT_REPO/openquakeplatform/vulnerability/dev_data/vuln_geo_applicability_data.csv
-    geonode loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
-    geonode loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
-    geonode create_gem_user
+    geonode vuln_groups_create
+
+    if [ "$DEVEL_DATA" ]; then
+        geonode add_user $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/auth_user.json
+        geonode loaddata $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/base_region.json
+        geonode loaddata -v 3 --app vulnerability $HOME/$GIT_REPO/openquakeplatform/common/gs_data/dump/all_vulnerability.json
+        geonode create_gem_user
+    else
+        geonode add_user $HOME/oq-private/old_platform_documents/json/auth_user.json
+        geonode loaddata $HOME/oq-private/old_platform_documents/json/base_region.json
+        geonode loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
+        geonode loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
+        geonode create_gem_user
+    fi    
     pip install simplejson==2.0.9
-    # export CATALINA_OPTS="-Xms4096M -Xmx4096M"
     sudo sed -i 's/-Xmx128m/-Xmx4096m/g' /etc/default/tomcat7
     sudo service tomcat7 restart
     
-    cd $HOME/$GIT_REPO
-    $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
-    
-    cd ~/
-    # Put sql for all layers
-    for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
-        sudo -u postgres psql -d $GEO_DBUSER -c '\copy '$lay' FROM '$HOME/oq-private/old_platform_documents/sql_layers/out/$lay''
-    done
-    
-    sudo cp -r $HOME/oq-private/old_platform_documents/thumbs/ $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
-    sudo chmod 777 -R $HOME/env/lib/python2.7/site-packages/geonode/uploaded/thumbs
-    sudo cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/env/lib/python2.7/site-packages/geonode/uploaded/
-    geonode add_documents_prod
-    # geonode updatelayers
-    # geonode sync_geofence
+    if [ -z "$DEVEL_DATA" ]; then
+        cp -r $HOME/oq-private/old_platform_documents/thumbs/ /var/www/geonode/uploaded/
+    fi
 
-    sudo invoke-rc.d apache2 restart
-    sudo service tomcat7 restart
+    cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents /var/www/geonode/uploaded/
+
+    cd $HOME/$GIT_REPO
+    if [ "$DEVEL_DATA" ]; then
+
+         ## load data for gec and isc viewer
+         geonode import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
+         geonode import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
+
+         # Create programmatically ISC and GHEC json
+         geonode create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
+         geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
+
+         apache_tomcat_restart
+
+         $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/$GIT_REPO/gs_data/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data" isc_viewer ghec_viewer
+    else    
+         $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/oq-private/old_platform_documents/output "openquakeplatform/" "openquakeplatform/" "openquakeplatform/bin" "oqplatform" "oqplatform" "geonode" "geonode" "$gem_db_pass" "/var/lib/tomcat7/webapps/geoserver/data"
+    fi
+
+    cd $HOME/
+
+     if [ "$DEVEL_DATA" ]; then
+         # sql qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec layer
+         sudo -u postgres psql -d geonode -c '\copy qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec FROM '$HOME/$GIT_REPO/gs_data/output/sql/qgis_irmt_053d2f0b_5753_415b_8546_021405e615ec.sql''
+         
+         # sql assumpcao2014 layer
+         sudo -u postgres psql -d geonode -c '\copy assumpcao2014 FROM '$HOME/$GIT_REPO/gs_data/output/sql/assumpcao2014.sql''
+         geonode updatelayers
+         geonode add_documents
+     else
+         # Put sql for all layers
+         for lay in $(cat $HOME/oq-private/old_platform_documents/sql_layers/in/layers_list.txt); do
+             sudo -u postgres psql -d $GEO_DBUSER -c '\copy '$lay' FROM '$HOME/oq-private/old_platform_documents/sql_layers/out/$lay''
+         done
+         geonode add_documents_prod
+     fi
+     # fix name and sitedomain in db
+     geonode fixsitename
 }
 
 function svir_world_data() {
-    sudo sed -i 's/:8000//g' $HOME/env/local/lib/python2.7/site-packages/geonode/static_root/irv/js/irv_viewer.js
-    geonode collectstatic --noinput --verbosity 0 
     geonode migrate
-    geonode loaddata oq-platform-data/api/data/world_prod.json.bz2 
-    geonode loaddata oq-platform-data/api/data/svir_prod.json.bz2
+    if [ "$DEVEL_DATA" ]; then
+        geonode loaddata $HOME/$GIT_REPO/openquakeplatform/world/dev_data/world.json.bz2
+        geonode loaddata $HOME/$GIT_REPO/openquakeplatform/svir/dev_data/svir.json.bz2
+    else    
+        sudo sed -i 's/:8000//g' /var/www/geonode/static/irv/js/irv_viewer.js
+        geonode collectstatic --noinput --verbosity 0 
+        geonode loaddata oq-platform-data/api/data/world_prod.json.bz2 
+        geonode loaddata oq-platform-data/api/data/svir_prod.json.bz2
+    fi    
 }
 
-#function complete procedure for tests
 function initialize_test() {
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
     sudo apt-get -y install python-pip wget
@@ -275,11 +335,23 @@ function initialize_test() {
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
-    sudo sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
-    sudo sed -i 's/localhost:8000/localhost/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
+    sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
+    sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
-    # cd $GIT_REPO
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
+}
+
+function exec_test() {
+    export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
+
+    if [ "$DEVEL_DATA" ]; then
+        export GEM_PLA_ADMIN_ID=1
+        export OQ_TEST="y"
+    else
+        export GEM_PLA_ADMIN_ID=1000
+    fi    
+    export DISPLAY=:1
+    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
 }
 
 function exec_set_map_thumbs() {
@@ -287,17 +359,19 @@ function exec_set_map_thumbs() {
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/set_thumb/mapthumbnail_test.py
 }
 
-function oq_install() {
+function platform_install() {
     setup_postgres_once
     clone_platform
     oq_application
     install_geonode
     apply_data
     svir_world_data
+
     if [ "$NO_EXEC_TEST" != "notest" ] ; then
         initialize_test
         exec_set_map_thumbs
+        exec_test
     fi    
 }
 
-oq_install
+platform_install

@@ -18,9 +18,7 @@
 <!-- todo put this back -->
 {% extends "data_viewer_base.html" %}
 
-{% block title %}
-Exposure Export {{ block.super }}
-{% endblock title %}
+{% block title %}{{ block.super }} - Exposure Export{% endblock title %}
 
 {% block extra_head %}
     {{block.super}}

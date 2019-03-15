@@ -7,7 +7,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(geonode.__file__))
 OQPLATFORM_ROOT = os.path.dirname(openquakeplatform.__file__)
 
 SITEURL = 'http://%(lxc_ip)s'
-SITENAME = 'Openquake Platform'
+SITENAME = 'OpenQuake Platform'
 
 ALLOWED_HOSTS = ['%(lxc_ip)s', 'localhost']
 PROXY_ALLOWED_HOSTS = ('%(lxc_ip)s', 'localhost')
@@ -39,6 +39,8 @@ DATABASES = {
         'NAME': '%(db_name)s',
         'USER': '%(db_user)s',
         'PASSWORD': '%(db_pass)s',
+        'HOST': 'localhost',
+        'PORT': '5432',
      },
     # vector datastore for uploads
     'datastore': {
@@ -55,21 +57,13 @@ DATABASES = {
 # Search Snippet Cache Time in Seconds
 CACHE_TIME = int(os.getenv('CACHE_TIME', '0'))
 
-GEOSERVER_LOCATION = os.getenv(
-    'GEOSERVER_LOCATION', 'http://%(geo_ip)s/geoserver/'
-)
+GEOSERVER_LOCATION = 'http://%(geo_ip)s/geoserver/'
 
-GEOSERVER_PUBLIC_LOCATION = os.getenv(
-    'GEOSERVER_PUBLIC_LOCATION', 'http://%(geo_public_ip)s/geoserver/'
-)
+GEOSERVER_PUBLIC_LOCATION = 'http://%(geo_public_ip)s/geoserver/'
 
-OGC_SERVER_DEFAULT_USER = os.getenv(
-    'GEOSERVER_ADMIN_USER', 'admin'
-)
+OGC_SERVER_DEFAULT_USER = 'admin'
 
-OGC_SERVER_DEFAULT_PASSWORD = os.getenv(
-    'GEOSERVER_ADMIN_PASSWORD', 'geoserver'
-)
+OGC_SERVER_DEFAULT_PASSWORD = 'geoserver'
 
 # OGC (WMS/WFS/WCS) Server Settings
 OGC_SERVER = {
@@ -258,6 +252,27 @@ MAP_BASELAYERS = [
         "group":"background"
     }
 ]
+
+# Uncomment to allow open registration.
+# NOTE: there's no admin validation on new accounts.
+REGISTRATION_OPEN = True
+
+# Uncomment to allow open registration.
+# This setting define in how many days an account
+# must be verified by the user.
+ACCOUNT_ACTIVATION_DAYS = 1
+
+ACCOUNT_EMAIL_CONFIRMATION_EMAIL = True
+
+# Define email service on GeoNode
+EMAIL_ENABLE = True
+
+if EMAIL_ENABLE:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'xxx.xx.xx.xx'
+    EMAIL_PORT = 25
+    DEFAULT_FROM_EMAIL = 'ch@nge.me'
+    THEME_ACCOUNT_CONTACT_EMAIL = 'ch@nge.me'
 
 FILESERVICE_CONFIG = {
     'store_dir': '/var/lib/geoserver_data/file-service-store',

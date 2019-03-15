@@ -1,3 +1,7 @@
+.l_proj,
+.but_l_proj {
+    border: none!important;
+}
 #mapLegend {
     position: relative;
     right: 6px;
@@ -15,8 +19,8 @@ optgroup {
 }
 #mapInfo {
     position: fixed;
-    margin-top: 40px;
-    right: 20px;
+    margin-top: 50px;
+    left: 20px;
     padding: 10px 10px 15px;
     background-color: whitesmoke;
     border-radius: 15px;
@@ -74,11 +78,11 @@ optgroup {
     padding: 10px 0;
 }    
 #layer-list div {
-    font-size: 16px;
+    font-size: 13.5px;
     cursor: pointer;
 }    
 #layer-list div:hover {
-    background: #ccc;
+    background: rgb(240, 90, 36) none repeat scroll 0% 0%;
     color: #fff;
 }
 #layer-list div:hover,

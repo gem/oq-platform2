@@ -33,7 +33,7 @@ fi
 GIT_BRANCH="$1"
 GIT_GEO_REPO="$2"
 GIT_REPO="$3"
-LXC_IP="$4"
+export LXC_IP="$4"
 GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
