@@ -310,7 +310,7 @@ function svir_world_data() {
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/world/dev_data/world.json.bz2
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/svir/dev_data/svir.json.bz2
     else    
-        sudo sed -i 's/:8000//g' /var/www/geonode/static/irv/js/irv_viewer.js
+        sed -i 's/:8000//g' /var/www/geonode/static/irv/js/irv_viewer.js
         geonode collectstatic --noinput --verbosity 0 
         geonode loaddata oq-platform-data/api/data/world_prod.json.bz2 
         geonode loaddata oq-platform-data/api/data/svir_prod.json.bz2
