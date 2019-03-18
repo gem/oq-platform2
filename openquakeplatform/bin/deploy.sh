@@ -217,7 +217,7 @@ function install_geonode() {
     # enable wsgi apache
     sudo apt-get install libapache2-mod-wsgi
     sudo a2enmod wsgi
-    sudo invoke-rc.d apache2 restart
+    sudo service apache2 restart
     
     # Create local_settings with pavement from repo
     paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /var/www/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
@@ -232,7 +232,7 @@ function install_geonode() {
     sudo -E ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
-    sudo invoke-rc.d apache2 restart                      
+    sudo service apache2 restart                      
 }
 
 function apply_data() {

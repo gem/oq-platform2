@@ -24,9 +24,9 @@
     GEONODE_LOG=$TARGET_ROOT/var/log/geonode
     # OS preferred way of starting or stopping services
     # for example 'service httpd' or '/etc/init.d/apache2'
-    APACHE_SERVICE="invoke-rc.d apache2"
+    APACHE_SERVICE="service apache2"
     # sama sama
-    TOMCAT_SERVICE="invoke-rc.d tomcat7"
+    TOMCAT_SERVICE="service tomcat7"
     
     # For Ubuntu 16.04 (with PostGIS 2.2)
     if [ -d "/usr/share/postgresql/9.5/contrib/postgis-2.2" ]
