@@ -166,7 +166,7 @@ function clone_platform() {
     git clone https://github.com/gem/oq-platform2.git
     cd $GIT_REPO
     git checkout $GIT_BRANCH
-    pip install -e .
+    pip install .
 }
 
 function oq_application() {
