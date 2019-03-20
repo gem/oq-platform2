@@ -52,7 +52,6 @@ pip install git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=djan
 pip install git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
 pip install git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
 pip install git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
-pip install scipy
 
 
 # install engine
