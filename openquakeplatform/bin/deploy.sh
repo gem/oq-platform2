@@ -267,7 +267,7 @@ function apply_data() {
     cd $HOME/$GIT_REPO
     if [ "$DEVEL_DATA" ]; then
          ## for exposure fake data
-         sed  '1 s@\(.*\)@\1 fake_data/*@g' MANIFEST.in
+         sed -i '1 s@\(.*\)@\1 fake_data/*@g' MANIFEST.in
 
          ## load data for gec and isc viewer
          geonode import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
