@@ -143,7 +143,9 @@ INSTALLED_APPS += (
 ) + STANDALONE_APPS + (
     'openquakeplatform.vulnerability',
     'openquakeplatform.grv',
-    'openquakeplatform.geodetic',
+    # on old platform is not working, it needs effort
+    # to be fixed, temporarly disabled 
+    # 'openquakeplatform.geodetic',
     'openquakeplatform.irv',
     'openquakeplatform.world',
     'openquakeplatform.svir',
