@@ -30,6 +30,7 @@ setup(
               'openquakeplatform.world',
               'openquakeplatform.svir',
               'openquakeplatform.vulnerability',
+              'openquakeplatform.pla_common',
               # 'openquakeplatform.weblib',
               # 'openquakeplatform.weblib.baseclasses',
               'openquakeplatform.grv',
