@@ -267,7 +267,7 @@ function apply_data() {
     cd $HOME/$GIT_REPO
     if [ "$DEVEL_DATA" ]; then
          ## for exposure fake data
-         sed -i "2 s@^@recursive-include openquakeplatform/exposure/*      *\n@g" MANIFEST.in
+         sed -i "2 s@^@#the line below was added by deploy.sh in DEVEL mode\nrecursive-include openquakeplatform/exposure/fake_data/      *\n@g" MANIFEST.in
 
          ## load data for gec and isc viewer
          geonode import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
