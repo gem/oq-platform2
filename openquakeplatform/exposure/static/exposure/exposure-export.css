@@ -52,3 +52,11 @@ label {
 .leaflet-control-layers-overlays label {
     display: block !important
 }
+.ui-dialog .ui-dialog-content {
+    position: absolute;
+    height: 580px!important;
+    width: 1540px;
+    top: 200px!important;
+    left: 150px;
+    display: block;
+}

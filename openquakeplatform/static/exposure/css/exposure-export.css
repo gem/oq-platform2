@@ -1,7 +1,19 @@
 #oq-body-heading {
-    padding: 0 30px; 
+/*    padding: 0 30px; 
+    top: 45px;
+    background: #fff;
+    z-index: 9;
+    left: 0;
+    width: 100%;
+    text-align: center; */
+    display: none;
 }
-
+#oq-data-body-content {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
 #oq-body-heading h1 {
     margin-bottom: 0;
 }
@@ -67,9 +79,17 @@ label {
 }
 
 div#map-tools {
-    margin: 10px 30px;
+    position: absolute;
+    top: 80px;
+    right: 50px;
+    z-index: 999999;
 }
-
+div#error-dialog {
+    height: auto!important;
+}
+.ui-dialog .ui-dialog-content {
+   height: 560px!important;
+}
 span.ui-button-text {
     background: #f7931e;
     color: #fff;

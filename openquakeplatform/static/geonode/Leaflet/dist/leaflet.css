@@ -90,7 +90,7 @@
 	pointer-events: none;
 	}
 .leaflet-top {
-	top: 0;
+	top: 80px;
 	}
 .leaflet-right {
 	right: 0;
@@ -99,7 +99,7 @@
 	bottom: 0;
 	}
 .leaflet-left {
-	left: 0;
+	left: 18px;
 	}
 .leaflet-control {
 	float: left;

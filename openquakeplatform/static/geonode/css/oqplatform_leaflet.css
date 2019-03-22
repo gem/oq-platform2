@@ -38,10 +38,10 @@
 }
 
 #oq-data-body-content {
-    float: right;
     width: 100%;
-    min-width: 648px;
-    height: 400px;
+    position: absolute;
+    left: 0;
+    top: 70px;
 }
 
 #oq-body-sidebar {

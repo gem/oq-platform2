@@ -2,11 +2,17 @@
 {% load i18n %}
 {% load url from future %}
 
-{% block title %} Share - {{ block.super }} {% endblock title %}
+{% block title %}{{ block.super }} - Calculate{% endblock title %}
 
 {% block middle %}
   {{ block.super }}
   {% block hero %}
+<style>
+body {                                                                                                                                                                                 
+    padding-top: 10px;
+}   
+</style>
+
 <div class="menu_page jumbotron">
         <div class="container">
           <h1>{% trans "OpenQuake Calculate" %}</h1>
@@ -38,6 +44,9 @@
                 </li>
                 <li>
                   <a class="static-link" href="https://github.com/GEMScienceTools/gmpe-smtk" target="_blank">GMPE Strong Motion Modeller's Toolkit</a> - Python and OpenQuake-based Toolkit for Analysis of Strong Motions and Interpretation of GMPEs
+                </li>
+                <li>
+                  <a class="static-link" href="https://github.com/GEMScienceTools/rmtk" target="_blank">The Risk Modeller’s Toolkit (RMTK)</a> is a library of Python scripts and IPython notebooks that provide engineers with tools to create exposure, fragility, and vulnerability input models required for running seismic risk calculations using the OpenQuake engine. The RMTK is currently under development.
                 </li>
               </ul>
             <b>Social Vulnerability and Integrated Risk</b><br/>

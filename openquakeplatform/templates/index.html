@@ -3,20 +3,64 @@
 {% load staticfiles %}
 {% load base_tags %}
 
-{% block title %} {% trans "Welcome!" %} - {{ block.super }} {% endblock %}
+{% block title %} {{ SITE_NAME }} {% endblock %}
 
 {% block body_class %}home{% endblock %}
 
 {% block middle %}
   {{ block.super }}
   {% block hero %}
+<style>
+#oq-body-wrapper {
+    display: none;
+}
+</style>
   <div class="jumbotron">
         <div class="container">
-                <h1>{#{% trans "Welcome" %}#}The Openquake platform</h1>
-                <p></p>
-                <p class="paragraf">
-                Welcome to the OpenQuake Platform, by the <a class="static-link" target="_blank" href="https://www.globalquakemodel.org">GEM Foundation</a>. This web-based platform offers an interactive environment in which users can access, manipulate, share and add data, and explore models and tools for integrated assessment of earthquake risk.
-                </p>
+        <h1>{#{% trans "Welcome" %}#}The Openquake platform</h1>
+        <p></p>
+        <p class="paragraf">
+        Welcome to the OpenQuake Platform, by the <a target="_blank" href="https://www.globalquakemodel.org">GEM Foundation</a>. This web-based platform offers an interactive environment in which users can access, manipulate, share and add data, and explore models and tools for integrated assessment of earthquake risk.
+        </p>
+        <h1 style="margin-top:135px;font-size: 30px;">{% trans "Quick access" %}</h1>
+        <ul id="home_ul">
+            <li>
+            <div class="oq_div_one">
+            	{% if user.is_authenticated %}<i class="fa fa-unlock"></i>{% else %}<i class="fa fa-lock"></i>{% endif %}
+            </div>
+            <div class="oq_div_two">
+                <a href="/ipt">Risk Input Preparation Toolkit</a><br><p>Tools used to create exposure, fragility and vulnerability risk input models.</p>
+            </div>
+            <div style="clear:both"></div>
+            </li>
+            <li>
+            <div class="oq_div_one">
+            	{% if user.is_authenticated %}<i class="fa fa-unlock"></i>{% else %}<i class="fa fa-lock"></i>{% endif %}
+            </div>
+            <div class="oq_div_two">
+                <a href="/building-class">The Building Classification Survey Tool</a><br><p>Allows users to share information regarding the building stock of a given region.</p>
+            </div>
+            <div style="clear:both"></div>
+            </li>
+            <li>
+            <div class="oq_div_one">
+            	<i class="fa fa-unlock"></i>
+            </div>
+            <div class="oq_div_two">
+                <a href="/taxtweb">TaxTweb</a><br><p>Graphical tool for editing GEM Taxonomy strings, web version.</p>
+            </div>
+            <div style="clear:both"></div>
+            </li>
+            <li>
+            <div class="oq_div_one">
+            	<i class="fa fa-unlock"></i>
+            </div>
+            <div class="oq_div_two">
+                <a href="/vulnerability">The Physical Vulnerability Suite {% if not user.is_authenticated %}View{% endif %}</a><br><p>Allows users to explore and contribute to a comprehensive global vulnerability database that includes fragility, vulnerability, damage-to-loss functions and capacity curves for different types of structure.</p>
+            </div>
+            <div style="clear:both"></div>
+            </li>
+</ul>
         </div>
   </div>
 <div class="oq-button-home">
@@ -24,10 +68,10 @@
           <p><a class="oq-button-home-btn btn" href="/maps/" role="button"><i class="fa fa-map-marker"></i> Maps</a></p>
       </div>
       <div class="col-md-4">
-          <p><a class="oq-button-home-btn btn" href="/layers/" role="button"><i class="fa fa-square-o rotate-45"></i>  Layers</a></p>
+          <p><a class="oq-button-home-btn btn" href="/layers/" role="button"><i class="fa fa-clone"></i>  Layers</a></p>
       </div>
       <div class="col-md-4">
-          <p><a class="oq-button-home-btn btn" href="{% url "account_login" %}?next=/documents/" role="button"><i class="fa fa-comment-o"></i> Documents</a></p>
+          <p><a class="oq-button-home-btn btn" href="{% url "account_login" %}?next=/documents/" role="button"><i class="fa fa-file"></i> Documents</a></p>
       </div>
       <img class="oq-calc" src="{{ STATIC_URL }}geonode/img/OQ-logo-blue.png" alt="OpenQuake: calculate, share, explore">
 </div>

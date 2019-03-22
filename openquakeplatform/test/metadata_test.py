@@ -13,6 +13,16 @@ class MetadataTest(unittest.TestCase):
 
     def check_metadata_test(self):
 
+        # set if is production installation
+        prod = os.getenv("OQ_TEST")
+
+        if prod == "y":
+            name_maps = "assumpcao2014"
+            port = ""
+        else:
+            name_maps = "ghec_viewer_measure"
+            port = ":8000"
+
         # check ip adress
         get_ip = os.getenv("LXC_IP")
 
@@ -24,7 +34,7 @@ class MetadataTest(unittest.TestCase):
 
         # click on layer ghec
         layer = pla.xpath_finduniq(
-            "//a[normalize-space(text()) = 'ghec_viewer_measure']")
+            "//a[normalize-space(text()) = '%s']" % name_maps)
         layer.click()
 
         # click download metadata in layer page detail
@@ -39,33 +49,35 @@ class MetadataTest(unittest.TestCase):
 
         time.sleep(2)
 
-        # switch window tab
-        window_after = pla.driver.window_handles[1]
-        pla.driver.switch_to.window(window_after)
+        if prod != "y":
+            # switch window tab
+            window_after = pla.driver.window_handles[1]
+            pla.driver.switch_to.window(window_after)
 
-        # if do login is not localhost
-        try:
-            # login
-            user = pla.xpath_findfirst(
-                "//input[@id = 'id_username']")
-            user.send_keys('admin')
+            # if do login is not localhost
+            try:
+                # login
+                user = pla.xpath_findfirst(
+                    "//input[@id = 'id_username']")
+                user.send_keys('admin')
 
-            pwd = pla.xpath_findfirst(
-                "//input[@id = 'id_password']")
-            pwd.send_keys('admin')
+                pwd = pla.xpath_findfirst(
+                    "//input[@id = 'id_password']")
+                pwd.send_keys('admin')
 
-            login = pla.xpath_finduniq(
-                "//button[normalize-space(text())='Log in']")
-            login.click()
-        except:
-            raise ValueError('Cannot do login')
+                login = pla.xpath_finduniq(
+                    "//button[normalize-space(text())='Log in']")
+                login.click()
+            except:
+                raise ValueError('Cannot do login')
 
-        pla.driver.window_handles[1]
+            pla.driver.window_handles[1]
+        
+            pla.wait_new_page(
+                    login, 'http://%s%s/catalogue/csw' % (get_ip, port))
 
-        pla.wait_new_page(
-                login, 'http://%s:8000/catalogue/csw' % get_ip)
-
-        # close window and swith to previous window
-        pla.window_close()
-        window_before = pla.driver.window_handles[0]
-        pla.driver.switch_to.window(window_before)
+        if prod != "y":
+            # close window and swith to previous window
+            pla.window_close()
+            window_before = pla.driver.window_handles[0]
+            pla.driver.switch_to.window(window_before)

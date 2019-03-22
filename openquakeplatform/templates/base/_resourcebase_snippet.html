@@ -14,7 +14,7 @@
           {% endverbatim %}
           <button class="btn btn-default btn-xs pull-right" ng-if="cart" ng-click="cart.toggleItem(item)"><i ng-class="cart.getFaClass(item.id)" class="fa fa-lg"></i></button>
           {% verbatim %}
-          <p class="item-meta"><span class="item-category">{{ item.category__gn_description }}</span></p>
+          <!--<p class="item-meta"><span class="item-category">{#{{ item.category__gn_description }}#}</span></p>-->
           <h4>
               <a ng-if="item.detail_url.indexOf('/layers/') > -1" href="{{ item.detail_url }}"><i class="fa fa-clone"></i> {{ item.title }}</a>
               <a class="oq-map" ng-if="item.detail_url.indexOf('/maps/') > -1" href="{{ item.detail_url }}"><i class="fa fa-map-marker"></i> {{ item.title }}</a>
@@ -27,17 +27,16 @@
                 <li><a href="/people/profile/{{ item.owner__username }}"><i class="fa fa-user"></i>{{ item.owner__username }}</a></li>
                 <li><a href="{{ item.detail_url }}#info"><i class="fa fa-calendar-o"></i>{{ item.date|date:'d MMM y' }}</a></li>
                 <li><a href="{{ item.detail_url }}"><i class="fa fa-eye"></i>{{ item.popular_count }}</a></li>
-                <li><a href="{{ item.detail_url }}#rate"><i class="fa fa-star"></i>{{ item.rating }}</a></li>
                 <li>{% endverbatim %}
                   {% if user.is_authenticated %}
                   <a ng-if="item.detail_url.indexOf('/layers/') > -1" href="{% url "new_map" %}?layer={% verbatim %}{{ item.detail_url.substring(8) }}{% endverbatim %}">
-                  <i class="fa fa-map-marker"></i>{% trans "Create a map" %}</a>
+                  <i class="fa fa-map-marker"></i>{% trans "Create map" %}</a>
                   {% endif %}
                 </li>
                 <li><a ng-if="item.detail_url.indexOf('/maps/') > -1" href="/maps/{% verbatim %}{{item.id}}{% endverbatim %}/view"><i class="fa fa-map-marker"></i>View Map</a></li>
 
-                        <li>
-<a ng-if="item.category__gn_description == 'SVIR' && item.detail_url.indexOf('/layers/') > -1" href="/irv/{% verbatim %}{{ item.detail_url.substring(8) }}{% endverbatim %}"><i class="fa fa-external-link"></i>Open in Irv</a>
+                        <li ng-if="item.category__gn_description == 'SVIR' && item.detail_url.indexOf('/layers/') > -1" class="btn btn-primary pull-right irv_link">
+<a href="/irv/{% verbatim %}{{ item.detail_url.substring(8) }}{% endverbatim %}"><i class="fa fa-external-link"></i>Open in Irv</a>
                 </li>
 
               </ul>

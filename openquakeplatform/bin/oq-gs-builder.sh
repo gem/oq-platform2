@@ -568,7 +568,7 @@ all_data_manage() {
         layergroup_manage "$is_drop" "$lg_name" "$lg_url"
     done
 
-    #
+    
     # manage layers
     fname="tmp/layers-list.get.xml"
     web_get "$fname" "${GEM_SITE}/geoserver/rest/layers.xml" 200

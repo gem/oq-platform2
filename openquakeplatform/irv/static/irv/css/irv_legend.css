@@ -1,11 +1,16 @@
+.l_proj,
+.but_l_proj {
+    border: none!important;
+}
 #mapLegend {
-    /*position: fixed;*/
-    right: 45px;
-    top: 180px;
+    position: relative;
+    right: 6px;
+    top: 30px;
     background: #fff;
     padding: 22px 20px 5px 25px;
     float: right;
     border-radius: 4px;
+    z-index: -1;
 }
 optgroup {
     font-weight: 700;
@@ -14,8 +19,8 @@ optgroup {
 }
 #mapInfo {
     position: fixed;
-    margin-top: 40px;
-    right: 20px;
+    margin-top: 50px;
+    left: 20px;
     padding: 10px 10px 15px;
     background-color: whitesmoke;
     border-radius: 15px;
@@ -73,13 +78,28 @@ optgroup {
     padding: 10px 0;
 }    
 #layer-list div {
-    font-size: 16px;
+    font-size: 13.5px;
+    cursor: pointer;
 }    
 #layer-list div:hover {
-    background: #ccc;
+    background: rgb(240, 90, 36) none repeat scroll 0% 0%;
     color: #fff;
 }
 #layer-list div:hover,
 #layer-list a:hover{
     text-decoration: none;
 }    
+/* mobile */
+@media (min-width: 1290px) and (max-width:1350px) {                                                                                                            #mapLegend {
+        position: absolute;
+        right: 6px;
+        top: 115px;
+    }
+}
+@media (min-width: 1351px) and (max-width:3000px) {                                                                                                            #mapLegend {
+        position: absolute;
+        right: 6px;
+        top: 115px;
+    }
+}
+

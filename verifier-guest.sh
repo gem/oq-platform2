@@ -154,8 +154,6 @@ source ~/env/bin/activate
 # install nested applications
 extra_deps_install
 
-pip install scipy
-
 cd ~
 
 #install and configuration postgres
@@ -285,7 +283,7 @@ patch < $HOME/$GIT_REPO/openquakeplatform/bin/dev_config_yml.patch
 paver -f $HOME/$GIT_REPO/pavement.py setup
 
 ## Create local_settings with pavement from repo
-paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP:8000 -u localhost:8800 -s $HOME/geonode/data -d geonode_dev -p geonode_dev -x $LXC_IP:8080 -g localhost:8080
+paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP:8000 -u localhost:8800 -s $HOME/geonode/data -d geonode_dev -p geonode_dev -x $LXC_IP:8080 -g localhost:8080 -k secret_key
 
 python manage.py migrate account --noinput
 paver -f $HOME/$GIT_REPO/pavement.py sync
