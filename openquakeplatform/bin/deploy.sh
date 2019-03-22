@@ -165,6 +165,10 @@ function clone_platform() {
     git clone https://github.com/gem/oq-platform2.git
     cd $GIT_REPO
     git checkout $GIT_BRANCH
+    if [ "$DEVEL_DATA" ]; then
+         ## for exposure fake data
+         sed -i "2 s@^@#the line below was added by deploy.sh in DEVEL mode\nrecursive-include openquakeplatform/exposure/fake_data/      *\n@g" MANIFEST.in
+    fi
     pip install .
 }
 
@@ -266,8 +270,6 @@ function apply_data() {
 
     cd $HOME/$GIT_REPO
     if [ "$DEVEL_DATA" ]; then
-         ## for exposure fake data
-         sed -i "2 s@^@#the line below was added by deploy.sh in DEVEL mode\nrecursive-include openquakeplatform/exposure/fake_data/      *\n@g" MANIFEST.in
 
          ## load data for gec and isc viewer
          geonode import_isccsv $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data.csv  $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_data_app.csv
