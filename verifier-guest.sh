@@ -154,6 +154,8 @@ source ~/env/bin/activate
 # install nested applications
 extra_deps_install
 
+pip install scipy
+
 cd ~
 
 #install and configuration postgres
