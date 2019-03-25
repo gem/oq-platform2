@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load url from future %}
 
-{% block title %} Share {% endblock title %}
+{% block title %}{{ block.super }} - Share{% endblock title %}
 
 {% block middle %}
   {{ block.super }}

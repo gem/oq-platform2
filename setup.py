@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-# from openquakeplatform import __version__ as oqp_version
+from openquakeplatform import __version__ as oqp_version
 
 
 def read(*rnames):
@@ -10,7 +10,7 @@ def read(*rnames):
 
 setup(
     name="openquakeplatform",
-    # version=oqp_version,
+    version=oqp_version,
     author="",
     author_email="",
     description="openquakeplatform, based on GeoNode",
@@ -24,16 +24,15 @@ setup(
     keywords="openquakeplatform geonode django",
     url='https://github.com/gem/oq-platform2',
     packages=['openquakeplatform',
+              'openquakeplatform.common',
               'openquakeplatform.isc_viewer',
               'openquakeplatform.ghec_viewer',
               'openquakeplatform.exposure',
               'openquakeplatform.world',
               'openquakeplatform.svir',
               'openquakeplatform.vulnerability',
-              # 'openquakeplatform.weblib',
-              # 'openquakeplatform.weblib.baseclasses',
+              'openquakeplatform.pla_common',
               'openquakeplatform.grv',
-              # 'openquakeplatform.hazus',
               'openquakeplatform.irv',
               'openquakeplatform.test',
               ],

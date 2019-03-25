@@ -7,7 +7,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(geonode.__file__))
 OQPLATFORM_ROOT = os.path.dirname(openquakeplatform.__file__)
 
 SITEURL = 'http://%(lxc_ip)s'
-SITENAME = 'Openquake Platform'
+SITENAME = 'OpenQuake Platform'
 
 ALLOWED_HOSTS = ['%(lxc_ip)s', 'localhost']
 PROXY_ALLOWED_HOSTS = ('%(lxc_ip)s', 'localhost')
@@ -143,7 +143,9 @@ INSTALLED_APPS += (
 ) + STANDALONE_APPS + (
     'openquakeplatform.vulnerability',
     'openquakeplatform.grv',
-    'openquakeplatform.geodetic',
+    # on old platform is not working, it needs effort
+    # to be fixed, temporarly disabled 
+    # 'openquakeplatform.geodetic',
     'openquakeplatform.irv',
     'openquakeplatform.world',
     'openquakeplatform.svir',
@@ -254,7 +256,7 @@ MAP_BASELAYERS = [
 ]
 
 # Uncomment to allow open registration.
-# FIXME: there's no admin validation on new accounts.
+# NOTE: there's no admin validation on new accounts.
 REGISTRATION_OPEN = True
 
 # Uncomment to allow open registration.

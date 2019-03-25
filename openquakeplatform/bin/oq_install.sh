@@ -66,7 +66,7 @@ function setup_directories() {
 function reorganize_configuration() {
     cp -rp $INSTALL_DIR/support/geonode.apache $APACHE_SITES/geonode.conf
     cp -rp $INSTALL_DIR/support/geonode.wsgi $GEONODE_WWW/wsgi/
-    if [ "$DEVEL_DATA" ] || [ "$DATA_PROD" ]; then
+    if [ "$DEVEL_DATA" -o "$DATA_PROD" ]; then
         sed -i 's/import os/import os\nos.umask(002)/g' $GEONODE_WWW/wsgi/geonode.wsgi
     fi
     cp -rp $INSTALL_DIR/support/geonode.robots $GEONODE_WWW/robots.txt
@@ -83,7 +83,7 @@ function reorganize_configuration() {
 function preinstall() {
     setup_directories
     reorganize_configuration
-    echo "Fine preinstall"
+    echo "End preinstall"
 }
 
 function randpass() {
@@ -126,7 +126,7 @@ function setup_django_every_time() {
     mkdir data
     chown www-data.www-data -R $GEONODE_WWW/data
     chmod 775 -R $GEONODE_WWW/data
-    if [ "$DEVEL_DATA" ] || [ "$DATA_PROD" ]; then
+    if [ "$DEVEL_DATA" -o "$DATA_PROD" ]; then
         chmod g+s $GEONODE_WWW/data
     fi
 }
@@ -178,8 +178,7 @@ function once() {
     exit 1
 }
 
-if [ $# -eq 1 ]
-then
+if [ $# -eq 1 ]; then
     printf "Sourcing %s as the configuration file\n" $1
     source $1
 else
@@ -187,12 +186,10 @@ else
         exit 2
 fi
 
-if [ "$stepflag" ]                                                              
-then
-printf "\tStep: '$stepval specified\n"
+if [ "$stepflag" ]; then
+    printf "\tStep: '$stepval specified\n"
 else
     stepval="all"
-    echo "heh"
 fi
 
 case $stepval in
@@ -220,7 +217,7 @@ case $stepval in
         setup_apache_once
         ;;
     *)
-        printf "\tValid values for step parameter are: 'pre', 'post','all'\n"
+        printf "\tValid values for step parameter are: 'pre', 'post','setup_apache_once','setup_geoserver'\n"
         printf "\tDefault value for step is 'all'\n"
         ;;
 esac                                     

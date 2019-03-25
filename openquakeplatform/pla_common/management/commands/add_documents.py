@@ -227,9 +227,6 @@ class Command(BaseCommand):
             maps = map_full['fields']
             mapp = new_resources[map_full['pk']]
 
-            # if (mapp['title'] == 'Global Historic Catalogue'):
-            #     continue
-
             # Istance user
             User = get_user_model()
             owner = User.objects.get(username=mapp['owner'][0])
@@ -525,7 +522,6 @@ class Command(BaseCommand):
 
         # Import all tagged items
         for tag_item in tag_item_load:
-            # print('tag_item')
             field = tag_item['fields']
 
             tagitem_type_name = field['content_type']
@@ -538,14 +534,10 @@ class Command(BaseCommand):
                     app_label=label_type, model=cont_type)
 
             try:
-                # print(field['object_id'])
-                # print(new_resources[field['object_id']]['uuid'])
                 content_object = ResourceBase.objects.get(
                     uuid=new_resources[field['object_id']]['uuid'])
             except:
-                # print('exception rized')
                 continue
-            # print('taggedcontentitem_new')
 
             new_tag_item = TaggedContentItem.objects.model(
                 tag=HierarchicalKeyword.objects.get(

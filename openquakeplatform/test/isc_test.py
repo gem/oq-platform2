@@ -12,7 +12,7 @@ class IscTest(unittest.TestCase):
         pla.get('/explore')
         pla.wait_new_page("//b[contains(text(),"
                           " 'Seismic Hazard Data Sets and Models')]",
-                          "/explore", strategy="next", timeout=10)
+                          "/explore", strategy="next", timeout=15)
 
         # <li>
         # <a href="/maps/23">
@@ -30,20 +30,20 @@ class IscTest(unittest.TestCase):
             "normalize-space(text()) = 'View Map']" % id_map)
         enter_button.click()
         pla.driver.refresh()
-        pla.wait_new_page(enter_button, '/maps/%s/view' % id_map, timeout=15)
+        pla.wait_new_page(enter_button, '/maps/%s/view' % id_map, timeout=20)
 
         # <button id="ext-gen159" class=" x-btn-text gxp-icon-getfeatureinfo"
         # type="button">Identify
         enter_button = pla.xpath_finduniq(
             "//button[@type='button' and normalize-space(text())"
-            "= 'Identify']", timeout=15)
+            "= 'Identify']", timeout=20)
         enter_button.click()
 
         # wait info button will be clicked
         pla.xpath_finduniq(
             "//button[@type='button' and normalize-space(text())"
             "= 'Identify']/../../../../..[contains(concat(' ', @class, ' '),"
-            " ' x-btn-pressed ')]", timeout=15)
+            " ' x-btn-pressed ')]", timeout=20)
 
         _, x, y = pla.xpath_finduniq_coords(
             "//img[contains(@src, 'LAYERS=oqplatform%3Aisc_viewer_measure"

@@ -52,7 +52,6 @@ pip install git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=djan
 pip install git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
 pip install git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
 pip install git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
-pip install scipy
 
 
 # install engine
@@ -154,12 +153,6 @@ EOF
     );
 EOF
 
-    # insert line in pg_hba.conf postgres
-#     sudo sed -i '1 s@^@local  all             '"$GEO_DBUSER"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
-#    if [ "$DEVEL_DATA" ] || [ "$DATA_PROD" ]; then
-#        PG='/32'
-#    fi
-#    sudo sed -i '2 s@^@host  all    '"$GEO_DBUSER"'         '"$LXC_IP""$PG"'             md5\n@g' /etc/postgresql/9.5/main/pg_hba.conf
     sudo sed -i "1 s@^@listen_addresses = '127.0.0.1,localhost,"$LXC_IP"'\n@g" /etc/postgresql/9.5/main/postgresql.conf
     
     # restart postgres
@@ -172,7 +165,11 @@ function clone_platform() {
     git clone https://github.com/gem/oq-platform2.git
     cd $GIT_REPO
     git checkout $GIT_BRANCH
-    pip install -e .
+    if [ "$DEVEL_DATA" ]; then
+         ## for exposure fake data
+         sed -i "2 s@^@#the line below was added by deploy.sh in DEVEL mode\nrecursive-include openquakeplatform/exposure/fake_data/      *\n@g" MANIFEST.in
+    fi
+    pip install .
 }
 
 function oq_application() {
@@ -223,7 +220,7 @@ function install_geonode() {
     # enable wsgi apache
     sudo apt-get install libapache2-mod-wsgi
     sudo a2enmod wsgi
-    sudo invoke-rc.d apache2 restart
+    sudo service apache2 restart
     
     # Create local_settings with pavement from repo
     paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /var/www/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
@@ -238,7 +235,7 @@ function install_geonode() {
     sudo -E ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
-    sudo invoke-rc.d apache2 restart                      
+    sudo service apache2 restart                      
 }
 
 function apply_data() {
@@ -279,10 +276,8 @@ function apply_data() {
          geonode import_gheccsv $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_data.csv
 
          # Create programmatically ISC and GHEC json
-         sudo chmod o+w /var/www/geonode/uploaded/thumbs
          geonode create_iscmap $HOME/$GIT_REPO/openquakeplatform/isc_viewer/dev_data/isc_map_comps.json
          geonode create_ghecmap $HOME/$GIT_REPO/openquakeplatform/ghec_viewer/dev_data/ghec_map_comps.json
-         sudo chmod o-w /var/www/geonode/uploaded/thumbs
 
          apache_tomcat_restart
 
@@ -308,6 +303,8 @@ function apply_data() {
          done
          geonode add_documents_prod
      fi
+     # fix name and sitedomain in db
+     geonode fixsitename
 }
 
 function svir_world_data() {
@@ -316,7 +313,7 @@ function svir_world_data() {
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/world/dev_data/world.json.bz2
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/svir/dev_data/svir.json.bz2
     else    
-        sudo sed -i 's/:8000//g' /var/www/geonode/static/irv/js/irv_viewer.js
+        sed -i 's/:8000//g' /var/www/geonode/static/irv/js/irv_viewer.js
         geonode collectstatic --noinput --verbosity 0 
         geonode loaddata oq-platform-data/api/data/world_prod.json.bz2 
         geonode loaddata oq-platform-data/api/data/svir_prod.json.bz2

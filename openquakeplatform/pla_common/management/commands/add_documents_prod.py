@@ -17,7 +17,6 @@ from decimal import Decimal
 def base_attrs(base):
     base_new = {}
     base_new.update(base)
-    # base_new['thumbnail_url'] = base['thumbnail']
     base_new['title_en'] = base['title']
     del base_new['thumbnail']
     del base_new['distribution_description']
@@ -271,10 +270,6 @@ class Command(BaseCommand):
                 "workspace": layer['workspace'],
                 "default_style": default_style,
                 "storeType": layer['storeType'],
-                # "bbox_x0": base['bbox_x0'],
-                # "bbox_x1": base['bbox_x1'],
-                # "bbox_y0": base['bbox_y0'],
-                # "bbox_y1": base['bbox_y1'],
                 "spatial_representation_type": srt,
                 "supplemental_information_en": base['supplemental_information']
             })
@@ -369,9 +364,6 @@ class Command(BaseCommand):
             maps = map_full['fields']
             mapp = new_resources[map_full['pk']]
 
-            # if (mapp['title'] == 'Global Historic Catalogue'):
-            #     continue
-
             # Istance user
             User = get_user_model()
             owner = User.objects.get(username=mapp['owner'][0])
@@ -390,10 +382,6 @@ class Command(BaseCommand):
                 center_y=maps['center_y'],
                 owner=owner,
                 abstract=mapp['abstract'],
-                # bbox_x0=mapp['bbox_x0'],
-                # bbox_x1=mapp['bbox_x1'],
-                # bbox_y0=mapp['bbox_y0'],
-                # bbox_y1=mapp['bbox_y1'],
                 purpose=mapp['purpose'],
                 csw_wkt_geometry=mapp['csw_wkt_geometry'],
                 csw_anytext=mapp['csw_anytext'],
@@ -411,15 +399,6 @@ class Command(BaseCommand):
                 )
             newmap.save()
             map_old_refs[map_full['pk']] = newmap
-
-            # Import thumbs in Resourcebase
-            # for th in th_load:
-
-            #     field = th['fields']
-
-            #     if mapp['thumbnail'] == th['pk']:
-            #         ResourceBase.objects.filter(uuid=mapp['uuid']).update(
-            #             thumbnail_url=field['thumb_file'])
 
             # Istance and add regions
             regions = [region for region in mapp['regions']]
@@ -549,7 +528,6 @@ class Command(BaseCommand):
 
         # Import all tagged items
         for tag_item in tag_item_load:
-            # print('tag_item')
             field = tag_item['fields']
 
             tagitem_type_name = field['content_type']
@@ -562,14 +540,10 @@ class Command(BaseCommand):
                     app_label=label_type, model=cont_type)
 
             try:
-                # print(field['object_id'])
-                # print(new_resources[field['object_id']]['uuid'])
                 content_object = ResourceBase.objects.get(
                     uuid=new_resources[field['object_id']]['uuid'])
             except:
-                # print('exception rized')
                 continue
-            # print('taggedcontentitem_new')
 
             new_tag_item = TaggedContentItem.objects.model(
                 tag=HierarchicalKeyword.objects.get(
