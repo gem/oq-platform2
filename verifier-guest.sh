@@ -311,7 +311,7 @@ python ./manage.py vuln_groups_create
 
 ## load data and install simplejson for vulnerability application
 python ./manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/vulnerability/post_fixtures/initial_data.json
-pip install simplejson==2.0.9
+# pip install simplejson==2.0.9
 
 ## load data for svir
 python manage.py loaddata $HOME/$GIT_REPO/openquakeplatform/world/dev_data/world.json.bz2
