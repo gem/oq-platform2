@@ -56,7 +56,7 @@ function setup_directories() {
     # Open up the permissions of the media folders so the python
     # processes like updatelayers and collectstatic can write here
     chmod 775 -R $GEONODE_WWW
-    chmod g+s $GEONODE_WWW/uploaded/thumbs
+    chmod g+s $GEONODE_WWW/uploaded/*
     chmod g+s $GEONODE_WWW/static
 
     # Apply the permissions to the newly created folders.
