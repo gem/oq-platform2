@@ -39,7 +39,6 @@ sudo apt install -y git python-virtualenv wget
 sudo apt install -y python-dev libpq-dev libgdal-dev openjdk-8-jdk-headless
 
 sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor
-pip install numpy
 sudo apt install -y apache2 tomcat7
 
 # Create and source virtual env
@@ -48,6 +47,8 @@ sudo chown www-data.www-data /var/www/env
 sudo chmod g+ws /var/www/env
 virtualenv /var/www/env
 source /var/www/env/bin/activate
+
+pip install numpy
 
 python -m pip install "django<2"
 pip install django-nested-inline
