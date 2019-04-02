@@ -36,15 +36,19 @@ sudo service apache2 restart || true
 sudo apt-get update
 sudo apt install -y git python-virtualenv wget
 
-# Create and source virtual env
-virtualenv env
-source $HOME/env/bin/activate
-
 sudo apt install -y python-dev libpq-dev libgdal-dev openjdk-8-jdk-headless
 
 sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor
 pip install numpy
 sudo apt install -y apache2 tomcat7
+
+# Create and source virtual env
+sudo mkdir /var/www/env
+sudo chown www-data.www-data /var/www/env
+sudo chmod g+ws /var/www/env
+virtualenv /var/www/env
+source /var/www/env/bin/activate
+
 python -m pip install "django<2"
 pip install django-nested-inline
 pip install django_extras
