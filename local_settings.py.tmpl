@@ -3,6 +3,8 @@ from geonode.settings import TEMPLATES, INSTALLED_APPS
 import geonode.settings
 import openquakeplatform
 
+DEBUG = True
+
 PROJECT_ROOT = os.path.abspath(os.path.dirname(geonode.__file__))
 OQPLATFORM_ROOT = os.path.dirname(openquakeplatform.__file__)
 
@@ -20,8 +22,6 @@ WEBUIURL = 'http://%(webuiurl)s/'
 FILE_PATH_FIELD_DIRECTORY = '%(datadir)s/'
 
 ROOT_URLCONF = 'openquakeplatform.urls'
-
-REGISTRATION_OPEN = 'True'
 
 THIRD_PARTY_URLS = {
     'leaflet_base_map': (
