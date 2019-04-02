@@ -238,7 +238,7 @@ function install_geonode() {
     sudo -E ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     sudo -E ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
-    sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
+    sudo sed -i '1 s@^@WSGIPythonHome /var/www/env\n@g' /etc/apache2/sites-enabled/geonode.conf
     sudo service apache2 restart                      
 }
 

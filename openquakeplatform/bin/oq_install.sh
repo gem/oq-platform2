@@ -98,7 +98,7 @@ function setup_postgres_every_time() {
 
 function setup_django_every_time() {
     echo "setup_django_every_time:"
-    source ~/env/bin/activate
+    source /var/www/env/bin/activate
     
     pip -v install /usr/share/geonode/GeoNode-*.zip --no-dependencies --quiet
     geonodedir=`python -c "import geonode;import os;print os.path.dirname(geonode.__file__)"`
@@ -112,13 +112,13 @@ function setup_django_every_time() {
 
     export DJANGO_SETTINGS_MODULE=geonode.settings
 
-    unsudo 'source env/bin/activate ; django-admin migrate account --settings=geonode.settings'
-    unsudo 'source env/bin/activate ; geonode migrate --verbosity 0'
-    unsudo 'source env/bin/activate ; geonode loaddata $geonodedir/base/fixtures/initial_data.json'
-    unsudo 'source env/bin/activate ; geonode collectstatic --noinput --verbosity 0'
+    unsudo 'source /var/www/env/bin/activate ; django-admin migrate account --settings=geonode.settings'
+    unsudo 'source /var/www/env/bin/activate ; geonode migrate --verbosity 0'
+    unsudo 'source /var/www/env/bin/activate ; geonode loaddata $geonodedir/base/fixtures/initial_data.json'
+    unsudo 'source /var/www/env/bin/activate ; geonode collectstatic --noinput --verbosity 0'
 
     if [ -z "$DEVEL_DATA" ]; then
-        unsudo 'source env/bin/activate ; geonode createsuperuser'
+        unsudo 'source /var/www/env/bin/activate ; geonode createsuperuser'
     fi
 
     # ipt folder
