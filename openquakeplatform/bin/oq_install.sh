@@ -103,8 +103,8 @@ function setup_django_every_time() {
     pip -v install /usr/share/geonode/GeoNode-*.zip --no-dependencies --quiet
     geonodedir=`python -c "import geonode;import os;print os.path.dirname(geonode.__file__)"`
 
-    ln -sf /etc/geonode/local_settings.py $HOME/env/lib/python2.7/site-packages/geonode/local_settings.py
-    ln -sf /usr/lib/python2.7/dist-packages/osgeo $HOME/env/lib/python2.7/site-packages
+    ln -sf /etc/geonode/local_settings.py /var/www/env/lib/python2.7/site-packages/geonode/local_settings.py
+    ln -sf /usr/lib/python2.7/dist-packages/osgeo /var/www/env/lib/python2.7/site-packages
 
     # Set up logging symlink
     mkdir -p $GEONODE_LOG
