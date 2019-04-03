@@ -42,7 +42,7 @@ sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-script
 sudo apt install -y apache2 tomcat7
 
 # Create and source virtual env
-sudo mkdir /var/lib/geonode/env
+sudo mkdir -p /var/lib/geonode/env
 sudo chown www-data.www-data /var/lib/geonode/env
 sudo chmod g+ws /var/lib/geonode/env
 virtualenv /var/lib/geonode/env
