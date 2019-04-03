@@ -165,7 +165,9 @@ EOF
 function clone_platform() {
     # clone oq-platform
     cd $HOME
+    umask 0022
     git clone https://github.com/gem/oq-platform2.git
+    umask 0002
     cd $GIT_REPO
     git checkout $GIT_BRANCH
     if [ "$DEVEL_DATA" ]; then
@@ -178,6 +180,7 @@ function clone_platform() {
 function oq_application() {
     # clone ipt, taxtweb, building-classification-survey
     cd $HOME
+    umask 0022
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class oq-platform-data; do
         # for repo in oq-platform-taxtweb; do
         if [ "$GIT_BRANCH_APP" = "master" ]; then false ; else git clone -b "$GIT_BRANCH_APP" https://github.com/gem/${repo}.git ; fi || git clone -b $GIT_REPO https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
@@ -187,6 +190,7 @@ function oq_application() {
             popd
         fi
     done
+    umask 0002
 }
 
 function install_geonode() { 
