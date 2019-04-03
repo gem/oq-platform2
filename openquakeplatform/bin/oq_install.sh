@@ -33,7 +33,7 @@ function unsudo () {
     local normal_user cmd="$1"
 
     normal_user="$(logname)"
-    sudo -u $normal_user -i bash -c "$cmd"
+    sudo su - -c "$cmd" $normal_user
 }
 
 function setup_directories() {
