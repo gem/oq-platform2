@@ -50,7 +50,7 @@ source /var/lib/geonode/env/bin/activate
 
 sudo /var/lib/geonode/env/bin/python -m pip install numpy
 
-python -m pip install "django<2"
+sudo /var/lib/geonode/env/bin/python -m pip install "django<2"
 sudo pip install django-nested-inline
 sudo pip install django_extras
 sudo pip install git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
