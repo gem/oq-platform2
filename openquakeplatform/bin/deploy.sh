@@ -22,7 +22,7 @@ set -e
 GIT_REPO="oq-platform2"
 
 # delete all folder used
-sudo rm -rf env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data /var/www/geonode /etc/geonode /var/lib/tomcat7/webapps GeoNode-2.6.x.zip* 
+sudo rm -rf /var/lib/geonode/env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data /var/www/geonode /etc/geonode /var/lib/tomcat7/webapps GeoNode-2.6.x.zip* 
 
 # if exists, delete postgres:
 sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5 tomcat7
@@ -42,11 +42,11 @@ sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-script
 sudo apt install -y apache2 tomcat7
 
 # Create and source virtual env
-sudo mkdir /var/www/env
-sudo chown www-data.www-data /var/www/env
-sudo chmod g+ws /var/www/env
-virtualenv /var/www/env
-source /var/www/env/bin/activate
+sudo mkdir /var/lib/geonode/env
+sudo chown www-data.www-data /var/lib/geonode/env
+sudo chmod g+ws /var/lib/geonode/env
+virtualenv /var/lib/geonode/env
+source /var/lib/geonode/env/bin/activate
 
 pip install numpy
 
@@ -239,7 +239,7 @@ function install_geonode() {
     sudo -E ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     sudo -E ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
-    sudo sed -i '1 s@^@WSGIPythonHome /var/www/env\n@g' /etc/apache2/sites-enabled/geonode.conf
+    sudo sed -i '1 s@^@WSGIPythonHome /var/lib/geonode/env\n@g' /etc/apache2/sites-enabled/geonode.conf
     sudo service apache2 restart                      
 }
 
