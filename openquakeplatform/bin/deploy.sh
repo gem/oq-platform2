@@ -45,18 +45,18 @@ sudo apt install -y apache2 tomcat7
 sudo mkdir -p /var/lib/geonode/env
 sudo chown www-data.www-data /var/lib/geonode/env
 sudo chmod g+ws /var/lib/geonode/env
-virtualenv /var/lib/geonode/env
+sudo virtualenv /var/lib/geonode/env
 source /var/lib/geonode/env/bin/activate
 
-pip install numpy
+sudo /var/lib/geonode/env/bin/python -m pip install numpy
 
 python -m pip install "django<2"
-pip install django-nested-inline
-pip install django_extras
-pip install git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
-pip install git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
-pip install git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
-pip install git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
+sudo pip install django-nested-inline
+sudo pip install django_extras
+sudo pip install git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
+sudo pip install git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
+sudo pip install git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
+sudo pip install git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
 
 
 # install engine
@@ -174,7 +174,7 @@ function clone_platform() {
          ## for exposure fake data
          sed -i "2 s@^@#the line below was added by deploy.sh in DEVEL mode\nrecursive-include openquakeplatform/exposure/fake_data/      *\n@g" MANIFEST.in
     fi
-    pip install .
+    sudo pip install .
 }
 
 function oq_application() {
@@ -185,7 +185,7 @@ function oq_application() {
         if [ "$GIT_BRANCH_APP" = "master" ]; then false ; else git clone -b "$GIT_BRANCH_APP" https://github.com/gem/${repo}.git ; fi || git clone -b $GIT_REPO https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
         if [ "${repo}" != "oq-platform-data" ]; then
             pushd ${repo}
-            pip install .
+            sudo pip install .
             popd
         fi
     done
@@ -206,9 +206,9 @@ function install_geonode() {
     
     # install geonode
     git checkout "$GEO_STABLE_HASH"
-    pip install -r requirements.txt
-    pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
-    pip install .
+    sudo pip install -r requirements.txt
+    sudo pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
+    sudo pip install .
     
     #TODO check python-gdal deps
     sudo apt install -y python-gdal gdal-bin
@@ -263,7 +263,7 @@ function apply_data() {
         geonode loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
         geonode create_gem_user
     fi    
-    pip install simplejson==2.0.9
+    sudo pip install simplejson==2.0.9
     sudo sed -i 's/-Xmx128m/-Xmx4096m/g' /etc/default/tomcat7
     sudo service tomcat7 restart
     
@@ -328,15 +328,15 @@ function svir_world_data() {
 function initialize_test() {
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
     sudo apt-get -y install python-pip wget
-    pip install --upgrade pip
-    pip install nose
+    sudo pip install --upgrade pip
+    sudo pip install nose
     wget "http://ftp.openquake.org/common/selenium-deps"
     GEM_FIREFOX_VERSION="$(dpkg-query --show -f '${Version}' firefox)"
     . selenium-deps
     wget "http://ftp.openquake.org/mirror/mozilla/geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     tar zxvf "geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     sudo cp geckodriver /usr/local/bin
-    pip install -U selenium==${GEM_SELENIUM_VERSION}
+    sudo pip install -U selenium==${GEM_SELENIUM_VERSION}
     if [ -z "$REINSTALL" ]; then
         git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b $GIT_REPO "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
     fi
