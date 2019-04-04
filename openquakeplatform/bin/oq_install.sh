@@ -48,19 +48,15 @@ function setup_directories() {
     mkdir -p $GEONODE_SHARE
 
     # Create an empty uploads dir
-    mkdir -p $GEONODE_WWW/uploaded
-    mkdir -p $GEONODE_WWW/uploaded/thumbs/
-    mkdir -p $GEONODE_WWW/uploaded/layers/
-    mkdir -p $GEONODE_WWW/uploaded/documents/
+    mkdir -p $GEONODE_WWW/uploaded/{thumbs,layers,documents}
 
     # Open up the permissions of the media folders so the python
     # processes like updatelayers and collectstatic can write here
     chmod 775 -R $GEONODE_WWW
     chmod g+s $GEONODE_WWW/uploaded/*
-    chmod g+s $GEONODE_WWW/static
 
     # Apply the permissions to the newly created folders.
-    chown www-data.www-data -R $GEONODE_WWW
+    chgrp www-data -R $GEONODE_WWW/uploaded/
 }
 
 function reorganize_configuration() {
