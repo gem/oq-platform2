@@ -22,7 +22,7 @@ set -e
 GIT_REPO="oq-platform2"
 
 # delete all folder used
-sudo rm -rf env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data /var/www/geonode /etc/geonode /var/lib/tomcat7/webapps GeoNode-2.6.x.zip* 
+sudo rm -rf /var/lib/geonode/env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data /var/www/geonode /etc/geonode /var/lib/tomcat7/webapps GeoNode-2.6.x.zip*
 
 # if exists, delete postgres:
 sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5 tomcat7
@@ -36,22 +36,25 @@ sudo service apache2 restart || true
 sudo apt-get update
 sudo apt install -y git python-virtualenv wget
 
-# Create and source virtual env
-virtualenv env
-source $HOME/env/bin/activate
-
 sudo apt install -y python-dev libpq-dev libgdal-dev openjdk-8-jdk-headless
 
 sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor
-pip install numpy
 sudo apt install -y apache2 tomcat7
-python -m pip install "django<2"
-pip install django-nested-inline
-pip install django_extras
-pip install git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
-pip install git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
-pip install git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
-pip install git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
+
+# Create and source virtual env
+sudo mkdir -p /var/lib/geonode/env
+sudo virtualenv /var/lib/geonode/env
+source /var/lib/geonode/env/bin/activate
+
+sudo /var/lib/geonode/env/bin/python -m pip install numpy
+
+sudo /var/lib/geonode/env/bin/python -m pip install "django<2"
+sudo /var/lib/geonode/env/bin/python -m pip install django-nested-inline
+sudo /var/lib/geonode/env/bin/python -m pip install django_extras
+sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
+sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
+sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
+sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
 
 
 # install engine
@@ -162,28 +165,32 @@ EOF
 function clone_platform() {
     # clone oq-platform
     cd $HOME
+    umask 0022
     git clone https://github.com/gem/oq-platform2.git
+    umask 0002
     cd $GIT_REPO
     git checkout $GIT_BRANCH
     if [ "$DEVEL_DATA" ]; then
          ## for exposure fake data
          sed -i "2 s@^@#the line below was added by deploy.sh in DEVEL mode\nrecursive-include openquakeplatform/exposure/fake_data/      *\n@g" MANIFEST.in
     fi
-    pip install .
+    sudo /var/lib/geonode/env/bin/python -m pip install .
 }
 
 function oq_application() {
     # clone ipt, taxtweb, building-classification-survey
     cd $HOME
+    umask 0022
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class oq-platform-data; do
         # for repo in oq-platform-taxtweb; do
         if [ "$GIT_BRANCH_APP" = "master" ]; then false ; else git clone -b "$GIT_BRANCH_APP" https://github.com/gem/${repo}.git ; fi || git clone -b $GIT_REPO https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
         if [ "${repo}" != "oq-platform-data" ]; then
             pushd ${repo}
-            pip install .
+            sudo /var/lib/geonode/env/bin/python -m pip install .
             popd
         fi
     done
+    umask 0002
 }
 
 function install_geonode() { 
@@ -201,9 +208,9 @@ function install_geonode() {
     
     # install geonode
     git checkout "$GEO_STABLE_HASH"
-    pip install -r requirements.txt
-    pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
-    pip install .
+    sudo /var/lib/geonode/env/bin/python -m pip install -r requirements.txt
+    sudo /var/lib/geonode/env/bin/python -m pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
+    sudo /var/lib/geonode/env/bin/python -m pip install .
     
     #TODO check python-gdal deps
     sudo apt install -y python-gdal gdal-bin
@@ -234,7 +241,7 @@ function install_geonode() {
     sudo -E ./package/oq_install.sh -s post $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     sudo -E ./package/oq_install.sh -s setup_geoserver $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
-    sudo sed -i '1 s@^@WSGIPythonHome '"$HOME"'/env\n@g' /etc/apache2/sites-enabled/geonode.conf
+    sudo sed -i '1 s@^@WSGIPythonHome /var/lib/geonode/env\n@g' /etc/apache2/sites-enabled/geonode.conf
     sudo service apache2 restart                      
 }
 
@@ -258,7 +265,7 @@ function apply_data() {
         geonode loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
         geonode create_gem_user
     fi    
-    # pip install simplejson==2.0.9
+    sudo /var/lib/geonode/env/bin/python -m pip install simplejson==2.0.9
     sudo sed -i 's/-Xmx128m/-Xmx4096m/g' /etc/default/tomcat7
     sudo service tomcat7 restart
     
@@ -323,15 +330,15 @@ function svir_world_data() {
 function initialize_test() {
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
     sudo apt-get -y install python-pip wget
-    pip install --upgrade pip
-    pip install nose
+    sudo /var/lib/geonode/env/bin/python -m pip install --upgrade pip
+    sudo /var/lib/geonode/env/bin/python -m pip install nose
     wget "http://ftp.openquake.org/common/selenium-deps"
     GEM_FIREFOX_VERSION="$(dpkg-query --show -f '${Version}' firefox)"
     . selenium-deps
     wget "http://ftp.openquake.org/mirror/mozilla/geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     tar zxvf "geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     sudo cp geckodriver /usr/local/bin
-    pip install -U selenium==${GEM_SELENIUM_VERSION}
+    sudo /var/lib/geonode/env/bin/python -m pip install -U selenium==${GEM_SELENIUM_VERSION}
     if [ -z "$REINSTALL" ]; then
         git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b $GIT_REPO "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
     fi

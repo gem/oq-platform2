@@ -4,22 +4,15 @@ import unittest
 from openquake.moon import platform_get
 
 
-@unittest.skip("temporarily disabled")
 class IrvTest(unittest.TestCase):
     def irv_test(self):
 
         pla = platform_get()
 
         # go to test page
-        pla.get('/irv/test/')
+        pla.get('/irv')
 
-        # wait DOM population via async JS
+        # check map     
         pla.xpath_finduniq(
-            "//div[@class='jasmine_html-reporter']/div"
-            "[@class='results']/div[@class='summary']",
+            "//div[@id='map' and @class='mapboxgl-map']",
             100, 1)
-
-        # check the result of tests
-        pla.xpath_finduniq(
-            "//span[@class='bar passed' and contains"
-            "(normalize-space(text()), ', 0 failures')]")

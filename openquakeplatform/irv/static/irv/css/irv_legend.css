@@ -20,11 +20,12 @@ optgroup {
 #mapInfo {
     position: fixed;
     margin-top: 50px;
-    left: 20px;
+    right: 20px;
     padding: 10px 10px 15px;
     background-color: whitesmoke;
     border-radius: 15px;
     visibility: hidden;
+    bottom: 30px;
 }
 
 .my-legend .legend-title {

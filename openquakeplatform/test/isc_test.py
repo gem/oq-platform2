@@ -23,21 +23,26 @@ class IscTest(unittest.TestCase):
         href = enter_button.get_attribute('href')
         id_map = os.path.basename(href)
         enter_button.click()
-        pla.wait_new_page(enter_button, '/maps/%s' % id_map)
 
-        enter_button = pla.xpath_finduniq(
+        # pla.driver.refresh()
+        # pla.driver.execute_script("location.reload()")
+        # pla.wait_new_page(enter_button, '/maps/%s' % id_map, timeout=30)
+
+        enter_button_view = pla.xpath_finduniq(
             "//a[@href='/maps/%s/view' and "
             "normalize-space(text()) = 'View Map']" % id_map)
-        enter_button.click()
-        pla.driver.refresh()
-        pla.wait_new_page(enter_button, '/maps/%s/view' % id_map, timeout=20)
+        enter_button_view.click()
+
+        # pla.driver.execute_script("location.reload()")
+        # pla.driver.refresh()
+        # pla.wait_new_page(enter_button_view, '/maps/%s/view' % id_map, timeout=30)
 
         # <button id="ext-gen159" class=" x-btn-text gxp-icon-getfeatureinfo"
         # type="button">Identify
-        enter_button = pla.xpath_finduniq(
+        enter_button_ident = pla.xpath_finduniq(
             "//button[@type='button' and normalize-space(text())"
             "= 'Identify']", timeout=20)
-        enter_button.click()
+        enter_button_ident.click()
 
         # wait info button will be clicked
         pla.xpath_finduniq(

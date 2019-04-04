@@ -33,7 +33,7 @@ function unsudo () {
     local normal_user cmd="$1"
 
     normal_user="$(logname)"
-    sudo -u $normal_user -i bash -c "$cmd"
+    sudo su - -c "$cmd" $normal_user
 }
 
 function setup_directories() {
@@ -56,7 +56,7 @@ function setup_directories() {
     # Open up the permissions of the media folders so the python
     # processes like updatelayers and collectstatic can write here
     chmod 775 -R $GEONODE_WWW
-    chmod g+s $GEONODE_WWW/uploaded/thumbs
+    chmod g+s $GEONODE_WWW/uploaded/*
     chmod g+s $GEONODE_WWW/static
 
     # Apply the permissions to the newly created folders.
@@ -98,13 +98,13 @@ function setup_postgres_every_time() {
 
 function setup_django_every_time() {
     echo "setup_django_every_time:"
-    source ~/env/bin/activate
+    source  /var/lib/geonode/env/bin/activate
     
     pip -v install /usr/share/geonode/GeoNode-*.zip --no-dependencies --quiet
     geonodedir=`python -c "import geonode;import os;print os.path.dirname(geonode.__file__)"`
 
-    ln -sf /etc/geonode/local_settings.py $HOME/env/lib/python2.7/site-packages/geonode/local_settings.py
-    ln -sf /usr/lib/python2.7/dist-packages/osgeo $HOME/env/lib/python2.7/site-packages
+    ln -sf /etc/geonode/local_settings.py /var/lib/geonode/env/lib/python2.7/site-packages/geonode/local_settings.py
+    ln -sf /usr/lib/python2.7/dist-packages/osgeo  /var/lib/geonode/env/lib/python2.7/site-packages
 
     # Set up logging symlink
     mkdir -p $GEONODE_LOG
@@ -112,13 +112,13 @@ function setup_django_every_time() {
 
     export DJANGO_SETTINGS_MODULE=geonode.settings
 
-    unsudo 'source env/bin/activate ; django-admin migrate account --settings=geonode.settings'
-    unsudo 'source env/bin/activate ; geonode migrate --verbosity 0'
-    unsudo 'source env/bin/activate ; geonode loaddata $geonodedir/base/fixtures/initial_data.json'
-    unsudo 'source env/bin/activate ; geonode collectstatic --noinput --verbosity 0'
+    unsudo 'source /var/lib/geonode/env/bin/activate ; django-admin migrate account --settings=geonode.settings'
+    unsudo 'source /var/lib/geonode/env/bin/activate ; geonode migrate --verbosity 0'
+    unsudo 'source /var/lib/geonode/env/bin/activate ; geonode loaddata $geonodedir/base/fixtures/initial_data.json'
+    unsudo 'source /var/lib/geonode/env/bin/activate ; geonode collectstatic --noinput --verbosity 0'
 
     if [ -z "$DEVEL_DATA" ]; then
-        unsudo 'source env/bin/activate ; geonode createsuperuser'
+        unsudo 'source /var/lib/geonode/env/bin/activate ; geonode createsuperuser'
     fi
 
     # ipt folder
@@ -137,7 +137,7 @@ function setup_apache_once() {
 
     sed -i '1d' $APACHE_SITES/geonode.conf
     sed -i "1i WSGIDaemonProcess geonode user=www-data threads=15 processes=2" $APACHE_SITES/geonode.conf
-    sed -i '1 s@^@WSGIPythonHome /home/openquake/env\n@g' $APACHE_SITES/geonode.conf
+    sed -i '1 s@^@WSGIPythonHome /var/lib/geonode/env\n@g' $APACHE_SITES/geonode.conf
 
     #FIXME: This could be removed if setup_apache_every_time is called after setup_apache_once
     $APACHE_SERVICE restart
