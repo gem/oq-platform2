@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-import os
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from importlib import import_module
 import openquakeplatform.version as version
-from openquakeplatform.settings import INSTALLED_APPS
+from openquakeplatform.settings import (
+        INSTALLED_APPS, GEM_ISC_MAP_UUID, GEM_GHEC_MAP_UUID,
+        GEM_ACTFAU_MAP_UUID, GEM_STRRAT_MAP_UUID)
 from django.views.generic import TemplateView
 from geonode.maps.models import Map
 
@@ -41,26 +42,35 @@ def versions(request, **kwargs):
         context_instance=RequestContext(request))
 
 
-from django.views.generic import TemplateView
-from geonode.maps.models import Map
-
-
 class ExploreView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ExploreView, self).get_context_data(**kwargs)
 
         try:
             isc_map = Map.objects.filter(
-                uuid='ee8019c0-5a77-11e8-af87-00163ec54f0a')
+                uuid=GEM_ISC_MAP_UUID)
             context['ISC_MAP_ID'] = isc_map[0].pk
         except:
             context['ISC_MAP_ID'] = 23
 
         try:
             ghec_map = Map.objects.filter(
-                uuid='6a6737e4-6252-11e8-ae52-e2db80e0bfca')
+                uuid=GEM_GHEC_MAP_UUID)
             context['GHEC_MAP_ID'] = ghec_map[0].pk
         except:
             context['GHEC_MAP_ID'] = 24
 
+        try:
+            actfau_map = Map.objects.filter(
+                uuid=GEM_ACTFAU_MAP_UUID)
+            context['ACTFAU_MAP_ID'] = actfau_map[0].pk
+        except:
+            context['ACTFAU_MAP_ID'] = 24
+
+        try:
+            strrat_map = Map.objects.filter(
+                uuid=GEM_STRRAT_MAP_UUID)
+            context['STRRAT_MAP_ID'] = strrat_map[0].pk
+        except:
+            context['STRRAT_MAP_ID'] = 24
         return context
