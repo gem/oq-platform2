@@ -111,7 +111,7 @@ function setup_django_every_time() {
     unsudo 'source /var/lib/geonode/env/bin/activate ; django-admin migrate account --settings=geonode.settings'
     unsudo 'source /var/lib/geonode/env/bin/activate ; geonode migrate --verbosity 0'
     unsudo 'source /var/lib/geonode/env/bin/activate ; geonode loaddata $geonodedir/base/fixtures/initial_data.json'
-    unsudo 'source /var/lib/geonode/env/bin/activate ; geonode collectstatic --noinput --verbosity 0'
+    geonode collectstatic --noinput --verbosity 0
 
     if [ -z "$DEVEL_DATA" ]; then
         unsudo 'source /var/lib/geonode/env/bin/activate ; geonode createsuperuser'

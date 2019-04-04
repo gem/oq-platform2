@@ -14,9 +14,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with OpenQuake.  If not, see <http://www.gnu.org/licenses/>.
 
-# if [ $GEM_SET_DEBUG ]; then
-set -x
-# fi
+if [ $GEM_SET_DEBUG ]; then
+    set -x
+fi
 set -e
 
 GIT_REPO="oq-platform2"
