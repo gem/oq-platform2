@@ -52,11 +52,11 @@ function setup_directories() {
 
     # Open up the permissions of the media folders so the python
     # processes like updatelayers and collectstatic can write here
-    chmod 775 -R $GEONODE_WWW
+    chmod 775 -R $GEONODE_WWW/uploaded
     chmod g+s -R $GEONODE_WWW/uploaded
 
     # Apply the permissions to the newly created folders.
-    chgrp www-data -R $GEONODE_WWW/uploaded/
+    chgrp www-data -R $GEONODE_WWW/uploaded
 }
 
 function reorganize_configuration() {
@@ -118,10 +118,9 @@ function setup_django_every_time() {
     fi
 
     # ipt folder
-    cd $GEONODE_WWW
-    mkdir data
-    chown www-data.www-data -R $GEONODE_WWW/data
-    chmod 775 -R $GEONODE_WWW/data
+    mkdir $GEONODE_WWW/data
+    chgrp www-data -R $GEONODE_WWW/data
+    chmod 775 $GEONODE_WWW/data
     if [ "$DEVEL_DATA" -o "$DATA_PROD" ]; then
         chmod g+s $GEONODE_WWW/data
     fi
