@@ -48,33 +48,29 @@ function setup_directories() {
     mkdir -p $GEONODE_SHARE
 
     # Create an empty uploads dir
-    mkdir -p $GEONODE_WWW/uploaded
-    mkdir -p $GEONODE_WWW/uploaded/thumbs/
-    mkdir -p $GEONODE_WWW/uploaded/layers/
-    mkdir -p $GEONODE_WWW/uploaded/documents/
+    mkdir -p $GEONODE_WWW/uploaded/{thumbs,layers,documents}
 
     # Open up the permissions of the media folders so the python
     # processes like updatelayers and collectstatic can write here
-    chmod 775 -R $GEONODE_WWW
-    chmod g+s $GEONODE_WWW/uploaded/*
-    chmod g+s $GEONODE_WWW/static
+    chmod 775 -R $GEONODE_WWW/uploaded
+    chmod g+s -R $GEONODE_WWW/uploaded
 
     # Apply the permissions to the newly created folders.
-    chown www-data.www-data -R $GEONODE_WWW
+    chgrp www-data -R $GEONODE_WWW/uploaded
 }
 
 function reorganize_configuration() {
-    cp -rp $INSTALL_DIR/support/geonode.apache $APACHE_SITES/geonode.conf
-    cp -rp $INSTALL_DIR/support/geonode.wsgi $GEONODE_WWW/wsgi/
+    cp $INSTALL_DIR/support/geonode.apache $APACHE_SITES/geonode.conf
+    cp $INSTALL_DIR/support/geonode.wsgi $GEONODE_WWW/wsgi/
     if [ "$DEVEL_DATA" -o "$DATA_PROD" ]; then
         sed -i 's/import os/import os\nos.umask(002)/g' $GEONODE_WWW/wsgi/geonode.wsgi
     fi
-    cp -rp $INSTALL_DIR/support/geonode.robots $GEONODE_WWW/robots.txt
-    cp -rp $INSTALL_DIR/support/geonode.binary $GEONODE_BIN/geonode
-    cp -rp $INSTALL_DIR/GeoNode*.zip $GEONODE_SHARE
-    cp -rp $INSTALL_DIR/support/geonode.updateip $GEONODE_BIN/geonode-updateip
-    cp -rp $INSTALL_DIR/support/geonode.admin $GEONODE_SHARE/admin.json
-    cp -rp $INSTALL_DIR/support/geonode.local_settings $GEONODE_ETC/local_settings.py
+    cp $INSTALL_DIR/support/geonode.robots $GEONODE_WWW/robots.txt
+    cp $INSTALL_DIR/support/geonode.binary $GEONODE_BIN/geonode
+    cp $INSTALL_DIR/GeoNode*.zip $GEONODE_SHARE
+    cp $INSTALL_DIR/support/geonode.updateip $GEONODE_BIN/geonode-updateip
+    cp $INSTALL_DIR/support/geonode.admin $GEONODE_SHARE/admin.json
+    cp $INSTALL_DIR/support/geonode.local_settings $GEONODE_ETC/local_settings.py
 
     chmod +x $GEONODE_BIN/geonode
     chmod +x $GEONODE_BIN/geonode-updateip
@@ -115,17 +111,16 @@ function setup_django_every_time() {
     unsudo 'source /var/lib/geonode/env/bin/activate ; django-admin migrate account --settings=geonode.settings'
     unsudo 'source /var/lib/geonode/env/bin/activate ; geonode migrate --verbosity 0'
     unsudo 'source /var/lib/geonode/env/bin/activate ; geonode loaddata $geonodedir/base/fixtures/initial_data.json'
-    unsudo 'source /var/lib/geonode/env/bin/activate ; geonode collectstatic --noinput --verbosity 0'
+    geonode collectstatic --noinput --verbosity 0
 
     if [ -z "$DEVEL_DATA" ]; then
         unsudo 'source /var/lib/geonode/env/bin/activate ; geonode createsuperuser'
     fi
 
     # ipt folder
-    cd $GEONODE_WWW
-    mkdir data
-    chown www-data.www-data -R $GEONODE_WWW/data
-    chmod 775 -R $GEONODE_WWW/data
+    mkdir $GEONODE_WWW/data
+    chgrp www-data -R $GEONODE_WWW/data
+    chmod 775 $GEONODE_WWW/data
     if [ "$DEVEL_DATA" -o "$DATA_PROD" ]; then
         chmod g+s $GEONODE_WWW/data
     fi
