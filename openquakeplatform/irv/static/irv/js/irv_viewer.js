@@ -1509,7 +1509,7 @@ function getGeoServerLayers() {
     $('#load-project-spinner').show();
     var IRMTLayerNames = [];
     var IRMTLayerTitle = [];
-    var url = "//"+ window.location.hostname +":8000/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
+    var url = "/geoserver/ows?service=WFS&version=1.0.0&REQUEST=GetCapabilities&SRSNAME=EPSG:4326&outputFormat=json&format_options=callback:getJson";
     // Get layers from GeoServer and populate the layer selection menu
 
     $.ajax({
@@ -1555,13 +1555,13 @@ function getGeoServerLayers() {
 		        $('#ajaxErrorDialog').dialog('open');
             }
 
-            
+
 
             // Create AngularJS dropdown menu
             var mapLayerList = [];
-            
+
             function target_location(hostname, lp_name) {
-                return function() { window.location = '//' + hostname + ':8000/irv/' + lp_name; }; 
+                return function() { window.location = '/irv/' + lp_name; };
             };
 
             for (var ij = 0; ij < IRMTLayerNames.length; ij++) {
@@ -1573,7 +1573,7 @@ function getGeoServerLayers() {
 
                 $('#layer-list').append('<div id="list' + ij +'">' + layerProperties.title + '</div>');
 
-                $('#list'+ ij).on('click', target_location(location.hostname, layerProperties.name));    
+                $('#list'+ ij).on('click', target_location(location.hostname, layerProperties.name));
             }
 
             $('#load-project-spinner').hide();
@@ -1596,16 +1596,15 @@ app.controller('myCtrl', function($scope) {
 
 angular.module('angularBootstrap.dropdown', []).directive('bootstrapDropdown', function () {
     return function(scope, element, attrs) {
-        
+
         jQuery('html').on('click', function () {
             element.removeClass('open')
         })
-        
+
         jQuery('.dropdown-toggle', element).on('click', function(e) {
             element.toggleClass('open');
             return false;
         });
-            
     };
 });
 
@@ -1901,7 +1900,7 @@ function attributeInfoRequest(selectedLayer) {
     // Get layer attributes from GeoServer
     return $.ajax({
         type: 'get',
-        url: '//'+ window.location.hostname +':8000/geoserver/oqplatform/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&maxFeatures=50&outputFormat=application%2Fjson',
+        url: '/geoserver/oqplatform/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ selectedLayer +'&maxFeatures=50&outputFormat=application%2Fjson',
         success: function(data) {
             projectChange = true;
             // Make a global variable used by the d3-tree chart
