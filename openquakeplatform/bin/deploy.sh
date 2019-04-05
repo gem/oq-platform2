@@ -376,6 +376,8 @@ function platform_install() {
     apply_data
     svir_world_data
 
+    echo "Installation complete"
+
     if [ "$NO_EXEC_TEST" != "notest" ] ; then
         initialize_test
         exec_set_map_thumbs
