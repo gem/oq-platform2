@@ -366,7 +366,7 @@ function exec_test() {
 
 function exec_set_map_thumbs() {
     export DISPLAY=:1
-    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-prod-thumbs-test.xml $GIT_REPO/openquakeplatform/set_thumb/mapthumbnail_test.py
+    python -m openquake.moon.nose_runner --failurecatcher prod-thumbs -s -v --with-xunit --xunit-file=xunit-platform-prod-thumbs-test.xml $GIT_REPO/openquakeplatform/set_thumb/mapthumbnail_test.py
 }
 
 function platform_install() {
