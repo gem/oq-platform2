@@ -308,12 +308,21 @@ copy_common () {
 }
 
 copy_dev () {
-    scp "${lxc_ip}:/var/log/apache2/access.log" "out/dev_apache2_access.log" || true
-    scp "${lxc_ip}:/var/log/apache2/error.log" "out/dev_apache2_error.log" || true
     scp "${lxc_ip}:/var/log/openquake/webui.log" "out/dev_webui.log" || true
     scp "${lxc_ip}:dev_*.png" "out/" || true
     scp "${lxc_ip}:xunit-platform-dev.xml" "out/" || true
-    # scp "${lxc_ip}:latest_requirements.txt" "out/" || true
+    scp "${lxc_ip}:gem_geonode_requirements.txt" "out/" || true
+    scp "${lxc_ip}:latest_geonode_commit.txt" "out/" || true
+}
+
+copy_prod () {
+    scp "${lxc_ip}:/var/log/openquake/webui.log" "out/prod_webui.log" || true
+    scp "${lxc_ip}:prod_*.png" "out/" || true
+    scp "${lxc_ip}:/var/log/apache2/access.log" "out/" || true
+    scp "${lxc_ip}:/var/log/apache2/error.log" "out/" || true
+    scp "${lxc_ip}:/var/log/tomcat7/catalina.out" "out/" || true
+    scp "${lxc_ip}:xunit-platform-prod.xml" "out/" || true
+    scp "${lxc_ip}:xunit-platform-prod-thumbs-test.xml" "out/" || true
     scp "${lxc_ip}:gem_geonode_requirements.txt" "out/" || true
     scp "${lxc_ip}:latest_geonode_commit.txt" "out/" || true
 }
@@ -408,17 +417,6 @@ prodtest_run () {
     return $inner_ret
 }
 
-copy_prod () {
-    scp "${lxc_ip}:/var/log/apache2/access.log" "out/dev_apache2_access.log" || true
-    scp "${lxc_ip}:/var/log/apache2/error.log" "out/dev_apache2_error.log" || true
-    scp "${lxc_ip}:/var/log/openquake/webui.log" "out/dev_webui.log" || true
-    scp "${lxc_ip}:dev_*.png" "out/" || true
-    scp "${lxc_ip}:xunit-platform-dev.xml" "out/" || true
-    # scp "${lxc_ip}:latest_requirements.txt" "out/" || true
-    scp "${lxc_ip}:gem_geonode_requirements.txt" "out/" || true
-    scp "${lxc_ip}:latest_geonode_commit.txt" "out/" || true
-}
-
 #
 #  sig_hand - manages cleanup if the build is aborted
 #
@@ -434,6 +432,7 @@ sig_hand () {
 
         copy_common "$ACTION"
         copy_dev
+        copy_prod
 
         echo "Destroying [$lxc_name] lxc"
         if [ "$LXC_DESTROY" = "true" ]; then

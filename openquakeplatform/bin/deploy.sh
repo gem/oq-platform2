@@ -320,7 +320,6 @@ function svir_world_data() {
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/world/dev_data/world.json.bz2
         geonode loaddata $HOME/$GIT_REPO/openquakeplatform/svir/dev_data/svir.json.bz2
     else    
-        sudo sed -i 's/:8000//g' /var/www/geonode/static/irv/js/irv_viewer.js
         geonode collectstatic --noinput --verbosity 0 
         geonode loaddata oq-platform-data/api/data/world_prod.json.bz2 
         geonode loaddata oq-platform-data/api/data/svir_prod.json.bz2
@@ -361,12 +360,12 @@ function exec_test() {
         export GEM_PLA_ADMIN_ID=1000
     fi    
     export DISPLAY=:1
-    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
+    python -m openquake.moon.nose_runner --failurecatcher prod -s -v --with-xunit --xunit-file=xunit-platform-prod.xml $GIT_REPO/openquakeplatform/test # || true
 }
 
 function exec_set_map_thumbs() {
     export DISPLAY=:1
-    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/set_thumb/mapthumbnail_test.py
+    python -m openquake.moon.nose_runner --failurecatcher prod-thumbs -s -v --with-xunit --xunit-file=xunit-platform-prod-thumbs-test.xml $GIT_REPO/openquakeplatform/set_thumb/mapthumbnail_test.py
 }
 
 function platform_install() {
@@ -376,6 +375,8 @@ function platform_install() {
     install_geonode
     apply_data
     svir_world_data
+
+    echo "Installation complete"
 
     if [ "$NO_EXEC_TEST" != "notest" ] ; then
         initialize_test
