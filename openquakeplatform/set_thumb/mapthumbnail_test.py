@@ -13,7 +13,7 @@ class SetThumbsTest(unittest.TestCase):
 
         pla = platform_get()
 
-        pla.get('/maps/')
+        pla.get('/maps/?limit=200&offset=0')
 
         time.sleep(5)
 
@@ -24,6 +24,33 @@ class SetThumbsTest(unittest.TestCase):
         for map_item in maps:
             link = map_item.get_attribute("href")
             links.append(os.path.basename(link))
+
+        for link_meta in links:
+
+            pla.get('/maps/%s' % link_meta)
+
+            time.sleep(5)
+
+            # Click edit map
+            edit_map_button_meta = pla.xpath_finduniq(
+                "//button[@data-target='#edit-map'"
+                " and normalize-space(text())='Edit Map']",
+                TIMEOUT, 1)
+            edit_map_button_meta.click()
+
+            edit_meta = pla.xpath_finduniq(
+                "//a[@href='/maps/%s/metadata'"
+                " and normalize-space(text())='Edit']" % link_meta,
+                TIMEOUT, 1)
+            edit_meta.click()
+
+            # Click update metadata
+            update_button_meta = pla.xpath_findfirst(
+                "//input[@type='submit' and @value='Update']",
+                TIMEOUT, 1)
+            update_button_meta.click()
+
+            print('Refreshed Metadata for map with id: %s' % link_meta)
 
         for link in links:
             pla.get('/maps/%s' % link)
@@ -44,27 +71,4 @@ class SetThumbsTest(unittest.TestCase):
                 TIMEOUT, 1)
             edit_thumb.click()
 
-        for link_meta in links:
-
-            pla.get('/maps/%s' % link_meta)
-
-            time.sleep(3)
-
-            # Click edit map
-            edit_map_button_meta = pla.xpath_finduniq(
-                "//button[@data-target='#edit-map'"
-                " and normalize-space(text())='Edit Map']",
-                TIMEOUT, 1)
-            edit_map_button_meta.click()
-
-            edit_meta = pla.xpath_finduniq(
-                "//a[@href='/maps/%s/metadata'"
-                " and normalize-space(text())='Edit']" % link_meta,
-                TIMEOUT, 1)
-            edit_meta.click()
-
-            # Click update metadata
-            update_button_meta = pla.xpath_findfirst(
-                "//input[@type='submit' and @value='Update']",
-                TIMEOUT, 1)
-            update_button_meta.click()
+            print('Set thumbnail for map with id: %s' % link)
