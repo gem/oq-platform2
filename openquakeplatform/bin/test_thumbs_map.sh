@@ -2,6 +2,7 @@
 GEM_GIT_REPO="https://github.com/gem"
 GIT_REPO="oq-platform2"
 HOST="$1"
+PASSWD="$2"
 function initialize_test() {
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
     sudo apt-get -y install python-pip wget
@@ -21,6 +22,9 @@ function initialize_test() {
 
     sed -i 's/localhost:8000/'"$HOST"'/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
     sed -i 's/localhost:8000/'"$HOST"'/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
+
+    sed -i 's/pla_passwd = "admin"/pla_passwd = "'"$PassWD"'"/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
+    sed -i 's/pla_passwd = "admin"/pla_passwd = "'"$PassWD"'"/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
     export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
 }
