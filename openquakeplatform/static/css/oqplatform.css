@@ -207,6 +207,8 @@ ul.dropdown-menu li {
 .navbar-nav .avatar img {
     margin-right: 0px;
     margin-top: -20px;
+    height: 38px;
+    width: 38px;
 }
 .navbar-inverse .navbar-nav>li>a {
     color: #fff!important;
