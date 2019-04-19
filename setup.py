@@ -130,7 +130,7 @@ setup(
         "requests >= 2.11.1 , < 2.12",
         "selenium >= 3.5.0 , < 3.9",
         "Shapely >= 1.5.17 , < 1.6",
-        "simplejson >= 3.11.1 , < 3.12",
+        "simplejson >= 2.0.9 , < 2.1",
         "six >= 1.10.0 , < 1.11",
         "transifex-client >= 0.10 , < 0.11",
         "Unidecode >= 0.4.19 , < 0.5",
