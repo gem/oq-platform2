@@ -265,7 +265,6 @@ function apply_data() {
         geonode loaddata -v 3 --app vulnerability $HOME/oq-private/old_platform_documents/json/all_vulnerability.json
         geonode create_gem_user
     fi    
-    sudo /var/lib/geonode/env/bin/python -m pip install simplejson==2.0.9
     sudo sed -i 's/-Xmx128m/-Xmx4096m/g' /etc/default/tomcat7
     sudo service tomcat7 restart
     
