@@ -177,6 +177,13 @@ function clone_platform() {
     sudo /var/lib/geonode/env/bin/python -m pip install .
 }
 
+funciton install_openquakeplatform() {
+    cd $HOME
+    cd oq-platform2
+    sudo /var/lib/geonode/env/bin/python -m pip install .
+    sudo service apache2 restart
+}
+
 function oq_application() {
     # clone ipt, taxtweb, building-classification-survey
     cd $HOME
@@ -378,6 +385,7 @@ function platform_install() {
     echo "Installation complete"
 
     if [ "$NO_EXEC_TEST" != "notest" ] ; then
+        install_openquakeplatform
         initialize_test
         exec_set_map_thumbs
         exec_test
