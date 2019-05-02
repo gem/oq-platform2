@@ -174,10 +174,8 @@ function clone_platform() {
          ## for exposure fake data
          sed -i "2 s@^@#the line below was added by deploy.sh in DEVEL mode\nrecursive-include openquakeplatform/exposure/fake_data/      *\n@g" MANIFEST.in
     fi
-    if [ -z "$DEVEL_DATA" ]; then
-        # set debug
-        sudo sed -i 's/DEBUG = True/DEBUG = False/g' local_settings.py.tmpl
-    fi
+    # set debug
+    sudo sed -i 's/DEBUG = True/DEBUG = False/g' local_settings.py.tmpl
     sudo /var/lib/geonode/env/bin/python -m pip install .
 }
 
