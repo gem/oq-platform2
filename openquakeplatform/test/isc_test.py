@@ -60,4 +60,4 @@ class IscTest(unittest.TestCase):
         pla.add_click_event()
         pla.click_at(107 + x, 70 + y)
 
-        pla.xpath_finduniq("//div[text() = '1942-02-09T12:11:00']", timeout=50)
+        pla.xpath_finduniq("//div[text() = '1942-02-09T07:11:00']", timeout=50)
