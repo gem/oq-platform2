@@ -174,8 +174,6 @@ function clone_platform() {
          ## for exposure fake data
          sed -i "2 s@^@#the line below was added by deploy.sh in DEVEL mode\nrecursive-include openquakeplatform/exposure/fake_data/      *\n@g" MANIFEST.in
     fi
-    # set debug
-    sudo sed -i 's/DEBUG = True/DEBUG = False/g' local_settings.py.tmpl
     sudo /var/lib/geonode/env/bin/python -m pip install .
 }
 
@@ -235,7 +233,11 @@ function install_geonode() {
     paver -f $HOME/$GIT_REPO/pavement.py oqsetup -l $LXC_IP -u localhost:8800 -s /var/www/geonode/data -d geonode -p $gem_db_pass -x $LXC_IP -g localhost:8080 -k $SECRET
     sudo rm /etc/geonode/local_settings.py
     sudo cp  $HOME/$GIT_REPO/local_settings.py /etc/geonode/
+
+    # set debug
+    sudo sed -i 's/^DEBUG = .*/DEBUG = False/g' /etc/geonode/local_settings.py
     
+    # add MEDIA_ROOT and STATIC_ROOT in local_settings
     sudo sed -i "24 s@^@MEDIA_ROOT = '/var/www/geonode/uploaded'\n@g" /etc/geonode/local_settings.py
     sudo sed -i "25 s@^@STATIC_ROOT = '/var/www/geonode/static'\n@g" /etc/geonode/local_settings.py
 
