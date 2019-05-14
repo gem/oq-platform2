@@ -1,0 +1,107 @@
+import os
+import json
+from django.core.management.base import BaseCommand
+from geonode.documents.models import Document
+from geonode.base.models import Region
+from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.models import ContentType
+
+
+class Command(BaseCommand):
+    args = '<documents_document.json>'
+    help = ('Import exposure data')
+
+    def handle(doc_fname, *args, **options):
+
+        # Read resourcebase json
+        resource_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'base_resource_base.json'))
+        resource_json = open(resource_name).read()
+        resource_load = json.loads(resource_json)
+
+        # ResourceBase json with pk equal pk of documents json
+        new_resources = {}
+        for resource in resource_load:
+            new_resources[resource['pk']] = resource['fields']
+        doc_fname = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'documents_document.json'))
+        doc_json = open(doc_fname).read()
+        doc_load = json.loads(doc_json)
+
+        # Read regions json
+        region_name = (
+            os.path.join(
+                os.path.expanduser("~"),
+                'oq-platform2/openquakeplatform/common/gs_data/dump/'
+                'base_region.json'))
+        region_json = open(region_name).read()
+        region_load = json.loads(region_json)
+
+        # ResourceBase json with pk equal pk of documents json
+        new_resources = {}
+        for resource in resource_load:
+            new_resources[resource['pk']] = resource['fields']
+
+        # Import documents
+        for doc_full in doc_load:
+
+            doc = doc_full['fields']
+            res = new_resources[doc_full['pk']]
+
+            # Istance content_type
+            ctype_name = doc['content_type']
+            if ctype_name is not None:
+                ctype = [ctype for ctype in doc['content_type']]
+                label_type = ctype[0]
+                cont_type = ctype[1]
+                content_type = ContentType.objects.get(
+                    app_label=label_type, model=cont_type)
+
+            # Istance user
+            User = get_user_model()
+            owner = User.objects.get(username=res['owner'][0])
+
+            object_id = None
+
+            # Save documents
+            newdoc = Document.objects.model(
+                uuid=res['uuid'],
+                title_en=res['title'],
+                owner=owner,
+                extension=doc['extension'],
+                abstract=res['abstract'],
+                purpose=res['purpose'],
+                doc_file=doc['doc_file'],
+                object_id=object_id,
+                category=res['category'],
+                license=res['license'],
+                content_type=content_type,
+                edition=res['edition'],
+                supplemental_information_en=res['supplemental_information'],
+                popular_count=doc['popular_count'],
+                share_count=doc['share_count']
+                )
+            newdoc.save()
+
+            # Istance and add regions
+            regions = [region for region in res['regions']]
+
+            for reg in regions:
+                # Search in old region json
+                for region in region_load:
+                    field = region['fields']
+                    if region['pk'] == reg:
+                        name = field['name']
+                    else:
+                        continue
+                # Add region to each document
+                Reg = Region.objects.get(name=name)
+                newdoc.regions.add(Reg)
+
+            print('Imported document: %s' % res['title'])
