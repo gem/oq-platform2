@@ -80,7 +80,6 @@ class Command(BaseCommand):
                 content_type=content_type,
                 edition=res['edition'],
                 supplemental_information_en=res['supplemental_information'],
-                share_count=doc['share_count']
                 )
             newdoc.save()
 
