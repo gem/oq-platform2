@@ -2,7 +2,7 @@ import os
 import json
 from django.core.management.base import BaseCommand
 from geonode.documents.models import Document
-from geonode.base.models import Region
+from geonode.base.models import TopicCategory, Region, License
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 
@@ -54,20 +54,16 @@ class Command(BaseCommand):
             doc = doc_full['fields']
             res = new_resources[doc_full['pk']]
 
-            # Istance content_type
-            ctype_name = doc['content_type']
-            if ctype_name is not None:
-                ctype = [ctype for ctype in doc['content_type']]
-                label_type = ctype[0]
-                cont_type = ctype[1]
-                content_type = ContentType.objects.get(
-                    app_label=label_type, model=cont_type)
-
             # Istance user
             User = get_user_model()
             owner = User.objects.get(username=res['owner'][0])
 
             object_id = None
+
+            license = License.objects.get(id=res['license'])
+
+            category = TopicCategory.objects.get(id=res['category'])
+
 
             # Save documents
             newdoc = Document.objects.model(
@@ -79,12 +75,11 @@ class Command(BaseCommand):
                 purpose=res['purpose'],
                 doc_file=doc['doc_file'],
                 object_id=object_id,
-                category=res['category'],
-                license=res['license'],
+                category=category,
+                license=license,
                 content_type=content_type,
                 edition=res['edition'],
                 supplemental_information_en=res['supplemental_information'],
-                popular_count=doc['popular_count'],
                 share_count=doc['share_count']
                 )
             newdoc.save()
