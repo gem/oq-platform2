@@ -18,7 +18,7 @@ class Command(BaseCommand):
             os.path.join(
                 os.path.expanduser("~"),
                 'oq-platform2/openquakeplatform/common/gs_data/dump/'
-                'base_resource_base.json'))
+                'exposure_demo/base_resourcebase.json'))
         resource_json = open(resource_name).read()
         resource_load = json.loads(resource_json)
 
@@ -30,7 +30,7 @@ class Command(BaseCommand):
             os.path.join(
                 os.path.expanduser("~"),
                 'oq-platform2/openquakeplatform/common/gs_data/dump/'
-                'documents_document.json'))
+                'exposure_demo/documents_document.json'))
         doc_json = open(doc_fname).read()
         doc_load = json.loads(doc_json)
 
