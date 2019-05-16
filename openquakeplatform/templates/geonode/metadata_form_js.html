@@ -49,17 +49,17 @@ $(document).ready(function() {
         $('.has-popover').popover({'trigger':'hover'});
 
         var params = typeof FILTER_TYPE == 'undefined' ? {} : {'type': FILTER_TYPE};
+            // $('#id_resource-keywords').tokenfield({
+            //     
+            //     autocomplete: {
+            //         source: kws,
+            //         delay: 100
+            //     },
+            //     showAutocompleteOnFocus: true
+            //     
+            // })
 
         $.ajax('/h_keywords_api', {params: params}).success(function(data){
-            $('#id_resource-keywords').tokenfield({
-                
-                autocomplete: {
-                    source: kws,
-                    delay: 100
-                },
-                showAutocompleteOnFocus: true
-                
-            })
             $('#treeview').treeview({
                 data: data,
                 levels: 1,
