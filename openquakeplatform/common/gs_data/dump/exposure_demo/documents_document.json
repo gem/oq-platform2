@@ -1,0 +1,22 @@
+[
+{
+    "fields": {
+        "doc_type": "archive",
+        "doc_url": "",
+        "extension": "zip",
+        "title_en": "DEMO Exposure Model for Algeria",
+        "object_id": null,
+        "data_quality_statement_en": "",
+        "regions": [],
+        "content_type": null,
+        "doc_file": "documents/Algeria.zip",
+        "supplemental_information_en": "https://www.globalquakemodel.org/gem",
+        "abstract_en": "This model was developed as part of the Global Earthquake Risk Model\r\nThe database contain residential, industrial and commercial building stock at wilaya level\r\nFor further details about the model, data sources and methodology adopted herein,\r\nplease visit https://www.globalquakemodel.org/gem.\r\n",
+        "tkeywords": [],
+        "purpose_en": "Exposure data for Algeria at administrative level 1 ",
+        "constraints_other_en": ""
+    },
+    "model": "documents.document",
+    "pk": 248
+}
+]
