@@ -196,7 +196,7 @@ function oq_application() {
 function install_geonode() { 
     # clone geonode
     cd $HOME
-    git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
+    git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/gem/geonode.git
 
     # download Geonode zip
     wget http://ftp.openquake.org/$GIT_REPO/GeoNode-2.6.x.zip

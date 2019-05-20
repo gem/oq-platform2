@@ -221,9 +221,9 @@ pip install numpy
 ## Clone GeoNode
 if [ -z "$REINSTALL" ]; then
     if [ "$GEM_TEST_LATEST" = "true" ]; then
-        git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/GeoNode/geonode.git
+        git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/gem/geonode.git
     else
-        git clone -n https://github.com/GeoNode/geonode.git
+        git clone -n https://github.com/gem/geonode.git
         cd geonode
         git checkout "$GEO_STABLE_HASH"
         cd ..
