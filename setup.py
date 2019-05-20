@@ -85,7 +85,7 @@ setup(
         "django-pagination >= 1.0.7 , < 1.1",
         "django-polymorphic >= 0.9.2 , < 0.10",
         "django-storages >= 1.1.8 , < 1.2",
-        "django-taggit >= 0.21.0 , < 0.22",
+        "django-taggit >= 0.18.0 , < 0.19",
         "django-tastypie >= 0.12.2 , < 0.13",
         "django-treebeard >= 3.0 , < 3.1",
         "elasticsearch >= 2.4.0 , < 2.5",
