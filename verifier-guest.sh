@@ -80,6 +80,7 @@ initialize_test () {
 }
 
 exec_test () {
+    sed -i 's/TIME_INVARIANT_OUTPUTS = False/TIME_INVARIANT_OUTPUTS = True/g' $GIT_REPO/local_settings.py
     export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
     export GEM_PLA_ADMIN_ID=1000
     export DISPLAY=:1
