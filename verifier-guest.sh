@@ -37,7 +37,7 @@ export LXC_IP="$4"
 GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
-GEO_STABLE_HASH="aa5932d"
+GEO_STABLE_HASH="3bb172f"
 
 geonode_setup_env()
 {
