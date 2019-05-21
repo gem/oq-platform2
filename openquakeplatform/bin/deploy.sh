@@ -72,7 +72,7 @@ fi
 export LXC_IP="$1"
 GIT_BRANCH="$2"
 GIT_GEO_REPO="2.6.x"
-GEO_STABLE_HASH="aa5932d"
+GEO_STABLE_HASH="3bb172f"
 GEO_DBUSER="geonode"
 GEM_GIT_REPO="git://github.com/gem"
 NO_EXEC_TEST="$3"
