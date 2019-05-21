@@ -207,7 +207,7 @@ function install_geonode() {
     patch < $HOME/$GIT_REPO/openquakeplatform/bin/dev_config_yml.patch
     
     # install geonode
-    git checkout "$GEO_STABLE_HASH"
+    # git checkout "$GEO_STABLE_HASH"
     sudo /var/lib/geonode/env/bin/python -m pip install -r requirements.txt
     sudo /var/lib/geonode/env/bin/python -m pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
     sudo /var/lib/geonode/env/bin/python -m pip install .
