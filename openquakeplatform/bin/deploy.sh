@@ -356,6 +356,7 @@ function initialize_test() {
 
 function exec_test() {
     sudo sed -i 's/TIME_INVARIANT_OUTPUTS = False/TIME_INVARIANT_OUTPUTS = True/g' /etc/$GEO_DBUSER/local_settings.py
+    sudo service apache2 restart
     export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
 
     if [ "$DEVEL_DATA" ]; then
