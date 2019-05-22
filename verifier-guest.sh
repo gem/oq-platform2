@@ -224,7 +224,7 @@ if [ -z "$REINSTALL" ]; then
     else
         git clone -n https://github.com/gem/geonode.git
         cd geonode
-        git checkout "$GEO_STABLE_HASH"
+        # git checkout "$GEO_STABLE_HASH"
         cd ..
     fi
 else
@@ -372,6 +372,7 @@ updatelayer
 cd ~/
 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
+    sed -i 's/TIME_INVARIANT_OUTPUTS = False/TIME_INVARIANT_OUTPUTS = True/g' $HOME/$GIT_REPO/local_settings.py
     exec_test
 fi
 
