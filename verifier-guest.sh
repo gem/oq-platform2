@@ -237,7 +237,7 @@ sudo apt-get update
 sudo apt-get install -y --force-yes python-oq-engine
 
 ## Install GeoNode and dependencies
-cd geonode
+cd ~/geonode
 pip install -r requirements.txt
 
 if [ "$GEM_TEST_LATEST" != "true" ]; then
