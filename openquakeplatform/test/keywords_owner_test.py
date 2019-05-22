@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-import os
+# import os
 import unittest
 import time
 from openquake.moon import platform_get
-from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.common.keys import Keys
 
 TIMEOUT = 100
 
