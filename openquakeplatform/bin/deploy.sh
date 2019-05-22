@@ -72,7 +72,7 @@ fi
 export LXC_IP="$1"
 GIT_BRANCH="$2"
 GIT_GEO_REPO="2.6.x"
-GEO_STABLE_HASH="3bb172f"
+GEO_STABLE_HASH="9ea3234"
 GEO_DBUSER="geonode"
 GEM_GIT_REPO="git://github.com/gem"
 NO_EXEC_TEST="$3"
@@ -207,7 +207,7 @@ function install_geonode() {
     patch < $HOME/$GIT_REPO/openquakeplatform/bin/dev_config_yml.patch
     
     # install geonode
-    # git checkout "$GEO_STABLE_HASH"
+    git checkout "$GEO_STABLE_HASH"
     sudo /var/lib/geonode/env/bin/python -m pip install -r requirements.txt
     sudo /var/lib/geonode/env/bin/python -m pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
     sudo /var/lib/geonode/env/bin/python -m pip install .
@@ -356,6 +356,7 @@ function initialize_test() {
 
 function exec_test() {
     sudo sed -i 's/TIME_INVARIANT_OUTPUTS = False/TIME_INVARIANT_OUTPUTS = True/g' /etc/$GEO_DBUSER/local_settings.py
+    sudo service apache2 restart
     export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
 
     if [ "$DEVEL_DATA" ]; then
