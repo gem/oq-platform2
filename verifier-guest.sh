@@ -226,12 +226,11 @@ else
     cd -
 fi
 
-## install engine
+# install engine
 sudo apt-get install -y software-properties-common
-# sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
-sudo add-apt-repository -y ppa:openquake/release-3.0
+sudo add-apt-repository -y ppa:openquake/ppa
 sudo apt-get update
-sudo apt-get install -y --force-yes python-oq-engine
+sudo apt-get install -y --force-yes python3-oq-engine
 
 ## Install GeoNode and dependencies
 cd $HOME/geonode
