@@ -31,9 +31,10 @@ if [ "$1"  = "-r" -o "$1" = "--reinstall" ]; then
     shift
 fi
 GIT_BRANCH="$1"
-GIT_GEO_REPO="$2"
+GIT_GEO_BRANCH="$2"
 GIT_REPO="$3"
 export LXC_IP="$4"
+NO_EXEC_TEST="$5"
 GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
@@ -218,26 +219,22 @@ pip install numpy
 
 ## Clone GeoNode
 if [ -z "$REINSTALL" ]; then
-    if [ "$GEM_TEST_LATEST" = "true" ]; then
-        git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/gem/geonode.git
-    else
-        git clone -n https://github.com/gem/geonode.git
-    fi
+    git clone -b "$GIT_GEO_BRANCH" https://github.com/gem/geonode.git
 else
     cd geonode
     git clean -dfx
+    git checkout "$GIT_GEO_BRANCH"
     cd -
 fi
 
-## install engine
+# install engine
 sudo apt-get install -y software-properties-common
-# sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
-sudo add-apt-repository -y ppa:openquake/release-3.0
+sudo add-apt-repository -y ppa:openquake/ppa
 sudo apt-get update
-sudo apt-get install -y --force-yes python-oq-engine
+sudo apt-get install -y --force-yes python3-oq-engine
 
 ## Install GeoNode and dependencies
-cd geonode
+cd $HOME/geonode
 pip install -r requirements.txt
 
 if [ "$GEM_TEST_LATEST" != "true" ]; then
