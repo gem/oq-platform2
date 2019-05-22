@@ -22,7 +22,7 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
 
         document = pla.xpath_finduniq(
             "//a[normalize-space(text()) = 'Global "
-            "Strain Rate Model - Final Report")
+            "Strain Rate Model - Final Report']")
 
         document.click()
 
