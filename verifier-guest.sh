@@ -37,7 +37,6 @@ export LXC_IP="$4"
 GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
-GEO_STABLE_HASH="3bb172f"
 
 geonode_setup_env()
 {
@@ -223,9 +222,6 @@ if [ -z "$REINSTALL" ]; then
         git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/gem/geonode.git
     else
         git clone -n https://github.com/gem/geonode.git
-        cd geonode
-        # git checkout "$GEO_STABLE_HASH"
-        cd ..
     fi
 else
     cd geonode
