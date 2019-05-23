@@ -50,7 +50,7 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
 
         # choose name
         choose_owner_field = pla.xpath_finduniq(
-            "//span[normalize-space(text())='admin'", TIMEOUT, 1)
+            "//span[normalize-space(text())='admin']", TIMEOUT, 1)
         choose_owner_field.click()
 
         # Click update metadata
@@ -59,7 +59,9 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
             TIMEOUT, 1)
         update_button_meta.click()
 
+        # plb.wait_new_page(update_button_meta, '/documents/', timeout=10)
+
         # check new owner
-        check_new_owner = pla.xpath_finduniq(
+        pla.xpath_finduniq(
             "//a[@itemprop='author' and "
             "normalize-space(text())='admin'", TIMEOUT, 1)
