@@ -43,13 +43,23 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
             "//span[@class='remove']", TIMEOUT, 1)
         remove_owner.click()
 
-        # edit name
+        # edit owner
         edit_owner_field = pla.xpath_finduniq(
             "//input[@id='id_resource-owner-autocomplete']", TIMEOUT, 1)
         edit_owner_field.send_keys('%s' % new_owner)
+
+        # choose name
+        choose_owner_field = pla.xpath_finduniq(
+            "//span[normalize-space(text())='admin'", TIMEOUT, 1)
+        choose_owner_field.click()
 
         # Click update metadata
         update_button_meta = pla.xpath_findfirst(
             "//input[@type='submit' and @value='Update']",
             TIMEOUT, 1)
         update_button_meta.click()
+
+        # check new owner
+        check_new_owner = pla.xpath_finduniq(
+            "//a[@itemprop='author' and "
+            "normalize-space(text())='admin'", TIMEOUT, 1)
