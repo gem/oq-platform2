@@ -45,7 +45,7 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
 
         # edit name
         edit_owner_field = pla.xpath_finduniq(
-            "//input[@id='id_resource-owner-autocomplete']")
+            "//input[@id='id_resource-owner-autocomplete']", TIMEOUT, 1)
         edit_owner_field.send_keys('%s' % new_owner)
 
         # Click update metadata
