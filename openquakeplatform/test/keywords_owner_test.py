@@ -46,6 +46,8 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
             "//input[@id='id_resource-owner-autocomplete']", TIMEOUT, 1)
         edit_owner_field.send_keys('%s' % new_owner)
 
+        time.sleep(5000000000)
+
         choose_owner_field = pla.xpath_finduniq(
             "//span[@class='yourlabs-autocomplete autocomplete-light-widget']",
             "/span[normalize-space(text())='admin']", TIMEOUT, 1)
