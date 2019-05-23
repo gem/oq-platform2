@@ -1,9 +1,7 @@
 #!/usr/bin/env python
-# import os
 import unittest
 import time
 from openquake.moon import platform_get
-# from selenium.webdriver.common.keys import Keys
 
 TIMEOUT = 100
 
@@ -48,6 +46,11 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
             "//input[@id='id_resource-owner-autocomplete']", TIMEOUT, 1)
         edit_owner_field.send_keys('%s' % new_owner)
 
+        choose_owner_field = pla.xpath_finduniq(
+            "//span[@class='yourlabs-autocomplete autocomplete-light-widget']",
+            "/span[normalize-space(text())='admin']", TIMEOUT, 1)
+        choose_owner_field.click()
+
         # choose name
         choose_owner_field = pla.xpath_finduniq(
             "//span[normalize-space(text())='admin']", TIMEOUT, 1)
@@ -59,7 +62,7 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
             TIMEOUT, 1)
         update_button_meta.click()
 
-        # plb.wait_new_page(update_button_meta, '/documents/', timeout=10)
+        # pla.wait_new_page(update_button_meta, '/documents/', timeout=10)
 
         # check new owner
         pla.xpath_finduniq(
