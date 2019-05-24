@@ -231,6 +231,7 @@ sudo apt-get install -y software-properties-common
 # sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
 sudo add-apt-repository -y ppa:openquake/release-3.0
 sudo apt-get update
+sudo apt-get install -y --force-yes python3-oq-libs-extra
 sudo apt-get install -y --force-yes python-oq-engine
 
 ## Install GeoNode and dependencies
