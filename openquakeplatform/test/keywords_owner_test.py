@@ -2,6 +2,8 @@
 import unittest
 import time
 from openquake.moon import platform_get
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 
 TIMEOUT = 100
 
@@ -12,7 +14,7 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
 
         pla = platform_get()
 
-        new_owner = '%s' % ('admin')
+        new_owner = '%s' % ('GEM')
 
         pla.get('/documents/?limit=200&offset=0')
 
@@ -21,7 +23,6 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
         document = pla.xpath_finduniq(
             "//a[normalize-space(text()) = 'Global "
             "Strain Rate Model - Final Report']")
-
         document.click()
 
         # Click edit map
@@ -41,24 +42,17 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
             "//span[@class='remove']", TIMEOUT, 1)
         remove_owner.click()
 
-        # edit owner
-        edit_owner_field = pla.xpath_finduniq(
+        search = pla.xpath_findfirst(
             "//input[@id='id_resource-owner-autocomplete']", TIMEOUT, 1)
-        edit_owner_field.send_keys('%s' % new_owner)
+        search.clear()
+        search.send_keys(new_owner)
 
-        # time.sleep(5000000000)
-
-        choose_owner_field = pla.xpath_finduniq(
-            "//span[@class='yourlabs-autocomplete autocomplete-light-widget']",
-            "/span[normalize-space(text())='admin']", TIMEOUT, 1)
-        choose_owner_field.click()
-
-        # choose name
-        choose_owner_field = pla.xpath_finduniq(
-            "//span[normalize-space(text())='admin']", TIMEOUT, 1)
-        choose_owner_field.click()
-
-        time.sleep(2)
+        auto_complete_click = pla.xpath_finduniq(
+            "//span[@class='yourlabs-autocomplete autocomplete-light-widget']"
+            "/span[normalize-space(text())='GEM']",
+            TIMEOUT, 1)
+        actionChains = ActionChains(pla.driver)
+        actionChains.double_click(auto_complete_click).perform()
 
         # Click update metadata
         update_button_meta = pla.xpath_findfirst(
@@ -66,9 +60,8 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
             TIMEOUT, 1)
         update_button_meta.click()
 
-        # pla.wait_new_page(update_button_meta, '/documents/', timeout=10)
-
         # check new owner
         pla.xpath_finduniq(
             "//a[@itemprop='author' and "
-            "normalize-space(text())='admin'", TIMEOUT, 1)
+            "normalize-space(text())='GEM']", TIMEOUT, 1)
+
