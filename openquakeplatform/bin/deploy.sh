@@ -71,12 +71,12 @@ fi
 
 export LXC_IP="$1"
 GIT_BRANCH="$2"
-GIT_GEO_REPO="2.6.x"
+GIT_GEO_BRANCH="2.6.x"
 GEO_DBUSER="geonode"
 GEM_GIT_REPO="git://github.com/gem"
 NO_EXEC_TEST="$3"
 export PROD_INSTALL='y'
-export DATA_PROD="$4"
+export DATA_PROD="$5"
 
 # branch for ipt, taxtweb, classification survey
 GIT_BRANCH_APP="$4"
@@ -195,7 +195,7 @@ function oq_application() {
 function install_geonode() { 
     # clone geonode
     cd $HOME
-    git clone --depth=1 -b "$GIT_GEO_REPO" https://github.com/gem/geonode.git
+    git clone -b "$GIT_GEO_BRANCH" https://github.com/gem/geonode.git
 
     # download Geonode zip
     wget http://ftp.openquake.org/$GIT_REPO/GeoNode-2.6.x.zip
