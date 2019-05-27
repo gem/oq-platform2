@@ -41,6 +41,8 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
             "//span[@class='remove']", TIMEOUT, 1)
         remove_owner.click()
 
+        time.sleep(2)
+
         search = pla.xpath_findfirst(
             "//input[@id='id_resource-owner-autocomplete']", TIMEOUT, 1)
         search.clear()
