@@ -2,7 +2,6 @@
 import unittest
 import time
 from openquake.moon import platform_get
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 
 TIMEOUT = 100
@@ -64,4 +63,3 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
         pla.xpath_finduniq(
             "//a[@itemprop='author' and "
             "normalize-space(text())='GEM']", TIMEOUT, 1)
-
