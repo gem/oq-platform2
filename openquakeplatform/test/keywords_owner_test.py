@@ -13,7 +13,7 @@ class SetMetadataKeywordsOwnerTest(unittest.TestCase):
 
         pla = platform_get()
 
-        new_owner = '%s' % ('GEM')
+        new_owner = 'GEM'
 
         pla.get('/documents/?limit=200&offset=0')
 
