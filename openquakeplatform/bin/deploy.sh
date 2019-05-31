@@ -55,6 +55,7 @@ sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/dja
 sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
 sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
 sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
+sudo /var/lib/geonode/env/bin/python -m pip install django-request==1.5.2
 
 
 # install engine
