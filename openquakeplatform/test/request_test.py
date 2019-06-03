@@ -39,3 +39,7 @@ class RequestTest(unittest.TestCase):
         pla.xpath_finduniq(
             "//h1[normalize-space(text())='Request overview']",
             100, 1)
+
+        # return homepage
+        platform_get()
+
