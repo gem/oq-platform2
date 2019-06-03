@@ -41,4 +41,4 @@ class RequestTest(unittest.TestCase):
             100, 1)
 
         # return homepage
-        platform_get('')
+        pla.get('')
