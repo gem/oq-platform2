@@ -12,7 +12,7 @@ class RequestTest(unittest.TestCase):
         # go to test page
         pla.get('/admin')
 
-        # click requests     
+        # click requests
         click_req = pla.xpath_finduniq(
             "//a[@href='/admin/request/request/'"
             " and normalize-space(text())='Requests']",
@@ -23,8 +23,8 @@ class RequestTest(unittest.TestCase):
         pla.xpath_finduniq(
             "//h1[normalize-space(text())='Select request to change']",
             100, 1)
-        
-        # click overview     
+
+        # click overview
         overview = pla.xpath_finduniq(
             "//a[@href='/admin/request/request/overview/'"
             " and normalize-space(text())='Overview']",
@@ -33,9 +33,8 @@ class RequestTest(unittest.TestCase):
 
         # check page overview
         pla.wait_new_page(
-            overview, '/admin/request/request/overview/', timeout=5)
+            overview, '/admin/request/request/overview', timeout=5)
 
-        
         # check title in requests overview page
         pla.xpath_finduniq(
             "//h1[normalize-space(text())='Request overview']",
