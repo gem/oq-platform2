@@ -34,7 +34,7 @@ class SearchTest(unittest.TestCase):
 
         pla = platform_get()
 
-        pla.get()
+        pla.get('')
 
         search_input = 'assumpcao2014'
 
