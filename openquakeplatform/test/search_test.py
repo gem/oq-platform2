@@ -24,8 +24,8 @@ def search_element():
         timeout=10)
 
     pla.xpath_finduniq(
-        "//a[@ng-if='item.detail_url.indexOf('/layers/') > -1' "
-        "and @href='/layers/oqplatform:assumpcao2014']",
+        "//a[@ng-if='item.detail_url.indexOf("'/layers/'") > -1'"
+        " and @href='/layers/oqplatform:assumpcao2014']",
         TIMEOUT, 1)
 
 
