@@ -60,7 +60,7 @@ class SearchTest(unittest.TestCase):
         # Search from left sidebar
         #
         # page list maps
-        pla.get('/maps')
+        pla.get('/layers')
 
         # write on search input
         left_search = pla.xpath_findfirst(
