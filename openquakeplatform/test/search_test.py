@@ -5,24 +5,28 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 TIMEOUT = 100
 
+
 def search_element():
-   auto_complete_click = pla.xpath_findfirst(
-       "//span[@class='yourlabs-autocomplete']"
-       "/span[normalize-space(text())='assumpcao2014']",
-       TIMEOUT, 1)
-   actionChains = ActionChains(pla.driver)
-   actionChains.double_click(auto_complete_click).perform()
 
-   pla.wait_new_page(
-       auto_complete_click,
-       # '/search/?title__icontains=assumpcao2014&limit=100&offset=0',
-       '/search/?title__icontains=assumpcao2014',
-       timeout=10)
+    pla = platform_get()
 
-   pla.xpath_finduniq(
-       "//a[@ng-if='item.detail_url.indexOf('/layers/') > -1' "
-       "and @href='/layers/oqplatform:assumpcao2014']",
-       TIMEOUT, 1)
+    auto_complete_click = pla.xpath_findfirst(
+        "//span[@class='yourlabs-autocomplete']"
+        "/span[normalize-space(text())='assumpcao2014']",
+        TIMEOUT, 1)
+    actionChains = ActionChains(pla.driver)
+    actionChains.double_click(auto_complete_click).perform()
+
+    pla.wait_new_page(
+        auto_complete_click,
+        # '/search/?title__icontains=assumpcao2014&limit=100&offset=0',
+        '/search/?title__icontains=assumpcao2014',
+        timeout=10)
+
+    pla.xpath_finduniq(
+        "//a[@ng-if='item.detail_url.indexOf('/layers/') > -1' "
+        "and @href='/layers/oqplatform:assumpcao2014']",
+        TIMEOUT, 1)
 
 
 class SearchTest(unittest.TestCase):
@@ -68,4 +72,3 @@ class SearchTest(unittest.TestCase):
 
         # launch search_element method
         search_element()
-
