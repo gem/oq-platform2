@@ -32,12 +32,12 @@ class SearchTest(unittest.TestCase):
         search.send_keys(search_input)
 
         # launch search_element method
-        auto_complete_click = pla.xpath_findfirst(
+        auto_complete = pla.xpath_findfirst(
             "//span[@class='yourlabs-autocomplete']"
             "/span[normalize-space(text())='assumpcao2014']",
             TIMEOUT, 1)
         actionChains = ActionChains(pla.driver)
-        action = actionChains.double_click(auto_complete_click).perform()
+        action = actionChains.double_click(auto_complete).perform()
 
         pla.wait_new_page(
             action,
@@ -62,12 +62,12 @@ class SearchTest(unittest.TestCase):
         left_search.send_keys(search_input)
 
         # launch search_element method
-        left_auto_complete_click = pla.xpath_findfirst(
+        left_auto_complete = pla.xpath_findfirst(
             "//span[@class='yourlabs-autocomplete']"
             "/span[normalize-space(text())='assumpcao2014']",
             TIMEOUT, 1)
         actionChains = ActionChains(pla.driver)
-        left_actionChains.double_click(left_auto_complete_click).perform()
+        left_action = actionChains.double_click(left_auto_complete).perform()
 
         pla.wait_new_page(
             left_action,
