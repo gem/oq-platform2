@@ -37,10 +37,10 @@ class SearchTest(unittest.TestCase):
             "/span[normalize-space(text())='assumpcao2014']",
             TIMEOUT, 1)
         actionChains = ActionChains(pla.driver)
-        actionChains.double_click(auto_complete_click).perform()
+        action = actionChains.double_click(auto_complete_click).perform()
 
         pla.wait_new_page(
-            auto_complete_click,
+            action,
             '/search/?title__icontains=assumpcao2014',
             timeout=10)
 
@@ -67,10 +67,10 @@ class SearchTest(unittest.TestCase):
             "/span[normalize-space(text())='assumpcao2014']",
             TIMEOUT, 1)
         actionChains = ActionChains(pla.driver)
-        actionChains.double_click(left_auto_complete_click).perform()
+        left_actionChains.double_click(left_auto_complete_click).perform()
 
         pla.wait_new_page(
-            left_auto_complete_click,
+            left_action,
             '/layers/?limit=100&offset=0&title__icontains=assumpcao2014',
             timeout=10)
 
