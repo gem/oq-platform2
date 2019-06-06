@@ -17,17 +17,6 @@ def search_element():
     actionChains = ActionChains(pla.driver)
     actionChains.double_click(auto_complete_click).perform()
 
-    pla.wait_new_page(
-        auto_complete_click,
-        # '/search/?title__icontains=assumpcao2014&limit=100&offset=0',
-        '/search/?title__icontains=assumpcao2014',
-        timeout=10)
-
-    pla.xpath_finduniq(
-        "//a[@ng-if='item.detail_url.indexOf("'/layers/'") > -1'"
-        " and @href='/layers/oqplatform:assumpcao2014']",
-        TIMEOUT, 1)
-
 
 class SearchTest(unittest.TestCase):
     def search_test(self):
@@ -57,6 +46,15 @@ class SearchTest(unittest.TestCase):
         # launch search_element method
         search_element()
 
+        pla.wait_new_page(
+            auto_complete_click,
+            '/search/?title__icontains=assumpcao2014',
+            timeout=10)
+
+        pla.xpath_findfirst(
+            "//a[@href='/layers/oqplatform:assumpcao2014']",
+            TIMEOUT, 1)
+
         # Search from left sidebar
         #
         # page list maps
@@ -72,3 +70,12 @@ class SearchTest(unittest.TestCase):
 
         # launch search_element method
         search_element()
+
+        pla.wait_new_page(
+            auto_complete_click,
+            '/layers/?limit=100&offset=0&title__icontains=assumpcao2014',
+            timeout=10)
+
+        pla.xpath_findfirst(
+            "//a[@href='/layers/oqplatform:assumpcao2014']",
+            TIMEOUT, 1)
