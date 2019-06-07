@@ -14,5 +14,5 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import version
 
-__version__ = '2.2.2'
+__version__ = '2.2.3'
 __version__ += version.git_suffix(__file__)
