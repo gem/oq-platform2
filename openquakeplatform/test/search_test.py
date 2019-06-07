@@ -39,11 +39,6 @@ class SearchTest(unittest.TestCase):
         actionChains = ActionChains(pla.driver)
         action = actionChains.double_click(auto_complete).perform()
 
-        pla.wait_new_page(
-            action,
-            '/search/?title__icontains=assumpcao2014',
-            timeout=10)
-
         pla.xpath_findfirst(
             "//a[@href='/layers/oqplatform:assumpcao2014']",
             TIMEOUT, 1)
@@ -68,11 +63,6 @@ class SearchTest(unittest.TestCase):
             TIMEOUT, 1)
         actionChains = ActionChains(pla.driver)
         left_action = actionChains.double_click(left_auto_complete).perform()
-
-        pla.wait_new_page(
-            left_action,
-            '/layers/?limit=100&offset=0&title__icontains=assumpcao2014',
-            timeout=10)
 
         pla.xpath_findfirst(
             "//a[@href='/layers/oqplatform:assumpcao2014']",
