@@ -52,7 +52,7 @@ def oq_context_processor(request):
     context['EXPOSURE_MAX_TOT_GRID_COUNT'] = \
         settings.EXPOSURE_MAX_TOT_GRID_COUNT
     # Google Analytics tracking code
-    # context['GOOGLE_UA'] = getattr(settings, 'GOOGLE_UA', False)
+    context['GOOGLE_UA'] = getattr(settings, 'GOOGLE_UA', False)
 
     if oq_is_qgis_browser(request):
         context['gem_qgis'] = True
