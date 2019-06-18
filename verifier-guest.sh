@@ -219,7 +219,7 @@ pip install numpy
 
 ## Clone GeoNode
 if [ -z "$REINSTALL" ]; then
-    git clone https://github.com/gem/$GIT_REPO.git
+    git clone -b "$GIT_GEO_BRANCH" https://github.com/gem/geonode.git
 else
     cd geonode
     git clean -dfx
