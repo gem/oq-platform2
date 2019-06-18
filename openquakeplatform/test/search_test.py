@@ -37,7 +37,7 @@ class SearchTest(unittest.TestCase):
             "/span[normalize-space(text())='assumpcao2014']",
             TIMEOUT, 1)
         actionChains = ActionChains(pla.driver)
-        action = actionChains.double_click(auto_complete).perform()
+        actionChains.double_click(auto_complete).perform()
 
         pla.xpath_findfirst(
             "//a[@href='/layers/oqplatform:assumpcao2014']",
@@ -62,7 +62,7 @@ class SearchTest(unittest.TestCase):
             "/span[normalize-space(text())='assumpcao2014']",
             TIMEOUT, 1)
         actionChains = ActionChains(pla.driver)
-        left_action = actionChains.double_click(left_auto_complete).perform()
+        actionChains.double_click(left_auto_complete).perform()
 
         pla.xpath_findfirst(
             "//a[@href='/layers/oqplatform:assumpcao2014']",
