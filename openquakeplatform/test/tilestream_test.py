@@ -62,3 +62,17 @@ class TilestreamTest(unittest.TestCase):
         pla.click_at(107 + x, 70 + y)
 
         pla.xpath_finduniq("//div[text() = '1942-02-09T07:11:00']", timeout=50)
+
+        # return content GETJson in Tilestream Source.js
+        s = open(
+                "/home/ubuntu/oq-platform2/openquakeplatform/"
+                "static/js/TileStreamSource.js").read()
+        s = s.replace('TilesetT', 'Tileset')
+        r = open(
+                "/home/ubuntu/oq-platform2/openquakeplatform/"
+                "static/js/TileStreamSource.js", 'w')
+        r.write(s)
+        r.close()
+
+        # restart apache
+        subprocess.check_call("sudo service apache2 restart".split())
