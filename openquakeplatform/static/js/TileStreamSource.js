@@ -121,7 +121,9 @@ var tilestreamPlugin = {
                 layers.push(newLayer);
             }
             newLayerStore(layers);
-        });
+        }).fail(function(json) {
+                    newLayerStore(layers);
+                });
 
         var plugin = this;
 
