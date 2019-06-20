@@ -16,7 +16,7 @@ def restart_apache():
     if prod == "y":
         # restart apache
         subprocess.check_call(
-            "geonode collectstatic --noinput --verbosity 0".split())
+            "geonode collectstatic --noinput".split())
         subprocess.check_call("sudo service apache2 restart".split())
     else:
         pass
