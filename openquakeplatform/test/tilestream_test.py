@@ -12,7 +12,7 @@ def restart_apache():
     # set if is production installation
     prod = os.getenv("OQ_TEST")
 
-    # restart apache
+    # collectstatic and restart apache
     if prod == "y":
         # restart apache
         subprocess.check_call(
