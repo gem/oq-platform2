@@ -83,5 +83,6 @@ class TilestreamTest(unittest.TestCase):
         r.write(s)
         r.close()
 
-        # restart apache
-        subprocess.check_call("sudo service apache2 restart".split())
+        if prod == "y":
+            # restart apache
+            subprocess.check_call("sudo service apache2 restart".split())
