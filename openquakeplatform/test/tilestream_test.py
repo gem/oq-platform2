@@ -7,7 +7,7 @@ from openquake.moon import platform_get
 TIMEOUT = 100
 
 
-def restart_apache(self):
+def restart_apache():
 
     # set if is production installation
     prod = os.getenv("OQ_TEST")
