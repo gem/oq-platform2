@@ -14,9 +14,11 @@ def restart_apache():
 
     # collectstatic and restart apache
     if prod == "y":
-        # restart apache
         subprocess.check_call(
-            "geonode collectstatic --noinput".split())
+            "cd ~/oq-platform2;"
+            "sudo /var/lib/geonode/env/bin/python -m pip install .",
+            shell=True)
+        # restart apache
         subprocess.check_call("sudo service apache2 restart".split())
     else:
         pass
@@ -30,7 +32,7 @@ class TilestreamTest(unittest.TestCase):
         s = open(
                 "/home/ubuntu/oq-platform2/openquakeplatform/"
                 "static/js/TileStreamSource.js").read()
-        s = s.replace('Tileset', 'TilesetT')
+        s = s.replace('Tileset', 'Tileset_wrong')
         r = open(
                 "/home/ubuntu/oq-platform2/openquakeplatform/"
                 "static/js/TileStreamSource.js", 'w')
