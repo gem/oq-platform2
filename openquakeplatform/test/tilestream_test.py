@@ -11,6 +11,9 @@ class TilestreamTest(unittest.TestCase):
 
     def tilestream_test(self):
 
+        # set if is production installation
+        prod = os.getenv("OQ_TEST")
+
         # change content GETJson in Tilestream Source.js
         s = open(
                 "/home/ubuntu/oq-platform2/openquakeplatform/"
@@ -22,10 +25,13 @@ class TilestreamTest(unittest.TestCase):
         r.write(s)
         r.close()
 
-        # restart apache
-        subprocess.check_call("sudo service apache2 restart".split())
+        if prod == "y":
+            # restart apache
+            subprocess.check_call("sudo service apache2 restart".split())
 
         pla = platform_get()
+
+        pla.get('')
 
         enter_button = pla.xpath_finduniq(
             "//li/a[normalize-space(text()) = 'Global "
