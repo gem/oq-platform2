@@ -7,12 +7,22 @@ from openquake.moon import platform_get
 TIMEOUT = 100
 
 
+def restart_apache(self):
+
+    # set if is production installation
+    prod = os.getenv("OQ_TEST")
+
+    # restart apache
+    if prod == "y":
+        # restart apache
+        subprocess.check_call("sudo service apache2 restart".split())
+    else:
+        pass
+
+
 class TilestreamTest(unittest.TestCase):
 
     def tilestream_test(self):
-
-        # set if is production installation
-        prod = os.getenv("OQ_TEST")
 
         # change content GETJson in Tilestream Source.js
         s = open(
@@ -25,9 +35,7 @@ class TilestreamTest(unittest.TestCase):
         r.write(s)
         r.close()
 
-        if prod == "y":
-            # restart apache
-            subprocess.check_call("sudo service apache2 restart".split())
+        restart_apache()
 
         pla = platform_get()
 
@@ -83,6 +91,4 @@ class TilestreamTest(unittest.TestCase):
         r.write(s)
         r.close()
 
-        if prod == "y":
-            # restart apache
-            subprocess.check_call("sudo service apache2 restart".split())
+        restart_apache()
