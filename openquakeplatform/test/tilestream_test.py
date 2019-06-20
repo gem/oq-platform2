@@ -31,7 +31,10 @@ class TilestreamTest(unittest.TestCase):
 
         pla = platform_get()
 
-        pla.get('')
+        pla.get('/explore')
+        pla.wait_new_page("//b[contains(text(),"
+                          " 'Seismic Hazard Data Sets and Models')]",
+                          "/explore", strategy="next", timeout=15)
 
         enter_button = pla.xpath_finduniq(
             "//li/a[normalize-space(text()) = 'Global "
