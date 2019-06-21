@@ -193,6 +193,8 @@ var startApp = function() {
             var layerOpt = document.createElement('option');
         }
 
+    }).fail(function(json) {
+                console.log('Error: Tilestream is unreachable');
     });
 
     // Create dynamic categorized layer dialog
