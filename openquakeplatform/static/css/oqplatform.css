@@ -28,6 +28,9 @@ body.home {
 .page-title {
     margin: 0;
 }
+.dl-horizontal dd {
+    margin-bottom: 10px;
+}
 .alert-info {
     margin-top: -58px;
 }
