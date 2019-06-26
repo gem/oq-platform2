@@ -742,6 +742,9 @@ form.user-settings {
     padding: 15px;
     margin: 0 auto;
 }        
+#side-left-input-group .yourlabs-autocomplete {                                                                                                                                                          
+    display: none!important;
+}
 
 /* mobile */
 @media (min-width: 980px) and (max-width: 1340px) {
