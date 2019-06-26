@@ -51,14 +51,14 @@ class SearchTest(unittest.TestCase):
         # write on search input
         left_search = pla.xpath_findfirst(
             "//input[@id='text_search_input'"
-            " and @placeholder='Search by text']",
+            " and @placeholder='Search by title']",
             TIMEOUT, 1)
         left_search.clear()
         left_search.send_keys(search_input)
 
         # launch search_element method
         left_search_button = pla.xpath_findfirst(
-            "//button[@class='btn btn-primary' and id='text_search_btn']",
+            "//button[@class='btn btn-primary' and @id='text_search_btn']",
             TIMEOUT, 1)
         left_search_button.click()
 
