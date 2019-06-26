@@ -57,12 +57,10 @@ class SearchTest(unittest.TestCase):
         left_search.send_keys(search_input)
 
         # launch search_element method
-        left_auto_complete = pla.xpath_findfirst(
-            "//span[@class='yourlabs-autocomplete']"
-            "/span[normalize-space(text())='assumpcao2014']",
+        left_search_button = pla.xpath_findfirst(
+            "//button[@class='btn btn-primary' and id='text_search_btn']",
             TIMEOUT, 1)
-        actionChains = ActionChains(pla.driver)
-        actionChains.double_click(left_auto_complete).perform()
+        left_search_button.click()
 
         pla.xpath_findfirst(
             "//a[@href='/layers/oqplatform:assumpcao2014']",
