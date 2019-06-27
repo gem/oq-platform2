@@ -102,29 +102,31 @@ var tilestreamPlugin = {
 
         var layers = new Array();
 
-        setTimeout(
-            $.getJSON(TS_URL + '/api/v1/Tileset',
-            function(json) {
-                for (var i=0; i < json.length; i++) {
-                    // Get the tile name and zoom level from the tilestream API
-                    var tileStreamLayerName = json[i].id;
-                    var tileMaxZoom = json[i].maxzoom;
+        $.ajax({
+            dataType: "json",
+            url: TS_URL + '/api/v1/Tileset',
+            success: function(json) {
+                         for (var i=0; i < json.length; i++) {
+                             // Get the tile name and zoom level from the tilestream API
+                             var tileStreamLayerName = json[i].id;
+                             var tileMaxZoom = json[i].maxzoom;
 
-                    // Build the list of layers
-                    var newLayer = new OpenLayers.Layer.XYZ(
-                        tileStreamLayerName,
-                        [TS_URL + "/v2/" + tileStreamLayerName + "/${z}/${x}/${y}.png"],
-                        OpenLayers.Util.applyDefaults({
-                            layername: tileStreamLayerName,
-                            numZoomLevels: tileMaxZoom
-                        }, options)
-                    );
-                    layers.push(newLayer);
-                }
-                newLayerStore(layers);
-            }).fail(function(json) {
-                        newLayerStore(layers);
-                }), 1000);
+                             // Build the list of layers
+                             var newLayer = new OpenLayers.Layer.XYZ(
+                                 tileStreamLayerName,
+                                 [TS_URL + "/v2/" + tileStreamLayerName + "/${z}/${x}/${y}.png"],
+                                 OpenLayers.Util.applyDefaults({
+                                     layername: tileStreamLayerName,
+                                     numZoomLevels: tileMaxZoom
+                                 }, options)
+                             );
+                             layers.push(newLayer);
+                         }
+                         newLayerStore(layers);
+                     },
+            timeout: 5000,
+            error: function(json){newLayerStore(layers);}
+        });
 
         var plugin = this;
 
