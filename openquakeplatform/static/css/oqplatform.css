@@ -745,6 +745,9 @@ form.user-settings {
 #side-left-input-group .yourlabs-autocomplete {                                                                                                                                                          
     display: none!important;
 }
+h4, .h4 {
+   font-size: 18px;
+}
 
 /* mobile */
 @media (min-width: 980px) and (max-width: 1340px) {
