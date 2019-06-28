@@ -150,50 +150,55 @@ var startApp = function() {
     catMenuHeader.innerHTML = "Category:";
     selCat.appendChild(catMenuHeader);
 
-    $.getJSON(TS_URL + '/api/v1/Tileset',
-    function(json) {
-        // Create the category list (build the object)
-        for (var i=0; i < json.length; i++) {
-            var name = json[i].mapped_value;
-            var cat = json[i].category;
-            var type = json[i].type;
-            if (cat != undefined && type == "svir") {
-                categoryList.push(cat);
-                layerNames[name] = [];
-                layersByCat[cat] = [];
-            }
-        }
+    $.ajax({
+            dataType: "json",
+            url: TS_URL + '/api/v1/Tileset',
+            success: function(json) {
+                        // Create the category list (build the object)
+                        for (var i=0; i < json.length; i++) {
+                            var name = json[i].mapped_value;
+                            var cat = json[i].category;
+                            var type = json[i].type;
+                            if (cat != undefined && type == "svir") {
+                                categoryList.push(cat);
+                                layerNames[name] = [];
+                                layersByCat[cat] = [];
+                            }
+                        }
 
-        // Create the category list (population the object)
-        for (var j=0; j < json.length; j++) {
-            var name = json[j].mapped_value;
-            var cat = json[j].category;
-            var type = json[j].type;
-            if (cat != undefined && type == "svir") {
-                layerId = json[j].id;
-                layerTitle = json[j].mapped_value;
-                layerNames[name].push(layerId);
-                layersByCat[cat].push(layerTitle);
-            }
-        }
+                        // Create the category list (population the object)
+                        for (var j=0; j < json.length; j++) {
+                            var name = json[j].mapped_value;
+                            var cat = json[j].category;
+                            var type = json[j].type;
+                            if (cat != undefined && type == "svir") {
+                                layerId = json[j].id;
+                                layerTitle = json[j].mapped_value;
+                                layerNames[name].push(layerId);
+                                layersByCat[cat].push(layerTitle);
+                            }
+                        }
 
-        // Get unique category names
-        var categoryUnique = categoryList.filter(function(itm,i,categoryList){
-            return i==categoryList.indexOf(itm);
+                        // Get unique category names
+                        var categoryUnique = categoryList.filter(function(itm,i,categoryList){
+                            return i==categoryList.indexOf(itm);
+                        });
+
+                        for (var k in categoryUnique) {
+                            // Append category names to dropdown list
+                            var categoryTitle = categoryUnique[k];
+                            var opt = document.createElement('option');
+                            opt.innerHTML = categoryTitle;
+                            opt.value = categoryTitle;
+                            selCat.appendChild(opt);
+                            // Append layer list to dowpdown
+                            var layerOpt = document.createElement('option');
+                        }
+
+                    },
+            timeout: 5000,
+            error: function(json){console.log('Error: Tilestream is unreachable');}
         });
-
-        for (var k in categoryUnique) {
-            // Append category names to dropdown list
-            var categoryTitle = categoryUnique[k];
-            var opt = document.createElement('option');
-            opt.innerHTML = categoryTitle;
-            opt.value = categoryTitle;
-            selCat.appendChild(opt);
-            // Append layer list to dowpdown
-            var layerOpt = document.createElement('option');
-        }
-
-    });
 
     // Create dynamic categorized layer dialog
     $("#layer-category").change(function() {
