@@ -123,6 +123,10 @@ TEMPLATES[0]['DIRS'].insert(0, os.path.join(OQPLATFORM_ROOT, 'templates'))
 TEMPLATES[0]['OPTIONS']['context_processors'].append(
     'openquakeplatform.utils.oq_context_processor')
 
+# for django-request
+TEMPLATES[0]['OPTIONS']['context_processors'].append(
+    'django.core.context_processors.request')
+
 ALLOWED_DOCUMENT_TYPES = [
     'csv', 'doc', 'docx', 'xls', 'xlsx', 'odt', 'ods', 'pdf',
     'jpg', 'jpeg', 'tif', 'tiff', 'png', 'gif', 'txt', 'zip',
@@ -146,6 +150,7 @@ INSTALLED_APPS = inst_new
 
 INSTALLED_APPS += (
     'django.contrib.redirects',
+    'request',
     'nested_inline',
     'chained_multi_checkboxes',
     'chained_selectbox',
@@ -182,6 +187,8 @@ MIDDLEWARE_CLASSES = (
     # is NOT required for using django-oauth-toolkit.
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'oauth2_provider.middleware.OAuth2TokenMiddleware',
+    # django-request
+    'request.middleware.RequestMiddleware',
 )
 
 # Add additional paths (as regular expressions) that don't require
@@ -300,3 +307,9 @@ EXPOSURE_MAX_EXPORT_AREA_SQ_DEG = 4
 EXPOSURE_MAX_TOT_GRID_COUNT = 100000
 
 TIME_INVARIANT_OUTPUTS = False
+
+REQUEST_IGNORE_IP = ['127.0.0.1']
+REQUEST_IGNORE_PATHS = (
+    r'^admin/',
+)
+
