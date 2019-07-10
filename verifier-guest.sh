@@ -93,6 +93,11 @@ exec_set_map_thumbs () {
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/set_thumb/mapthumbnail_test.py
 }
 
+migrations_vulnerability_test() {
+    cd ~/geonode
+    python manage.py test -v 3 $GIT_REPO/openquakeplatform/migrations_test.py
+}
+
 updatelayer() {
     cd ~/geonode
     python manage.py updatelayers
@@ -336,7 +341,7 @@ cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/g
 python ./manage.py add_documents
 
 cd ~/
-## install geckodriver and selenium
+# install geckodriver and selenium
 initialize_test
 # Set thumbnails all maps
 exec_set_map_thumbs
@@ -378,8 +383,9 @@ if [ "$GEM_TEST_LATEST" = "true" ]; then
     cd -
 fi
 
-cd ~/geonode
+# test vulnerability migrations
+migrations_vulnerability_test
 
-## Stop Geonode
+# Stop Geonode
 sudo supervisorctl stop openquake-webui
 paver -f $HOME/$GIT_REPO/pavement.py stop
