@@ -49,7 +49,7 @@ geonode_setup_env()
 #install dependencies vulnerability and ipt
 extra_deps_install() {
     python -m pip install "django<2"
-    pip install django-nested-inline
+    # pip install django-nested-inline
     pip install django_extras
     pip install -e git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
     pip install -e git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
