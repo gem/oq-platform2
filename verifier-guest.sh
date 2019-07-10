@@ -368,6 +368,9 @@ sudo -u postgres psql -d geonode_dev -c '\copy assumpcao2014 FROM '$HOME/$GIT_RE
 
 updatelayer
 
+# test vulnerability migrations
+migrations_vulnerability_test
+
 cd ~/
 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
@@ -382,9 +385,6 @@ if [ "$GEM_TEST_LATEST" = "true" ]; then
     git log -1 > ~/latest_geonode_commit.txt
     cd -
 fi
-
-# test vulnerability migrations
-migrations_vulnerability_test
 
 # Stop Geonode
 sudo supervisorctl stop openquake-webui
