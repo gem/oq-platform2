@@ -6,10 +6,9 @@ from django.test import TestCase
 from django.db.migrations.executor import MigrationExecutor
 from django.db import connection
 
-# import pdb
-# pdb.set_trace()
+import unittest
 
-
+@unittest.skip("temporarily disabled")
 class TestMigrations(TestCase):
 
     @property
@@ -46,6 +45,7 @@ class TestMigrations(TestCase):
         pass
 
 
+@unittest.skip("temporarily disabled")
 class TagsTestCase(TestMigrations):
 
     migrate_from = '0002_auto_20190703_1424'
