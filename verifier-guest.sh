@@ -94,8 +94,9 @@ exec_set_map_thumbs () {
 }
 
 migrations_vulnerability_test() {
-    cd ~/geonode
+    pushd ~/geonode
     python manage.py test -v 3 $GIT_REPO/openquakeplatform/migrations_test.py
+    popd
 }
 
 updatelayer() {
@@ -369,7 +370,8 @@ sudo -u postgres psql -d geonode_dev -c '\copy assumpcao2014 FROM '$HOME/$GIT_RE
 updatelayer
 
 # test vulnerability migrations
-# MN: temporary disabled migrations_vulnerability_test
+# MN: temporary disabled
+# migrations_vulnerability_test
 
 cd ~/
 
@@ -381,10 +383,12 @@ fi
 if [ "$GEM_TEST_LATEST" = "true" ]; then
     # pip freeze > ~/latest_requirements.txt
     $HOME/$GIT_REPO/create_gem_requirements.sh > gem_geonode_requirements.txt
-    cd ~/geonode
+    pushd ~/geonode
     git log -1 > ~/latest_geonode_commit.txt
-    cd -
+    popd -
 fi
+
+cd ~/geonode
 
 # Stop Geonode
 sudo supervisorctl stop openquake-webui
