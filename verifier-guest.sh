@@ -95,7 +95,7 @@ exec_set_map_thumbs () {
 
 migrations_vulnerability_test() {
     pushd ~/geonode
-    python manage.py test -v 3 $GIT_REPO/openquakeplatform/migrations_test.py
+    python manage.py test -v 3 $HOME/$GIT_REPO/openquakeplatform/migrations_test.py
     popd
 }
 
