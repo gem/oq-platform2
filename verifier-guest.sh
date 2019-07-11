@@ -94,8 +94,9 @@ exec_set_map_thumbs () {
 }
 
 migrations_vulnerability_test() {
-    cd ~/geonode
-    python manage.py test -v 3 $HOME/$GIT_REPO/openquakeplatform/migrations_test.py
+    pushd ~/geonode
+    python manage.py test -v 3 $GIT_REPO/openquakeplatform/migrations_test.py
+    popd
 }
 
 updatelayer() {
@@ -387,6 +388,8 @@ if [ "$GEM_TEST_LATEST" = "true" ]; then
     git log -1 > ~/latest_geonode_commit.txt
     cd -
 fi
+
+cd ~/geonode
 
 # Stop Geonode
 sudo supervisorctl stop openquake-webui
