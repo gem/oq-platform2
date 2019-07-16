@@ -1,6 +1,9 @@
 # import unittest
 from django_migration_testcase import MigrationTest
 from django.contrib.auth import get_user_model
+from openquakeplatform.vulnerability.models import GeneralInformation
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "local_settings")
 
 
 # @unittest.skip("temporarily disabled")
@@ -22,40 +25,24 @@ class VulnMigrationTest(MigrationTest):
         owner = User.objects.get(username="admin")
         print(owner.pk)
 
-        generalinformation = self.get_model_before('generalinformation')
-        newgen = generalinformation(
-                                    owner_id=owner.pk,
-                                    name="9 Storey Non-Ductile RC-MRFs",
-                                    category='10',
-                                    material=None,
-                                    type_of_assessment="10",
-                                    article_title="Influence horizontal",
-                                    structure_type="10",
-                                    year="2016"
-                                   )
+        geninformation = self.get_model_before('generalinformation')
+        newgen = geninformation(
+                                owner_id=owner.pk,
+                                name="9 Storey Non-Ductile RC-MRFs",
+                                category='10',
+                                material=None,
+                                type_of_assessment="10",
+                                article_title="Influence horizontal",
+                                structure_type="10",
+                                year="2016"
+                               )
         newgen.save()
 
-        # fragilityfunc = self.get_model_before('fragilityfunc')
-        # newfragilityfunc = fragilityfunc(
-        #                                  owner=user,
-        #                                  general_information_id=1000,
-        #                                  method_of_estimation="2",
-        #                                  func_distr_type="2"
-        #                                 )
-        # newfragilityfunc.save()
-
-        # funcdistrdtldiscr = self.get_model_before('funcdistrdtldiscr')
-        # newrec = funcdistrdtldiscr(
-        #                            owner=user,
-        #                            damage_to_loss_func_id='1000',
-        #                            # var_mean_val='',
-        #                            # var_val_coeff='',
-        #                            # func_distr_shape=''
-        #                           )
-        # newrec.save()
-
+        # import pdb;pdb.set_trace()
         self.run_migration()
 
-        generalinformation = self.get_model_after('generalinformation')
-        # fragilityfunc = self.get_model_after('funcdistrdtldiscr')
-        # funcdistrdtldiscr = self.get_model_after('funcdistrdtldiscr')
+        geninformation = self.get_model_after('generalinformation')
+
+        newgen = GeneralInformation.objects.get(
+            name="9 Storey Non-Ductile RC-MRFs")
+        print('Function: %s' % newgen.pk)
