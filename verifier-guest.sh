@@ -82,10 +82,10 @@ initialize_test () {
 
 exec_test () {
     sed -i 's/TIME_INVARIANT_OUTPUTS = False/TIME_INVARIANT_OUTPUTS = True/g' $GIT_REPO/local_settings.py
-    # export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
+    export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
     export GEM_PLA_ADMIN_ID=1000
     export DISPLAY=:1
-    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test/vulnerability_test.py # || true
+    python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/test # || true
 }
 
 exec_set_map_thumbs () {

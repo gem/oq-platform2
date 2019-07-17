@@ -356,7 +356,7 @@ function initialize_test() {
 function exec_test() {
     sudo sed -i 's/TIME_INVARIANT_OUTPUTS = False/TIME_INVARIANT_OUTPUTS = True/g' /etc/$GEO_DBUSER/local_settings.py
     sudo service apache2 restart
-    # export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
+    export GEM_OPT_PACKAGES="$(python -c 'from openquakeplatform.settings import STANDALONE_APPS ; print(",".join(x for x in STANDALONE_APPS))')"
 
     if [ "$DEVEL_DATA" ]; then
         export GEM_PLA_ADMIN_ID=1
@@ -365,7 +365,7 @@ function exec_test() {
         export GEM_PLA_ADMIN_ID=1000
     fi    
     export DISPLAY=:1
-    python -m openquake.moon.nose_runner --failurecatcher prod -s -v --with-xunit --xunit-file=xunit-platform-prod.xml $GIT_REPO/openquakeplatform/test/vulnerability_test.py # || true
+    python -m openquake.moon.nose_runner --failurecatcher prod -s -v --with-xunit --xunit-file=xunit-platform-prod.xml $GIT_REPO/openquakeplatform/test # || true
 }
 
 function exec_set_map_thumbs() {
