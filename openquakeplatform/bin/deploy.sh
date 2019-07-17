@@ -365,7 +365,7 @@ function exec_test() {
         export GEM_PLA_ADMIN_ID=1000
     fi    
     export DISPLAY=:1
-    python -m openquake.moon.nose_runner --failurecatcher prod -s -v --with-xunit --xunit-file=xunit-platform-prod.xml $GIT_REPO/openquakeplatform/test # || true
+    python -m openquake.moon.nose_runner --failurecatcher prod -s -v --with-xunit --xunit-file=xunit-platform-prod.xml $GIT_REPO/openquakeplatform/test/vulnerability_test.py # || true
 }
 
 function exec_set_map_thumbs() {
