@@ -1,7 +1,7 @@
 # import unittest
 from django_migration_testcase import MigrationTest
 from django.contrib.auth import get_user_model
-from openquakeplatform.vulnerability.models import GeneralInformation
+# from openquakeplatform.vulnerability.models import GeneralInformation
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "local_settings")
 
@@ -23,7 +23,7 @@ class VulnMigrationTest(MigrationTest):
                                  )
         user.save()
         owner = User.objects.get(username="admin")
-        print(owner.pk)
+        print('Pk: %s' % owner.pk)
 
         geninformation = self.get_model_before('generalinformation')
         newgen = geninformation(
@@ -43,6 +43,6 @@ class VulnMigrationTest(MigrationTest):
 
         geninformation = self.get_model_after('generalinformation')
 
-        newgen = GeneralInformation.objects.get(
+        new_gen = geninformation.objects.get(
             name="9 Storey Non-Ductile RC-MRFs")
-        print('Function: %s' % newgen.pk)
+        print('Function: %s' % new_gen.pk)
