@@ -65,7 +65,7 @@ class VulnMigrationTest(MigrationTest):
                                damage_to_loss_func_id=newdamloss_istance.pk,
                                var_mean_val="0.1;0.2;0.4;0.9;1",
                                # var_val_coeff="",
-                               func_distr_shape="1"
+                               func_distr_shape=None
                                )
         newdtldiscr.save()
 
@@ -86,4 +86,6 @@ class VulnMigrationTest(MigrationTest):
 
         new_dtldiscr = FuncDistrDTLDiscr.objects.get(
             damage_to_loss_func_id=new_damloss.pk)
-        print('FuncDistrDTLDiscr Id: %s' % new_dtldiscr.pk)
+        print('FuncDistrDTLDiscr Id: %s' % new_dtldiscr.func_distr_shape)
+
+        self.assertEqual(new_dtldiscr.func_distr_shape, 1)
