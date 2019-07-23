@@ -373,7 +373,7 @@ updatelayer
 
 # test vulnerability migrations
 # MN: temporary disabled
-# migrations_vulnerability_test
+migrations_vulnerability_test
 
 cd ~/
 
