@@ -1,8 +1,4 @@
-# import unittest
 from django_migration_testcase import MigrationTest
-from openquakeplatform.vulnerability.models import GeneralInformation
-from openquakeplatform.vulnerability.models import DamageToLossFunc
-from openquakeplatform.vulnerability.models import FuncDistrDTLDiscr
 from openquakeplatform.vulnerability.models import FDS
 from django.contrib.auth import get_user_model
 import os
@@ -18,70 +14,56 @@ class VulnMigrationTest(MigrationTest):
     def test_migration_model(self):
 
         User = get_user_model()
-        user = User.objects.model(
+        user = User.objects.create(
                                   username="admin",
                                   password="admin",
                                   is_superuser="true"
                                  )
         user.save()
         owner = User.objects.get(username="admin")
-        print('Pk: %s' % owner.pk)
 
-        geninformation = self.get_model_before('GeneralInformation')
-        newgen = geninformation(
-                                owner_id=owner.pk,
-                                name="9 Storey Non-Ductile RC-MRFs",
-                                category='10',
-                                material=None,
-                                type_of_assessment="10",
-                                article_title="Influence horizontal",
-                                structure_type="10",
-                                year="2016"
-                               )
-        newgen.save()
+        GeneralInformation_be = self.get_model_before('GeneralInformation')
+        be_gen = GeneralInformation_be.objects.create(
+            owner_id=owner.pk,
+            name="9 Storey Non-Ductile RC-MRFs",
+            category='10',
+            material=None,
+            type_of_assessment="10",
+            article_title="Influence horizontal",
+            structure_type="10",
+            year="2016",
+            )
+        be_gen.save()
 
-        newgen_istance = GeneralInformation.objects.get(
-            name="9 Storey Non-Ductile RC-MRFs")
-        print(newgen_istance.pk)
+        DamageToLossFunc_be = self.get_model_before('DamageToLossFunc')
 
-        damloss = self.get_model_before('DamageToLossFunc')
+        be_damloss = DamageToLossFunc_be.objects.create(
+            owner_id=owner.pk,
+            general_information=be_gen,
+            method_of_estimation="2",
+            damage_scale="6",
+            resp_var="5"
+            )
+        be_damloss.save()
 
-        newdamloss = damloss(
-                             owner_id=owner.pk,
-                             general_information_id=newgen_istance.pk,
-                             method_of_estimation="2",
-                             damage_scale="6",
-                             resp_var="5"
-                             )
-        newdamloss.save()
-
-        newdamloss_istance = DamageToLossFunc.objects.get(
-            general_information=newgen_istance.pk)
-
-        dtldiscr = self.get_model_before('FuncDistrDTLDiscr')
-        newdtldiscr = dtldiscr(
-                               owner_id=owner.pk,
-                               damage_to_loss_func_id=newdamloss_istance.pk,
-                               var_mean_val="0.1;0.2;0.4;0.9;1",
-                               func_distr_shape=None
-                               )
-        newdtldiscr.save()
+        FuncDistrDTLDiscr_be = self.get_model_before('FuncDistrDTLDiscr')
+        be_dtldiscr = FuncDistrDTLDiscr_be.objects.create(
+            owner_id=owner.pk,
+            damage_to_loss_func=be_damloss,
+            var_mean_val="0.1;0.2;0.4;0.9;1",
+            func_distr_shape=None
+            )
+        be_dtldiscr.save()
 
         self.run_migration()
 
         # after migrations
-        geninformation = self.get_model_after('GeneralInformation')
-        damloss = self.get_model_after('DamageToLossFunc')
-        dtldiscr = self.get_model_after('FuncDistrDTLDiscr')
+        GeneralInformation_af = self.get_model_after('GeneralInformation')
 
-        new_gen = GeneralInformation.objects.get(
+        af_gen = GeneralInformation_af.objects.get(
             name="9 Storey Non-Ductile RC-MRFs")
 
-        new_damloss = DamageToLossFunc.objects.get(
-            general_information_id=new_gen.pk)
-
-        new_dtldiscr = FuncDistrDTLDiscr.objects.get(
-            damage_to_loss_func_id=new_damloss.pk)
+        af_dtldiscr = af_gen.damage_to_loss_func.func_distr_dtl_discr
 
         # check func_distr_shape
-        self.assertEqual(new_dtldiscr.func_distr_shape, FDS.LOGNORMAL)
+        self.assertEqual(af_dtldiscr.func_distr_shape, FDS.LOGNORMAL)
