@@ -95,7 +95,7 @@ exec_set_map_thumbs () {
 
 migrations_vulnerability_test() {
     pushd ~/geonode
-    python manage.py test -v 3 $GIT_REPO/openquakeplatform/migrations_test.py
+    python manage.py test -v 3 $HOME/$GIT_REPO/openquakeplatform/migrations_test.py
     popd
 }
 
@@ -178,6 +178,8 @@ cat << EOF | sudo -u postgres psql
     CREATE USER "$GEO_DBUSER" WITH PASSWORD '$GEO_DBPWD';
     GRANT ALL PRIVILEGES ON DATABASE "$GEO_DBNAME" to $GEO_DBUSER;
     GRANT ALL PRIVILEGES ON DATABASE "geonode_dev-imports" to $GEO_DBUSER;
+    ALTER USER "$GEO_DBUSER" CREATEDB;
+    ALTER ROLE "$GEO_DBUSER" SUPERUSER;
 EOF
 
 sudo -u postgres psql -d geonode_dev -c 'CREATE EXTENSION postgis;'
@@ -371,7 +373,7 @@ updatelayer
 
 # test vulnerability migrations
 # MN: temporary disabled
-# migrations_vulnerability_test
+migrations_vulnerability_test
 
 cd ~/
 
