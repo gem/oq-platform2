@@ -3,6 +3,7 @@ from django_migration_testcase import MigrationTest
 from openquakeplatform.vulnerability.models import GeneralInformation
 from openquakeplatform.vulnerability.models import DamageToLossFunc
 from openquakeplatform.vulnerability.models import FuncDistrDTLDiscr
+from openquakeplatform.vulnerability.models import FDS
 from django.contrib.auth import get_user_model
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "local_settings")
@@ -83,4 +84,4 @@ class VulnMigrationTest(MigrationTest):
             damage_to_loss_func_id=new_damloss.pk)
 
         # check func_distr_shape
-        self.assertEqual(new_dtldiscr.func_distr_shape, 1)
+        self.assertEqual(new_dtldiscr.func_distr_shape, FDS.LOGNORMAL)
