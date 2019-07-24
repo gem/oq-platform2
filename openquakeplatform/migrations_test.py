@@ -8,7 +8,6 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "local_settings")
 
 
-# @unittest.skip("temporarily disabled")
 class VulnMigrationTest(MigrationTest):
 
     app_name = 'vulnerability'
@@ -51,7 +50,6 @@ class VulnMigrationTest(MigrationTest):
                              general_information_id=newgen_istance.pk,
                              method_of_estimation="2",
                              damage_scale="6",
-                             # limit_states_desc=None,
                              resp_var="5"
                              )
         newdamloss.save()
@@ -64,28 +62,25 @@ class VulnMigrationTest(MigrationTest):
                                owner_id=owner.pk,
                                damage_to_loss_func_id=newdamloss_istance.pk,
                                var_mean_val="0.1;0.2;0.4;0.9;1",
-                               # var_val_coeff="",
                                func_distr_shape=None
                                )
         newdtldiscr.save()
 
-        # import pdb;pdb.set_trace()
         self.run_migration()
 
+        # after migrations
         geninformation = self.get_model_after('GeneralInformation')
         damloss = self.get_model_after('DamageToLossFunc')
         dtldiscr = self.get_model_after('FuncDistrDTLDiscr')
 
         new_gen = GeneralInformation.objects.get(
             name="9 Storey Non-Ductile RC-MRFs")
-        print('GeneralInformation Id: %s' % new_gen.pk)
 
         new_damloss = DamageToLossFunc.objects.get(
             general_information_id=new_gen.pk)
-        print('DamageToLossFunc Id: %s' % new_damloss.pk)
 
         new_dtldiscr = FuncDistrDTLDiscr.objects.get(
             damage_to_loss_func_id=new_damloss.pk)
-        print('FuncDistrDTLDiscr Id: %s' % new_dtldiscr.func_distr_shape)
 
+        # check func_distr_shape
         self.assertEqual(new_dtldiscr.func_distr_shape, 1)
