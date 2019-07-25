@@ -183,7 +183,8 @@ function oq_application() {
     umask 0022
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class oq-platform-data; do
         # for repo in oq-platform-taxtweb; do
-        if [ "$GIT_BRANCH_APP" = "master" ]; then false ; else git clone -b "$GIT_BRANCH_APP" https://github.com/gem/${repo}.git ; fi || git clone -b $GIT_REPO https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
+        # if [ "$GIT_BRANCH_APP" = "master" ]; then false ; else git clone -b "$GIT_BRANCH_APP" https://github.com/gem/${repo}.git ; fi || git clone -b $GIT_REPO https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
+        git clone https://github.com/gem/${repo}.git 
         if [ "${repo}" != "oq-platform-data" ]; then
             pushd ${repo}
             sudo /var/lib/geonode/env/bin/python -m pip install .
