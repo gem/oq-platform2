@@ -371,8 +371,6 @@ sudo -u postgres psql -d geonode_dev -c '\copy assumpcao2014 FROM '$HOME/$GIT_RE
 
 updatelayer
 
-# test vulnerability migrations
-# MN: temporary disabled
 migrations_vulnerability_test
 
 cd ~/
