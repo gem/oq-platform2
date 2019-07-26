@@ -74,7 +74,8 @@ class TilestreamTest(unittest.TestCase):
             # wait info button will be clicked
             pla.xpath_finduniq(
                 "//button[@type='button' and normalize-space(text())"
-                "= 'Identify']/../../../../..[contains(concat(' ', @class, ' '),"
+                "= 'Identify']/../../../../..["
+                "contains(concat(' ', @class, ' '),"
                 " ' x-btn-pressed ')]", timeout=20)
 
             _, x, y = pla.xpath_finduniq_coords(
@@ -87,28 +88,41 @@ class TilestreamTest(unittest.TestCase):
             pla.add_click_event()
             pla.click_at(107 + x, 70 + y)
 
-            pla.xpath_finduniq("//div[text() = '1942-02-09T07:11:00']", timeout=50)
+            pla.xpath_finduniq(
+                "//div[text() = '1942-02-09T07:11:00']", timeout=50)
 
             # return content GETJson in Tilestream Source.js
             s = open(
-                    "/home/ubuntu/oq-platform2/openquakeplatform/"
-                    "static/js/TileStreamSource.js").read()
+                os.path.join(
+                    os.path.expanduser("~"), "/oq-platform2/"
+                                             "openquakeplatform/static/js/"
+                                             "static/js/"
+                                             "TileStreamSource.js")).read()
             s = s.replace('Tileset_wrong', 'Tileset')
             r = open(
-                    "/home/ubuntu/oq-platform2/openquakeplatform/"
-                    "static/js/TileStreamSource.js", 'w')
+                os.path.join(
+                    os.path.expanduser("~"), "/oq-platform2/"
+                                             "openquakeplatform/static/js/"
+                                             "static/js/"
+                                             "TileStreamSource.js"), 'w')
             r.write(s)
             r.close()
 
             restart_apache()
         finally:
             s = open(
-                    "/home/ubuntu/oq-platform2/openquakeplatform/"
-                    "static/js/TileStreamSource.js").read()
+                os.path.join(
+                    os.path.expanduser("~"), "/oq-platform2/"
+                                             "openquakeplatform/static/js/"
+                                             "static/js/"
+                                             "TileStreamSource.js")).read()
             s = s.replace('Tileset_wrong', 'Tileset')
             r = open(
-                    "/home/ubuntu/oq-platform2/openquakeplatform/"
-                    "static/js/TileStreamSource.js", 'w')
+                os.path.join(
+                    os.path.expanduser("~"), "/oq-platform2/"
+                                             "openquakeplatform/static/js/"
+                                             "static/js/"
+                                             "TileStreamSource.js"), 'w')
             r.write(s)
             r.close()
 
