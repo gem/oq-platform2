@@ -32,14 +32,18 @@ class TilestreamTest(unittest.TestCase):
             # change content GETJson in Tilestream Source.js
             s = open(
                 os.path.join(
-                    os.path.expanduser("~"), "/oq-platform2/"
-                                             "openquakeplatform/static/js/"
+                    os.path.expanduser("~"), "oq-platform2",
+                                             "openquakeplatform",
+                                             "static",
+                                             "js",
                                              "TileStreamSource.js")).read()
             s = s.replace('Tileset', 'Tileset_wrong')
             r = open(
                 os.path.join(
-                    os.path.expanduser("~"), "/oq-platform2/"
-                                             "openquakeplatform/static/js/"
+                    os.path.expanduser("~"), "oq-platform2",
+                                             "openquakeplatform",
+                                             "static",
+                                             "js",
                                              "TileStreamSource.js"), 'w')
             r.write(s)
             r.close()
@@ -94,16 +98,18 @@ class TilestreamTest(unittest.TestCase):
             # return content GETJson in Tilestream Source.js
             s = open(
                 os.path.join(
-                    os.path.expanduser("~"), "/oq-platform2/"
-                                             "openquakeplatform/static/js/"
-                                             "static/js/"
+                    os.path.expanduser("~"), "oq-platform2",
+                                             "openquakeplatform",
+                                             "static",
+                                             "js",
                                              "TileStreamSource.js")).read()
             s = s.replace('Tileset_wrong', 'Tileset')
             r = open(
                 os.path.join(
-                    os.path.expanduser("~"), "/oq-platform2/"
-                                             "openquakeplatform/static/js/"
-                                             "static/js/"
+                    os.path.expanduser("~"), "oq-platform2",
+                                             "openquakeplatform",
+                                             "static",
+                                             "js",
                                              "TileStreamSource.js"), 'w')
             r.write(s)
             r.close()
@@ -112,16 +118,18 @@ class TilestreamTest(unittest.TestCase):
         finally:
             s = open(
                 os.path.join(
-                    os.path.expanduser("~"), "/oq-platform2/"
-                                             "openquakeplatform/static/js/"
-                                             "static/js/"
+                    os.path.expanduser("~"), "oq-platform2",
+                                             "openquakeplatform",
+                                             "static",
+                                             "js",
                                              "TileStreamSource.js")).read()
             s = s.replace('Tileset_wrong', 'Tileset')
             r = open(
                 os.path.join(
-                    os.path.expanduser("~"), "/oq-platform2/"
-                                             "openquakeplatform/static/js/"
-                                             "static/js/"
+                    os.path.expanduser("~"), "oq-platform2",
+                                             "openquakeplatform",
+                                             "static",
+                                             "js",
                                              "TileStreamSource.js"), 'w')
             r.write(s)
             r.close()
