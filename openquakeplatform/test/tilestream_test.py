@@ -31,12 +31,16 @@ class TilestreamTest(unittest.TestCase):
         try:
             # change content GETJson in Tilestream Source.js
             s = open(
-                    "/home/ubuntu/oq-platform2/openquakeplatform/"
-                    "static/js/TileStreamSource.js").read()
+                os.path.join(
+                    os.path.expanduser("~"), "/oq-platform2/"
+                                             "openquakeplatform/static/js/"
+                                             "TileStreamSource.js")).read()
             s = s.replace('Tileset', 'Tileset_wrong')
             r = open(
-                    "/home/ubuntu/oq-platform2/openquakeplatform/"
-                    "static/js/TileStreamSource.js", 'w')
+                os.path.join(
+                    os.path.expanduser("~"), "/oq-platform2/"
+                                             "openquakeplatform/static/js/"
+                                             "TileStreamSource.js"), 'w')
             r.write(s)
             r.close()
 
