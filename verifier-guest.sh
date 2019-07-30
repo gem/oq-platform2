@@ -52,7 +52,7 @@ extra_deps_install() {
     pip install django-nested-inline
     pip install django_extras
     pip install -e git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
-    pip install -e git+git://github.com/gem/django-nested-inlines.git@pla26#egg=django-nested-inlines-0.1.4
+    pip install -e git+git://github.com/gem/django-nested-inlines.git@master19#egg=django-nested-inlines-0.1.5
     pip install -e git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
     pip install -e git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
     pip install django-request==1.5.2
@@ -91,6 +91,12 @@ exec_test () {
 exec_set_map_thumbs () {
     export DISPLAY=:1
     python -m openquake.moon.nose_runner --failurecatcher dev -s -v --with-xunit --xunit-file=xunit-platform-dev.xml $GIT_REPO/openquakeplatform/set_thumb/mapthumbnail_test.py
+}
+
+migrations_vulnerability_test() {
+    pushd ~/geonode
+    python manage.py test -v 3 $HOME/$GIT_REPO/openquakeplatform/migrations_test.py
+    popd
 }
 
 updatelayer() {
@@ -172,6 +178,8 @@ cat << EOF | sudo -u postgres psql
     CREATE USER "$GEO_DBUSER" WITH PASSWORD '$GEO_DBPWD';
     GRANT ALL PRIVILEGES ON DATABASE "$GEO_DBNAME" to $GEO_DBUSER;
     GRANT ALL PRIVILEGES ON DATABASE "geonode_dev-imports" to $GEO_DBUSER;
+    ALTER USER "$GEO_DBUSER" CREATEDB;
+    ALTER ROLE "$GEO_DBUSER" SUPERUSER;
 EOF
 
 sudo -u postgres psql -d geonode_dev -c 'CREATE EXTENSION postgis;'
@@ -336,7 +344,7 @@ cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/g
 python ./manage.py add_documents
 
 cd ~/
-## install geckodriver and selenium
+# install geckodriver and selenium
 initialize_test
 # Set thumbnails all maps
 exec_set_map_thumbs
@@ -363,6 +371,9 @@ sudo -u postgres psql -d geonode_dev -c '\copy assumpcao2014 FROM '$HOME/$GIT_RE
 
 updatelayer
 
+# test vulnerability migrations
+migrations_vulnerability_test
+
 cd ~/
 
 if [ "$NO_EXEC_TEST" != "notest" ] ; then
@@ -373,13 +384,13 @@ fi
 if [ "$GEM_TEST_LATEST" = "true" ]; then
     # pip freeze > ~/latest_requirements.txt
     $HOME/$GIT_REPO/create_gem_requirements.sh > gem_geonode_requirements.txt
-    cd ~/geonode
+    pushd ~/geonode
     git log -1 > ~/latest_geonode_commit.txt
-    cd -
+    popd -
 fi
 
 cd ~/geonode
 
-## Stop Geonode
+# Stop Geonode
 sudo supervisorctl stop openquake-webui
 paver -f $HOME/$GIT_REPO/pavement.py stop
