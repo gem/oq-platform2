@@ -224,7 +224,7 @@ fi
 sudo service postgresql restart
 
 #install numpy
-pip install numpy
+pip install "numpy>=1.16,<1.17"
 
 ## Clone GeoNode
 if [ -z "$REINSTALL" ]; then
