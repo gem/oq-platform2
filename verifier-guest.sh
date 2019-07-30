@@ -386,7 +386,7 @@ if [ "$GEM_TEST_LATEST" = "true" ]; then
     $HOME/$GIT_REPO/create_gem_requirements.sh > gem_geonode_requirements.txt
     pushd ~/geonode
     git log -1 > ~/latest_geonode_commit.txt
-    popd -
+    popd
 fi
 
 cd ~/geonode
