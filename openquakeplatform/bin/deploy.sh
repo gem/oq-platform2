@@ -51,10 +51,10 @@ sudo /var/lib/geonode/env/bin/python -m pip install "numpy>=1.16,<1.17"
 sudo /var/lib/geonode/env/bin/python -m pip install "django<2"
 sudo /var/lib/geonode/env/bin/python -m pip install django-nested-inline
 sudo /var/lib/geonode/env/bin/python -m pip install django_extras
-sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.3
+sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox
 sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/django-nested-inlines.git@master19#egg=django-nested-inlines
-sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
-sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
+sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes
+sudo /var/lib/geonode/env/bin/python -m pip install git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers
 sudo /var/lib/geonode/env/bin/python -m pip install django-request==1.5.2
 
 
