@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: tabstop=4 shiftwidth=4 softtabstop=4
 
-# Copyright (c) 2014, GEM Foundation.
+# Copyright (c) 2014-2019, GEM Foundation.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -91,7 +91,8 @@ def get_supplemental_information(request):
             'Please provide the layer_name parameter')
     try:
         layer = _resolve_layer(
-            request, layer_name, 'layers.view_layer', _PERMISSION_MSG_VIEW)
+            request, layer_name, 'base.view_resourcebase',
+            _PERMISSION_MSG_VIEW)
     except PermissionDenied:
         return HttpResponse(
             'You are not allowed to view this layer',
