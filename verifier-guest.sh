@@ -108,7 +108,7 @@ rem_sig_hand() {
     trap "" ERR
     echo 'signal trapped'
     set +e
-    sudo supervisorctl stop openquake-webui
+    sudo supervisorctl stop openquake-webui || true
 
     geonode_setup_env
 
@@ -392,5 +392,5 @@ fi
 cd ~/geonode
 
 # Stop Geonode
-sudo supervisorctl stop openquake-webui
+sudo supervisorctl stop openquake-webui || true
 paver -f $HOME/$GIT_REPO/pavement.py stop
