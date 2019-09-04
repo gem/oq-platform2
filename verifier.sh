@@ -24,7 +24,7 @@
 # export GEM_EPHEM_NAME=<lxc-name>
 # export GEM_EPHEM_EXE=<lxc-name>
 # export GEM_EPHEM_DESTROY=false
-# 
+#
 #
 #  usage <exitcode> - show usage of the script
 #      <exitcode>    value of exitcode
@@ -39,10 +39,10 @@ usage () {
 
     echo
     echo "USAGE:"
-    echo "    $0 devtest <branch-name> ['notests']"
-    echo "                                     development installation and tests."
-    echo "         <branch-name>    name of branch repo"
-    echo "         'notests'    if not running the tests"
+    echo "    $0 devtest <branch_id> <branch_geonode|''> <'notest'|''>"
+    echo "                             development installation and tests."
+    echo "         <branch-name|''>    name of branch repo"
+    echo "         <'notest'|''>       if not running the tests"
     echo
     exit $ret
 }
@@ -217,13 +217,13 @@ _lxc_name_and_ip_get()
     fi
 }
 
-#
-#  _devtest_innervm_run <branch_id> <lxc_ip> - part of source test performed on lxc
+#  _devtest_innervm_run <branch_id> <branch_geonode|''> <'notest'|''> - part of source test performed on lxc
 #                     the following activities are performed:
 #                       files and install them
 #
-#      <branch_id>    name of the tested branch
-#      <lxc_ip>       the IP address of lxc instance
+#      <branch_id>           name of the tested branch
+#      <branch_geonode|''>   name of the geonode branch
+#      <notest|''>           name of variable for activate or deactivate tests
 #
 _devtest_innervm_run () {
     local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2" notests="$3"
@@ -260,10 +260,10 @@ export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 }
 
 #
-#  devtest_run <branch_id> <branch_geonode> <notests> - main function for development test
-#      <branch_id>        name of the tested branch
-#      <branch_geonode>   name of the geonode branch
-#      <notests>          name of variable for activate or deactivate tests 
+#  devtest_run <branch_id> <branch_geonode|''> <'notest'|''> - main function for development test
+#      <branch_id>           name of the tested branch
+#      <branch_geonode|''>   name of the geonode branch
+#      <notest|''>           name of variable for activate or deactivate tests
 #
 devtest_run () {
     local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3"
@@ -271,7 +271,7 @@ devtest_run () {
     if [ "$branch_geonode" == "" ] ; then
         branch_geonode="2.6.x"
     fi
- 
+
     sudo echo
     if [ "$GEM_EPHEM_EXE" = "$GEM_EPHEM_NAME" ]; then
         _lxc_name_and_ip_get
@@ -328,12 +328,13 @@ copy_prod () {
 }
 
 #
-#  _prodtest_innervm_run <branch_id> <lxc_ip> - part of source test performed on lxc
-#                     the following activities are performed:
-#                       files and install them
+#  _prodtest_innervm_run <branch_id> <branch_geonode|''> <'notest'|''>- part of source test performed on lxc
+#                          the following activities are performed:
+#                          files and install them
 #
-#      <branch_id>    name of the tested branch
-#      <lxc_ip>       the IP address of lxc instance
+#      <branch_id>         name of the tested branch
+#      <branch_geonode|''> name of geonode branch used for the installation
+#      <'notest'|''>       the IP address of lxc instance
 #
 # cp \"$HOME\"/\"$GEM_GIT_PACKAGE\"/openquakeplatform/deploy.sh \"$HOME\"
 # cp \"$HOME\"/\"$GEM_GIT_PACKAGE\"/openquakeplatform/oq_install.sh \"$HOME\"
@@ -374,10 +375,10 @@ export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 }
 
 #
-#  prodtest_run <branch_id> <branch_geonode> <notests> - main function for development test
-#      <branch_id>        name of the tested branch
-#      <branch_geonode>   name of the geonode branch
-#      <notests>          name of variable for activate or deactivate tests 
+#  prodtest_run <branch_id> <branch_geonode|''> <'notest'|''> - main function for development test
+#      <branch_id>           name of the tested branch
+#      <branch_geonode|''>   name of the geonode branch
+#      <'notest'|''>         name of variable for activate or deactivate tests
 #
 prodtest_run () {
     local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3"
@@ -385,7 +386,7 @@ prodtest_run () {
     if [ "$branch_geonode" == "" ] ; then
         branch_geonode="2.6.x"
     fi
- 
+
     sudo echo
     if [ "$GEM_EPHEM_EXE" = "$GEM_EPHEM_NAME" ]; then
         _lxc_name_and_ip_get
