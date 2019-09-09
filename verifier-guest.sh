@@ -51,10 +51,10 @@ extra_deps_install() {
     python -m pip install "django<2"
     pip install django-nested-inline
     pip install django_extras
-    pip install -e git+git://github.com/gem/django-chained-selectbox.git@pla26#egg=django-chained-selectbox-0.2.2
-    pip install -e git+git://github.com/gem/django-nested-inlines.git@master19#egg=django-nested-inlines-0.1.5
-    pip install -e git+git://github.com/gem/django-chained-multi-checkboxes.git@pla26#egg=django-chained-multi-checkboxes-0.4.1
-    pip install -e git+git://github.com/gem/wadofstuff-django-serializers.git@pla26#egg=wadofstuff-django-serializers-1.1.2
+    pip install -e git+git://github.com/gem/django-chained-selectbox.git#egg=django-chained-selectbox
+    pip install -e git+git://github.com/gem/django-nested-inlines.git#egg=django-nested-inlines
+    pip install -e git+git://github.com/gem/django-chained-multi-checkboxes.git#egg=django-chained-multi-checkboxes
+    pip install -e git+git://github.com/gem/wadofstuff-django-serializers.git#egg=wadofstuff-django-serializers
     pip install django-request==1.5.2
 }
 
@@ -108,7 +108,7 @@ rem_sig_hand() {
     trap "" ERR
     echo 'signal trapped'
     set +e
-    sudo supervisorctl stop openquake-webui
+    sudo supervisorctl stop openquake-webui || true
 
     geonode_setup_env
 
@@ -392,5 +392,5 @@ fi
 cd ~/geonode
 
 # Stop Geonode
-sudo supervisorctl stop openquake-webui
+sudo supervisorctl stop openquake-webui || true
 paver -f $HOME/$GIT_REPO/pavement.py stop
