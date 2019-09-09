@@ -78,6 +78,7 @@ GEM_GIT_REPO="git://github.com/gem"
 NO_EXEC_TEST="$3"
 export PROD_INSTALL='y'
 export DATA_PROD="$5"
+TOMCAT_PROD="/var/lib/tomcat7"
 
 # sudo usermod -aG www-data $USER
 
@@ -264,6 +265,11 @@ function apply_data() {
     fi    
     sudo /var/lib/geonode/env/bin/python -m pip install simplejson==2.0.9
     sudo sed -i 's/-Xmx128m/-Xmx4096m/g' /etc/default/tomcat7
+    if [ !"$DEVEL_DATA" ]; then
+        sudo sed -i 's/http://localhost:8000/'"$LXC_IP"'/g' $TOMCAT_PROD/webapps/geoserver/data/security/role/geonode REST role service/config.xml
+        sudo sed -i 's/http://localhost:8000/'"$LXC_IP"'/g' $TOMCAT_PROD/webapps/geoserver/data/security/auth/geonodeAuthProvider/config.xml
+        sudo sed -i 's/http://localhost:8000//g' $TOMCAT_PROD/webapps/geoserver/data/security/filter/geonode-oauth2/config.xml
+    fi
     sudo service tomcat7 restart
     
     if [ -z "$DEVEL_DATA" ]; then
