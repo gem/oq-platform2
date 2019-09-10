@@ -240,7 +240,7 @@ fi
 sudo apt-get install -y software-properties-common
 sudo add-apt-repository -y ppa:openquake/ppa
 sudo apt-get update
-sudo apt-get install -y --force-yes python3-oq-engine
+sudo apt-get install -y --force-yes python3-oq-engine python3-oq-libs-extra
 
 ## Install GeoNode and dependencies
 cd $HOME/geonode
