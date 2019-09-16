@@ -328,7 +328,8 @@ def stop():
 
 
 @cmdopts([
-    ('bind=', 'b', 'Bind server to provided IP address and port number.')
+    ('bind=', 'b', 'Bind server to provided IP address and port number.'),
+    ('foreground', 'f', 'Do not run in background but in foreground')
 ])
 @task
 def start_django():
