@@ -108,7 +108,7 @@ rem_sig_hand() {
     trap "" ERR
     echo 'signal trapped'
     set +e
-    sudo supervisorctl stop openquake-webui || true
+    sudo systemctl stop openquake-webui.service
 
     geonode_setup_env
 
