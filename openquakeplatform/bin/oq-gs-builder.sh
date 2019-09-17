@@ -1144,6 +1144,7 @@ usage () {
     echo "$0 drop"
     echo "$0 restore <dirname>"
     echo "$0 populate <srcdir> <dstdir> <bindir> <workspace_name_def> <datastore_name_def> <db_name> <db_user> <db_pass> <gs_datadir> <app1> [<app2> [...]]"
+    echo "$0 migrate_geofence01 [To add new role inside Geofence [...]]"
     }
 
 #
