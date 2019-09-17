@@ -1117,6 +1117,27 @@ geoserver_population () {
     rm -rf $HOME/oq-platform2/openquakeplatform/build-gs-tree
 }
 
+migrate_geofence01 () {
+    gr_id=88
+    deny_src_id=1
+    mkdir -p "migrate_dir"
+    cp ./openquakeplatform/common/gs_data/geofence/rules/${gr_id}.xml migrate_dir
+    cp ./openquakeplatform/common/gs_data/geofence/rules/${deny_src_id}.xml migrate_dir
+
+    sed -i "s@127.0.0.1:8000@127.0.0.1:$GEM_GEONODE_PORT@g;s@127\.0\.0\.1:8080@127.0.0.1:$GEM_GEOSERVER_PORT@g" migrate_dir/*.xml
+
+    fname=rules_list
+    web_get "$fname" "${GEM_SITE}/geoserver/geofence/rest/rules" 200
+    deny_id="$(xmlstarlet sel -t -m '/Rules/Rule[access[text()="DENY"]]' -v "concat(@id, '$NL')" "${OUTDIR}$fname")"
+    fname=deny_rule
+    web_post "$fname" "text/xml" "" "migrate_dir/${deny_src_id}.xml" "${GEM_SITE}/geoserver/geofence/rest/rules/id/$deny_id" 200
+
+    fname=admin_rule
+    web_post "$fname" "text/xml" "" "migrate_dir/${gr_id}.xml" "${GEM_SITE}/geoserver/geofence/rest/rules" 201
+
+    fname=inval_output
+    web_put "$fname" "text/xml" "" "" "${GEM_SITE}/geoserver/rest/ruleCache/invalidate" 200
+}
 
 usage () {
     echo "$0 dump"
@@ -1149,6 +1170,10 @@ case $act in
         geoserver_population "$@"
         ;;
 
+    migrate_geofence01)
+        shift
+        migrate_geofence01 "$@"
+        ;;
     *)
         usage $0
         exit 1
