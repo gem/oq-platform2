@@ -269,6 +269,7 @@ function apply_data() {
     # Delete port 8000 from Geoserver Oauth in production installation
     if [ !"$DEVEL_DATA" ]; then
         sudo service tomcat7 stop
+        sleep 220
         sudo sed -i 's/localhost:8000/localhost/g' "$TOMCAT_PROD/webapps/geoserver/data/security/role/geonode REST role service/config.xml"
         sudo sed -i 's/localhost:8000/localhost/g' $TOMCAT_PROD/webapps/geoserver/data/security/auth/geonodeAuthProvider/config.xml
         sudo sed -i 's/localhost:8000/localhost/g' $TOMCAT_PROD/webapps/geoserver/data/security/filter/geonode-oauth2/config.xml
