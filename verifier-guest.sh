@@ -108,7 +108,7 @@ rem_sig_hand() {
     trap "" ERR
     echo 'signal trapped'
     set +e
-    sudo supervisorctl stop openquake-webui || true
+    sudo systemctl stop openquake-webui.service
 
     geonode_setup_env
 
@@ -140,7 +140,7 @@ if [ "$REINSTALL" ]; then
     if [ -f ~/env/bin/activate -a -f ~/oq-platform2/pavement.py -a -d ~/geonode ]; then
         . ~/env/bin/activate
         cd ~/geonode
-        sudo supervisorctl stop openquake-webui || true
+        sudo systemctl stop openquake-webui.service
         paver -f ~/oq-platform2/pavement.py stop || true
         deactivate
     else
@@ -392,5 +392,5 @@ fi
 cd ~/geonode
 
 # Stop Geonode
-sudo supervisorctl stop openquake-webui || true
+sudo systemctl stop openquake-webui.service
 paver -f $HOME/$GIT_REPO/pavement.py stop
