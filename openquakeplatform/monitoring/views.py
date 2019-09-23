@@ -51,13 +51,13 @@ def monitoring(request):
     PG_PWD = settings.DATABASES['default']['PASSWORD']
 
     pg['Title'] = 'Postgres'
+    pg['Url'] = PG_HOST
     try:
         psycopg2.connect(
             "host = '%s' "
             "dbname = '%s' "
             "user = '%s' "
             "password = '%s'" % (PG_HOST, PG_NAME, PG_USER, PG_PWD))
-
         pg['Status'] = 'OK'
     except psycopg2.OperationalError:
         pg['Status'] = 'Fail'
