@@ -37,11 +37,11 @@ def monitoring(request):
             item['Title'] = a_title
             item['Url'] = a_url
             item['Status'] = 'OK'
-        except urllib2.URLError, e:
+        except urllib2.HTTPError, e:
             item['Title'] = a_title
             item['Url'] = a_url
             item['Status'] = 'Fail'
-            item['Error'] = e.reason
+            item['Error'] = e.code
         data.append(item)
 
     # check postgres
