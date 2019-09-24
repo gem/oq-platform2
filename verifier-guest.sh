@@ -32,9 +32,10 @@ if [ "$1"  = "-r" -o "$1" = "--reinstall" ]; then
 fi
 GIT_BRANCH="$1"
 GIT_GEO_BRANCH="$2"
-GIT_REPO="$3"
-export LXC_IP="$4"
-NO_EXEC_TEST="$5"
+plugins_branch_id="$3"
+GIT_REPO="$4"
+export LXC_IP="$5"
+NO_EXEC_TEST="$6"
 GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
@@ -266,6 +267,9 @@ cd ~
 if [ -z "$REINSTALL" ]; then
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
         # for repo in oq-platform-taxtweb; do
+        if [ "$plugins_branch_id" != "" ]; then
+            GIT_BRANCH=$plugins_branch_id
+        fi
         if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
     done
 fi

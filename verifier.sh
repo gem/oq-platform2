@@ -224,6 +224,7 @@ _lxc_name_and_ip_get()
 #      <branch_id>           name of the tested branch
 #      <branch_geonode|''>   name of the geonode branch
 #      <notest|''>           name of variable for activate or deactivate tests
+#      <plugins_branch_id>  name of preferred branch for plugins
 #
 _devtest_innervm_run () {
     local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2" plugins_branch_id="$3 "notests="$4"
