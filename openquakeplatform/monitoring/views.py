@@ -27,7 +27,7 @@ def monitoring(request):
     GS_LOCATION = settings.GEOSERVER_LOCATION
 
     title = ['Engine server', 'Geoserver']
-    url = ['http://localhost:8800/v1/engine_version', GS_LOCATION]
+    url = ['http://localhost:8800/v1/engine_versione', GS_LOCATION]
 
     # check Geoserver and Engine server
     for a_title, a_url in zip(title, url):
@@ -37,10 +37,11 @@ def monitoring(request):
             item['Title'] = a_title
             item['Url'] = a_url
             item['Status'] = 'OK'
-        except urllib2.URLError:
+        except urllib2.URLError, e:
             item['Title'] = a_title
             item['Url'] = a_url
             item['Status'] = 'Fail'
+            item['Error'] = e.reason
         data.append(item)
 
     # check postgres
