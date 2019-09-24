@@ -38,7 +38,7 @@ NO_EXEC_TEST="$5"
 GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
-plugins_branch_id="$6"
+plugins_branch="$6"
 
 geonode_setup_env()
 {
@@ -267,8 +267,8 @@ cd ~
 if [ -z "$REINSTALL" ]; then
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
         # for repo in oq-platform-taxtweb; do
-        if [ "$plugins_branch_id" != "" ]; then
-            GIT_BRANCH=$plugins_branch_id
+        if [ "$plugins_branch" != "" ]; then
+            GIT_BRANCH=$plugins_branch
         fi
         if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
     done

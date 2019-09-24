@@ -79,7 +79,7 @@ NO_EXEC_TEST="$3"
 export PROD_INSTALL='y'
 export DATA_PROD="$5"
 TOMCAT_PROD="/var/lib/tomcat7"
-plugins_branch_id="$6"
+plugins_branch="$6"
 
 # sudo usermod -aG www-data $USER
 
@@ -178,8 +178,8 @@ function oq_application() {
     cd $HOME
     umask 0022
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class oq-platform-data; do
-        if [ "$plugins_branch_id" != "" ]; then
-            GIT_BRANCH=$plugins_branch_id
+        if [ "$plugins_branch" != "" ]; then
+            GIT_BRANCH=$plugins_branch
         fi
         # for repo in oq-platform-taxtweb; do
         git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
