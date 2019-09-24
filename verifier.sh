@@ -227,7 +227,7 @@ _lxc_name_and_ip_get()
 #      <plugins_branch_id>  name of preferred branch for plugins
 #
 _devtest_innervm_run () {
-    local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2" plugins_branch_id="$3" notests="$4"
+    local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2" notests="$3" plugins_branch_id="$4"
 
     trap 'local LASTERR="$?" ; trap ERR ; (exit $LASTERR) ; return' ERR
 
@@ -253,7 +253,7 @@ export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
 export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
 export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 
-\"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$plugins_branch_id\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\" \"$notests\"
+\"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\" \"$notests\" \"$plugins_branch_id\"
 "
     echo "_devtest_innervm_run: exit"
 
@@ -267,7 +267,7 @@ export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 #      <notest|''>           name of variable for activate or deactivate tests
 #
 devtest_run () {
-    local deps old_ifs branch_id="$1" branch_geonode="$2" plugins_branch_id="$3" notests="$4"
+    local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3" plugins_branch_id="$4"
 
     if [ "$branch_geonode" == "" ] ; then
         branch_geonode="2.6.x"
@@ -288,7 +288,7 @@ devtest_run () {
 
     _wait_ssh $lxc_ip
     set +e
-    _devtest_innervm_run "$branch_id" "$branch_geonode" "$plugins_branch_id" "$notests"
+    _devtest_innervm_run "$branch_id" "$branch_geonode" "$notests" "$plugins_branch_id"
     inner_ret=$?
 
     copy_common dev

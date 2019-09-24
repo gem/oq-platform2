@@ -32,13 +32,13 @@ if [ "$1"  = "-r" -o "$1" = "--reinstall" ]; then
 fi
 GIT_BRANCH="$1"
 GIT_GEO_BRANCH="$2"
-plugins_branch_id="$3"
-GIT_REPO="$4"
-export LXC_IP="$5"
-NO_EXEC_TEST="$6"
+GIT_REPO="$3"
+export LXC_IP="$4"
+NO_EXEC_TEST="$5"
 GEO_DBNAME="geonode_dev"
 GEO_DBUSER="geonode_dev"
 GEO_DBPWD="geonode_dev"
+plugins_branch_id="$6"
 
 geonode_setup_env()
 {
