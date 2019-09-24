@@ -267,8 +267,8 @@ cd ~
 if [ -z "$REINSTALL" ]; then
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class; do
         # for repo in oq-platform-taxtweb; do
-        if [ "$plugins_branch_id" != "" ]; then
-            GIT_BRANCH=$plugins_branch_id
+        if [ "$plugins_branch_id" != 'master' ]; then
+            GIT_BRANCH="$plugins_branch_id"
         fi
         if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
     done

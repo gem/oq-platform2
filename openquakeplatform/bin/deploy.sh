@@ -178,8 +178,8 @@ function oq_application() {
     cd $HOME
     umask 0022
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class oq-platform-data; do
-        if [ "$plugins_branch" != "" ]; then
-            GIT_BRANCH=$plugins_branch
+        if [ "$plugins_branch" != "master" ]; then
+            GIT_BRANCH="$plugins_branch"
         fi
         # for repo in oq-platform-taxtweb; do
         git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
