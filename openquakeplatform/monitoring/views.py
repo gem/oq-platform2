@@ -27,7 +27,7 @@ def monitoring(request):
     GS_LOCATION = settings.GEOSERVER_LOCATION
 
     title = ['Engine server', 'Geoserver']
-    url = ['http://localhost:8800/v1/engine_versione', GS_LOCATION]
+    url = ['http://localhost:8800/v1/engine_version', GS_LOCATION]
 
     # check Geoserver and Engine server
     for a_title, a_url in zip(title, url):
