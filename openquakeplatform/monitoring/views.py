@@ -31,15 +31,11 @@ def monitoring(request):
 
     # check Geoserver and Engine server
     for title_cur, url_cur in zip(titles, urls):
-        item = {}
+        item = {"Title": title_cur, "Url": url_cur}
         try:
             urllib2.urlopen(url_cur, timeout=1)
-            item['Title'] = title_cur
-            item['Url'] = url_cur
             item['Status'] = 'OK'
         except urllib2.HTTPError, e:
-            item['Title'] = title_cur
-            item['Url'] = url_cur
             item['Status'] = 'Fail'
             item['Error'] = e.code
         data.append(item)
