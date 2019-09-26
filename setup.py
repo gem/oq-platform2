@@ -35,6 +35,7 @@ setup(
               'openquakeplatform.grv',
               'openquakeplatform.irv',
               'openquakeplatform.test',
+              'openquakeplatform.monitoring',
               ],
     # NOTE:  django-chained-multi-checkboxes
     #        is following the new convention: a floating tag on github

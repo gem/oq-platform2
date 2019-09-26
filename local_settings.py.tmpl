@@ -166,6 +166,7 @@ INSTALLED_APPS += (
     'openquakeplatform.ghec_viewer',
     'openquakeplatform.isc_viewer',
     'openquakeplatform.pla_common',
+    'openquakeplatform.monitoring',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -199,6 +200,7 @@ AUTH_EXEMPT_URLS = ('/$',
                     '/share/',
                     '/explore/',
                     '/about/',
+                    '/monitoring/',
                     '/geoserver/',
                     '/gs/.*',
                     '/maps/',

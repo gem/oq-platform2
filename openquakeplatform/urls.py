@@ -124,6 +124,9 @@ urlpatterns = patterns('',
                        # svir
                        (r'^svir/', include('openquakeplatform.svir.urls')),
 
+                       #monitoring
+                       (r'^monitoring/', include('openquakeplatform.monitoring.urls')),
+
                        # Social views
                        (r"^account/", include("account.urls")),
                        (r'^people/', include('geonode.people.urls')),
