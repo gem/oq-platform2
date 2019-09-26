@@ -73,7 +73,7 @@ initialize_test () {
     sudo cp geckodriver /usr/local/bin
     pip install -U selenium==${GEM_SELENIUM_VERSION}
     if [ -z "$REINSTALL" ]; then
-        git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone -b oq-platform2 "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
+        git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
     fi
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
 
@@ -270,7 +270,7 @@ if [ -z "$REINSTALL" ]; then
         if [ "$plugins_branch_id" != 'master' ]; then
             GIT_BRANCH="$plugins_branch_id"
         fi
-        if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone -b oq-platform2 https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
+        if [ "$GIT_BRANCH" = "master" ]; then false ; else git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git ; fi || git clone https://github.com/gem/${repo}.git
     done
 fi
 
