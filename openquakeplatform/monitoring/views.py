@@ -26,20 +26,20 @@ def monitoring(request):
 
     GS_LOCATION = settings.GEOSERVER_LOCATION
 
-    title = ['Engine server', 'Geoserver']
-    url = ['http://localhost:8800/v1/engine_version', GS_LOCATION]
+    titles = ['Engine server', 'Geoserver']
+    urls = ['http://localhost:8800/v1/engine_version', GS_LOCATION]
 
     # check Geoserver and Engine server
-    for a_title, a_url in zip(title, url):
+    for title_cur, url_cur in zip(titles, urls):
         item = {}
         try:
             urllib2.urlopen(a_url, timeout=1)
-            item['Title'] = a_title
-            item['Url'] = a_url
+            item['Title'] = title_cur
+            item['Url'] = url_cur
             item['Status'] = 'OK'
         except urllib2.HTTPError, e:
-            item['Title'] = a_title
-            item['Url'] = a_url
+            item['Title'] = title_cur
+            item['Url'] = url_cur
             item['Status'] = 'Fail'
             item['Error'] = e.code
         data.append(item)
