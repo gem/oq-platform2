@@ -33,7 +33,7 @@ def monitoring(request):
     for title_cur, url_cur in zip(titles, urls):
         item = {}
         try:
-            urllib2.urlopen(a_url, timeout=1)
+            urllib2.urlopen(url_cur, timeout=1)
             item['Title'] = title_cur
             item['Url'] = url_cur
             item['Status'] = 'OK'
