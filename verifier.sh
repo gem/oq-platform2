@@ -484,7 +484,7 @@ while [ $# -gt 0 ]; do
             ;;
          prodtest)
             ACTION="$1"
-            prodtest_run $(echo "$2" | sed 's@.*/@@g') "$3" "$4"
+            prodtest_run $(echo "$2" | sed 's@.*/@@g') "$3" "$4" "$5"
             break
             ;;
         *)
