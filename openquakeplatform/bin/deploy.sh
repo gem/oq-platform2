@@ -76,10 +76,10 @@ GIT_GEO_BRANCH="2.6.x"
 GEO_DBUSER="geonode"
 GEM_GIT_REPO="git://github.com/gem"
 NO_EXEC_TEST="$3"
+plugins_branch_id="$4"
 export PROD_INSTALL='y'
 export DATA_PROD="$5"
 TOMCAT_PROD="/var/lib/tomcat7"
-plugins_branch_id="$6"
 
 # sudo usermod -aG www-data $USER
 
