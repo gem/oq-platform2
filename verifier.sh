@@ -224,9 +224,10 @@ _lxc_name_and_ip_get()
 #      <branch_id>           name of the tested branch
 #      <branch_geonode|''>   name of the geonode branch
 #      <notest|''>           name of variable for activate or deactivate tests
+#      <plugins_branch_id>  name of preferred branch for plugins
 #
 _devtest_innervm_run () {
-    local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2" notests="$3"
+    local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2" notests="$3" plugins_branch_id="$4"
 
     trap 'local LASTERR="$?" ; trap ERR ; (exit $LASTERR) ; return' ERR
 
@@ -251,8 +252,9 @@ export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
 export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
 export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
 export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
+export plugins_branch_id=\"$plugins_branch_id\"
 
-\"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\" \"$notests\"
+\"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\" \"$notests\" \"$plugins_branch_id\"
 "
     echo "_devtest_innervm_run: exit"
 
@@ -266,10 +268,14 @@ export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 #      <notest|''>           name of variable for activate or deactivate tests
 #
 devtest_run () {
-    local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3"
+    local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3" plugins_branch_id="$4"
 
     if [ "$branch_geonode" == "" ] ; then
         branch_geonode="2.6.x"
+    fi
+
+    if [ "$branch_id" = "$plugins_branch_id" ]; then
+        plugins_branch_id=""
     fi
 
     sudo echo
@@ -283,7 +289,7 @@ devtest_run () {
 
     _wait_ssh $lxc_ip
     set +e
-    _devtest_innervm_run "$branch_id" "$branch_geonode" "$notests"
+    _devtest_innervm_run "$branch_id" "$branch_geonode" "$notests" "$plugins_branch_id"
     inner_ret=$?
 
     copy_common dev
@@ -340,7 +346,7 @@ copy_prod () {
 # cp \"$HOME\"/\"$GEM_GIT_PACKAGE\"/openquakeplatform/oq_install.sh \"$HOME\"
 
 _prodtest_innervm_run () {
-    local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2" notests="$3"
+    local i old_ifs pkgs_list dep git_branch="$1" branch_geonode="$2" notests="$3" plugins_branch_id="$4"
 
     trap 'local LASTERR="$?" ; trap ERR ; (exit $LASTERR) ; return' ERR
 
@@ -366,8 +372,9 @@ export GEM_SET_DEBUG=\"$GEM_SET_DEBUG\"
 export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
 export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
 export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
+export plugins_branch_id=\"$plugins_branch_id\"
 
-\"./deploy.sh\" -d \"$lxc_ip\" \"$branch_id\" \"$notests\"
+\"./deploy.sh\" -d \"$lxc_ip\" \"$branch_id\" \"$notests\" \"$plugins_branch_id\"
 "
     echo "_prodtest_innervm_run: exit"
 
@@ -381,7 +388,7 @@ export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 #      <'notest'|''>         name of variable for activate or deactivate tests
 #
 prodtest_run () {
-    local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3"
+    local deps old_ifs branch_id="$1" branch_geonode="$2" notests="$3" plugins_branch_id="$4"
 
     if [ "$branch_geonode" == "" ] ; then
         branch_geonode="2.6.x"
@@ -398,7 +405,7 @@ prodtest_run () {
 
     _wait_ssh $lxc_ip
     set +e
-    _prodtest_innervm_run "$branch_id" "$branch_geonode" "$notests"
+    _prodtest_innervm_run "$branch_id" "$branch_geonode" "$notests" "$plugins_branch_id"
     inner_ret=$?
 
     copy_common prod
@@ -472,12 +479,12 @@ while [ $# -gt 0 ]; do
             #    usage 1
             #fi
             ACTION="$1"
-            devtest_run $(echo "$2" | sed 's@.*/@@g') "$3" "$4"
+            devtest_run $(echo "$2" | sed 's@.*/@@g') "$3" "$4" "$5"
             break
             ;;
          prodtest)
             ACTION="$1"
-            prodtest_run $(echo "$2" | sed 's@.*/@@g')
+            prodtest_run $(echo "$2" | sed 's@.*/@@g') "$3" "$4" "$5"
             break
             ;;
         *)
