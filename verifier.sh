@@ -405,7 +405,7 @@ prodtest_run () {
 
     _wait_ssh $lxc_ip
     set +e
-    _prodtest_innervm_run "$branch_id" "$branch_geonode" "$notests" "$plugin_branch_id"
+    _prodtest_innervm_run "$branch_id" "$branch_geonode" "$notests" "$plugins_branch_id"
     inner_ret=$?
 
     copy_common prod
