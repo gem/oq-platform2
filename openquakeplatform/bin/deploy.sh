@@ -162,7 +162,7 @@ function clone_platform() {
     # clone oq-platform
     cd $HOME
     umask 0022
-    git clone https://github.com/gem/$GIT_REPO.git
+    git clone $GEM_GIT_REPO/$GIT_REPO.git
     umask 0002
     cd $GIT_REPO
     git checkout $GIT_BRANCH
@@ -178,11 +178,12 @@ function oq_application() {
     cd $HOME
     umask 0022
     for repo in oq-platform-taxtweb oq-platform-ipt oq-platform-building-class oq-platform-data; do
-        if [ "$plugins_branch_id" != "master" ]; then
-            GIT_BRANCH="$plugins_branch_id"
+        if [ "$plugins_branch_id" ]; then
+            plugins_pfx="git clone -b $plugins_branch_id $GEM_GIT_REPO/${repo}.git || "
         fi
+
         # for repo in oq-platform-taxtweb; do
-        git clone -b "$GIT_BRANCH" https://github.com/gem/${repo}.git || git clone https://github.com/gem/${repo}.git
+        eval "${plugins_pfx}git clone -b "$GIT_BRANCH" $GEM_GIT_REPO/${repo}.git || git clone $GEM_GIT_REPO/${repo}.git"
         if [ "${repo}" != "oq-platform-data" ]; then
             pushd ${repo}
             sudo /var/lib/geonode/env/bin/python -m pip install .
@@ -195,7 +196,7 @@ function oq_application() {
 function install_geonode() { 
     # clone geonode
     cd $HOME
-    git clone --depth=1 -b "$GIT_GEO_BRANCH" https://github.com/gem/geonode.git
+    git clone --depth=1 -b "$GIT_GEO_BRANCH" $GEM_GIT_REPO/geonode.git
 
     # download Geonode zip
     wget http://ftp.openquake.org/$GIT_REPO/GeoNode-2.6.x.zip
@@ -352,7 +353,12 @@ function initialize_test() {
     sudo cp geckodriver /usr/local/bin
     sudo /var/lib/geonode/env/bin/python -m pip install -U selenium==${GEM_SELENIUM_VERSION}
     if [ -z "$REINSTALL" ]; then
-        git clone -b "$GIT_BRANCH" "$GEM_GIT_REPO/oq-moon.git" || git clone "$GEM_GIT_REPO/oq-moon.git"
+        if [ "$plugins_branch_id" ]; then
+            plugins_pfx="git clone -b $plugins_branch_id $GEM_GIT_REPO/oq-moon.git || "
+        fi
+
+        # for repo in oq-platform-taxtweb; do
+        eval "${plugins_pfx}git clone -b "$GIT_BRANCH" $GEM_GIT_REPO/oq-moon.git || git clone $GEM_GIT_REPO/oq-moon.git"
     fi
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/set_thumb/moon_config.py
