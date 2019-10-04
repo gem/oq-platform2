@@ -9,7 +9,7 @@ class VulnMigrationTest(MigrationTest):
 
     app_name = 'vulnerability'
     before = '0001_initial'
-    after = '0005_auto_20191003_1406'
+    after = '0005_func_dist_vuln_dtl_scm'
 
     def test_migration_model(self):
 
