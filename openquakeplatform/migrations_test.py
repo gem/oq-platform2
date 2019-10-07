@@ -70,7 +70,7 @@ class VulnMigrationTest(MigrationTest):
             owner_id=owner.pk,
             vulnerability_func=be_vulnfunc,
             resp_var_mean_val="0.1;0.2;0.4;0.9;1",
-            resp_var_val_coeff=None,
+            resp_var_val_coeff="",
             data_pts_num="3"
             )
         be_distr_vuln_discr.save()
