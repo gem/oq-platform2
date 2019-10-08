@@ -7,25 +7,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "local_settings")
 User = get_user_model()
 
 
-def after_migr(self, func_name):
-
-    # after migrations
-    GeneralInformation_af = self.get_model_after('GeneralInformation')
-    VulnerabilityFunc_af = self.get_model_after('VulnerabilityFunc')
-
-    af_gen = GeneralInformation_af.objects.get(name=func_name)
-
-    af_vul_f = VulnerabilityFunc_af.objects.get(resp_var="5")
-
-    af_dtldiscr = (af_gen.damage_to_loss_func.func_distr_dtl_discr)
-    af_vuln_discr = af_vul_f.func_distr_vuln_discr
-
-    # check func_distr_shape, var_val_coeff, resp_var_val_coeff
-    self.assertEqual(af_dtldiscr.func_distr_shape, FDS.LOGNORMAL)
-    self.assertEqual(af_dtldiscr.var_val_coeff, '0;0;0;0;0')
-    self.assertEqual(af_vuln_discr.resp_var_val_coeff, '0;0;0;0;0')
-
-
 def create_user():
     user = User.objects.create(
                               username="admin",
@@ -33,6 +14,7 @@ def create_user():
                               is_superuser="true"
                              )
     user.save()
+    return user
 
 
 class VulnMigrationTest(MigrationTest):
@@ -41,15 +23,12 @@ class VulnMigrationTest(MigrationTest):
     before = '0001_initial'
     after = '0005_func_dist_vuln_dtl_scm'
 
-    def test_migration_model_none(self):
-
-        create_user()
-        owner = User.objects.get(username="admin")
+    def gen_information(self, owner, name_suffix):
 
         GeneralInformation_be = self.get_model_before('GeneralInformation')
         be_gen = GeneralInformation_be.objects.create(
             owner_id=owner.pk,
-            name="9 Storey Non-Ductile RC-MRFs None",
+            name="9 Storey Non-Ductile RC-MRFs %s" % name_suffix,
             category='10',
             material=None,
             type_of_assessment="10",
@@ -58,6 +37,13 @@ class VulnMigrationTest(MigrationTest):
             year="2016",
             )
         be_gen.save()
+        return be_gen
+
+    def test_migration_model_none(self):
+
+        owner = create_user()
+
+        be_gen = self.gen_information(owner, 'None')
 
         VulnerabilityFunc_be = self.get_model_before('VulnerabilityFunc')
         be_vulnfunc = VulnerabilityFunc_be.objects.create(
@@ -103,25 +89,12 @@ class VulnMigrationTest(MigrationTest):
         self.run_migration()
 
         # tests after migrations
-        after_migr(self, be_gen.name)
+        self.after_migr(be_gen.name)
 
     def test_migration_model_empty(self):
 
-        create_user()
-        owner = User.objects.get(username="admin")
-
-        GeneralInformation_be = self.get_model_before('GeneralInformation')
-        be_gen = GeneralInformation_be.objects.create(
-            owner_id=owner.pk,
-            name="9 Storey Non-Ductile RC-MRFs Empty",
-            category='10',
-            material=None,
-            type_of_assessment="10",
-            article_title="Influence horizontal",
-            structure_type="10",
-            year="2016",
-            )
-        be_gen.save()
+        owner = create_user()
+        be_gen = self.gen_information(owner, 'Empty')
 
         VulnerabilityFunc_be = self.get_model_before('VulnerabilityFunc')
         be_vulnfunc = VulnerabilityFunc_be.objects.create(
@@ -167,4 +140,21 @@ class VulnMigrationTest(MigrationTest):
         self.run_migration()
 
         # tests after migrations
-        after_migr(self, be_gen.name)
+        self.after_migr(be_gen.name)
+
+    def after_migr(self, func_name):
+        # after migrations
+        GeneralInformation_af = self.get_model_after('GeneralInformation')
+        VulnerabilityFunc_af = self.get_model_after('VulnerabilityFunc')
+
+        af_gen = GeneralInformation_af.objects.get(name=func_name)
+
+        af_vul_f = VulnerabilityFunc_af.objects.get(resp_var="5")
+
+        af_dtldiscr = (af_gen.damage_to_loss_func.func_distr_dtl_discr)
+        af_vuln_discr = af_vul_f.func_distr_vuln_discr
+
+        # check func_distr_shape, var_val_coeff, resp_var_val_coeff
+        self.assertEqual(af_dtldiscr.func_distr_shape, FDS.LOGNORMAL)
+        self.assertEqual(af_dtldiscr.var_val_coeff, '0;0;0;0;0')
+        self.assertEqual(af_vuln_discr.resp_var_val_coeff, '0;0;0;0;0')
