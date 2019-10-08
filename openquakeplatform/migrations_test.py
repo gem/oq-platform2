@@ -39,7 +39,28 @@ class VulnMigrationTest(MigrationTest):
         be_gen.save()
         return be_gen
 
-    def test_migration_model_none(self):
+    def after_migr(self, func_name):
+
+        # after migrations
+        GeneralInformation_af = self.get_model_after('GeneralInformation')
+        VulnerabilityFunc_af = self.get_model_after('VulnerabilityFunc')
+
+        af_gen = GeneralInformation_af.objects.get(name=func_name)
+
+        af_vul_f = VulnerabilityFunc_af.objects.get(resp_var="5")
+
+        af_dtldiscr = (af_gen.damage_to_loss_func.func_distr_dtl_discr)
+        af_vuln_discr = af_vul_f.func_distr_vuln_discr
+
+        # check func_distr_shape, var_val_coeff, resp_var_val_coeff
+        self.assertEqual(af_dtldiscr.func_distr_shape, FDS.LOGNORMAL)
+        self.assertEqual(af_dtldiscr.var_val_coeff, '0;0;0;0;0')
+        self.assertEqual(af_vuln_discr.resp_var_val_coeff, '0;0;0;0;0')
+
+
+class VulnMigrationNoneTest(VulnMigrationTest):
+
+    def test_migration_model(self):
 
         owner = create_user()
 
@@ -91,7 +112,10 @@ class VulnMigrationTest(MigrationTest):
         # tests after migrations
         self.after_migr(be_gen.name)
 
-    def test_migration_model_empty(self):
+
+class VulnMigrationEmptyTest(VulnMigrationTest):
+
+    def test_migration_model(self):
 
         owner = create_user()
         be_gen = self.gen_information(owner, 'Empty')
@@ -141,20 +165,3 @@ class VulnMigrationTest(MigrationTest):
 
         # tests after migrations
         self.after_migr(be_gen.name)
-
-    def after_migr(self, func_name):
-        # after migrations
-        GeneralInformation_af = self.get_model_after('GeneralInformation')
-        VulnerabilityFunc_af = self.get_model_after('VulnerabilityFunc')
-
-        af_gen = GeneralInformation_af.objects.get(name=func_name)
-
-        af_vul_f = VulnerabilityFunc_af.objects.get(resp_var="5")
-
-        af_dtldiscr = (af_gen.damage_to_loss_func.func_distr_dtl_discr)
-        af_vuln_discr = af_vul_f.func_distr_vuln_discr
-
-        # check func_distr_shape, var_val_coeff, resp_var_val_coeff
-        self.assertEqual(af_dtldiscr.func_distr_shape, FDS.LOGNORMAL)
-        self.assertEqual(af_dtldiscr.var_val_coeff, '0;0;0;0;0')
-        self.assertEqual(af_vuln_discr.resp_var_val_coeff, '0;0;0;0;0')
