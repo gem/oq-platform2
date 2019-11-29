@@ -274,9 +274,9 @@ devtest_run () {
         branch_geonode="2.6.x"
     fi
 
-    if [ "$branch_id" = "$plugins_branch_id" ]; then
-        plugins_branch_id=""
-    fi
+#    if [ "$branch_id" = "$plugins_branch_id" ]; then
+#        plugins_branch_id=""
+#    fi
 
     sudo echo
     if [ "$GEM_EPHEM_EXE" = "$GEM_EPHEM_NAME" ]; then
