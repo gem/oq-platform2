@@ -258,6 +258,7 @@ if [ "$GEM_TEST_LATEST" != "true" ]; then
     pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
 fi
 
+pip install configparser
 pip install -e .
 
 # Install the system python-gdal
