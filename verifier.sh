@@ -374,6 +374,14 @@ export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
 export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 export plugins_branch_id=\"$plugins_branch_id\"
 
+# install demos from engine trevis build
+sudo apt-get update
+sudo apt-get install zip unzip
+rm -f demos-*.zip
+wget https://artifacts.openquake.org/travis/demos-${plugins_branch_id}.zip || wget https://artifacts.openquake.org/travis/demos-master.zip
+rm -rf demos
+unzip demos-*.zip
+
 \"./deploy.sh\" -d \"$lxc_ip\" \"$branch_id\" \"$notests\" \"$plugins_branch_id\"
 "
     echo "_prodtest_innervm_run: exit"
