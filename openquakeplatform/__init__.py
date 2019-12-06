@@ -15,5 +15,5 @@
 from __future__ import absolute_import
 from .version import git_suffix
 
-__version__ = '2.6.1'
+__version__ = '2.7.0'
 __version__ += git_suffix(__file__)
