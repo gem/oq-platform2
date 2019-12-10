@@ -274,9 +274,9 @@ devtest_run () {
         branch_geonode="2.6.x"
     fi
 
-    if [ "$branch_id" = "$plugins_branch_id" ]; then
-        plugins_branch_id=""
-    fi
+#    if [ "$branch_id" = "$plugins_branch_id" ]; then
+#        plugins_branch_id=""
+#    fi
 
     sudo echo
     if [ "$GEM_EPHEM_EXE" = "$GEM_EPHEM_NAME" ]; then
@@ -373,6 +373,14 @@ export GEM_GIT_REPO=\"$GEM_GIT_REPO\"
 export GEM_GIT_PACKAGE=\"$GEM_GIT_PACKAGE\"
 export GEM_TEST_LATEST=\"$GEM_TEST_LATEST\"
 export plugins_branch_id=\"$plugins_branch_id\"
+
+# install demos from engine trevis build
+sudo apt-get update
+sudo apt-get install zip unzip
+rm -f demos-*.zip
+wget https://artifacts.openquake.org/travis/demos-${plugins_branch_id}.zip || wget https://artifacts.openquake.org/travis/demos-master.zip
+rm -rf demos
+unzip demos-*.zip
 
 \"./deploy.sh\" -d \"$lxc_ip\" \"$branch_id\" \"$notests\" \"$plugins_branch_id\"
 "

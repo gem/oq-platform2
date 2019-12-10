@@ -60,7 +60,8 @@ sudo /var/lib/geonode/env/bin/python -m pip install django-request==1.5.2
 
 # install engine
 sudo apt-get install -y software-properties-common
-sudo add-apt-repository -y ppa:openquake/ppa
+# sudo add-apt-repository -y ppa:openquake/ppa
+sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
 sudo apt-get update
 sudo apt-get install -y --force-yes python3-oq-engine python3-oq-libs-extra
 
@@ -345,6 +346,7 @@ function initialize_test() {
     sudo apt-get -y install python-pip wget
     sudo /var/lib/geonode/env/bin/python -m pip install --upgrade pip
     sudo /var/lib/geonode/env/bin/python -m pip install nose
+    sudo /var/lib/geonode/env/bin/python -m pip install configparser
     wget "http://ftp.openquake.org/common/selenium-deps"
     GEM_FIREFOX_VERSION="$(dpkg-query --show -f '${Version}' firefox)"
     . selenium-deps

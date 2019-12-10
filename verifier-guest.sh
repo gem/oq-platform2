@@ -131,7 +131,7 @@ fi
 
 
 sudo apt update
-sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless
+sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless zip unzip
 
 # Used a local clone (see verifier.sh)
 # git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git
@@ -164,6 +164,12 @@ source ~/env/bin/activate
 extra_deps_install
 
 cd ~
+
+# install demos from engine trevis build
+rm -f demos-*.zip
+wget https://artifacts.openquake.org/travis/demos-${plugins_branch_id}.zip || wget https://artifacts.openquake.org/travis/demos-master.zip
+rm -rf demos
+unzip demos-*.zip
 
 #install and configuration postgres
 sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor
@@ -239,7 +245,8 @@ fi
 
 # install engine
 sudo apt-get install -y software-properties-common
-sudo add-apt-repository -y ppa:openquake/ppa
+# sudo add-apt-repository -y ppa:openquake/ppa
+sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
 sudo apt-get update
 sudo apt-get install -y --force-yes python3-oq-engine python3-oq-libs-extra
 
@@ -252,6 +259,7 @@ if [ "$GEM_TEST_LATEST" != "true" ]; then
     pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
 fi
 
+pip install configparser
 pip install -e .
 
 # Install the system python-gdal
