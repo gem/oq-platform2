@@ -46,6 +46,7 @@ sudo mkdir -p /var/lib/geonode/env
 sudo virtualenv /var/lib/geonode/env
 source /var/lib/geonode/env/bin/activate
 
+#install setuptools specitic version for python 2.7
 sudo /var/lib/geonode/env/bin/python -m pip install "setuptools==44.0.0"
 
 sudo /var/lib/geonode/env/bin/python -m pip install "numpy>=1.16,<1.17"

@@ -230,6 +230,9 @@ fi
 #restart postgres
 sudo service postgresql restart
 
+#install setuptools specitic version for python 2.7
+pip install "setuptools==44.0.0"
+
 #install numpy
 pip install "numpy>=1.16,<1.17"
 
