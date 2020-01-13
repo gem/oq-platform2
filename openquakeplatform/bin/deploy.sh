@@ -46,6 +46,8 @@ sudo mkdir -p /var/lib/geonode/env
 sudo virtualenv /var/lib/geonode/env
 source /var/lib/geonode/env/bin/activate
 
+sudo /var/lib/geonode/env/bin/python -m pip install "setuptools==44.0.0"
+
 sudo /var/lib/geonode/env/bin/python -m pip install "numpy>=1.16,<1.17"
 
 sudo /var/lib/geonode/env/bin/python -m pip install "django<2"
