@@ -1,15 +1,18 @@
 diff --git a/dev_config.yml b/dev_config.yml
-index 638485b..5b2ae23 100644
+index 638485be9..3fad59e4f 100644
 --- a/dev_config.yml
 +++ b/dev_config.yml
-@@ -1,6 +1,8 @@
+@@ -1,7 +1,10 @@
  ---
 -GEOSERVER_URL: "http://build.geonode.org/geoserver/latest/geoserver-2.9.x-oauth2.war"
 -DATA_DIR_URL: "http://build.geonode.org/geoserver/latest/data-2.9.x-oauth2.zip"
+-JETTY_RUNNER_URL: "http://repo2.maven.org/maven2/org/mortbay/jetty/jetty-runner/8.1.8.v20121106/jetty-runner-8.1.8.v20121106.jar"
 +# GEOSERVER_URL: "http://build.geonode.org/geoserver/latest/geoserver-2.9.x-oauth2.war"
 +GEOSERVER_URL: "http://ftp.openquake.org/oq-platform2/geoserver-2.9.x-oauth2.war"
 +# DATA_DIR_URL: "http://build.geonode.org/geoserver/latest/data-2.9.x-oauth2.zip"
 +DATA_DIR_URL: "http://ftp.openquake.org/oq-platform2/data-2.9.x-oauth2.zip"
- JETTY_RUNNER_URL: "http://repo2.maven.org/maven2/org/mortbay/jetty/jetty-runner/8.1.8.v20121106/jetty-runner-8.1.8.v20121106.jar"
++# JETTY_RUNNER_URL: "http://repo2.maven.org/maven2/org/mortbay/jetty/jetty-runner/8.1.8.v20121106/jetty-runner-8.1.8.v20121106.jar"
++JETTY_RUNNER_URL: "https://repo1.maven.org/maven2/org/mortbay/jetty/jetty-runner/8.1.8.v20121106/jetty-runner-8.1.8.v20121106.jar"
  WINDOWS:
    py2exe: "http://downloads.sourceforge.net/project/py2exe/py2exe/0.6.9/py2exe-0.6.9.win32-py2.7.exe"
+   nose: "https://s3.amazonaws.com/geonodedeps/nose-1.3.3.win32-py2.7.exe"
