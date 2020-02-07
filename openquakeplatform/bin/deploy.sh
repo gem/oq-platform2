@@ -368,6 +368,9 @@ function initialize_test() {
 
         # for repo in oq-platform-taxtweb; do
         eval "${plugins_pfx}git clone -b "$GIT_BRANCH" $GEM_GIT_REPO/oq-moon.git || git clone $GEM_GIT_REPO/oq-moon.git"
+        pushd oq-moon
+        sudo /var/lib/geonode/env/bin/python -m pip install -e .
+        popd
     fi
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
     cp $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py.tmpl $GIT_REPO/openquakeplatform/set_thumb/moon_config.py
@@ -375,7 +378,7 @@ function initialize_test() {
     sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/test/config/moon_config.py
     sed -i 's/localhost:8000/'"$LXC_IP"'/g' $HOME/$GIT_REPO/openquakeplatform/set_thumb/moon_config.py
 
-    export PYTHONPATH=$HOME/oq-moon:$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
+    export PYTHONPATH=$HOME/$GIT_REPO:$HOME/$GIT_REPO/openquakeplatform/test/config:$HOME/oq-platform-taxtweb:$HOME/oq-platform-ipt:$HOME/oq-platform-building-class
 }
 
 function exec_test() {
