@@ -63,8 +63,8 @@ sudo /var/lib/geonode/env/bin/python -m pip install django-request==1.5.2
 
 # install engine
 sudo apt-get install -y software-properties-common
-# sudo add-apt-repository -y ppa:openquake/ppa
-sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
+sudo add-apt-repository -y ppa:openquake/ppa
+# sudo add-apt-repository -y ppa:openquake-automatic-team/latest-master
 sudo apt-get update
 sudo apt-get install -y --force-yes python3-oq-engine python3-oq-libs-extra
 
