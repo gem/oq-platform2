@@ -18,6 +18,6 @@ class CorsTest(unittest.TestCase):
             "F99+FWC99/FOS99"
         )
 
-        exp_page_get = pla.get(exp_page)
+        pla.get(exp_page)
 
-        pla.wait_new_page(exp_page_get, exp_page)
+        # pla.wait_new_page(exp_page_get, exp_page)
