@@ -9,12 +9,15 @@ class CorsTest(unittest.TestCase):
 
         pla = platform_get()
 
-        pla.get("/taxtweb/explanation/DX+D99/"
-                "S+S99+BOL/LWAL+DU99/DY+D99/"
-                "S+S99+BOL/LWAL+DU99/H99/Y99/"
-                "OC99/BP99/PLF99/IR99/EW99/"
-                "RSH99+RMT99+R99+RWC99/"
-                "F99+FWC99/FOS99")
+        exp_page = (
+            "/taxtweb/explanation/DX+D99/"
+            "S+S99+BOL/LWAL+DU99/DY+D99/"
+            "S+S99+BOL/LWAL+DU99/H99/Y99/"
+            "OC99/BP99/PLF99/IR99/EW99/"
+            "RSH99+RMT99+R99+RWC99/"
+            "F99+FWC99/FOS99"
+        )
 
-        content = pla.xpath_finduniq(
-            "//pre[normalize-space(text())='Material type: Steel']")
+        exp_page_get = pla.get(exp_page)
+
+        pla.wait_new_page(exp_page_get, exp_page)
