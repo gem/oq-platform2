@@ -140,7 +140,7 @@ STANDALONE_APPS = (
     'openquakeplatform_building_class',
 )
 
-inst_new = tuple()
+inst_new = tuple(['corsheaders'])
 for app in INSTALLED_APPS:
     if app == 'django.contrib.admin':
         inst_new += ('nested_inlines', app)
@@ -315,3 +315,6 @@ REQUEST_IGNORE_PATHS = (
     r'^admin/',
 )
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = r'^/taxtweb/explanation/'
+CORS_ALLOW_CREDENTIAL = False
