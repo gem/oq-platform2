@@ -68,6 +68,7 @@ setup(
         "django-bootstrap3-datetimepicker >= 2.2.3 , < 2.3",
         "django-braces >= 1.11.0 , < 1.12",
         "django-celery >= 3.1.16 , < 3.2",
+        "django-cors-headers >= 2.4.1 , < 2.5.0",
         "django-downloadview >= 1.2 , < 1.3",
         "django-extensions >= 1.6.1 , < 1.7",
         "django-forms-bootstrap >= 3.0.1 , < 3.1",
