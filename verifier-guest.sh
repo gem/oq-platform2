@@ -236,6 +236,9 @@ pip install "setuptools==44.0.0"
 #install numpy
 pip install "numpy>=1.16,<1.17"
 
+#install numpy
+pip install "django-cors-headers>=2.4.1,<2.5.0"
+
 ## Clone GeoNode
 if [ -z "$REINSTALL" ]; then
     git clone -b "$GIT_GEO_BRANCH" https://github.com/gem/geonode.git
