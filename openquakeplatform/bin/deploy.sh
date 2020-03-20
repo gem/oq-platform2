@@ -51,6 +51,8 @@ sudo /var/lib/geonode/env/bin/python -m pip install "setuptools==44.0.0"
 
 sudo /var/lib/geonode/env/bin/python -m pip install "numpy>=1.16,<1.17"
 
+sudo /var/lib/geonode/env/bin/python -m pip install "django-cors-headers>=2.4.1,<2.5.0"
+
 sudo /var/lib/geonode/env/bin/python -m pip install "django<2"
 sudo /var/lib/geonode/env/bin/python -m pip install django-nested-inline
 sudo /var/lib/geonode/env/bin/python -m pip install django_extras
