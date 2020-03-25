@@ -249,8 +249,6 @@ urlpatterns += patterns('',
                         (r'^vulnerability/',
                          include('openquakeplatform.vulnerability.urls',
                                  namespace='vulnerability')),
-                        (r'^exposure/',
-                         include('openquakeplatform.exposure.urls')),
                         )
 # Enable internal geoserver proxy in development mode.
 # In production it must be done by Apache/Nginx, not by Django
