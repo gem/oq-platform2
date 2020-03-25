@@ -29,11 +29,6 @@ Install and run the application::
 
 (Optional.) Add bing maps api key to local_settings.py by modifying the BING_KEY flag.
 
-(Optional.) Set Global Exposure Database (GED) settings. Copy the sample config
-file and customize the settings according to your database configuration::
-
-    $ cp openquakeplatform/ged_settings.py.tmpl openquakeplatform/ged_settings.py
-
 
 Usage
 -----
