@@ -172,10 +172,6 @@ function clone_platform() {
     umask 0002
     cd $GIT_REPO
     git checkout $GIT_BRANCH
-    if [ "$DEVEL_DATA" ]; then
-         ## for exposure fake data
-         sed -i "2 s@^@#the line below was added by deploy.sh in DEVEL mode\nrecursive-include openquakeplatform/exposure/fake_data/      *\n@g" MANIFEST.in
-    fi
     sudo /var/lib/geonode/env/bin/python -m pip install .
 }
 
