@@ -27,7 +27,6 @@ setup(
               'openquakeplatform.common',
               'openquakeplatform.isc_viewer',
               'openquakeplatform.ghec_viewer',
-              'openquakeplatform.exposure',
               'openquakeplatform.world',
               'openquakeplatform.svir',
               'openquakeplatform.vulnerability',
