@@ -190,7 +190,7 @@ function oq_application() {
             pushd ${repo}
             sudo /var/lib/geonode/env/bin/python -m pip install .
             if [ "$repo" = "oq-platform-taxtweb" ]; then
-                rm -rf build dist
+                sudo rm -rf build dist
                 sudo PYBUILD_NAME='oq-taxonomy' /var/lib/geonode/env/bin/python -m pip install .
             fi
             popd
