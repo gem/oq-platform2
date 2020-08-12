@@ -134,7 +134,7 @@ sudo apt update
 sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev zip unzip
 
 # install last version of jdk 1-8-0_265 and downgrade to 1.8.0.242 used from Geoserver
-function install jdk() {
+function install_jdk() {
    sudo apt install -y openjdk-8-jdk-headless
    cd /usr/lib/jvm/
    mv java-8-openjdk-amd64 java-8-openjdk-amd64.last
