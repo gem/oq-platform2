@@ -138,9 +138,9 @@ function install_jdk() {
    sudo apt install -y openjdk-8-jdk-headless
    cd /usr/lib/jvm/
    sudo mv java-8-openjdk-amd64 java-8-openjdk-amd64.last
-   wget http://ftp.openquake.org/oq-platform2/8u242.tgz
-   tar zxvf 8u242.tgz
-   update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-8-openjdk-amd64/bin/java 1
+   sudo wget http://ftp.openquake.org/oq-platform2/8u242.tgz
+   sudo tar zxvf 8u242.tgz
+   sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-8-openjdk-amd64/bin/java 1
 }
 
 install_jdk
