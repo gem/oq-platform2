@@ -52,7 +52,10 @@ function install_jdk() {
 install_jdk
 
 sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor
-sudo apt install -y apache2 tomcat7
+sudo apt install -y apache2
+
+# Install Tomcat and Tomcat manager (hostname:8080/manager on the web)
+sudo apt install -y tomcat7 tomcat7-admin
 
 # Create and source virtual env
 sudo mkdir -p /var/lib/geonode/env
