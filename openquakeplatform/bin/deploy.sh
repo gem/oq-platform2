@@ -36,10 +36,25 @@ sudo service apache2 restart || true
 sudo apt-get update
 sudo apt install -y git python-virtualenv wget
 
-sudo apt install -y python-dev libpq-dev libgdal-dev openjdk-8-jdk-headless
+sudo apt install -y python-dev libpq-dev libgdal-dev
+
+# install last version of jdk 1-8-0_265 and downgrade to 1.8.0.242 used from Geoserver
+function install_jdk() {
+   sudo apt install -y openjdk-8-jdk-headless
+   cd /usr/lib/jvm/
+   sudo mv java-8-openjdk-amd64 java-8-openjdk-amd64.last
+   sudo wget http://ftp.openquake.org/oq-platform2/8u242.tgz
+   sudo tar zxvf 8u242.tgz
+   sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-8-openjdk-amd64/bin/java 1
+}
+
+install_jdk
 
 sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor
-sudo apt install -y apache2 tomcat7
+sudo apt install -y apache2
+
+# Install Tomcat and Tomcat manager (hostname:8080/manager on the web)
+sudo apt install -y tomcat7 tomcat7-admin
 
 # Create and source virtual env
 sudo mkdir -p /var/lib/geonode/env

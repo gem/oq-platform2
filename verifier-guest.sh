@@ -131,7 +131,19 @@ fi
 
 
 sudo apt update
-sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev openjdk-8-jdk-headless zip unzip
+sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev zip unzip
+
+# install last version of jdk 1-8-0_265 and downgrade to 1.8.0.242 used from Geoserver
+function install_jdk() {
+   sudo apt install -y openjdk-8-jdk-headless
+   cd /usr/lib/jvm/
+   sudo mv java-8-openjdk-amd64 java-8-openjdk-amd64.last
+   sudo wget http://ftp.openquake.org/oq-platform2/8u242.tgz
+   sudo tar zxvf 8u242.tgz
+   sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-8-openjdk-amd64/bin/java 1
+}
+
+install_jdk
 
 # Used a local clone (see verifier.sh)
 # git clone -b "$GIT_BRANCH" https://github.com/gem/oq-platform2.git
