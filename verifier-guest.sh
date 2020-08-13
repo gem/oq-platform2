@@ -19,6 +19,8 @@
 
 
 sudo systemctl stop apt-daily.timer
+sudo systemctl stop tomcat7
+sudo systemctl stop apache2
 
 set -o errtrace
 
@@ -62,7 +64,7 @@ extra_deps_install() {
 #function complete procedure for tests
 initialize_test () {
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
-    sudo apt-get -y install python-pip wget
+    # sudo apt-get -y install python-pip wget
     pip install --upgrade pip
     pip install nose
     wget "http://ftp.openquake.org/common/selenium-deps"
@@ -130,12 +132,12 @@ if [ $GEM_SET_DEBUG ]; then
 fi
 
 
-sudo apt update
-sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev zip unzip
+# sudo apt update
+# sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev zip unzip
 
 # install last version of jdk 1-8-0_265 and downgrade to 1.8.0.242 used from Geoserver
 function install_jdk() {
-   sudo apt install -y openjdk-8-jdk-headless
+   # sudo apt install -y openjdk-8-jdk-headless
    cd /usr/lib/jvm/
    sudo mv java-8-openjdk-amd64 java-8-openjdk-amd64.last
    sudo wget http://ftp.openquake.org/oq-platform2/8u242.tgz
@@ -184,7 +186,7 @@ rm -rf demos
 unzip demos-*.zip
 
 #install and configuration postgres
-sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor
+# sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor
 if [ "$REINSTALL" ]; then
     sudo -u postgres dropdb geonode_dev
     sudo -u postgres dropdb geonode_dev-imports
@@ -281,7 +283,7 @@ pip install configparser
 pip install -e .
 
 # Install the system python-gdal
-sudo apt-get install -y python-gdal
+# sudo apt-get install -y python-gdal
 
 cd ~
 # Create a symbolic link in your virtualenv

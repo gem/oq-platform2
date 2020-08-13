@@ -22,10 +22,11 @@ set -e
 GIT_REPO="oq-platform2"
 
 # delete all folder used
-sudo rm -rf /var/lib/geonode/env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data /var/www/geonode /etc/geonode /var/lib/tomcat7/webapps GeoNode-2.6.x.zip*
+# sudo rm -rf /var/lib/geonode/env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data /var/www/geonode /etc/geonode /var/lib/tomcat7/webapps GeoNode-2.6.x.zip*
+sudo rm -rf /var/lib/geonode/env $GIT_REPO geonode oq-platform-taxtweb oq-platform-building-class oq-platform-ipt oq-platform-data /var/www/geonode /etc/geonode GeoNode-2.6.x.zip*
 
 # if exists, delete postgres:
-sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5 tomcat7
+# sudo apt-get --purge remove -y postgresql postgresql-9.5 postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts postgresql-client-9.5 postgresql-client-common postgresql-common postgresql-contrib-9.5 tomcat7
 
 sudo a2dissite geonode || true 
 sudo rm /etc/apache2/sites-available/geonode.conf || true
@@ -33,14 +34,14 @@ sudo rm /etc/apache2/sites-enabled/geonode.conf || true
 sudo rm /etc/geonode/local_settings.py || true
 sudo service apache2 restart || true
 
-sudo apt-get update
-sudo apt install -y git python-virtualenv wget
+# sudo apt-get update
+# sudo apt install -y git python-virtualenv wget
 
-sudo apt install -y python-dev libpq-dev libgdal-dev
+# sudo apt install -y python-dev libpq-dev libgdal-dev
 
 # install last version of jdk 1-8-0_265 and downgrade to 1.8.0.242 used from Geoserver
 function install_jdk() {
-   sudo apt install -y openjdk-8-jdk-headless
+   # sudo apt install -y openjdk-8-jdk-headless
    cd /usr/lib/jvm/
    sudo mv java-8-openjdk-amd64 java-8-openjdk-amd64.last
    sudo wget http://ftp.openquake.org/oq-platform2/8u242.tgz
@@ -50,11 +51,11 @@ function install_jdk() {
 
 install_jdk
 
-sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor
-sudo apt install -y apache2
+# sudo apt-get install -y postgresql-9.5-postgis-2.2 postgresql-9.5-postgis-scripts curl xmlstarlet supervisor
+# sudo apt install -y apache2
 
 # Install Tomcat and Tomcat manager (hostname:8080/manager on the web)
-sudo apt install -y tomcat7 tomcat7-admin
+# sudo apt install -y tomcat7 tomcat7-admin
 
 # Create and source virtual env
 sudo mkdir -p /var/lib/geonode/env
@@ -233,7 +234,7 @@ function install_geonode() {
     sudo /var/lib/geonode/env/bin/python -m pip install .
     
     #TODO check python-gdal deps
-    sudo apt install -y python-gdal gdal-bin
+    # sudo apt install -y python-gdal gdal-bin
     
     # copy Geonode zip and oq_install script in package folder of Geonode
     cd $HOME/geonode/package/
@@ -245,7 +246,7 @@ function install_geonode() {
     sudo -E ./package/oq_install.sh -s pre $HOME/$GIT_REPO/openquakeplatform/common/geonode_install.sh
     
     # enable wsgi apache
-    sudo apt-get install libapache2-mod-wsgi
+    # sudo apt-get install libapache2-mod-wsgi
     sudo a2enmod wsgi
     sudo service apache2 restart
     
@@ -363,7 +364,7 @@ function svir_world_data() {
 
 function initialize_test() {
     #install selenium,pip,geckodriver,clone oq-moon and execute tests with nose
-    sudo apt-get -y install python-pip wget
+    # sudo apt-get -y install python-pip wget
     sudo /var/lib/geonode/env/bin/python -m pip install --upgrade pip
     sudo /var/lib/geonode/env/bin/python -m pip install nose
     sudo /var/lib/geonode/env/bin/python -m pip install configparser
