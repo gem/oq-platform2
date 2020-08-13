@@ -19,6 +19,8 @@
 
 
 sudo systemctl stop apt-daily.timer
+sudo systemctl stop tomcat7
+sudo systemctl stop apache2
 
 set -o errtrace
 
