@@ -31,6 +31,8 @@ class GrvTest(unittest.TestCase):
         category_tabs = pla.xpath_finduniq(
             "//div[@id='categoryTabs']", TIMEOUT)
 
+        pla.scroll_into_view(category_tabs)
+
         # test fails if the svg is not found
         economy_tabs = pla.xpath_finduniq(
             "//div[@id='economy']"
