@@ -26,8 +26,6 @@ class GrvTest(unittest.TestCase):
         action_chart.move_to_element_with_offset(
             content_map, 550, 50).click().perform()
 
-        # import time
-        # time.sleep(50000)
         category_tabs = pla.xpath_finduniq(
             "//div[@id='categoryTabs']", TIMEOUT)
 
@@ -43,6 +41,3 @@ class GrvTest(unittest.TestCase):
             el=category_tabs)
 
         pla.scroll_into_view(economy_tabs)
-
-        # import time
-        # time.sleep(5000000)
