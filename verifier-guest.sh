@@ -131,8 +131,10 @@ if [ $GEM_SET_DEBUG ]; then
     set -x
 fi
 
+sudo apt update
+sudo apt upgrade -y
+sudo apt full-upgrade -y
 
-# sudo apt update
 # sudo apt install -y git python-dev python-virtualenv libpq-dev libgdal-dev zip unzip
 
 # install last version of jdk 1-8-0_265 and downgrade to 1.8.0.242 used from Geoserver
