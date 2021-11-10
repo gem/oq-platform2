@@ -376,7 +376,9 @@ $HOME/$GIT_REPO/openquakeplatform/bin/oq-gs-builder.sh populate -a $HOME/$GIT_RE
 cd ~/geonode
 mkdir -p $HOME/geonode/geonode/uploaded/
 cp -r $HOME/$GIT_REPO/openquakeplatform/common/gs_data/documents $HOME/geonode/geonode/uploaded/
-pip install django-braces==1.11.0
+
+# install version 1.14.0 of django-braces because version 1.15 require django 2.x
+pip install django-braces==1.14.0
 python ./manage.py add_documents
 
 cd ~/
