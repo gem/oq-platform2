@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with OpenQuake.  If not, see <http://www.gnu.org/licenses/>.
 
+echo 'Start prod installation'
+
 if [ $GEM_SET_DEBUG ]; then
     set -x
 fi

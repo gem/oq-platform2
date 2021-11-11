@@ -17,6 +17,7 @@
 
 # \"./verifier-guest.sh\" \"$branch_id\" \"$branch_geonode\" \"$GEM_GIT_PACKAGE\" \"$lxc_ip\" \"$notests\"
 
+echo 'Start dev installation'
 
 sudo systemctl stop apt-daily.timer
 sudo systemctl stop tomcat7
