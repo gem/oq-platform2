@@ -55,10 +55,10 @@ extra_deps_install() {
     python -m pip install "django<2"
     pip install django-nested-inline
     pip install django_extras
-    pip install -e git+git@github.com:gem/django-chained-selectbox.git#egg=django-chained-selectbox
-    pip install -e git+git@github.com:gem/django-nested-inlines.git#egg=django-nested-inlines
-    pip install -e git+git@github.com:gem/django-chained-multi-checkboxes.git#egg=django-chained-multi-checkboxes
-    pip install -e git+git@github.com:gem/wadofstuff-django-serializers.git#egg=wadofstuff-django-serializers
+    pip install -e git+https://git@github.com:gem/django-chained-selectbox.git#egg=django-chained-selectbox
+    pip install -e git+https://git@github.com:gem/django-nested-inlines.git#egg=django-nested-inlines
+    pip install -e git+https://git@github.com:gem/django-chained-multi-checkboxes.git#egg=django-chained-multi-checkboxes
+    pip install -e git+https://git@github.com:gem/wadofstuff-django-serializers.git#egg=wadofstuff-django-serializers
     pip install django-request==1.5.2
 }
 
