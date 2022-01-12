@@ -55,7 +55,7 @@ fi
 
 set -e
 
-GEM_GIT_REPO="https://github.com/gem"
+GEM_GIT_REPO="$(echo "${repository:-git@github.com:gem/oq-platform2.git}" | sed 's@/[^/]*$@@g')"
 GEM_GIT_PACKAGE="oq-platform2"
 
 if [ "$GEM_EPHEM_CMD" = "" ]; then

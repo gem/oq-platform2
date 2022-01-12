@@ -74,10 +74,10 @@ sudo /var/lib/geonode/env/bin/python -m pip install "django-cors-headers>=2.4.1,
 sudo /var/lib/geonode/env/bin/python -m pip install "django<2"
 sudo /var/lib/geonode/env/bin/python -m pip install django-nested-inline
 sudo /var/lib/geonode/env/bin/python -m pip install django_extras
-sudo /var/lib/geonode/env/bin/python -m pip install git+https://github.com/gem/django-chained-selectbox.git#egg=django-chained-selectbox
-sudo /var/lib/geonode/env/bin/python -m pip install git+https://github.com/gem/django-nested-inlines.git#egg=django-nested-inlines
-sudo /var/lib/geonode/env/bin/python -m pip install git+https://github.com/gem/django-chained-multi-checkboxes.git#egg=django-chained-multi-checkboxes
-sudo /var/lib/geonode/env/bin/python -m pip install git+https://github.com/gem/wadofstuff-django-serializers.git#egg=wadofstuff-django-serializers
+sudo /var/lib/geonode/env/bin/python -m pip install git+git@github.com:gem/django-chained-selectbox.git#egg=django-chained-selectbox
+sudo /var/lib/geonode/env/bin/python -m pip install git+git@github.com:gem/django-nested-inlines.git#egg=django-nested-inlines
+sudo /var/lib/geonode/env/bin/python -m pip install git+git@github.com:gem/django-chained-multi-checkboxes.git#egg=django-chained-multi-checkboxes
+sudo /var/lib/geonode/env/bin/python -m pip install git+git@github.com:gem/wadofstuff-django-serializers.git#egg=wadofstuff-django-serializers
 sudo /var/lib/geonode/env/bin/python -m pip install django-request==1.5.2
 
 # install engine
@@ -97,7 +97,7 @@ export LXC_IP="$1"
 GIT_BRANCH="$2"
 GIT_GEO_BRANCH="2.6.x"
 GEO_DBUSER="geonode"
-GEM_GIT_REPO="https://github.com/gem"
+GEM_GIT_REPO="$(echo "${repository:-git@github.com:gem/oq-platform2.git}" | sed 's@/[^/]*$@@g')"
 NO_EXEC_TEST="$3"
 plugins_branch_id="$4"
 export PROD_INSTALL='y'
