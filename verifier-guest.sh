@@ -56,6 +56,12 @@ extra_deps_install() {
     python -m pip install "django<2"
     pip install django-nested-inline
     pip install django_extras
+
+    github_key="$(ssh-keyscan -t rsa github.com)"
+    if ! grep -q "$github_key" $HOME/.ssh/known_hosts; then
+        echo "$github_key" >> $HOME/.ssh/known_hosts
+    fi
+
     git_repo_pip="$(echo "$GEM_GIT_REPO" | tr : /)"
     pip install -e git+ssh://${gem_repo_pip}/django-chained-selectbox.git#egg=django-chained-selectbox
     pip install -e git+ssh://${gem_repo_pip}/django-nested-inlines.git#egg=django-nested-inlines
