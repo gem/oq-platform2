@@ -63,9 +63,9 @@ extra_deps_install() {
     fi
 
     git_repo_pip="$(echo "$GEM_GIT_REPO" | tr : /)"
-    pip install -e git+ssh://${gem_repo_pip}/django-chained-selectbox.git#egg=django-chained-selectbox
-    pip install -e git+ssh://${gem_repo_pip}/django-nested-inlines.git#egg=django-nested-inlines
-    pip install -e git+ssh://${gem_repo_pip}/django-chained-multi-checkboxes.git#egg=django-chained-multi-checkboxes
+    pip install -e git+ssh://${git_repo_pip}/django-chained-selectbox.git#egg=django-chained-selectbox
+    pip install -e git+ssh://${git_repo_pip}/django-nested-inlines.git#egg=django-nested-inlines
+    pip install -e git+ssh://${git_repo_pip}/django-chained-multi-checkboxes.git#egg=django-chained-multi-checkboxes
     pip install -e git+ssh://${gem_repo_pip}/wadofstuff-django-serializers.git#egg=wadofstuff-django-serializers
     pip install django-request==1.5.2
 }
