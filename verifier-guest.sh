@@ -52,13 +52,21 @@ geonode_setup_env()
 
 #install dependencies vulnerability and ipt
 extra_deps_install() {
+    local git_repo_pip
     python -m pip install "django<2"
     pip install django-nested-inline
     pip install django_extras
-    pip install -e git+git://github.com/gem/django-chained-selectbox.git#egg=django-chained-selectbox
-    pip install -e git+git://github.com/gem/django-nested-inlines.git#egg=django-nested-inlines
-    pip install -e git+git://github.com/gem/django-chained-multi-checkboxes.git#egg=django-chained-multi-checkboxes
-    pip install -e git+git://github.com/gem/wadofstuff-django-serializers.git#egg=wadofstuff-django-serializers
+
+    github_key="$(ssh-keyscan -t rsa github.com)"
+    if ! grep -q "$github_key" $HOME/.ssh/known_hosts; then
+        echo "$github_key" >> $HOME/.ssh/known_hosts
+    fi
+
+    git_repo_pip="$(echo "$GEM_GIT_REPO" | tr : /)"
+    pip install -e git+ssh://${git_repo_pip}/django-chained-selectbox.git#egg=django-chained-selectbox
+    pip install -e git+ssh://${git_repo_pip}/django-nested-inlines.git#egg=django-nested-inlines
+    pip install -e git+ssh://${git_repo_pip}/django-chained-multi-checkboxes.git#egg=django-chained-multi-checkboxes
+    pip install -e git+ssh://${git_repo_pip}/wadofstuff-django-serializers.git#egg=wadofstuff-django-serializers
     pip install django-request==1.5.2
 }
 
