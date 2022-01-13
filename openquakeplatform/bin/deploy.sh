@@ -76,7 +76,7 @@ sudo /var/lib/geonode/env/bin/python -m pip install django-nested-inline
 sudo /var/lib/geonode/env/bin/python -m pip install django_extras
 
 github_key="$(ssh-keyscan -t rsa github.com)"
-sudo -H -i if ! grep -q "$github_key" \$HOME/.ssh/known_hosts; then echo "$github_key" | tee -a \$HOME/.ssh/known_hosts ; fi
+if ! sudo -H -i grep -q "$github_key" \$HOME/.ssh/known_hosts; then echo "$github_key" | sudo -H -i tee -a \$HOME/.ssh/known_hosts ; fi
 
 git_repo_pip="$(echo "$GEM_GIT_REPO" | tr : /)"
 sudo /var/lib/geonode/env/bin/python -m pip install git+ssh://${git_repo_pip}/django-chained-selectbox.git#egg=django-chained-selectbox
