@@ -374,9 +374,9 @@ function initialize_test() {
     sudo /var/lib/geonode/env/bin/python -m pip install --upgrade pip
     sudo /var/lib/geonode/env/bin/python -m pip install nose
     sudo /var/lib/geonode/env/bin/python -m pip install configparser
-    wget "http://ftp.openquake.org/common/selenium-deps"
+    wget "http://ftp.openquake.org/common/selenium-deps-ubuntu-16-04"
     GEM_FIREFOX_VERSION="$(dpkg-query --show -f '${Version}' firefox)"
-    . selenium-deps
+    . selenium-deps-ubuntu-16-04
     wget "http://ftp.openquake.org/mirror/mozilla/geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     tar zxvf "geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     sudo cp geckodriver /usr/local/bin

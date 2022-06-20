@@ -76,9 +76,9 @@ initialize_test () {
     # sudo apt-get -y install python-pip wget
     pip install --upgrade pip
     pip install nose
-    wget "http://ftp.openquake.org/common/selenium-deps"
+    wget "http://ftp.openquake.org/common/selenium-deps-ubuntu-16-04"
     GEM_FIREFOX_VERSION="$(dpkg-query --show -f '${Version}' firefox)"
-    . selenium-deps
+    . selenium-deps-ubuntu-16-04
     wget "http://ftp.openquake.org/mirror/mozilla/geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     tar zxvf "geckodriver-v${GEM_GECKODRIVER_VERSION}-linux64.tar.gz"
     sudo cp geckodriver /usr/local/bin
