@@ -284,11 +284,11 @@ sudo apt-get install -y --force-yes python3-oq-engine python3-oq-libs-extra
 
 ## Install GeoNode and dependencies
 cd $HOME/geonode
-pip install -r requirements.txt
+pip install --default-timeout=100 -r requirements.txt
 
 if [ "$GEM_TEST_LATEST" != "true" ]; then
     ## more stable dependencies installed
-    pip install -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
+    pip install --default-timeout=100 -r $HOME/$GIT_REPO/gem_geonode_requirements.txt
 fi
 
 pip install configparser
